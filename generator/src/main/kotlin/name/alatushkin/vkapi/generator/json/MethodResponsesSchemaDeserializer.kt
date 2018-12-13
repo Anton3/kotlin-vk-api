@@ -5,17 +5,15 @@ import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 
-class MethodResponsesSchemaDeserializer : StdDeserializer<MethodResponses>(
-    MethodResponses::class.java
-) {
+object MethodResponsesSchemaDeserializer : StdDeserializer<MethodResponses>(MethodResponses::class.java) {
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext): MethodResponses {
         val oc = p.codec
         val node: JsonNode = oc.readTree(p)
         val subParser = node.traverse(oc)
         subParser.nextToken()
         try {
-            return ctxt.readValue(
-                subParser, when {
+            return ctxt.readValue(subParser,
+                when {
                     node.has("userIdsResponse") -> UserIdsResponse::class.java
                     node.has("needMutualResponse") -> NeedMutualResponse::class.java
                     node.has("targetUidsResponse") -> TargetUidsResponse::class.java

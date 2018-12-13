@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import name.alatushkin.vkapi.generator.source.JsonTypeRef
 import kotlin.reflect.KClass
 
-class ObjectSchemaDeserializer : StdDeserializer<Object>(Object::class.java) {
+object ObjectSchemaDeserializer : StdDeserializer<Object>(Object::class.java) {
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext): Object {
         val oc = p.codec
         val node: JsonNode = oc.readTree(p)

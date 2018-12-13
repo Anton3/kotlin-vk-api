@@ -13,7 +13,6 @@ import name.alatushkin.vkapi.generated.wall.objects.WallpostAttachment
 import name.alatushkin.vkapi.json.deser.*
 import name.alatushkin.vkapi.methods.execute.BatchExecuteResult
 import name.alatushkin.vkapi.vktypes.VkResponse
-import name.alatushkin.vkapi.json.deser.*
 
 internal val VK_OBJECT_MAPPER: ObjectMapper = vkObjectMapper()
 
@@ -24,20 +23,11 @@ private fun vkObjectMapper(): ObjectMapper {
     mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
     val module = SimpleModule()
-    module.addDeserializer(WallpostAttachment::class.java,
-        VkWallPostAttachmentsDeserializer()
-    )
-    module.addDeserializer(CommentAttachment::class.java,
-        VkCommentAttachmentsDeserializer()
-    )
-    module.addDeserializer(MessageAttachment::class.java,
-        VkMessageAttachmentsDeserializer()
-    )
+    module.addDeserializer(WallpostAttachment::class.java, VkWallPostAttachmentsDeserializer)
+    module.addDeserializer(CommentAttachment::class.java, VkCommentAttachmentsDeserializer)
+    module.addDeserializer(MessageAttachment::class.java, VkMessageAttachmentsDeserializer)
     module.addDeserializer(VkResponse::class.java, VkResponseDeserializer())
-    module.addDeserializer(
-        BatchExecuteResult::class.java,
-        BatchExecuteResultDeserializer()
-    )
+    module.addDeserializer(BatchExecuteResult::class.java, BatchExecuteResultDeserializer)
 
     val resolver = SimpleAbstractTypeResolver()
     for ((from, to) in vkInterfaceMapping()) {

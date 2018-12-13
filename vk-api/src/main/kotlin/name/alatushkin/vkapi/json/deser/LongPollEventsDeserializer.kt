@@ -1,10 +1,10 @@
 package name.alatushkin.vkapi.json.deser
 
 import com.fasterxml.jackson.databind.JsonNode
+import mu.KotlinLogging
 import name.alatushkin.vkapi.methods.longpoll.Events
 import name.alatushkin.vkapi.methods.longpoll.LongPollEvent
 import name.alatushkin.vkapi.methods.longpoll.MessageAdded
-import org.slf4j.LoggerFactory
 
 object LongPollEventsDeserializer {
     fun decode(updatesNode: JsonNode): List<MessageAdded> {
@@ -24,6 +24,4 @@ object LongPollEventsDeserializer {
             MessageAdded::class.java.cast(event)
         } else null
     }
-
-    val log = LoggerFactory.getLogger(LongPollEventsDeserializer::class.java)
 }

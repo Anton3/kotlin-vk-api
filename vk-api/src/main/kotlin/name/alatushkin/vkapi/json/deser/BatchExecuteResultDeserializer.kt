@@ -13,7 +13,7 @@ import name.alatushkin.vkapi.methods.execute.BatchExecuteResult
 
 const val EXECUTE_RESPONSE_TYPES = "executeResponseTypes"
 
-class BatchExecuteResultDeserializer : StdDeserializer<BatchExecuteResult>(BatchExecuteResult::class.java) {
+object BatchExecuteResultDeserializer : StdDeserializer<BatchExecuteResult>(BatchExecuteResult::class.java) {
 
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext): BatchExecuteResult {
         val codec = p.codec as ObjectMapper

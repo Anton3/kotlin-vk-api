@@ -34,7 +34,7 @@ internal sealed class AbstractVkAttachmentsDeserializer<T>(
     }
 }
 
-internal class VkWallPostAttachmentsDeserializer : AbstractVkAttachmentsDeserializer<WallpostAttachment>(
+internal object VkWallPostAttachmentsDeserializer : AbstractVkAttachmentsDeserializer<WallpostAttachment>(
     weakType(),
     mapOf(
         "photo" to Photo::class.java,
@@ -55,7 +55,7 @@ internal class VkWallPostAttachmentsDeserializer : AbstractVkAttachmentsDeserial
     )
 )
 
-internal class VkCommentAttachmentsDeserializer : AbstractVkAttachmentsDeserializer<CommentAttachment>(
+internal object VkCommentAttachmentsDeserializer : AbstractVkAttachmentsDeserializer<CommentAttachment>(
     weakType(),
     mapOf(
         "photo" to Photo::class.java,
@@ -71,7 +71,7 @@ internal class VkCommentAttachmentsDeserializer : AbstractVkAttachmentsDeseriali
     )
 )
 
-internal class VkMessageAttachmentsDeserializer : AbstractVkAttachmentsDeserializer<MessageAttachment>(
+internal object VkMessageAttachmentsDeserializer : AbstractVkAttachmentsDeserializer<MessageAttachment>(
     weakType(),
     mapOf(
         "photo" to Photo::class.java,
