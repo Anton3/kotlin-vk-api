@@ -1,18 +1,20 @@
 package name.alatushkin.vkapi.methods.longpoll
 
 import com.fasterxml.jackson.module.kotlin.readValue
-import name.alatushkin.vkapi.methods.callback.CallbackEvent
+import mu.KotlinLogging
+import name.alatushkin.httpclient.HttpClient
+import name.alatushkin.httpclient.HttpMethod
+import name.alatushkin.vkapi.client.VkClient
+import name.alatushkin.vkapi.client.invoke
 import name.alatushkin.vkapi.generated.groups.methods.GroupsGetLongPollServer
 import name.alatushkin.vkapi.generated.groups.objects.LongPollServer
 import name.alatushkin.vkapi.json.VK_OBJECT_MAPPER
+import name.alatushkin.vkapi.methods.callback.CallbackEvent
 import name.alatushkin.vkapi.tokens.GroupMethod
-import name.alatushkin.vkapi.client.VkClient
-import name.alatushkin.vkapi.client.invoke
-import name.alatushkin.httpclient.HttpClient
-import name.alatushkin.httpclient.HttpMethod
-import org.slf4j.LoggerFactory
 import java.net.SocketTimeoutException
 import java.nio.charset.Charset
+
+private val log = KotlinLogging.logger {}
 
 class SimpleServerLongPollEventSource(
     private val api: VkClient<GroupMethod>,
@@ -68,7 +70,6 @@ class SimpleServerLongPollEventSource(
     }
 
     companion object {
-        val log = LoggerFactory.getLogger(SimpleUserLongPollEventSource::class.java)!!
     }
 }
 

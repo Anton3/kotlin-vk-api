@@ -29,11 +29,11 @@ dependencies {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
 
     implementation("io.github.microutils:kotlin-logging:1.6.22")
-    implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.11.0")
 
     implementation("name.alatushkin.utils:common-http-client:0.1")
 
     testImplementation("junit:junit:4.12")
+    testImplementation("org.apache.logging.log4j:log4j-slf4j-impl:2.11.0")
 }
 
 val sourcesJar by tasks.creating(Jar::class) {

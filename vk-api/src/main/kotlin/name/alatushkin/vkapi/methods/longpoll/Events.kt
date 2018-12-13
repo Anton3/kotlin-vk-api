@@ -1,9 +1,11 @@
 package name.alatushkin.vkapi.methods.longpoll
 
 import com.fasterxml.jackson.databind.JsonNode
-import org.slf4j.LoggerFactory
+import mu.KotlinLogging
 
-enum class Events(private val id: Int, creator: ((JsonNode) -> LongPollEvent?) = { null }) {
+private val log = KotlinLogging.logger {}
+
+enum class Events(private val id: Int, private val creator: (JsonNode) -> LongPollEvent? = { null }) {
 
     MESSAGE_DELETED(0, ::MessageAdded),
     MESSAGE_FLAGS_RESET(1, ::MessageFlagsReset),
@@ -27,20 +29,15 @@ enum class Events(private val id: Int, creator: ((JsonNode) -> LongPollEvent?) =
     NEW_COUNTER_VALUE(80),
     NOTIFICATION_SETTINGS_CHANGED(114);
 
-    private val creator: ((JsonNode) -> LongPollEvent?) = creator
-
-
     fun create(jsonArray: JsonNode): LongPollEvent? {
         val result = creator(jsonArray)
         if (result == null) {
             log.warn("Not implemented for event {}", jsonArray.toString())
         }
         return result
-
     }
 
     companion object {
-
         fun byId(id: Int): Events? {
             val result = Events.values().find { it.id == id }
             if (result == null) {
@@ -49,7 +46,5 @@ enum class Events(private val id: Int, creator: ((JsonNode) -> LongPollEvent?) =
 
             return result
         }
-
-        val log = LoggerFactory.getLogger(Events::class.java)
     }
 }
