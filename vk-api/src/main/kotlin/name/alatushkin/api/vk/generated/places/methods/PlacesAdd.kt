@@ -1,0 +1,34 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
+
+package name.alatushkin.api.vk.generated.places.methods
+
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import name.alatushkin.api.vk.core.VkMethod
+import name.alatushkin.api.vk.generated.places.objects.AddResponse
+import name.alatushkin.api.vk.tokens.UserMethod
+
+/**
+ * [https://vk.com/dev/places.add]
+ *
+ * Adds a new location to the location database.
+ *
+ * @property type ID of the location's type (e.g., '1' — Home, '2' — Work). To get location type IDs, use the [vk.com/dev/places.getTypes|places.getTypes] method.
+ * @property title Title of the location.
+ * @property latitude Geographical latitude, in degrees (from '-90' to '90').
+ * @property longitude Geographical longitude, in degrees (from '-180' to '180').
+ * @property country ID of the location's country. To get country IDs, use the [vk.com/dev/database.getCountries|database.getCountries] method.
+ * @property city ID of the location's city. To get city IDs, use the [vk.com/dev/database.getCities|database.getCities] method.
+ * @property address Street address of the location (e.g., '125 Elm Street').
+ */
+data class PlacesAdd(
+    var type: Long? = null,
+    var title: String,
+    var latitude: Double,
+    var longitude: Double,
+    var country: Long? = null,
+    var city: Long? = null,
+    var address: String? = null
+) : VkMethod<AddResponse>(
+    "places.add",
+    jacksonTypeRef()
+), UserMethod

@@ -10,7 +10,7 @@ import org.junit.Test
 class MessagesSendMethodTest {
     @Test
     fun smoke1() = runBlocking {
-        val result = groupApi(MessagesSendMethod(
+        val result = groupApi(MessagesSend(
                 peerId = peerId,
                 groupId = groupId.toLong(),
                 message = "test"

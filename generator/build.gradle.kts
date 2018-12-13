@@ -1,7 +1,4 @@
-plugins {
-}
-kotlin {
-}
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 repositories {
     mavenLocal()
@@ -10,18 +7,31 @@ repositories {
     maven("https://dl.bintray.com/alatushkin/maven")
 }
 
+plugins {
+    kotlin("jvm")
+}
+
 dependencies {
-    testImplementation("junit:junit:4.12")
+    implementation(kotlin("stdlib-jdk8"))
+
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.7")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.7")
     implementation("com.fasterxml.jackson.core:jackson-core:2.9.7")
+
     implementation("com.google.guava:guava:11.0.2")
 
+    implementation("io.github.microutils:kotlin-logging:1.6.22")
+    implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.11.0")
 
-    implementation(kotlin("stdlib-jdk8"))
-    implementation(kotlin("reflect"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
-    implementation("org.slf4j:slf4j-api:1.7.25")
     testImplementation("junit:junit:4.12")
+}
 
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions {
+    jvmTarget = "1.8"
+}
+
+val compileTestKotlin: KotlinCompile by tasks
+compileTestKotlin.kotlinOptions {
+    jvmTarget = "1.8"
 }

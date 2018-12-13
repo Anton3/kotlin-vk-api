@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import name.alatushkin.api.vk.generatorng.source.JsonTypeRef
+import kotlin.reflect.KClass
 
 class ObjectSchemaDeserializer : StdDeserializer<Object>(Object::class.java) {
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext): Object {
@@ -13,53 +14,48 @@ class ObjectSchemaDeserializer : StdDeserializer<Object>(Object::class.java) {
         val node: JsonNode = oc.readTree(p)
         val subParser = node.traverse(oc)
         subParser.nextToken()
-        return if (node.has("\$ref"))
-            ctxt.readValue(subParser, RefObject::class.java)
-        else if (node.has("oneOf"))
-            ctxt.readValue(subParser, OneOfObject::class.java)
-        else if (node.has("allOf"))
-            ctxt.readValue(subParser, AllOfObject::class.java)
-        else if (node.has("type") && node["type"].textValue() == "array")
-            ctxt.readValue(subParser, ArrayObject::class.java)
-        else if (node.has("type") && node["type"].isArray)
-            ctxt.readValue(subParser, SimpleObjectMultiType::class.java)
-        else if (node.has("enum"))
-            ctxt.readValue(subParser, EnumObject::class.java)
-        else if (node.has("patternProperties"))
-            ctxt.readValue(subParser, ObjectWithPatternProperties::class.java)
-        else if (!node.has("properties"))
-            ctxt.readValue(subParser, SimpleObject::class.java)
-        else
-            ctxt.readValue(subParser, GeneralObject::class.java)
-    }
 
+        val objectKind: KClass<out Object> = when {
+            node.has("\$ref") -> RefObject::class
+            node.has("oneOf") -> OneOfObject::class
+            node.has("allOf") -> AllOfObject::class
+            node.has("type") && node["type"].textValue() == "array" -> ArrayObject::class
+            node.has("type") && node["type"].isArray -> SimpleObjectMultiType::class
+            node.has("enum") -> EnumObject::class
+            node.has("patternProperties") -> ObjectWithPatternProperties::class
+            !node.has("properties") -> SimpleObject::class
+            else -> GeneralObject::class
+        }
+        return ctxt.readValue(subParser, objectKind.java)
+    }
 }
 
 
 sealed class Object(val description: String? = null, val inherited: Boolean = false)
+
 class OneOfObject(
     val type: String = "object",
     @JsonDeserialize(contentUsing = ObjectSchemaDeserializer::class)
-    val oneOf: Array<Object>
+    val oneOf: List<Object>
 ) : Object()
 
 class AllOfObject(
     val type: String = "object",
     @JsonDeserialize(contentUsing = ObjectSchemaDeserializer::class)
-    val allOf: Array<Object>
+    val allOf: List<Object>
 ) : Object()
 
 class RefObject(
     val `$ref`: String,
     description: String? = null,
     //у некоторых есть вырожденные случаи
+    @Suppress("UNUSED_PARAMETER")
     type: String? = null
 ) : Object(description) {
     fun toJsonRef(): JsonTypeRef {
         return this.`$ref`.substringAfterLast('/')
     }
 }
-
 
 class SimpleObject(
     val type: String,
@@ -68,15 +64,15 @@ class SimpleObject(
 ) : Object(description)
 
 class SimpleObjectMultiType(
-    val type: Array<String>,
+    val type: List<String>,
     description: String
 ) : Object(description)
 
 class EnumObject(
     val type: String,
     description: String? = null,
-    val enum: Array<String>,
-    val enumNames: Array<String>? = null
+    val enum: List<String>,
+    val enumNames: List<String>? = null
 ) : Object(description)
 
 class ArrayObject(
@@ -92,7 +88,7 @@ class GeneralObject(
     @JsonDeserialize(contentUsing = ObjectSchemaDeserializer::class)
     val properties: Map<String, Object>,
     val additionalProperties: Boolean? = false,
-    val required: Array<String> = emptyArray(),
+    val required: List<String> = emptyList(),
     val maxProperties: Int? = null,
     val minProperties: Int? = null
 ) : Object()

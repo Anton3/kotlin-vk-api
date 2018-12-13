@@ -1,16 +1,16 @@
 package name.alatushkin.api.vk.callback
 
 import com.fasterxml.jackson.annotation.*
-import name.alatushkin.api.vk.api.VkDate
-import name.alatushkin.api.vk.generated.audio.AudioFull
-import name.alatushkin.api.vk.generated.board.TopicComment
-import name.alatushkin.api.vk.generated.common.LikesInfo
-import name.alatushkin.api.vk.generated.messages.Message
-import name.alatushkin.api.vk.generated.photos.Photo
-import name.alatushkin.api.vk.generated.video.VideoImpl
-import name.alatushkin.api.vk.generated.wall.CommentAttachment
-import name.alatushkin.api.vk.generated.wall.WallComment
-import name.alatushkin.api.vk.generated.wall.WallpostFull
+import name.alatushkin.api.vk.generated.audio.objects.AudioFull
+import name.alatushkin.api.vk.generated.board.objects.TopicComment
+import name.alatushkin.api.vk.generated.common.objects.LikesInfo
+import name.alatushkin.api.vk.generated.messages.objects.Message
+import name.alatushkin.api.vk.generated.photos.objects.Photo
+import name.alatushkin.api.vk.generated.video.objects.VideoImpl
+import name.alatushkin.api.vk.generated.wall.objects.CommentAttachment
+import name.alatushkin.api.vk.generated.wall.objects.WallComment
+import name.alatushkin.api.vk.generated.wall.objects.WallpostFull
+import name.alatushkin.api.vk.vktypes.VkDate
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 interface Attachment
@@ -52,9 +52,9 @@ interface Attachment
     JsonSubTypes.Type(name = "wall_reply_restore", value = WallReplyCallbackEvent::class),
     JsonSubTypes.Type(name = "wall_reply_delete", value = WallReplyDelete::class),
 
-    JsonSubTypes.Type(name = "board_post_new", value = BoardPostCallbackEnvent::class),
-    JsonSubTypes.Type(name = "board_post_edit", value = BoardPostCallbackEnvent::class),
-    JsonSubTypes.Type(name = "board_post_restore", value = BoardPostCallbackEnvent::class),
+    JsonSubTypes.Type(name = "board_post_new", value = BoardPostCallbackEvent::class),
+    JsonSubTypes.Type(name = "board_post_edit", value = BoardPostCallbackEvent::class),
+    JsonSubTypes.Type(name = "board_post_restore", value = BoardPostCallbackEvent::class),
     JsonSubTypes.Type(name = "board_post_delete", value = BoardPostDelete::class),
 
     //market*
@@ -101,16 +101,16 @@ class MessageDeny(groupId: Long, @JsonProperty("object") attachment: ToggleMessa
 class WallReply(
     val postId: Long,
     val postOwnerId: Long,
-    id: Long,
-    fromId: Long,
-    date: VkDate,
-    text: String,
-    likes: LikesInfo?,
-    replyToUser: Long?,
-    replyToComment: Long?,
-    attachments: Array<CommentAttachment>?,
-    realOffset: Long?
-) : WallComment(id, fromId, date, text, likes, replyToUser, replyToComment, attachments, realOffset)
+    override val id: Long,
+    override val fromId: Long,
+    override val date: VkDate,
+    override val text: String,
+    override val likes: LikesInfo?,
+    override val replyToUser: Long?,
+    override val replyToComment: Long?,
+    override val attachments: List<CommentAttachment>?,
+    override val realOffset: Long?
+) : WallComment
 
 class WallReplyCallbackEvent(groupId: Long, @JsonProperty("object") attachment: WallReply) :
     CallbackEvent<WallReply>(groupId, attachment)
@@ -118,6 +118,7 @@ class WallReplyCallbackEvent(groupId: Long, @JsonProperty("object") attachment: 
 
 class WallReplyDelete(groupId: Long, @JsonProperty("object") attachment: Attachment) :
     CallbackEvent<WallReplyDelete.Attachment>(groupId, attachment) {
+
     class Attachment(ownerId: Long, id: Int, userId: Long, deleteId: Long, postId: Long)
 }
 
@@ -128,18 +129,18 @@ class WallRepost(groupId: Long, @JsonProperty("object") attachment: WallpostFull
     CallbackEvent<WallpostFull>(groupId, attachment)
 
 
-class BoardPostEventAttach(
+data class BoardPostEventAttach(
     val topicId: Long,
     val topicOwnerId: Long,
-    id: Long,
-    fromId: Long,
-    date: VkDate,
-    text: String,
-    attachments: Array<CommentAttachment>?,
-    realOffset: Long?
-) : TopicComment(id, fromId, date, text, attachments, realOffset)
+    override val id: Long,
+    override val fromId: Long,
+    override val date: VkDate,
+    override val text: String,
+    override val attachments: List<CommentAttachment>?,
+    override val realOffset: Long?
+) : TopicComment
 
-class BoardPostCallbackEnvent(groupId: Long, @JsonProperty("object") attachment: BoardPostEventAttach) :
+class BoardPostCallbackEvent(groupId: Long, @JsonProperty("object") attachment: BoardPostEventAttach) :
     CallbackEvent<BoardPostEventAttach>(groupId, attachment)
 
 class BoardPostDelete(groupId: Long, @JsonProperty("object") attachment: Attach) :
@@ -152,16 +153,16 @@ class PhotoNew(groupId: Long, @JsonProperty("object") attachment: Photo) : Callb
 class PhotoCommentAttach(
     val photoId: Long,
     val photoOwnerId: Long,
-    id: Long,
-    fromId: Long,
-    date: VkDate,
-    text: String,
-    likes: LikesInfo?,
-    replyToUser: Long?,
-    replyToComment: Long?,
-    attachments: Array<CommentAttachment>?,
-    realOffset: Long?
-) : WallComment(id, fromId, date, text, likes, replyToUser, replyToComment, attachments, realOffset)
+    override val id: Long,
+    override val fromId: Long,
+    override val date: VkDate,
+    override val text: String,
+    override val likes: LikesInfo?,
+    override val replyToUser: Long?,
+    override val replyToComment: Long?,
+    override val attachments: List<CommentAttachment>?,
+    override val realOffset: Long?
+) : WallComment
 
 
 class PhotoCommentCallbackEvent(groupId: Long, @JsonProperty("object") attachment: PhotoCommentAttach) :
@@ -175,16 +176,16 @@ class PhotoCommentDelete(groupId: Long, @JsonProperty("object") attachment: Atta
 class VideoCommentAttach(
     val videoId: Long,
     val videoOwnerId: Long,
-    id: Long,
-    fromId: Long,
-    date: VkDate,
-    text: String,
-    likes: LikesInfo?,
-    replyToUser: Long?,
-    replyToComment: Long?,
-    attachments: Array<CommentAttachment>?,
-    realOffset: Long?
-) : WallComment(id, fromId, date, text, likes, replyToUser, replyToComment, attachments, realOffset)
+    override val id: Long,
+    override val fromId: Long,
+    override val date: VkDate,
+    override val text: String,
+    override val likes: LikesInfo?,
+    override val replyToUser: Long?,
+    override val replyToComment: Long?,
+    override val attachments: List<CommentAttachment>?,
+    override val realOffset: Long?
+) : WallComment
 
 
 class VideoCommentCallbackEvent(groupId: Long, @JsonProperty("object") attachment: VideoCommentAttach) :

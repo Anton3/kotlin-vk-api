@@ -1,5 +1,6 @@
 package name.alatushkin.api.vk
 
+import name.alatushkin.api.vk.core.SimpleMethodExecutor
 import name.alatushkin.api.vk.tokens.GroupToken
 import name.alatushkin.api.vk.tokens.UserToken
 import name.alatushkin.api.vk.tokens.withToken

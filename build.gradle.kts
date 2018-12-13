@@ -8,13 +8,13 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.10")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.11")
     }
 }
 
 plugins {
     java
-    kotlin("jvm") version "1.3.10"
+    kotlin("jvm") version "1.3.11"
 }
 
 tasks.withType(KotlinCompile::class.java).all {
@@ -47,7 +47,7 @@ subprojects {
         implementation(kotlin("stdlib-jdk8"))
         implementation(kotlin("reflect"))
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
-        implementation("org.slf4j:slf4j-api:1.7.25")
+
         testImplementation("junit:junit:4.12")
     }
 }

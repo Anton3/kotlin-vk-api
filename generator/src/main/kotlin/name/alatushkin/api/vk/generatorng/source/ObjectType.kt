@@ -20,29 +20,12 @@ data class ObjectType(
         val nullable: Boolean = true
     ) {
         override fun toString(): String {
-            return "${inherited("override ")}$name:${typeId.fullTypeName}${nullable("?")}"
+            return "${inherited("override ")}$name:${typeId.fullName()}${nullable("?")}"
         }
     }
 
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is ObjectType) return false
-
-        if (props != other.props) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        return props.hashCode()
-    }
-
-    override fun toString(): String {
-        return "ObjectType(props=$props)"
-    }
-
-    override val hasSource: Boolean
-        get() = (kind == Kind.CLASS && props.isNotEmpty()) || kind == Kind.INTERFACE
+    override val fixedName: Boolean get() = false
+    override val hasSource: Boolean get() = true
 
     override fun generateSource(basePackage: String, typeId: TypeId, sourceWriter: SourceWriter): String {
         val defaultValue = if (kind == Kind.INTERFACE) null else "null"
@@ -66,34 +49,44 @@ data class ObjectType(
         }
         val parentClause = parents.isNotEmpty()(" : $parentTypes")
 
-        val packageClause = sourceWriter.packageClause(basePackage, typeId)
-        val importClause = sourceWriter.importClause(basePackage, typeId)
+        val packageClause = sourceWriter.packageClause(typeId)
+        val importClause = sourceWriter.importClause(typeId)
 
         val builder = StringBuilder()
         builder.append("$packageClause$importClause\n\n")
 
+        builder.append(
+            when {
+                kind == Kind.INTERFACE -> "interface"
+                props.isEmpty() -> "class"
+                else -> "data class"
+            }
+        )
+
+        builder.append(" ${typeId.name}")
+
         if (kind == Kind.INTERFACE) {
-            builder.append("interface")
-        } else {
-            if (props.isNotEmpty())
-                builder.append("open class")
-            else
-                builder.append("data class")
+            builder.append(parentClause)
         }
 
-        builder.append(" ${typeId.typeName}")
-        if (kind == Kind.INTERFACE) {
-            builder.append("$parentClause {\n")
-        } else {
-            builder.append("(\n")
+        if (props.isNotEmpty()) {
+            if (kind == Kind.INTERFACE) {
+                builder.append(" {\n")
+            } else {
+                builder.append("(\n")
+            }
+
+            builder.append(constructorArgs)
+
+            if (kind == Kind.INTERFACE) {
+                builder.append("\n}")
+            } else {
+                builder.append("\n)")
+            }
         }
 
-        builder.append(constructorArgs)
-
-        if (kind == Kind.INTERFACE) {
-            builder.append("\n}")
-        } else {
-            builder.append("\n)$parentClause")
+        if (kind != Kind.INTERFACE) {
+            builder.append(parentClause)
         }
 
         return builder.toString()

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+    <Properties>
+        <Property name="log-path">log</Property>
+    </Properties>
+    <Appenders>
+        <Console name="console-log" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%-5level] %msg%n"/>
+            <ThresholdFilter level="warn"/>
+        </Console>
+        <File name="file-log" fileName="${log-path}/log.log">
+            <PatternLayout pattern="[%-5level] %-100l | %msg%n"/>
+            <ThresholdFilter level="debug"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="debug" additivity="false">
+            <AppenderRef ref="console-log"/>
+            <AppenderRef ref="file-log"/>
+        </Root>
+    </Loggers>
+</Configuration>

@@ -2,12 +2,12 @@ package name.alatushkin.api.vk.longpoll
 
 import com.fasterxml.jackson.module.kotlin.readValue
 import kotlinx.coroutines.runBlocking
-import name.alatushkin.api.vk.VK_OBJECT_MAPPER
 import name.alatushkin.api.vk.callback.MessageNew
-import name.alatushkin.api.vk.generated.messages.*
-import name.alatushkin.api.vk.generated.messages.methods.MessagesSendMethod
-import name.alatushkin.api.vk.generated.photos.Photo
+import name.alatushkin.api.vk.generated.messages.methods.MessagesSend
+import name.alatushkin.api.vk.generated.messages.objects.*
+import name.alatushkin.api.vk.generated.photos.objects.Photo
 import name.alatushkin.api.vk.groupApi
+import name.alatushkin.api.vk.json.VK_OBJECT_MAPPER
 import name.alatushkin.api.vk.peerId
 import name.alatushkin.api.vk.tokens.invoke
 import name.alatushkin.httpclient.httpClient
@@ -41,25 +41,29 @@ class SimpleServerLongPollEventSourceTest {
         }
     }
 
-    private fun makeMessageToSend(): MessagesSendMethod {
+    private fun makeMessageToSend(): MessagesSend {
         val keyboard = KeyboardImpl(
-                oneTime = false,
-                buttons = arrayOf(arrayOf(KeyboardButton(
+            oneTime = false,
+            buttons = listOf(
+                listOf(
+                    KeyboardButton(
                         color = KeyboardButtonColor.DEFAULT,
                         action = KeyboardButtonAction(
-                                KeyboardButtonActionType.TEXT,
-                                payload = "\"some_payload\"",
-                                label = "Label"
+                            KeyboardButtonActionType.TEXT,
+                            payload = "\"some_payload\"",
+                            label = "Label"
                         )
 
-                )))
+                    )
+                )
+            )
         )
 
-        return MessagesSendMethod(
-                peerId = peerId,
-                message = "msg${System.currentTimeMillis()}",
-                randomId = System.currentTimeMillis(),
-                keyboard = keyboard
+        return MessagesSend(
+            peerId = peerId,
+            message = "msg${System.currentTimeMillis()}",
+            randomId = System.currentTimeMillis(),
+            keyboard = keyboard
         )
     }
 
@@ -67,7 +71,6 @@ class SimpleServerLongPollEventSourceTest {
     fun `deserialize message with image attachment`() {
         val json =
             "{\"ts\":\"243\",\"updates\":[{\"type\":\"message_new\",\"object\":{\"date\":1542641092,\"from_id\":5518788,\"id\":2840,\"out\":0,\"peer_id\":5518788,\"text\":\"\",\"conversation_message_id\":2728,\"fwd_messages\":[],\"important\":false,\"random_id\":0,\"attachments\":[{\"type\":\"photo\",\"photo\":{\"id\":430665037,\"album_id\":-7,\"owner_id\":5518788,\"sizes\":[{\"type\":\"m\",\"url\":\"https:\\/\\/pp.userapi.com\\/c636727\\/v636727788\\/18429\\/vATo5T3lEqA.jpg\",\"width\":130,\"height\":83},{\"type\":\"o\",\"url\":\"https:\\/\\/pp.userapi.com\\/c636727\\/v636727788\\/1842d\\/gsd9_XrSOdk.jpg\",\"width\":130,\"height\":87},{\"type\":\"p\",\"url\":\"https:\\/\\/pp.userapi.com\\/c636727\\/v636727788\\/1842e\\/4yL_6vzBXsk.jpg\",\"width\":200,\"height\":133},{\"type\":\"q\",\"url\":\"https:\\/\\/pp.userapi.com\\/c636727\\/v636727788\\/1842f\\/mFVjMMvUJVU.jpg\",\"width\":320,\"height\":213},{\"type\":\"r\",\"url\":\"https:\\/\\/pp.userapi.com\\/c636727\\/v636727788\\/18430\\/zqcoJTur_kg.jpg\",\"width\":510,\"height\":340},{\"type\":\"s\",\"url\":\"https:\\/\\/pp.userapi.com\\/c636727\\/v636727788\\/18428\\/KxwOYSOsiiY.jpg\",\"width\":75,\"height\":48},{\"type\":\"x\",\"url\":\"https:\\/\\/pp.userapi.com\\/c636727\\/v636727788\\/1842a\\/ZZVCDHtoB40.jpg\",\"width\":604,\"height\":385},{\"type\":\"y\",\"url\":\"https:\\/\\/pp.userapi.com\\/c636727\\/v636727788\\/1842b\\/T7BwoFxVkos.jpg\",\"width\":807,\"height\":514},{\"type\":\"z\",\"url\":\"https:\\/\\/pp.userapi.com\\/c636727\\/v636727788\\/1842c\\/e0h9O8E2-nI.jpg\",\"width\":1107,\"height\":705}],\"text\":\"\",\"date\":1473353068,\"post_id\":1202,\"access_key\":\"57f43d7ec925b9f6c3\"}}],\"is_hidden\":false},\"group_id\":27640201}]}\n"
-
         val lpResponse: GroupLongPollResponse = VK_OBJECT_MAPPER.readValue(json)
 
         assertTrue(lpResponse.updates.size == 1)

@@ -1,13 +1,13 @@
 package name.alatushkin.api.vk.tokens
 
-import name.alatushkin.api.vk.MethodExecutor
-import name.alatushkin.api.vk.VkMethod
+import name.alatushkin.api.vk.core.MethodExecutor
+import name.alatushkin.api.vk.core.VkMethod
 
-class ExampleUserMethod : VkMethod<Int>(TODO(), TODO(), TODO()), UserMethod
-class ExampleServiceMethod : VkMethod<Long>(TODO(), TODO(), TODO()), ServiceMethod
-class ExampleUserGroupMethod : VkMethod<Short>(TODO(), TODO(), TODO()), UserGroupMethod
-class ExampleUserServiceMethod : VkMethod<Char>(TODO(), TODO(), TODO()), UserServiceMethod
-class ExampleUserGroupServiceMethod : VkMethod<Double>(TODO(), TODO(), TODO()), UserGroupServiceMethod
+class ExampleUserMethod : VkMethod<Int>(TODO(), TODO()), UserMethod
+class ExampleServiceMethod : VkMethod<Long>(TODO(), TODO()), ServiceMethod
+class ExampleUserGroupMethod : VkMethod<Short>(TODO(), TODO()), UserGroupMethod
+class ExampleUserServiceMethod : VkMethod<Char>(TODO(), TODO()), UserServiceMethod
+class ExampleUserGroupServiceMethod : VkMethod<Double>(TODO(), TODO()), UserGroupServiceMethod
 
 fun getSomeExecutor(): MethodExecutor = TODO()
 

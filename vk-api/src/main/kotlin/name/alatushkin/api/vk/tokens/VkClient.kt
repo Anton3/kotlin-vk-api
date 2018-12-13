@@ -1,8 +1,8 @@
 package name.alatushkin.api.vk.tokens
 
-import name.alatushkin.api.vk.MethodExecutor
-import name.alatushkin.api.vk.ThrowingMethodExecutor
-import name.alatushkin.api.vk.VkMethod
+import name.alatushkin.api.vk.core.MethodExecutor
+import name.alatushkin.api.vk.core.ThrowingMethodExecutor
+import name.alatushkin.api.vk.core.VkMethod
 import name.alatushkin.httpclient.HttpClient
 
 data class VkClient<in M: MethodRequirement>(val executor: ThrowingMethodExecutor, val token: Token<M>) {

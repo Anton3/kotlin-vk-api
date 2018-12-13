@@ -1,10 +1,10 @@
 package name.alatushkin.api.vk.longpoll
 
 import com.fasterxml.jackson.module.kotlin.readValue
-import name.alatushkin.api.vk.VK_OBJECT_MAPPER
 import name.alatushkin.api.vk.callback.CallbackEvent
-import name.alatushkin.api.vk.generated.groups.LongPollServer
-import name.alatushkin.api.vk.generated.groups.methods.GroupsGetLongPollServerMethod
+import name.alatushkin.api.vk.generated.groups.methods.GroupsGetLongPollServer
+import name.alatushkin.api.vk.generated.groups.objects.LongPollServer
+import name.alatushkin.api.vk.json.VK_OBJECT_MAPPER
 import name.alatushkin.api.vk.tokens.GroupMethod
 import name.alatushkin.api.vk.tokens.VkClient
 import name.alatushkin.api.vk.tokens.invoke
@@ -64,23 +64,13 @@ class SimpleServerLongPollEventSource(
     }
 
     private suspend fun getLongPollServer(): LongPollServer {
-        return api(GroupsGetLongPollServerMethod(groupId))
+        return api(GroupsGetLongPollServer(groupId))
     }
 
     companion object {
         val log = LoggerFactory.getLogger(SimpleUserLongPollEventSource::class.java)!!
     }
 }
-
-private fun LongPollServer.copy(
-    key: String? = null,
-    server: String? = null,
-    ts: Long? = null
-): LongPollServer = LongPollServer(
-        key = key ?: this.key,
-        server = server ?: this.server,
-        ts = ts ?: this.ts
-)
 
 fun LongPollServer.toUrl(timeOut: Int = 95): String {
     return "$server?act=a_check&key=$key&ts=$ts&wait=$timeOut"

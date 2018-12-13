@@ -8,13 +8,13 @@ import org.junit.Test
 class WallGetMethodExtendedTest {
     @Test
     fun smoke1() = runBlocking {
-        val result = userApi(WallGetMethod(domain = "departureMsk"))
+        val result = userApi(WallGet(domain = "departureMsk"))
         println(result)
     }
 
     @Test
     fun smoke2() = runBlocking {
-        val result = userApi(WallGetMethodExtended(domain = "departureMsk"))
+        val result = userApi(WallGetExtended(domain = "departureMsk"))
         println(result)
     }
 }

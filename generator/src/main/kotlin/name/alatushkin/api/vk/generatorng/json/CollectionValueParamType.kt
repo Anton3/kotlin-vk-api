@@ -5,6 +5,6 @@ data class CollectionValueParamType(
     //для массивов
     val minimum: Int? = 0,
     //для строк
-    val enum: Array<String>? = null,
-    val enumNames: Array<String>? = null
+    val enum: List<String>? = null,
+    val enumNames: List<String>? = null
 )

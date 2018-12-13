@@ -1,6 +1,6 @@
 package name.alatushkin.api.vk.tokens
 
-import name.alatushkin.api.vk.VkMethod
+import name.alatushkin.api.vk.core.VkMethod
 
 sealed class Token<in M: MethodRequirement> {
     abstract fun <T> attachTo(method: VkMethod<T>)
@@ -15,7 +15,7 @@ data class UserToken(
 ) : Token<UserMethod>() {
 
     override fun <T> attachTo(method: VkMethod<T>) {
-        method.presetProps["access_token"] = accessToken
+        method.accessToken = accessToken
     }
 }
 
@@ -25,7 +25,7 @@ data class GroupToken(
 ) : Token<GroupMethod>() {
 
     override fun <T> attachTo(method: VkMethod<T>) {
-        method.presetProps["access_token"] = accessToken
+        method.accessToken = accessToken
     }
 }
 
@@ -36,9 +36,9 @@ data class ServiceToken(
 ) : Token<ServiceMethod>() {
 
     override fun <T> attachTo(method: VkMethod<T>) {
-        method.presetProps["access_token"] = accessToken
+        method.accessToken = accessToken
         if (method.apiMethodName.substringBefore('.') == "secure") {
-            method.presetProps["client_secret"] = clientSecret
+            method.clientSecret = clientSecret
         }
     }
 }

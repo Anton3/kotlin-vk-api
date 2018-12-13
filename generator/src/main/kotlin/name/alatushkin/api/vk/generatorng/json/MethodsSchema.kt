@@ -18,10 +18,10 @@ data class Error(
 )
 
 data class MethodSchema(
-    //поле для наших патчей
+    // поле для наших патчей
     val name: String,
-    val className: String = nameMethod(name).typeName,
-    //есть методы без описания
+    val className: String = nameMethod(name, basePackage = "").name,
+    // есть методы без описания
     val description: String? = null,
     @JsonProperty("access_token_type")
     val accessTokenType: List<String> = emptyList(),

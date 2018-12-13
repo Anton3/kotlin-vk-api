@@ -15,4 +15,4 @@ fun objectMapper() = ObjectMapper().registerModule(KotlinModule())!!
 fun camel2under(str: String): String = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, str)
 fun under2camel(str: String): String = CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, str)
 fun under2Camel(str: String): String = CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, str)
-fun ucFirst(str: String): String = if (str.isNotEmpty()) str[0].toUpperCase() + str.substring(1) else ""
+fun ucFirst(str: String): String = str.capitalize()

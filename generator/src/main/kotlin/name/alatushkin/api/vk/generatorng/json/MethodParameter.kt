@@ -17,16 +17,16 @@ data class MethodParameter(
     val maxItems: Int? = null,
 
     //для enum но с типом string
-    val enum: Array<String>? = null,
-    val enumNames: Array<String>? = null
+    val enum: List<String>? = null,
+    val enumNames: List<String>? = null
 ) {
     fun narrowEnumValues(values: List<String>): MethodParameter {
         val valuesToStay = values
             .map { enum!!.indexOf(it) }
             .map { enum!![it] to enumNames!![it] }
         return copy(
-            enum = valuesToStay.map { it.first }.toTypedArray(),
-            enumNames = valuesToStay.map { it.second }.toTypedArray()
+            enum = valuesToStay.map { it.first },
+            enumNames = valuesToStay.map { it.second }
         )
     }
 }

@@ -1,0 +1,81 @@
+{
+  "responses": {
+    "messages_getConversationMembers_response": {
+      "type": "object",
+      "properties": {
+        "response": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "integer",
+              "description": "Number of conversation members"
+            },
+            "items": {
+              "type": "array",
+              "description": "Conversation members",
+              "items": {
+                "$ref": "objects.json#/definitions/messages_conversation_member"
+              }
+            },
+            "profiles": {
+              "type": "array",
+              "description": "User member profiles",
+              "items": {
+                "$ref": "objects.json#/definitions/users_user"
+              }
+            },
+            "groups": {
+              "type": "array",
+              "description": "Group member profiles",
+              "items": {
+                "$ref": "objects.json#/definitions/groups_group"
+              }
+            }
+          },
+          "required": [
+            "count",
+            "items",
+            "profiles",
+            "groups"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "objects": {
+    "messages_conversation_member": {
+      "type": "object",
+      "properties": {
+        "member_id": {
+          "type": "integer",
+          "description": "Member id"
+        },
+        "invited_by": {
+          "type": "integer",
+          "description": "User id of the member that invited this member"
+        },
+        "join_date": {
+          "type": "integer",
+          "description": "Date when this member entered the conversation"
+        },
+        "is_admin": {
+          "type": "boolean",
+          "description": "`true` if this member is an admin of the chat"
+        },
+        "can_kick": {
+          "type": "boolean",
+          "description": "`true` if current user can kick this member"
+        }
+      },
+      "required": [
+        "member_id",
+        "invited_by",
+        "join_date",
+        "is_admin",
+        "can_kick"
+      ]
+    }
+  }
+}

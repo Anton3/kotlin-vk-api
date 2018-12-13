@@ -1,9 +1,9 @@
 package name.alatushkin.api.vk.longpoll
 
 import com.fasterxml.jackson.module.kotlin.readValue
-import name.alatushkin.api.vk.VK_OBJECT_MAPPER
-import name.alatushkin.api.vk.generated.messages.LongpollParams
-import name.alatushkin.api.vk.generated.messages.methods.MessagesGetLongPollServerMethod
+import name.alatushkin.api.vk.generated.messages.methods.MessagesGetLongPollServer
+import name.alatushkin.api.vk.generated.messages.objects.LongpollParams
+import name.alatushkin.api.vk.json.VK_OBJECT_MAPPER
 import name.alatushkin.api.vk.tokens.GroupMethod
 import name.alatushkin.api.vk.tokens.VkClient
 import name.alatushkin.api.vk.tokens.invoke
@@ -64,25 +64,13 @@ class SimpleUserLongPollEventSource(
     }
 
     private suspend fun getLongPollServer(): LongpollParams {
-        return api(MessagesGetLongPollServerMethod(groupId = groupId, needPts = true, lpVersion = 3L))
+        return api(MessagesGetLongPollServer(groupId = groupId, needPts = true, lpVersion = 3L))
     }
 
     companion object {
         val log = LoggerFactory.getLogger(SimpleUserLongPollEventSource::class.java)!!
     }
 }
-
-private fun LongpollParams.copy(
-        key: String? = null,
-        server: String? = null,
-        ts: Long? = null,
-        pts: Long? = null
-): LongpollParams = LongpollParams(
-        key = key ?: this.key,
-        server = server ?: this.server,
-        ts = ts ?: this.ts,
-        pts = pts ?: this.pts
-)
 
 fun LongpollParams.toUrl(timeOut: Int = 95): String {
     return "https://$server?act=a_check&key=$key&ts=$ts&wait=$timeOut&mode=${2 + 8 + 64}&version=3"

@@ -1,6 +1,6 @@
 package name.alatushkin.api.vk.generatorng.source.writer
 
-import name.alatushkin.api.vk.generatorng.TypesSpace
+import name.alatushkin.api.vk.generatorng.TypeSpace
 import name.alatushkin.api.vk.generatorng.source.TypeId
 import name.alatushkin.api.vk.under2camel
 
@@ -26,26 +26,26 @@ interface SourceWriter {
 
     fun enumItem(name: String, vararg values: String): String
 
-    fun importClause(basePackage: String, typeId: TypeId): String
+    fun importClause(currentTypeId: TypeId): String
 
     fun copy(): SourceWriter
-    fun packageClause(basePackage: String, typeId: TypeId? = null): String
+
+    fun packageClause(typeId: TypeId): String
+
     fun fieldName(name: String): String
+
     fun fieldNameEscaped(name: String): String
+
     fun realType(typeId: TypeId): TypeId
-    fun importType(type: TypeId)
+
+    fun importType(importedTypeId: TypeId)
 }
 
+operator fun Boolean.invoke(onTrue: String, onFalse: String = ""): String = if (this) onTrue else onFalse
 
-operator fun Boolean.invoke(onTrue: String, onFalse: String = ""): String {
-    return if (this)
-        onTrue
-    else
-        onFalse
-}
+class KotlinSourceWriter(private val typeSpace: TypeSpace) : SourceWriter {
 
-class KotlinSourceWriter(val typesSpace: TypesSpace) : SourceWriter {
-    val referencedTypes = HashSet<TypeId>()
+    private val referencedTypes = HashSet<TypeId>()
 
     override fun constructorField(
         name: String,
@@ -65,9 +65,9 @@ class KotlinSourceWriter(val typesSpace: TypesSpace) : SourceWriter {
     }
 
     override fun argument(name: String, type: TypeId, nullable: Boolean, defaultValue: String?): String {
-        val realType = typesSpace.resolveActualTypeId(type)
+        val realType = typeSpace.resolveTypeAliases(type)
         importType(realType)
-        return "${fieldNameEscaped(name)}: ${realType.fullTypeName}${nullable("?")}" +
+        return "${fieldNameEscaped(name)}: ${realType.fullName()}${nullable("?")}" +
                 defaultValue?.let { " = $it" }.orEmpty()
     }
 
@@ -82,34 +82,48 @@ class KotlinSourceWriter(val typesSpace: TypesSpace) : SourceWriter {
     }
 
     override fun parentType(type: TypeId): String {
-        val realType = typesSpace.resolveActualTypeId(type)
+        val realType = typeSpace.resolveTypeAliases(type)
         importType(realType)
-        return realType.fullTypeName
+        return realType.fullName()
     }
 
-    override fun importType(type: TypeId) {
-        val realType = typesSpace.resolveActualTypeId(type)
+    override fun importType(importedTypeId: TypeId) {
+        val realType = typeSpace.resolveTypeAliases(importedTypeId)
         referencedTypes.add(realType)
-        realType.paramTypeIds.forEach(this::importType)
+        realType.genericParameters.forEach { importType(it) }
     }
 
-    override fun importClause(basePackage: String, typeId: TypeId): String {
-        val importsToDo = referencedTypes
-            .filterNot { it.packages.first() in setOf("kotlin") }
-            .filterNot { it.packages.containsAll(typeId.packages) }
+    private fun isImplicitlyImported(typeId: TypeId): Boolean = when (typeId.packages.firstOrNull()) {
+        "java" -> when (typeId.packages.elementAtOrNull(1)) {
+            "lang" -> true
+            null -> false
+            else -> false
+        }
+        "kotlin" -> when (typeId.packages.elementAtOrNull(1)) {
+            "annotation", "collections", "comparisons", "io", "ranges", "sequences", "text", "jvm", "js" -> true
+            null -> true
+            else -> false
+        }
+        null -> false
+        else -> false
+    }
+
+    override fun importClause(currentTypeId: TypeId): String {
+        val importsToDo = referencedTypes.filterNot {
+            isImplicitlyImported(it) || it.packages == currentTypeId.packages
+        }
 
         if (importsToDo.isEmpty()) return ""
 
-        return importsToDo.map { importLine(basePackage, it) }
-                .toSortedSet().joinToString("\n", prefix = "\n\n") { "import $it" }
+        return importsToDo.map { "import ${it.qualifiedName()}" }.toSortedSet().joinToString("\n", prefix = "\n\n")
     }
 
     override fun copy(): SourceWriter {
-        return KotlinSourceWriter(typesSpace)
+        return KotlinSourceWriter(typeSpace)
     }
 
-    override fun packageClause(basePackage: String, typeId: TypeId?): String {
-        return "package ${(listOf(basePackage) + typeId?.packages.orEmpty()).joinToString(".")}"
+    override fun packageClause(typeId: TypeId): String {
+        return "package " + typeId.packages.joinToString(".")
     }
 
     override fun enumItem(name: String, vararg values: String): String {
@@ -123,20 +137,10 @@ class KotlinSourceWriter(val typesSpace: TypesSpace) : SourceWriter {
         } else
             preResultName
 
-        return finalName + "(" + values.map { "\"$it\"" }.joinToString(", ") + ")"
-    }
-
-    private fun importLine(basePackage: String, it: TypeId): String {
-        val prefix =
-            if (basePackage.startsWith(it.packages.first()) || it.packages.first().startsWith("/"))
-                ""
-            else
-                "$basePackage."
-
-        return prefix + it.packages.joinToString(".").substringAfter("/") + "." + it.typeName
+        return finalName + "(" + values.joinToString(", ") { "\"$it\"" } + ")"
     }
 
     override fun realType(typeId: TypeId): TypeId {
-        return typesSpace.resolveActualTypeId(typeId)
+        return typeSpace.resolveTypeAliases(typeId)
     }
 }

@@ -10,18 +10,19 @@ data class MethodArgument(
     val description: String? = null
 )
 
-data class MethodAccessType(val interfaceName: String, val interfacePackage: String)
-
 data class MethodType(
     val methodUrl: String,
     val arguments: List<MethodArgument>,
     val result: TypeId,
     val defaultParams: Map<String, String?> = emptyMap(),
-    val methodAccessType: MethodAccessType?,
-    override val description: String?
+    val methodAccessType: TypeId?,
+    val description: String?
 ) : TypeDefinition {
 
     class Item(val name: String, val value: String)
+
+    override val fixedName: Boolean get() = false
+    override val hasSource: Boolean get() = true
 
     override fun generateSource(
         basePackage: String,
@@ -29,31 +30,26 @@ data class MethodType(
         sourceWriter: SourceWriter
     ): String = with(sourceWriter) {
 
-        val hasParams = arguments.isNotEmpty()
-        val fieldsDefinition = arguments.joinToString("\n", prefix = "\n", postfix = "\n") { arg ->
+        val baseFields = setOf("access_token", "client_secret", "v", "lang", "test_mode")
+
+        val filteredArguments = arguments.filter { it.name !in baseFields }
+        val hasParams = filteredArguments.isNotEmpty()
+
+        val fieldsDefinition = filteredArguments.joinToString(",\n", prefix = "\n", postfix = "\n") { arg ->
             sourceWriter.constructorField(
                 name = arg.name,
                 type = arg.typeId,
-                inherited = false,
+                inherited = arg.name in baseFields,
                 final = false,
                 nullable = !arg.required,
-                delegateBy = "props",
-                defaultValue = null
-            )
-        }
-
-        val constructorArgs = arguments.joinToString(",\n    ", prefix = "\n    ") { arg ->
-            sourceWriter.argument(
-                name = arg.name,
-                type = arg.typeId,
-                nullable = !arg.required,
+                delegateBy = null,
                 defaultValue = if (arg.required) null else "null"
             )
         }
 
         val implementsClause = methodAccessType?.let {
-            importType(TypeId(it.interfacePackage, it.interfaceName))
-            ", ${it.interfaceName}"
+            importType(it)
+            ", ${it.name}"
         }.orEmpty()
 
         val classRef = renderClassRef(sourceWriter)
@@ -61,8 +57,10 @@ data class MethodType(
 
         val parentClass = parentType(result)
 
-        val packageClause = packageClause(basePackage, typeId)
-        val importClause = importClause(basePackage, typeId)
+        val packageClause = packageClause(typeId)
+        val importClause = importClause(typeId)
+
+        val dataClass = hasParams("data ")
 
         val builder = StringBuilder()
 
@@ -73,24 +71,26 @@ data class MethodType(
             |$packageClause$importClause
             |
             |$description
-            |class ${typeId.typeName}${hasParams("($constructorArgs\n)")} : $parentClass(
+            |${dataClass}class ${typeId.name}${hasParams("($fieldsDefinition)")} : $parentClass(
             |    "$methodUrl",
-            |    ${renderMutableMap(defaultParams)},
             |    $classRef
             |)$implementsClause
             """.trimMargin()
         )
 
-        if (hasParams) {
-            val constructorBody = arguments
-                .map { fieldNameEscaped(it.name) }
-                .joinToString("\n") { "        this.$it = $it" }
+        renderMutableMap(defaultParams)
+
+        val filteredDefaultParams = defaultParams
+            .mapNotNull { (key, value) -> value?.let { key to value } }
+
+        if (filteredDefaultParams.isNotEmpty()) {
+            val constructorBody = filteredDefaultParams
+                .joinToString("\n        ") { (key, value) -> """unsafeParam("$key", "$value")""" }
 
             builder.append(
                 """ {
-                |$fieldsDefinition
                 |    init {
-                |$constructorBody
+                |        $constructorBody
                 |    }
                 |}
                 """.trimMargin()
@@ -101,14 +101,12 @@ data class MethodType(
     }
 
     private fun renderClassRef(sourceWriter: SourceWriter): String {
-        sourceWriter.importType(TypeId("/name.alatushkin.api.vk", "successReference"))
-        return "successReference()"
+        sourceWriter.importType(TypeId("com.fasterxml.jackson.module.kotlin.jacksonTypeRef"))
+        return "jacksonTypeRef()"
     }
 
     private fun renderMutableMap(map: Map<String, String?>): String {
-        return map.filterValues { it != null }.map {
-            "\"${it.key}\" to \"${it.value}\""
-        }.joinToString(", ", prefix = "mutableMapOf(", postfix = ")")
+        return map.filterValues { it != null }.entries.joinToString(", ", prefix = "mutableMapOf(", postfix = ")") { "\"${it.key}\" to \"${it.value!!}\"" }
     }
 
     private fun renderDescription(sourceWriter: SourceWriter): String {
