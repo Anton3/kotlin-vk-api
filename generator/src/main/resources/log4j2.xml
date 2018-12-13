@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="warn">
     <Properties>
-        <Property name="log-path">log</Property>
+        <Property name="log-path">generator/log</Property>
     </Properties>
     <Appenders>
         <Console name="console-log" target="SYSTEM_OUT">
@@ -9,7 +9,7 @@
             <ThresholdFilter level="warn"/>
         </Console>
         <File name="file-log" fileName="${log-path}/log.log">
-            <PatternLayout pattern="[%-5level] %-100l | %msg%n"/>
+            <PatternLayout pattern="[%-5level] %msg%n"/>
             <ThresholdFilter level="debug"/>
         </File>
     </Appenders>

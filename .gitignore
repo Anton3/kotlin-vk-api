@@ -10,3 +10,5 @@
 .gradle
 build
 /gradle.properties
+
+log
