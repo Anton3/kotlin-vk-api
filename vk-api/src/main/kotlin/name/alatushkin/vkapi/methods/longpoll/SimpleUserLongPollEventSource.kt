@@ -8,7 +8,8 @@ import name.alatushkin.vkapi.client.VkClient
 import name.alatushkin.vkapi.client.invoke
 import name.alatushkin.vkapi.generated.messages.methods.MessagesGetLongPollServer
 import name.alatushkin.vkapi.generated.messages.objects.LongpollParams
-import name.alatushkin.vkapi.json.VK_OBJECT_MAPPER
+import name.alatushkin.vkapi.methods.longpoll.events.LongPollEvent
+import name.alatushkin.vkapi.methods.longpoll.objects.LongPollFailure
 import name.alatushkin.vkapi.tokens.GroupMethod
 import java.net.SocketTimeoutException
 import java.nio.charset.Charset
@@ -36,33 +37,35 @@ class SimpleUserLongPollEventSource(
                 return lpServer to emptyList()
             }
             log.debug("Vk long poll responds with $vkJson")
-            val lpResponse: LongPollResponse = VK_OBJECT_MAPPER.readValue(vkJson)
+            val lpResponse: LongPollResponse = api.objectMapper.readValue(vkJson)
 
-            when (lpResponse.failed) {
-                1 -> {
-                    log.debug("Vk say failed:1. Old ts:{} new ts: {}", lpServer.ts, lpResponse.ts)
-                    return lpServer.copy(ts = lpResponse.ts) to emptyList()
+            return when (lpResponse.failed) {
+                null -> {
+                    lpServer.copy(ts = lpResponse.ts) to lpResponse.updates
                 }
-                2 -> {
+                LongPollFailure.NEW_TS -> {
+                    log.debug("Vk say failed:1. Old ts:{} new ts: {}", lpServer.ts, lpResponse.ts)
+                    lpServer.copy(ts = lpResponse.ts) to emptyList()
+                }
+                LongPollFailure.REQUEST_NEW_KEY -> {
                     val newServer = getLongPollServer()
                     log.debug("Vk say failed:2. Old ts:{} new ts: {}", lpServer.ts, newServer.ts)
-                    return newServer to emptyList()
+                    newServer to emptyList()
                 }
-                3 -> {
+                LongPollFailure.REQUEST_NEW_KEY_TS -> {
                     val newServer = getLongPollServer()
                     log.debug("Vk say failed:3. Old ts:{} new ts: {}", lpServer.ts, newServer.ts)
-                    return newServer to emptyList()
+                    newServer to emptyList()
+                }
+                LongPollFailure.INVALID_VERSION -> {
+                    error("Invalid version")
                 }
             }
-
-            return lpServer.copy(ts = lpResponse.ts) to lpResponse.decodedUpdates
-
         } catch (e: Exception) {
             log.error("Some error occurs {}", e.message)
             log.error("{}", e)
             return lpServer to emptyList()
         }
-
     }
 
     private suspend fun getLongPollServer(): LongpollParams {

@@ -1,17 +1,17 @@
 package name.alatushkin.vkapi.generator.source
 
 import name.alatushkin.vkapi.generator.TypeSpace
-import name.alatushkin.vkapi.generator.source.writer.SourceWriter
 
 class InterfaceMapping(private val typeSpace: TypeSpace) : TypeDefinition {
     override val fixedName: Boolean = true
-    override val hasSource: Boolean = true
+    override val hasSource: Boolean = false
 
     fun typeId(basePackage: String): TypeId = TypeId(basePackage, "vkInterfaceMapping")
 
     override fun generateSource(basePackage: String, typeId: TypeId, sourceWriter: SourceWriter): String {
 
-        sourceWriter.importType(TypeId("kotlin.reflect.KClass"))
+        sourceWriter.importType(TypeId("com.fasterxml.jackson.databind.AbstractTypeResolver"))
+        sourceWriter.importType(TypeId("com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver"))
 
         val mappings = typeSpace.interfaceImplementations
             .map { (iFace, Impl) ->
@@ -20,7 +20,7 @@ class InterfaceMapping(private val typeSpace: TypeSpace) : TypeDefinition {
             .map { (iFace, Impl) ->
                 sourceWriter.importType(iFace)
                 sourceWriter.importType(Impl)
-                "${iFace.name}::class to ${Impl.name}::class"
+                "resolver.addMapping(${iFace.name}::class.java, ${Impl.name}::class.java)"
             }
 
         val packageClause = sourceWriter.packageClause(typeId)
@@ -29,9 +29,13 @@ class InterfaceMapping(private val typeSpace: TypeSpace) : TypeDefinition {
         return """
         |$packageClause$importClause
         |
-        |internal fun ${typeId.name}(): Map<KClass<out Any>, KClass<out Any>> = mapOf(
-        |    ${mappings.joinToString(",\n    ")}
-        |)
+        |fun ${typeId.name}(): AbstractTypeResolver {
+        |    val resolver = SimpleAbstractTypeResolver()
+        |
+        |    ${mappings.joinToString("\n    ")}
+        |
+        |    return resolver
+        |}
         """.trimMargin()
     }
 }

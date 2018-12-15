@@ -1,6 +1,11 @@
 package name.alatushkin.vkapi.methods.upload
 
 import com.fasterxml.jackson.module.kotlin.readValue
+import name.alatushkin.httpclient.FilePart
+import name.alatushkin.httpclient.HttpMethod
+import name.alatushkin.httpclient.RequestBody
+import name.alatushkin.vkapi.client.VkClient
+import name.alatushkin.vkapi.client.invoke
 import name.alatushkin.vkapi.generated.docs.methods.DocsGetMessagesUploadServer
 import name.alatushkin.vkapi.generated.docs.methods.DocsSave
 import name.alatushkin.vkapi.generated.docs.objects.Doc
@@ -8,13 +13,7 @@ import name.alatushkin.vkapi.generated.docs.objects.GetMessagesUploadServerType
 import name.alatushkin.vkapi.generated.photos.methods.PhotosGetMessagesUploadServer
 import name.alatushkin.vkapi.generated.photos.methods.PhotosSaveMessagesPhoto
 import name.alatushkin.vkapi.generated.photos.objects.Photo
-import name.alatushkin.vkapi.json.VK_OBJECT_MAPPER
 import name.alatushkin.vkapi.tokens.UserGroupMethod
-import name.alatushkin.vkapi.client.VkClient
-import name.alatushkin.vkapi.client.invoke
-import name.alatushkin.httpclient.FilePart
-import name.alatushkin.httpclient.HttpMethod
-import name.alatushkin.httpclient.RequestBody
 import java.nio.charset.Charset
 
 data class UploadPhotoResponse(val server: Long, val hash: String, val photo: String)
@@ -30,7 +29,7 @@ suspend fun VkClient<UserGroupMethod>.uploadMessagePhoto(peerId: Long, byteArray
         )
     )
     val uploadPhotoResponse: UploadPhotoResponse =
-        VK_OBJECT_MAPPER.readValue(response.data.toString(Charset.forName("UTF-8")))
+        objectMapper.readValue(response.data.toString(Charset.forName("UTF-8")))
 
     return this(
         PhotosSaveMessagesPhoto(
@@ -55,13 +54,12 @@ suspend fun VkClient<UserGroupMethod>.uploadMessageDocument(
         HttpMethod.POST(
             url = uploadUrl,
             body = RequestBody.MultipartBody(
-                mapOf("file" to FilePart(fileName,
-                    guessContentTypeByFilename(fileName), byteArray))
+                mapOf("file" to FilePart(fileName, guessContentTypeByFilename(fileName), byteArray))
             )
         )
     )
     val uploadDocumentResponse: UploadDocumentResponse =
-        VK_OBJECT_MAPPER.readValue(response.data.toString(Charset.forName("UTF-8")))
+        objectMapper.readValue(response.data.toString(Charset.forName("UTF-8")))
 
     return this(
         DocsSave(

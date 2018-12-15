@@ -8,7 +8,6 @@ import name.alatushkin.vkapi.client.VkClient
 import name.alatushkin.vkapi.client.invoke
 import name.alatushkin.vkapi.generated.groups.methods.GroupsGetLongPollServer
 import name.alatushkin.vkapi.generated.groups.objects.LongPollServer
-import name.alatushkin.vkapi.json.VK_OBJECT_MAPPER
 import name.alatushkin.vkapi.methods.callback.CallbackEvent
 import name.alatushkin.vkapi.tokens.GroupMethod
 import java.net.SocketTimeoutException
@@ -37,7 +36,7 @@ class SimpleServerLongPollEventSource(
                 return lpServer to emptyList()
             }
             log.debug("Vk long poll responds with $vkJson")
-            val lpResponse: GroupLongPollResponse = VK_OBJECT_MAPPER.readValue(vkJson)
+            val lpResponse: GroupLongPollResponse = api.objectMapper.readValue(vkJson)
 
             when (lpResponse.failed) {
                 1 -> {
@@ -69,8 +68,7 @@ class SimpleServerLongPollEventSource(
         return api(GroupsGetLongPollServer(groupId))
     }
 
-    companion object {
-    }
+    companion object
 }
 
 fun LongPollServer.toUrl(timeOut: Int = 95): String {

@@ -8,7 +8,7 @@
             <PatternLayout pattern="[%-5level] %msg%n"/>
             <ThresholdFilter level="warn"/>
         </Console>
-        <File name="file-log" fileName="${log-path}/log.log">
+        <File name="file-log" fileName="${log-path}/generator.log" immediateFlush="false" append="false">
             <PatternLayout pattern="[%-5level] %msg%n"/>
             <ThresholdFilter level="debug"/>
         </File>

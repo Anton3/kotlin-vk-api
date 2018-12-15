@@ -24,17 +24,13 @@ open class Attachment(node: JsonNode, idx: Int) {
     companion object {
         @JvmStatic
         protected fun getForPropertyForIdx(root: JsonNode, idx: Int, name: String): JsonNode {
-            return root.get("attach" + idx + if (!name.isEmpty()) "_" + name else "")
+            return root.get("attach" + idx + if (!name.isEmpty()) "_$name" else "")
         }
 
         @JvmStatic
         protected fun prop(node: JsonNode, idx: Int): (String) -> JsonNode {
             return { name: String ->
-                Attachment.getForPropertyForIdx(
-                    node,
-                    idx,
-                    name
-                )
+                Attachment.getForPropertyForIdx(node, idx, name)
             }
         }
     }

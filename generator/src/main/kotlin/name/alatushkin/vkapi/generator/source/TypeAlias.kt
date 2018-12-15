@@ -1,7 +1,5 @@
 package name.alatushkin.vkapi.generator.source
 
-import name.alatushkin.vkapi.generator.source.writer.SourceWriter
-
 class TypeAlias(val originalType: TypeId) : TypeDefinition {
     override val fixedName: Boolean get() = false
 

@@ -1,7 +1,5 @@
 package name.alatushkin.vkapi.generator.source
 
-import name.alatushkin.vkapi.generator.source.writer.SourceWriter
-import name.alatushkin.vkapi.generator.source.writer.invoke
 import java.nio.file.FileSystems
 import java.util.*
 

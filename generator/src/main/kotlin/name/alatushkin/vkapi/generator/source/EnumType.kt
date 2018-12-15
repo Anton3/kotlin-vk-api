@@ -1,7 +1,5 @@
 package name.alatushkin.vkapi.generator.source
 
-import name.alatushkin.vkapi.generator.source.writer.SourceWriter
-
 data class EnumType(val items: List<Item>) : TypeDefinition {
 
     data class Item(val name: String, val value: String)

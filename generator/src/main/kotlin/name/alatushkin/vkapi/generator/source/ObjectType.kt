@@ -1,27 +1,23 @@
 package name.alatushkin.vkapi.generator.source
 
-import name.alatushkin.vkapi.generator.source.writer.SourceWriter
-import name.alatushkin.vkapi.generator.source.writer.invoke
+data class Prop(
+    val name: String,
+    val typeId: TypeId,
+    val inherited: Boolean,
+    val nullable: Boolean,
+    val description: String?
+)
 
 data class ObjectType(
-        val props: List<Prop>,
-        val kind: Kind = Kind.CLASS,
-        val parents: Set<TypeId> = emptySet()
+    val props: List<Prop>,
+    val kind: Kind,
+    val parents: Set<TypeId> = emptySet(),
+    val implementation: TypeId? = null,
+    val description: String?
 ) : TypeDefinition {
 
     enum class Kind {
         CLASS, INTERFACE
-    }
-
-    data class Prop(
-        val name: String,
-        val typeId: TypeId,
-        val inherited: Boolean = false,
-        val nullable: Boolean = true
-    ) {
-        override fun toString(): String {
-            return "${inherited("override ")}$name:${typeId.fullName()}${nullable("?")}"
-        }
     }
 
     override val fixedName: Boolean get() = false
@@ -34,13 +30,13 @@ data class ObjectType(
 
         val constructorArgs = props.joinToString(delimiter) { arg ->
             sourceWriter.constructorField(
-                    name = arg.name,
-                    type = arg.typeId,
-                    inherited = arg.inherited,
-                    nullable = arg.nullable,
-                    final = true,
-                    defaultValue = defaultValue.takeIf { arg.nullable },
-                    delegateBy = null
+                name = arg.name,
+                type = arg.typeId,
+                inherited = arg.inherited,
+                nullable = arg.nullable,
+                final = true,
+                defaultValue = defaultValue.takeIf { arg.nullable },
+                delegateBy = null
             )
         }
 
@@ -49,21 +45,26 @@ data class ObjectType(
         }
         val parentClause = parents.isNotEmpty()(" : $parentTypes")
 
+        val implClause = if (implementation != null) {
+            sourceWriter.importType(TypeId("com.fasterxml.jackson.databind.annotation.JsonDeserialize"))
+            sourceWriter.importType(implementation)
+            "@JsonDeserialize(`as` = ${implementation.name}::class)\n"
+        } else ""
+
         val packageClause = sourceWriter.packageClause(typeId)
         val importClause = sourceWriter.importClause(typeId)
 
+        val description = renderDescription(sourceWriter)
+
+        val definitionKeyword = when {
+            kind == Kind.INTERFACE -> "interface"
+            props.isEmpty() -> "class"
+            else -> "data class"
+        }
+
         val builder = StringBuilder()
-        builder.append("$packageClause$importClause\n\n")
 
-        builder.append(
-            when {
-                kind == Kind.INTERFACE -> "interface"
-                props.isEmpty() -> "class"
-                else -> "data class"
-            }
-        )
-
-        builder.append(" ${typeId.name}")
+        builder.append("$packageClause$importClause\n\n$description\n$implClause$definitionKeyword ${typeId.name}")
 
         if (kind == Kind.INTERFACE) {
             builder.append(parentClause)
@@ -72,6 +73,7 @@ data class ObjectType(
         if (props.isNotEmpty()) {
             if (kind == Kind.INTERFACE) {
                 builder.append(" {\n")
+                if (parents.isNotEmpty()) builder.append("\n")
             } else {
                 builder.append("(\n")
             }
@@ -90,5 +92,19 @@ data class ObjectType(
         }
 
         return builder.toString()
+    }
+
+    private fun renderDescription(sourceWriter: SourceWriter): String {
+        val propertyDescriptions = props.joinToString("\n") { arg ->
+            " * @property ${sourceWriter.fieldName(arg.name)} ${arg.description?.trim() ?: "No description"}"
+        }
+
+        return """
+        |/**
+        | * ${description ?: "No description"}
+        | *
+        |$propertyDescriptions
+        | */
+        """.trimMargin()
     }
 }

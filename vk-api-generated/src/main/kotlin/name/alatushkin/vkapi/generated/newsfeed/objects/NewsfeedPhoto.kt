@@ -1,0 +1,48 @@
+package name.alatushkin.vkapi.generated.newsfeed.objects
+
+import name.alatushkin.vkapi.generated.common.objects.Likes
+import name.alatushkin.vkapi.generated.common.objects.ObjectCount
+import name.alatushkin.vkapi.generated.photos.objects.Image
+import name.alatushkin.vkapi.generated.photos.objects.Photo
+import name.alatushkin.vkapi.vktypes.VkDate
+
+/**
+ * No description
+ *
+ * @property likes No description
+ * @property comments No description
+ * @property canComment Information whether current user can comment the photo
+ * @property canRepost Information whether current user can repost the photo
+ * @property id Photo ID
+ * @property albumId Album ID
+ * @property ownerId Photo owner's ID
+ * @property userId ID of the user who have uploaded the photo
+ * @property sizes No description
+ * @property postId Post ID
+ * @property width Original photo width
+ * @property height Original photo height
+ * @property text Photo caption
+ * @property date Date when uploaded
+ * @property lat Latitude
+ * @property long Longitude
+ * @property accessKey Access key for the photo
+ */
+data class NewsfeedPhoto(
+    val likes: Likes? = null,
+    val comments: ObjectCount? = null,
+    val canComment: Boolean? = null,
+    val canRepost: Boolean? = null,
+    override val id: Long,
+    override val albumId: Long,
+    override val ownerId: Long,
+    override val userId: Long? = null,
+    override val sizes: List<Image>? = null,
+    override val postId: Long? = null,
+    override val width: Long? = null,
+    override val height: Long? = null,
+    override val text: String? = null,
+    override val date: VkDate,
+    override val lat: Double? = null,
+    override val long: Double? = null,
+    override val accessKey: String? = null
+) : Photo

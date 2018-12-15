@@ -24,6 +24,7 @@ tasks.withType(KotlinCompile::class.java).all {
 }
 
 subprojects {
+    group = "name.alatushkin.utils"
     version = "0.1"
 
     apply {
@@ -33,21 +34,12 @@ subprojects {
     tasks.withType(KotlinCompile::class.java).all {
         kotlinOptions {
             jvmTarget = "1.8"
-        }
-    }
-
-    tasks.withType(KotlinCompile::class.java).all {
-        kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = "1.8"
         }
     }
 
     dependencies {
         implementation(kotlin("stdlib-jdk8"))
         implementation(kotlin("reflect"))
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
-
-        testImplementation("junit:junit:4.12")
     }
 }

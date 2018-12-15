@@ -1,0 +1,28 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
+
+package name.alatushkin.vkapi.generated.market.methods
+
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import name.alatushkin.vkapi.core.VkMethod
+import name.alatushkin.vkapi.tokens.UserMethod
+import name.alatushkin.vkapi.vktypes.OkResponse
+
+/**
+ * [https://vk.com/dev/market.reorderItems]
+ *
+ * Changes item place in a collection.
+ *
+ * @property ownerId ID of an item owner community.
+ * @property albumId ID of a collection to reorder items in. Set 0 to reorder full items list.
+ * @property itemId Item ID.
+ * @property before ID of an item to place current item before it.
+ * @property after ID of an item to place current item after it.
+ */
+data class MarketReorderItems(
+    var ownerId: Long,
+    var albumId: Long? = null,
+    var itemId: Long,
+    var before: Long? = null,
+    var after: Long? = null
+) : VkMethod<OkResponse>("market.reorderItems", jacksonTypeRef()),
+    UserMethod

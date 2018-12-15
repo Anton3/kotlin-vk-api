@@ -6,7 +6,6 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import mu.KotlinLogging
 import name.alatushkin.vkapi.generator.json.*
 import name.alatushkin.vkapi.generator.source.*
-import name.alatushkin.vkapi.generator.source.writer.KotlinSourceWriter
 import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.streams.asSequence
@@ -105,10 +104,10 @@ class SourceGenerator(val basePackage: String) {
             methodUrl = methodsSchema.name,
             arguments = methodsSchema.parameters.map {
                 MethodArgument(
-                        typeId = resolveMethodParamToTypeId(methodsSchema.name, it),
-                        name = it.name,
-                        required = it.required ?: false,
-                        description = it.description
+                    typeId = resolveMethodParamToTypeId(methodsSchema.name, it),
+                    name = it.name,
+                    required = it.required ?: false,
+                    description = it.description
                 )
             }.map { it.name to it }.toMap().values.toList(),
             result = methodResultType,
@@ -152,10 +151,6 @@ class SourceGenerator(val basePackage: String) {
 
     private fun makeVkList(typeId: TypeId): TypeId {
         return TypeId("name.alatushkin.vkapi.vktypes.VkList", listOf(typeId))
-    }
-
-    private fun makeVkIterator(typeId: TypeId): TypeId {
-        return TypeId("name.alatushkin.vkapi.vktypes.VkIterator", listOf(typeId))
     }
 
     private fun makeMethodAccessType(methodSchema: MethodSchema): TypeId? {
@@ -202,9 +197,9 @@ class SourceGenerator(val basePackage: String) {
     }
 
     private fun makeEnumType(
-            nameStrategy: NameStrategy,
-            responseRef: JsonTypeRef,
-            typeObject: EnumObject
+        nameStrategy: NameStrategy,
+        responseRef: JsonTypeRef,
+        typeObject: EnumObject
     ): TypeId {
         val typeIdByRef = typeSpace.resolveTypeIdByJsonRefOrNull(responseRef)
             ?.let { typeSpace.resolveTypeAliases(it) }
@@ -226,7 +221,13 @@ class SourceGenerator(val basePackage: String) {
     private fun makeOneOfType(nameStrategy: NameStrategy, responseRef: JsonTypeRef, typeObject: OneOfObject): TypeId? {
         //для каждго ref - делаем сплит и родительскому интерфйесу добавляем в родители пустой маркер-интерфейс этого объекта
         val rootTypeId = nameStrategy(responseRef, basePackage)
-        val rootType = ObjectType(props = emptyList(), kind = ObjectType.Kind.INTERFACE)
+
+        val rootType = ObjectType(
+            props = emptyList(),
+            kind = ObjectType.Kind.INTERFACE,
+            description = typeObject.description
+        )
+
         typeSpace.registerTypeReference(responseRef, rootTypeId)
         typeSpace.registerTypeImplementation(rootTypeId, rootType)
 
@@ -261,7 +262,7 @@ class SourceGenerator(val basePackage: String) {
         val ownProps = typeObject.allOf.filterIsInstance(GeneralObject::class.java)
             .flatMap { objectPropsToClassProps(it.properties, nameStrategy, responseRef, it.required) }.toSet().toList()
 
-        val rootType = ObjectType(ownProps)
+        val rootType = ObjectType(ownProps, kind = ObjectType.Kind.CLASS, description = typeObject.description)
 
         val rootTypeId = nameStrategy(responseRef, basePackage)
         typeSpace.registerTypeReference(responseRef, rootTypeId)
@@ -323,9 +324,11 @@ class SourceGenerator(val basePackage: String) {
                 prop.copy(nullable = !typeObject.required.contains(prop.name))
             }
 
+        typeObject.description
 
-        return typeSpace.registerTypeImplementation(typeId, ObjectType(props))
+        val definition = ObjectType(props, kind = ObjectType.Kind.CLASS, description = typeObject.description)
 
+        return typeSpace.registerTypeImplementation(typeId, definition)
     }
 
     private fun objectPropsToClassProps(
@@ -333,7 +336,7 @@ class SourceGenerator(val basePackage: String) {
             nameStrategy: NameStrategy,
             responseRef: JsonTypeRef,
             required: List<String> = emptyList()
-    ): List<ObjectType.Prop> {
+    ): List<Prop> {
         return properties.mapNotNull { (name, propObj) ->
             val typeId = makeType(nameStrategy, responseRef + "_" + name, propObj)
             if (typeId == null) {
@@ -347,7 +350,13 @@ class SourceGenerator(val basePackage: String) {
                 else -> typeId
             }
 
-            ObjectType.Prop(name, finalType, propObj.inherited, nullable = !required.contains(name))
+            Prop(
+                name,
+                finalType,
+                propObj.inherited,
+                nullable = !required.contains(name),
+                description = propObj.description
+            )
         }.map {
             it.copy(typeId = typeSpace.resolveTypeAliases(it.typeId))
         }
@@ -407,11 +416,15 @@ class SourceGenerator(val basePackage: String) {
     }
 
     private fun defineCommonTypes() {
+        // Types that are not generated
         typeSpace.registerBuiltin("kotlin.collections.List")
         typeSpace.registerBuiltin("kotlin.collections.Map")
+        typeSpace.registerBuiltin("com.fasterxml.jackson.databind.annotation.JsonDeserialize")
+        typeSpace.registerBuiltin("com.fasterxml.jackson.annotation.JsonCreator")
+        typeSpace.registerBuiltin("com.fasterxml.jackson.annotation.JsonValue")
+        typeSpace.registerBuiltin("com.fasterxml.jackson.module.kotlin.jacksonTypeRef")
         typeSpace.registerBuiltin("name.alatushkin.vkapi.vktypes.VkDate")
         typeSpace.registerBuiltin("name.alatushkin.vkapi.vktypes.VkList")
-        typeSpace.registerBuiltin("name.alatushkin.vkapi.vktypes.VkIterator")
         typeSpace.registerBuiltin("name.alatushkin.vkapi.vktypes.VkBirthDate")
         typeSpace.registerBuiltin("name.alatushkin.vkapi.core.VkMethod")
         typeSpace.registerBuiltin("name.alatushkin.vkapi.json.successReference")
@@ -420,31 +433,17 @@ class SourceGenerator(val basePackage: String) {
         typeSpace.registerBuiltin("name.alatushkin.vkapi.tokens.UserGroupMethod")
         typeSpace.registerBuiltin("name.alatushkin.vkapi.tokens.UserServiceMethod")
         typeSpace.registerBuiltin("name.alatushkin.vkapi.tokens.UserGroupServiceMethod")
-//        typeSpace.registerVkPrimitiveType("base_boolean_int", "kotlin.Boolean")
-//        typeSpace.registerVkPrimitiveType("base_bool_int", "kotlin.Boolean")
-//        typeSpace.registerVkPrimitiveType("ok_response", "kotlin.Boolean")
-//        typeSpace.registerVkPrimitiveType("base_property_exists", "kotlin.Boolean")
-//        typeSpace.registerVkPrimitiveType("base_ok_response", "kotlin.Boolean")
+
+        // Primitive schema types
         typeSpace.registerVkPrimitiveType("integer", "kotlin.Long")
         typeSpace.registerVkPrimitiveType("string", "kotlin.String")
         typeSpace.registerVkPrimitiveType("boolean", "kotlin.Boolean")
         typeSpace.registerVkPrimitiveType("number", "kotlin.Double")
 
-//        typeSpace.registerType(
-//            "base_mode",
-//            TypeId("common.Mode", basePackage = basePackage),
-//            EnumType.define(mapOf("0" to "disabled", "1" to "open", "2" to "limited"))
-//        )
-//        typeSpace.registerTypeImplementation(
-//            TypeId("common.AccessLevel", basePackage = basePackage),
-//            EnumType.define(mapOf("0" to "managers", "1" to "members", "2" to "all"))
-//        )
-//        val costTypeId = typeSpace.registerType(
-//            "ads_ad_layout_cost_type",
-//            TypeId("ads.CostType", basePackage = basePackage),
-//            EnumType.define(mapOf("0" to "per clicks", "1" to "per impressions"))
-//        )
-//        typeSpace.registerTypeReference("ads_ad_cost_type", costTypeId)
+        // Redefine some schema types to better representations
+        typeSpace.registerVkPrimitiveType("base_bool_int", "kotlin.Boolean")
+        typeSpace.registerVkPrimitiveType("base_property_exists", "name.alatushkin.vkapi.vktypes.PropertyExists")
+        typeSpace.registerVkPrimitiveType("base_ok_response", "name.alatushkin.vkapi.vktypes.OkResponse")
     }
 
     private fun deleteOldAndRecreate(absPath: Path?) {
@@ -455,9 +454,12 @@ class SourceGenerator(val basePackage: String) {
 
     fun resolveMethod(methodId: String) {
         defineCommonTypes()
-        val normalizedMethods =
-            methodsSchema.methods.filter { it.name == methodId }.mapNotNull { normalizeMethodDefinition(it) }.flatten()
-                .filter { responseSchemaIsDefined(it.responses.response) }
+        val normalizedMethods = methodsSchema.methods
+            .filter { it.name == methodId }
+            .mapNotNull { normalizeMethodDefinition(it) }
+            .flatten()
+            .filter { responseSchemaIsDefined(it.responses.response) }
+
         log.info("Normalized  methods: ${normalizedMethods.size}")
         normalizedMethods.forEach(this::makeMethod)
     }
@@ -506,12 +508,14 @@ class SourceGenerator(val basePackage: String) {
         val sourceWriter = KotlinSourceWriter(typeSpace)
         val interfaceMapping = InterfaceMapping(typeSpace)
 
-        val typeId = interfaceMapping.typeId(basePackage)
-        val source = interfaceMapping.generateSource(basePackage, typeId, sourceWriter)
+        if (interfaceMapping.hasSource) {
+            val typeId = interfaceMapping.typeId(basePackage)
+            val source = interfaceMapping.generateSource(basePackage, typeId, sourceWriter)
 
-        val filePath = rootPath.resolve(typeId.filePath())
-        Files.createDirectories(filePath.parent)
-        Files.write(filePath, source.split("\n"))
+            val filePath = rootPath.resolve(typeId.filePath())
+            Files.createDirectories(filePath.parent)
+            Files.write(filePath, source.split("\n"))
+        }
     }
 
 }

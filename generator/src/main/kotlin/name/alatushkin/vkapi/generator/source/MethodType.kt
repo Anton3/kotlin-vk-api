@@ -1,13 +1,10 @@
 package name.alatushkin.vkapi.generator.source
 
-import name.alatushkin.vkapi.generator.source.writer.SourceWriter
-import name.alatushkin.vkapi.generator.source.writer.invoke
-
 data class MethodArgument(
     val typeId: TypeId,
     val name: String,
     val required: Boolean,
-    val description: String? = null
+    val description: String?
 )
 
 data class MethodType(
@@ -24,11 +21,7 @@ data class MethodType(
     override val fixedName: Boolean get() = false
     override val hasSource: Boolean get() = true
 
-    override fun generateSource(
-        basePackage: String,
-        typeId: TypeId,
-        sourceWriter: SourceWriter
-    ): String = with(sourceWriter) {
+    override fun generateSource(basePackage: String, typeId: TypeId, sourceWriter: SourceWriter): String {
 
         val baseFields = setOf("access_token", "client_secret", "v", "lang", "test_mode")
 
@@ -48,17 +41,17 @@ data class MethodType(
         }
 
         val implementsClause = methodAccessType?.let {
-            importType(it)
-            ", ${it.name}"
+            sourceWriter.importType(it)
+            ",\n    ${it.name}"
         }.orEmpty()
 
         val classRef = renderClassRef(sourceWriter)
         val description = renderDescription(sourceWriter)
 
-        val parentClass = parentType(result)
+        val parentClass = sourceWriter.parentType(result)
 
-        val packageClause = packageClause(typeId)
-        val importClause = importClause(typeId)
+        val packageClause = sourceWriter.packageClause(typeId)
+        val importClause = sourceWriter.importClause(typeId)
 
         val dataClass = hasParams("data ")
 
@@ -71,10 +64,7 @@ data class MethodType(
             |$packageClause$importClause
             |
             |$description
-            |${dataClass}class ${typeId.name}${hasParams("($fieldsDefinition)")} : $parentClass(
-            |    "$methodUrl",
-            |    $classRef
-            |)$implementsClause
+            |${dataClass}class ${typeId.name}${hasParams("($fieldsDefinition)")} : $parentClass("$methodUrl", $classRef)$implementsClause
             """.trimMargin()
         )
 
@@ -111,14 +101,14 @@ data class MethodType(
 
     private fun renderDescription(sourceWriter: SourceWriter): String {
         val propertyDescriptions = arguments.joinToString("\n") { arg ->
-            " * @property ${sourceWriter.fieldName(arg.name)} ${arg.description?.trim().orEmpty()}"
+            " * @property ${sourceWriter.fieldName(arg.name)} ${arg.description?.trim() ?: "No description"}"
         }
 
         return """
         |/**
         | * [https://vk.com/dev/$methodUrl]
         | *
-        | * $description
+        | * ${description ?: "No description"}
         | *
         |$propertyDescriptions
         | */

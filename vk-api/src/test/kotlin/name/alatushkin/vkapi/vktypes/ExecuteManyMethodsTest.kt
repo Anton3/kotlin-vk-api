@@ -2,10 +2,10 @@ package name.alatushkin.vkapi.vktypes
 
 import kotlinx.coroutines.runBlocking
 import name.alatushkin.vkapi.core.VkResult
-import name.alatushkin.vkapi.methods.execute.batch
-import name.alatushkin.vkapi.methods.execute.batchUnchecked
 import name.alatushkin.vkapi.generated.wall.methods.WallGet
 import name.alatushkin.vkapi.generated.wall.objects.WallpostFull
+import name.alatushkin.vkapi.methods.execute.batch
+import name.alatushkin.vkapi.methods.execute.batchUnchecked
 import name.alatushkin.vkapi.vktypes.utils.groupApi
 import name.alatushkin.vkapi.vktypes.utils.userApi
 import org.junit.Assert.assertEquals

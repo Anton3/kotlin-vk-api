@@ -13,19 +13,20 @@ class TypeSpace {
 
     val typesCount: Int get() = definedTypes.size
 
-    fun splitToInterfaceImplementationPairIfNeeded(typeId: TypeId): TypeId {
+    fun splitToInterfaceImplementationPairIfNeeded(typeId: TypeId) {
         val type = definedTypes[resolveTypeAliases(typeId)]
 
         require(type is ObjectType) { "Only ObjectType can be split" }
+
         if (type.kind == ObjectType.Kind.INTERFACE) {
             log.debug("$typeId is already split")
-            return typeId
+            return
         }
 
         val implTypeId = typeId.copy(name = typeId.name + "Impl")
         if (definedTypes[resolveTypeAliases(implTypeId)] != null) {
             log.debug("$typeId is already split")
-            return typeId
+            return
         }
 
         val implType = type.copy(
@@ -35,15 +36,14 @@ class TypeSpace {
         )
 
         val interfaceType = type.copy(
-            kind = ObjectType.Kind.INTERFACE
+            kind = ObjectType.Kind.INTERFACE,
+            implementation = implTypeId
         )
 
         registerTypeImplementation(implTypeId, implType)
         replaceTypeImplementation(typeId, interfaceType)
 
         interfaceImplementations.add(typeId to implTypeId)
-
-        return typeId
     }
 
     fun renameType(oldTypeId: TypeId, newTypeId: TypeId): TypeId {
@@ -58,7 +58,7 @@ class TypeSpace {
         return newTypeId
     }
 
-    fun registerType(jsonRef: JsonTypeRef, typeId: TypeId, type: TypeDefinition): TypeId {
+    private fun registerType(jsonRef: JsonTypeRef, typeId: TypeId, type: TypeDefinition): TypeId {
         registerTypeReference(jsonRef, typeId)
         registerTypeImplementation(typeId, type)
         return typeId
@@ -95,7 +95,13 @@ class TypeSpace {
 
     fun resolveTypeAliases(typeId: TypeId): TypeId {
         val preResult = typeAliases[typeId]?.let { resolveTypeAliases(it) } ?: typeId
-        return preResult.copy(genericParameters = preResult.genericParameters.map { resolveTypeAliases(it) })
+        val result = preResult.copy(genericParameters = preResult.genericParameters.map { resolveTypeAliases(it) })
+
+        result.allWildcardGenerics().filter { it !in definedTypes }.forEach {
+            log.info("Type $it is not defined, but may get defined later")
+        }
+
+        return result
     }
 
     fun registerBuiltin(qualifiedName: String) {
@@ -130,7 +136,7 @@ class TypeSpace {
         )
     }
 
-    private fun normalizeTypeIds(list: List<ObjectType.Prop>): List<ObjectType.Prop> {
+    private fun normalizeTypeIds(list: List<Prop>): List<Prop> {
         return list.map { it.copy(typeId = resolveTypeAliases(it.typeId)) }
     }
 }

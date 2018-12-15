@@ -2,8 +2,6 @@ import com.jfrog.bintray.gradle.BintrayExtension
 import org.gradle.api.tasks.bundling.Jar
 import java.util.Date
 
-group = "name.alatushkin.utils"
-
 repositories {
     mavenLocal()
     mavenCentral()
@@ -19,18 +17,19 @@ plugins {
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-    implementation(kotlin("reflect"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
+    api(project(":vk-api-core"))
+    api(project(":vk-api-generated"))
 
     val jacksonVersion = "2.9.7"
-    implementation("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+    api("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
+    api("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
+    api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+
+    api("name.alatushkin.utils:common-http-client:0.1")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
 
     implementation("io.github.microutils:kotlin-logging:1.6.22")
-
-    implementation("name.alatushkin.utils:common-http-client:0.1")
 
     testImplementation("junit:junit:4.12")
     testImplementation("org.apache.logging.log4j:log4j-slf4j-impl:2.11.0")

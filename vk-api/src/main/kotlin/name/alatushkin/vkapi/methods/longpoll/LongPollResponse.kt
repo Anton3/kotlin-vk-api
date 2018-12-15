@@ -1,11 +1,12 @@
 package name.alatushkin.vkapi.methods.longpoll
 
-import com.fasterxml.jackson.databind.JsonNode
-import name.alatushkin.vkapi.json.deser.LongPollEventsDeserializer
+import name.alatushkin.vkapi.methods.longpoll.events.LongPollEvent
+import name.alatushkin.vkapi.methods.longpoll.objects.LongPollFailure
 
-data class LongPollResponse(val ts: Long, val updates: JsonNode?, val failed: Int?) {
-    val decodedUpdates: List<LongPollEvent>
-        get()
-        = LongPollEventsDeserializer.decode(updates!!)
-}
-
+data class LongPollResponse(
+    val failed: LongPollFailure? = null,
+    val ts: Long? = null,
+    val updates: List<LongPollEvent> = emptyList(),
+    val minVersion: Int? = null,
+    val maxVersion: Int? = null
+)

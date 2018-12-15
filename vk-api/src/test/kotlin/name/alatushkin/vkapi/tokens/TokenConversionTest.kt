@@ -9,8 +9,7 @@ class ExampleUserMethod : VkMethod<Int>(TODO(), TODO()), UserMethod
 class ExampleServiceMethod : VkMethod<Long>(TODO(), TODO()), ServiceMethod
 class ExampleUserGroupMethod : VkMethod<Short>(TODO(), TODO()), UserGroupMethod
 class ExampleUserServiceMethod : VkMethod<Char>(TODO(), TODO()), UserServiceMethod
-class ExampleUserGroupServiceMethod : VkMethod<Double>(TODO(), TODO()),
-    UserGroupServiceMethod
+class ExampleUserGroupServiceMethod : VkMethod<Double>(TODO(), TODO()), UserGroupServiceMethod
 
 fun getSomeExecutor(): MethodExecutor = TODO()
 

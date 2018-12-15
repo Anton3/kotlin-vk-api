@@ -1,5 +1,7 @@
 package name.alatushkin.vkapi.vktypes
 
+import name.alatushkin.vkapi.client.VkClient
+import name.alatushkin.vkapi.client.invoke
 import name.alatushkin.vkapi.generated.audio.objects.Audio
 import name.alatushkin.vkapi.generated.docs.objects.Doc
 import name.alatushkin.vkapi.generated.market.objects.MarketItem
@@ -11,8 +13,6 @@ import name.alatushkin.vkapi.generated.video.objects.Video
 import name.alatushkin.vkapi.generated.video.objects.VideoFull
 import name.alatushkin.vkapi.generated.wall.objects.Wallpost
 import name.alatushkin.vkapi.tokens.UserGroupMethod
-import name.alatushkin.vkapi.client.VkClient
-import name.alatushkin.vkapi.client.invoke
 
 private fun attachmentId(type: String, id: Long, ownerId: Long, accessKey: String? = null): String =
     "$type${ownerId}_$id${accessKey?.let { "_$it" }.orEmpty()}"
