@@ -8,11 +8,7 @@ fun ObjectMapper.serializeMethod(method: VkMethod<*>): Map<String, String> {
     return this.convertValue<Map<String, Any?>>(method, MAP_TYPE)
         .filterValues { it != null }
         .entries
-        .map { restorePropNames(it.key) to requestValueToString(
-            it.value!!,
-            this
-        )
-        }
+        .map { restorePropNames(it.key) to requestValueToString(it.value!!, this) }
         .toMap() + method.unsafeParams
 }
 

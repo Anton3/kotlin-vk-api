@@ -1,9 +1,9 @@
 package name.alatushkin.vkapi.tokens
 
+import name.alatushkin.vkapi.client.VkClient
 import name.alatushkin.vkapi.client.invoke
-import name.alatushkin.vkapi.client.withToken
-import name.alatushkin.vkapi.executors.MethodExecutor
 import name.alatushkin.vkapi.core.VkMethod
+import name.alatushkin.vkapi.executors.MethodExecutor
 
 class ExampleUserMethod : VkMethod<Int>(TODO(), TODO()), UserMethod
 class ExampleServiceMethod : VkMethod<Long>(TODO(), TODO()), ServiceMethod
@@ -25,7 +25,7 @@ suspend fun example() {
     val executor = getSomeExecutor()
 
     val token1 = getSomeUserToken()
-    val vk1 = executor.withToken(token1)
+    val vk1 = VkClient(executor, token1)
     val res11 = vk1(ExampleUserMethod())
 //    val res12 = vk1(ExampleServiceMethod())
     val res13 = vk1(ExampleUserGroupMethod())
@@ -33,7 +33,7 @@ suspend fun example() {
     val res15 = vk1(ExampleUserGroupServiceMethod())
 
     val token2 = getSomeUserGroupToken()
-    val vk2 = executor.withToken(token2)
+    val vk2 = VkClient(executor, token2)
 //    val res21 = vk2(ExampleUserMethod())
 //    val res22 = vk2(ExampleServiceMethod())
     val res23 = vk2(ExampleUserGroupMethod())
@@ -41,7 +41,7 @@ suspend fun example() {
     val res25 = vk2(ExampleUserGroupServiceMethod())
 
     val token3 = getSomeUserGroupServiceToken()
-    val vk3 = executor.withToken(token3)
+    val vk3 = VkClient(executor, token3)
 //    val res31 = vk3(ExampleUserMethod())
 //    val res32 = vk3(ExampleServiceMethod())
 //    val res33 = vk3(ExampleUserGroupMethod())

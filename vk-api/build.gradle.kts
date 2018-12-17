@@ -27,8 +27,6 @@ dependencies {
 
     api("name.alatushkin.utils:common-http-client:0.1")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
-
     implementation("io.github.microutils:kotlin-logging:1.6.22")
 
     testImplementation("junit:junit:4.12")

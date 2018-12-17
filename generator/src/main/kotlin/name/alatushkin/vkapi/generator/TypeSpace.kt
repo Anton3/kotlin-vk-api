@@ -24,7 +24,7 @@ class TypeSpace {
         }
 
         val implTypeId = typeId.copy(name = typeId.name + "Impl")
-        if (definedTypes[resolveTypeAliases(implTypeId)] != null) {
+        if (definedTypes[resolveTypeAliasesUnchecked(implTypeId)] != null) {
             log.debug("$typeId is already split")
             return
         }
@@ -93,9 +93,13 @@ class TypeSpace {
         return resolveTypeAliases(typeId)
     }
 
-    fun resolveTypeAliases(typeId: TypeId): TypeId {
+    private fun resolveTypeAliasesUnchecked(typeId: TypeId): TypeId {
         val preResult = typeAliases[typeId]?.let { resolveTypeAliases(it) } ?: typeId
-        val result = preResult.copy(genericParameters = preResult.genericParameters.map { resolveTypeAliases(it) })
+        return preResult.copy(genericParameters = preResult.genericParameters.map { resolveTypeAliases(it) })
+    }
+
+    fun resolveTypeAliases(typeId: TypeId): TypeId {
+        val result = resolveTypeAliasesUnchecked(typeId)
 
         result.allWildcardGenerics().filter { it !in definedTypes }.forEach {
             log.info("Type $it is not defined, but may get defined later")

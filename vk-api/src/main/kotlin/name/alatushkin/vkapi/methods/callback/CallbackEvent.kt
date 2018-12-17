@@ -57,7 +57,7 @@ interface Attachment
     JsonSubTypes.Type(name = "board_post_restore", value = BoardPostCallbackEvent::class),
     JsonSubTypes.Type(name = "board_post_delete", value = BoardPostDelete::class),
 
-    //market*
+    // TODO market*
 
     JsonSubTypes.Type(name = "group_leave", value = GroupLeave::class),
     JsonSubTypes.Type(name = "group_join", value = GroupJoin::class),
@@ -66,11 +66,9 @@ interface Attachment
     JsonSubTypes.Type(name = "user_block", value = UserBlock::class),
     JsonSubTypes.Type(name = "poll_vote_new", value = PollVoteNew::class)
 
-    //poll_vote
-    //group_*
-    //vkpay
-
-
+    // TODO poll_vote
+    // TODO group_*
+    // TODO vkpay
 )
 sealed class CallbackEvent<T>(
     val groupId: Long,

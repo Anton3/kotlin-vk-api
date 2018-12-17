@@ -1,8 +1,8 @@
 package name.alatushkin.vkapi.vktypes.utils
 
 import name.alatushkin.httpclient.httpClient
-import name.alatushkin.vkapi.client.withToken
 import name.alatushkin.vkapi.executors.SimpleMethodExecutor
+import name.alatushkin.vkapi.json.vkObjectMapper
 import name.alatushkin.vkapi.tokens.GroupToken
 import name.alatushkin.vkapi.tokens.UserToken
 import java.io.FileInputStream
@@ -40,7 +40,7 @@ val groupId = readConfigParam("groupId")
 val peerId = readConfigParam("peerId").toLong()
 
 val httpClient = httpClient(readTimeout = 95_000)
-val executor = SimpleMethodExecutor(httpClient)
+val executor = SimpleMethodExecutor(httpClient, vkObjectMapper())
 val groupToken = GroupToken(groupAccessToken, groupId.toLong())
 val userToken = UserToken(userAccessToken, peerId)
 val groupApi = executor.withToken(groupToken)

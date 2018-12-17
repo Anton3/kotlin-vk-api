@@ -24,6 +24,11 @@ dependencies {
 
     api("name.alatushkin.utils:common-http-client:0.1")
 
+    // For executors
+    val coroutinesVersion = "1.0.1"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$coroutinesVersion")
+
     implementation("io.github.microutils:kotlin-logging:1.6.22")
 
     testImplementation("junit:junit:4.12")
