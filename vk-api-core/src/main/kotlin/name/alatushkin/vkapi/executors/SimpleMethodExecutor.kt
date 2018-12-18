@@ -10,6 +10,7 @@ import name.alatushkin.vkapi.json.serializeMethod
 import name.alatushkin.vkapi.tokens.MethodRequirement
 import name.alatushkin.vkapi.tokens.Token
 import name.alatushkin.vkapi.vktypes.VkResponse
+import java.net.URLEncoder
 
 data class SimpleMethodExecutor(
     override val httpClient: TransportClient,
@@ -26,11 +27,13 @@ data class SimpleMethodExecutor(
     fun <M : MethodRequirement> withToken(token: Token<M>): VkClient<M> = VkClient(this, token)
 
     private fun methodUrl(name: String, params: Map<String, String>): String {
-        val paramsString = params.entries.joinToString("&", prefix = "?") { "${it.key}=${it.value}" }
+        val paramsString = params.entries.joinToString("&", prefix = "?") {
+            "${it.key}=${URLEncoder.encode(it.value, "UTF-8")}"
+        }
         return URL_PREFIX + name + (if (params.isNotEmpty()) paramsString else "")
     }
 
     companion object {
-        private const val URL_PREFIX = "https://vkapi.com/method/"
+        private const val URL_PREFIX = "https://api.vk.com/method/"
     }
 }

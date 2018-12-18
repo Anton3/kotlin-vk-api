@@ -12,19 +12,16 @@ abstract class StrongStdDeserializer<T>(
     context: DeserializationContext? = null
 ) : StdDeserializer<T>(weakType), ContextualDeserializer {
 
-    init {
-        require(valueType.isTypeOrSubTypeOf(weakType)) { "Wrong base type" }
-    }
-
     private val _valueType: JavaType? = context?.contextualType
     private var _context: DeserializationContext? = context
 
-    override fun getValueType(): JavaType = _valueType!!
+    override fun getValueType(): JavaType? = _valueType
 
     val context: DeserializationContext
         get() = _context!!
 
     override fun createContextual(ctxt: DeserializationContext, property: BeanProperty?): JsonDeserializer<*> {
+        require(ctxt.contextualType?.isTypeOrSubTypeOf(handledType()) ?: true) { "Wrong base type" }
         return copy(ctxt)
     }
 

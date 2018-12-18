@@ -14,7 +14,7 @@ import name.alatushkin.vkapi.vktypes.VkResponse
 class VkResponseDeserializer(context: DeserializationContext? = null) :
     StrongStdDeserializer<VkResponse<*>>(weakType(), context) {
 
-    private val wrappedType = valueType.containedType(0)!!
+    private val wrappedType = valueType?.containedType(0)
     private val errorType = strongType<VkError>()
     private val errorsType = strongType<List<VkError>>()
 
@@ -26,7 +26,7 @@ class VkResponseDeserializer(context: DeserializationContext? = null) :
         val node = p.readNode<ObjectNode>()
 
         val response = node["response"]?.let {
-            codec.reader(ctxt).readValue<Any>(it.traverse(codec), wrappedType)!!
+            codec.reader(ctxt).readValue<Any>(it.traverse(codec), wrappedType!!)!!
         }
         val error = node["error"]?.let {
             codec.readValue<VkError>(it.traverse(codec), errorType)!!

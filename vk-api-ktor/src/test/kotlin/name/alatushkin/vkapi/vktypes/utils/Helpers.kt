@@ -17,7 +17,7 @@ private fun readConfigParam(name: String): String {
             ?: readPropsFrom("../gradle.properties")
         ?: System.getenv()
 
-    return (testParams[name]?.toString()) ?: error("$name not found. provide it via gradle.properties or env")
+    return testParams[name]?.toString() ?: error("$name not found. provide it via gradle.properties or env")
 }
 
 private fun readPropsFrom(strPath: String): Properties? {
@@ -41,7 +41,7 @@ val userAccessToken = readConfigParam("userAccessToken")
 val groupId = readConfigParam("groupId")
 val peerId = readConfigParam("peerId").toLong()
 
-val timeOut = 95_000
+const val timeOut = 95_000
 val httpClient = KtorTransportClient(HttpClient(Apache) {
     engine {
         socketTimeout = 95_000

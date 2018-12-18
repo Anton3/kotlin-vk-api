@@ -20,4 +20,13 @@ class MessagesSendMethodTest {
         )
         println(result)
     }
+
+    @Test
+    fun smoke2() = runBlocking {
+        val method = MessagesSend(
+            userId = peerId,
+            message = "test"
+        )
+        repeat(20) { println(groupApi(method)) }
+    }
 }
