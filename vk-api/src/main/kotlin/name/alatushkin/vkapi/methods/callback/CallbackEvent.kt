@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package name.alatushkin.vkapi.methods.callback
 
 import com.fasterxml.jackson.annotation.*
@@ -117,7 +119,7 @@ class WallReplyCallbackEvent(groupId: Long, @JsonProperty("object") attachment: 
 class WallReplyDelete(groupId: Long, @JsonProperty("object") attachment: Attachment) :
     CallbackEvent<WallReplyDelete.Attachment>(groupId, attachment) {
 
-    class Attachment(ownerId: Long, id: Int, userId: Long, deleteId: Long, postId: Long)
+    class Attachment(val ownerId: Long, val id: Int, val userId: Long, val deleteId: Long, val postId: Long)
 }
 
 class WallPostNew(groupId: Long, @JsonProperty("object") attachment: WallpostFull) :
@@ -197,12 +199,20 @@ class VideoCommentDelete(groupId: Long, @JsonProperty("object") attachment: Atta
 //{"admin_id":271651224,"user_id":302484804,"unblock_date":0,"reason":"other","comment":""}
 class UserBlock(groupId: Long, @JsonProperty("object") attachment: Attachment) :
     CallbackEvent<UserBlock.Attachment>(groupId, attachment) {
-    class Attachment(adminId: Long, userId: Long, unblockDate: Long, reason: String, comment: String)
+
+    class Attachment(
+        val adminId: Long,
+        val userId: Long,
+        val unblockDate: Long,
+        val reason: String,
+        val comment: String
+    )
 }
 
 class PollVoteNew(groupId: Long, @JsonProperty("object") attachment: Attachment) :
     CallbackEvent<PollVoteNew.Attachment>(groupId, attachment) {
-    class Attachment(ownerId: Long, userId: Long, pollId: Long, optionId: Long)
+
+    class Attachment(val ownerId: Long, val userId: Long, val pollId: Long, val optionId: Long)
 }
 
 enum class JoinType(val value: String) {

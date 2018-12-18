@@ -14,12 +14,9 @@ class ExampleUserGroupServiceMethod : VkMethod<Double>(TODO(), TODO()), UserGrou
 fun getSomeExecutor(): MethodExecutor = TODO()
 
 fun getUserToken(): UserToken = TODO()
-fun getSomeUserToken(): Token<UserMethod> =
-    getUserToken()
-fun getSomeUserGroupToken(): Token<UserGroupMethod> =
-    getSomeUserToken()
-fun getSomeUserGroupServiceToken(): Token<UserGroupServiceMethod> =
-    getSomeUserGroupToken()
+fun getSomeUserToken(): Token<UserMethod> = getUserToken()
+fun getSomeUserGroupToken(): Token<UserGroupMethod> = getSomeUserToken()
+fun getSomeUserGroupServiceToken(): Token<UserGroupServiceMethod> = getSomeUserGroupToken()
 
 suspend fun example() {
     val executor = getSomeExecutor()

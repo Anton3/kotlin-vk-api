@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     repositories {
+        mavenLocal()
         mavenCentral()
     }
 
@@ -39,7 +40,17 @@ subprojects {
     }
 
     dependencies {
+        val jacksonVersion = "2.9.7"
+        api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+        api("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
+        api("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
+
         implementation(kotlin("stdlib-jdk8"))
         implementation(kotlin("reflect"))
+
+        implementation("io.github.microutils:kotlin-logging:1.6.22")
+
+        testImplementation("junit:junit:4.12")
+        testImplementation("org.apache.logging.log4j:log4j-slf4j-impl:2.11.0")
     }
 }
