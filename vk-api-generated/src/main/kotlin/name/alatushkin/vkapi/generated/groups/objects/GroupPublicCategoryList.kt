@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.groups.objects
+package name.anton3.vkapi.generated.groups.objects
 
 /**
  * No description

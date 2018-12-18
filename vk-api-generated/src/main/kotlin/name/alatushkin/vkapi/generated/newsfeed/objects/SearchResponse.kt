@@ -1,6 +1,6 @@
-package name.alatushkin.vkapi.generated.newsfeed.objects
+package name.anton3.vkapi.generated.newsfeed.objects
 
-import name.alatushkin.vkapi.generated.wall.objects.WallpostFull
+import name.anton3.vkapi.generated.wall.objects.WallpostFull
 
 /**
  * No description

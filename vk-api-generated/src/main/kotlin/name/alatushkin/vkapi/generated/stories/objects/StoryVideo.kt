@@ -1,9 +1,9 @@
-package name.alatushkin.vkapi.generated.stories.objects
+package name.anton3.vkapi.generated.stories.objects
 
-import name.alatushkin.vkapi.generated.video.objects.Video
-import name.alatushkin.vkapi.generated.video.objects.VideoFiles
-import name.alatushkin.vkapi.vktypes.PropertyExists
-import name.alatushkin.vkapi.vktypes.VkDate
+import name.anton3.vkapi.generated.video.objects.Video
+import name.anton3.vkapi.generated.video.objects.VideoFiles
+import name.anton3.vkapi.vktypes.PropertyExists
+import name.anton3.vkapi.vktypes.VkDate
 
 /**
  * No description

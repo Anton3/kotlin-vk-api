@@ -1,7 +1,7 @@
-package name.alatushkin.vkapi.generated.secure.objects
+package name.anton3.vkapi.generated.secure.objects
 
-import name.alatushkin.vkapi.vktypes.OkResponse
-import name.alatushkin.vkapi.vktypes.VkDate
+import name.anton3.vkapi.vktypes.OkResponse
+import name.anton3.vkapi.vktypes.VkDate
 
 /**
  * No description

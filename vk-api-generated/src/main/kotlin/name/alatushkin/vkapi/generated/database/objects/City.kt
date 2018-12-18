@@ -1,6 +1,6 @@
-package name.alatushkin.vkapi.generated.database.objects
+package name.anton3.vkapi.generated.database.objects
 
-import name.alatushkin.vkapi.generated.common.objects.Object
+import name.anton3.vkapi.generated.common.objects.Object
 
 /**
  * No description

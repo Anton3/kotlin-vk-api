@@ -1,11 +1,11 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.pages.methods
+package name.anton3.vkapi.generated.pages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.pages.objects.WikipageVersion
-import name.alatushkin.vkapi.tokens.UserMethod
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.pages.objects.WikipageVersion
+import name.anton3.vkapi.tokens.UserMethod
 
 /**
  * [https://vk.com/dev/pages.getHistory]
@@ -14,7 +14,7 @@ import name.alatushkin.vkapi.tokens.UserMethod
  *
  * @property pageId Wiki page ID.
  * @property groupId ID of the community that owns the wiki page.
- * @property userId 
+ * @property userId
  */
 data class PagesGetHistory(
     var pageId: Long,

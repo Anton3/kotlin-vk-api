@@ -1,7 +1,7 @@
-package name.alatushkin.vkapi.generated.pages.objects
+package name.anton3.vkapi.generated.pages.objects
 
-import name.alatushkin.vkapi.generated.wall.objects.CommentAttachment
-import name.alatushkin.vkapi.generated.wall.objects.WallpostAttachment
+import name.anton3.vkapi.generated.wall.objects.CommentAttachment
+import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
 
 /**
  * No description

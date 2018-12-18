@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.stories.objects
+package name.anton3.vkapi.generated.stories.objects
 
 /**
  * No description

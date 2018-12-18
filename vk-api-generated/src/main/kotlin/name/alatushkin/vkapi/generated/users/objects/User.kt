@@ -1,7 +1,7 @@
-package name.alatushkin.vkapi.generated.users.objects
+package name.anton3.vkapi.generated.users.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import name.alatushkin.vkapi.generated.common.objects.Sex
+import name.anton3.vkapi.generated.common.objects.Sex
 
 /**
  * No description

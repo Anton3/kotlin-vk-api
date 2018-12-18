@@ -1,6 +1,6 @@
-package name.alatushkin.vkapi.generated.ads.objects
+package name.anton3.vkapi.generated.ads.objects
 
-import name.alatushkin.vkapi.generated.stats.objects.WallpostStat
+import name.anton3.vkapi.generated.stats.objects.WallpostStat
 
 /**
  * No description

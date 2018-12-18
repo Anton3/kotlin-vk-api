@@ -1,8 +1,8 @@
-package name.alatushkin.vkapi.generated.photos.objects
+package name.anton3.vkapi.generated.photos.objects
 
-import name.alatushkin.vkapi.generated.groups.objects.GroupFull
-import name.alatushkin.vkapi.generated.users.objects.UserFull
-import name.alatushkin.vkapi.generated.wall.objects.WallComment
+import name.anton3.vkapi.generated.groups.objects.GroupFull
+import name.anton3.vkapi.generated.users.objects.UserFull
+import name.anton3.vkapi.generated.wall.objects.WallComment
 
 /**
  * No description

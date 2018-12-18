@@ -1,6 +1,6 @@
-package name.alatushkin.vkapi.generated.auth.objects
+package name.anton3.vkapi.generated.auth.objects
 
-import name.alatushkin.vkapi.generated.auth.responses.ConfirmResponseSuccess
+import name.anton3.vkapi.generated.auth.responses.ConfirmResponseSuccess
 
 /**
  * No description

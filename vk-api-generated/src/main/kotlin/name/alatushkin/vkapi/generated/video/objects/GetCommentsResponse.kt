@@ -1,8 +1,8 @@
-package name.alatushkin.vkapi.generated.video.objects
+package name.anton3.vkapi.generated.video.objects
 
-import name.alatushkin.vkapi.generated.groups.objects.GroupFull
-import name.alatushkin.vkapi.generated.users.objects.UserMin
-import name.alatushkin.vkapi.generated.wall.objects.WallComment
+import name.anton3.vkapi.generated.groups.objects.GroupFull
+import name.anton3.vkapi.generated.users.objects.UserMin
+import name.anton3.vkapi.generated.wall.objects.WallComment
 
 /**
  * No description

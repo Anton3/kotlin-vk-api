@@ -1,7 +1,7 @@
-package name.alatushkin.vkapi.generated.stories.objects
+package name.anton3.vkapi.generated.stories.objects
 
-import name.alatushkin.vkapi.generated.groups.objects.GroupFull
-import name.alatushkin.vkapi.generated.users.objects.UserFull
+import name.anton3.vkapi.generated.groups.objects.GroupFull
+import name.anton3.vkapi.generated.users.objects.UserFull
 
 /**
  * No description

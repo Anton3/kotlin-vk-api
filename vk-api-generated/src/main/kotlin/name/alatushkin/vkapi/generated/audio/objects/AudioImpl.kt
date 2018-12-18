@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.audio.objects
+package name.anton3.vkapi.generated.audio.objects
 
 /**
  * No description

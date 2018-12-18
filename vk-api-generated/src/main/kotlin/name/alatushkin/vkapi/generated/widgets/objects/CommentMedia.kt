@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.widgets.objects
+package name.anton3.vkapi.generated.widgets.objects
 
 /**
  * No description

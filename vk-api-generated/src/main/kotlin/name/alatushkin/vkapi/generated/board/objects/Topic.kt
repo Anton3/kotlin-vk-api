@@ -1,6 +1,6 @@
-package name.alatushkin.vkapi.generated.board.objects
+package name.anton3.vkapi.generated.board.objects
 
-import name.alatushkin.vkapi.generated.notifications.objects.NotificationParent
+import name.anton3.vkapi.generated.notifications.objects.NotificationParent
 
 /**
  * No description

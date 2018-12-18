@@ -1,6 +1,6 @@
-package name.alatushkin.vkapi.generated.leads.objects
+package name.anton3.vkapi.generated.leads.objects
 
-import name.alatushkin.vkapi.vktypes.OkResponse
+import name.anton3.vkapi.vktypes.OkResponse
 
 /**
  * No description

@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.orders.objects
+package name.anton3.vkapi.generated.orders.objects
 
 /**
  * No description

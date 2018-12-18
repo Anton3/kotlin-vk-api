@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.likes.objects
+package name.anton3.vkapi.generated.likes.objects
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue

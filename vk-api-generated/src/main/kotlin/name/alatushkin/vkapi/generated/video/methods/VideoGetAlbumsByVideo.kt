@@ -1,9 +1,9 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.video.methods
+package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
+import name.anton3.vkapi.core.VkMethod
 
 /**
  * [https://vk.com/dev/video.getAlbumsByVideo]

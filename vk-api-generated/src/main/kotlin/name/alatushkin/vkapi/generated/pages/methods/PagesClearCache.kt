@@ -1,11 +1,11 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.pages.methods
+package name.anton3.vkapi.generated.pages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.tokens.UserServiceMethod
-import name.alatushkin.vkapi.vktypes.OkResponse
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.tokens.UserServiceMethod
+import name.anton3.vkapi.vktypes.OkResponse
 
 /**
  * [https://vk.com/dev/pages.clearCache]

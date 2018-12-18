@@ -1,10 +1,10 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.groups.methods
+package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.groups.objects.AddCallbackServerResponse
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.groups.objects.AddCallbackServerResponse
 
 /**
  * [https://vk.com/dev/groups.addCallbackServer]

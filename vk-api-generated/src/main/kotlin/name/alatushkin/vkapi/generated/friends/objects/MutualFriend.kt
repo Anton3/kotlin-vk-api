@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.friends.objects
+package name.anton3.vkapi.generated.friends.objects
 
 /**
  * No description

@@ -1,11 +1,11 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.places.methods
+package name.anton3.vkapi.generated.places.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.places.objects.PlaceMin
-import name.alatushkin.vkapi.tokens.UserMethod
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.places.objects.PlaceMin
+import name.anton3.vkapi.tokens.UserMethod
 
 /**
  * [https://vk.com/dev/places.getById]

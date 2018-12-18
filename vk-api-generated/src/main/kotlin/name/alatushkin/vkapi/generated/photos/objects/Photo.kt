@@ -1,11 +1,11 @@
-package name.alatushkin.vkapi.generated.photos.objects
+package name.anton3.vkapi.generated.photos.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import name.alatushkin.vkapi.generated.messages.objects.MessageAttachment
-import name.alatushkin.vkapi.generated.notifications.objects.NotificationParent
-import name.alatushkin.vkapi.generated.wall.objects.CommentAttachment
-import name.alatushkin.vkapi.generated.wall.objects.WallpostAttachment
-import name.alatushkin.vkapi.vktypes.VkDate
+import name.anton3.vkapi.generated.messages.objects.MessageAttachment
+import name.anton3.vkapi.generated.notifications.objects.NotificationParent
+import name.anton3.vkapi.generated.wall.objects.CommentAttachment
+import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
+import name.anton3.vkapi.vktypes.VkDate
 
 /**
  * No description

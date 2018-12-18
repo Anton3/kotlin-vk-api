@@ -1,12 +1,12 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.photos.methods
+package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.photos.objects.Photo
-import name.alatushkin.vkapi.tokens.UserServiceMethod
-import name.alatushkin.vkapi.vktypes.VkList
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.photos.objects.Photo
+import name.anton3.vkapi.tokens.UserServiceMethod
+import name.anton3.vkapi.vktypes.VkList
 
 /**
  * [https://vk.com/dev/photos.search]
@@ -16,8 +16,8 @@ import name.alatushkin.vkapi.vktypes.VkList
  * @property q Search query string.
  * @property lat Geographical latitude, in degrees (from '-90' to '90').
  * @property long Geographical longitude, in degrees (from '-180' to '180').
- * @property startTime 
- * @property endTime 
+ * @property startTime
+ * @property endTime
  * @property sort Sort order:
  * @property offset Offset needed to return a specific subset of photos.
  * @property count Number of photos to return.

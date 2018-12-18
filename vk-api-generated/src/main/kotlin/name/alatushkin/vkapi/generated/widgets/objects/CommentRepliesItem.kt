@@ -1,7 +1,7 @@
-package name.alatushkin.vkapi.generated.widgets.objects
+package name.anton3.vkapi.generated.widgets.objects
 
-import name.alatushkin.vkapi.generated.users.objects.UserFull
-import name.alatushkin.vkapi.vktypes.VkDate
+import name.anton3.vkapi.generated.users.objects.UserFull
+import name.anton3.vkapi.vktypes.VkDate
 
 /**
  * No description

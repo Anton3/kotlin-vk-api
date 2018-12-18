@@ -1,15 +1,15 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.users.methods
+package name.anton3.vkapi.generated.users.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.users.objects.SearchSex
-import name.alatushkin.vkapi.generated.users.objects.SearchSort
-import name.alatushkin.vkapi.generated.users.objects.SearchStatus
-import name.alatushkin.vkapi.generated.users.objects.UserFull
-import name.alatushkin.vkapi.tokens.UserMethod
-import name.alatushkin.vkapi.vktypes.VkList
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.users.objects.SearchSex
+import name.anton3.vkapi.generated.users.objects.SearchSort
+import name.anton3.vkapi.generated.users.objects.SearchStatus
+import name.anton3.vkapi.generated.users.objects.UserFull
+import name.anton3.vkapi.tokens.UserMethod
+import name.anton3.vkapi.vktypes.VkList
 
 /**
  * [https://vk.com/dev/users.search]

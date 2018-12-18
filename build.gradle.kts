@@ -25,7 +25,7 @@ tasks.withType(KotlinCompile::class.java).all {
 }
 
 subprojects {
-    group = "name.alatushkin.utils"
+    group = "name.anton3.utils"
     version = "0.1"
 
     apply {

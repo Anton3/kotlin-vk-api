@@ -1,10 +1,10 @@
-package name.alatushkin.vkapi.generated.friends.objects
+package name.anton3.vkapi.generated.friends.objects
 
-import name.alatushkin.vkapi.generated.friends.responses.DeleteResponseFriendDeleted
-import name.alatushkin.vkapi.generated.friends.responses.DeleteResponseInRequestDeleted
-import name.alatushkin.vkapi.generated.friends.responses.DeleteResponseOutRequestDeleted
-import name.alatushkin.vkapi.generated.friends.responses.DeleteResponseSuggestionDeleted
-import name.alatushkin.vkapi.vktypes.OkResponse
+import name.anton3.vkapi.generated.friends.responses.DeleteResponseFriendDeleted
+import name.anton3.vkapi.generated.friends.responses.DeleteResponseInRequestDeleted
+import name.anton3.vkapi.generated.friends.responses.DeleteResponseOutRequestDeleted
+import name.anton3.vkapi.generated.friends.responses.DeleteResponseSuggestionDeleted
+import name.anton3.vkapi.vktypes.OkResponse
 
 /**
  * No description

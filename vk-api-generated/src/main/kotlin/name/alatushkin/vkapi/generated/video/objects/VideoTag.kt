@@ -1,6 +1,6 @@
-package name.alatushkin.vkapi.generated.video.objects
+package name.anton3.vkapi.generated.video.objects
 
-import name.alatushkin.vkapi.vktypes.VkDate
+import name.anton3.vkapi.vktypes.VkDate
 
 /**
  * No description

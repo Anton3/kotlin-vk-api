@@ -1,12 +1,12 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.messages.methods
+package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.messages.objects.GetHistoryResponse
-import name.alatushkin.vkapi.generated.messages.objects.GetHistoryRev
-import name.alatushkin.vkapi.tokens.UserGroupMethod
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.messages.objects.GetHistoryResponse
+import name.anton3.vkapi.generated.messages.objects.GetHistoryRev
+import name.anton3.vkapi.tokens.UserGroupMethod
 
 /**
  * [https://vk.com/dev/messages.getHistory]

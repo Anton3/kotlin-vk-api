@@ -1,7 +1,7 @@
-package name.alatushkin.vkapi.generated.search.objects
+package name.anton3.vkapi.generated.search.objects
 
-import name.alatushkin.vkapi.generated.groups.objects.Group
-import name.alatushkin.vkapi.generated.users.objects.UserMin
+import name.anton3.vkapi.generated.groups.objects.Group
+import name.anton3.vkapi.generated.users.objects.UserMin
 
 /**
  * No description

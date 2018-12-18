@@ -1,13 +1,13 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.board.methods
+package name.anton3.vkapi.generated.board.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.board.objects.GetTopicsExtendedResponse
-import name.alatushkin.vkapi.generated.board.objects.GetTopicsOrder
-import name.alatushkin.vkapi.generated.board.objects.GetTopicsPreview
-import name.alatushkin.vkapi.tokens.UserServiceMethod
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.board.objects.GetTopicsExtendedResponse
+import name.anton3.vkapi.generated.board.objects.GetTopicsOrder
+import name.anton3.vkapi.generated.board.objects.GetTopicsPreview
+import name.anton3.vkapi.tokens.UserServiceMethod
 
 /**
  * [https://vk.com/dev/board.getTopics]

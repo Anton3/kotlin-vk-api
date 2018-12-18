@@ -1,14 +1,14 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.groups.methods
+package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.groups.objects.GetMembersFilter
-import name.alatushkin.vkapi.generated.groups.objects.GetMembersSort
-import name.alatushkin.vkapi.generated.groups.objects.UserXtrRole
-import name.alatushkin.vkapi.tokens.UserGroupServiceMethod
-import name.alatushkin.vkapi.vktypes.VkList
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.groups.objects.GetMembersFilter
+import name.anton3.vkapi.generated.groups.objects.GetMembersSort
+import name.anton3.vkapi.generated.groups.objects.UserXtrRole
+import name.anton3.vkapi.tokens.UserGroupServiceMethod
+import name.anton3.vkapi.vktypes.VkList
 
 /**
  * [https://vk.com/dev/groups.getMembers]

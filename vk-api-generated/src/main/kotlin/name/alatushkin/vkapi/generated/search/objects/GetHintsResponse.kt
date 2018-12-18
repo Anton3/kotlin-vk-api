@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.search.objects
+package name.anton3.vkapi.generated.search.objects
 
 /**
  * No description

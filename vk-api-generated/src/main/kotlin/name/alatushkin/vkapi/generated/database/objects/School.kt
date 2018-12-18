@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.database.objects
+package name.anton3.vkapi.generated.database.objects
 
 /**
  * No description

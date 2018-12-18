@@ -1,11 +1,11 @@
-package name.alatushkin.vkapi.generated.widgets.objects
+package name.anton3.vkapi.generated.widgets.objects
 
-import name.alatushkin.vkapi.generated.common.objects.LikesInfo
-import name.alatushkin.vkapi.generated.common.objects.RepostsInfo
-import name.alatushkin.vkapi.generated.users.objects.UserFull
-import name.alatushkin.vkapi.generated.wall.objects.CommentAttachment
-import name.alatushkin.vkapi.generated.wall.objects.PostSource
-import name.alatushkin.vkapi.vktypes.VkDate
+import name.anton3.vkapi.generated.common.objects.LikesInfo
+import name.anton3.vkapi.generated.common.objects.RepostsInfo
+import name.anton3.vkapi.generated.users.objects.UserFull
+import name.anton3.vkapi.generated.wall.objects.CommentAttachment
+import name.anton3.vkapi.generated.wall.objects.PostSource
+import name.anton3.vkapi.vktypes.VkDate
 
 /**
  * No description

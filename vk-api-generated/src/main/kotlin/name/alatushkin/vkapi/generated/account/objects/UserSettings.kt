@@ -1,10 +1,10 @@
-package name.alatushkin.vkapi.generated.account.objects
+package name.anton3.vkapi.generated.account.objects
 
-import name.alatushkin.vkapi.generated.common.objects.Country
-import name.alatushkin.vkapi.generated.common.objects.Object
-import name.alatushkin.vkapi.generated.common.objects.Sex
-import name.alatushkin.vkapi.generated.users.objects.UserMin
-import name.alatushkin.vkapi.vktypes.VkBirthDate
+import name.anton3.vkapi.generated.common.objects.Country
+import name.anton3.vkapi.generated.common.objects.Object
+import name.anton3.vkapi.generated.common.objects.Sex
+import name.anton3.vkapi.generated.users.objects.UserMin
+import name.anton3.vkapi.vktypes.VkBirthDate
 
 /**
  * No description

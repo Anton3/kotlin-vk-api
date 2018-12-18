@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.messages.objects
+package name.anton3.vkapi.generated.messages.objects
 
 /**
  * Description of the action, that should be performed on button click

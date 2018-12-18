@@ -1,22 +1,22 @@
-package name.alatushkin.vkapi.generated.groups.objects
+package name.anton3.vkapi.generated.groups.objects
 
-import name.alatushkin.vkapi.generated.audio.objects.AudioFull
-import name.alatushkin.vkapi.generated.common.objects.Country
-import name.alatushkin.vkapi.generated.common.objects.Object
-import name.alatushkin.vkapi.generated.common.objects.Sex
-import name.alatushkin.vkapi.generated.users.objects.Career
-import name.alatushkin.vkapi.generated.users.objects.CropPhoto
-import name.alatushkin.vkapi.generated.users.objects.Exports
-import name.alatushkin.vkapi.generated.users.objects.LastSeen
-import name.alatushkin.vkapi.generated.users.objects.Military
-import name.alatushkin.vkapi.generated.users.objects.Occupation
-import name.alatushkin.vkapi.generated.users.objects.Personal
-import name.alatushkin.vkapi.generated.users.objects.Relative
-import name.alatushkin.vkapi.generated.users.objects.School
-import name.alatushkin.vkapi.generated.users.objects.University
-import name.alatushkin.vkapi.generated.users.objects.UserFull
-import name.alatushkin.vkapi.generated.users.objects.UserMin
-import name.alatushkin.vkapi.vktypes.VkBirthDate
+import name.anton3.vkapi.generated.audio.objects.AudioFull
+import name.anton3.vkapi.generated.common.objects.Country
+import name.anton3.vkapi.generated.common.objects.Object
+import name.anton3.vkapi.generated.common.objects.Sex
+import name.anton3.vkapi.generated.users.objects.Career
+import name.anton3.vkapi.generated.users.objects.CropPhoto
+import name.anton3.vkapi.generated.users.objects.Exports
+import name.anton3.vkapi.generated.users.objects.LastSeen
+import name.anton3.vkapi.generated.users.objects.Military
+import name.anton3.vkapi.generated.users.objects.Occupation
+import name.anton3.vkapi.generated.users.objects.Personal
+import name.anton3.vkapi.generated.users.objects.Relative
+import name.anton3.vkapi.generated.users.objects.School
+import name.anton3.vkapi.generated.users.objects.University
+import name.anton3.vkapi.generated.users.objects.UserFull
+import name.anton3.vkapi.generated.users.objects.UserMin
+import name.anton3.vkapi.vktypes.VkBirthDate
 
 /**
  * No description

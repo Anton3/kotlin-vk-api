@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.streaming.objects
+package name.anton3.vkapi.generated.streaming.objects
 
 /**
  * No description

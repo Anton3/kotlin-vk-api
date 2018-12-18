@@ -1,6 +1,6 @@
-package name.alatushkin.vkapi.generated.photos.objects
+package name.anton3.vkapi.generated.photos.objects
 
-import name.alatushkin.vkapi.vktypes.VkDate
+import name.anton3.vkapi.vktypes.VkDate
 
 /**
  * No description

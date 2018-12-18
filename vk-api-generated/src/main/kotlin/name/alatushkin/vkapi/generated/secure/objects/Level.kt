@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.secure.objects
+package name.anton3.vkapi.generated.secure.objects
 
 /**
  * No description

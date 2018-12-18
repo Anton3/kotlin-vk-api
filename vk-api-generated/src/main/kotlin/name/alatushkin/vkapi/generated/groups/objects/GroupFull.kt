@@ -1,9 +1,9 @@
-package name.alatushkin.vkapi.generated.groups.objects
+package name.anton3.vkapi.generated.groups.objects
 
-import name.alatushkin.vkapi.generated.common.objects.Country
-import name.alatushkin.vkapi.generated.common.objects.Object
-import name.alatushkin.vkapi.generated.newsfeed.objects.GetSuggestedSourcesResponse
-import name.alatushkin.vkapi.generated.users.objects.GetSubscriptionsExtendedResponse
+import name.anton3.vkapi.generated.common.objects.Country
+import name.anton3.vkapi.generated.common.objects.Object
+import name.anton3.vkapi.generated.newsfeed.objects.GetSuggestedSourcesResponse
+import name.anton3.vkapi.generated.users.objects.GetSubscriptionsExtendedResponse
 
 /**
  * No description

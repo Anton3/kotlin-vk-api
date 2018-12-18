@@ -1,6 +1,6 @@
-package name.alatushkin.vkapi.generated.orders.objects
+package name.anton3.vkapi.generated.orders.objects
 
-import name.alatushkin.vkapi.vktypes.VkDate
+import name.anton3.vkapi.vktypes.VkDate
 
 /**
  * No description

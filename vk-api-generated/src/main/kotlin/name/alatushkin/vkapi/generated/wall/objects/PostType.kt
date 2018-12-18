@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.wall.objects
+package name.anton3.vkapi.generated.wall.objects
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue

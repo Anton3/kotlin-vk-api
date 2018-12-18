@@ -1,6 +1,6 @@
-package name.alatushkin.vkapi.generated.newsfeed.objects
+package name.anton3.vkapi.generated.newsfeed.objects
 
-import name.alatushkin.vkapi.generated.video.objects.Video
+import name.anton3.vkapi.generated.video.objects.Video
 
 /**
  * No description

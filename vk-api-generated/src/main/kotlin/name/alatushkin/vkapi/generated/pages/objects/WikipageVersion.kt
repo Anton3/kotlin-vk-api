@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.pages.objects
+package name.anton3.vkapi.generated.pages.objects
 
 /**
  * No description

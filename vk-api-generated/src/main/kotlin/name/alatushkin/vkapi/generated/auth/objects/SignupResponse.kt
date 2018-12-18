@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.auth.objects
+package name.anton3.vkapi.generated.auth.objects
 
 /**
  * No description

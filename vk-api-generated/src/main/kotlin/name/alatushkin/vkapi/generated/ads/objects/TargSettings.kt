@@ -1,6 +1,6 @@
-package name.alatushkin.vkapi.generated.ads.objects
+package name.anton3.vkapi.generated.ads.objects
 
-import name.alatushkin.vkapi.vktypes.PropertyExists
+import name.anton3.vkapi.vktypes.PropertyExists
 
 /**
  * No description

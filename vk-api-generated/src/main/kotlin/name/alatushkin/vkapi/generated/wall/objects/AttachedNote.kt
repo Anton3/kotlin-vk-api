@@ -1,6 +1,6 @@
-package name.alatushkin.vkapi.generated.wall.objects
+package name.anton3.vkapi.generated.wall.objects
 
-import name.alatushkin.vkapi.vktypes.VkDate
+import name.anton3.vkapi.vktypes.VkDate
 
 /**
  * No description

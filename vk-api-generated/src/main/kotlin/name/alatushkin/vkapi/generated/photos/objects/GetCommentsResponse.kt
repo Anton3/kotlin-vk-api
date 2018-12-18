@@ -1,6 +1,6 @@
-package name.alatushkin.vkapi.generated.photos.objects
+package name.anton3.vkapi.generated.photos.objects
 
-import name.alatushkin.vkapi.generated.wall.objects.WallComment
+import name.anton3.vkapi.generated.wall.objects.WallComment
 
 /**
  * No description

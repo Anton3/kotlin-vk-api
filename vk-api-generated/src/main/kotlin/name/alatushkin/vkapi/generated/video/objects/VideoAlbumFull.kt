@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.video.objects
+package name.anton3.vkapi.generated.video.objects
 
 /**
  * No description

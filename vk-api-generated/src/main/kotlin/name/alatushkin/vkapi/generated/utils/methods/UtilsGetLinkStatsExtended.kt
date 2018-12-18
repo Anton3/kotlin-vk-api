@@ -1,12 +1,12 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.utils.methods
+package name.anton3.vkapi.generated.utils.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.utils.objects.GetLinkStatsInterval
-import name.alatushkin.vkapi.generated.utils.objects.LinkStatsExtended
-import name.alatushkin.vkapi.tokens.UserGroupServiceMethod
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.utils.objects.GetLinkStatsInterval
+import name.anton3.vkapi.generated.utils.objects.LinkStatsExtended
+import name.anton3.vkapi.tokens.UserGroupServiceMethod
 
 /**
  * [https://vk.com/dev/utils.getLinkStats]

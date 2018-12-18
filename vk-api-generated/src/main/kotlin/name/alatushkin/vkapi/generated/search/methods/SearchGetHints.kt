@@ -1,11 +1,11 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.search.methods
+package name.anton3.vkapi.generated.search.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.search.objects.GetHintsResponse
-import name.alatushkin.vkapi.tokens.UserMethod
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.search.objects.GetHintsResponse
+import name.anton3.vkapi.tokens.UserMethod
 
 /**
  * [https://vk.com/dev/search.getHints]
@@ -15,8 +15,8 @@ import name.alatushkin.vkapi.tokens.UserMethod
  * @property q Search query string.
  * @property offset Offset for querying specific result subset
  * @property limit Maximum number of results to return.
- * @property filters 
- * @property searchGlobal 
+ * @property filters
+ * @property searchGlobal
  */
 data class SearchGetHints(
     var q: String? = null,

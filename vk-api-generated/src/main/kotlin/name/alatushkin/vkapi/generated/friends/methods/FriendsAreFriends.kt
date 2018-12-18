@@ -1,11 +1,11 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.friends.methods
+package name.anton3.vkapi.generated.friends.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.friends.objects.FriendStatus
-import name.alatushkin.vkapi.tokens.UserMethod
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.friends.objects.FriendStatus
+import name.anton3.vkapi.tokens.UserMethod
 
 /**
  * [https://vk.com/dev/friends.areFriends]

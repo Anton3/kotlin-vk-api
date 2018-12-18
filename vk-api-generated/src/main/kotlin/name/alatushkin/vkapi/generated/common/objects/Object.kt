@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.common.objects
+package name.anton3.vkapi.generated.common.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 

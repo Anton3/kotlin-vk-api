@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.fave.objects
+package name.anton3.vkapi.generated.fave.objects
 
 /**
  * No description

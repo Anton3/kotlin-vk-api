@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.groups.objects
+package name.anton3.vkapi.generated.groups.objects
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue

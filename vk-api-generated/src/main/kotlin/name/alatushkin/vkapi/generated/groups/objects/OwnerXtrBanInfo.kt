@@ -1,6 +1,6 @@
-package name.alatushkin.vkapi.generated.groups.objects
+package name.anton3.vkapi.generated.groups.objects
 
-import name.alatushkin.vkapi.generated.users.objects.User
+import name.anton3.vkapi.generated.users.objects.User
 
 /**
  * No description

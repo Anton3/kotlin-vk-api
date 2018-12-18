@@ -1,12 +1,12 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.newsfeed.methods
+package name.anton3.vkapi.generated.newsfeed.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.common.objects.NameCase
-import name.alatushkin.vkapi.generated.newsfeed.objects.GetBannedExtendedResponse
-import name.alatushkin.vkapi.tokens.UserMethod
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.common.objects.NameCase
+import name.anton3.vkapi.generated.newsfeed.objects.GetBannedExtendedResponse
+import name.anton3.vkapi.tokens.UserMethod
 
 /**
  * [https://vk.com/dev/newsfeed.getBanned]

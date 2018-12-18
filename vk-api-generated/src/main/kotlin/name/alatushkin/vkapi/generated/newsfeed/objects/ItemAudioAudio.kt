@@ -1,6 +1,6 @@
-package name.alatushkin.vkapi.generated.newsfeed.objects
+package name.anton3.vkapi.generated.newsfeed.objects
 
-import name.alatushkin.vkapi.generated.audio.objects.AudioFull
+import name.anton3.vkapi.generated.audio.objects.AudioFull
 
 /**
  * No description

@@ -1,12 +1,12 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.polls.methods
+package name.anton3.vkapi.generated.polls.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.common.objects.NameCase
-import name.alatushkin.vkapi.generated.polls.objects.Voters
-import name.alatushkin.vkapi.tokens.UserMethod
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.common.objects.NameCase
+import name.anton3.vkapi.generated.polls.objects.Voters
+import name.anton3.vkapi.tokens.UserMethod
 
 /**
  * [https://vk.com/dev/polls.getVoters]

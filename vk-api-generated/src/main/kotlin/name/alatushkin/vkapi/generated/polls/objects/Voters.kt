@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.polls.objects
+package name.anton3.vkapi.generated.polls.objects
 
 /**
  * No description

@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.callback.objects
+package name.anton3.vkapi.generated.callback.objects
 
 /**
  * No description

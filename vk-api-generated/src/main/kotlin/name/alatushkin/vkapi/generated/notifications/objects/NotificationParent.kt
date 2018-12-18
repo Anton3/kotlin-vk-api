@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.notifications.objects
+package name.anton3.vkapi.generated.notifications.objects
 
 /**
  * No description

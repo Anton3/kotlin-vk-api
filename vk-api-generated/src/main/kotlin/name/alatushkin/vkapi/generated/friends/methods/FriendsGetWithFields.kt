@@ -1,14 +1,14 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.friends.methods
+package name.anton3.vkapi.generated.friends.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.common.objects.NameCase
-import name.alatushkin.vkapi.generated.friends.objects.GetOrder
-import name.alatushkin.vkapi.generated.friends.objects.UserXtrLists
-import name.alatushkin.vkapi.tokens.UserServiceMethod
-import name.alatushkin.vkapi.vktypes.VkList
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.common.objects.NameCase
+import name.anton3.vkapi.generated.friends.objects.GetOrder
+import name.anton3.vkapi.generated.friends.objects.UserXtrLists
+import name.anton3.vkapi.tokens.UserServiceMethod
+import name.anton3.vkapi.vktypes.VkList
 
 /**
  * [https://vk.com/dev/friends.get]

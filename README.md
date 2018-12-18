@@ -4,16 +4,16 @@
 API ВКонтакте сгенерированное на основе [схемы](https://github.com/VKCOM/vk-api-schema) с исправленными ошибками c поддержкой корутин.
 
 Gradle:
-```
+```gradle
 repositories {
-    maven {
-        url  "https://dl.bintray.com/alatushkin/maven"
-    }
+    maven { url "https://jitpack.io" }
 }
-...
+```
+
+```gradle
 dependencies {
-        implementation("name.alatushkin.utils:kotlin-vk-api:0.1")
-    }
+    implementation("name.anton3.utils:kotlin-vk-api:0.1")
+}
 ```
 
 Пример вызова метода:
@@ -67,7 +67,7 @@ val resultExtended:VkResponse<GetExtendedResponse> = api(WallGetMethodExtended(d
 
 ## Авторы
 
-- [@alatushkin](https://github.com/alatushkin) ([email](mailto:alexandr.latushkin@gmail.com), [ВК](https://vk.com/id5518788)) —
+- [@anton3](https://github.com/anton3) ([email](mailto:alexandr.latushkin@gmail.com), [ВК](https://vk.com/id5518788)) —
 автор оригинального репозтория и первоначальной версии API
 - [@Anton3](https://github.com/Anton3) ([email](mailto:antony.zhilin@gmail.com), [ВК](https://vk.com/antonyzhilin)) —
 автор форка

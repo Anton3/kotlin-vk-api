@@ -1,6 +1,6 @@
-package name.alatushkin.vkapi.generated.common.objects
+package name.anton3.vkapi.generated.common.objects
 
-import name.alatushkin.vkapi.generated.market.objects.Price
+import name.anton3.vkapi.generated.market.objects.Price
 
 /**
  * No description

@@ -1,7 +1,7 @@
-package name.alatushkin.vkapi.generated.board.objects
+package name.anton3.vkapi.generated.board.objects
 
-import name.alatushkin.vkapi.generated.wall.objects.CommentAttachment
-import name.alatushkin.vkapi.vktypes.VkDate
+import name.anton3.vkapi.generated.wall.objects.CommentAttachment
+import name.anton3.vkapi.vktypes.VkDate
 
 /**
  * No description

@@ -1,8 +1,8 @@
-package name.alatushkin.vkapi.generated.notifications.objects
+package name.anton3.vkapi.generated.notifications.objects
 
-import name.alatushkin.vkapi.generated.common.objects.Geo
-import name.alatushkin.vkapi.generated.common.objects.LikesInfo
-import name.alatushkin.vkapi.generated.wall.objects.WallpostAttachment
+import name.anton3.vkapi.generated.common.objects.Geo
+import name.anton3.vkapi.generated.common.objects.LikesInfo
+import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
 
 /**
  * No description

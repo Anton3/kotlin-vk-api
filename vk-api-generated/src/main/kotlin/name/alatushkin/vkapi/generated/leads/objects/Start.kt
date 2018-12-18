@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.leads.objects
+package name.anton3.vkapi.generated.leads.objects
 
 /**
  * No description

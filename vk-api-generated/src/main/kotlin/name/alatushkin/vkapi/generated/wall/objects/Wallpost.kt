@@ -1,8 +1,8 @@
-package name.alatushkin.vkapi.generated.wall.objects
+package name.anton3.vkapi.generated.wall.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import name.alatushkin.vkapi.generated.common.objects.Geo
-import name.alatushkin.vkapi.vktypes.VkDate
+import name.anton3.vkapi.generated.common.objects.Geo
+import name.anton3.vkapi.vktypes.VkDate
 
 /**
  * No description

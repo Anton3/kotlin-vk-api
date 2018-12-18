@@ -1,12 +1,12 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.account.methods
+package name.anton3.vkapi.generated.account.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.account.objects.LookupContactsService
-import name.alatushkin.vkapi.generated.account.objects.LookupResult
-import name.alatushkin.vkapi.tokens.UserMethod
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.account.objects.LookupContactsService
+import name.anton3.vkapi.generated.account.objects.LookupResult
+import name.anton3.vkapi.tokens.UserMethod
 
 /**
  * [https://vk.com/dev/account.lookupContacts]

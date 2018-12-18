@@ -1,8 +1,8 @@
-package name.alatushkin.vkapi.generated.market.objects
+package name.anton3.vkapi.generated.market.objects
 
-import name.alatushkin.vkapi.generated.common.objects.Likes
-import name.alatushkin.vkapi.generated.photos.objects.Photo
-import name.alatushkin.vkapi.vktypes.VkDate
+import name.anton3.vkapi.generated.common.objects.Likes
+import name.anton3.vkapi.generated.photos.objects.Photo
+import name.anton3.vkapi.vktypes.VkDate
 
 /**
  * No description

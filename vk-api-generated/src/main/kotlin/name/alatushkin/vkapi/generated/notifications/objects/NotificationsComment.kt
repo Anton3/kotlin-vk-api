@@ -1,10 +1,10 @@
-package name.alatushkin.vkapi.generated.notifications.objects
+package name.anton3.vkapi.generated.notifications.objects
 
-import name.alatushkin.vkapi.generated.board.objects.Topic
-import name.alatushkin.vkapi.generated.photos.objects.Photo
-import name.alatushkin.vkapi.generated.video.objects.Video
-import name.alatushkin.vkapi.generated.wall.objects.Wallpost
-import name.alatushkin.vkapi.vktypes.VkDate
+import name.anton3.vkapi.generated.board.objects.Topic
+import name.anton3.vkapi.generated.photos.objects.Photo
+import name.anton3.vkapi.generated.video.objects.Video
+import name.anton3.vkapi.generated.wall.objects.Wallpost
+import name.anton3.vkapi.vktypes.VkDate
 
 /**
  * No description

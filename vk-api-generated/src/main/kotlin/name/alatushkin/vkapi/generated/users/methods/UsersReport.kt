@@ -1,12 +1,12 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.users.methods
+package name.anton3.vkapi.generated.users.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.users.objects.ReportType
-import name.alatushkin.vkapi.tokens.UserMethod
-import name.alatushkin.vkapi.vktypes.OkResponse
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.users.objects.ReportType
+import name.anton3.vkapi.tokens.UserMethod
+import name.anton3.vkapi.vktypes.OkResponse
 
 /**
  * [https://vk.com/dev/users.report]

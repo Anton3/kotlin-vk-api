@@ -1,10 +1,10 @@
-package name.alatushkin.vkapi.generated.messages.objects
+package name.anton3.vkapi.generated.messages.objects
 
-import name.alatushkin.vkapi.generated.audio.objects.AudioFull
-import name.alatushkin.vkapi.generated.common.objects.Link
-import name.alatushkin.vkapi.generated.docs.objects.Doc
-import name.alatushkin.vkapi.generated.photos.objects.Photo
-import name.alatushkin.vkapi.generated.video.objects.Video
+import name.anton3.vkapi.generated.audio.objects.AudioFull
+import name.anton3.vkapi.generated.common.objects.Link
+import name.anton3.vkapi.generated.docs.objects.Doc
+import name.anton3.vkapi.generated.photos.objects.Photo
+import name.anton3.vkapi.generated.video.objects.Video
 
 /**
  * No description

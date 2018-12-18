@@ -1,6 +1,6 @@
-package name.alatushkin.vkapi.generated.apps.objects
+package name.anton3.vkapi.generated.apps.objects
 
-import name.alatushkin.vkapi.generated.photos.objects.Photo
+import name.anton3.vkapi.generated.photos.objects.Photo
 
 /**
  * No description

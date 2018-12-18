@@ -1,12 +1,12 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.apps.methods
+package name.anton3.vkapi.generated.apps.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.apps.objects.GetLeaderboardExtendedResponse
-import name.alatushkin.vkapi.generated.apps.objects.GetLeaderboardType
-import name.alatushkin.vkapi.tokens.UserMethod
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.apps.objects.GetLeaderboardExtendedResponse
+import name.anton3.vkapi.generated.apps.objects.GetLeaderboardType
+import name.anton3.vkapi.tokens.UserMethod
 
 /**
  * [https://vk.com/dev/apps.getLeaderboard]

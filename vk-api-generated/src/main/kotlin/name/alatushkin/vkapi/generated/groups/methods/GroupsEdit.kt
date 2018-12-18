@@ -1,17 +1,17 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.groups.methods
+package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.groups.objects.EditAgeLimits
-import name.alatushkin.vkapi.generated.groups.objects.EditMarketCurrency
-import name.alatushkin.vkapi.generated.groups.objects.EditSubject
-import name.alatushkin.vkapi.generated.groups.objects.EditWall
-import name.alatushkin.vkapi.generated.groups.objects.SectionAccess
-import name.alatushkin.vkapi.generated.groups.objects.Visibility
-import name.alatushkin.vkapi.tokens.UserMethod
-import name.alatushkin.vkapi.vktypes.OkResponse
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.groups.objects.EditAgeLimits
+import name.anton3.vkapi.generated.groups.objects.EditMarketCurrency
+import name.anton3.vkapi.generated.groups.objects.EditSubject
+import name.anton3.vkapi.generated.groups.objects.EditWall
+import name.anton3.vkapi.generated.groups.objects.SectionAccess
+import name.anton3.vkapi.generated.groups.objects.Visibility
+import name.anton3.vkapi.tokens.UserMethod
+import name.anton3.vkapi.vktypes.OkResponse
 
 /**
  * [https://vk.com/dev/groups.edit]

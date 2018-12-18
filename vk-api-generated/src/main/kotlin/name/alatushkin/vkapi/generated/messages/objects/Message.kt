@@ -1,7 +1,7 @@
-package name.alatushkin.vkapi.generated.messages.objects
+package name.anton3.vkapi.generated.messages.objects
 
-import name.alatushkin.vkapi.generated.common.objects.Geo
-import name.alatushkin.vkapi.vktypes.VkDate
+import name.anton3.vkapi.generated.common.objects.Geo
+import name.anton3.vkapi.vktypes.VkDate
 
 /**
  * No description

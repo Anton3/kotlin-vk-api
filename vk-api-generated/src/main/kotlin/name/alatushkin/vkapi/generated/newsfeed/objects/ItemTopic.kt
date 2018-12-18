@@ -1,8 +1,8 @@
-package name.alatushkin.vkapi.generated.newsfeed.objects
+package name.anton3.vkapi.generated.newsfeed.objects
 
-import name.alatushkin.vkapi.generated.common.objects.CommentsInfo
-import name.alatushkin.vkapi.generated.common.objects.LikesInfo
-import name.alatushkin.vkapi.vktypes.VkDate
+import name.anton3.vkapi.generated.common.objects.CommentsInfo
+import name.anton3.vkapi.generated.common.objects.LikesInfo
+import name.anton3.vkapi.vktypes.VkDate
 
 /**
  * No description

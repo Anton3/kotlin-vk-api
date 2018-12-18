@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.places.objects
+package name.anton3.vkapi.generated.places.objects
 
 /**
  * No description

@@ -1,4 +1,4 @@
-package name.alatushkin.vkapi.generated.ads.objects
+package name.anton3.vkapi.generated.ads.objects
 
 /**
  * No description

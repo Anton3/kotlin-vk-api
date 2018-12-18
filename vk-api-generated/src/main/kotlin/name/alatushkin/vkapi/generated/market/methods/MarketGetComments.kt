@@ -1,13 +1,13 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate", "SpellCheckingInspection")
 
-package name.alatushkin.vkapi.generated.market.methods
+package name.anton3.vkapi.generated.market.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.alatushkin.vkapi.core.VkMethod
-import name.alatushkin.vkapi.generated.market.objects.GetCommentsSort
-import name.alatushkin.vkapi.generated.wall.objects.WallComment
-import name.alatushkin.vkapi.tokens.UserMethod
-import name.alatushkin.vkapi.vktypes.VkList
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.market.objects.GetCommentsSort
+import name.anton3.vkapi.generated.wall.objects.WallComment
+import name.anton3.vkapi.tokens.UserMethod
+import name.anton3.vkapi.vktypes.VkList
 
 /**
  * [https://vk.com/dev/market.getComments]
