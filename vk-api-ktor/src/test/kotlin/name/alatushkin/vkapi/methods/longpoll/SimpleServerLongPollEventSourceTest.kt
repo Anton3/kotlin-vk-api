@@ -2,7 +2,6 @@ package name.alatushkin.vkapi.methods.longpoll
 
 import com.fasterxml.jackson.module.kotlin.readValue
 import kotlinx.coroutines.runBlocking
-import name.alatushkin.httpclient.httpClient
 import name.alatushkin.vkapi.client.invoke
 import name.alatushkin.vkapi.generated.messages.methods.MessagesSend
 import name.alatushkin.vkapi.generated.messages.objects.*
@@ -10,6 +9,7 @@ import name.alatushkin.vkapi.generated.photos.objects.Photo
 import name.alatushkin.vkapi.methods.callback.MessageNew
 import name.alatushkin.vkapi.vktypes.utils.executor
 import name.alatushkin.vkapi.vktypes.utils.groupApi
+import name.alatushkin.vkapi.vktypes.utils.httpClient
 import name.alatushkin.vkapi.vktypes.utils.peerId
 import org.junit.Assert.assertTrue
 import org.junit.Ignore
@@ -20,9 +20,7 @@ class SimpleServerLongPollEventSourceTest {
     @Ignore
     fun smokeTest1() = runBlocking {
         val timeOut = 95
-        val httpClient = httpClient(readTimeout = timeOut * 1000)
-        val source =
-            SimpleServerLongPollEventSource(groupApi, httpClient, timeOut)
+        val source = SimpleServerLongPollEventSource(groupApi, httpClient, timeOut)
 
         while (true) {
             val (next, events) = source.getEvents()

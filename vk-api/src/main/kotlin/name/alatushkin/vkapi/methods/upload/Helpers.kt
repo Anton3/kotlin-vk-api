@@ -1,11 +1,10 @@
 package name.alatushkin.vkapi.methods.upload
 
 import com.fasterxml.jackson.module.kotlin.readValue
-import name.alatushkin.httpclient.FilePart
-import name.alatushkin.httpclient.HttpMethod
-import name.alatushkin.httpclient.RequestBody
 import name.alatushkin.vkapi.client.VkClient
 import name.alatushkin.vkapi.client.invoke
+import name.alatushkin.vkapi.core.RequestContent
+import name.alatushkin.vkapi.core.post
 import name.alatushkin.vkapi.generated.docs.methods.DocsGetMessagesUploadServer
 import name.alatushkin.vkapi.generated.docs.methods.DocsSave
 import name.alatushkin.vkapi.generated.docs.objects.Doc
@@ -20,14 +19,8 @@ data class UploadPhotoResponse(val server: Long, val hash: String, val photo: St
 
 suspend fun VkClient<UserGroupMethod>.uploadMessagePhoto(peerId: Long, byteArray: ByteArray): Photo {
     val uploadUrl = this(PhotosGetMessagesUploadServer(peerId)).uploadUrl
-    val response = httpClient(
-        HttpMethod.POST(
-            url = uploadUrl,
-            body = RequestBody.MultipartBody(
-                mapOf("photo" to FilePart("someName.jpg", "image/jpg", byteArray))
-            )
-        )
-    )
+    val response = httpClient.post(uploadUrl, RequestContent.File("photo", "someName.jpg", byteArray))
+
     val uploadPhotoResponse: UploadPhotoResponse =
         objectMapper.readValue(response.data.toString(Charset.forName("UTF-8")))
 
@@ -50,14 +43,7 @@ suspend fun VkClient<UserGroupMethod>.uploadMessageDocument(
 ): Doc {
     val uploadUrl = this(DocsGetMessagesUploadServer(GetMessagesUploadServerType.DOC, peerId)).uploadUrl
 
-    val response = httpClient(
-        HttpMethod.POST(
-            url = uploadUrl,
-            body = RequestBody.MultipartBody(
-                mapOf("file" to FilePart(fileName, guessContentTypeByFilename(fileName), byteArray))
-            )
-        )
-    )
+    val response = httpClient.post(uploadUrl, RequestContent.File("file", fileName, byteArray))
     val uploadDocumentResponse: UploadDocumentResponse =
         objectMapper.readValue(response.data.toString(Charset.forName("UTF-8")))
 

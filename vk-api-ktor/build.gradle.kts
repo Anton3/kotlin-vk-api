@@ -20,15 +20,19 @@ dependencies {
     api(project(":vk-api-core"))
     api(project(":vk-api"))
 
+    val jacksonVersion = "2.9.7"
+    api("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
+    api("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
+    api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+
     val ktorVersion = "1.0.0"
     api("io.ktor:ktor-client-core-jvm:$ktorVersion")
-
-    api("name.alatushkin.utils:common-http-client:0.1")
 
     implementation("io.github.microutils:kotlin-logging:1.6.22")
 
     testImplementation("junit:junit:4.12")
     testImplementation("org.apache.logging.log4j:log4j-slf4j-impl:2.11.0")
+    testImplementation("io.ktor:ktor-client-apache:$ktorVersion")
 }
 
 val sourcesJar by tasks.creating(Jar::class) {

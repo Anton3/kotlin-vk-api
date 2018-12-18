@@ -2,7 +2,7 @@ package name.alatushkin.vkapi.client
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import kotlinx.coroutines.Dispatchers
-import name.alatushkin.httpclient.HttpClient
+import name.alatushkin.vkapi.core.TransportClient
 import name.alatushkin.vkapi.executors.BatchMethodExecutor
 import name.alatushkin.vkapi.executors.MethodExecutor
 import name.alatushkin.vkapi.executors.SimpleMethodExecutor
@@ -10,7 +10,7 @@ import name.alatushkin.vkapi.executors.ThrottledMethodExecutor
 import name.alatushkin.vkapi.tokens.*
 import java.time.Duration
 
-class VkClientFactory(httpClient: HttpClient, objectMapper: ObjectMapper) {
+class VkClientFactory(httpClient: TransportClient, objectMapper: ObjectMapper) {
 
     private val baseExecutor: MethodExecutor =
         SimpleMethodExecutor(httpClient, objectMapper)

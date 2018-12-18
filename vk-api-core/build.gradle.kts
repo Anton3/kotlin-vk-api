@@ -22,8 +22,6 @@ dependencies {
     api("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
     api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
 
-    api("name.alatushkin.utils:common-http-client:0.1")
-
     // For executors
     val coroutinesVersion = "1.0.1"
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")

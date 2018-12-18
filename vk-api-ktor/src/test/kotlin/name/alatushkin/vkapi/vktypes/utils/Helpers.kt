@@ -1,6 +1,8 @@
 package name.alatushkin.vkapi.vktypes.utils
 
-import name.alatushkin.httpclient.httpClient
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.apache.Apache
+import name.alatushkin.vkapi.client.KtorTransportClient
 import name.alatushkin.vkapi.executors.SimpleMethodExecutor
 import name.alatushkin.vkapi.json.vkObjectMapper
 import name.alatushkin.vkapi.tokens.GroupToken
@@ -39,7 +41,12 @@ val userAccessToken = readConfigParam("userAccessToken")
 val groupId = readConfigParam("groupId")
 val peerId = readConfigParam("peerId").toLong()
 
-val httpClient = httpClient(readTimeout = 95_000)
+val timeOut = 95_000
+val httpClient = KtorTransportClient(HttpClient(Apache) {
+    engine {
+        socketTimeout = 95_000
+    }
+})
 val executor = SimpleMethodExecutor(httpClient, vkObjectMapper())
 val groupToken = GroupToken(groupAccessToken, groupId.toLong())
 val userToken = UserToken(userAccessToken, peerId)

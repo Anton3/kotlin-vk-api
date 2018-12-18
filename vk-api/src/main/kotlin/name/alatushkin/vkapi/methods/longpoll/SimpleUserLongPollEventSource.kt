@@ -2,10 +2,10 @@ package name.alatushkin.vkapi.methods.longpoll
 
 import com.fasterxml.jackson.module.kotlin.readValue
 import mu.KotlinLogging
-import name.alatushkin.httpclient.HttpClient
-import name.alatushkin.httpclient.HttpMethod
 import name.alatushkin.vkapi.client.VkClient
 import name.alatushkin.vkapi.client.invoke
+import name.alatushkin.vkapi.core.TransportClient
+import name.alatushkin.vkapi.core.get
 import name.alatushkin.vkapi.generated.messages.methods.MessagesGetLongPollServer
 import name.alatushkin.vkapi.generated.messages.objects.LongpollParams
 import name.alatushkin.vkapi.methods.longpoll.events.LongPollEvent
@@ -18,7 +18,7 @@ private val log = KotlinLogging.logger {}
 
 class SimpleUserLongPollEventSource(
     private val api: VkClient<GroupMethod>,
-    private val httpClient: HttpClient = api.httpClient,
+    private val httpClient: TransportClient = api.httpClient,
     private val timeOut: Int
 ) {
     private val groupId = api.token.id
@@ -29,7 +29,7 @@ class SimpleUserLongPollEventSource(
 
         try {
             val vkJson = try {
-                httpClient(HttpMethod.GET(lpServer.toUrl(timeOut))).data.toString(Charset.forName("UTF-8"))
+                httpClient.get(lpServer.toUrl(timeOut)).data.toString(Charset.forName("UTF-8"))
             } catch (e: SocketTimeoutException) {
                 return lpServer to emptyList()
             } catch (e: Exception) {
