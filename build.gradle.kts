@@ -26,7 +26,7 @@ tasks.withType(KotlinCompile::class.java).all {
 
 subprojects {
     group = "name.anton3.utils"
-    version = "0.1"
+    version = "0.2"
 
     apply {
         plugin("org.jetbrains.kotlin.jvm")
