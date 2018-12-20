@@ -1,9 +1,8 @@
 import org.gradle.api.tasks.bundling.Jar
 import java.util.Date
 
-repositories {
-    mavenLocal()
-    mavenCentral()
+plugins {
+    `java-library`
 }
 
 dependencies {

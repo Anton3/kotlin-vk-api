@@ -1,18 +1,16 @@
 import org.gradle.api.tasks.bundling.Jar
 import java.util.Date
 
-repositories {
-    mavenLocal()
-    mavenCentral()
+plugins {
+    `java-library`
 }
 
 dependencies {
-    api(project(":vk-api-core"))
-    api(project(":vk-api"))
+    api(project(":vk-api-methods"))
 
     val ktorVersion = "1.0.0"
     api("io.ktor:ktor-client-core-jvm:$ktorVersion")
-    
+
     testImplementation("io.ktor:ktor-client-apache:$ktorVersion")
 }
 

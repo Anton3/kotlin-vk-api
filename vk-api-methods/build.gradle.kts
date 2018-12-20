@@ -1,13 +1,11 @@
 import org.gradle.api.tasks.bundling.Jar
 import java.util.Date
 
-repositories {
-    mavenLocal()
-    mavenCentral()
+plugins {
+    `java-library`
 }
 
 dependencies {
-    api(project(":vk-api-core"))
     api(project(":vk-api-generated"))
 }
 

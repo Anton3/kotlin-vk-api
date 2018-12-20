@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     repositories {
-        mavenLocal()
         mavenCentral()
     }
 
@@ -14,7 +13,6 @@ buildscript {
 }
 
 plugins {
-    java
     kotlin("jvm") version "1.3.11"
 }
 
@@ -27,6 +25,11 @@ tasks.withType(KotlinCompile::class.java).all {
 subprojects {
     group = "name.anton3.utils"
     version = "0.1"
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
 
     apply {
         plugin("org.jetbrains.kotlin.jvm")
