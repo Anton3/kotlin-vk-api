@@ -12,7 +12,7 @@ repositories {
 
 ```gradle
 dependencies {
-    implementation("name.anton3.utils:kotlin-vk-api:0.1")
+    implementation("com.github.Anton3:kotlin-vk-api:0.2")
 }
 ```
 
