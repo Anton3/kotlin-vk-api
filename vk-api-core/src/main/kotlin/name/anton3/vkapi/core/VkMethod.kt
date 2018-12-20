@@ -2,7 +2,6 @@ package name.anton3.vkapi.core
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.core.type.TypeReference
-import name.anton3.vkapi.json.ForwardableAttributes
 import name.anton3.vkapi.vktypes.VkLang
 
 open class VkMethod<T>(
@@ -26,7 +25,4 @@ open class VkMethod<T>(
     var v: String? = "5.87"
     var lang: VkLang? = null
     var testMode: Int? = null
-
-    open val parserAttributes: ForwardableAttributes
-        @JsonIgnore get() = ForwardableAttributes.EMPTY
 }

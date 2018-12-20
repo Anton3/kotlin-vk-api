@@ -2,12 +2,11 @@ package name.anton3.vkapi.client
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import kotlinx.coroutines.Dispatchers
+import name.anton3.vkapi.core.MethodExecutor
 import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.executors.BatchMethodExecutor
-import name.anton3.vkapi.executors.MethodExecutor
 import name.anton3.vkapi.executors.SimpleMethodExecutor
 import name.anton3.vkapi.executors.ThrottledMethodExecutor
-import name.anton3.vkapi.tokens.*
 import name.anton3.vkapi.tokens.*
 import java.time.Duration
 
@@ -28,7 +27,7 @@ class VkClientFactory(httpClient: TransportClient, objectMapper: ObjectMapper) {
             Duration.ofMillis(flushDelayMillis),
             token
         )
-        return VkClient(executorWrapper(batch), token)
+        return executorWrapper(batch).attach(token)
     }
 
     fun group(
@@ -43,7 +42,7 @@ class VkClientFactory(httpClient: TransportClient, objectMapper: ObjectMapper) {
             Duration.ofMillis(flushDelayMillis),
             token
         )
-        return VkClient(executorWrapper(batch), token)
+        return executorWrapper(batch).attach(token)
     }
 
     fun ads(
@@ -57,7 +56,7 @@ class VkClientFactory(httpClient: TransportClient, objectMapper: ObjectMapper) {
             serviceType.requestsPerHour,
             Duration.ofHours(1)
         )
-        return VkClient(executorWrapper(throttled2), token)
+        return executorWrapper(throttled2).attach(token)
     }
 
     fun secure(
@@ -67,7 +66,7 @@ class VkClientFactory(httpClient: TransportClient, objectMapper: ObjectMapper) {
     ): VkClient<ServiceMethod> {
         val throttled =
             ThrottledMethodExecutor(baseExecutor, appPopularity.requestsPerSecond)
-        return VkClient(executorWrapper(throttled), token)
+        return executorWrapper(throttled).attach(token)
     }
 }
 

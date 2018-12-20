@@ -2,10 +2,10 @@ package name.anton3.vkapi.executors
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import name.anton3.vkapi.core.MethodExecutor
 import name.anton3.vkapi.core.VkMethod
 import name.anton3.vkapi.core.VkResult
 import name.anton3.vkapi.core.wrapInSimpleResponse
-import name.anton3.vkapi.methods.execute.BATCH_EXECUTE_LIMIT
 import name.anton3.vkapi.methods.execute.batchUnchecked
 import name.anton3.vkapi.methods.execute.supportsBatch
 import name.anton3.vkapi.tokens.Token
@@ -34,12 +34,16 @@ class BatchMethodExecutor(
         return base.batchUnchecked(methods, token)
     }
 
-    override suspend fun <T> invoke(method: VkMethod<T>, token: Token<*>): VkResponse<T> {
+    override suspend fun <T> invoke(method: VkMethod<T>): VkResponse<T> {
         return if (method.supportsBatch()) {
             @Suppress("UNCHECKED_CAST")
             batcher(method).wrapInSimpleResponse() as VkResponse<T>
         } else {
-            base(method, token)
+            base(method)
         }
+    }
+
+    companion object {
+        const val BATCH_EXECUTE_LIMIT = 25
     }
 }

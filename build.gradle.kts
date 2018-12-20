@@ -23,7 +23,7 @@ tasks.withType(KotlinCompile::class.java).all {
 }
 
 subprojects {
-    group = "name.anton3.utils"
+    group = "name.anton3"
     version = "0.1"
 
     repositories {

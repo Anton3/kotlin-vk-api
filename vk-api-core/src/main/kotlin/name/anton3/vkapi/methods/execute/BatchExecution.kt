@@ -1,15 +1,13 @@
 package name.anton3.vkapi.methods.execute
 
-import name.anton3.vkapi.core.VkMethod
-import name.anton3.vkapi.core.VkResult
-import name.anton3.vkapi.core.extractExecuteResult
-import name.anton3.vkapi.executors.MethodExecutor
+import name.anton3.vkapi.core.*
 import name.anton3.vkapi.tokens.Token
+import name.anton3.vkapi.tokens.attach
 import java.io.IOException
 
 suspend fun MethodExecutor.batchUnchecked(methods: List<VkMethod<*>>, token: Token<*>): List<VkResult<*>> {
-    val batchMethod = BatchExecuteMethod(methods, objectMapper)
-    return this(batchMethod, token).extractExecuteResult().unwrap().parseBatchResponse()
+    val batchMethod = BatchExecuteMethod(methods, objectMapper).attach(token)
+    return this(batchMethod).extractExecuteResult().unwrap().parseBatchResponse()
 }
 
 internal fun ExecuteResponse<BatchExecuteResult>.parseBatchResponse(): List<VkResult<*>> {

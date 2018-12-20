@@ -1,7 +1,7 @@
 package name.anton3.vkapi.executors
 
+import name.anton3.vkapi.core.MethodExecutor
 import name.anton3.vkapi.core.VkMethod
-import name.anton3.vkapi.tokens.Token
 import name.anton3.vkapi.vktypes.VkResponse
 import java.time.Duration
 
@@ -13,6 +13,6 @@ class ThrottledMethodExecutor(
 
     private val throttler = Throttler(rateLimit, ratePeriod)
 
-    override suspend fun <T> invoke(method: VkMethod<T>, token: Token<*>): VkResponse<T> =
-        throttler { base(method, token) }
+    override suspend fun <T> invoke(method: VkMethod<T>): VkResponse<T> =
+        throttler { base(method) }
 }

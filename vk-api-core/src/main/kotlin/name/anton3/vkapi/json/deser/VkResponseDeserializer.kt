@@ -4,8 +4,8 @@ import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ObjectNode
+import name.anton3.vkapi.json.attributes.reader
 import name.anton3.vkapi.json.readNode
-import name.anton3.vkapi.json.reader
 import name.anton3.vkapi.json.strongType
 import name.anton3.vkapi.json.weakType
 import name.anton3.vkapi.vktypes.VkError

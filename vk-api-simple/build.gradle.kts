@@ -6,10 +6,8 @@ plugins {
 }
 
 dependencies {
-    api(project(":vk-api-core"))
-
-    val ktorVersion = "1.0.0"
-    api("io.ktor:ktor-client-core-jvm:$ktorVersion")
+    api(project(":vk-api-methods"))
+    api(project(":vk-api-ktor"))
 }
 
 val sourcesJar by tasks.creating(Jar::class) {

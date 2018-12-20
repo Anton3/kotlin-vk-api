@@ -1,6 +1,5 @@
 package name.anton3.vkapi.core
 
-import name.anton3.vkapi.methods.execute.ExecuteResponse
 import name.anton3.vkapi.vktypes.VkResponse
 import java.io.IOException
 
