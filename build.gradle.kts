@@ -24,7 +24,7 @@ tasks.withType(KotlinCompile::class.java).all {
 
 subprojects {
     group = "name.anton3"
-    version = "0.2"
+    version = "0.2.0"
 
     repositories {
         mavenLocal()
