@@ -11,11 +11,7 @@ class SimpleUserLongPollEventSourceTest {
     @Test
     @Ignore
     fun smokeTest1() = runBlocking {
-        val source = SimpleUserLongPollEventSource(
-            groupApi,
-            httpClient,
-            timeOut
-        )
+        val source = SimpleUserLongPollEventSource(groupApi, httpClient, timeOut)
 
         while (true) {
             val (next, events) = source.getEvents()

@@ -12,8 +12,7 @@ import java.time.Duration
 
 class VkClientFactory(httpClient: TransportClient, objectMapper: ObjectMapper) {
 
-    private val baseExecutor: MethodExecutor =
-        SimpleMethodExecutor(httpClient, objectMapper)
+    private val baseExecutor: MethodExecutor = SimpleMethodExecutor(httpClient, objectMapper)
 
     fun user(
         token: UserToken,
@@ -21,12 +20,7 @@ class VkClientFactory(httpClient: TransportClient, objectMapper: ObjectMapper) {
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
     ): VkClient<UserMethod> {
         val throttled = ThrottledMethodExecutor(baseExecutor, 3)
-        val batch = BatchMethodExecutor(
-            throttled,
-            Dispatchers.Default,
-            Duration.ofMillis(flushDelayMillis),
-            token
-        )
+        val batch = BatchMethodExecutor(throttled, Dispatchers.Default, Duration.ofMillis(flushDelayMillis), token)
         return executorWrapper(batch).attach(token)
     }
 
@@ -36,12 +30,7 @@ class VkClientFactory(httpClient: TransportClient, objectMapper: ObjectMapper) {
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
     ): VkClient<GroupMethod> {
         val throttled = ThrottledMethodExecutor(baseExecutor, 20)
-        val batch = BatchMethodExecutor(
-            throttled,
-            Dispatchers.Default,
-            Duration.ofMillis(flushDelayMillis),
-            token
-        )
+        val batch = BatchMethodExecutor(throttled, Dispatchers.Default, Duration.ofMillis(flushDelayMillis), token)
         return executorWrapper(batch).attach(token)
     }
 
@@ -51,11 +40,7 @@ class VkClientFactory(httpClient: TransportClient, objectMapper: ObjectMapper) {
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
     ): VkClient<UserMethod> {
         val throttled1 = ThrottledMethodExecutor(baseExecutor, 2)
-        val throttled2 = ThrottledMethodExecutor(
-            throttled1,
-            serviceType.requestsPerHour,
-            Duration.ofHours(1)
-        )
+        val throttled2 = ThrottledMethodExecutor(throttled1, serviceType.requestsPerHour, Duration.ofHours(1))
         return executorWrapper(throttled2).attach(token)
     }
 
@@ -64,8 +49,7 @@ class VkClientFactory(httpClient: TransportClient, objectMapper: ObjectMapper) {
         appPopularity: SecureAppPopularity = SecureAppPopularity.SMALL,
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
     ): VkClient<ServiceMethod> {
-        val throttled =
-            ThrottledMethodExecutor(baseExecutor, appPopularity.requestsPerSecond)
+        val throttled = ThrottledMethodExecutor(baseExecutor, appPopularity.requestsPerSecond)
         return executorWrapper(throttled).attach(token)
     }
 }

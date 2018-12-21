@@ -13,9 +13,8 @@ import java.nio.file.Paths
 import java.util.*
 
 private fun readConfigParam(name: String): String {
-    val testParams: Map<out Any, Any> =
-        readPropsFrom("gradle.properties")
-            ?: readPropsFrom("../gradle.properties")
+    val testParams: Map<out Any, Any> = readPropsFrom("gradle.properties")
+        ?: readPropsFrom("../gradle.properties")
         ?: System.getenv()
 
     return testParams[name]?.toString() ?: error("$name not found. provide it via gradle.properties or env")
@@ -39,7 +38,7 @@ fun readResource(path: String): ByteArray =
 
 val groupAccessToken = readConfigParam("groupAccessToken")
 val userAccessToken = readConfigParam("userAccessToken")
-val groupId = readConfigParam("groupId")
+val groupId = readConfigParam("groupId").toLong()
 val peerId = readConfigParam("peerId").toLong()
 
 const val timeOut = 95_000
@@ -49,7 +48,7 @@ val httpClient = KtorTransportClient(HttpClient(Apache) {
     }
 })
 val executor = SimpleMethodExecutor(httpClient, vkObjectMapper())
-val groupToken = GroupToken(groupAccessToken, groupId.toLong())
-val userToken = UserToken(userAccessToken, peerId)
+val groupToken = GroupToken(groupAccessToken, groupId)
+val userToken = UserToken(userAccessToken, groupId)
 val groupApi = VkClient(executor, groupToken)
 val userApi = VkClient(executor, userToken)

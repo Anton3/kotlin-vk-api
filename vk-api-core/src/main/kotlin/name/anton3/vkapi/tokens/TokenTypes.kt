@@ -10,8 +10,8 @@ sealed class Token<in M: MethodRequirement> {
 }
 
 data class UserToken(
-        override val accessToken: String,
-        override val id: Long
+    override val accessToken: String,
+    override val id: Long
 ) : Token<UserMethod>() {
 
     override fun <T> attachTo(method: VkMethod<T>) {
@@ -20,8 +20,8 @@ data class UserToken(
 }
 
 data class GroupToken(
-        override val accessToken: String,
-        override val id: Long
+    override val accessToken: String,
+    override val id: Long
 ) : Token<GroupMethod>() {
 
     override fun <T> attachTo(method: VkMethod<T>) {
@@ -30,9 +30,9 @@ data class GroupToken(
 }
 
 data class ServiceToken(
-        override val accessToken: String,
-        override val id: Long,
-        val clientSecret: String
+    override val accessToken: String,
+    override val id: Long,
+    val clientSecret: String
 ) : Token<ServiceMethod>() {
 
     override fun <T> attachTo(method: VkMethod<T>) {

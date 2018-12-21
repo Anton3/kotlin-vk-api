@@ -20,9 +20,7 @@ class SimpleServerLongPollEventSourceTest {
     @Ignore
     fun smokeTest1() = runBlocking {
         val timeOut = 95
-        val source = SimpleServerLongPollEventSource(
-            groupApi,
-            httpClient, timeOut)
+        val source = SimpleServerLongPollEventSource(groupApi, httpClient, timeOut)
 
         while (true) {
             val (next, events) = source.getEvents()
@@ -91,5 +89,4 @@ class SimpleServerLongPollEventSourceTest {
         val lpResponse: GroupLongPollResponse = executor.objectMapper.readValue(json)
         println(lpResponse)
     }
-
 }
