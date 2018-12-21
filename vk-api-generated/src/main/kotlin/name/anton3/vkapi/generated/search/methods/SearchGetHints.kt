@@ -15,8 +15,8 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property q Search query string.
  * @property offset Offset for querying specific result subset
  * @property limit Maximum number of results to return.
- * @property filters
- * @property searchGlobal
+ * @property filters 
+ * @property searchGlobal 
  */
 data class SearchGetHints(
     var q: String? = null,

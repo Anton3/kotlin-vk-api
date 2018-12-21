@@ -4,10 +4,9 @@ package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.generated.video.objects.SearchExtendedResponse
 import name.anton3.vkapi.generated.video.objects.SearchSort
-import name.anton3.vkapi.generated.video.objects.Video
 import name.anton3.vkapi.tokens.UserMethod
-import name.anton3.vkapi.vktypes.VkList
 
 /**
  * [https://vk.com/dev/video.search]
@@ -19,13 +18,13 @@ import name.anton3.vkapi.vktypes.VkList
  * @property hd If not null, only searches for high-definition videos.
  * @property adult '1' — to disable the Safe Search filter, '0' — to enable the Safe Search filter
  * @property filters Filters to apply: 'youtube' — return YouTube videos only, 'vimeo' — return Vimeo videos only, 'short' — return short videos only, 'long' — return long videos only
- * @property searchOwn
+ * @property searchOwn 
  * @property offset Offset needed to return a specific subset of videos.
  * @property longer No description
  * @property shorter No description
  * @property count Number of videos to return.
  */
-data class VideoSearch(
+data class VideoSearchExtended(
     var q: String,
     var sort: SearchSort? = null,
     var hd: Long? = null,
@@ -36,5 +35,9 @@ data class VideoSearch(
     var longer: Long? = null,
     var shorter: Long? = null,
     var count: Long? = null
-) : VkMethod<VkList<Video>>("video.search", jacksonTypeRef()),
-    UserMethod
+) : VkMethod<SearchExtendedResponse>("video.search", jacksonTypeRef()),
+    UserMethod {
+    init {
+        unsafeParam("extended", "1")
+    }
+}

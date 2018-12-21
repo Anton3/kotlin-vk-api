@@ -14,7 +14,7 @@ import name.anton3.vkapi.tokens.UserMethod
  *
  * @property pageId Wiki page ID.
  * @property groupId ID of the community that owns the wiki page.
- * @property userId
+ * @property userId 
  */
 data class PagesGetHistory(
     var pageId: Long,
