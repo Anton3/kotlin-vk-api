@@ -1,5 +1,4 @@
-import org.jetbrains.kotlin.gradle.dsl.Coroutines
-import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
+import org.gradle.api.tasks.bundling.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
@@ -13,32 +12,24 @@ buildscript {
 }
 
 plugins {
+    java
     kotlin("jvm") version "1.3.11"
 }
 
-tasks.withType(KotlinCompile::class.java).all {
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-}
-
 subprojects {
-    group = "name.anton3"
-    version = "0.2.0"
+    group = "com.github.Anton3"
+    version = "0.2.1"
 
     repositories {
-        mavenLocal()
         mavenCentral()
     }
 
-    apply {
-        plugin("org.jetbrains.kotlin.jvm")
-    }
+    apply(plugin = "kotlin")
+    apply(plugin = "maven")
 
     tasks.withType(KotlinCompile::class.java).all {
         kotlinOptions {
             jvmTarget = "1.8"
-            freeCompilerArgs = listOf("-Xjsr305=strict")
         }
     }
 
@@ -48,12 +39,24 @@ subprojects {
         api("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
         api("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
 
-        implementation(kotlin("stdlib-jdk8"))
-        implementation(kotlin("reflect"))
+        val kotlinVersion = "1.3.11"
+        implementation(kotlin("stdlib-jdk8:$kotlinVersion"))
+        implementation(kotlin("reflect:$kotlinVersion"))
 
         implementation("io.github.microutils:kotlin-logging:1.6.22")
 
         testImplementation("junit:junit:4.12")
         testImplementation("org.apache.logging.log4j:log4j-slf4j-impl:2.11.0")
+    }
+
+    val sourcesJar by tasks.creating(Jar::class) {
+        dependsOn("classes")
+        classifier = "sources"
+        val sourceSets: SourceSetContainer by project
+        from(sourceSets["main"].allSource)
+    }
+
+    artifacts {
+        add("archives", sourcesJar)
     }
 }

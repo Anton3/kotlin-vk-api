@@ -1,5 +1,6 @@
 # kotlin-vk-api
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat)](#contributors)
+[![Release](https://jitpack.io/v/Anton3/kotlin-vk-api.svg)](https://jitpack.io/#Anton3/kotlin-vk-api)
 
 API ВКонтакте сгенерированное на основе
 [схемы](https://github.com/VKCOM/vk-api-schema)
@@ -11,11 +12,12 @@ Gradle:
 
 ```gradle
 repositories {
-    maven { url "https://jitpack.io" }
+    jcenter()
+    maven(url = "https://jitpack.io")
 }
 
 dependencies {
-    implementation("com.github.Anton3.kotlin-vk-api:vk-api-simple:0.2.0")
+    implementation("com.github.Anton3.kotlin-vk-api:vk-api-simple:0.2.1")
 }
 ```
 
