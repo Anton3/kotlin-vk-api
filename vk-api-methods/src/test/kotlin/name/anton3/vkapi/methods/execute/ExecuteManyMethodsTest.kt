@@ -50,7 +50,7 @@ class ExecuteManyMethodsTest {
     @Test
     fun smokeError2() = runBlocking {
         try {
-            groupApi.executeUnchecked(
+            groupApi.unchecked(
                 WallGet(
                     domain = "departureMsk",
                     offset = 0,

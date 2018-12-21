@@ -9,7 +9,7 @@ import org.junit.Test
 class SimpleMethodExecutorTest {
     @Test
     fun smokeTest1() = runBlocking {
-        val result = groupApi.batchUnchecked(listOf(GroupsGetById(groupId = groupId)))
+        val result = groupApi.batchUnchecked(listOf(GroupsGetById(groupId = groupId.toString())))
         println(result)
     }
 }
