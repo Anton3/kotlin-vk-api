@@ -6,16 +6,19 @@ import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.produce
+import kotlinx.coroutines.withContext
 import mu.KotlinLogging
 import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.core.get
 import name.anton3.vkapi.methods.longpoll.objects.LongPollFailure
 import java.io.IOException
 import java.nio.charset.Charset
+import kotlin.coroutines.CoroutineContext
 
 private val log = KotlinLogging.logger {}
 
 abstract class AbstractLongPollEventSource<EventType, IteratorType>(
+    private val longPollContext: CoroutineContext,
     protected val objectMapper: ObjectMapper,
     protected val httpClient: TransportClient,
     private val responseType: TypeReference<LongPollResponse<EventType>> = jacksonTypeRef()
@@ -27,7 +30,9 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
     abstract suspend fun iterator(): IteratorType
 
     suspend fun getEvents(iterator: IteratorType): Pair<IteratorType, List<EventType>> {
-        val vkResponse = httpClient.get(iteratorToUrl(iterator))
+        val vkResponse = withContext(longPollContext) {
+            httpClient.get(iteratorToUrl(iterator))
+        }
 
         val vkJson = vkResponse.data.toString(Charset.forName("UTF-8"))
         log.debug("VK long poll responds with $vkJson")

@@ -1,6 +1,7 @@
 package name.anton3.vkapi.methods.longpoll
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.ReceiveChannel
 import name.anton3.vkapi.client.VkClient
 import name.anton3.vkapi.client.invoke
@@ -11,13 +12,16 @@ import name.anton3.vkapi.methods.longpoll.events.LongPollEvent
 import name.anton3.vkapi.tokens.GroupMethod
 import name.anton3.vkapi.tokens.UserGroupMethod
 import name.anton3.vkapi.tokens.UserMethod
+import kotlin.coroutines.CoroutineContext
 
 class UserLongPollEventSource(
+    longPollContext: CoroutineContext,
     private val api: VkClient<UserGroupMethod>,
     private val groupId: Long?,
     httpClient: TransportClient,
     private val timeout: Int
 ) : AbstractLongPollEventSource<LongPollEvent, LongpollParams>(
+    longPollContext = longPollContext,
     objectMapper = api.objectMapper,
     httpClient = httpClient
 ) {
@@ -42,7 +46,7 @@ fun VkClient<GroupMethod>.messageLongPollEvents(
     httpClient: TransportClient = this.httpClient,
     timeout: Int
 ): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(this, null, httpClient, timeout).produceEvents(scope)
+    UserLongPollEventSource(Dispatchers.IO, this, null, httpClient, timeout).produceEvents(scope)
 
 fun VkClient<UserMethod>.messageLongPollEventsAsAdmin(
     groupId: Long,
@@ -50,11 +54,11 @@ fun VkClient<UserMethod>.messageLongPollEventsAsAdmin(
     httpClient: TransportClient = this.httpClient,
     timeout: Int
 ): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(this, groupId, httpClient, timeout).produceEvents(scope)
+    UserLongPollEventSource(Dispatchers.IO, this, groupId, httpClient, timeout).produceEvents(scope)
 
 fun VkClient<UserMethod>.messageLongPollEventsForUser(
     scope: CoroutineScope,
     httpClient: TransportClient = this.httpClient,
     timeout: Int
 ): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(this, null, httpClient, timeout).produceEvents(scope)
+    UserLongPollEventSource(Dispatchers.IO, this, null, httpClient, timeout).produceEvents(scope)

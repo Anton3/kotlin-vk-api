@@ -1,6 +1,7 @@
 package name.anton3.vkapi.methods.longpoll
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.ReceiveChannel
 import name.anton3.vkapi.client.VkClient
 import name.anton3.vkapi.client.invoke
@@ -11,13 +12,16 @@ import name.anton3.vkapi.methods.callback.CallbackEvent
 import name.anton3.vkapi.tokens.GroupMethod
 import name.anton3.vkapi.tokens.UserGroupMethod
 import name.anton3.vkapi.tokens.UserMethod
+import kotlin.coroutines.CoroutineContext
 
 class GroupLongPollEventSource(
+    longPollContext: CoroutineContext,
     private val api: VkClient<UserGroupMethod>,
     private val groupId: Long,
     httpClient: TransportClient,
     private val timeout: Int
 ) : AbstractLongPollEventSource<CallbackEvent<*>, LongPollServer>(
+    longPollContext = longPollContext,
     objectMapper = api.objectMapper,
     httpClient = httpClient
 ) {
@@ -39,7 +43,7 @@ fun VkClient<GroupMethod>.groupLongPollEvents(
     httpClient: TransportClient = this.httpClient,
     timeout: Int
 ): ReceiveChannel<CallbackEvent<*>> =
-    GroupLongPollEventSource(this, this.token.id, httpClient, timeout).produceEvents(scope)
+    GroupLongPollEventSource(Dispatchers.IO, this, this.token.id, httpClient, timeout).produceEvents(scope)
 
 fun VkClient<UserMethod>.groupLongPollEventsAsAdmin(
     groupId: Long,
@@ -47,4 +51,4 @@ fun VkClient<UserMethod>.groupLongPollEventsAsAdmin(
     httpClient: TransportClient = this.httpClient,
     timeout: Int
 ): ReceiveChannel<CallbackEvent<*>> =
-    GroupLongPollEventSource(this, groupId, httpClient, timeout).produceEvents(scope)
+    GroupLongPollEventSource(Dispatchers.IO, this, groupId, httpClient, timeout).produceEvents(scope)
