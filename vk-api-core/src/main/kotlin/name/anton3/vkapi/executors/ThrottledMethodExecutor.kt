@@ -9,10 +9,18 @@ class ThrottledMethodExecutor(
     private val base: MethodExecutor,
     rateLimit: Int,
     ratePeriod: Duration = Duration.ofSeconds(1L)
-) : MethodExecutor by base {
+) : MethodExecutor by base, AsyncCloseable {
 
     private val throttler = Throttler(rateLimit, ratePeriod)
 
     override suspend fun <T> invoke(method: VkMethod<T>): VkResponse<T> =
         throttler { base(method) }
+
+    override fun close() {
+        throttler.close()
+    }
+
+    override suspend fun join() {
+        throttler.join()
+    }
 }

@@ -94,6 +94,14 @@ val response: WallpostFull? = api.swallowing(WallGet(domain = "departureMsk"))
 println(response?.text)
 ```
 
+Так как запросы к ВК отправляются не сразу при поступлении, а с учётом лимитов,
+то при завершении работы хорошая идея — подождать, пока все запросы
+выполнятся:
+
+```kotlin
+clientFactory.closeAndJoin()
+```
+
 ## Структура библиотеки
 Библиотека разбита на следующие модули:
 

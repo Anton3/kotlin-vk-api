@@ -19,7 +19,7 @@ class BatchMethodExecutor(
     coroutineContext: CoroutineContext = Dispatchers.Default,
     flushDelay: Duration,
     private val token: Token<UserGroupMethod>
-) : MethodExecutor by base {
+) : MethodExecutor by base, AsyncCloseable {
 
     private val coroutineScope: CoroutineScope = CoroutineScope(coroutineContext)
 
@@ -41,6 +41,14 @@ class BatchMethodExecutor(
         } else {
             base(method)
         }
+    }
+
+    override fun close() {
+        batcher.close()
+    }
+
+    override suspend fun join() {
+        batcher.join()
     }
 
     companion object {
