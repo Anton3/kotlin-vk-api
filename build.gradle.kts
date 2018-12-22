@@ -12,7 +12,7 @@ buildscript {
 }
 
 plugins {
-    java
+    `java-library`
     kotlin("jvm") version "1.3.11"
 }
 
