@@ -41,24 +41,24 @@ class UserLongPollEventSource(
     }
 }
 
-fun VkClient<GroupMethod>.messageLongPollEvents(
-    scope: CoroutineScope,
-    httpClient: TransportClient = this.httpClient,
+fun CoroutineScope.messageLongPollEvents(
+    api: VkClient<GroupMethod>,
+    httpClient: TransportClient = api.httpClient,
     timeout: Int
 ): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, this, null, httpClient, timeout).produceEvents(scope)
+    UserLongPollEventSource(Dispatchers.IO, api, null, httpClient, timeout).produceEvents(this)
 
-fun VkClient<UserMethod>.messageLongPollEventsAsAdmin(
+fun CoroutineScope.messageLongPollEventsAsAdmin(
+    api: VkClient<UserMethod>,
     groupId: Long,
-    scope: CoroutineScope,
-    httpClient: TransportClient = this.httpClient,
+    httpClient: TransportClient = api.httpClient,
     timeout: Int
 ): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, this, groupId, httpClient, timeout).produceEvents(scope)
+    UserLongPollEventSource(Dispatchers.IO, api, groupId, httpClient, timeout).produceEvents(this)
 
-fun VkClient<UserMethod>.messageLongPollEventsForUser(
-    scope: CoroutineScope,
-    httpClient: TransportClient = this.httpClient,
+fun CoroutineScope.messageLongPollEventsForUser(
+    api: VkClient<UserMethod>,
+    httpClient: TransportClient = api.httpClient,
     timeout: Int
 ): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, this, null, httpClient, timeout).produceEvents(scope)
+    UserLongPollEventSource(Dispatchers.IO, api, null, httpClient, timeout).produceEvents(this)

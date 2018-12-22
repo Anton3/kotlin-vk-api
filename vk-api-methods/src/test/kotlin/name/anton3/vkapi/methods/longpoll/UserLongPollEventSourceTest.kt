@@ -10,7 +10,7 @@ class UserLongPollEventSourceTest {
     @Test
     @Ignore
     fun smokeTest1() = runBlocking {
-        val source = groupApi.messageLongPollEvents(this, timeout = timeout)
+        val source = messageLongPollEvents(groupApi, timeout = timeout)
 
         for (event in source) {
             println(event.toString())

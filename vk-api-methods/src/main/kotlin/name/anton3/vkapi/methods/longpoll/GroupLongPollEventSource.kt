@@ -38,17 +38,17 @@ class GroupLongPollEventSource(
     }
 }
 
-fun VkClient<GroupMethod>.groupLongPollEvents(
-    scope: CoroutineScope,
-    httpClient: TransportClient = this.httpClient,
+fun CoroutineScope.groupLongPollEvents(
+    api: VkClient<GroupMethod>,
+    httpClient: TransportClient = api.httpClient,
     timeout: Int
 ): ReceiveChannel<CallbackEvent<*>> =
-    GroupLongPollEventSource(Dispatchers.IO, this, this.token.id, httpClient, timeout).produceEvents(scope)
+    GroupLongPollEventSource(Dispatchers.IO, api, api.token.id, httpClient, timeout).produceEvents(this)
 
-fun VkClient<UserMethod>.groupLongPollEventsAsAdmin(
+fun CoroutineScope.groupLongPollEventsAsAdmin(
+    api: VkClient<UserMethod>,
     groupId: Long,
-    scope: CoroutineScope,
-    httpClient: TransportClient = this.httpClient,
+    httpClient: TransportClient = api.httpClient,
     timeout: Int
 ): ReceiveChannel<CallbackEvent<*>> =
-    GroupLongPollEventSource(Dispatchers.IO, this, groupId, httpClient, timeout).produceEvents(scope)
+    GroupLongPollEventSource(Dispatchers.IO, api, groupId, httpClient, timeout).produceEvents(this)
