@@ -41,7 +41,7 @@ val userAccessToken = readConfigParam("userAccessToken")
 val groupId = readConfigParam("groupId").toLong()
 val peerId = readConfigParam("peerId").toLong()
 
-const val timeOut = 95_000
+const val timeout = 95_000
 val httpClient = KtorTransportClient(HttpClient(Apache) {
     engine {
         socketTimeout = 95_000

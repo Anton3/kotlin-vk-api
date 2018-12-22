@@ -9,34 +9,28 @@ import name.anton3.vkapi.generated.photos.objects.Photo
 import name.anton3.vkapi.methods.callback.MessageNew
 import name.anton3.vkapi.utils.executor
 import name.anton3.vkapi.utils.groupApi
-import name.anton3.vkapi.utils.httpClient
 import name.anton3.vkapi.utils.peerId
+import name.anton3.vkapi.utils.timeout
 import org.junit.Assert.assertTrue
 import org.junit.Ignore
 import org.junit.Test
 
-class SimpleServerLongPollEventSourceTest {
+class GroupLongPollEventSourceTest {
     @Test
     @Ignore
     fun smokeTest1() = runBlocking {
-        val timeOut = 95
-        val source = SimpleServerLongPollEventSource(groupApi, httpClient, timeOut)
+        val source = groupApi.groupLongPollEvents(this, timeout = timeout)
 
-        while (true) {
-            val (next, events) = source.getEvents()
+        for (event in source) {
+            println(event.toString())
 
-            if (events.isNotEmpty()) {
-                println(next.dump())
-                println(events)
-                val first = events.first()
-                if (first is MessageNew) {
-                    println(first.attachment.peerId)
-                    println(first.attachment.fromId)
-                }
-
-                val result = groupApi(makeMessageToSend())
-                println(result)
+            if (event is MessageNew) {
+                println(event.attachment.peerId)
+                println(event.attachment.fromId)
             }
+
+            val result = groupApi(makeMessageToSend())
+            println(result)
         }
     }
 

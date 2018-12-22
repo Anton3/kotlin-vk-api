@@ -1,12 +1,16 @@
 package name.anton3.vkapi.methods.longpoll
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import name.anton3.vkapi.methods.callback.CallbackEvent
 import name.anton3.vkapi.methods.longpoll.events.LongPollEvent
 import name.anton3.vkapi.methods.longpoll.objects.LongPollFailure
 
-data class LongPollResponse(
+@JsonIgnoreProperties(ignoreUnknown = true)
+class LongPollResponse<EventType>(
     val failed: LongPollFailure? = null,
     val ts: Long? = null,
-    val updates: List<LongPollEvent> = emptyList(),
-    val minVersion: Int? = null,
-    val maxVersion: Int? = null
+    val updates: List<EventType> = emptyList()
 )
+
+typealias UserLongPollResponse = LongPollResponse<LongPollEvent>
+typealias GroupLongPollResponse = LongPollResponse<CallbackEvent<*>>
