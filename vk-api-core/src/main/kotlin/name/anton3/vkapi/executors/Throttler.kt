@@ -11,16 +11,16 @@ import java.util.concurrent.atomic.AtomicInteger
 
 class Throttler(private val rateLimit: Int, private val ratePeriod: Duration) : AsyncCloseable {
 
+    private val tickets: Channel<Instant> = Channel(rateLimit)
+    private val ticketsLeft: AtomicInteger = AtomicInteger(rateLimit)
+    private val isClosed: AtomicBoolean = AtomicBoolean(false)
+
     init {
         require(rateLimit > 0 && ratePeriod > Duration.ZERO)
 
         val now = Instant.now()
         repeat(rateLimit) { tickets.offer(now) }
     }
-
-    private val tickets: Channel<Instant> = Channel(rateLimit)
-    private val ticketsLeft: AtomicInteger = AtomicInteger(rateLimit)
-    private val isClosed: AtomicBoolean = AtomicBoolean(false)
 
     suspend operator fun <T> invoke(block: suspend () -> T): T {
         if (isClosed.get()) throw CancellationException("Closed Throttler")

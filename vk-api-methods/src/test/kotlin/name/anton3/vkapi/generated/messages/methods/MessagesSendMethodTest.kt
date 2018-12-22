@@ -13,7 +13,7 @@ class MessagesSendMethodTest {
         val result = groupApi(
             MessagesSend(
                 peerId = peerId,
-                groupId = groupId.toLong(),
+                groupId = groupId,
                 message = "test"
             )
         )

@@ -28,5 +28,5 @@ fun main(vararg args: String) {
 
     generator.resolveTypes()
 
-    generator.writeSourceTo(Paths.get("vk-api-generated/src/main/kotlin"))
+    generator.writeSourceTo(Paths.get("../vk-api-generated/src/main/kotlin"))
 }

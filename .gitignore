@@ -11,4 +11,5 @@
 build
 /gradle.properties
 
-log
+/generator/log
+/*/log
