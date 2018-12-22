@@ -24,6 +24,7 @@ subprojects {
         mavenCentral()
     }
 
+    apply(plugin = "java-library")
     apply(plugin = "kotlin")
     apply(plugin = "maven")
 

@@ -1,7 +1,3 @@
-plugins {
-    `java-library`
-}
-
 dependencies {
     // For executors
     val coroutinesVersion = "1.0.1"
