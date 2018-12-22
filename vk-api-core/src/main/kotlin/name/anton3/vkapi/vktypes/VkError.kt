@@ -1,7 +1,6 @@
 package name.anton3.vkapi.vktypes
 
 import com.fasterxml.jackson.databind.JsonNode
-import java.io.IOException
 
 data class VkError(
     val errorCode: Int,
@@ -11,5 +10,3 @@ data class VkError(
 ) {
     override fun toString(): String = "$errorCode: $errorMsg"
 }
-
-class VkApiException(val vkError: VkError) : IOException(vkError.toString())
