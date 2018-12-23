@@ -1,0 +1,268 @@
+{
+  "objects": {
+    "messages_conversation": {
+      "type": "object",
+      "description": "Object that describes dialog with user or community or group chat",
+      "properties": {
+        "peer": {
+          "type": "object",
+          "description": "information about location",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "destination ID"
+            },
+            "type": {
+              "type": "string",
+              "description": "conversation type",
+              "enum": [
+                "user",
+                "chat",
+                "group",
+                "email"
+              ]
+            },
+            "local_id": {
+              "type": "integer",
+              "description": "local destination ID. For conversations — id - 2000000000, for community — -id, for e-mail — -(id+2000000000)."
+            }
+          },
+          "required": [
+            "id",
+            "type",
+            "local_id"
+          ],
+          "additionalProperties": false
+        },
+        "in_read": {
+          "type": "integer",
+          "description": "ID of the last read incoming message."
+        },
+        "out_read": {
+          "type": "integer",
+          "description": "ID of the last read outcoming message."
+        },
+        "unread_count": {
+          "type": "integer",
+          "description": "number of unread messages."
+        },
+        "important": {
+          "type": "boolean",
+          "description": "true, if the conversation marked as important (only for community messages)."
+        },
+        "unanswered": {
+          "type": "boolean",
+          "description": "true, if the conversation marked as unanswered (only for community messages)."
+        },
+        "push_settings": {
+          "type": "object",
+          "description": "push-notifications settings",
+          "properties": {
+            "disabled_until": {
+              "type": "integer",
+              "description": "timestamp, to which notification are disables"
+            },
+            "disabled_forever": {
+              "type": "boolean",
+              "description": "true, if notifications are disabled totally"
+            },
+            "no_sound": {
+              "type": "boolean",
+              "description": "true, if notification alert sound is disabled"
+            }
+          },
+          "required": [
+            "disabled_until"
+          ],
+          "additionalProperties": false
+        },
+        "can_write": {
+          "type": "object",
+          "description": "information whether current user can send message to the conversation",
+          "properties": {
+            "allowed": {
+              "type": "boolean",
+              "description": "true, if the user can send message to the conversation"
+            },
+            "reason": {
+              "type": "integer",
+              "description": "error code for allowed = false",
+              "enum": [
+                18,
+                900,
+                901,
+                902,
+                915,
+                916,
+                917,
+                918,
+                203
+              ],
+              "enumNames": [
+                "user_deleted",
+                "user_is_blacklisted",
+                "user_blacklisted_community",
+                "user_blocked_messages",
+                "community_disabled_messages",
+                "community_blocked_messages",
+                "no_conversation_access",
+                "no_email_access",
+                "no_community_access"
+              ]
+            }
+          },
+          "required": [
+            "allowed"
+          ],
+          "additionalProperties": false
+        },
+        "chat_settings": {
+          "type": "object",
+          "description": "conversation settings",
+          "properties": {
+            "member_count": {
+              "type": "integer",
+              "description": "conversation members number"
+            },
+            "title": {
+              "type": "integer",
+              "description": "conversation title"
+            },
+            "pinned_message": {
+              "$ref": "#/objects/messages_pinned_message"
+            },
+            "state": {
+              "type": "string",
+              "description": "current user state",
+              "enum": [
+                "in",
+                "kicked",
+                "left"
+              ]
+            },
+            "photo": {
+              "type": "object",
+              "description": "conversation cover image",
+              "properties": {
+                "photo_50": {
+                  "type": "string",
+                  "description": "URL of conversation image with width size of 50 px"
+                },
+                "photo_100": {
+                  "type": "string",
+                  "description": "URL of conversation image with width size of 100 px"
+                },
+                "photo_200": {
+                  "type": "string",
+                  "description": "URL of conversation image with width size of 200 px"
+                }
+              },
+              "required": [
+                "photo_50",
+                "photo_100",
+                "photo_200"
+              ],
+              "additionalProperties": false
+            },
+            "active_ids": {
+              "type": "array",
+              "description": "IDs of the last users who wrote to the conversation",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "is_group_channel": {
+              "type": "boolean",
+              "description": "true, if this conversation is a community channel"
+            }
+          },
+          "required": [
+            "member_count",
+            "title",
+            "state",
+            "photo",
+            "active_ids",
+            "is_group_channel"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "peer",
+        "in_read",
+        "out_read",
+        "unread_count",
+        "push_settings",
+        "can_write",
+        "chat_settings"
+      ],
+      "additionalProperties": false
+    },
+    "messages_pinned_message": {
+      "type": "object",
+      "description": "Pinned message information",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "message id, or 0 if the current user history does not contain it"
+        },
+        "date": {
+          "type": "integer",
+          "description": "sending time in Unixtime"
+        },
+        "from_id": {
+          "type": "integer",
+          "description": "sender id"
+        },
+        "text": {
+          "type": "string",
+          "description": "message text"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/messages_message_attachment"
+          }
+        },
+        "geo": {
+          "type": "object",
+          "description": "Place information",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "place type"
+            },
+            "coordinates": {
+              "type": "string",
+              "description": "place coordinates"
+            },
+            "place": {
+              "$ref": "#/definitions/base_place"
+            }
+          },
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "additionalProperties": false
+        },
+        "fwd_messages": {
+          "description": "Forwarded messages",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/messages_message"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "date",
+        "from_id",
+        "text",
+        "attachments",
+        "geo"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
