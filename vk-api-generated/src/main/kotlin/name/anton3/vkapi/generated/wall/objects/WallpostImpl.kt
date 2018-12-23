@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.wall.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.common.objects.Geo
 import name.anton3.vkapi.vktypes.VkDate
 
@@ -19,6 +20,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property geo No description
  * @property postSource No description
  */
+@JsonDeserialize(`as` = Void::class)
 data class WallpostImpl(
     override val id: Long? = null,
     override val fromId: Long? = null,

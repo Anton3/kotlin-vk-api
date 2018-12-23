@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.market.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -15,6 +16,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property thumbPhoto URL of the preview image
  * @property availability No description
  */
+@JsonDeserialize(`as` = Void::class)
 data class MarketItemImpl(
     override val id: Long,
     override val ownerId: Long,

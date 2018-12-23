@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.newsfeed.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+
 /**
  * No description
  *
@@ -8,6 +10,7 @@ package name.anton3.vkapi.generated.newsfeed.objects
  * @property id List ID
  * @property title List title
  */
+@JsonDeserialize(`as` = Void::class)
 data class ListFull(
     val noReposts: Boolean? = null,
     val sourceIds: List<Long>? = null,

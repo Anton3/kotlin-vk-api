@@ -45,11 +45,12 @@ data class ObjectType(
         }
         val parentClause = parents.isNotEmpty()(" : $parentTypes")
 
-        val implClause = if (implementation != null) {
+        val implType = implementation ?: TypeId("java.lang.Void").takeIf { parents.isNotEmpty() }
+        val implClause = implType?.let {
             sourceWriter.importType(TypeId("com.fasterxml.jackson.databind.annotation.JsonDeserialize"))
-            sourceWriter.importType(implementation)
-            "@JsonDeserialize(`as` = ${implementation.name}::class)\n"
-        } else ""
+            sourceWriter.importType(implType)
+            "@JsonDeserialize(`as` = ${implType.name}::class)\n"
+        }.orEmpty()
 
         val packageClause = sourceWriter.packageClause(typeId)
         val importClause = sourceWriter.importClause(typeId)

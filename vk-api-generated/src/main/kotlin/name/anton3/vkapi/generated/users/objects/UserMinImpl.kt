@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.users.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+
 /**
  * No description
  *
@@ -9,6 +11,7 @@ package name.anton3.vkapi.generated.users.objects
  * @property deactivated Returns if a profile is deleted or blocked
  * @property hidden Returns if a profile is hidden.
  */
+@JsonDeserialize(`as` = Void::class)
 data class UserMinImpl(
     override val id: Long,
     override val firstName: String,

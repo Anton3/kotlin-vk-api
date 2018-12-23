@@ -16,6 +16,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property important Is it an important message
  * @property payload No description
  * @property text Message text
+ * @property body Old-style text field
  * @property attachments No description
  * @property geo No description
  * @property action No description
@@ -31,7 +32,8 @@ data class Message(
     val randomId: Long? = null,
     val important: Boolean? = null,
     val payload: String? = null,
-    val text: String,
+    val text: String? = null,
+    val body: String? = null,
     val attachments: List<MessageAttachment>? = null,
     val geo: Geo? = null,
     val action: MessageAction? = null,

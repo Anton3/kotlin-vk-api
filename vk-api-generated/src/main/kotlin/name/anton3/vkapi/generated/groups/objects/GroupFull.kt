@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.groups.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.common.objects.Country
 import name.anton3.vkapi.generated.common.objects.Object
 import name.anton3.vkapi.generated.newsfeed.objects.GetSuggestedSourcesResponse
@@ -54,6 +55,7 @@ import name.anton3.vkapi.generated.users.objects.GetSubscriptionsExtendedRespons
  * @property photo100 URL of square photo of the community with 100 pixels in width
  * @property photo200 URL of square photo of the community with 200 pixels in width
  */
+@JsonDeserialize(`as` = Void::class)
 data class GroupFull(
     val market: MarketInfo? = null,
     val memberStatus: GroupFullMemberStatus? = null,

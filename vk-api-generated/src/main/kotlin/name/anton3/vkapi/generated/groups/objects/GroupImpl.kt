@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.groups.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+
 /**
  * No description
  *
@@ -16,6 +18,7 @@ package name.anton3.vkapi.generated.groups.objects
  * @property photo100 URL of square photo of the community with 100 pixels in width
  * @property photo200 URL of square photo of the community with 200 pixels in width
  */
+@JsonDeserialize(`as` = Void::class)
 data class GroupImpl(
     override val id: Long? = null,
     override val name: String? = null,

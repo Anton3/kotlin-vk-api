@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.common.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.messages.objects.MessageAttachment
 import name.anton3.vkapi.generated.wall.objects.CommentAttachment
 
@@ -11,6 +12,7 @@ import name.anton3.vkapi.generated.wall.objects.CommentAttachment
  * @property images No description
  * @property imagesWithBackground No description
  */
+@JsonDeserialize(`as` = Void::class)
 data class Sticker(
     val stickerId: Long? = null,
     val productId: Long? = null,

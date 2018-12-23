@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.users.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.common.objects.Sex
 import name.anton3.vkapi.generated.newsfeed.objects.GetSuggestedSourcesResponse
 
@@ -20,6 +21,7 @@ import name.anton3.vkapi.generated.newsfeed.objects.GetSuggestedSourcesResponse
  * @property deactivated Returns if a profile is deleted or blocked
  * @property hidden Returns if a profile is hidden.
  */
+@JsonDeserialize(`as` = Void::class)
 data class UserXtrType(
     val type: UserType? = null,
     override val sex: Sex? = null,

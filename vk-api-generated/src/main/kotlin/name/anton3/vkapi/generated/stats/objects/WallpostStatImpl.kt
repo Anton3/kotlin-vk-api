@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.stats.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+
 /**
  * No description
  *
@@ -12,6 +14,7 @@ package name.anton3.vkapi.generated.stats.objects
  * @property hide Hidings number
  * @property unsubscribe Unsubscribed members
  */
+@JsonDeserialize(`as` = Void::class)
 data class WallpostStatImpl(
     override val reachSubscribers: Long? = null,
     override val reachTotal: Long? = null,

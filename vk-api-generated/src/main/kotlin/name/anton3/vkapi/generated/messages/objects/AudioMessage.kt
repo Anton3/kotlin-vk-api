@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.messages.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+
 /**
  * No description
  *
@@ -11,6 +13,7 @@ package name.anton3.vkapi.generated.messages.objects
  * @property accessKey No description
  * @property waveform No description
  */
+@JsonDeserialize(`as` = Void::class)
 data class AudioMessage(
     val id: Long,
     val ownerId: Long,

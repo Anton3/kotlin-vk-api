@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.common.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.messages.objects.MessageAttachment
 import name.anton3.vkapi.generated.photos.objects.Photo
 import name.anton3.vkapi.generated.wall.objects.CommentAttachment
@@ -22,6 +23,7 @@ import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
  * @property rating No description
  * @property application No description
  */
+@JsonDeserialize(`as` = Void::class)
 data class Link(
     val target: LinkTarget? = null,
     val isExternal: Boolean? = null,

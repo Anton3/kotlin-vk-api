@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.stories.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.video.objects.Video
 import name.anton3.vkapi.generated.video.objects.VideoFiles
 import name.anton3.vkapi.vktypes.PropertyExists
@@ -37,6 +38,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property width Video width
  * @property height Video height
  */
+@JsonDeserialize(`as` = Void::class)
 data class StoryVideo(
     val firstFrame800: String? = null,
     val firstFrame320: String? = null,

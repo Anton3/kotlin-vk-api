@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.audio.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.messages.objects.MessageAttachment
 import name.anton3.vkapi.generated.wall.objects.CommentAttachment
 import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
@@ -22,6 +23,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property url URL of mp3 file
  * @property accessKey Access key for the audio
  */
+@JsonDeserialize(`as` = Void::class)
 data class AudioFull(
     val duration: Long,
     val date: VkDate,

@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.photos.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -19,6 +20,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property long Longitude
  * @property accessKey Access key for the photo
  */
+@JsonDeserialize(`as` = Void::class)
 data class PhotoImpl(
     override val id: Long,
     override val albumId: Long,

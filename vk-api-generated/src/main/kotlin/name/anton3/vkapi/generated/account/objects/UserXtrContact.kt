@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.account.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.audio.objects.AudioFull
 import name.anton3.vkapi.generated.common.objects.Country
 import name.anton3.vkapi.generated.common.objects.Object
@@ -109,6 +110,7 @@ import name.anton3.vkapi.vktypes.VkBirthDate
  * @property deactivated Returns if a profile is deleted or blocked
  * @property hidden Returns if a profile is hidden.
  */
+@JsonDeserialize(`as` = Void::class)
 data class UserXtrContact(
     val contact: String? = null,
     val requestSent: Long? = null,

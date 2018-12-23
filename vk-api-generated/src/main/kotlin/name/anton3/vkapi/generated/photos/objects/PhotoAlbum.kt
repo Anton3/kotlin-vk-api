@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.photos.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
 
 /**
@@ -14,6 +15,7 @@ import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
  * @property updated Date when the album has been updated last time in Unixtime
  * @property size Photos number
  */
+@JsonDeserialize(`as` = Void::class)
 data class PhotoAlbum(
     val id: Long,
     val thumb: Photo? = null,

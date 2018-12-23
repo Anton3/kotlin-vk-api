@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.wall.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -13,6 +14,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property title Note title
  * @property viewUrl URL of the page with note preview
  */
+@JsonDeserialize(`as` = Void::class)
 data class AttachedNote(
     val id: Long,
     val ownerId: Long,

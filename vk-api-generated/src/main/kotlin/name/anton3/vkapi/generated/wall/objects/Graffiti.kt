@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.wall.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+
 /**
  * No description
  *
@@ -8,6 +10,7 @@ package name.anton3.vkapi.generated.wall.objects
  * @property photo200 URL of the preview image with 200 px in width
  * @property photo586 URL of the preview image with 586 px in width
  */
+@JsonDeserialize(`as` = Void::class)
 data class Graffiti(
     val id: Long? = null,
     val ownerId: Long? = null,

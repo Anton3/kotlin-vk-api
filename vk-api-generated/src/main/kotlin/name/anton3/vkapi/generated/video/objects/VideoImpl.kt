@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.video.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.vktypes.PropertyExists
 import name.anton3.vkapi.vktypes.VkDate
 
@@ -30,6 +31,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property width Video width
  * @property height Video height
  */
+@JsonDeserialize(`as` = Void::class)
 data class VideoImpl(
     override val id: Long? = null,
     override val ownerId: Long? = null,

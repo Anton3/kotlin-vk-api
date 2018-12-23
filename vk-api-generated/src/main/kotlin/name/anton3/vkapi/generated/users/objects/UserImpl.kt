@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.users.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.common.objects.Sex
 
 /**
@@ -18,6 +19,7 @@ import name.anton3.vkapi.generated.common.objects.Sex
  * @property deactivated Returns if a profile is deleted or blocked
  * @property hidden Returns if a profile is hidden.
  */
+@JsonDeserialize(`as` = Void::class)
 data class UserImpl(
     override val sex: Sex? = null,
     override val screenName: String? = null,

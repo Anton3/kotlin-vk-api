@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.ads.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.vktypes.PropertyExists
 
 /**
@@ -36,6 +37,7 @@ import name.anton3.vkapi.vktypes.PropertyExists
  * @property uniFrom University graduation year from
  * @property uniTo University graduation year to
  */
+@JsonDeserialize(`as` = Void::class)
 data class CriteriaImpl(
     override val sex: CriteriaSex? = null,
     override val ageFrom: Long? = null,

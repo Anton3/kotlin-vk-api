@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.board.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.wall.objects.CommentAttachment
 import name.anton3.vkapi.vktypes.VkDate
 
@@ -13,6 +14,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property attachments No description
  * @property realOffset Real position of the comment
  */
+@JsonDeserialize(`as` = Void::class)
 data class TopicCommentImpl(
     override val id: Long,
     override val fromId: Long,

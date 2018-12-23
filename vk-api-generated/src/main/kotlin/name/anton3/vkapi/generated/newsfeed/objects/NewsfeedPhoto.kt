@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.newsfeed.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.common.objects.Likes
 import name.anton3.vkapi.generated.common.objects.ObjectCount
 import name.anton3.vkapi.generated.photos.objects.Image
@@ -27,6 +28,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property long Longitude
  * @property accessKey Access key for the photo
  */
+@JsonDeserialize(`as` = Void::class)
 data class NewsfeedPhoto(
     val likes: Likes? = null,
     val comments: ObjectCount? = null,

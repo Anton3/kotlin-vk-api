@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.notifications.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.board.objects.Topic
 import name.anton3.vkapi.generated.photos.objects.Photo
 import name.anton3.vkapi.generated.video.objects.Video
@@ -18,6 +19,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property post No description
  * @property topic No description
  */
+@JsonDeserialize(`as` = Void::class)
 data class NotificationsComment(
     val id: Long? = null,
     val ownerId: Long? = null,

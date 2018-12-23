@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="warn">
     <Properties>
-        <Property name="log-path">generator/log</Property>
+        <Property name="log-path">log</Property>
     </Properties>
     <Appenders>
         <Console name="console-log" target="SYSTEM_OUT">

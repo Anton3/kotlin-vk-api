@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.wall.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.common.objects.CommentsInfo
 import name.anton3.vkapi.generated.common.objects.Geo
 import name.anton3.vkapi.generated.common.objects.LikesInfo
@@ -28,6 +29,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property copyPostId Source post ID
  * @property copyText Repost comment
  */
+@JsonDeserialize(`as` = Void::class)
 data class WallpostAttached(
     val id: Long? = null,
     val fromId: Long? = null,

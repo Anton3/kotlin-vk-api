@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.polls.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
 
 /**
@@ -14,6 +15,7 @@ import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
  * @property answers No description
  * @property anonymous Information whether the pole is anonymous
  */
+@JsonDeserialize(`as` = Void::class)
 data class Poll(
     val id: Long,
     val ownerId: Long,

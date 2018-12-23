@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.market.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.common.objects.Likes
 import name.anton3.vkapi.generated.photos.objects.Photo
 import name.anton3.vkapi.vktypes.VkDate
@@ -22,6 +23,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property thumbPhoto URL of the preview image
  * @property availability No description
  */
+@JsonDeserialize(`as` = Void::class)
 data class MarketItemFull(
     val photos: List<Photo>? = null,
     val canComment: Boolean? = null,

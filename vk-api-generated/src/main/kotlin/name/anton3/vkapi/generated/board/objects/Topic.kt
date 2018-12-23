@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.board.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.notifications.objects.NotificationParent
 
 /**
@@ -15,6 +16,7 @@ import name.anton3.vkapi.generated.notifications.objects.NotificationParent
  * @property isFixed Information whether the topic is fixed
  * @property comments Comments number
  */
+@JsonDeserialize(`as` = Void::class)
 data class Topic(
     val id: Long? = null,
     val title: String? = null,

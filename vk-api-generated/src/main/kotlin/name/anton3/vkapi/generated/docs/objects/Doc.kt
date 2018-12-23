@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.docs.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.messages.objects.MessageAttachment
 import name.anton3.vkapi.generated.wall.objects.CommentAttachment
 import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
@@ -19,6 +20,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property preview No description
  * @property accessKey Access key for the document
  */
+@JsonDeserialize(`as` = Void::class)
 data class Doc(
     val id: Long,
     val ownerId: Long,
