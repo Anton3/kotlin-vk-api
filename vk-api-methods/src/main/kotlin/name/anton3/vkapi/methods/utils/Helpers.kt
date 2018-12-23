@@ -20,8 +20,7 @@ private fun attachmentId(type: String, id: Long, ownerId: Long, accessKey: Strin
 fun Photo.toAttachmentId() = attachmentId("photo", id, ownerId, accessKey)
 fun Photo.fullId() = attachmentId("", id, ownerId, accessKey)
 
-fun VideoFull.toAttachmentId() =
-    attachmentId("video", id!!, ownerId!!, accessKey)
+fun VideoFull.toAttachmentId() = attachmentId("video", id!!, ownerId!!, accessKey)
 fun VideoFull.fullId() = attachmentId("", id!!, ownerId!!, accessKey)
 
 fun Video.toAttachmentId() = attachmentId("video", id!!, ownerId!!, accessKey)

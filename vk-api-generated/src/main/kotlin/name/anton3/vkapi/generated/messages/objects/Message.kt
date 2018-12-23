@@ -15,8 +15,8 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property randomId ID used for sending messages. It returned only for outgoing messages
  * @property important Is it an important message
  * @property payload No description
+ * @property fwdMessages Forwarded messages
  * @property text Message text
- * @property body Old-style text field
  * @property attachments No description
  * @property geo No description
  * @property action No description
@@ -32,8 +32,8 @@ data class Message(
     val randomId: Long? = null,
     val important: Boolean? = null,
     val payload: String? = null,
-    val text: String? = null,
-    val body: String? = null,
+    val fwdMessages: List<Message>? = null,
+    val text: String,
     val attachments: List<MessageAttachment>? = null,
     val geo: Geo? = null,
     val action: MessageAction? = null,

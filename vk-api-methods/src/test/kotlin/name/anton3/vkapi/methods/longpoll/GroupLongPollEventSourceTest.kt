@@ -34,9 +34,9 @@ class GroupLongPollEventSourceTest {
         }
     }
 
-    private fun makeMessageToSend(): MessagesSend {
-        val keyboard = KeyboardImpl(
-            oneTime = false,
+    private fun makeKeyboard(): Keyboard {
+        return KeyboardImpl(
+            oneTime = true,
             buttons = listOf(
                 listOf(
                     KeyboardButton(
@@ -50,12 +50,14 @@ class GroupLongPollEventSourceTest {
                 )
             )
         )
+    }
 
+    private fun makeMessageToSend(): MessagesSend {
         return MessagesSend(
             peerId = peerId,
             message = "test",
             randomId = System.currentTimeMillis(),
-            keyboard = keyboard
+            keyboard = makeKeyboard()
         )
     }
 

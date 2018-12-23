@@ -83,7 +83,7 @@
           "description": "Forwarded messages",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/messages_fwd_message"
+            "$ref": "#/definitions/messages_message"
           }
         },
         "text": {

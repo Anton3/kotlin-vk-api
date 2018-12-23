@@ -2,6 +2,7 @@ package name.anton3.vkapi.generated.messages.methods
 
 import kotlinx.coroutines.runBlocking
 import name.anton3.vkapi.client.invoke
+import name.anton3.vkapi.generated.messages.objects.KeyboardImpl
 import name.anton3.vkapi.utils.groupApi
 import name.anton3.vkapi.utils.groupId
 import name.anton3.vkapi.utils.peerId
@@ -27,5 +28,20 @@ class MessagesSendMethodTest {
             message = "test"
         )
         repeat(20) { println(groupApi(method)) }
+    }
+
+    @Test
+    fun smoke3() = runBlocking {
+        val result = groupApi(makeMessageToSend())
+        println(result)
+    }
+
+    private fun makeMessageToSend(): MessagesSend {
+        return MessagesSend(
+            peerId = peerId,
+            message = "Keyboard reset",
+            randomId = System.currentTimeMillis(),
+            keyboard = KeyboardImpl(oneTime = true, buttons = listOf())
+        )
     }
 }
