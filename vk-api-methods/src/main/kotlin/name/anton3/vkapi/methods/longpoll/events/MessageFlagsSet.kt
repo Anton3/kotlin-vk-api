@@ -9,11 +9,11 @@ data class MessageFlagsSet(
     override val eventType: Int,
     val messageId: Long,
     val mask: Flags,
-    @field:JsonIgnore val extra: ExtraFields
+    @field:JsonIgnore val extra: ExtraFields?
 ) : LongPollEvent(eventType) {
 
     // Workaround for broken Jackson @JsonUnwrapped
     @get:JsonUnwrapped
-    private val _extra: ExtraFields
+    private val _extra: ExtraFields?
         get() = extra
 }
