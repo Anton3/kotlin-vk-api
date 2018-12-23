@@ -13,7 +13,7 @@ package name.anton3.vkapi.generated.messages.objects
  */
 data class ConversationChatSettings(
     val memberCount: Long,
-    val title: Long,
+    val title: String,
     val pinnedMessage: PinnedMessage? = null,
     val state: ConversationChatSettingsState,
     val photo: ConversationChatSettingsPhoto,
