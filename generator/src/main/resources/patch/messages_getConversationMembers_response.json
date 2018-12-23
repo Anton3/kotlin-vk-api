@@ -34,9 +34,7 @@
           },
           "required": [
             "count",
-            "items",
-            "profiles",
-            "groups"
+            "items"
           ],
           "additionalProperties": false
         }
@@ -75,7 +73,8 @@
         "join_date",
         "is_admin",
         "can_kick"
-      ]
+      ],
+      "additionalProperties": false
     }
   }
 }

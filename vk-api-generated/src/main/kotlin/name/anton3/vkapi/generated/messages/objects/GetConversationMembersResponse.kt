@@ -14,6 +14,6 @@ import name.anton3.vkapi.generated.users.objects.User
 data class GetConversationMembersResponse(
     val count: Long,
     val items: List<ConversationMember>,
-    val profiles: List<User>,
-    val groups: List<Group>
+    val profiles: List<User>? = null,
+    val groups: List<Group>? = null
 )
