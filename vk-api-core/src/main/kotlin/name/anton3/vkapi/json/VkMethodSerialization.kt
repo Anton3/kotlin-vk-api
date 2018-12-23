@@ -2,6 +2,7 @@ package name.anton3.vkapi.json
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.ObjectNode
 import com.fasterxml.jackson.databind.node.ValueNode
 import name.anton3.vkapi.core.VkMethod
@@ -33,6 +34,7 @@ private fun restorePropertyName(name: String): String = when (name) {
 
 private fun propertyValueToParameter(value: JsonNode, objectMapper: ObjectMapper): String = when (value) {
     is ValueNode -> value.asText()
+    is ArrayNode -> value.elements().asSequence().joinToString(",") { it.asText() }
     else -> objectMapper.writeValueAsString(value)
 }
 
