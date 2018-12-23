@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.*
 import name.anton3.vkapi.generated.audio.objects.AudioFull
 import name.anton3.vkapi.generated.board.objects.TopicComment
 import name.anton3.vkapi.generated.common.objects.LikesInfo
+import name.anton3.vkapi.generated.messages.objects.Message
 import name.anton3.vkapi.generated.photos.objects.Photo
 import name.anton3.vkapi.generated.video.objects.VideoImpl
 import name.anton3.vkapi.generated.wall.objects.CommentAttachment
@@ -85,27 +86,14 @@ sealed class CallbackEvent<T>(
 class NotImplemented(groupId: Long, @JsonProperty("object") attachment: Map<String, Any>) :
     CallbackEvent<Map<String, Any>>(groupId, attachment)
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-data class MiniMessage(
-    val id: Long,
-    val body: String,
-    val title: String,
-    val date: VkDate,
-    val out: Boolean?,
-    val userId: Long?,
-    val fromId: Long?,
-    val readState: Boolean?,
-    val randomId: Long?
-)
+class MessageNew(groupId: Long, @JsonProperty("object") attachment: Message) :
+    CallbackEvent<Message>(groupId, attachment)
 
-class MessageNew(groupId: Long, @JsonProperty("object") attachment: MiniMessage) :
-    CallbackEvent<MiniMessage>(groupId, attachment)
+class MessageReply(groupId: Long, @JsonProperty("object") attachment: Message) :
+    CallbackEvent<Message>(groupId, attachment)
 
-class MessageReply(groupId: Long, @JsonProperty("object") attachment: MiniMessage) :
-    CallbackEvent<MiniMessage>(groupId, attachment)
-
-class MessageEdit(groupId: Long, @JsonProperty("object") attachment: MiniMessage) :
-    CallbackEvent<MiniMessage>(groupId, attachment)
+class MessageEdit(groupId: Long, @JsonProperty("object") attachment: Message) :
+    CallbackEvent<Message>(groupId, attachment)
 
 data class ToggleMessageAllowance(val userId: Long, val key: String?)
 

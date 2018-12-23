@@ -25,7 +25,8 @@ class GroupLongPollEventSourceTest {
             println(event.toString())
 
             if (event is MessageNew) {
-                println(event.attachment.fromId ?: event.attachment.userId)
+                println(event.attachment.peerId)
+                println(event.attachment.fromId)
 
                 val result = groupApi(makeMessageToSend())
                 println(result)
