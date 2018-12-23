@@ -1,4 +1,8 @@
 package name.anton3.vkapi.methods.longpoll.events
 
-// TODO
-class ConversationFlagsUnset(override val eventType: Int) : LongPollEvent(eventType)
+import name.anton3.vkapi.methods.longpoll.objects.Flags
+
+data class ConversationFlagsUnset(
+    override val eventType: Int,
+    val mask: Flags
+) : LongPollEvent(eventType)

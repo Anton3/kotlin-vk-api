@@ -1,8 +1,5 @@
 package name.anton3.vkapi.methods.longpoll.objects
 
-import com.fasterxml.jackson.annotation.JsonFormat
-
-@JsonFormat(shape = JsonFormat.Shape.NUMBER_INT)
 data class Flags(val flagsMask: Long) {
 
     fun has(flag: Long): Boolean {

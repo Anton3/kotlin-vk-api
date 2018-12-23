@@ -1,4 +1,7 @@
 package name.anton3.vkapi.methods.longpoll.events
 
-// TODO
-data class UserTypingInChat(override val eventType: Int) : LongPollEvent(eventType)
+data class UserTypingInChat(
+    override val eventType: Int,
+    val userId: Long,
+    val chatId: Long
+) : LongPollEvent(eventType)

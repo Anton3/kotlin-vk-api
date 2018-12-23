@@ -5,11 +5,10 @@ import com.fasterxml.jackson.databind.module.SimpleModule
 import name.anton3.vkapi.generated.messages.objects.MessageAttachment
 import name.anton3.vkapi.generated.wall.objects.CommentAttachment
 import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
-import name.anton3.vkapi.json.deser.ExtraFieldsDeserializer
-import name.anton3.vkapi.json.deser.VkCommentAttachmentsDeserializer
-import name.anton3.vkapi.json.deser.VkMessageAttachmentsDeserializer
-import name.anton3.vkapi.json.deser.VkWallPostAttachmentsDeserializer
+import name.anton3.vkapi.json.deser.*
+import name.anton3.vkapi.methods.longpoll.events.LongPollEvent
 import name.anton3.vkapi.methods.longpoll.objects.ExtraFields
+import name.anton3.vkapi.methods.longpoll.objects.Flags
 
 class VkMainSerialModule : SimpleModule() {
     init {
@@ -18,6 +17,8 @@ class VkMainSerialModule : SimpleModule() {
         addDeserializer(MessageAttachment::class.java, VkMessageAttachmentsDeserializer)
 
         addDeserializer(ExtraFields::class.java, ExtraFieldsDeserializer)
+        addDeserializer(LongPollEvent::class.java, LongPollEventDeserializer)
+        addDeserializer(Flags::class.java, FlagsDeserializer)
     }
 }
 

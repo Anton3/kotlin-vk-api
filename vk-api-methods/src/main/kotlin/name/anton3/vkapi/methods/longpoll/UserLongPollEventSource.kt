@@ -1,5 +1,6 @@
 package name.anton3.vkapi.methods.longpoll
 
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.ReceiveChannel
@@ -23,11 +24,11 @@ class UserLongPollEventSource(
 ) : AbstractLongPollEventSource<LongPollEvent, LongpollParams>(
     longPollContext = longPollContext,
     objectMapper = api.objectMapper,
-    httpClient = httpClient
+    httpClient = httpClient,
+    responseType = jacksonTypeRef()
 ) {
     override suspend fun iteratorToUrl(iterator: LongpollParams): String {
-        return "https://${iterator.server}?act=a_check&key=${iterator.key}" +
-                "&ts=${iterator.ts}&wait=$timeout&mode=${2 + 8 + 64}&version=3"
+        return "https://${iterator.server}?act=a_check&key=${iterator.key}&ts=${iterator.ts}&wait=$timeout&mode=${2 + 8 + 64}&version=3"
     }
 
     override suspend fun iteratorWithTs(iterator: LongpollParams, ts: Long): LongpollParams {

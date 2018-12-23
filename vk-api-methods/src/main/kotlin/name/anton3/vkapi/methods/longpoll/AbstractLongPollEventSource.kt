@@ -2,7 +2,6 @@ package name.anton3.vkapi.methods.longpoll
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.produce
@@ -21,7 +20,7 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
     private val longPollContext: CoroutineContext,
     protected val objectMapper: ObjectMapper,
     protected val httpClient: TransportClient,
-    private val responseType: TypeReference<LongPollResponse<EventType>> = jacksonTypeRef()
+    private val responseType: TypeReference<LongPollResponse<EventType>>
 ) {
     abstract suspend fun iteratorToUrl(iterator: IteratorType): String
 

@@ -25,12 +25,11 @@ class GroupLongPollEventSourceTest {
             println(event.toString())
 
             if (event is MessageNew) {
-                println(event.attachment.peerId)
-                println(event.attachment.fromId)
-            }
+                println(event.attachment.fromId ?: event.attachment.userId)
 
-            val result = groupApi(makeMessageToSend())
-            println(result)
+                val result = groupApi(makeMessageToSend())
+                println(result)
+            }
         }
     }
 
@@ -46,7 +45,6 @@ class GroupLongPollEventSourceTest {
                             payload = "\"some_payload\"",
                             label = "Label"
                         )
-
                     )
                 )
             )
@@ -54,7 +52,7 @@ class GroupLongPollEventSourceTest {
 
         return MessagesSend(
             peerId = peerId,
-            message = "msg${System.currentTimeMillis()}",
+            message = "test",
             randomId = System.currentTimeMillis(),
             keyboard = keyboard
         )
