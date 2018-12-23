@@ -1,10 +1,12 @@
 package name.anton3.vkapi.client
 
 import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.HttpRequestData
 import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.forms.append
 import io.ktor.client.request.forms.formData
 import io.ktor.client.request.request
+import io.ktor.client.request.takeFrom
 import io.ktor.client.response.HttpResponse
 import io.ktor.client.response.readBytes
 import io.ktor.http.ContentType
@@ -15,8 +17,6 @@ import io.ktor.http.content.OutgoingContent
 import io.ktor.http.content.TextContent
 import io.ktor.http.takeFrom
 import io.ktor.util.toMap
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import mu.KotlinLogging
 import name.anton3.vkapi.core.RequestContent
 import name.anton3.vkapi.core.TransportClient
@@ -34,9 +34,7 @@ class KtorTransportClient(
         private val log = KotlinLogging.logger {}
     }
 
-    private val dispatcher = Dispatchers.Default
-
-    private suspend fun callWithStatusCheck(request: HttpRequestBuilder): TransportClient.Response {
+    private suspend fun callWithStatusCheck(request: HttpRequestData): TransportClient.Response {
         lateinit var response: TransportClient.Response
 
         repeat(retryAttemptsInvalidStatusCount) {
@@ -51,22 +49,18 @@ class KtorTransportClient(
         return status == HttpStatusCode.BadGateway || status == HttpStatusCode.GatewayTimeout
     }
 
-    private suspend fun call(request: HttpRequestBuilder): TransportClient.Response {
+    private suspend fun call(request: HttpRequestData): TransportClient.Response {
         lateinit var exception: IOException
 
         repeat(retryAttemptsNetworkErrorCount) {
             val startTime = Instant.now()!!
 
             try {
-                val response = withContext(dispatcher) {
-                    client.request<HttpResponse>(request)
-                }
+                val response = client.request<HttpResponse>(HttpRequestBuilder().takeFrom(request))
 
                 response.requestTime
 
-                val result = withContext(dispatcher) {
-                    response.readBytes()
-                }
+                val result = response.readBytes()
 
                 val endTime = Instant.now()!!
                 val resultTime = Duration.between(startTime, endTime)!!
@@ -75,12 +69,11 @@ class KtorTransportClient(
                 return toVkResponse(response, result)
 
             } catch (e: IOException) {
-
                 val endTime = Instant.now()!!
                 val resultTime = Duration.between(startTime, endTime)
 
                 logRequest(request, null, null, resultTime)
-                log.warn("Network troubles", e)
+                log.warn("Network troubles")
                 exception = e
             }
         }
@@ -88,13 +81,13 @@ class KtorTransportClient(
         throw exception
     }
 
-    private fun logRequest(request: HttpRequestBuilder, response: HttpResponse?, result: ByteArray?, resultTime: Duration?) {
+    private fun logRequest(request: HttpRequestData, response: HttpResponse?, result: ByteArray?, resultTime: Duration?) {
         if (log.isDebugEnabled) {
             log.info(
                 """
-                URI: ${request.url.buildString()}
+                URI: ${request.url}
                 Method: ${request.method}
-                Request headers: ${request.headers.build().entries().joinToString { "${it.key}=${it.value}" }}
+                Request headers: ${request.headers.entries().joinToString { "${it.key}=${it.value}" }}
                 Response time: ${resultTime ?: "-"}
                 Status: ${response?.status ?: "-"}
                 Response headers: ${response?.headers?.toMap()?.toString() ?: "-"}
@@ -102,7 +95,7 @@ class KtorTransportClient(
                 """.trimIndent()
             )
         } else if (log.isInfoEnabled) {
-            log.info("Request: ${request.url.buildString()}\t\tTime=$resultTime")
+            log.info("Request: ${request.url}\t\tTime=$resultTime")
         }
     }
 
@@ -126,7 +119,7 @@ class KtorTransportClient(
                 method = HttpMethod.parse(request.method.toString())
                 url.takeFrom(request.url)
                 body = convertBody(request.content)
-            }
+            }.build()
         )
     }
 }
