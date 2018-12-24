@@ -231,7 +231,8 @@ enum class JoinType(@JsonValue override val value: String) : Value<String> {
     REQUEST("request");
 
     companion object {
-        @JvmStatic @JsonCreator(mode=JsonCreator.Mode.DELEGATING)
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): JoinType = parseEnum(value)
     }
 }

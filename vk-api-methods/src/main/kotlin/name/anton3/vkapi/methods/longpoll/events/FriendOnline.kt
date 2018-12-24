@@ -13,7 +13,7 @@ data class FriendOnline(
 
     companion object {
         @JvmStatic
-        @JsonCreator(mode=JsonCreator.Mode.DELEGATING)
+        @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
         fun parse(eventType: Int, userId: Long, extra: Long, timestamp: VkDate): FriendOnline {
             return FriendOnline(
                 eventType,

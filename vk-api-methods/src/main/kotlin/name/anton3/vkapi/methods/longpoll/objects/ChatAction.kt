@@ -13,7 +13,8 @@ enum class ChatAction(@JsonValue override val value: String) : Value<String> {
     USER_KICKED("chat_kick_user");
 
     companion object {
-        @JvmStatic @JsonCreator(mode=JsonCreator.Mode.DELEGATING)
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): ChatAction = parseEnum(value)
     }
 }

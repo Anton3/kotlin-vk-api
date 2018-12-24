@@ -16,7 +16,8 @@ enum class ConversationEditType(@get:JsonValue override val value: Int) : Value<
     ADMIN_REMOVED(9);
 
     companion object {
-        @JvmStatic @JsonCreator(mode=JsonCreator.Mode.DELEGATING)
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: Int): ConversationEditType = parseEnum(value)
     }
 }

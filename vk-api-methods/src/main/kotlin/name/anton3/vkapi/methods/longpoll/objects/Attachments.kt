@@ -15,7 +15,7 @@ data class Attachments(
 ) {
     companion object {
         @JvmStatic
-        @JsonCreator(mode=JsonCreator.Mode.DELEGATING)
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(node: ObjectNode): Attachments {
             val geo = node.has("geo")
             val emoji = node.has("emoji")
