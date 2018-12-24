@@ -191,12 +191,9 @@
         "peer",
         "in_read",
         "out_read",
-        "unread_count",
-        "push_settings",
-        "can_write",
-        "chat_settings"
+        "can_write"
       ],
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "messages_pinned_message": {
       "type": "object",

@@ -17,10 +17,10 @@ data class Conversation(
     val peer: ConversationPeer,
     val inRead: Long,
     val outRead: Long,
-    val unreadCount: Long,
+    val unreadCount: Long? = null,
     val important: Boolean? = null,
     val unanswered: Boolean? = null,
-    val pushSettings: ConversationPushSettings,
+    val pushSettings: ConversationPushSettings? = null,
     val canWrite: ConversationCanWrite,
-    val chatSettings: ConversationChatSettings
+    val chatSettings: ConversationChatSettings? = null
 )
