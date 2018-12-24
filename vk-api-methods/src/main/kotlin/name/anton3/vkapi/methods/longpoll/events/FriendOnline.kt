@@ -18,7 +18,7 @@ data class FriendOnline(
             return FriendOnline(
                 eventType,
                 -userId,
-                FriendPlatform.values().first { it.value == extra and 0xFF },
+                (extra and 0xFF).takeIf { it != 0L }?.let { FriendPlatform.parse(it) },
                 timestamp
             )
         }
