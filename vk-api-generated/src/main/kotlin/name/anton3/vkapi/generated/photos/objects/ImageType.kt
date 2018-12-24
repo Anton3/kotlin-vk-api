@@ -16,7 +16,8 @@ enum class ImageType(@JsonValue override val value: String) : Value<String> {
     Y("y"),
     Z("z"),
     W("w"),
-    K("k");
+    K("k"),
+    L("l");
 
     companion object {
         @JvmStatic
