@@ -11,7 +11,8 @@ enum class Period(@JsonValue override val value: String) : Value<String> {
     OVERALL("overall");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): Period = parseEnum(value)
     }
 }

@@ -19,7 +19,8 @@ enum class ImageType(@JsonValue override val value: String) : Value<String> {
     K("k");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): ImageType = parseEnum(value)
     }
 }

@@ -17,7 +17,8 @@ enum class IsLikedType(@JsonValue override val value: String) : Value<String> {
     TOPIC_COMMENT("topic_comment");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): IsLikedType = parseEnum(value)
     }
 }

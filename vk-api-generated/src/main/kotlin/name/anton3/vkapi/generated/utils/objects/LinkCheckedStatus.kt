@@ -11,7 +11,8 @@ enum class LinkCheckedStatus(@JsonValue override val value: String) : Value<Stri
     PROCESSING("processing");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): LinkCheckedStatus = parseEnum(value)
     }
 }

@@ -11,7 +11,8 @@ enum class SaveProfileInfoBdateVisibility(@JsonValue override val value: String)
     HIDE("0");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): SaveProfileInfoBdateVisibility = parseEnum(value)
     }
 }

@@ -9,7 +9,8 @@ enum class ConfirmResponseSuccess(@JsonValue override val value: String) : Value
     OK("1");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): ConfirmResponseSuccess = parseEnum(value)
     }
 }

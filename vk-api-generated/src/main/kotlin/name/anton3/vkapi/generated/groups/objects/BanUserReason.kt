@@ -13,7 +13,8 @@ enum class BanUserReason(@JsonValue override val value: String) : Value<String> 
     IRRELEVANT_MESSAGES("4");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): BanUserReason = parseEnum(value)
     }
 }

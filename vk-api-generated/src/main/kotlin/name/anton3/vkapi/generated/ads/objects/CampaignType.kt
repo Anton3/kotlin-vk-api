@@ -12,7 +12,8 @@ enum class CampaignType(@JsonValue override val value: String) : Value<String> {
     PROMOTED_POSTS("promoted_posts");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): CampaignType = parseEnum(value)
     }
 }

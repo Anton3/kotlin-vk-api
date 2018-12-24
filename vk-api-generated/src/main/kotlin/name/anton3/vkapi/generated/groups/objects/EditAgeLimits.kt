@@ -11,7 +11,8 @@ enum class EditAgeLimits(@JsonValue override val value: String) : Value<String> 
     PLUS_18("3");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): EditAgeLimits = parseEnum(value)
     }
 }

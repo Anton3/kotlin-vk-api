@@ -12,7 +12,8 @@ enum class ServerInfoStatus(@JsonValue override val value: String) : Value<Strin
     OK("ok");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): ServerInfoStatus = parseEnum(value)
     }
 }

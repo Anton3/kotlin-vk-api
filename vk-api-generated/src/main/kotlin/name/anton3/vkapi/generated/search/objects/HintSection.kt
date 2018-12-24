@@ -15,7 +15,8 @@ enum class HintSection(@JsonValue override val value: String) : Value<String> {
     MUTUAL_FRIENDS("mutual_friends");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): HintSection = parseEnum(value)
     }
 }

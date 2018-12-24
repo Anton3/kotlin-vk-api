@@ -12,7 +12,8 @@ enum class KeyboardButtonColor(@JsonValue override val value: String) : Value<St
     PRIMARY("primary");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): KeyboardButtonColor = parseEnum(value)
     }
 }

@@ -11,7 +11,8 @@ enum class GroupFullAgeLimits(@JsonValue override val value: String) : Value<Str
     OVER_18("3");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GroupFullAgeLimits = parseEnum(value)
     }
 }

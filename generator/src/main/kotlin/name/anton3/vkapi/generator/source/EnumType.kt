@@ -28,7 +28,8 @@ data class EnumType(val items: List<Item>) : TypeDefinition {
             |    $itemsClause;
             |
             |    companion object {
-            |        @JvmStatic @JsonCreator
+            |        @JvmStatic
+            |        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
             |        fun parse(value: String): ${typeId.name} = parseEnum(value)
             |    }
             |}

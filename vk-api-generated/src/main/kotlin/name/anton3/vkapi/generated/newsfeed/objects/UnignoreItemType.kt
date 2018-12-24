@@ -13,7 +13,8 @@ enum class UnignoreItemType(@JsonValue override val value: String) : Value<Strin
     AUDIO("audio");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): UnignoreItemType = parseEnum(value)
     }
 }

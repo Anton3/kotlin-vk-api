@@ -18,7 +18,8 @@ enum class PhotoSizesType(@JsonValue override val value: String) : Value<String>
     W("w");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): PhotoSizesType = parseEnum(value)
     }
 }

@@ -11,7 +11,8 @@ enum class SearchSort(@JsonValue override val value: String) : Value<String> {
     DATE_ADDED("0");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): SearchSort = parseEnum(value)
     }
 }

@@ -10,7 +10,8 @@ enum class GetRequestsSort(@JsonValue override val value: String) : Value<String
     MUTUAL("1");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetRequestsSort = parseEnum(value)
     }
 }

@@ -15,7 +15,8 @@ enum class LookupContactsService(@JsonValue override val value: String) : Value<
     GOOGLE("google");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): LookupContactsService = parseEnum(value)
     }
 }

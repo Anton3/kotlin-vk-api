@@ -11,7 +11,8 @@ enum class OnlineStatusType(@JsonValue override val value: String) : Value<Strin
     ANSWER_MARK("answer_mark");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): OnlineStatusType = parseEnum(value)
     }
 }

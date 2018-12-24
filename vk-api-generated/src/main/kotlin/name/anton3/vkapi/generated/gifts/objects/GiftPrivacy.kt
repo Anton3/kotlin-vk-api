@@ -11,7 +11,8 @@ enum class GiftPrivacy(@JsonValue override val value: String) : Value<String> {
     NAME_AND_MESSAGE_FOR_RECIPIENT_ONLY("2");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GiftPrivacy = parseEnum(value)
     }
 }

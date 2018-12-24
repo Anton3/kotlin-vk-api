@@ -10,7 +10,8 @@ enum class CheckedResult(@JsonValue override val value: String) : Value<String> 
     FALSE("false");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): CheckedResult = parseEnum(value)
     }
 }

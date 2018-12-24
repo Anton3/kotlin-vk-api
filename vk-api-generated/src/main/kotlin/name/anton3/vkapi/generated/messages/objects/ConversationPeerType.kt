@@ -12,7 +12,8 @@ enum class ConversationPeerType(@JsonValue override val value: String) : Value<S
     EMAIL("email");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): ConversationPeerType = parseEnum(value)
     }
 }

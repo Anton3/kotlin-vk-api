@@ -17,7 +17,8 @@ enum class NewsfeedItemType(@JsonValue override val value: String) : Value<Strin
     TOPIC("topic");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): NewsfeedItemType = parseEnum(value)
     }
 }

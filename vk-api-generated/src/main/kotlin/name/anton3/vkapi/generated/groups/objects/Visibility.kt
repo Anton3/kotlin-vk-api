@@ -11,7 +11,8 @@ enum class Visibility(@JsonValue override val value: String) : Value<String> {
     PRIVATE("2");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): Visibility = parseEnum(value)
     }
 }

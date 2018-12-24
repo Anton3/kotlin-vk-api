@@ -11,7 +11,8 @@ enum class OwnSex(@JsonValue override val value: String) : Value<String> {
     MALE("2");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): OwnSex = parseEnum(value)
     }
 }

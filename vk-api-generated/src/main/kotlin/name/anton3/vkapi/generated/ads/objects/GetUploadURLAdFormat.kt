@@ -13,7 +13,8 @@ enum class GetUploadURLAdFormat(@JsonValue override val value: String) : Value<S
     SPECIAL_APP_FORMAT("7");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetUploadURLAdFormat = parseEnum(value)
     }
 }

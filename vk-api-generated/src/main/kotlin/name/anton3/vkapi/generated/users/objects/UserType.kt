@@ -9,7 +9,8 @@ enum class UserType(@JsonValue override val value: String) : Value<String> {
     PROFILE("profile");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): UserType = parseEnum(value)
     }
 }

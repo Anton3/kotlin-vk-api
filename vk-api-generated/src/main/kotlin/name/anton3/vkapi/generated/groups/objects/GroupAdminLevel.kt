@@ -11,7 +11,8 @@ enum class GroupAdminLevel(@JsonValue override val value: String) : Value<String
     ADMINISTRATOR("3");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GroupAdminLevel = parseEnum(value)
     }
 }

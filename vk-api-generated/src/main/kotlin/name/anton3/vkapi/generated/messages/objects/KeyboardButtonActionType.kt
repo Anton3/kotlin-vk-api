@@ -10,7 +10,8 @@ enum class KeyboardButtonActionType(@JsonValue override val value: String) : Val
     START("start");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): KeyboardButtonActionType = parseEnum(value)
     }
 }

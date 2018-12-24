@@ -12,7 +12,8 @@ enum class CatBlockView(@JsonValue override val value: String) : Value<String> {
     VERTICAL_COMPACT("vertical_compact");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): CatBlockView = parseEnum(value)
     }
 }

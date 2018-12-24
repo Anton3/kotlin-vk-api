@@ -12,7 +12,8 @@ enum class EditWall(@JsonValue override val value: String) : Value<String> {
     CLOSED("3");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): EditWall = parseEnum(value)
     }
 }

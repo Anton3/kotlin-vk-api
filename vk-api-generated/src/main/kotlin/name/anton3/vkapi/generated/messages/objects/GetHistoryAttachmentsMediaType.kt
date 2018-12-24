@@ -16,7 +16,8 @@ enum class GetHistoryAttachmentsMediaType(@JsonValue override val value: String)
     SHARE("share");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetHistoryAttachmentsMediaType = parseEnum(value)
     }
 }

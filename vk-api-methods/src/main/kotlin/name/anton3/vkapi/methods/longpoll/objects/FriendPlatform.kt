@@ -15,7 +15,7 @@ enum class FriendPlatform(@JsonValue override val value: Long) : Value<Long> {
     WEB(7);
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic @JsonCreator(mode=JsonCreator.Mode.DELEGATING)
         fun parse(value: Long): FriendPlatform = parseEnum(value)
     }
 }

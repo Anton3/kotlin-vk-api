@@ -11,7 +11,8 @@ enum class GetAlbumId(@JsonValue override val value: String) : Value<String> {
     SAVED("saved");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetAlbumId = parseEnum(value)
     }
 }

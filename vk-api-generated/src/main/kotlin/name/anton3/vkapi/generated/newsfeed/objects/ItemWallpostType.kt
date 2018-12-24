@@ -11,7 +11,8 @@ enum class ItemWallpostType(@JsonValue override val value: String) : Value<Strin
     REPLY("reply");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): ItemWallpostType = parseEnum(value)
     }
 }

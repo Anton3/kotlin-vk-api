@@ -13,7 +13,8 @@ enum class PostType(@JsonValue override val value: String) : Value<String> {
     SUGGEST("suggest");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): PostType = parseEnum(value)
     }
 }

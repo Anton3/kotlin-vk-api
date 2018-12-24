@@ -16,7 +16,8 @@ enum class GetTargetingStatsAdFormat(@JsonValue override val value: String) : Va
     APP_BOARD("10");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetTargetingStatsAdFormat = parseEnum(value)
     }
 }

@@ -11,7 +11,8 @@ enum class ConversationChatSettingsState(@JsonValue override val value: String) 
     LEFT("left");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): ConversationChatSettingsState = parseEnum(value)
     }
 }

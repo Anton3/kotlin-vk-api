@@ -11,7 +11,8 @@ enum class GetSuggestionsLang(@JsonValue override val value: String) : Value<Str
     ENGLISH("en");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetSuggestionsLang = parseEnum(value)
     }
 }

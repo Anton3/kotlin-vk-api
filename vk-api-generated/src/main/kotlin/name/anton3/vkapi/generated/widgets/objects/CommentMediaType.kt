@@ -11,7 +11,8 @@ enum class CommentMediaType(@JsonValue override val value: String) : Value<Strin
     VIDEO("video");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): CommentMediaType = parseEnum(value)
     }
 }

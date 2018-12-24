@@ -10,7 +10,8 @@ enum class OfflineReason(@JsonValue override val value: Int) : Value<Int> {
     TIMEOUT(1);
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: Int): OfflineReason = parseEnum(value)
     }
 }

@@ -13,7 +13,8 @@ enum class GetFilter(@JsonValue override val value: String) : Value<String> {
     SUGGESTS("suggests");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetFilter = parseEnum(value)
     }
 }

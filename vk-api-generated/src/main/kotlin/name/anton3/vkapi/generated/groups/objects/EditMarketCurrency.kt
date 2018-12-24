@@ -13,7 +13,8 @@ enum class EditMarketCurrency(@JsonValue override val value: String) : Value<Str
     US_DOLLARS("840");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): EditMarketCurrency = parseEnum(value)
     }
 }

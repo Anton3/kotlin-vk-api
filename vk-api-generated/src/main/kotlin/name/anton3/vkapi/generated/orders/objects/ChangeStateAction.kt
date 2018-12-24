@@ -11,7 +11,8 @@ enum class ChangeStateAction(@JsonValue override val value: String) : Value<Stri
     REFUND("refund");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): ChangeStateAction = parseEnum(value)
     }
 }

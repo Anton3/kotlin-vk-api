@@ -10,7 +10,8 @@ enum class SearchRev(@JsonValue override val value: String) : Value<String> {
     REVERSE("1");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): SearchRev = parseEnum(value)
     }
 }

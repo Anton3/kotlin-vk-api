@@ -11,7 +11,8 @@ enum class GetTopicsPreview(@JsonValue override val value: String) : Value<Strin
     NONE("0");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetTopicsPreview = parseEnum(value)
     }
 }

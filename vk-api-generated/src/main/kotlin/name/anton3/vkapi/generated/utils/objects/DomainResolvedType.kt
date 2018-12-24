@@ -12,7 +12,8 @@ enum class DomainResolvedType(@JsonValue override val value: String) : Value<Str
     PAGE("page");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): DomainResolvedType = parseEnum(value)
     }
 }

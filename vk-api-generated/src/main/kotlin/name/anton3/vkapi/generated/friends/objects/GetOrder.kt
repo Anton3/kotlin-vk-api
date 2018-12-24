@@ -10,7 +10,8 @@ enum class GetOrder(@JsonValue override val value: String) : Value<String> {
     HINTS("hints");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetOrder = parseEnum(value)
     }
 }

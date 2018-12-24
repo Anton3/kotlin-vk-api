@@ -12,7 +12,8 @@ enum class PushParamsMode(@JsonValue override val value: String) : Value<String>
     NO_TEXT("no_text");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): PushParamsMode = parseEnum(value)
     }
 }

@@ -10,7 +10,8 @@ enum class AccountType(@JsonValue override val value: String) : Value<String> {
     AGENCY("agency");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): AccountType = parseEnum(value)
     }
 }

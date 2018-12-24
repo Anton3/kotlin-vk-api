@@ -18,7 +18,8 @@ enum class Type(@JsonValue override val value: String) : Value<String> {
     SITEPAGE("sitepage");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): Type = parseEnum(value)
     }
 }

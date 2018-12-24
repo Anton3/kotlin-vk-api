@@ -10,7 +10,8 @@ enum class GetMembersFilter(@JsonValue override val value: String) : Value<Strin
     UNSURE("unsure");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetMembersFilter = parseEnum(value)
     }
 }

@@ -17,7 +17,8 @@ enum class ConversationCanWriteReason(@JsonValue override val value: String) : V
     NO_COMMUNITY_ACCESS("203");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): ConversationCanWriteReason = parseEnum(value)
     }
 }

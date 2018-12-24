@@ -10,7 +10,8 @@ enum class GetHistoryRev(@JsonValue override val value: String) : Value<String> 
     REVERSE_CHRONOLOGICAL("0");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetHistoryRev = parseEnum(value)
     }
 }

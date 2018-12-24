@@ -10,7 +10,8 @@ enum class GetListFilter(@JsonValue override val value: String) : Value<String> 
     COPIES("copies");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetListFilter = parseEnum(value)
     }
 }

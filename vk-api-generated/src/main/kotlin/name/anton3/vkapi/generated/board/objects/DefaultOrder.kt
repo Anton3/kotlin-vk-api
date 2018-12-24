@@ -12,7 +12,8 @@ enum class DefaultOrder(@JsonValue override val value: String) : Value<String> {
     ASC_CREATED("-2");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): DefaultOrder = parseEnum(value)
     }
 }

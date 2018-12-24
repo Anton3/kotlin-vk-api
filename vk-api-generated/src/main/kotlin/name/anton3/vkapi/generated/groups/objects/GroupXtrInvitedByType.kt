@@ -11,7 +11,8 @@ enum class GroupXtrInvitedByType(@JsonValue override val value: String) : Value<
     EVENT("event");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GroupXtrInvitedByType = parseEnum(value)
     }
 }

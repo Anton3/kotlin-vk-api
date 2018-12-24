@@ -11,7 +11,8 @@ enum class StoryStatsState(@JsonValue override val value: String) : Value<String
     HIDDEN("hidden");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): StoryStatsState = parseEnum(value)
     }
 }

@@ -11,7 +11,8 @@ enum class EditManagerRole(@JsonValue override val value: String) : Value<String
     ADMINISTRATOR("administrator");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): EditManagerRole = parseEnum(value)
     }
 }

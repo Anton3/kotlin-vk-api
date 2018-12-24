@@ -10,7 +10,8 @@ enum class OwnerXtrBanInfoType(@JsonValue override val value: String) : Value<St
     PROFILE("profile");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): OwnerXtrBanInfoType = parseEnum(value)
     }
 }

@@ -12,7 +12,8 @@ enum class GetConversationsFilter(@JsonValue override val value: String) : Value
     UNANSWERED("unanswered");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetConversationsFilter = parseEnum(value)
     }
 }

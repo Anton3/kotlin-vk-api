@@ -11,7 +11,8 @@ enum class GroupXtrInvitedByAdminLevel(@JsonValue override val value: String) : 
     ADMINISTRATOR("3");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GroupXtrInvitedByAdminLevel = parseEnum(value)
     }
 }

@@ -13,7 +13,8 @@ enum class GetCatalogSort(@JsonValue override val value: String) : Value<String>
     POPULAR_WEEK("popular_week");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetCatalogSort = parseEnum(value)
     }
 }

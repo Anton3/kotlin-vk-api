@@ -13,7 +13,8 @@ enum class GetLinkStatsInterval(@JsonValue override val value: String) : Value<S
     FOREVER("forever");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetLinkStatsInterval = parseEnum(value)
     }
 }

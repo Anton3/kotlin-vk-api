@@ -13,7 +13,8 @@ enum class GetTopicsOrder(@JsonValue override val value: String) : Value<String>
     AS_BY_ADMINISTRATOR("0");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetTopicsOrder = parseEnum(value)
     }
 }

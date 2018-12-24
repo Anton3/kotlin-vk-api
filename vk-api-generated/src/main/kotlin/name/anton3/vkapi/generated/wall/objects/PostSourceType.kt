@@ -13,7 +13,8 @@ enum class PostSourceType(@JsonValue override val value: String) : Value<String>
     SMS("sms");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): PostSourceType = parseEnum(value)
     }
 }

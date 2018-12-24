@@ -11,7 +11,8 @@ enum class AccessRole(@JsonValue override val value: String) : Value<String> {
     REPORTS("reports");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): AccessRole = parseEnum(value)
     }
 }

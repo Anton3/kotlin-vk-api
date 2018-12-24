@@ -11,7 +11,8 @@ enum class AppLeaderboardType(@JsonValue override val value: String) : Value<Str
     POINTS("2");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): AppLeaderboardType = parseEnum(value)
     }
 }

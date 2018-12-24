@@ -13,7 +13,8 @@ enum class CheckLinkLinkType(@JsonValue override val value: String) : Value<Stri
     SITE("site");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): CheckLinkLinkType = parseEnum(value)
     }
 }

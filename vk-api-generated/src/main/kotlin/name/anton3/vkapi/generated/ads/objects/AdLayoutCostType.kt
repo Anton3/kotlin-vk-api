@@ -10,7 +10,8 @@ enum class AdLayoutCostType(@JsonValue override val value: String) : Value<Strin
     PER_IMPRESSIONS("1");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): AdLayoutCostType = parseEnum(value)
     }
 }

@@ -12,7 +12,8 @@ enum class AppType(@JsonValue override val value: String) : Value<String> {
     STANDALONE("standalone");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): AppType = parseEnum(value)
     }
 }

@@ -9,7 +9,8 @@ enum class LinkButtonActionType(@JsonValue override val value: String) : Value<S
     OPEN_URL("open_url");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): LinkButtonActionType = parseEnum(value)
     }
 }

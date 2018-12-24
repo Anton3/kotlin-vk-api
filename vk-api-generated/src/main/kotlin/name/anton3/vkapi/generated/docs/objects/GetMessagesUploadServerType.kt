@@ -10,7 +10,8 @@ enum class GetMessagesUploadServerType(@JsonValue override val value: String) : 
     AUDIO_MESSAGE("audio_message");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetMessagesUploadServerType = parseEnum(value)
     }
 }

@@ -9,7 +9,8 @@ enum class DeleteResponseInRequestDeleted(@JsonValue override val value: String)
     OK("1");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): DeleteResponseInRequestDeleted = parseEnum(value)
     }
 }

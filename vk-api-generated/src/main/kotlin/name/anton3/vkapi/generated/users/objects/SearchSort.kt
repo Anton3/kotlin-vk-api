@@ -10,7 +10,8 @@ enum class SearchSort(@JsonValue override val value: String) : Value<String> {
     BY_DATE_REGISTERED("1");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): SearchSort = parseEnum(value)
     }
 }

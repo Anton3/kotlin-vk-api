@@ -12,7 +12,8 @@ enum class ReportType(@JsonValue override val value: String) : Value<String> {
     ADVERTISMENT("advertisment");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): ReportType = parseEnum(value)
     }
 }

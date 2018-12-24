@@ -13,7 +13,8 @@ enum class GetUsersStatus(@JsonValue override val value: String) : Value<String>
     FINISH_IN_TEST_MODE("4");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetUsersStatus = parseEnum(value)
     }
 }

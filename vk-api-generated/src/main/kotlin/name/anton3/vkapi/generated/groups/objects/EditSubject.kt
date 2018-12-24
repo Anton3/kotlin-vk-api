@@ -50,7 +50,8 @@ enum class EditSubject(@JsonValue override val value: String) : Value<String> {
     DESIGN_AND_GRAPHICS("42");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): EditSubject = parseEnum(value)
     }
 }

@@ -10,7 +10,8 @@ enum class GetCommentsSort(@JsonValue override val value: String) : Value<String
     NEW_TO_OLD("desc");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetCommentsSort = parseEnum(value)
     }
 }

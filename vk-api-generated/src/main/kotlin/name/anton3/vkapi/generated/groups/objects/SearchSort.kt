@@ -14,7 +14,8 @@ enum class SearchSort(@JsonValue override val value: String) : Value<String> {
     ENTRIES("5");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): SearchSort = parseEnum(value)
     }
 }

@@ -13,7 +13,8 @@ enum class NameRequestStatus(@JsonValue override val value: String) : Value<Stri
     WAS_DECLINED("was_declined");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): NameRequestStatus = parseEnum(value)
     }
 }

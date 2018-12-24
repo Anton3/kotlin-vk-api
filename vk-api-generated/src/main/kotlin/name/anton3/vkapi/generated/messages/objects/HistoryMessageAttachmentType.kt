@@ -16,7 +16,8 @@ enum class HistoryMessageAttachmentType(@JsonValue override val value: String) :
     SHARE("share");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): HistoryMessageAttachmentType = parseEnum(value)
     }
 }

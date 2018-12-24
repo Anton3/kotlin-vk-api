@@ -11,7 +11,8 @@ enum class CreateType(@JsonValue override val value: String) : Value<String> {
     EVENT("event");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): CreateType = parseEnum(value)
     }
 }

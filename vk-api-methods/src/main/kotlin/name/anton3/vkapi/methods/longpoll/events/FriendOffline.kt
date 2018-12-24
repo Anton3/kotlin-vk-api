@@ -13,7 +13,7 @@ data class FriendOffline(
 
     companion object {
         @JvmStatic
-        @JsonCreator
+        @JsonCreator(mode=JsonCreator.Mode.DELEGATING)
         fun parse(eventType: Int, userId: Long, reason: OfflineReason, timestamp: VkDate): FriendOffline {
             return FriendOffline(eventType, -userId, reason, timestamp)
         }

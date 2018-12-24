@@ -13,7 +13,8 @@ enum class GetNearbyRadius(@JsonValue override val value: String) : Value<String
     _150_KM_("4");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetNearbyRadius = parseEnum(value)
     }
 }

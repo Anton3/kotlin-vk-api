@@ -16,7 +16,8 @@ enum class SearchStatus(@JsonValue override val value: String) : Value<String> {
     IN_LOVE("7");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): SearchStatus = parseEnum(value)
     }
 }

@@ -12,7 +12,8 @@ enum class TargSuggestionsSchoolsType(@JsonValue override val value: String) : V
     CHAIR("chair");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): TargSuggestionsSchoolsType = parseEnum(value)
     }
 }

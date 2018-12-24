@@ -11,7 +11,8 @@ enum class MarketItemAvailability(@JsonValue override val value: String) : Value
     UNAVAILABLE("2");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): MarketItemAvailability = parseEnum(value)
     }
 }

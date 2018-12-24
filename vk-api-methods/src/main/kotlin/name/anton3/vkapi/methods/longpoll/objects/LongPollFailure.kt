@@ -12,7 +12,7 @@ enum class LongPollFailure(@get:JsonValue override val value: Int) : Value<Int> 
     INVALID_VERSION(4);
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic @JsonCreator(mode=JsonCreator.Mode.DELEGATING)
         fun parse(value: Int): LongPollFailure = parseEnum(value)
     }
 }

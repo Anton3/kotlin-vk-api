@@ -12,7 +12,8 @@ enum class GetMembersSort(@JsonValue override val value: String) : Value<String>
     TIME_DESC("time_desc");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetMembersSort = parseEnum(value)
     }
 }

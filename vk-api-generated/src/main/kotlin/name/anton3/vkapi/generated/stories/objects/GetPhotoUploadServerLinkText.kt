@@ -28,7 +28,8 @@ enum class GetPhotoUploadServerLinkText(@JsonValue override val value: String) :
     READ("read");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetPhotoUploadServerLinkText = parseEnum(value)
     }
 }

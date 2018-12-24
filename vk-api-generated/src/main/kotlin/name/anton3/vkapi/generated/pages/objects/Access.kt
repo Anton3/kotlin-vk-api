@@ -11,7 +11,8 @@ enum class Access(@JsonValue override val value: String) : Value<String> {
     ALL("2");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): Access = parseEnum(value)
     }
 }

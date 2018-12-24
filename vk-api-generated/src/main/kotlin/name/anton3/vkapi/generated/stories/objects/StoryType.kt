@@ -10,7 +10,8 @@ enum class StoryType(@JsonValue override val value: String) : Value<String> {
     VIDEO("video");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): StoryType = parseEnum(value)
     }
 }

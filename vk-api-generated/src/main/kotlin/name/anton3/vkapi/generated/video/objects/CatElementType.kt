@@ -10,7 +10,8 @@ enum class CatElementType(@JsonValue override val value: String) : Value<String>
     ALBUM("album");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): CatElementType = parseEnum(value)
     }
 }

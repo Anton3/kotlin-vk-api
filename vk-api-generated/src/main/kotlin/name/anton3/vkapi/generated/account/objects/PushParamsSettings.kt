@@ -11,7 +11,8 @@ enum class PushParamsSettings(@JsonValue override val value: String) : Value<Str
     FR_OF_FR("fr_of_fr");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): PushParamsSettings = parseEnum(value)
     }
 }

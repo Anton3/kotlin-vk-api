@@ -10,7 +10,8 @@ enum class OnOffOptions(@JsonValue override val value: String) : Value<String> {
     OFF("off");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): OnOffOptions = parseEnum(value)
     }
 }

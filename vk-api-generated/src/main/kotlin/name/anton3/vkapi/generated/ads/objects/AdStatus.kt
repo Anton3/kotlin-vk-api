@@ -11,7 +11,8 @@ enum class AdStatus(@JsonValue override val value: String) : Value<String> {
     DELETED("2");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): AdStatus = parseEnum(value)
     }
 }

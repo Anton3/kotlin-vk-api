@@ -12,7 +12,8 @@ enum class GetPlatform(@JsonValue override val value: String) : Value<String> {
     WINPHONE("winphone");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetPlatform = parseEnum(value)
     }
 }

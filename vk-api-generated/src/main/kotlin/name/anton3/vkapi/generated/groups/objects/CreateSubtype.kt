@@ -12,7 +12,8 @@ enum class CreateSubtype(@JsonValue override val value: String) : Value<String> 
     PRODUCT_OR_ART("4");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): CreateSubtype = parseEnum(value)
     }
 }

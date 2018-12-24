@@ -11,7 +11,8 @@ enum class GetLeaderboardType(@JsonValue override val value: String) : Value<Str
     SCORE("score");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetLeaderboardType = parseEnum(value)
     }
 }

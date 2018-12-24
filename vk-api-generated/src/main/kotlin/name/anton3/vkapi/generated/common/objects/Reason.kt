@@ -15,7 +15,8 @@ enum class Reason(@JsonValue override val value: String) : Value<String> {
     INSULT_ABUSE("6");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): Reason = parseEnum(value)
     }
 }

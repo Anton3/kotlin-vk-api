@@ -12,7 +12,8 @@ enum class MemberRoleStatus(@JsonValue override val value: String) : Value<Strin
     CREATOR("creator");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): MemberRoleStatus = parseEnum(value)
     }
 }

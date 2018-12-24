@@ -14,7 +14,8 @@ enum class NameCase(@JsonValue override val value: String) : Value<String> {
     PREPOSITIONAL("abl");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): NameCase = parseEnum(value)
     }
 }

@@ -17,7 +17,8 @@ enum class MessageActionStatus(@JsonValue override val value: String) : Value<St
     CHAT_INVITE_USER_BY_LINK("chat_invite_user_by_link");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): MessageActionStatus = parseEnum(value)
     }
 }

@@ -14,7 +14,8 @@ enum class GroupFullMemberStatus(@JsonValue override val value: String) : Value<
     INVITED("5");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GroupFullMemberStatus = parseEnum(value)
     }
 }

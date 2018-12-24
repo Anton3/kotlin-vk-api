@@ -11,7 +11,8 @@ enum class PrivacySettings(@JsonValue override val value: String) : Value<String
     EVERYONE("2");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): PrivacySettings = parseEnum(value)
     }
 }

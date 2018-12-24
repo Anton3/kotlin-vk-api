@@ -11,7 +11,8 @@ enum class SectionAccess(@JsonValue override val value: String) : Value<String> 
     LIMITED("2");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): SectionAccess = parseEnum(value)
     }
 }

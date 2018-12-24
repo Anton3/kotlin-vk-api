@@ -16,7 +16,8 @@ enum class SaveProfileInfoRelation(@JsonValue override val value: String) : Valu
     NOT_SPECIFIED("0");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): SaveProfileInfoRelation = parseEnum(value)
     }
 }

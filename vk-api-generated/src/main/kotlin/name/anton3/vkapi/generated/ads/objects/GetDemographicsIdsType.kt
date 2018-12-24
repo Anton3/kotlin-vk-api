@@ -10,7 +10,8 @@ enum class GetDemographicsIdsType(@JsonValue override val value: String) : Value
     CAMPAIGN("campaign");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): GetDemographicsIdsType = parseEnum(value)
     }
 }

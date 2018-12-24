@@ -13,7 +13,8 @@ enum class BanInfoReason(@JsonValue override val value: String) : Value<String> 
     FLOOD("4");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): BanInfoReason = parseEnum(value)
     }
 }

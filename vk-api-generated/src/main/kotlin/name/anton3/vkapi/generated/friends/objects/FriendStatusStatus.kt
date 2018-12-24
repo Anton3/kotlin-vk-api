@@ -12,7 +12,8 @@ enum class FriendStatusStatus(@JsonValue override val value: String) : Value<Str
     IS_FRIEND("3");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): FriendStatusStatus = parseEnum(value)
     }
 }

@@ -13,7 +13,8 @@ enum class UnsubscribeType(@JsonValue override val value: String) : Value<String
     VIDEO("video");
 
     companion object {
-        @JvmStatic @JsonCreator
+        @JvmStatic
+        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(value: String): UnsubscribeType = parseEnum(value)
     }
 }
