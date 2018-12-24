@@ -25,7 +25,7 @@ data class Attachments(
 
             val sourceActNode = node["source_act"]
             val sourceAct = sourceActNode?.asText()?.takeIf { sourceActNode.isTextual }
-                ?.let { ChatAction.parse(it) }
+                ?.let { actString -> ChatAction.values().first { it.value == actString } }
 
             val sourceMidNode = node["source_mid"]
             val sourceMid = sourceMidNode?.asLong()?.takeIf { sourceMidNode.isIntegralNumber }

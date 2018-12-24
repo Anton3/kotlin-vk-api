@@ -15,7 +15,12 @@ data class FriendOnline(
         @JvmStatic
         @JsonCreator
         fun parse(eventType: Int, userId: Long, extra: Long, timestamp: VkDate): FriendOnline {
-            return FriendOnline(eventType, -userId, FriendPlatform.parse(extra and 0xFF), timestamp)
+            return FriendOnline(
+                eventType,
+                -userId,
+                FriendPlatform.values().first { it.value == extra and 0xFF },
+                timestamp
+            )
         }
     }
 }
