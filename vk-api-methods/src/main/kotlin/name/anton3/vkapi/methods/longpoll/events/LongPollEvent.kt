@@ -6,3 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonFormat(shape = JsonFormat.Shape.ARRAY)
 abstract class LongPollEvent(open val eventType: Int)
+
+@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+class UnknownLongPollEvent(override val eventType: Int, val eventData: List<Any>) : LongPollEvent(eventType)

@@ -6,11 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.NumericNode
+import com.fasterxml.jackson.module.kotlin.convertValue
 import name.anton3.vkapi.json.attributes.reader
 import name.anton3.vkapi.json.readNode
 import name.anton3.vkapi.json.strongType
 import name.anton3.vkapi.methods.longpoll.events.*
-import java.io.IOException
 
 object LongPollEventDeserializer : StdDeserializer<LongPollEvent>(LongPollEvent::class.java) {
 
@@ -19,7 +19,7 @@ object LongPollEventDeserializer : StdDeserializer<LongPollEvent>(LongPollEvent:
         val node = p.readNode<ArrayNode>()
 
         val typeId = (node[0] as NumericNode).intValue()
-        val type = eventTypes[typeId] ?: throw IOException("Unknown message type")
+        val type = eventTypes[typeId] ?: return UnknownLongPollEvent(typeId, codec.convertValue(node))
 
         return codec.reader(ctxt).readValue<LongPollEvent>(node.traverse(codec), type)
     }
