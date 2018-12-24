@@ -1,5 +1,5 @@
 {
-  "objects": {
+  "responses": {
     "messages_getConversationsById_response": {
       "type": "object",
       "properties": {

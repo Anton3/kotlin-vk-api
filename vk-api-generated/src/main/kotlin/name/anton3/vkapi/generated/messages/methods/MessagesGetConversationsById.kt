@@ -4,7 +4,7 @@ package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.core.VkMethod
-import name.anton3.vkapi.generated.messages.objects.ConversationWithMessage
+import name.anton3.vkapi.generated.messages.objects.Conversation
 import name.anton3.vkapi.tokens.UserGroupMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -23,5 +23,5 @@ data class MessagesGetConversationsById(
     var extended: Boolean? = null,
     var fields: List<String>? = null,
     var groupId: Long? = null
-) : VkMethod<VkList<ConversationWithMessage>>("messages.getConversationsById", jacksonTypeRef()),
+) : VkMethod<VkList<Conversation>>("messages.getConversationsById", jacksonTypeRef()),
     UserGroupMethod
