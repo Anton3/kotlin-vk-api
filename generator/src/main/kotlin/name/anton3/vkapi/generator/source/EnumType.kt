@@ -9,7 +9,10 @@ data class EnumType(val items: List<Item>) : TypeDefinition {
 
     override fun generateSource(basePackage: String, typeId: TypeId, sourceWriter: SourceWriter): String {
 
+        sourceWriter.importType(TypeId("com.fasterxml.jackson.annotation.JsonCreator"))
         sourceWriter.importType(TypeId("com.fasterxml.jackson.annotation.JsonValue"))
+        sourceWriter.importType(TypeId("name.anton3.vkapi.vktypes.Value"))
+        sourceWriter.importType(TypeId("name.anton3.vkapi.vktypes.parseEnum"))
 
         val packageClause = sourceWriter.packageClause(typeId)
         val importClause = sourceWriter.importClause(typeId)
@@ -21,8 +24,13 @@ data class EnumType(val items: List<Item>) : TypeDefinition {
         return """
             |$packageClause$importClause
             |
-            |enum class ${typeId.name}(@get:JsonValue val value: String) {
-            |    $itemsClause
+            |enum class ${typeId.name}(@JsonValue override val value: String) : Value<String> {
+            |    $itemsClause;
+            |
+            |    companion object {
+            |        @JvmStatic @JsonCreator
+            |        fun parse(value: String): ${typeId.name} = parseEnum(value)
+            |    }
             |}
         """.trimMargin()
     }

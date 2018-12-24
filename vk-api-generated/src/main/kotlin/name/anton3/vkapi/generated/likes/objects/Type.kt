@@ -1,8 +1,11 @@
 package name.anton3.vkapi.generated.likes.objects
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
+import name.anton3.vkapi.vktypes.Value
+import name.anton3.vkapi.vktypes.parseEnum
 
-enum class Type(@get:JsonValue val value: String) {
+enum class Type(@JsonValue override val value: String) : Value<String> {
     POST("post"),
     COMMENT("comment"),
     PHOTO("photo"),
@@ -12,5 +15,10 @@ enum class Type(@get:JsonValue val value: String) {
     PHOTO_COMMENT("photo_comment"),
     VIDEO_COMMENT("video_comment"),
     TOPIC_COMMENT("topic_comment"),
-    SITEPAGE("sitepage")
+    SITEPAGE("sitepage");
+
+    companion object {
+        @JvmStatic @JsonCreator
+        fun parse(value: String): Type = parseEnum(value)
+    }
 }

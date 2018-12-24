@@ -1,10 +1,18 @@
 package name.anton3.vkapi.generated.ads.objects
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
+import name.anton3.vkapi.vktypes.Value
+import name.anton3.vkapi.vktypes.parseEnum
 
-enum class TargSuggestionsSchoolsType(@get:JsonValue val value: String) {
+enum class TargSuggestionsSchoolsType(@JsonValue override val value: String) : Value<String> {
     SCHOOL("school"),
     UNIVERSITY("university"),
     FACULTY("faculty"),
-    CHAIR("chair")
+    CHAIR("chair");
+
+    companion object {
+        @JvmStatic @JsonCreator
+        fun parse(value: String): TargSuggestionsSchoolsType = parseEnum(value)
+    }
 }

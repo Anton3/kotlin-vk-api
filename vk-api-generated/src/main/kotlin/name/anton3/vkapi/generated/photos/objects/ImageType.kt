@@ -1,8 +1,11 @@
 package name.anton3.vkapi.generated.photos.objects
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
+import name.anton3.vkapi.vktypes.Value
+import name.anton3.vkapi.vktypes.parseEnum
 
-enum class ImageType(@get:JsonValue val value: String) {
+enum class ImageType(@JsonValue override val value: String) : Value<String> {
     S("s"),
     M("m"),
     X("x"),
@@ -13,5 +16,10 @@ enum class ImageType(@get:JsonValue val value: String) {
     Y("y"),
     Z("z"),
     W("w"),
-    K("k")
+    K("k");
+
+    companion object {
+        @JvmStatic @JsonCreator
+        fun parse(value: String): ImageType = parseEnum(value)
+    }
 }

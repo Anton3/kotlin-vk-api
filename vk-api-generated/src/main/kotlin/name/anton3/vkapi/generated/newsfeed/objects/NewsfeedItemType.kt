@@ -1,8 +1,11 @@
 package name.anton3.vkapi.generated.newsfeed.objects
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
+import name.anton3.vkapi.vktypes.Value
+import name.anton3.vkapi.vktypes.parseEnum
 
-enum class NewsfeedItemType(@get:JsonValue val value: String) {
+enum class NewsfeedItemType(@JsonValue override val value: String) : Value<String> {
     POST("post"),
     PHOTO("photo"),
     PHOTO_TAG("photo_tag"),
@@ -11,5 +14,10 @@ enum class NewsfeedItemType(@get:JsonValue val value: String) {
     NOTE("note"),
     AUDIO("audio"),
     VIDEO("video"),
-    TOPIC("topic")
+    TOPIC("topic");
+
+    companion object {
+        @JvmStatic @JsonCreator
+        fun parse(value: String): NewsfeedItemType = parseEnum(value)
+    }
 }

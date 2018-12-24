@@ -1,10 +1,18 @@
 package name.anton3.vkapi.generated.board.objects
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
+import name.anton3.vkapi.vktypes.Value
+import name.anton3.vkapi.vktypes.parseEnum
 
-enum class DefaultOrder(@get:JsonValue val value: String) {
+enum class DefaultOrder(@JsonValue override val value: String) : Value<String> {
     DESC_UPDATED("1"),
     DESC_CREATED("2"),
     ASC_UPDATED("-1"),
-    ASC_CREATED("-2")
+    ASC_CREATED("-2");
+
+    companion object {
+        @JvmStatic @JsonCreator
+        fun parse(value: String): DefaultOrder = parseEnum(value)
+    }
 }

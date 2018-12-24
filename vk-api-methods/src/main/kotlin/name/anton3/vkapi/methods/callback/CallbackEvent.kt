@@ -12,7 +12,10 @@ import name.anton3.vkapi.generated.video.objects.VideoImpl
 import name.anton3.vkapi.generated.wall.objects.CommentAttachment
 import name.anton3.vkapi.generated.wall.objects.WallComment
 import name.anton3.vkapi.generated.wall.objects.WallpostFull
+import name.anton3.vkapi.methods.longpoll.objects.OfflineReason
+import name.anton3.vkapi.vktypes.Value
 import name.anton3.vkapi.vktypes.VkDate
+import name.anton3.vkapi.vktypes.parseEnum
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 interface Attachment
@@ -220,12 +223,17 @@ class PollVoteNew(groupId: Long, @JsonProperty("object") attachment: Attachment)
     class Attachment(val ownerId: Long, val userId: Long, val pollId: Long, val optionId: Long)
 }
 
-enum class JoinType(@get:JsonValue val value: String) {
+enum class JoinType(@JsonValue override val value: String) : Value<String> {
     JOIN("join"),
     UNSURE("unsure"),
     ACCEPTED("accepted"),
     APPROVED("approved"),
-    REQUEST("request")
+    REQUEST("request");
+
+    companion object {
+        @JvmStatic @JsonCreator
+        fun parse(value: String): JoinType = parseEnum(value)
+    }
 }
 
 
