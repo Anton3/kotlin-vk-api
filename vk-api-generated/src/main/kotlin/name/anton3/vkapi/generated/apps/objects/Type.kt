@@ -1,18 +1,8 @@
 package name.anton3.vkapi.generated.apps.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 
-enum class Type(@JsonValue val jsonValue: String) {
+enum class Type(@get:JsonValue val value: String) {
     REQUEST("request"),
-    INVITE("invite");
-
-    override fun toString() = jsonValue
-
-    companion object {
-        @JvmStatic
-        @JsonCreator
-        fun fromJsonValue(value: String): Type =
-            Type.values().find { it.jsonValue == value }!!
-    }
+    INVITE("invite")
 }

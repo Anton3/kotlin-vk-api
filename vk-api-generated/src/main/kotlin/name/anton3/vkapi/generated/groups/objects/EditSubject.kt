@@ -1,9 +1,8 @@
 package name.anton3.vkapi.generated.groups.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 
-enum class EditSubject(@JsonValue val jsonValue: String) {
+enum class EditSubject(@get:JsonValue val value: String) {
     AUTO("1"),
     ACTIVITY_HOLIDAYS("2"),
     BUSINESS("3"),
@@ -45,14 +44,5 @@ enum class EditSubject(@JsonValue val jsonValue: String) {
     EROTIC("39"),
     HUMOR("40"),
     SOCIETY_HUMANITIES("41"),
-    DESIGN_AND_GRAPHICS("42");
-
-    override fun toString() = jsonValue
-
-    companion object {
-        @JvmStatic
-        @JsonCreator
-        fun fromJsonValue(value: String): EditSubject =
-            EditSubject.values().find { it.jsonValue == value }!!
-    }
+    DESIGN_AND_GRAPHICS("42")
 }

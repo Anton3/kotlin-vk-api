@@ -1,9 +1,8 @@
 package name.anton3.vkapi.generated.likes.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 
-enum class IsLikedType(@JsonValue val jsonValue: String) {
+enum class IsLikedType(@get:JsonValue val value: String) {
     POST("post"),
     COMMENT("comment"),
     PHOTO("photo"),
@@ -12,14 +11,5 @@ enum class IsLikedType(@JsonValue val jsonValue: String) {
     NOTE("note"),
     PHOTO_COMMENT("photo_comment"),
     VIDEO_COMMENT("video_comment"),
-    TOPIC_COMMENT("topic_comment");
-
-    override fun toString() = jsonValue
-
-    companion object {
-        @JvmStatic
-        @JsonCreator
-        fun fromJsonValue(value: String): IsLikedType =
-            IsLikedType.values().find { it.jsonValue == value }!!
-    }
+    TOPIC_COMMENT("topic_comment")
 }

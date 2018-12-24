@@ -1,18 +1,8 @@
 package name.anton3.vkapi.generated.market.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 
-enum class GetCommentsSort(@JsonValue val jsonValue: String) {
+enum class GetCommentsSort(@get:JsonValue val value: String) {
     OLD_TO_NEW("asc"),
-    NEW_TO_OLD("desc");
-
-    override fun toString() = jsonValue
-
-    companion object {
-        @JvmStatic
-        @JsonCreator
-        fun fromJsonValue(value: String): GetCommentsSort =
-            GetCommentsSort.values().find { it.jsonValue == value }!!
-    }
+    NEW_TO_OLD("desc")
 }

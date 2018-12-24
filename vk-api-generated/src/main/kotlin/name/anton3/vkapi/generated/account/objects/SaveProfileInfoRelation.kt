@@ -1,9 +1,8 @@
 package name.anton3.vkapi.generated.account.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 
-enum class SaveProfileInfoRelation(@JsonValue val jsonValue: String) {
+enum class SaveProfileInfoRelation(@get:JsonValue val value: String) {
     SINGLE("1"),
     RELATIONSHIP("2"),
     ENGAGED("3"),
@@ -11,14 +10,5 @@ enum class SaveProfileInfoRelation(@JsonValue val jsonValue: String) {
     COMPLICATED("5"),
     ACTIVELY_SEARCHING("6"),
     IN_LOVE("7"),
-    NOT_SPECIFIED("0");
-
-    override fun toString() = jsonValue
-
-    companion object {
-        @JvmStatic
-        @JsonCreator
-        fun fromJsonValue(value: String): SaveProfileInfoRelation =
-            SaveProfileInfoRelation.values().find { it.jsonValue == value }!!
-    }
+    NOT_SPECIFIED("0")
 }

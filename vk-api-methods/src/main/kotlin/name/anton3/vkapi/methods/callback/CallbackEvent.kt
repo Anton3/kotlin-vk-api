@@ -220,16 +220,12 @@ class PollVoteNew(groupId: Long, @JsonProperty("object") attachment: Attachment)
     class Attachment(val ownerId: Long, val userId: Long, val pollId: Long, val optionId: Long)
 }
 
-enum class JoinType(val value: String) {
-    JOIN("join"), UNSURE("unsure"), ACCEPTED("accepted"), APPROVED("approved"), REQUEST("request");
-
-    override fun toString() = value
-
-    companion object {
-        @JvmStatic
-        @JsonCreator
-        fun fromJsonValue(value: String): JoinType = JoinType.values().find { it.value == value }!!
-    }
+enum class JoinType(@get:JsonValue val value: String) {
+    JOIN("join"),
+    UNSURE("unsure"),
+    ACCEPTED("accepted"),
+    APPROVED("approved"),
+    REQUEST("request")
 }
 
 

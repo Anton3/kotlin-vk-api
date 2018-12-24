@@ -1,9 +1,8 @@
 package name.anton3.vkapi.generated.ads.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 
-enum class GetTargetingStatsAdFormat(@JsonValue val jsonValue: String) {
+enum class GetTargetingStatsAdFormat(@get:JsonValue val value: String) {
     IMAGE_AND_TEXT("1"),
     BIG_IMAGE("2"),
     EXCLUSIVE_FORMAT("3"),
@@ -11,14 +10,5 @@ enum class GetTargetingStatsAdFormat(@JsonValue val jsonValue: String) {
     SPECIAL_APP_FORMAT("7"),
     SPECIAL_COMMUNITY_FORMAT("8"),
     POST_IN_COMMUNITY("9"),
-    APP_BOARD("10");
-
-    override fun toString() = jsonValue
-
-    companion object {
-        @JvmStatic
-        @JsonCreator
-        fun fromJsonValue(value: String): GetTargetingStatsAdFormat =
-            GetTargetingStatsAdFormat.values().find { it.jsonValue == value }!!
-    }
+    APP_BOARD("10")
 }

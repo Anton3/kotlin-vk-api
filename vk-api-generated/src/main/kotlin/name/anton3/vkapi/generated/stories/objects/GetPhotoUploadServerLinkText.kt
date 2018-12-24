@@ -1,9 +1,8 @@
 package name.anton3.vkapi.generated.stories.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 
-enum class GetPhotoUploadServerLinkText(@JsonValue val jsonValue: String) {
+enum class GetPhotoUploadServerLinkText(@get:JsonValue val value: String) {
     TO_STORE("to_store"),
     VOTE("vote"),
     MORE("more"),
@@ -23,14 +22,5 @@ enum class GetPhotoUploadServerLinkText(@JsonValue val jsonValue: String) {
     WATCH("watch"),
     PLAY("play"),
     INSTALL("install"),
-    READ("read");
-
-    override fun toString() = jsonValue
-
-    companion object {
-        @JvmStatic
-        @JsonCreator
-        fun fromJsonValue(value: String): GetPhotoUploadServerLinkText =
-            GetPhotoUploadServerLinkText.values().find { it.jsonValue == value }!!
-    }
+    READ("read")
 }

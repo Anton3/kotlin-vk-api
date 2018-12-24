@@ -1,19 +1,9 @@
 package name.anton3.vkapi.generated.apps.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 
-enum class AppLeaderboardType(@JsonValue val jsonValue: String) {
+enum class AppLeaderboardType(@get:JsonValue val value: String) {
     NOT_SUPPORTED("0"),
     LEVELS("1"),
-    POINTS("2");
-
-    override fun toString() = jsonValue
-
-    companion object {
-        @JvmStatic
-        @JsonCreator
-        fun fromJsonValue(value: String): AppLeaderboardType =
-            AppLeaderboardType.values().find { it.jsonValue == value }!!
-    }
+    POINTS("2")
 }

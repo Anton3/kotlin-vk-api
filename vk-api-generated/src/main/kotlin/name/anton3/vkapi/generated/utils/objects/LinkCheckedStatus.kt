@@ -1,19 +1,9 @@
 package name.anton3.vkapi.generated.utils.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 
-enum class LinkCheckedStatus(@JsonValue val jsonValue: String) {
+enum class LinkCheckedStatus(@get:JsonValue val value: String) {
     NOT_BANNED("not_banned"),
     BANNED("banned"),
-    PROCESSING("processing");
-
-    override fun toString() = jsonValue
-
-    companion object {
-        @JvmStatic
-        @JsonCreator
-        fun fromJsonValue(value: String): LinkCheckedStatus =
-            LinkCheckedStatus.values().find { it.jsonValue == value }!!
-    }
+    PROCESSING("processing")
 }

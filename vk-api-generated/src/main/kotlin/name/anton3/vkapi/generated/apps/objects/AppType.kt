@@ -1,20 +1,10 @@
 package name.anton3.vkapi.generated.apps.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 
-enum class AppType(@JsonValue val jsonValue: String) {
+enum class AppType(@get:JsonValue val value: String) {
     APP("app"),
     GAME("game"),
     SITE("site"),
-    STANDALONE("standalone");
-
-    override fun toString() = jsonValue
-
-    companion object {
-        @JvmStatic
-        @JsonCreator
-        fun fromJsonValue(value: String): AppType =
-            AppType.values().find { it.jsonValue == value }!!
-    }
+    STANDALONE("standalone")
 }

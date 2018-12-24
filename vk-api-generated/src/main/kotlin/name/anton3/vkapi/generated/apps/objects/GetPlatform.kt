@@ -1,20 +1,10 @@
 package name.anton3.vkapi.generated.apps.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 
-enum class GetPlatform(@JsonValue val jsonValue: String) {
+enum class GetPlatform(@get:JsonValue val value: String) {
     WEB("web"),
     IOS("ios"),
     ANDROID("android"),
-    WINPHONE("winphone");
-
-    override fun toString() = jsonValue
-
-    companion object {
-        @JvmStatic
-        @JsonCreator
-        fun fromJsonValue(value: String): GetPlatform =
-            GetPlatform.values().find { it.jsonValue == value }!!
-    }
+    WINPHONE("winphone")
 }

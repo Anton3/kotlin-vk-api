@@ -1,9 +1,8 @@
 package name.anton3.vkapi.generated.newsfeed.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 
-enum class NewsfeedItemType(@JsonValue val jsonValue: String) {
+enum class NewsfeedItemType(@get:JsonValue val value: String) {
     POST("post"),
     PHOTO("photo"),
     PHOTO_TAG("photo_tag"),
@@ -12,14 +11,5 @@ enum class NewsfeedItemType(@JsonValue val jsonValue: String) {
     NOTE("note"),
     AUDIO("audio"),
     VIDEO("video"),
-    TOPIC("topic");
-
-    override fun toString() = jsonValue
-
-    companion object {
-        @JvmStatic
-        @JsonCreator
-        fun fromJsonValue(value: String): NewsfeedItemType =
-            NewsfeedItemType.values().find { it.jsonValue == value }!!
-    }
+    TOPIC("topic")
 }

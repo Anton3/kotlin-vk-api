@@ -1,19 +1,9 @@
 package name.anton3.vkapi.generated.groups.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 
-enum class CreateType(@JsonValue val jsonValue: String) {
+enum class CreateType(@get:JsonValue val value: String) {
     GROUP("group"),
     PUBLIC("public"),
-    EVENT("event");
-
-    override fun toString() = jsonValue
-
-    companion object {
-        @JvmStatic
-        @JsonCreator
-        fun fromJsonValue(value: String): CreateType =
-            CreateType.values().find { it.jsonValue == value }!!
-    }
+    EVENT("event")
 }

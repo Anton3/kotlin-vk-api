@@ -1,18 +1,8 @@
 package name.anton3.vkapi.generated.groups.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 
-enum class OwnerXtrBanInfoType(@JsonValue val jsonValue: String) {
+enum class OwnerXtrBanInfoType(@get:JsonValue val value: String) {
     GROUP("group"),
-    PROFILE("profile");
-
-    override fun toString() = jsonValue
-
-    companion object {
-        @JvmStatic
-        @JsonCreator
-        fun fromJsonValue(value: String): OwnerXtrBanInfoType =
-            OwnerXtrBanInfoType.values().find { it.jsonValue == value }!!
-    }
+    PROFILE("profile")
 }
