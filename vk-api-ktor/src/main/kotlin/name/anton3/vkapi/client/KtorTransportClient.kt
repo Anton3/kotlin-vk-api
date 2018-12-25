@@ -12,7 +12,6 @@ import io.ktor.client.response.readBytes
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
-import io.ktor.http.content.ByteArrayContent
 import io.ktor.http.content.OutgoingContent
 import io.ktor.http.content.TextContent
 import io.ktor.http.takeFrom
@@ -81,21 +80,26 @@ class KtorTransportClient(
         throw exception
     }
 
-    private fun logRequest(request: HttpRequestData, response: HttpResponse?, result: ByteArray?, resultTime: Duration?) {
-        if (log.isDebugEnabled) {
-            log.info(
-                """
-                URI: ${request.url}
-                Method: ${request.method}
-                Request headers: ${request.headers.entries().joinToString { "${it.key}=${it.value}" }}
-                Response time: ${resultTime ?: "-"}
-                Status: ${response?.status ?: "-"}
-                Response headers: ${response?.headers?.toMap()?.toString() ?: "-"}
-                Response: ${result?.toString(Charsets.UTF_8) ?: "-"}
-                """.trimIndent()
-            )
-        } else if (log.isInfoEnabled) {
-            log.info("Request: ${request.url}\t\tTime=$resultTime")
+    private fun logRequest(
+        request: HttpRequestData,
+        response: HttpResponse?,
+        result: ByteArray?,
+        resultTime: Duration?
+    ) {
+        log.info {
+            "Request: ${request.url}"
+        }
+        log.debug {
+            """
+            URI: ${request.url}
+            Method: ${request.method}
+            Request headers: ${request.headers.entries().joinToString { "${it.key}=${it.value}" }}
+            Request: ${request.body}
+            Response time: ${resultTime ?: "-"}
+            Status: ${response?.status ?: "-"}
+            Response headers: ${response?.headers?.toMap()?.toString() ?: "-"}
+            Response: ${result?.toString(Charsets.UTF_8) ?: "-"}
+            """.trimIndent()
         }
     }
 
@@ -105,12 +109,17 @@ class KtorTransportClient(
 
     private fun convertBody(body: RequestContent): OutgoingContent = when (body) {
         is RequestContent.Empty -> TextContent("", ContentType.parse(body.contentType))
+        is RequestContent.Text -> TextContent(body.data, ContentType.parse(body.contentType))
+        is RequestContent.Form -> MultiPartFormDataContent(formData {
+            for ((key, value) in body.data) {
+                append(key, value)
+            }
+        })
         is RequestContent.File -> MultiPartFormDataContent(formData {
             append(body.key, body.fileName) {
                 writeFully(body.data, 0, body.data.size)
             }
         })
-        is RequestContent.Text -> ByteArrayContent(body.data.toByteArray(), ContentType.parse(body.contentType))
     }
 
     override suspend fun invoke(request: TransportClient.Request): TransportClient.Response {

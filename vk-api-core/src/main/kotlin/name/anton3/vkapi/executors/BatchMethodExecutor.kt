@@ -7,7 +7,6 @@ import name.anton3.vkapi.core.MethodExecutor
 import name.anton3.vkapi.core.VkMethod
 import name.anton3.vkapi.core.VkResult
 import name.anton3.vkapi.core.wrapInSimpleResponse
-import name.anton3.vkapi.methods.execute.BatchExecuteMethod
 import name.anton3.vkapi.methods.execute.batchUnchecked
 import name.anton3.vkapi.methods.execute.supportsBatch
 import name.anton3.vkapi.tokens.Token
@@ -31,7 +30,7 @@ class BatchMethodExecutor(
     private val coroutineScope: CoroutineScope = CoroutineScope(coroutineContext)
 
     private val batcher: Batcher<VkMethod<*>, VkResult<*>> = Batcher(
-        coroutineScope,
+        scope = coroutineScope,
         flushDelay = flushDelay,
         executor = this::executeBatch,
         limiter = this::batchLimit,
@@ -42,18 +41,10 @@ class BatchMethodExecutor(
         return base.batchUnchecked(methods, token)
     }
 
-    private fun batchLimitInternal(methods: List<VkMethod<*>>): BatchLimit {
-        if (methods.size > BATCH_EXECUTE_LIMIT) return BatchLimit.OVERFLOW
-        if (methods.size == BATCH_EXECUTE_LIMIT) return BatchLimit.FULL
-
-        val batchMethod = BatchExecuteMethod(methods, objectMapper)
-        val batchCodeSize = batchMethod.code.length
-
-        return when {
-            batchCodeSize < BATCH_CODE_LIMIT -> BatchLimit.INCOMPLETE
-            methods.size == 1 -> BatchLimit.FULL
-            else -> BatchLimit.OVERFLOW
-        }
+    private fun batchLimitInternal(methods: List<VkMethod<*>>): BatchLimit = when {
+        methods.size > BATCH_EXECUTE_LIMIT -> BatchLimit.OVERFLOW
+        methods.size == BATCH_EXECUTE_LIMIT -> BatchLimit.FULL
+        else -> BatchLimit.INCOMPLETE
     }
 
     // No synchronization, everything happens inside actor
@@ -85,7 +76,7 @@ class BatchMethodExecutor(
 
     override suspend fun <T> invoke(method: VkMethod<T>): VkResponse<T> {
         return if (method.supportsBatch()) {
-            method.accessToken = null  // shorter URIs
+            method.accessToken = null  // shorter requests
             @Suppress("UNCHECKED_CAST")
             batcher(method).wrapInSimpleResponse() as VkResponse<T>
         } else {
@@ -103,6 +94,5 @@ class BatchMethodExecutor(
 
     companion object {
         const val BATCH_EXECUTE_LIMIT = 25
-        const val BATCH_CODE_LIMIT = 3900
     }
 }

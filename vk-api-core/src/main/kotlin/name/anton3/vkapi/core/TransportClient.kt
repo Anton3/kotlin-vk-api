@@ -9,6 +9,8 @@ sealed class RequestContent {
 
     class Text(val data: String, val contentType: String = FORM_CONTENT_TYPE) : RequestContent()
 
+    class Form(val data: Map<String, String>, val contentType: String = FORM_CONTENT_TYPE) : RequestContent()
+
     class File(
         val key: String,
         val fileName: String,

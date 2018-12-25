@@ -1,10 +1,7 @@
 package name.anton3.vkapi.executors
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import name.anton3.vkapi.core.MethodExecutor
-import name.anton3.vkapi.core.TransportClient
-import name.anton3.vkapi.core.VkMethod
-import name.anton3.vkapi.core.post
+import name.anton3.vkapi.core.*
 import name.anton3.vkapi.json.deserializeResponse
 import name.anton3.vkapi.json.serializeMethod
 import name.anton3.vkapi.vktypes.VkResponse
@@ -17,7 +14,10 @@ data class SimpleMethodExecutor(
 
     override suspend operator fun <T> invoke(method: VkMethod<T>): VkResponse<T> {
         val params = objectMapper.serializeMethod(method)
-        val response = httpClient.post(methodUrl(method.apiMethodName, params))
+        val response = httpClient.post(
+            url = URL_PREFIX + method.apiMethodName,
+            content = RequestContent.Form(params)
+        )
         return objectMapper.deserializeResponse(method, response.data)
     }
 
