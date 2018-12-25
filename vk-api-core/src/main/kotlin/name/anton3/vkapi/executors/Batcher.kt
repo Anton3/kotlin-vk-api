@@ -4,7 +4,6 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.ClosedSendChannelException
 import kotlinx.coroutines.channels.actor
 import kotlinx.coroutines.channels.consumeEach
-import kotlinx.coroutines.channels.sendBlocking
 import kotlinx.coroutines.time.delay
 import java.time.Duration
 
@@ -40,19 +39,16 @@ class Batcher<Request, Response>(
         completionHandle.await()
     }
 
+    private val completionHandle: CompletableDeferred<Unit> = CompletableDeferred()
+
     private val actor = BatcherActor(
         scope = scope,
         flushDelay = flushDelay,
         executor = executor,
         limiter = limiter,
-        timeoutHandler = timeoutHandler
+        timeoutHandler = timeoutHandler,
+        completionHandle = completionHandle
     ).actor
-
-    private val completionHandle: CompletableDeferred<Unit> = CompletableDeferred()
-
-    init {
-        actor.sendBlocking(Message.SetCompletionHandle(completionHandle))
-    }
 }
 
 private data class QueuedRequest<Request, Response>(
@@ -71,9 +67,6 @@ private sealed class Message<Request, Response> {
 
     class Flush<Request, Response>
         : Message<Request, Response>()
-
-    data class SetCompletionHandle<Request, Response>(val handle: CompletableDeferred<Unit>)
-        : Message<Request, Response>()
 }
 
 private class BatcherActor<Request, Response>(
@@ -81,7 +74,8 @@ private class BatcherActor<Request, Response>(
     private val flushDelay: Duration,
     private val executor: suspend (List<Request>) -> List<Response>,
     private val limiter: (List<Request>) -> BatchLimit,
-    private val timeoutHandler: () -> Boolean
+    private val timeoutHandler: () -> Boolean,
+    private val completionHandle: CompletableDeferred<Unit>
 ) {
     init {
         require(!flushDelay.isNegative)
@@ -89,15 +83,13 @@ private class BatcherActor<Request, Response>(
 
     private var requests: MutableList<QueuedRequest<Request, Response>> = mutableListOf()
 
-    private var completionHandle: CompletableDeferred<Unit>? = null
-
     @Suppress("EXPERIMENTAL_API_USAGE")
     val actor = scope.actor<Message<Request, Response>> {
         coroutineScope {
             channel.consumeEach { processMessage(it) }
             if (requests.isNotEmpty()) execute(requests)
         }
-        completionHandle?.complete(Unit)
+        completionHandle.complete(Unit)
     }
 
     private suspend fun CoroutineScope.processMessage(message: Message<Request, Response>) {
@@ -105,7 +97,6 @@ private class BatcherActor<Request, Response>(
             is Message.NewRequest -> onNewRequest(message)
             is Message.TimeElapsed -> onTimeElapsed(message)
             is Message.Flush -> onFlush()
-            is Message.SetCompletionHandle -> onSetCompletionHandle(message)
         }
     }
 
@@ -130,10 +121,6 @@ private class BatcherActor<Request, Response>(
 
     private suspend fun CoroutineScope.onFlush() {
         if (requests.isNotEmpty()) flush()
-    }
-
-    private fun onSetCompletionHandle(message: Message.SetCompletionHandle<Request, Response>) {
-        completionHandle = message.handle
     }
 
     private fun CoroutineScope.ensureTimeLimit(queuedRequest: QueuedRequest<Request, Response>): Job = launch {
