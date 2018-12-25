@@ -23,7 +23,7 @@ class VkClientFactory(httpClient: TransportClient, objectMapper: ObjectMapper) {
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
     ): VkClient<UserMethod> {
         val throttled = ThrottledMethodExecutor(baseExecutor, 3)
-        val batch = BatchMethodExecutor(throttled, Dispatchers.Default, Duration.ofMillis(flushDelayMillis), token)
+        val batch = BatchMethodExecutor(throttled, token, throttled, Duration.ofMillis(flushDelayMillis), Dispatchers.Default)
         closeableExecutors.add(throttled)
         closeableExecutors.add(batch)
         return executorWrapper(batch).attach(token)
@@ -36,7 +36,7 @@ class VkClientFactory(httpClient: TransportClient, objectMapper: ObjectMapper) {
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
     ): VkClient<GroupMethod> {
         val throttled = ThrottledMethodExecutor(baseExecutor, 20)
-        val batch = BatchMethodExecutor(throttled, Dispatchers.Default, Duration.ofMillis(flushDelayMillis), token)
+        val batch = BatchMethodExecutor(throttled, token, throttled, Duration.ofMillis(flushDelayMillis), Dispatchers.Default)
         closeableExecutors.add(throttled)
         closeableExecutors.add(batch)
         return executorWrapper(batch).attach(token)
@@ -56,7 +56,7 @@ class VkClientFactory(httpClient: TransportClient, objectMapper: ObjectMapper) {
     }
 
     @Synchronized
-    fun secure(
+    fun secureAndOpen(
         token: ServiceToken,
         appPopularity: SecureAppPopularity = SecureAppPopularity.SMALL,
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }

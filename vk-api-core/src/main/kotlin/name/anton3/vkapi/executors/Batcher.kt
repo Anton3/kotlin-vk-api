@@ -8,12 +8,20 @@ import kotlinx.coroutines.channels.sendBlocking
 import kotlinx.coroutines.time.delay
 import java.time.Duration
 
+enum class BatchLimit {
+    INCOMPLETE,
+    FULL,
+    OVERFLOW
+}
+
 class Batcher<Request, Response>(
     scope: CoroutineScope,
     flushDelay: Duration,
-    batchSizeLimit: Int,
-    batchExecutor: suspend (List<Request>) -> List<Response>
+    executor: suspend (List<Request>) -> List<Response>,
+    limiter: (List<Request>) -> BatchLimit,
+    timeoutHandler: () -> Boolean
 ) : AsyncCloseable {
+
     suspend operator fun invoke(request: Request): Response {
         val queuedRequest = QueuedRequest<Request, Response>(request, CompletableDeferred())
         actor.send(Message.NewRequest(queuedRequest))
@@ -32,7 +40,14 @@ class Batcher<Request, Response>(
         completionHandle.await()
     }
 
-    private val actor = BatcherActor(scope, flushDelay, batchSizeLimit, batchExecutor).actor
+    private val actor = BatcherActor(
+        scope = scope,
+        flushDelay = flushDelay,
+        executor = executor,
+        limiter = limiter,
+        timeoutHandler = timeoutHandler
+    ).actor
+
     private val completionHandle: CompletableDeferred<Unit> = CompletableDeferred()
 
     init {
@@ -64,11 +79,11 @@ private sealed class Message<Request, Response> {
 private class BatcherActor<Request, Response>(
     scope: CoroutineScope,
     private val flushDelay: Duration,
-    private val batchSizeLimit: Int,
-    private val batchExecutor: suspend (List<Request>) -> List<Response>
+    private val executor: suspend (List<Request>) -> List<Response>,
+    private val limiter: (List<Request>) -> BatchLimit,
+    private val timeoutHandler: () -> Boolean
 ) {
     init {
-        require(batchSizeLimit > 0)
         require(!flushDelay.isNegative)
     }
 
@@ -98,16 +113,19 @@ private class BatcherActor<Request, Response>(
         val queuedRequest = message.queuedRequest
         requests.add(queuedRequest)
 
-        if (requests.size == batchSizeLimit) {
-            flush()
-        } else {
-            ensureTimeLimit(queuedRequest)
+        when (limiter(requests.map { it.request })) {
+            BatchLimit.OVERFLOW -> {
+                requests.removeAt(requests.lastIndex)
+                flush()
+                requests.add(queuedRequest)
+            }
+            BatchLimit.FULL -> flush()
+            BatchLimit.INCOMPLETE -> ensureTimeLimit(queuedRequest)
         }
     }
 
     private suspend fun CoroutineScope.onTimeElapsed(message: Message.TimeElapsed<Request, Response>) {
-        val queuedRequest = message.queuedRequest
-        if (queuedRequest.causesFlush) flush()
+        if (message.queuedRequest.causesFlush && timeoutHandler()) flush()
     }
 
     private suspend fun CoroutineScope.onFlush() {
@@ -119,7 +137,6 @@ private class BatcherActor<Request, Response>(
     }
 
     private fun CoroutineScope.ensureTimeLimit(queuedRequest: QueuedRequest<Request, Response>): Job = launch {
-        this.coroutineContext
         delay(flushDelay)
         try {
             actor.send(Message.TimeElapsed(queuedRequest))
@@ -139,7 +156,7 @@ private class BatcherActor<Request, Response>(
 
     private suspend fun execute(pendingRequests: List<QueuedRequest<Request, Response>>) {
         val responses = try {
-            batchExecutor(pendingRequests.map { it.request })
+            executor(pendingRequests.map { it.request })
         } catch (e: Throwable) {
             pendingRequests.forEach { it.handler.completeExceptionally(e) }
             null
