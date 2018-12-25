@@ -7,18 +7,13 @@ import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.time.delay
 import java.time.Duration
 
-enum class BatchLimit {
-    INCOMPLETE,
-    FULL,
-    OVERFLOW
-}
-
 class Batcher<Request, Response>(
     scope: CoroutineScope,
+    batchLimit: Int,
     flushDelay: Duration,
-    executor: suspend (List<Request>) -> List<Response>,
-    limiter: (List<Request>) -> BatchLimit,
-    timeoutHandler: () -> Boolean
+    timeoutHandler: () -> Boolean = { true },
+    preExecute: () -> Unit = {},
+    executor: suspend (List<Request>) -> List<Response>
 ) : AsyncCloseable {
 
     suspend operator fun invoke(request: Request): Response {
@@ -43,10 +38,11 @@ class Batcher<Request, Response>(
 
     private val actor = BatcherActor(
         scope = scope,
+        batchLimit = batchLimit,
         flushDelay = flushDelay,
-        executor = executor,
-        limiter = limiter,
         timeoutHandler = timeoutHandler,
+        preExecute = preExecute,
+        executor = executor,
         completionHandle = completionHandle
     ).actor
 }
@@ -71,10 +67,11 @@ private sealed class Message<Request, Response> {
 
 private class BatcherActor<Request, Response>(
     scope: CoroutineScope,
+    private val batchLimit: Int,
     private val flushDelay: Duration,
-    private val executor: suspend (List<Request>) -> List<Response>,
-    private val limiter: (List<Request>) -> BatchLimit,
     private val timeoutHandler: () -> Boolean,
+    private val preExecute: () -> Unit,
+    private val executor: suspend (List<Request>) -> List<Response>,
     private val completionHandle: CompletableDeferred<Unit>
 ) {
     init {
@@ -86,8 +83,14 @@ private class BatcherActor<Request, Response>(
     @Suppress("EXPERIMENTAL_API_USAGE")
     val actor = scope.actor<Message<Request, Response>> {
         coroutineScope {
-            channel.consumeEach { processMessage(it) }
-            if (requests.isNotEmpty()) execute(requests)
+            channel.consumeEach {
+                processMessage(it)
+            }
+
+            if (requests.isNotEmpty()) {
+                preExecute()
+                execute(requests)
+            }
         }
         completionHandle.complete(Unit)
     }
@@ -104,14 +107,10 @@ private class BatcherActor<Request, Response>(
         val queuedRequest = message.queuedRequest
         requests.add(queuedRequest)
 
-        when (limiter(requests.map { it.request })) {
-            BatchLimit.OVERFLOW -> {
-                requests.removeAt(requests.lastIndex)
-                flush()
-                requests.add(queuedRequest)
-            }
-            BatchLimit.FULL -> flush()
-            BatchLimit.INCOMPLETE -> ensureTimeLimit(queuedRequest)
+        if (requests.size >= batchLimit) {
+            flush()
+        } else {
+            ensureTimeLimit(queuedRequest)
         }
     }
 
@@ -136,6 +135,7 @@ private class BatcherActor<Request, Response>(
         val pendingRequests = requests
         requests = mutableListOf()
 
+        preExecute()
         launch {
             execute(pendingRequests)
         }

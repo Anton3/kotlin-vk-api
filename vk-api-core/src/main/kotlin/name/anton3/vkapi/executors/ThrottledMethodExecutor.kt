@@ -19,8 +19,8 @@ class ThrottledMethodExecutor(
     override val rateLeft: Int
         get() = throttler.rateLeft
 
-    override fun setFreeRateHandler(handler: () -> Unit) {
-        throttler.setFreeRateHandler(handler)
+    override fun addFreeRateHandler(handler: () -> Boolean) {
+        throttler.addFreeRateHandler(handler)
     }
 
     override fun close() {

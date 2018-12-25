@@ -13,6 +13,7 @@ import name.anton3.vkapi.tokens.Token
 import name.anton3.vkapi.tokens.UserGroupMethod
 import name.anton3.vkapi.vktypes.VkResponse
 import java.time.Duration
+import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.coroutines.CoroutineContext
 
 class BatchMethodExecutor(
@@ -24,54 +25,44 @@ class BatchMethodExecutor(
 ) : MethodExecutor by base, AsyncCloseable {
 
     init {
-        rateProvider.setFreeRateHandler(this::onFreeRate)
+        rateProvider.addFreeRateHandler(this::freeRateHandler)
     }
 
     private val coroutineScope: CoroutineScope = CoroutineScope(coroutineContext)
 
     private val batcher: Batcher<VkMethod<*>, VkResult<*>> = Batcher(
         scope = coroutineScope,
+        batchLimit = BATCH_EXECUTE_LIMIT,
         flushDelay = flushDelay,
-        executor = this::executeBatch,
-        limiter = this::batchLimit,
-        timeoutHandler = this::handleTimeout
+        timeoutHandler = this::timeoutHandler,
+        preExecute = this::preExecute,
+        executor = this::executeBatch
     )
 
     private suspend fun executeBatch(methods: List<VkMethod<*>>): List<VkResult<*>> {
         return base.batchUnchecked(methods, token)
     }
 
-    private fun batchLimitInternal(methods: List<VkMethod<*>>): BatchLimit = when {
-        methods.size > BATCH_EXECUTE_LIMIT -> BatchLimit.OVERFLOW
-        methods.size == BATCH_EXECUTE_LIMIT -> BatchLimit.FULL
-        else -> BatchLimit.INCOMPLETE
-    }
+    private var throttledTimeoutReceived: AtomicBoolean = AtomicBoolean(false)
 
-    // No synchronization, everything happens inside actor
-    private var timeoutReceived: Boolean = false
-
-    private fun batchLimit(methods: List<VkMethod<*>>): BatchLimit {
-        val result = batchLimitInternal(methods)
-        if (result != BatchLimit.INCOMPLETE) {
-            timeoutReceived = false
-        }
-        return result
-    }
-
-    private fun handleTimeout(): Boolean {
+    private fun timeoutHandler(): Boolean {
         val throttling = rateProvider.isThrottling
-        timeoutReceived = throttling
+        throttledTimeoutReceived.set(throttling)
         return !throttling
     }
 
-    private fun onFreeRate() {
-        if (timeoutReceived) {
-            timeoutReceived = false
+    private fun preExecute() {
+        throttledTimeoutReceived.set(false)
+    }
 
+    private fun freeRateHandler(): Boolean {
+        val shouldFlush = throttledTimeoutReceived.getAndSet(false)
+        if (shouldFlush) {
             coroutineScope.launch {
                 batcher.flush()
             }
         }
+        return shouldFlush
     }
 
     override suspend fun <T> invoke(method: VkMethod<T>): VkResponse<T> {

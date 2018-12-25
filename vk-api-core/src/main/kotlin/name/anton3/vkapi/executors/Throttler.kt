@@ -9,17 +9,11 @@ import java.time.Instant
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 
-class Throttler(private val rateLimit: Int, private val ratePeriod: Duration) : RateProvider, AsyncCloseable {
+class Throttler(private val rateLimit: Int, private val ratePeriod: Duration) : AsyncCloseable, RateProvider {
 
     private val tickets: Channel<Instant> = Channel(rateLimit)
     private val ticketsLeft: AtomicInteger = AtomicInteger(rateLimit)
     private val isClosed: AtomicBoolean = AtomicBoolean(false)
-
-    private var freeRateHandler: () -> Unit = {}
-
-    override fun setFreeRateHandler(handler: () -> Unit) {
-        freeRateHandler = handler
-    }
 
     init {
         require(rateLimit > 0 && ratePeriod > Duration.ZERO)
@@ -45,7 +39,7 @@ class Throttler(private val rateLimit: Int, private val ratePeriod: Duration) : 
             return block()
         } finally {
             val newTicket = Instant.now().plus(ratePeriod)
-            if (ticketsLeft.incrementAndGet() > 0) freeRateHandler()
+            if (ticketsLeft.incrementAndGet() > 0) onFreeRate()
             tickets.offer(newTicket)
         }
     }
@@ -63,5 +57,17 @@ class Throttler(private val rateLimit: Int, private val ratePeriod: Duration) : 
 
         repeat(rateLimit) { tickets.receive() }
         tickets.close()
+    }
+
+    private val freeRateHandlers: MutableList<() -> Boolean> = mutableListOf()
+
+    @Synchronized
+    override fun addFreeRateHandler(handler: () -> Boolean) {
+        freeRateHandlers.add(handler)
+    }
+
+    @Synchronized
+    private fun onFreeRate() {
+        freeRateHandlers.forEach { if (it()) return }
     }
 }
