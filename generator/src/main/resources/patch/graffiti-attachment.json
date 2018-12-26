@@ -1,0 +1,27 @@
+{
+  "objects": {
+    "messages_message_graffiti": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "owner_id": {
+          "type": "integer"
+        },
+        "url": {
+          "type": "string"
+        },
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        },
+        "access_key": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

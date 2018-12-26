@@ -13,6 +13,7 @@ import name.anton3.vkapi.generated.market.objects.MarketAlbum
 import name.anton3.vkapi.generated.market.objects.MarketItem
 import name.anton3.vkapi.generated.messages.objects.AudioMessage
 import name.anton3.vkapi.generated.messages.objects.MessageAttachment
+import name.anton3.vkapi.generated.messages.objects.MessageGraffiti
 import name.anton3.vkapi.generated.pages.objects.WikipageFull
 import name.anton3.vkapi.generated.photos.objects.Photo
 import name.anton3.vkapi.generated.photos.objects.PhotoAlbum
@@ -85,6 +86,7 @@ internal object VkMessageAttachmentsDeserializer : AbstractVkAttachmentsDeserial
         "gift" to Layout::class.java,
         "wall" to WallpostAttached::class.java,
         "wall_reply" to WallComment::class.java,
-        "audio_message" to AudioMessage::class.java
+        "audio_message" to AudioMessage::class.java,
+        "graffiti" to MessageGraffiti::class.java
     )
 )
