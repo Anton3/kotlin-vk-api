@@ -134,6 +134,9 @@
         },
         {
           "$ref": "#/definitions/messages_message_graffiti"
+        },
+        {
+          "$ref": "#/definitions/polls_poll"
         }
       ]
     },

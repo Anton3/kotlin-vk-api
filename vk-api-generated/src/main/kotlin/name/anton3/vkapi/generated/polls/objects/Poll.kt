@@ -1,6 +1,7 @@
 package name.anton3.vkapi.generated.polls.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import name.anton3.vkapi.generated.messages.objects.MessageAttachment
 import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
 
 /**
@@ -22,7 +23,8 @@ data class Poll(
     val created: Long,
     val question: String,
     val votes: String,
-    val answerId: Long,
+    val answerId: Long? = null,
     val answers: List<Answer>,
     val anonymous: Boolean
-) : WallpostAttachment
+) : WallpostAttachment,
+    MessageAttachment

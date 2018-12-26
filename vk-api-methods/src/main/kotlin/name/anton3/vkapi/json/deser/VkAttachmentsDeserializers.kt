@@ -87,6 +87,7 @@ internal object VkMessageAttachmentsDeserializer : AbstractVkAttachmentsDeserial
         "wall" to WallpostAttached::class.java,
         "wall_reply" to WallComment::class.java,
         "audio_message" to AudioMessage::class.java,
-        "graffiti" to MessageGraffiti::class.java
+        "graffiti" to MessageGraffiti::class.java,
+        "poll" to Poll::class.java
     )
 )
