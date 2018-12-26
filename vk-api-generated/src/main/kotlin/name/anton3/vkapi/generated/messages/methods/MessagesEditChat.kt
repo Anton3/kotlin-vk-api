@@ -4,7 +4,7 @@ package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.core.VkMethod
-import name.anton3.vkapi.tokens.UserMethod
+import name.anton3.vkapi.tokens.UserGroupMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
 /**
@@ -19,4 +19,4 @@ data class MessagesEditChat(
     var chatId: Long,
     var title: String
 ) : VkMethod<OkResponse>("messages.editChat", jacksonTypeRef()),
-    UserMethod
+    UserGroupMethod
