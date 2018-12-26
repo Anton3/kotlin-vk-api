@@ -71,6 +71,7 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
                 getEvents(iter)
             } catch (e: IOException) {
                 log.warn("LongPoll error", e)
+                iter = iterator()
                 continue
             }
 
