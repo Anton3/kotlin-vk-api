@@ -1,0 +1,31 @@
+{
+  "methods": [
+    {
+      "name": "messages.removeChatUser",
+      "description": "Allows the current user to leave a chat or, if the current user started the chat, allows the user to remove another user from the chat.",
+      "access_token_type": [
+        "user",
+        "group"
+      ],
+      "parameters": [
+        {
+          "name": "chat_id",
+          "description": "Chat ID.",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "user_id",
+          "description": "ID of the user to be removed from the chat.",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "response": {
+          "$ref": "responses.json#/definitions/ok_response"
+        }
+      }
+    }
+  ]
+}
