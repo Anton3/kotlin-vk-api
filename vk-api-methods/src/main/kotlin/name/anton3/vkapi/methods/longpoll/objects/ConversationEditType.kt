@@ -9,6 +9,7 @@ enum class ConversationEditType(@get:JsonValue override val value: Int) : Value<
     TITLE_CHANGE(1),
     PHOTO_CHANGE(2),
     ADMIN_ADDED(3),
+    UNKNOWN(4),  // Not described in spec, but happens
     MESSAGE_PINNED(5),
     USER_JOINED(6),
     USER_EXITED(7),
