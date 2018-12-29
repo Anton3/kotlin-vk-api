@@ -14,7 +14,9 @@ enum class ConversationEditType(@get:JsonValue override val value: Int) : Value<
     USER_JOINED(6),
     USER_EXITED(7),
     USER_KICKED(8),
-    ADMIN_REMOVED(9);
+    ADMIN_REMOVED(9),
+    UNKNOWN2(10),  // Not described in spec, but happens
+    UNKNOWN3(11);  // Not described in spec, but happens
 
     companion object {
         @JvmStatic
