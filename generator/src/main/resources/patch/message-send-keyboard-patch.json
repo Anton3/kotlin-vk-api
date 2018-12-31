@@ -48,10 +48,6 @@
           "type": "integer",
           "description": "Message ID"
         },
-        "conversation_message_id": {
-          "type": "integer",
-          "description": "Unique auto-incremented number for all messages with this peer"
-        },
         "date": {
           "type": "integer",
           "description": "Date when the message has been sent in Unixtime"
@@ -64,17 +60,34 @@
           "type": "integer",
           "description": "Message author's ID"
         },
-        "update_time": {
-          "type": "integer",
-          "description": "Date when the message has been updated in Unixtime"
+        "text": {
+          "type": "string",
+          "description": "Message text"
         },
         "random_id": {
           "type": "integer",
           "description": "ID used for sending messages. It returned only for outgoing messages"
         },
+        "ref": {
+          "type": "string",
+          "description": "Arbitrary parameter for working with referring sources"
+        },
+        "ref_source": {
+          "type": "string",
+          "description": "Arbitrary parameter for working with referring sources"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/messages_message_attachment"
+          }
+        },
         "important": {
           "type": "boolean",
           "description": "Is it an important message"
+        },
+        "geo": {
+          "$ref": "#/definitions/base_geo"
         },
         "payload": {
           "type": "string"
@@ -86,21 +99,19 @@
             "$ref": "#/definitions/messages_message"
           }
         },
-        "text": {
-          "type": "string",
-          "description": "Message text"
-        },
-        "attachments": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/messages_message_attachment"
-          }
-        },
-        "geo": {
-          "$ref": "#/definitions/base_geo"
+        "reply_message": {
+          "$ref": "#/definitions/messages_message"
         },
         "action": {
           "$ref": "#/definitions/messages_message_action"
+        },
+        "conversation_message_id": {
+          "type": "integer",
+          "description": "Unique auto-incremented number for all messages with this peer"
+        },
+        "update_time": {
+          "type": "integer",
+          "description": "Date when the message has been updated in Unixtime"
         },
         "keyboard": {
           "$ref": "#/definitions/messages_keyboard_returned"
