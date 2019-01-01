@@ -10,7 +10,7 @@ import name.anton3.vkapi.generated.common.objects.ObjectWithName
  * @property subcategories No description
  */
 data class GroupCategory(
-    val id: Long,
+    val id: Int,
     val name: String,
     val subcategories: List<ObjectWithName>? = null
 )

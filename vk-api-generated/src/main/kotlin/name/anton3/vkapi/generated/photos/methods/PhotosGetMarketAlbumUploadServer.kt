@@ -15,6 +15,6 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property groupId Community ID.
  */
 data class PhotosGetMarketAlbumUploadServer(
-    var groupId: Long
+    var groupId: Int
 ) : VkMethod<UploadServer>("photos.getMarketAlbumUploadServer", jacksonTypeRef()),
     UserMethod

@@ -19,11 +19,11 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property offset Offset needed to return a specific subset of videos.
  */
 data class VideoGetExtended(
-    var ownerId: Long? = null,
+    var ownerId: Int? = null,
     var videos: List<String>? = null,
-    var albumId: Long? = null,
-    var count: Long? = null,
-    var offset: Long? = null
+    var albumId: Int? = null,
+    var count: Int? = null,
+    var offset: Int? = null
 ) : VkMethod<GetExtendedResponse>("video.get", jacksonTypeRef()),
     UserMethod {
     init {

@@ -15,11 +15,11 @@ import name.anton3.vkapi.generated.users.objects.UserFull
  * @property more Has more
  */
 data class GetLongPollHistoryResponse(
-    val history: List<List<Long>>? = null,
+    val history: List<List<Int>>? = null,
     val groups: List<Group>? = null,
     val messages: LongpollMessages? = null,
     val profiles: List<UserFull>? = null,
     val chats: List<Chat>? = null,
-    val newPts: Long? = null,
+    val newPts: Int? = null,
     val more: Boolean? = null
 )

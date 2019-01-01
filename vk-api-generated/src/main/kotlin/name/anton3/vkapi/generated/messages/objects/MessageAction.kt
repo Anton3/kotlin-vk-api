@@ -12,9 +12,9 @@ package name.anton3.vkapi.generated.messages.objects
  */
 data class MessageAction(
     val type: MessageActionStatus,
-    val memberId: Long? = null,
+    val memberId: Int? = null,
     val message: String? = null,
     val text: String? = null,
-    val conversationMessageId: Long? = null,
+    val conversationMessageId: Int? = null,
     val email: String? = null
 )

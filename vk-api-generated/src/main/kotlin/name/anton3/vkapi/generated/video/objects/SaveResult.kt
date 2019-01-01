@@ -11,8 +11,8 @@ package name.anton3.vkapi.generated.video.objects
  */
 data class SaveResult(
     val uploadUrl: String? = null,
-    val videoId: Long? = null,
-    val ownerId: Long? = null,
+    val videoId: Int? = null,
+    val ownerId: Int? = null,
     val title: String? = null,
     val description: String? = null
 )

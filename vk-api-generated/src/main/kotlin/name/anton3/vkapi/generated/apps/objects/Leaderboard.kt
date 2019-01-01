@@ -9,8 +9,8 @@ package name.anton3.vkapi.generated.apps.objects
  * @property userId User ID
  */
 data class Leaderboard(
-    val score: Long? = null,
-    val level: Long? = null,
-    val points: Long? = null,
-    val userId: Long
+    val score: Int? = null,
+    val level: Int? = null,
+    val points: Int? = null,
+    val userId: Int
 )

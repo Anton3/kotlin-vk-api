@@ -16,7 +16,7 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property userId User ID.
  */
 data class MessagesIsMessagesFromGroupAllowed(
-    var groupId: Long,
-    var userId: Long
+    var groupId: Int,
+    var userId: Int
 ) : VkMethod<IsMessagesFromGroupAllowedResponse>("messages.isMessagesFromGroupAllowed", jacksonTypeRef()),
     UserGroupMethod

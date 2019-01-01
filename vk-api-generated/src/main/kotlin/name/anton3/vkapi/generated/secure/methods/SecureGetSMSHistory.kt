@@ -18,9 +18,9 @@ import name.anton3.vkapi.tokens.ServiceMethod
  * @property limit number of returned posts. By default — 1000.
  */
 data class SecureGetSMSHistory(
-    var userId: Long? = null,
-    var dateFrom: Long? = null,
-    var dateTo: Long? = null,
-    var limit: Long? = null
+    var userId: Int? = null,
+    var dateFrom: Int? = null,
+    var dateTo: Int? = null,
+    var limit: Int? = null
 ) : VkMethod<List<SmsNotification>>("secure.getSMSHistory", jacksonTypeRef()),
     ServiceMethod

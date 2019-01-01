@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property after ID of the link after which to place the link with 'link_id'.
  */
 data class GroupsReorderLink(
-    var groupId: Long,
-    var linkId: Long,
-    var after: Long? = null
+    var groupId: Int,
+    var linkId: Int,
+    var after: Int? = null
 ) : VkMethod<OkResponse>("groups.reorderLink", jacksonTypeRef()),
     UserMethod

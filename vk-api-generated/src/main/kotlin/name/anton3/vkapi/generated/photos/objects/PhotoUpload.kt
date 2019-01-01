@@ -9,6 +9,6 @@ package name.anton3.vkapi.generated.photos.objects
  */
 data class PhotoUpload(
     val uploadUrl: String,
-    val albumId: Long,
-    val userId: Long
+    val albumId: Int,
+    val userId: Int
 )

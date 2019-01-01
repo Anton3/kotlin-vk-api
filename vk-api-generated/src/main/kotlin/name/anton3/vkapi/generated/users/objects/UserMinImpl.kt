@@ -13,9 +13,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @JsonDeserialize(`as` = Void::class)
 data class UserMinImpl(
-    override val id: Long,
+    override val id: Int,
     override val firstName: String,
     override val lastName: String,
     override val deactivated: String? = null,
-    override val hidden: Long? = null
+    override val hidden: Int? = null
 ) : UserMin

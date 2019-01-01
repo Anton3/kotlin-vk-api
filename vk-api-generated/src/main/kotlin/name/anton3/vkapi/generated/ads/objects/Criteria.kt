@@ -40,10 +40,10 @@ import name.anton3.vkapi.vktypes.PropertyExists
 @JsonDeserialize(`as` = CriteriaImpl::class)
 interface Criteria {
     val sex: CriteriaSex?
-    val ageFrom: Long?
-    val ageTo: Long?
-    val birthday: Long?
-    val country: Long?
+    val ageFrom: Int?
+    val ageTo: Int?
+    val birthday: Int?
+    val country: Int?
     val cities: String?
     val citiesNot: String?
     val statuses: String?
@@ -65,8 +65,8 @@ interface Criteria {
     val retargetingGroupsNot: String?
     val paying: Boolean?
     val travellers: PropertyExists?
-    val schoolFrom: Long?
-    val schoolTo: Long?
-    val uniFrom: Long?
-    val uniTo: Long?
+    val schoolFrom: Int?
+    val schoolTo: Int?
+    val uniFrom: Int?
+    val uniTo: Int?
 }

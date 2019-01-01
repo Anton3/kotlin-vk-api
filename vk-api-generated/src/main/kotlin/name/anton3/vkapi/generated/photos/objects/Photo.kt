@@ -30,14 +30,14 @@ interface Photo : WallpostAttachment,
     MessageAttachment,
     NotificationParent {
 
-    val id: Long
-    val albumId: Long
-    val ownerId: Long
-    val userId: Long?
+    val id: Int
+    val albumId: Int
+    val ownerId: Int
+    val userId: Int?
     val sizes: List<Image>?
-    val postId: Long?
-    val width: Long?
-    val height: Long?
+    val postId: Int?
+    val width: Int?
+    val height: Int?
     val text: String?
     val date: VkDate
     val lat: Double?

@@ -15,9 +15,9 @@ package name.anton3.vkapi.generated.messages.objects
  */
 data class Conversation(
     val peer: ConversationPeer,
-    val inRead: Long,
-    val outRead: Long,
-    val unreadCount: Long? = null,
+    val inRead: Int,
+    val outRead: Int,
+    val unreadCount: Int? = null,
     val important: Boolean? = null,
     val unanswered: Boolean? = null,
     val pushSettings: ConversationPushSettings? = null,

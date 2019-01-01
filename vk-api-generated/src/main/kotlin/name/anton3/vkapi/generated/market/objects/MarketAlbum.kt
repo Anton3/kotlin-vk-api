@@ -18,11 +18,11 @@ import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
  */
 @JsonDeserialize(`as` = Void::class)
 data class MarketAlbum(
-    val id: Long,
-    val ownerId: Long,
+    val id: Int,
+    val ownerId: Int,
     val title: String,
-    val count: Long,
-    val updatedTime: Long,
+    val count: Int,
+    val updatedTime: Int,
     val photo: Photo? = null
 ) : WallpostAttachment,
     CommentAttachment,

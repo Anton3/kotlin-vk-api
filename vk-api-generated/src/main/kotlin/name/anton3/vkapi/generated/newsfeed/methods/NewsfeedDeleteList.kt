@@ -14,5 +14,5 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property listId No description
  */
 data class NewsfeedDeleteList(
-    var listId: Long
+    var listId: Int
 ) : VkMethod<OkResponse>("newsfeed.deleteList", jacksonTypeRef())

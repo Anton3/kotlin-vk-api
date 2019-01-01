@@ -22,12 +22,12 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property groupId Group ID (for group messages with group access token)
  */
 data class MessagesGetHistoryAttachments(
-    var peerId: Long,
+    var peerId: Int,
     var mediaType: GetHistoryAttachmentsMediaType? = null,
     var startFrom: String? = null,
-    var count: Long? = null,
+    var count: Int? = null,
     var photoSizes: Boolean? = null,
     var fields: List<String>? = null,
-    var groupId: Long? = null
+    var groupId: Int? = null
 ) : VkMethod<GetHistoryAttachmentsResponse>("messages.getHistoryAttachments", jacksonTypeRef()),
     UserGroupMethod

@@ -21,7 +21,7 @@ import name.anton3.vkapi.vktypes.VkList
 data class DocsSearch(
     var q: String,
     var searchOwn: Boolean? = null,
-    var count: Long? = null,
-    var offset: Long? = null
+    var count: Int? = null,
+    var offset: Int? = null
 ) : VkMethod<VkList<Doc>>("docs.search", jacksonTypeRef()),
     UserGroupMethod

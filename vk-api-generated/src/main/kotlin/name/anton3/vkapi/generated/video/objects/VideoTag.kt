@@ -13,9 +13,9 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property viewed Information whether tha tag is reviewed
  */
 data class VideoTag(
-    val userId: Long,
-    val id: Long,
-    val placerId: Long,
+    val userId: Int,
+    val id: Int,
+    val placerId: Int,
     val taggedName: String,
     val date: VkDate,
     val viewed: Boolean

@@ -16,7 +16,7 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property storyId Story ID.
  */
 data class StoriesGetStats(
-    var ownerId: Long,
-    var storyId: Long
+    var ownerId: Int,
+    var storyId: Int
 ) : VkMethod<StoryStats>("stories.getStats", jacksonTypeRef()),
     UserGroupMethod

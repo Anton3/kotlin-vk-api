@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property title New title of the topic.
  */
 data class BoardEditTopic(
-    var groupId: Long,
-    var topicId: Long,
+    var groupId: Int,
+    var topicId: Int,
     var title: String
 ) : VkMethod<OkResponse>("board.editTopic", jacksonTypeRef()),
     UserMethod

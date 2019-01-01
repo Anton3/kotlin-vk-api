@@ -18,9 +18,9 @@ import name.anton3.vkapi.tokens.UserServiceMethod
  * @property fields No description
  */
 data class UsersGetSubscriptions(
-    var userId: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var userId: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var fields: List<String>? = null
 ) : VkMethod<GetSubscriptionsResponse>("users.getSubscriptions", jacksonTypeRef()),
     UserServiceMethod

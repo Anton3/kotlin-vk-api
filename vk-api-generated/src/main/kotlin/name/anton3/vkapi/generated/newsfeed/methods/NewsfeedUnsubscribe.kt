@@ -19,7 +19,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  */
 data class NewsfeedUnsubscribe(
     var type: UnsubscribeType,
-    var ownerId: Long? = null,
-    var itemId: Long
+    var ownerId: Int? = null,
+    var itemId: Int
 ) : VkMethod<OkResponse>("newsfeed.unsubscribe", jacksonTypeRef()),
     UserMethod

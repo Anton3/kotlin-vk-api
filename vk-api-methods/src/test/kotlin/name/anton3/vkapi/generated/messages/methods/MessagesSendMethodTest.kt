@@ -7,6 +7,7 @@ import name.anton3.vkapi.utils.groupApi
 import name.anton3.vkapi.utils.groupId
 import name.anton3.vkapi.utils.peerId
 import org.junit.Test
+import kotlin.random.Random
 
 class MessagesSendMethodTest {
     @Test
@@ -40,7 +41,7 @@ class MessagesSendMethodTest {
         return MessagesSend(
             peerId = peerId,
             message = "Keyboard reset",
-            randomId = System.currentTimeMillis(),
+            randomId = Random.nextInt(),
             keyboard = KeyboardImpl(oneTime = true, buttons = listOf())
         )
     }

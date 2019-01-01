@@ -6,5 +6,5 @@ package name.anton3.vkapi.generated.friends.objects
  * @property listId List ID
  */
 data class AddListResponse(
-    val listId: Long
+    val listId: Int
 )

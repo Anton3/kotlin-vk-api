@@ -19,7 +19,7 @@ import name.anton3.vkapi.tokens.UserMethod
  */
 data class LikesDelete(
     var type: Type,
-    var ownerId: Long? = null,
-    var itemId: Long
+    var ownerId: Int? = null,
+    var itemId: Int
 ) : VkMethod<DeleteResponse>("likes.delete", jacksonTypeRef()),
     UserMethod

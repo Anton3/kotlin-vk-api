@@ -15,7 +15,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property commentId Comment ID.
  */
 data class PhotosDeleteComment(
-    var ownerId: Long? = null,
-    var commentId: Long
+    var ownerId: Int? = null,
+    var commentId: Int
 ) : VkMethod<Boolean>("photos.deleteComment", jacksonTypeRef()),
     UserMethod

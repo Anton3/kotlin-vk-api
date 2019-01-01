@@ -6,5 +6,5 @@ package name.anton3.vkapi.generated.common.objects
  * @property count Items count
  */
 data class ObjectCount(
-    val count: Long? = null
+    val count: Int? = null
 )

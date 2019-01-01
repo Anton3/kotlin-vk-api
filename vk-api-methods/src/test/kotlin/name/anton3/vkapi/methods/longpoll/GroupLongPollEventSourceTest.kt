@@ -14,6 +14,7 @@ import name.anton3.vkapi.utils.timeout
 import org.junit.Assert.assertTrue
 import org.junit.Ignore
 import org.junit.Test
+import kotlin.random.Random
 
 class GroupLongPollEventSourceTest {
     @Test
@@ -56,7 +57,7 @@ class GroupLongPollEventSourceTest {
         return MessagesSend(
             peerId = peerId,
             message = "test",
-            randomId = System.currentTimeMillis(),
+            randomId = Random.nextInt(),
             keyboard = makeKeyboard()
         )
     }

@@ -10,6 +10,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @JsonDeserialize(`as` = ObjectImpl::class)
 interface Object {
-    val id: Long
+    val id: Int
     val title: String
 }

@@ -16,5 +16,5 @@ import name.anton3.vkapi.vktypes.VkList
  */
 data class StoriesGetBanned(
     var fields: List<String>? = null
-) : VkMethod<VkList<Long>>("stories.getBanned", jacksonTypeRef()),
+) : VkMethod<VkList<Int>>("stories.getBanned", jacksonTypeRef()),
     UserMethod

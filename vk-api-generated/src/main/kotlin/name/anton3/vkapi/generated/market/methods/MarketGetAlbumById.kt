@@ -17,7 +17,7 @@ import name.anton3.vkapi.vktypes.VkList
  * @property albumIds collections identifiers to obtain data from
  */
 data class MarketGetAlbumById(
-    var ownerId: Long,
-    var albumIds: List<Long>
+    var ownerId: Int,
+    var albumIds: List<Int>
 ) : VkMethod<VkList<MarketAlbum>>("market.getAlbumById", jacksonTypeRef()),
     UserMethod

@@ -14,6 +14,6 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property userId No description
  */
 data class UsersIsAppUser(
-    var userId: Long? = null
+    var userId: Int? = null
 ) : VkMethod<Boolean>("users.isAppUser", jacksonTypeRef()),
     UserMethod

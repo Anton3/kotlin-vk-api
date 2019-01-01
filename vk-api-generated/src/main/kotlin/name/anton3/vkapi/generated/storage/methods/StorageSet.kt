@@ -19,6 +19,6 @@ import name.anton3.vkapi.vktypes.OkResponse
 data class StorageSet(
     var key: String,
     var value: String? = null,
-    var userId: Long? = null
+    var userId: Int? = null
 ) : VkMethod<OkResponse>("storage.set", jacksonTypeRef()),
     UserMethod

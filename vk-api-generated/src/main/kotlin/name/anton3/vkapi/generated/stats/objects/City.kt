@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.stats.objects
  * @property name City name
  */
 data class City(
-    val count: Long? = null,
-    val value: Long? = null,
+    val count: Int? = null,
+    val value: Int? = null,
     val name: String? = null
 )

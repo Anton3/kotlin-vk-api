@@ -26,11 +26,11 @@ import name.anton3.vkapi.vktypes.VkList
 data class PlacesGetCheckins(
     var latitude: Double? = null,
     var longitude: Double? = null,
-    var place: Long? = null,
-    var userId: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
-    var timestamp: Long? = null,
+    var place: Int? = null,
+    var userId: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
+    var timestamp: Int? = null,
     var friendsOnly: Boolean? = null,
     var needPlaces: Boolean? = null
 ) : VkMethod<VkList<Checkin>>("places.getCheckins", jacksonTypeRef()),

@@ -19,18 +19,18 @@ package name.anton3.vkapi.generated.places.objects
  * @property groupPhoto URL of the community's photo
  */
 data class PlaceFull(
-    val id: Long? = null,
+    val id: Int? = null,
     val title: String? = null,
     val latitude: Double? = null,
     val longitude: Double? = null,
-    val created: Long? = null,
+    val created: Int? = null,
     val icon: String? = null,
-    val checkins: Long? = null,
+    val checkins: Int? = null,
     val type: String? = null,
-    val country: Long? = null,
-    val city: Long? = null,
+    val country: Int? = null,
+    val city: Int? = null,
     val address: String? = null,
-    val distance: Long? = null,
-    val groupId: Long? = null,
+    val distance: Int? = null,
+    val groupId: Int? = null,
     val groupPhoto: String? = null
 )

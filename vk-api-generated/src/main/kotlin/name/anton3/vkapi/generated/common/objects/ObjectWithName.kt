@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.common.objects
  * @property name Object name
  */
 data class ObjectWithName(
-    val id: Long,
+    val id: Int,
     val name: String
 )

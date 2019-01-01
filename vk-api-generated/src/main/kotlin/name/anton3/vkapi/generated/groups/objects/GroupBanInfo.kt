@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.groups.objects
  * @property comment Ban comment
  */
 data class GroupBanInfo(
-    val endDate: Long? = null,
+    val endDate: Int? = null,
     val comment: String? = null
 )

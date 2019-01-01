@@ -14,7 +14,7 @@ import name.anton3.vkapi.generated.video.objects.VideoFull
 import name.anton3.vkapi.generated.wall.objects.Wallpost
 import name.anton3.vkapi.tokens.UserGroupMethod
 
-private fun attachmentId(type: String, id: Long, ownerId: Long, accessKey: String? = null): String =
+private fun attachmentId(type: String, id: Int, ownerId: Int, accessKey: String? = null): String =
     "$type${ownerId}_$id${accessKey?.let { "_$it" }.orEmpty()}"
 
 fun Photo.toAttachmentId() = attachmentId("photo", id, ownerId, accessKey)
@@ -43,7 +43,7 @@ fun Poll.fullId() = attachmentId("", id, ownerId)
 
 fun AudioMessage.fullId() = attachmentId("", id, ownerId)
 
-suspend fun VkClient<UserGroupMethod>.sendTypings(groupId: Long, peerId: Long) {
+suspend fun VkClient<UserGroupMethod>.sendTypings(groupId: Int, peerId: Int) {
     this(
         MessagesSetActivity(
             peerId = peerId,

@@ -18,8 +18,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property extended '1' — to return additional 'wall', 'profiles', and 'groups' fields. By default: '0'.
  */
 data class FaveGetPosts(
-    var offset: Long? = null,
-    var count: Long? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var extended: Boolean? = null
 ) : VkMethod<VkList<WallpostFull>>("fave.getPosts", jacksonTypeRef()),
     UserMethod

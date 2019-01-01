@@ -21,10 +21,10 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  */
 data class StoriesGetVideoUploadServer(
     var addToNews: Boolean? = null,
-    var userIds: List<Long>? = null,
+    var userIds: List<Int>? = null,
     var replyToStory: String? = null,
     var linkText: String? = null,
     var linkUrl: String? = null,
-    var groupId: Long? = null
+    var groupId: Int? = null
 ) : VkMethod<GetVideoUploadServerResponse>("stories.getVideoUploadServer", jacksonTypeRef()),
     UserGroupMethod

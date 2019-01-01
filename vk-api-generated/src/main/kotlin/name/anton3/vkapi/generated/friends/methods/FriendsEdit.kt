@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property listIds IDs of the friend lists to which to add the user.
  */
 data class FriendsEdit(
-    var userId: Long,
-    var listIds: List<Long>? = null
+    var userId: Int,
+    var listIds: List<Int>? = null
 ) : VkMethod<OkResponse>("friends.edit", jacksonTypeRef()),
     UserMethod

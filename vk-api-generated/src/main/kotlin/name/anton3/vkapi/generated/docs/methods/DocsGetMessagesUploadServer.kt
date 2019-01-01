@@ -18,6 +18,6 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  */
 data class DocsGetMessagesUploadServer(
     var type: GetMessagesUploadServerType? = null,
-    var peerId: Long? = null
+    var peerId: Int? = null
 ) : VkMethod<UploadServer>("docs.getMessagesUploadServer", jacksonTypeRef()),
     UserGroupMethod

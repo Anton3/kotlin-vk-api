@@ -28,13 +28,13 @@ import name.anton3.vkapi.vktypes.VkList
 data class VideoSearch(
     var q: String,
     var sort: SearchSort? = null,
-    var hd: Long? = null,
+    var hd: Int? = null,
     var adult: Boolean? = null,
     var filters: List<String>? = null,
     var searchOwn: Boolean? = null,
-    var offset: Long? = null,
-    var longer: Long? = null,
-    var shorter: Long? = null,
-    var count: Long? = null
+    var offset: Int? = null,
+    var longer: Int? = null,
+    var shorter: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<Video>>("video.search", jacksonTypeRef()),
     UserMethod

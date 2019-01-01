@@ -21,15 +21,15 @@ package name.anton3.vkapi.generated.photos.objects
  * @property sizes No description
  */
 data class PhotoAlbumFull(
-    val id: Long,
-    val thumbId: Long? = null,
+    val id: Int,
+    val thumbId: Int? = null,
     val thumbSrc: String? = null,
-    val ownerId: Long,
+    val ownerId: Int,
     val title: String,
     val description: String? = null,
-    val created: Long,
-    val updated: Long,
-    val size: Long,
+    val created: Int,
+    val updated: Int,
+    val size: Int,
     val privacyView: List<String>? = null,
     val privacyComment: List<String>? = null,
     val uploadByAdminsOnly: Boolean? = null,

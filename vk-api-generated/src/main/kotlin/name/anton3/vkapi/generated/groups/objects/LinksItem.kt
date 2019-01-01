@@ -12,7 +12,7 @@ package name.anton3.vkapi.generated.groups.objects
  * @property photo100 URL of square image of the link with 100 pixels in width
  */
 data class LinksItem(
-    val id: Long? = null,
+    val id: Int? = null,
     val url: String? = null,
     val editTitle: Boolean? = null,
     val name: String? = null,

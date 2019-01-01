@@ -8,5 +8,5 @@ package name.anton3.vkapi.generated.stories.objects
  */
 data class StoryStatsStat(
     val state: StoryStatsState,
-    val count: Long? = null
+    val count: Int? = null
 )

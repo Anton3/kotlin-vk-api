@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.messages.objects
  * @property chat No description
  */
 data class SetChatPhotoResponse(
-    val messageId: Long? = null,
+    val messageId: Int? = null,
     val chat: Chat? = null
 )

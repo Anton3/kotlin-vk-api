@@ -15,6 +15,6 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property groupId ID of the community that owns the wiki page.
  */
 data class PagesGetTitles(
-    var groupId: Long? = null
+    var groupId: Int? = null
 ) : VkMethod<List<Wikipage>>("pages.getTitles", jacksonTypeRef()),
     UserMethod

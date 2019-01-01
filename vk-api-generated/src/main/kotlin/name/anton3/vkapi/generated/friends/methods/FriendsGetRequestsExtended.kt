@@ -21,8 +21,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property suggested '1' — to return a list of suggested friends, '0' — to return friend requests (default)
  */
 data class FriendsGetRequestsExtended(
-    var offset: Long? = null,
-    var count: Long? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var out: Boolean? = null,
     var sort: GetRequestsSort? = null,
     var suggested: Boolean? = null

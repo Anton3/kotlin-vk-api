@@ -10,7 +10,7 @@ package name.anton3.vkapi.generated.account.objects
  */
 data class PushSettings(
     val disabled: Boolean? = null,
-    val disabledUntil: Long? = null,
+    val disabledUntil: Int? = null,
     val conversations: PushConversations? = null,
     val settings: PushParams? = null
 )

@@ -18,9 +18,9 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property needHtml '1' — to return the page as HTML
  */
 data class PagesGetVersion(
-    var versionId: Long,
-    var groupId: Long? = null,
-    var userId: Long? = null,
+    var versionId: Int,
+    var groupId: Int? = null,
+    var userId: Int? = null,
     var needHtml: Boolean? = null
 ) : VkMethod<WikipageFull>("pages.getVersion", jacksonTypeRef()),
     UserMethod

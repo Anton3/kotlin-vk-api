@@ -15,9 +15,9 @@ import name.anton3.vkapi.generated.photos.objects.Photo
 import name.anton3.vkapi.tokens.UserGroupMethod
 import java.nio.charset.Charset
 
-data class UploadPhotoResponse(val server: Long, val hash: String, val photo: String)
+data class UploadPhotoResponse(val server: Int, val hash: String, val photo: String)
 
-suspend fun VkClient<UserGroupMethod>.uploadMessagePhoto(peerId: Long, byteArray: ByteArray): Photo {
+suspend fun VkClient<UserGroupMethod>.uploadMessagePhoto(peerId: Int, byteArray: ByteArray): Photo {
     val uploadUrl = this(PhotosGetMessagesUploadServer(peerId)).uploadUrl
     val response = httpClient.post(uploadUrl, RequestContent.File("photo", "someName.jpg", byteArray))
 
@@ -36,7 +36,7 @@ suspend fun VkClient<UserGroupMethod>.uploadMessagePhoto(peerId: Long, byteArray
 data class UploadDocumentResponse(val file: String)
 
 suspend fun VkClient<UserGroupMethod>.uploadMessageDocument(
-    peerId: Long,
+    peerId: Int,
     fileName: String,
     byteArray: ByteArray,
     tags: List<String> = emptyList()

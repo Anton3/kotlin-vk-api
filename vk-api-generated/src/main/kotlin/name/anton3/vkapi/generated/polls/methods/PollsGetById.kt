@@ -17,8 +17,8 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property pollId Poll ID.
  */
 data class PollsGetById(
-    var ownerId: Long? = null,
+    var ownerId: Int? = null,
     var isBoard: Boolean? = null,
-    var pollId: Long
+    var pollId: Int
 ) : VkMethod<Poll>("polls.getById", jacksonTypeRef()),
     UserMethod

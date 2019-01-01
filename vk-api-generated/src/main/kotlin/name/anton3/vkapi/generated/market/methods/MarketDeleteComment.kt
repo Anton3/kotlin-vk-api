@@ -15,7 +15,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property commentId comment id
  */
 data class MarketDeleteComment(
-    var ownerId: Long,
-    var commentId: Long
+    var ownerId: Int,
+    var commentId: Int
 ) : VkMethod<Boolean>("market.deleteComment", jacksonTypeRef()),
     UserMethod

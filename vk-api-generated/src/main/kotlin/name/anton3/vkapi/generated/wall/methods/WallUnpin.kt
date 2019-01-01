@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property postId Post ID.
  */
 data class WallUnpin(
-    var ownerId: Long? = null,
-    var postId: Long
+    var ownerId: Int? = null,
+    var postId: Int
 ) : VkMethod<OkResponse>("wall.unpin", jacksonTypeRef()),
     UserMethod

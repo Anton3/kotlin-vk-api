@@ -13,6 +13,6 @@ import name.anton3.vkapi.vktypes.VkDate
 @JsonDeserialize(`as` = Void::class)
 data class NewsfeedItemImpl(
     override val type: NewsfeedItemType? = null,
-    override val sourceId: Long? = null,
+    override val sourceId: Int? = null,
     override val date: VkDate? = null
 ) : NewsfeedItem

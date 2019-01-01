@@ -15,7 +15,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property groupId Community ID.
  */
 data class PhotosGetAlbumsCount(
-    var userId: Long? = null,
-    var groupId: Long? = null
-) : VkMethod<Long>("photos.getAlbumsCount", jacksonTypeRef()),
+    var userId: Int? = null,
+    var groupId: Int? = null
+) : VkMethod<Int>("photos.getAlbumsCount", jacksonTypeRef()),
     UserMethod

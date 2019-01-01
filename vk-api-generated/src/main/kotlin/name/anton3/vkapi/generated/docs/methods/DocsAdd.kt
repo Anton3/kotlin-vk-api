@@ -17,8 +17,8 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property accessKey Access key. This parameter is required if 'access_key' was returned with the document's data.
  */
 data class DocsAdd(
-    var ownerId: Long,
-    var docId: Long,
+    var ownerId: Int,
+    var docId: Int,
     var accessKey: String? = null
 ) : VkMethod<AddResponse>("docs.add", jacksonTypeRef()),
     UserMethod

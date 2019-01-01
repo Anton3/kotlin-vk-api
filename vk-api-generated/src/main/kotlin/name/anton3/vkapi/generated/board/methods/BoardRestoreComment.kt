@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property commentId Comment ID.
  */
 data class BoardRestoreComment(
-    var groupId: Long,
-    var topicId: Long,
-    var commentId: Long
+    var groupId: Int,
+    var topicId: Int,
+    var commentId: Int
 ) : VkMethod<OkResponse>("board.restoreComment", jacksonTypeRef()),
     UserGroupMethod

@@ -15,6 +15,6 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property groupId Community ID.
  */
 data class FaveRemoveGroup(
-    var groupId: Long
+    var groupId: Int
 ) : VkMethod<OkResponse>("fave.removeGroup", jacksonTypeRef()),
     UserMethod

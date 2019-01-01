@@ -2,9 +2,9 @@ package name.anton3.vkapi.methods.longpoll.events
 
 data class NotificationSettingsSet(
     override val eventType: Int,
-    val peerId: Long,
+    val peerId: Int,
     val sound: Boolean,
-    val disabledUntil: Long
+    val disabledUntil: Int
 ) : LongPollEvent(eventType) {
 
     companion object {

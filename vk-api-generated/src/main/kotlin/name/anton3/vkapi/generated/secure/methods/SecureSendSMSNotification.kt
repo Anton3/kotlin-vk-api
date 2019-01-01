@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property message 'SMS' text to be sent in 'UTF-8' encoding. Only Latin letters and numbers are allowed. Maximum size is '160' characters.
  */
 data class SecureSendSMSNotification(
-    var userId: Long,
+    var userId: Int,
     var message: String
 ) : VkMethod<OkResponse>("secure.sendSMSNotification", jacksonTypeRef()),
     ServiceMethod

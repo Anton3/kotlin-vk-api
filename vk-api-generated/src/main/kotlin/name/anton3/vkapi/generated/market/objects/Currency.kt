@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.market.objects
  * @property name Currency sign
  */
 data class Currency(
-    val id: Long,
+    val id: Int,
     val name: String
 )

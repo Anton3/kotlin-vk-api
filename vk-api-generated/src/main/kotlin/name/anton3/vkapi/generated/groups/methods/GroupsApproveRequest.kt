@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property userId User ID.
  */
 data class GroupsApproveRequest(
-    var groupId: Long,
-    var userId: Long
+    var groupId: Int,
+    var userId: Int
 ) : VkMethod<OkResponse>("groups.approveRequest", jacksonTypeRef()),
     UserMethod

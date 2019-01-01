@@ -14,6 +14,6 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property userId User ID whose settings information shall be got. By default: current user.
  */
 data class AccountGetAppPermissions(
-    var userId: Long
-) : VkMethod<Long>("account.getAppPermissions", jacksonTypeRef()),
+    var userId: Int
+) : VkMethod<Int>("account.getAppPermissions", jacksonTypeRef()),
     UserMethod

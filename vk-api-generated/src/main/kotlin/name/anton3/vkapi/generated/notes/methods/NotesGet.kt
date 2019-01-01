@@ -18,8 +18,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of notes to return.
  */
 data class NotesGet(
-    var noteIds: List<Long>? = null,
-    var userId: Long? = null,
-    var count: Long? = null
+    var noteIds: List<Int>? = null,
+    var userId: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<Note>>("notes.get", jacksonTypeRef()),
     UserMethod

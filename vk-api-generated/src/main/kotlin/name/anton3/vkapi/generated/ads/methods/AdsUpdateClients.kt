@@ -15,7 +15,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property data Serialized JSON array of objects that describe changes in clients. Description of 'client_mod' objects see below.
  */
 data class AdsUpdateClients(
-    var accountId: Long,
+    var accountId: Int,
     var data: String
-) : VkMethod<Long>("ads.updateClients", jacksonTypeRef()),
+) : VkMethod<Int>("ads.updateClients", jacksonTypeRef()),
     UserMethod

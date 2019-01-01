@@ -21,5 +21,5 @@ data class NotesAdd(
     var text: String,
     var privacyView: List<String>? = null,
     var privacyComment: List<String>? = null
-) : VkMethod<Long>("notes.add", jacksonTypeRef()),
+) : VkMethod<Int>("notes.add", jacksonTypeRef()),
     UserMethod

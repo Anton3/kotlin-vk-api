@@ -22,8 +22,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property deletePlace No description
  */
 data class PhotosEdit(
-    var ownerId: Long? = null,
-    var photoId: Long,
+    var ownerId: Int? = null,
+    var photoId: Int,
     var caption: String? = null,
     var latitude: Double? = null,
     var longitude: Double? = null,

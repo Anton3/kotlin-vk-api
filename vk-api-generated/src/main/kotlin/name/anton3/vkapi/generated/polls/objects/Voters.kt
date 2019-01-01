@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.polls.objects
  * @property users No description
  */
 data class Voters(
-    val answerId: Long? = null,
+    val answerId: Int? = null,
     val users: VotersUsers? = null
 )

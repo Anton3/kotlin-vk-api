@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.friends.objects
  * @property onlineMobile No description
  */
 data class GetOnlineOnlineMobileResponse(
-    val online: List<Long>? = null,
-    val onlineMobile: List<Long>? = null
+    val online: List<Int>? = null,
+    val onlineMobile: List<Int>? = null
 )

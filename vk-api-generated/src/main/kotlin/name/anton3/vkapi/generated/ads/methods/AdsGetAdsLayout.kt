@@ -21,12 +21,12 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property offset Offset. Used in the same cases as 'limit' parameter.
  */
 data class AdsGetAdsLayout(
-    var accountId: Long,
-    var clientId: Long? = null,
+    var accountId: Int,
+    var clientId: Int? = null,
     var includeDeleted: Boolean? = null,
     var campaignIds: String? = null,
     var adIds: String? = null,
-    var limit: Long? = null,
-    var offset: Long? = null
+    var limit: Int? = null,
+    var offset: Int? = null
 ) : VkMethod<List<AdLayout>>("ads.getAdsLayout", jacksonTypeRef()),
     UserMethod

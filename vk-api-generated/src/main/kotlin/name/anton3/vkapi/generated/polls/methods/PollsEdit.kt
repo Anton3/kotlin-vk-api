@@ -20,8 +20,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property deleteAnswers list of answer ids to be deleted. For example: "[382967099, 382967103]"
  */
 data class PollsEdit(
-    var ownerId: Long,
-    var pollId: Long,
+    var ownerId: Int,
+    var pollId: Int,
     var question: String? = null,
     var addAnswers: String? = null,
     var editAnswers: String? = null,

@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.stats.objects
  * @property value Sex/age value
  */
 data class SexAge(
-    val count: Long? = null,
+    val count: Int? = null,
     val value: String? = null
 )

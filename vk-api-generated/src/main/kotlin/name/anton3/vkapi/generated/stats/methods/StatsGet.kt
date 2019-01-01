@@ -18,8 +18,8 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property dateTo End datestamp (in Unix time) of statistics to return.
  */
 data class StatsGet(
-    var groupId: Long? = null,
-    var appId: Long? = null,
+    var groupId: Int? = null,
+    var appId: Int? = null,
     var dateFrom: String? = null,
     var dateTo: String? = null
 ) : VkMethod<List<Period>>("stats.get", jacksonTypeRef()),

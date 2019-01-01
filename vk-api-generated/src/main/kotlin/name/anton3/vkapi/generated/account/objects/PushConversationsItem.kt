@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.account.objects
  * @property disabledUntil Time until that notifications are disabled in seconds
  */
 data class PushConversationsItem(
-    val peerId: Long? = null,
+    val peerId: Int? = null,
     val sound: Boolean? = null,
-    val disabledUntil: Long? = null
+    val disabledUntil: Int? = null
 )

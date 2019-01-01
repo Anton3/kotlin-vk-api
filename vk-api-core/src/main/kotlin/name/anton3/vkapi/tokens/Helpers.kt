@@ -8,14 +8,14 @@ val Token<*>.clientSecret: String?
         else -> null
     }
 
-val Token<UserGroupMethod>.peerId: Long
+val Token<UserGroupMethod>.peerId: Int
     get() = when (this) {
         is UserToken -> id
         is GroupToken -> -id
         else -> error("Impossible")
     }
 
-val Token<*>.peerId: Long?
+val Token<*>.peerId: Int?
     get() = when (this) {
         is UserToken -> id
         is GroupToken -> -id

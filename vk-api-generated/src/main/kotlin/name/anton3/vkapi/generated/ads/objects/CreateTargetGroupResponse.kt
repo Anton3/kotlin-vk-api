@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.ads.objects
  * @property pixel Pixel code
  */
 data class CreateTargetGroupResponse(
-    val id: Long? = null,
+    val id: Int? = null,
     val pixel: String? = null
 )

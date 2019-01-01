@@ -21,8 +21,8 @@ import name.anton3.vkapi.vktypes.VkDate
  */
 @JsonDeserialize(`as` = Void::class)
 data class NotificationsComment(
-    val id: Long? = null,
-    val ownerId: Long? = null,
+    val id: Int? = null,
+    val ownerId: Int? = null,
     val date: VkDate? = null,
     val text: String? = null,
     val photo: Photo? = null,

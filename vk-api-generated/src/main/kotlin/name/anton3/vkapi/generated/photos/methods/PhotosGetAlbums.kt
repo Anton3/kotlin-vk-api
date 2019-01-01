@@ -22,10 +22,10 @@ import name.anton3.vkapi.vktypes.VkList
  * @property photoSizes '1' — to return photo sizes in a
  */
 data class PhotosGetAlbums(
-    var ownerId: Long? = null,
-    var albumIds: List<Long>? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var ownerId: Int? = null,
+    var albumIds: List<Int>? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var needSystem: Boolean? = null,
     var needCovers: Boolean? = null,
     var photoSizes: Boolean? = null

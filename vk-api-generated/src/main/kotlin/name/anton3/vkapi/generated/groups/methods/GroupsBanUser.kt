@@ -21,9 +21,9 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property commentVisible '1' — text of comment will be visible to the user,, '0' — text of comment will be invisible to the user. By default: '0'.
  */
 data class GroupsBanUser(
-    var groupId: Long,
-    var userId: Long,
-    var endDate: Long? = null,
+    var groupId: Int,
+    var userId: Int,
+    var endDate: Int? = null,
     var reason: BanUserReason? = null,
     var comment: String? = null,
     var commentVisible: Boolean? = null

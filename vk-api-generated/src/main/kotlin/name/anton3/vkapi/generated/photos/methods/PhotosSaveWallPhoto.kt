@@ -22,10 +22,10 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property caption Text describing the photo. 2048 digits max.
  */
 data class PhotosSaveWallPhoto(
-    var userId: Long? = null,
-    var groupId: Long? = null,
+    var userId: Int? = null,
+    var groupId: Int? = null,
     var photo: String,
-    var server: Long? = null,
+    var server: Int? = null,
     var hash: String? = null,
     var latitude: Double? = null,
     var longitude: Double? = null,

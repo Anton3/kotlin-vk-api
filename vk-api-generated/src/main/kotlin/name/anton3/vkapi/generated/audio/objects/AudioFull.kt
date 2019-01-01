@@ -25,15 +25,15 @@ import name.anton3.vkapi.vktypes.VkDate
  */
 @JsonDeserialize(`as` = Void::class)
 data class AudioFull(
-    val duration: Long,
+    val duration: Int,
     val date: VkDate,
-    val albumId: Long? = null,
-    val lyricsId: Long? = null,
-    val genreId: Long? = null,
+    val albumId: Int? = null,
+    val lyricsId: Int? = null,
+    val genreId: Int? = null,
     val noSearch: Boolean? = null,
     val isHq: Boolean? = null,
-    override val id: Long,
-    override val ownerId: Long,
+    override val id: Int,
+    override val ownerId: Int,
     override val artist: String,
     override val title: String,
     override val url: String? = null,

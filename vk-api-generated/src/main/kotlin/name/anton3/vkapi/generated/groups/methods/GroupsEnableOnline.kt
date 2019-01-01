@@ -15,6 +15,6 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property groupId Group ID
  */
 data class GroupsEnableOnline(
-    var groupId: Long
+    var groupId: Int
 ) : VkMethod<OkResponse>("groups.enableOnline", jacksonTypeRef()),
     UserGroupMethod

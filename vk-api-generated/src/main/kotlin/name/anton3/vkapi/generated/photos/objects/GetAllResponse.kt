@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.photos.objects
  * @property more Information whether next page is presented
  */
 data class GetAllResponse(
-    val count: Long? = null,
+    val count: Int? = null,
     val items: List<PhotoXtrRealOffset>? = null,
     val more: Boolean? = null
 )

@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property ownerId ID of the user or community that owns the video. Use a negative value to designate a community ID.
  */
 data class VideoAdd(
-    var targetId: Long? = null,
-    var videoId: Long,
-    var ownerId: Long
+    var targetId: Int? = null,
+    var videoId: Int,
+    var ownerId: Int
 ) : VkMethod<OkResponse>("video.add", jacksonTypeRef()),
     UserMethod

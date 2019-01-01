@@ -12,7 +12,7 @@ import name.anton3.vkapi.generated.users.objects.UserFull
  * @property groups No description
  */
 data class GetHistoryResponse(
-    val count: Long,
+    val count: Int,
     val items: List<Message>,
     val profiles: List<UserFull>? = null,
     val groups: List<GroupFull>? = null

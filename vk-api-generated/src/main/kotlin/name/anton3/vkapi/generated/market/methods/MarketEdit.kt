@@ -23,14 +23,14 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property photoIds IDs of additional photos.
  */
 data class MarketEdit(
-    var ownerId: Long,
-    var itemId: Long,
+    var ownerId: Int,
+    var itemId: Int,
     var name: String,
     var description: String,
-    var categoryId: Long,
+    var categoryId: Int,
     var price: Double,
     var deleted: Boolean? = null,
-    var mainPhotoId: Long,
-    var photoIds: List<Long>? = null
+    var mainPhotoId: Int,
+    var photoIds: List<Int>? = null
 ) : VkMethod<OkResponse>("market.edit", jacksonTypeRef()),
     UserMethod

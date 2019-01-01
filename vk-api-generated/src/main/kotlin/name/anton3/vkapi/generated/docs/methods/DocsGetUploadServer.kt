@@ -15,6 +15,6 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property groupId Community ID (if the document will be uploaded to the community).
  */
 data class DocsGetUploadServer(
-    var groupId: Long? = null
+    var groupId: Int? = null
 ) : VkMethod<UploadServer>("docs.getUploadServer", jacksonTypeRef()),
     UserMethod

@@ -18,8 +18,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of comments to return.
  */
 data class NotesGetComments(
-    var noteId: Long,
-    var ownerId: Long? = null,
-    var count: Long? = null
+    var noteId: Int,
+    var ownerId: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<NoteComment>>("notes.getComments", jacksonTypeRef()),
     UserMethod

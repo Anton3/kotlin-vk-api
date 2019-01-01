@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property text New description text for the link.
  */
 data class GroupsEditLink(
-    var groupId: Long,
-    var linkId: Long,
+    var groupId: Int,
+    var linkId: Int,
     var text: String? = null
 ) : VkMethod<OkResponse>("groups.editLink", jacksonTypeRef()),
     UserMethod

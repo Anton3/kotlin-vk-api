@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.groups.objects
  * @property items No description
  */
 data class GroupsArray(
-    val count: Long,
-    val items: List<Long>
+    val count: Int,
+    val items: List<Int>
 )

@@ -19,9 +19,9 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property itemId Object ID.
  */
 data class LikesIsLiked(
-    var userId: Long? = null,
+    var userId: Int? = null,
     var type: IsLikedType,
-    var ownerId: Long? = null,
-    var itemId: Long
+    var ownerId: Int? = null,
+    var itemId: Int
 ) : VkMethod<IsLikedResponse>("likes.isLiked", jacksonTypeRef()),
     UserMethod

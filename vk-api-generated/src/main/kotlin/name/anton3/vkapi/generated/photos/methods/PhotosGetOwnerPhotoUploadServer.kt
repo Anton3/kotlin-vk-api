@@ -15,6 +15,6 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property ownerId identifier of a community or current user. "Note that community id must be negative. 'owner_id=1' – user, 'owner_id=-1' – community, "
  */
 data class PhotosGetOwnerPhotoUploadServer(
-    var ownerId: Long? = null
+    var ownerId: Int? = null
 ) : VkMethod<UploadServer>("photos.getOwnerPhotoUploadServer", jacksonTypeRef()),
     UserMethod

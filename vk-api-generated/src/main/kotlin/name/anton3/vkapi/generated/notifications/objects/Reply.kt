@@ -10,7 +10,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property text Reply text
  */
 data class Reply(
-    val id: Long? = null,
+    val id: Int? = null,
     val date: VkDate? = null,
-    val text: Long? = null
+    val text: Int? = null
 )

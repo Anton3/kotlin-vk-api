@@ -19,10 +19,10 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property mainAlbum Set as main ('1' – set, '0' – no).
  */
 data class MarketEditAlbum(
-    var ownerId: Long,
-    var albumId: Long,
+    var ownerId: Int,
+    var albumId: Int,
     var title: String,
-    var photoId: Long? = null,
+    var photoId: Int? = null,
     var mainAlbum: Boolean? = null
 ) : VkMethod<OkResponse>("market.editAlbum", jacksonTypeRef()),
     UserMethod

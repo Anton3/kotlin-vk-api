@@ -15,6 +15,6 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property groupId ID or screen name of the community.
  */
 data class GroupsLeave(
-    var groupId: Long
+    var groupId: Int
 ) : VkMethod<OkResponse>("groups.leave", jacksonTypeRef()),
     UserMethod

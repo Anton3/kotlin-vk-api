@@ -20,7 +20,7 @@ import name.anton3.vkapi.tokens.UserMethod
 data class WallRepost(
     var `object`: String,
     var message: String? = null,
-    var groupId: Long? = null,
+    var groupId: Int? = null,
     var markAsAds: Boolean? = null
 ) : VkMethod<RepostResponse>("wall.repost", jacksonTypeRef()),
     UserMethod

@@ -16,15 +16,15 @@ package name.anton3.vkapi.generated.users.objects
  * @property educationStatus Education status
  */
 data class University(
-    val id: Long? = null,
-    val country: Long? = null,
-    val city: Long? = null,
+    val id: Int? = null,
+    val country: Int? = null,
+    val city: Int? = null,
     val name: String? = null,
-    val faculty: Long? = null,
+    val faculty: Int? = null,
     val facultyName: String? = null,
-    val chair: Long? = null,
+    val chair: Int? = null,
     val chairName: String? = null,
-    val graduation: Long? = null,
+    val graduation: Int? = null,
     val educationForm: String? = null,
     val educationStatus: String? = null
 )

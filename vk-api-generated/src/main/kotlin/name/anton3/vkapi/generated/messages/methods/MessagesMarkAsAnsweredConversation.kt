@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property answered '1' — to mark as answered, '0' — to remove the mark
  */
 data class MessagesMarkAsAnsweredConversation(
-    var groupId: Long? = null,
-    var peerId: Long,
+    var groupId: Int? = null,
+    var peerId: Int,
     var answered: Boolean? = null
 ) : VkMethod<OkResponse>("messages.markAsAnsweredConversation", jacksonTypeRef()),
     UserGroupMethod

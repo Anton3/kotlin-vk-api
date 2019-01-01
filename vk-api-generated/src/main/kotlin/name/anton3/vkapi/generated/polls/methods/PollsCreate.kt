@@ -20,7 +20,7 @@ import name.anton3.vkapi.tokens.UserMethod
 data class PollsCreate(
     var question: String? = null,
     var isAnonymous: Boolean? = null,
-    var ownerId: Long? = null,
+    var ownerId: Int? = null,
     var addAnswers: String? = null
 ) : VkMethod<Poll>("polls.create", jacksonTypeRef()),
     UserMethod

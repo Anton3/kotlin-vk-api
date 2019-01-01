@@ -14,8 +14,8 @@ import name.anton3.vkapi.generated.wall.objects.CommentAttachment
  */
 @JsonDeserialize(`as` = Void::class)
 data class Sticker(
-    val stickerId: Long? = null,
-    val productId: Long? = null,
+    val stickerId: Int? = null,
+    val productId: Int? = null,
     val images: List<Image>? = null,
     val imagesWithBackground: List<Image>? = null
 ) : CommentAttachment,

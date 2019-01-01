@@ -11,8 +11,8 @@ package name.anton3.vkapi.generated.users.objects
  */
 data class Military(
     val unit: String? = null,
-    val unitId: Long? = null,
-    val countryId: Long? = null,
-    val from: Long? = null,
-    val until: Long? = null
+    val unitId: Int? = null,
+    val countryId: Int? = null,
+    val from: Int? = null,
+    val until: Int? = null
 )

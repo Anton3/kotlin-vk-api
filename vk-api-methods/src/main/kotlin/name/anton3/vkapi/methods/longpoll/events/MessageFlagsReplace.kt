@@ -7,9 +7,9 @@ import name.anton3.vkapi.vktypes.VkDate
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class MessageFlagsReplace(
     override val eventType: Int,
-    val messageId: Long,
+    val messageId: Int,
     val flags: Flags,
-    val peerId: Long?,
+    val peerId: Int?,
     val timestamp: VkDate?,
     val text: String?
 ) : LongPollEvent(eventType)

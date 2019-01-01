@@ -19,10 +19,10 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property endTime Latest timestamp (in Unix time) of a notification to return. By default, the current time.
  */
 data class NotificationsGet(
-    var count: Long? = null,
+    var count: Int? = null,
     var startFrom: String? = null,
     var filters: List<String>? = null,
-    var startTime: Long? = null,
-    var endTime: Long? = null
+    var startTime: Int? = null,
+    var endTime: Int? = null
 ) : VkMethod<GetResponse>("notifications.get", jacksonTypeRef()),
     UserMethod

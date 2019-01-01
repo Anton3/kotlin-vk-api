@@ -9,8 +9,8 @@ package name.anton3.vkapi.generated.newsfeed.objects
  * @property comments Comments Number
  */
 data class NewsfeedNote(
-    val id: Long? = null,
-    val ownerId: Long? = null,
+    val id: Int? = null,
+    val ownerId: Int? = null,
     val title: String? = null,
-    val comments: Long? = null
+    val comments: Int? = null
 )

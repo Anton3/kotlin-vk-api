@@ -51,7 +51,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property userUnblock User removed from community blacklist
  */
 data class GroupsSetLongPollSettings(
-    var groupId: Long,
+    var groupId: Int,
     var enabled: Boolean? = null,
     var messageNew: Boolean? = null,
     var messageReply: Boolean? = null,

@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @JsonDeserialize(`as` = GroupImpl::class)
 interface Group {
-    val id: Long?
+    val id: Int?
     val name: String?
     val screenName: String?
     val deactivated: String?

@@ -20,11 +20,11 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of communities to return.
  */
 data class GroupsGetExtended(
-    var userId: Long? = null,
+    var userId: Int? = null,
     var filter: List<String>? = null,
     var fields: List<String>? = null,
-    var offset: Long? = null,
-    var count: Long? = null
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<GroupFull>>("groups.get", jacksonTypeRef()),
     UserMethod {
     init {

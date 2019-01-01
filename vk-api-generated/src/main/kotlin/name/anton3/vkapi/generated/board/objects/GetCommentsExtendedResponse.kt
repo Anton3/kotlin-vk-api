@@ -13,7 +13,7 @@ import name.anton3.vkapi.generated.users.objects.User
  * @property groups No description
  */
 data class GetCommentsExtendedResponse(
-    val count: Long,
+    val count: Int,
     val items: List<TopicComment>,
     val poll: TopicPoll? = null,
     val profiles: List<User>,

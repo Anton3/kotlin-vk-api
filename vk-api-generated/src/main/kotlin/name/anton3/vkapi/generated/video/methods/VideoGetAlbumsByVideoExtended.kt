@@ -17,9 +17,9 @@ import name.anton3.vkapi.vktypes.VkList
  * @property videoId No description
  */
 data class VideoGetAlbumsByVideoExtended(
-    var targetId: Long? = null,
-    var ownerId: Long,
-    var videoId: Long
+    var targetId: Int? = null,
+    var ownerId: Int,
+    var videoId: Int
 ) : VkMethod<VkList<VideoAlbumFull>>("video.getAlbumsByVideo", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")

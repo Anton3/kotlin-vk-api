@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.messages.objects
  * @property localId local destination ID. For conversations — id - 2000000000, for community — -id, for e-mail — -(id+2000000000).
  */
 data class ConversationPeer(
-    val id: Long,
+    val id: Int,
     val type: ConversationPeerType,
-    val localId: Long
+    val localId: Int
 )

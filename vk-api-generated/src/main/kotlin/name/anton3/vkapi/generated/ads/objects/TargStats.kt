@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.ads.objects
  * @property recommendedCpm Recommended CPM value
  */
 data class TargStats(
-    val audienceCount: Long,
+    val audienceCount: Int,
     val recommendedCpc: Double? = null,
     val recommendedCpm: Double? = null
 )

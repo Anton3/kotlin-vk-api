@@ -16,10 +16,10 @@ import name.anton3.vkapi.vktypes.VkDate
  */
 @JsonDeserialize(`as` = TopicCommentImpl::class)
 interface TopicComment {
-    val id: Long
-    val fromId: Long
+    val id: Int
+    val fromId: Int
     val date: VkDate
     val text: String
     val attachments: List<CommentAttachment>?
-    val realOffset: Long?
+    val realOffset: Int?
 }

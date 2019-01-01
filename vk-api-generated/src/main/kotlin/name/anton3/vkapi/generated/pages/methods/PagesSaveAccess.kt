@@ -19,10 +19,10 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property edit Who can edit the wiki page: '1' — only community members, '2' — all users can edit the page, '0' — only community managers
  */
 data class PagesSaveAccess(
-    var pageId: Long,
-    var groupId: Long? = null,
-    var userId: Long? = null,
+    var pageId: Int,
+    var groupId: Int? = null,
+    var userId: Int? = null,
     var view: Access? = null,
     var edit: Access? = null
-) : VkMethod<Long>("pages.saveAccess", jacksonTypeRef()),
+) : VkMethod<Int>("pages.saveAccess", jacksonTypeRef()),
     UserMethod

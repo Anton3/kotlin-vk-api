@@ -20,9 +20,9 @@ import name.anton3.vkapi.vktypes.OkResponse
  */
 data class MessagesDeleteConversation(
     var userId: String? = null,
-    var groupId: Long? = null,
-    var peerId: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null
+    var groupId: Int? = null,
+    var peerId: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<OkResponse>("messages.deleteConversation", jacksonTypeRef()),
     UserGroupMethod

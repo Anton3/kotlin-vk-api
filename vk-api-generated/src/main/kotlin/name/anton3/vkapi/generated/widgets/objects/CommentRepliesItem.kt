@@ -14,8 +14,8 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property user No description
  */
 data class CommentRepliesItem(
-    val cid: Long? = null,
-    val uid: Long? = null,
+    val cid: Int? = null,
+    val uid: Int? = null,
     val date: VkDate? = null,
     val text: String? = null,
     val likes: WidgetLikes? = null,

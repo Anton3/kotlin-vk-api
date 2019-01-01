@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property groupId Group ID (for group messages with user access token)
  */
 data class MessagesRestore(
-    var messageId: Long,
-    var groupId: Long? = null
+    var messageId: Int,
+    var groupId: Int? = null
 ) : VkMethod<OkResponse>("messages.restore", jacksonTypeRef()),
     UserGroupMethod

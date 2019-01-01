@@ -20,10 +20,10 @@ import name.anton3.vkapi.vktypes.VkList
  * @property groupId Group ID (for group messages with group access token)
  */
 data class MessagesGetById(
-    var messageIds: List<Long>,
-    var previewLength: Long? = null,
+    var messageIds: List<Int>,
+    var previewLength: Int? = null,
     var extended: Boolean? = null,
     var fields: List<String>? = null,
-    var groupId: Long? = null
+    var groupId: Int? = null
 ) : VkMethod<VkList<Message>>("messages.getById", jacksonTypeRef()),
     UserGroupMethod

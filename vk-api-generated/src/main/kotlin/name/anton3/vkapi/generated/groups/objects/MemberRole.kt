@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.groups.objects
  * @property role No description
  */
 data class MemberRole(
-    val id: Long? = null,
+    val id: Int? = null,
     val role: MemberRoleStatus? = null
 )

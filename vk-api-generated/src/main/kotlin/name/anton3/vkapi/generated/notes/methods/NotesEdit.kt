@@ -19,7 +19,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property privacyComment No description
  */
 data class NotesEdit(
-    var noteId: Long,
+    var noteId: Int,
     var title: String,
     var text: String,
     var privacyView: List<String>? = null,

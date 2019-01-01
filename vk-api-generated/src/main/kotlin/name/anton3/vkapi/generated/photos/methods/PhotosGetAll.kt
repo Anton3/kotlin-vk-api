@@ -21,9 +21,9 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property skipHidden '1' – not to return photos being hidden from the block above the wall. Works only with owner_id>0, no_service_albums is ignored.
  */
 data class PhotosGetAll(
-    var ownerId: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var ownerId: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var photoSizes: Boolean? = null,
     var noServiceAlbums: Boolean? = null,
     var needHidden: Boolean? = null,

@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.messages.objects
  * @property noSound true, if notification alert sound is disabled
  */
 data class ConversationPushSettings(
-    val disabledUntil: Long,
+    val disabledUntil: Int,
     val disabledForever: Boolean? = null,
     val noSound: Boolean? = null
 )

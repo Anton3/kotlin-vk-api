@@ -21,11 +21,11 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of cities to return.
  */
 data class DatabaseGetCities(
-    var countryId: Long,
-    var regionId: Long? = null,
+    var countryId: Int,
+    var regionId: Int? = null,
     var q: String? = null,
     var needAll: Boolean? = null,
-    var offset: Long? = null,
-    var count: Long? = null
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<City>>("database.getCities", jacksonTypeRef()),
     UserServiceMethod

@@ -19,9 +19,9 @@ import name.anton3.vkapi.vktypes.VkList
  * @property fields No description
  */
 data class UsersGetSubscriptionsExtended(
-    var userId: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var userId: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var fields: List<String>? = null
 ) : VkMethod<VkList<GetSubscriptionsExtendedResponse>>("users.getSubscriptions", jacksonTypeRef()),
     UserServiceMethod {

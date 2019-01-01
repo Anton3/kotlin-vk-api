@@ -22,12 +22,12 @@ import name.anton3.vkapi.tokens.UserServiceMethod
  * @property sort Sort order: 'asc' — by creation date in chronological order, 'desc' — by creation date in reverse chronological order,
  */
 data class BoardGetComments(
-    var groupId: Long,
-    var topicId: Long,
+    var groupId: Int,
+    var topicId: Int,
     var needLikes: Boolean? = null,
-    var startCommentId: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var startCommentId: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var sort: GetCommentsSort? = null
 ) : VkMethod<GetCommentsResponse>("board.getComments", jacksonTypeRef()),
     UserServiceMethod

@@ -18,8 +18,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count amount of chairs to get
  */
 data class DatabaseGetChairs(
-    var facultyId: Long,
-    var offset: Long? = null,
-    var count: Long? = null
+    var facultyId: Int,
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<Object>>("database.getChairs", jacksonTypeRef()),
     UserServiceMethod

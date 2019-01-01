@@ -20,11 +20,11 @@ import name.anton3.vkapi.tokens.UserServiceMethod
  * @property count No description
  */
 data class WidgetsGetComments(
-    var widgetApiId: Long? = null,
+    var widgetApiId: Int? = null,
     var url: String? = null,
     var pageId: String? = null,
     var order: String? = null,
     var fields: List<String>? = null,
-    var count: Long? = null
+    var count: Int? = null
 ) : VkMethod<GetCommentsResponse>("widgets.getComments", jacksonTypeRef()),
     UserServiceMethod

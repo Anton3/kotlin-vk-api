@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.VkList
  * @property listIds numeric list identifiers.
  */
 data class NewsfeedGetListsExtended(
-    var listIds: List<Long>? = null
+    var listIds: List<Int>? = null
 ) : VkMethod<VkList<ListFull>>("newsfeed.getLists", jacksonTypeRef()),
     UserMethod {
     init {

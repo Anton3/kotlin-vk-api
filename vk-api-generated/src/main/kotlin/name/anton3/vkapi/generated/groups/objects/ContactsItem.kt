@@ -9,7 +9,7 @@ package name.anton3.vkapi.generated.groups.objects
  * @property phone Contact phone
  */
 data class ContactsItem(
-    val userId: Long? = null,
+    val userId: Int? = null,
     val desc: String? = null,
     val email: String? = null,
     val phone: String? = null

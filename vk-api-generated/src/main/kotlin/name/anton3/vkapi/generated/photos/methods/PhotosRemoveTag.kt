@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property tagId Tag ID.
  */
 data class PhotosRemoveTag(
-    var ownerId: Long? = null,
-    var photoId: Long,
-    var tagId: Long
+    var ownerId: Int? = null,
+    var photoId: Int,
+    var tagId: Int
 ) : VkMethod<OkResponse>("photos.removeTag", jacksonTypeRef()),
     UserMethod

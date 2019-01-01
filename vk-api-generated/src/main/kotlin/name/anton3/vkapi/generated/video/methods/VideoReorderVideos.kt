@@ -22,13 +22,13 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property afterVideoId ID of the video after which the photo in question shall be placed.
  */
 data class VideoReorderVideos(
-    var targetId: Long? = null,
-    var albumId: Long? = null,
-    var ownerId: Long,
-    var videoId: Long,
-    var beforeOwnerId: Long? = null,
-    var beforeVideoId: Long? = null,
-    var afterOwnerId: Long? = null,
-    var afterVideoId: Long? = null
+    var targetId: Int? = null,
+    var albumId: Int? = null,
+    var ownerId: Int,
+    var videoId: Int,
+    var beforeOwnerId: Int? = null,
+    var beforeVideoId: Int? = null,
+    var afterOwnerId: Int? = null,
+    var afterVideoId: Int? = null
 ) : VkMethod<OkResponse>("video.reorderVideos", jacksonTypeRef()),
     UserMethod

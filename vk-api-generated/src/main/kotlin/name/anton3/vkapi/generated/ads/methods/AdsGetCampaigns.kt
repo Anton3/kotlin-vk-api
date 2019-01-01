@@ -18,8 +18,8 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property campaignIds Filter of advertising campaigns to show. Serialized JSON array with campaign IDs. Only campaigns that exist in 'campaign_ids' and belong to the specified advertising account will be shown. If the parameter is null, all campaigns will be shown.
  */
 data class AdsGetCampaigns(
-    var accountId: Long,
-    var clientId: Long? = null,
+    var accountId: Int,
+    var clientId: Int? = null,
     var includeDeleted: Boolean? = null,
     var campaignIds: String? = null
 ) : VkMethod<List<Campaign>>("ads.getCampaigns", jacksonTypeRef()),

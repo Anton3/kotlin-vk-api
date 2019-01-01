@@ -15,7 +15,7 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property ownerId Owner ID.
  */
 data class StoriesGetExtended(
-    var ownerId: Long? = null
+    var ownerId: Int? = null
 ) : VkMethod<GetExtendedResponse>("stories.get", jacksonTypeRef()),
     UserGroupMethod {
     init {

@@ -22,8 +22,8 @@ import name.anton3.vkapi.vktypes.VkList
 data class GroupsGetMembersManagers(
     var groupId: String? = null,
     var sort: GetMembersSort? = null,
-    var offset: Long? = null,
-    var count: Long? = null
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<MemberRole>>("groups.getMembers", jacksonTypeRef()),
     UserGroupServiceMethod {
     init {

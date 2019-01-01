@@ -17,6 +17,6 @@ data class City(
     val area: String? = null,
     val region: String? = null,
     val important: Boolean? = null,
-    override val id: Long,
+    override val id: Int,
     override val title: String
 ) : Object

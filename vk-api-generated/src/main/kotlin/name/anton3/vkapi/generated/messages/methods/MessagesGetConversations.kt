@@ -22,12 +22,12 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property fields Profile and communities fields to return.
  */
 data class MessagesGetConversations(
-    var groupId: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var groupId: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var filter: GetConversationsFilter? = null,
     var extended: Boolean? = null,
-    var startMessageId: Long? = null,
+    var startMessageId: Int? = null,
     var fields: List<String>? = null
 ) : VkMethod<GetConversationsResponse>("messages.getConversations", jacksonTypeRef()),
     UserGroupMethod

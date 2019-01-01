@@ -21,12 +21,12 @@ import name.anton3.vkapi.tokens.UserServiceMethod
  * @property fields No description
  */
 data class WallSearchExtended(
-    var ownerId: Long? = null,
+    var ownerId: Int? = null,
     var domain: String? = null,
     var query: String? = null,
     var ownersOnly: Boolean? = null,
-    var count: Long? = null,
-    var offset: Long? = null,
+    var count: Int? = null,
+    var offset: Int? = null,
     var fields: List<String>? = null
 ) : VkMethod<SearchExtendedResponse>("wall.search", jacksonTypeRef()),
     UserServiceMethod {

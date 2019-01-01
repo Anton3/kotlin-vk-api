@@ -21,13 +21,13 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property groupId Group ID (for group messages with user access token)
  */
 data class MessagesEdit(
-    var peerId: Long,
+    var peerId: Int,
     var message: String? = null,
     var lat: Double? = null,
     var long: Double? = null,
     var attachment: List<String>? = null,
     var keepForwardMessages: Boolean? = null,
     var keepSnippets: Boolean? = null,
-    var groupId: Long? = null
+    var groupId: Int? = null
 ) : VkMethod<Boolean>("messages.edit", jacksonTypeRef()),
     UserGroupMethod

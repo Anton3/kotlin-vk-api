@@ -12,11 +12,11 @@ package name.anton3.vkapi.generated.users.objects
  * @property position Position
  */
 data class Career(
-    val groupId: Long? = null,
+    val groupId: Int? = null,
     val company: String? = null,
-    val countryId: Long? = null,
-    val cityId: Long? = null,
-    val from: Long? = null,
-    val until: Long? = null,
+    val countryId: Int? = null,
+    val cityId: Int? = null,
+    val from: Int? = null,
+    val until: Int? = null,
     val position: String? = null
 )

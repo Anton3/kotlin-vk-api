@@ -16,7 +16,7 @@ import name.anton3.vkapi.tokens.UserServiceMethod
  * @property secret Secret key from the lead testing interface.
  */
 data class LeadsStart(
-    var leadId: Long,
+    var leadId: Int,
     var secret: String
 ) : VkMethod<Start>("leads.start", jacksonTypeRef()),
     UserServiceMethod

@@ -24,12 +24,12 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property fields No description
  */
 data class PhotosGetComments(
-    var ownerId: Long? = null,
-    var photoId: Long,
+    var ownerId: Int? = null,
+    var photoId: Int,
     var needLikes: Boolean? = null,
-    var startCommentId: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var startCommentId: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var sort: GetCommentsSort? = null,
     var accessKey: String? = null,
     var fields: List<String>? = null

@@ -22,10 +22,10 @@ import name.anton3.vkapi.vktypes.VkDate
  */
 @JsonDeserialize(`as` = Void::class)
 data class Doc(
-    val id: Long,
-    val ownerId: Long,
+    val id: Int,
+    val ownerId: Int,
     val title: String,
-    val size: Long,
+    val size: Int,
     val ext: String,
     val url: String? = null,
     val date: VkDate,

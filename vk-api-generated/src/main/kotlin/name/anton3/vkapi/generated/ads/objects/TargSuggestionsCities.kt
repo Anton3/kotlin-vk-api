@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.ads.objects
  * @property parent Parent object
  */
 data class TargSuggestionsCities(
-    val id: Long? = null,
+    val id: Int? = null,
     val name: String? = null,
     val parent: String? = null
 )

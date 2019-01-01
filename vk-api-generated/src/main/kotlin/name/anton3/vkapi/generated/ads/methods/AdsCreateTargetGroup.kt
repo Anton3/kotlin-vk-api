@@ -19,10 +19,10 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property lifetime 'For groups with auditory created with pixel code only.', , Number of days after that users will be automatically removed from the group. '0' — not to remove users.
  */
 data class AdsCreateTargetGroup(
-    var accountId: Long,
-    var clientId: Long? = null,
+    var accountId: Int,
+    var clientId: Int? = null,
     var name: String,
     var domain: String? = null,
-    var lifetime: Long? = null
+    var lifetime: Int? = null
 ) : VkMethod<CreateTargetGroupResponse>("ads.createTargetGroup", jacksonTypeRef()),
     UserMethod

@@ -17,7 +17,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property follow '1' to pass an incoming request to followers list.
  */
 data class FriendsAdd(
-    var userId: Long,
+    var userId: Int,
     var text: String? = null,
     var follow: Boolean? = null
 ) : VkMethod<AddResponse>("friends.add", jacksonTypeRef()),

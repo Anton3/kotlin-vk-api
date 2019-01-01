@@ -9,8 +9,8 @@ package name.anton3.vkapi.generated.common.objects
  * @property canPublish Information whether current user can repost
  */
 data class LikesInfo(
-    val count: Long,
-    val userLikes: Long,
+    val count: Int,
+    val userLikes: Int,
     val canLike: Boolean,
     val canPublish: Boolean? = null
 )

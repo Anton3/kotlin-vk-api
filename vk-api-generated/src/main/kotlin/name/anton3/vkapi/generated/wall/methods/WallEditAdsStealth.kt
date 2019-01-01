@@ -25,14 +25,14 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property linkImage Link image url
  */
 data class WallEditAdsStealth(
-    var ownerId: Long? = null,
-    var postId: Long? = null,
+    var ownerId: Int? = null,
+    var postId: Int? = null,
     var message: String? = null,
     var attachments: List<String>? = null,
     var signed: Boolean? = null,
     var lat: Double? = null,
     var long: Double? = null,
-    var placeId: Long? = null,
+    var placeId: Int? = null,
     var linkButton: String? = null,
     var linkTitle: String? = null,
     var linkImage: String? = null

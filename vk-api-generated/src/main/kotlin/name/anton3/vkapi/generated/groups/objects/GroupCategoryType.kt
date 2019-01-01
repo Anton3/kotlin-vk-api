@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.groups.objects
  * @property name No description
  */
 data class GroupCategoryType(
-    val id: Long? = null,
+    val id: Int? = null,
     val name: String? = null
 )

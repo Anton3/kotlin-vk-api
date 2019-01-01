@@ -20,11 +20,11 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property fields Additional fields of [vk.com/dev/fields|profiles] and [vk.com/dev/fields_groups|communities] to return.
  */
 data class NewsfeedGetRecommended(
-    var startTime: Long? = null,
-    var endTime: Long? = null,
-    var maxPhotos: Long? = null,
+    var startTime: Int? = null,
+    var endTime: Int? = null,
+    var maxPhotos: Int? = null,
     var startFrom: String? = null,
-    var count: Long? = null,
+    var count: Int? = null,
     var fields: List<String>? = null
 ) : VkMethod<GetRecommendedResponse>("newsfeed.getRecommended", jacksonTypeRef()),
     UserMethod

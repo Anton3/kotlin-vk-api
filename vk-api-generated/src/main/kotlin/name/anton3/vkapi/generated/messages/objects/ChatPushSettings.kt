@@ -8,5 +8,5 @@ package name.anton3.vkapi.generated.messages.objects
  */
 data class ChatPushSettings(
     val sound: Boolean? = null,
-    val disabledUntil: Long? = null
+    val disabledUntil: Int? = null
 )

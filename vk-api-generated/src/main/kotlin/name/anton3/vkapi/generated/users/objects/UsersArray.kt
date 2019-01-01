@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.users.objects
  * @property items No description
  */
 data class UsersArray(
-    val count: Long,
-    val items: List<Long>
+    val count: Int,
+    val items: List<Int>
 )

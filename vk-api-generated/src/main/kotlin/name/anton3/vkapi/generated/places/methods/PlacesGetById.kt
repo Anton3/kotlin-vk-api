@@ -15,6 +15,6 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property places Location IDs.
  */
 data class PlacesGetById(
-    var places: List<Long>
+    var places: List<Int>
 ) : VkMethod<List<PlaceMin>>("places.getById", jacksonTypeRef()),
     UserMethod

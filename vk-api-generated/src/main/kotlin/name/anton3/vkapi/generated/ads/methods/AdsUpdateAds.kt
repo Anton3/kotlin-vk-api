@@ -15,7 +15,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property data Serialized JSON array of objects that describe changes in ads. Description of 'ad_edit_specification' objects see below.
  */
 data class AdsUpdateAds(
-    var accountId: Long,
+    var accountId: Int,
     var data: String
-) : VkMethod<List<Long>>("ads.updateAds", jacksonTypeRef()),
+) : VkMethod<List<Int>>("ads.updateAds", jacksonTypeRef()),
     UserMethod

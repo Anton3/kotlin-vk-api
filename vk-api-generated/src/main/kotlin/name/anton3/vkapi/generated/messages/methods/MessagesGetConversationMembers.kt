@@ -19,8 +19,8 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property nameCase Case for declension of user name and surname: 'nom' — nominative (default), 'gen' — genitive, 'dat' — dative, 'acc' — accusative, 'ins' — instrumental, 'abl' — prepositional
  */
 data class MessagesGetConversationMembers(
-    var groupId: Long? = null,
-    var peerId: Long? = null,
+    var groupId: Int? = null,
+    var peerId: Int? = null,
     var fields: List<String>? = null,
     var nameCase: NameCase? = null
 ) : VkMethod<GetConversationMembersResponse>("messages.getConversationMembers", jacksonTypeRef()),

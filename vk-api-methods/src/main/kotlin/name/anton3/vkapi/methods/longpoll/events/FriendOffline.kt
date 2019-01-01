@@ -6,7 +6,7 @@ import name.anton3.vkapi.vktypes.VkDate
 
 data class FriendOffline(
     override val eventType: Int,
-    val userId: Long,
+    val userId: Int,
     val reason: OfflineReason,
     val timestamp: VkDate
 ) : LongPollEvent(eventType) {
@@ -14,7 +14,7 @@ data class FriendOffline(
     companion object {
         @JvmStatic
         @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-        fun parse(eventType: Int, userId: Long, reason: OfflineReason, timestamp: VkDate): FriendOffline {
+        fun parse(eventType: Int, userId: Int, reason: OfflineReason, timestamp: VkDate): FriendOffline {
             return FriendOffline(eventType, -userId, reason, timestamp)
         }
     }

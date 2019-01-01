@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property albumIds Collections IDs to add item to.
  */
 data class MarketAddToAlbum(
-    var ownerId: Long,
-    var itemId: Long,
-    var albumIds: List<Long>
+    var ownerId: Int,
+    var itemId: Int,
+    var albumIds: List<Int>
 ) : VkMethod<OkResponse>("market.addToAlbum", jacksonTypeRef()),
     UserMethod

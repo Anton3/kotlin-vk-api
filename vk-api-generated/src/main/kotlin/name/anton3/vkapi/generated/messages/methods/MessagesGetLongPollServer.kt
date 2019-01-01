@@ -17,8 +17,8 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property groupId Group ID (for group messages with user access token)
  */
 data class MessagesGetLongPollServer(
-    var lpVersion: Long? = null,
+    var lpVersion: Int? = null,
     var needPts: Boolean? = null,
-    var groupId: Long? = null
+    var groupId: Int? = null
 ) : VkMethod<LongpollParams>("messages.getLongPollServer", jacksonTypeRef()),
     UserGroupMethod

@@ -18,10 +18,10 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property offset Offset needed to return a specific subset of mutual friends.
  */
 data class FriendsGetMutual(
-    var sourceUid: Long? = null,
-    var targetUid: Long? = null,
+    var sourceUid: Int? = null,
+    var targetUid: Int? = null,
     var order: String? = null,
-    var count: Long? = null,
-    var offset: Long? = null
-) : VkMethod<List<Long>>("friends.getMutual", jacksonTypeRef()),
+    var count: Int? = null,
+    var offset: Int? = null
+) : VkMethod<List<Int>>("friends.getMutual", jacksonTypeRef()),
     UserMethod

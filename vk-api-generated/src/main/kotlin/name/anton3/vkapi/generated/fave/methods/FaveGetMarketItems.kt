@@ -17,7 +17,7 @@ import name.anton3.vkapi.vktypes.VkList
  * @property extended '1' – to return additional fields 'likes, can_comment, can_repost, photos'. By default: '0'.
  */
 data class FaveGetMarketItems(
-    var count: Long? = null,
+    var count: Int? = null,
     var extended: Boolean? = null
 ) : VkMethod<VkList<MarketItem>>("fave.getMarketItems", jacksonTypeRef()),
     UserMethod

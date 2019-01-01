@@ -12,7 +12,6 @@ import name.anton3.vkapi.generated.video.objects.VideoImpl
 import name.anton3.vkapi.generated.wall.objects.CommentAttachment
 import name.anton3.vkapi.generated.wall.objects.WallComment
 import name.anton3.vkapi.generated.wall.objects.WallpostFull
-import name.anton3.vkapi.methods.longpoll.objects.OfflineReason
 import name.anton3.vkapi.vktypes.Value
 import name.anton3.vkapi.vktypes.VkDate
 import name.anton3.vkapi.vktypes.parseEnum
@@ -77,7 +76,7 @@ interface Attachment
     // TODO vkpay
 )
 sealed class CallbackEvent<T>(
-    val groupId: Long,
+    val groupId: Int,
     val attachment: T
 ) {
     override fun toString(): String {
@@ -86,141 +85,141 @@ sealed class CallbackEvent<T>(
 }
 
 
-class NotImplemented(groupId: Long, @JsonProperty("object") attachment: Map<String, Any>) :
+class NotImplemented(groupId: Int, @JsonProperty("object") attachment: Map<String, Any>) :
     CallbackEvent<Map<String, Any>>(groupId, attachment)
 
-class MessageNew(groupId: Long, @JsonProperty("object") attachment: Message) :
+class MessageNew(groupId: Int, @JsonProperty("object") attachment: Message) :
     CallbackEvent<Message>(groupId, attachment)
 
-class MessageReply(groupId: Long, @JsonProperty("object") attachment: Message) :
+class MessageReply(groupId: Int, @JsonProperty("object") attachment: Message) :
     CallbackEvent<Message>(groupId, attachment)
 
-class MessageEdit(groupId: Long, @JsonProperty("object") attachment: Message) :
+class MessageEdit(groupId: Int, @JsonProperty("object") attachment: Message) :
     CallbackEvent<Message>(groupId, attachment)
 
-data class ToggleMessageAllowance(val userId: Long, val key: String?)
+data class ToggleMessageAllowance(val userId: Int, val key: String?)
 
-class MessageAllow(groupId: Long, @JsonProperty("object") attachment: ToggleMessageAllowance) :
+class MessageAllow(groupId: Int, @JsonProperty("object") attachment: ToggleMessageAllowance) :
     CallbackEvent<ToggleMessageAllowance>(groupId, attachment)
 
-class MessageDeny(groupId: Long, @JsonProperty("object") attachment: ToggleMessageAllowance) :
+class MessageDeny(groupId: Int, @JsonProperty("object") attachment: ToggleMessageAllowance) :
     CallbackEvent<ToggleMessageAllowance>(groupId, attachment)
 
 class WallReply(
-    val postId: Long,
-    val postOwnerId: Long,
-    override val id: Long,
-    override val fromId: Long,
+    val postId: Int,
+    val postOwnerId: Int,
+    override val id: Int,
+    override val fromId: Int,
     override val date: VkDate,
     override val text: String,
     override val likes: LikesInfo?,
-    override val replyToUser: Long?,
-    override val replyToComment: Long?,
+    override val replyToUser: Int?,
+    override val replyToComment: Int?,
     override val attachments: List<CommentAttachment>?,
-    override val realOffset: Long?
+    override val realOffset: Int?
 ) : WallComment
 
-class WallReplyCallbackEvent(groupId: Long, @JsonProperty("object") attachment: WallReply) :
+class WallReplyCallbackEvent(groupId: Int, @JsonProperty("object") attachment: WallReply) :
     CallbackEvent<WallReply>(groupId, attachment)
 
 
-class WallReplyDelete(groupId: Long, @JsonProperty("object") attachment: Attachment) :
+class WallReplyDelete(groupId: Int, @JsonProperty("object") attachment: Attachment) :
     CallbackEvent<WallReplyDelete.Attachment>(groupId, attachment) {
 
-    class Attachment(val ownerId: Long, val id: Int, val userId: Long, val deleteId: Long, val postId: Long)
+    class Attachment(val ownerId: Int, val id: Int, val userId: Int, val deleteId: Int, val postId: Int)
 }
 
-class WallPostNew(groupId: Long, @JsonProperty("object") attachment: WallpostFull) :
+class WallPostNew(groupId: Int, @JsonProperty("object") attachment: WallpostFull) :
     CallbackEvent<WallpostFull>(groupId, attachment)
 
-class WallRepost(groupId: Long, @JsonProperty("object") attachment: WallpostFull) :
+class WallRepost(groupId: Int, @JsonProperty("object") attachment: WallpostFull) :
     CallbackEvent<WallpostFull>(groupId, attachment)
 
 
 data class BoardPostEventAttach(
-    val topicId: Long,
-    val topicOwnerId: Long,
-    override val id: Long,
-    override val fromId: Long,
+    val topicId: Int,
+    val topicOwnerId: Int,
+    override val id: Int,
+    override val fromId: Int,
     override val date: VkDate,
     override val text: String,
     override val attachments: List<CommentAttachment>?,
-    override val realOffset: Long?
+    override val realOffset: Int?
 ) : TopicComment
 
-class BoardPostCallbackEvent(groupId: Long, @JsonProperty("object") attachment: BoardPostEventAttach) :
+class BoardPostCallbackEvent(groupId: Int, @JsonProperty("object") attachment: BoardPostEventAttach) :
     CallbackEvent<BoardPostEventAttach>(groupId, attachment)
 
-class BoardPostDelete(groupId: Long, @JsonProperty("object") attachment: Attach) :
+class BoardPostDelete(groupId: Int, @JsonProperty("object") attachment: Attach) :
     CallbackEvent<BoardPostDelete.Attach>(groupId, attachment) {
-    class Attach(val topicId: Long, val topicOwnerId: Long, val id: Int)
+    class Attach(val topicId: Int, val topicOwnerId: Int, val id: Int)
 }
 
-class PhotoNew(groupId: Long, @JsonProperty("object") attachment: Photo) : CallbackEvent<Photo>(groupId, attachment)
+class PhotoNew(groupId: Int, @JsonProperty("object") attachment: Photo) : CallbackEvent<Photo>(groupId, attachment)
 
 class PhotoCommentAttach(
-    val photoId: Long,
-    val photoOwnerId: Long,
-    override val id: Long,
-    override val fromId: Long,
+    val photoId: Int,
+    val photoOwnerId: Int,
+    override val id: Int,
+    override val fromId: Int,
     override val date: VkDate,
     override val text: String,
     override val likes: LikesInfo?,
-    override val replyToUser: Long?,
-    override val replyToComment: Long?,
+    override val replyToUser: Int?,
+    override val replyToComment: Int?,
     override val attachments: List<CommentAttachment>?,
-    override val realOffset: Long?
+    override val realOffset: Int?
 ) : WallComment
 
 
-class PhotoCommentCallbackEvent(groupId: Long, @JsonProperty("object") attachment: PhotoCommentAttach) :
+class PhotoCommentCallbackEvent(groupId: Int, @JsonProperty("object") attachment: PhotoCommentAttach) :
     CallbackEvent<PhotoCommentAttach>(groupId, attachment)
 
-class PhotoCommentDelete(groupId: Long, @JsonProperty("object") attachment: Attach) :
+class PhotoCommentDelete(groupId: Int, @JsonProperty("object") attachment: Attach) :
     CallbackEvent<PhotoCommentDelete.Attach>(groupId, attachment) {
-    class Attach(val ownerId: Long, val id: Int, val userId: Long, val deleterId: Long, val photoId: Long)
+    class Attach(val ownerId: Int, val id: Int, val userId: Int, val deleterId: Int, val photoId: Int)
 }
 
 class VideoCommentAttach(
-    val videoId: Long,
-    val videoOwnerId: Long,
-    override val id: Long,
-    override val fromId: Long,
+    val videoId: Int,
+    val videoOwnerId: Int,
+    override val id: Int,
+    override val fromId: Int,
     override val date: VkDate,
     override val text: String,
     override val likes: LikesInfo?,
-    override val replyToUser: Long?,
-    override val replyToComment: Long?,
+    override val replyToUser: Int?,
+    override val replyToComment: Int?,
     override val attachments: List<CommentAttachment>?,
-    override val realOffset: Long?
+    override val realOffset: Int?
 ) : WallComment
 
 
-class VideoCommentCallbackEvent(groupId: Long, @JsonProperty("object") attachment: VideoCommentAttach) :
+class VideoCommentCallbackEvent(groupId: Int, @JsonProperty("object") attachment: VideoCommentAttach) :
     CallbackEvent<VideoCommentAttach>(groupId, attachment)
 
-class VideoCommentDelete(groupId: Long, @JsonProperty("object") attachment: Attach) :
+class VideoCommentDelete(groupId: Int, @JsonProperty("object") attachment: Attach) :
     CallbackEvent<VideoCommentDelete.Attach>(groupId, attachment) {
-    class Attach(val ownerId: Long, val id: Int, val userId: Long, val deleterId: Long, val videoId: Long)
+    class Attach(val ownerId: Int, val id: Int, val userId: Int, val deleterId: Int, val videoId: Int)
 }
 
 //{"admin_id":271651224,"user_id":302484804,"unblock_date":0,"reason":"other","comment":""}
-class UserBlock(groupId: Long, @JsonProperty("object") attachment: Attachment) :
+class UserBlock(groupId: Int, @JsonProperty("object") attachment: Attachment) :
     CallbackEvent<UserBlock.Attachment>(groupId, attachment) {
 
     class Attachment(
-        val adminId: Long,
-        val userId: Long,
-        val unblockDate: Long,
+        val adminId: Int,
+        val userId: Int,
+        val unblockDate: Int,
         val reason: String,
         val comment: String
     )
 }
 
-class PollVoteNew(groupId: Long, @JsonProperty("object") attachment: Attachment) :
+class PollVoteNew(groupId: Int, @JsonProperty("object") attachment: Attachment) :
     CallbackEvent<PollVoteNew.Attachment>(groupId, attachment) {
 
-    class Attachment(val ownerId: Long, val userId: Long, val pollId: Long, val optionId: Long)
+    class Attachment(val ownerId: Int, val userId: Int, val pollId: Int, val optionId: Int)
 }
 
 enum class JoinType(@JsonValue override val value: String) : Value<String> {
@@ -238,11 +237,11 @@ enum class JoinType(@JsonValue override val value: String) : Value<String> {
 }
 
 
-data class GroupJoinAttach(val userId: Long, val joinType: JoinType)
-data class GroupLeaveAttach(val userId: Long, val self: Boolean)
+data class GroupJoinAttach(val userId: Int, val joinType: JoinType)
+data class GroupLeaveAttach(val userId: Int, val self: Boolean)
 
-class GroupJoin(groupId: Long, @JsonProperty("object") attachment: GroupJoinAttach) :
+class GroupJoin(groupId: Int, @JsonProperty("object") attachment: GroupJoinAttach) :
     CallbackEvent<GroupJoinAttach>(groupId, attachment)
 
-class GroupLeave(groupId: Long, @JsonProperty("object") attachment: GroupLeaveAttach) :
+class GroupLeave(groupId: Int, @JsonProperty("object") attachment: GroupLeaveAttach) :
     CallbackEvent<GroupLeaveAttach>(groupId, attachment)

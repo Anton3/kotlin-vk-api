@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property groupIds No description
  */
 data class NewsfeedDeleteBan(
-    var userIds: List<Long>? = null,
-    var groupIds: List<Long>? = null
+    var userIds: List<Int>? = null,
+    var groupIds: List<Int>? = null
 ) : VkMethod<OkResponse>("newsfeed.deleteBan", jacksonTypeRef()),
     UserMethod

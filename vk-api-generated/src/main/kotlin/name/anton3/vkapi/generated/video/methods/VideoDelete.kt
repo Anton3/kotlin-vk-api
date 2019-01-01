@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property targetId No description
  */
 data class VideoDelete(
-    var videoId: Long,
-    var ownerId: Long? = null,
-    var targetId: Long? = null
+    var videoId: Int,
+    var ownerId: Int? = null,
+    var targetId: Int? = null
 ) : VkMethod<OkResponse>("video.delete", jacksonTypeRef()),
     UserMethod

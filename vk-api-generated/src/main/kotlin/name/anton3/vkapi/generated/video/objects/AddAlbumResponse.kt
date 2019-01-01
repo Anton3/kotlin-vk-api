@@ -6,5 +6,5 @@ package name.anton3.vkapi.generated.video.objects
  * @property albumId Created album ID
  */
 data class AddAlbumResponse(
-    val albumId: Long
+    val albumId: Int
 )

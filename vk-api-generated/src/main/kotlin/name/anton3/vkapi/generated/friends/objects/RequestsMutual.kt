@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.friends.objects
  * @property users No description
  */
 data class RequestsMutual(
-    val count: Long? = null,
-    val users: List<Long>? = null
+    val count: Int? = null,
+    val users: List<Int>? = null
 )

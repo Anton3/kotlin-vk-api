@@ -20,8 +20,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property searchQuery (If the video was found in search results.) Search query string.
  */
 data class VideoReport(
-    var ownerId: Long,
-    var videoId: Long,
+    var ownerId: Int,
+    var videoId: Int,
     var reason: Reason? = null,
     var comment: String? = null,
     var searchQuery: String? = null

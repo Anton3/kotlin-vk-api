@@ -19,9 +19,9 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of regions to return.
  */
 data class DatabaseGetRegions(
-    var countryId: Long,
+    var countryId: Int,
     var q: String? = null,
-    var offset: Long? = null,
-    var count: Long? = null
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<Region>>("database.getRegions", jacksonTypeRef()),
     UserServiceMethod

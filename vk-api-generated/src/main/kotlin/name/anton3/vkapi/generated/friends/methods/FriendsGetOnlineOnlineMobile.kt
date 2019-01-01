@@ -19,11 +19,11 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property offset Offset needed to return a specific subset of friends.
  */
 data class FriendsGetOnlineOnlineMobile(
-    var userId: Long? = null,
-    var listId: Long? = null,
+    var userId: Int? = null,
+    var listId: Int? = null,
     var order: String? = null,
-    var count: Long? = null,
-    var offset: Long? = null
+    var count: Int? = null,
+    var offset: Int? = null
 ) : VkMethod<GetOnlineOnlineMobileResponse>("friends.getOnline", jacksonTypeRef()),
     UserMethod {
     init {

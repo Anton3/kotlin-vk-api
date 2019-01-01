@@ -16,7 +16,7 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property serverId Server ID.
  */
 data class GroupsGetCallbackSettings(
-    var groupId: Long,
-    var serverId: Long? = null
+    var groupId: Int,
+    var serverId: Int? = null
 ) : VkMethod<CallbackSettings>("groups.getCallbackSettings", jacksonTypeRef()),
     UserGroupMethod

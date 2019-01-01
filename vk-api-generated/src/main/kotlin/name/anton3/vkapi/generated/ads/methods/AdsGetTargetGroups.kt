@@ -17,8 +17,8 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property extended '1' — to return pixel code.
  */
 data class AdsGetTargetGroups(
-    var accountId: Long,
-    var clientId: Long? = null,
+    var accountId: Int,
+    var clientId: Int? = null,
     var extended: Boolean? = null
 ) : VkMethod<List<TargetGroup>>("ads.getTargetGroups", jacksonTypeRef()),
     UserMethod

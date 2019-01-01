@@ -20,11 +20,11 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property lifetime 'Only for the groups that get audience from sites with user accounting code.', Time in days when users added to a retarget group will be automatically excluded from it. '0' – automatic exclusion is off.
  */
 data class AdsUpdateTargetGroup(
-    var accountId: Long,
-    var clientId: Long? = null,
-    var targetGroupId: Long,
+    var accountId: Int,
+    var clientId: Int? = null,
+    var targetGroupId: Int,
     var name: String,
     var domain: String? = null,
-    var lifetime: Long? = null
+    var lifetime: Int? = null
 ) : VkMethod<OkResponse>("ads.updateTargetGroup", jacksonTypeRef()),
     UserMethod

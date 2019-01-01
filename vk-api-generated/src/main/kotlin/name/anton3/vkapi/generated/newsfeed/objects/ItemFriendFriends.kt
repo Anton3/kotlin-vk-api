@@ -9,6 +9,6 @@ import name.anton3.vkapi.generated.common.objects.UserId
  * @property items No description
  */
 data class ItemFriendFriends(
-    val count: Long? = null,
+    val count: Int? = null,
     val items: List<UserId>? = null
 )

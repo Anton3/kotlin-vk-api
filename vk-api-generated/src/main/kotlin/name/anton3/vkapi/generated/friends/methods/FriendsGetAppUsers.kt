@@ -13,5 +13,5 @@ import name.anton3.vkapi.tokens.UserMethod
  *
 
  */
-class FriendsGetAppUsers : VkMethod<List<Long>>("friends.getAppUsers", jacksonTypeRef()),
+class FriendsGetAppUsers : VkMethod<List<Int>>("friends.getAppUsers", jacksonTypeRef()),
     UserMethod

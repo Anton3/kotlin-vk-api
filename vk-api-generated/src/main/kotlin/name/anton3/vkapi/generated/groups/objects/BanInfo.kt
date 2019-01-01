@@ -12,9 +12,9 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property endDate Date when user will be removed from blacklist in Unixtime
  */
 data class BanInfo(
-    val adminId: Long? = null,
+    val adminId: Int? = null,
     val date: VkDate? = null,
     val reason: BanInfoReason? = null,
     val comment: String? = null,
-    val endDate: Long? = null
+    val endDate: Int? = null
 )

@@ -16,7 +16,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property videoId Video ID.
  */
 data class VideoGetTags(
-    var ownerId: Long? = null,
-    var videoId: Long
+    var ownerId: Int? = null,
+    var videoId: Int
 ) : VkMethod<List<VideoTag>>("video.getTags", jacksonTypeRef()),
     UserMethod

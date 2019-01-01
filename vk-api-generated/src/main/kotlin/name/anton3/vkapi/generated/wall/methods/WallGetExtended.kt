@@ -21,10 +21,10 @@ import name.anton3.vkapi.tokens.UserServiceMethod
  * @property fields No description
  */
 data class WallGetExtended(
-    var ownerId: Long? = null,
+    var ownerId: Int? = null,
     var domain: String? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var filter: GetFilter? = null,
     var fields: List<String>? = null
 ) : VkMethod<GetExtendedResponse>("wall.get", jacksonTypeRef()),

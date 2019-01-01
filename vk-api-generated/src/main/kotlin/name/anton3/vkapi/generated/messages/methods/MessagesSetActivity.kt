@@ -20,7 +20,7 @@ import name.anton3.vkapi.vktypes.OkResponse
 data class MessagesSetActivity(
     var userId: String? = null,
     var type: String? = null,
-    var peerId: Long? = null,
-    var groupId: Long? = null
+    var peerId: Int? = null,
+    var groupId: Int? = null
 ) : VkMethod<OkResponse>("messages.setActivity", jacksonTypeRef()),
     UserGroupMethod

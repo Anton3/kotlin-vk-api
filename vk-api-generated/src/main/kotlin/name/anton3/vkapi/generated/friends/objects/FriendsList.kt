@@ -8,5 +8,5 @@ package name.anton3.vkapi.generated.friends.objects
  */
 data class FriendsList(
     val name: String,
-    val id: Long
+    val id: Int
 )

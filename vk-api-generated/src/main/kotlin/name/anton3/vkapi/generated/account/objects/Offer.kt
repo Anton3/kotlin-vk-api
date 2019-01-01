@@ -14,7 +14,7 @@ package name.anton3.vkapi.generated.account.objects
  * @property price Offer price
  */
 data class Offer(
-    val id: Long? = null,
+    val id: Int? = null,
     val title: String? = null,
     val instruction: String? = null,
     val instructionHtml: String? = null,
@@ -22,5 +22,5 @@ data class Offer(
     val description: String? = null,
     val img: String? = null,
     val tag: String? = null,
-    val price: Long? = null
+    val price: Int? = null
 )

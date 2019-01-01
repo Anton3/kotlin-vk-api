@@ -18,8 +18,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property photoSizes '1' — to return photo sizes in a [vk.com/dev/photo_sizes|special format].
  */
 data class FaveGetPhotos(
-    var offset: Long? = null,
-    var count: Long? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var photoSizes: Boolean? = null
 ) : VkMethod<VkList<Photo>>("fave.getPhotos", jacksonTypeRef()),
     UserMethod

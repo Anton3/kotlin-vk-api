@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property name Application screen name.
  */
 data class AccountSetNameInMenu(
-    var userId: Long,
+    var userId: Int,
     var name: String? = null
 ) : VkMethod<OkResponse>("account.setNameInMenu", jacksonTypeRef()),
     UserMethod

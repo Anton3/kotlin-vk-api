@@ -16,8 +16,8 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property accessKey for private photos
  */
 data class PhotosCopy(
-    var ownerId: Long,
-    var photoId: Long,
+    var ownerId: Int,
+    var photoId: Int,
     var accessKey: String? = null
-) : VkMethod<Long>("photos.copy", jacksonTypeRef()),
+) : VkMethod<Int>("photos.copy", jacksonTypeRef()),
     UserMethod

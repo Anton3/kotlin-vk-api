@@ -14,11 +14,11 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property replyTo ID of replied comment
  */
 data class NoteComment(
-    val id: Long,
-    val uid: Long,
-    val nid: Long,
-    val oid: Long,
+    val id: Int,
+    val uid: Int,
+    val nid: Int,
+    val oid: Int,
     val date: VkDate,
     val message: String,
-    val replyTo: Long? = null
+    val replyTo: Int? = null
 )

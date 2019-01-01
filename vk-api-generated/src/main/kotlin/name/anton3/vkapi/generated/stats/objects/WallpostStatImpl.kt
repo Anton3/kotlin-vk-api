@@ -16,12 +16,12 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @JsonDeserialize(`as` = Void::class)
 data class WallpostStatImpl(
-    override val reachSubscribers: Long? = null,
-    override val reachTotal: Long? = null,
-    override val links: Long? = null,
-    override val toGroup: Long? = null,
-    override val joinGroup: Long? = null,
-    override val report: Long? = null,
-    override val hide: Long? = null,
-    override val unsubscribe: Long? = null
+    override val reachSubscribers: Int? = null,
+    override val reachTotal: Int? = null,
+    override val links: Int? = null,
+    override val toGroup: Int? = null,
+    override val joinGroup: Int? = null,
+    override val report: Int? = null,
+    override val hide: Int? = null,
+    override val unsubscribe: Int? = null
 ) : WallpostStat

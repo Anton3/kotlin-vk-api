@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @JsonDeserialize(`as` = Void::class)
 data class AppPost(
-    val id: Long? = null,
+    val id: Int? = null,
     val name: String? = null,
     val photo130: String? = null,
     val photo604: String? = null

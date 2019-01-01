@@ -8,8 +8,8 @@ import name.anton3.vkapi.methods.longpoll.attachments.AttachmentType
 data class Attachments(
     val attachments: List<Attachment>,
     val sourceAct: ChatAction?,
-    val sourceMid: Long?,
-    val fromAdmin: Long?,
+    val sourceMid: Int?,
+    val fromAdmin: Int?,
     val geo: Boolean,
     val emoji: Boolean
 ) {
@@ -21,14 +21,14 @@ data class Attachments(
             val emoji = node.has("emoji")
 
             val fromAdminNode = node["from_admin"]
-            val fromAdmin = fromAdminNode?.asLong()?.takeIf { fromAdminNode.isIntegralNumber }
+            val fromAdmin = fromAdminNode?.asInt()?.takeIf { fromAdminNode.isIntegralNumber }
 
             val sourceActNode = node["source_act"]
             val sourceAct = sourceActNode?.asText()?.takeIf { sourceActNode.isTextual }
                 ?.let { actString -> ChatAction.values().first { it.value == actString } }
 
             val sourceMidNode = node["source_mid"]
-            val sourceMid = sourceMidNode?.asLong()?.takeIf { sourceMidNode.isIntegralNumber }
+            val sourceMid = sourceMidNode?.asInt()?.takeIf { sourceMidNode.isIntegralNumber }
 
             val attachments = generateSequence(1) { it + 1 }
                 .takeWhile { node.has("attach$it") }

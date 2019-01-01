@@ -19,7 +19,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  */
 data class NewsfeedUnignoreItem(
     var type: UnignoreItemType,
-    var ownerId: Long,
-    var itemId: Long
+    var ownerId: Int,
+    var itemId: Int
 ) : VkMethod<OkResponse>("newsfeed.unignoreItem", jacksonTypeRef()),
     UserMethod

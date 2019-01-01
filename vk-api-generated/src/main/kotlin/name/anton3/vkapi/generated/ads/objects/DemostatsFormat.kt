@@ -14,7 +14,7 @@ package name.anton3.vkapi.generated.ads.objects
 data class DemostatsFormat(
     val day: String? = null,
     val month: String? = null,
-    val overall: Long? = null,
+    val overall: Int? = null,
     val sex: List<StatsSex>? = null,
     val age: List<StatsAge>? = null,
     val sexAge: List<StatsSexAge>? = null,

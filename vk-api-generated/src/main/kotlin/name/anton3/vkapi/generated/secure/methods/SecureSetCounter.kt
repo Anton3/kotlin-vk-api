@@ -18,7 +18,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  */
 data class SecureSetCounter(
     var counters: List<String>? = null,
-    var userId: Long? = null,
-    var counter: Long? = null
+    var userId: Int? = null,
+    var counter: Int? = null
 ) : VkMethod<OkResponse>("secure.setCounter", jacksonTypeRef()),
     ServiceMethod

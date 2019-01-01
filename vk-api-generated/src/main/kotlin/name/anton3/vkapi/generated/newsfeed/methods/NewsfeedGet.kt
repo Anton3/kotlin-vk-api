@@ -25,12 +25,12 @@ import name.anton3.vkapi.tokens.UserMethod
 data class NewsfeedGet(
     var filters: List<String>? = null,
     var returnBanned: Boolean? = null,
-    var startTime: Long? = null,
-    var endTime: Long? = null,
-    var maxPhotos: Long? = null,
+    var startTime: Int? = null,
+    var endTime: Int? = null,
+    var maxPhotos: Int? = null,
     var sourceIds: List<String>? = null,
     var startFrom: String? = null,
-    var count: Long? = null,
+    var count: Int? = null,
     var fields: List<String>? = null
 ) : VkMethod<GetResponse>("newsfeed.get", jacksonTypeRef()),
     UserMethod

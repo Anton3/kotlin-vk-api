@@ -9,8 +9,8 @@ package name.anton3.vkapi.generated.leads.objects
  * @property spent Amount of spent votes
  */
 data class LeadDays(
-    val impressions: Long? = null,
-    val started: Long? = null,
-    val completed: Long? = null,
-    val spent: Long? = null
+    val impressions: Int? = null,
+    val started: Int? = null,
+    val completed: Int? = null,
+    val spent: Int? = null
 )

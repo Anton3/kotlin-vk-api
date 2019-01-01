@@ -16,6 +16,6 @@ import name.anton3.vkapi.tokens.UserGroupServiceMethod
  */
 data class GroupsIsMemberUserIds(
     var groupId: String,
-    var userIds: List<Long>? = null
+    var userIds: List<Int>? = null
 ) : VkMethod<Boolean>("groups.isMember", jacksonTypeRef()),
     UserGroupServiceMethod

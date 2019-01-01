@@ -22,7 +22,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property dateTo Date to show statistics to. For different value of 'period' different date format is used: *day: YYYY-MM-DD, example: 2011-09-27 — September 27, 2011, **0 — current day,, *month: YYYY-MM, example: 2011-09 — September 2011, **0 — current month,, *overall: 0.
  */
 data class AdsGetDemographics(
-    var accountId: Long,
+    var accountId: Int,
     var idsType: GetDemographicsIdsType,
     var ids: String,
     var period: Period,

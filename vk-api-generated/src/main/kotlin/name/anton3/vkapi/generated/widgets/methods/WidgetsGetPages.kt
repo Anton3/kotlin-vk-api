@@ -18,9 +18,9 @@ import name.anton3.vkapi.tokens.UserServiceMethod
  * @property count No description
  */
 data class WidgetsGetPages(
-    var widgetApiId: Long? = null,
+    var widgetApiId: Int? = null,
     var order: String? = null,
     var period: String? = null,
-    var count: Long? = null
+    var count: Int? = null
 ) : VkMethod<GetPagesResponse>("widgets.getPages", jacksonTypeRef()),
     UserServiceMethod

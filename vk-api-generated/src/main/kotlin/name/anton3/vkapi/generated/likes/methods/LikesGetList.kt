@@ -26,13 +26,13 @@ import name.anton3.vkapi.vktypes.VkList
  */
 data class LikesGetList(
     var type: Type,
-    var ownerId: Long? = null,
-    var itemId: Long? = null,
+    var ownerId: Int? = null,
+    var itemId: Int? = null,
     var pageUrl: String? = null,
     var filter: GetListFilter? = null,
     var friendsOnly: Boolean? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var skipOwn: Boolean? = null
-) : VkMethod<VkList<Long>>("likes.getList", jacksonTypeRef()),
+) : VkMethod<VkList<Int>>("likes.getList", jacksonTypeRef()),
     UserServiceMethod

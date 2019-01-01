@@ -15,14 +15,14 @@ package name.anton3.vkapi.generated.account.objects
  * @property friendsSuggestions New friends suggestions number
  */
 data class AccountCounters(
-    val friends: Long? = null,
-    val messages: Long? = null,
-    val photos: Long? = null,
-    val videos: Long? = null,
-    val gifts: Long? = null,
-    val events: Long? = null,
-    val groups: Long? = null,
-    val notifications: Long? = null,
-    val appRequests: Long? = null,
-    val friendsSuggestions: Long? = null
+    val friends: Int? = null,
+    val messages: Int? = null,
+    val photos: Int? = null,
+    val videos: Int? = null,
+    val gifts: Int? = null,
+    val events: Int? = null,
+    val groups: Int? = null,
+    val notifications: Int? = null,
+    val appRequests: Int? = null,
+    val friendsSuggestions: Int? = null
 )

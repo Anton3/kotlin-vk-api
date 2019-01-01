@@ -19,9 +19,9 @@ import name.anton3.vkapi.tokens.UserMethod
  */
 data class PagesSave(
     var text: String? = null,
-    var pageId: Long? = null,
-    var groupId: Long? = null,
-    var userId: Long? = null,
+    var pageId: Int? = null,
+    var groupId: Int? = null,
+    var userId: Int? = null,
     var title: String? = null
-) : VkMethod<Long>("pages.save", jacksonTypeRef()),
+) : VkMethod<Int>("pages.save", jacksonTypeRef()),
     UserMethod

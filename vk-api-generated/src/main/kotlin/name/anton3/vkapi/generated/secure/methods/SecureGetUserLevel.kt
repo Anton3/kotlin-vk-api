@@ -15,6 +15,6 @@ import name.anton3.vkapi.tokens.ServiceMethod
  * @property userIds No description
  */
 data class SecureGetUserLevel(
-    var userIds: List<Long>
+    var userIds: List<Int>
 ) : VkMethod<List<Level>>("secure.getUserLevel", jacksonTypeRef()),
     ServiceMethod

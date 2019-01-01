@@ -22,7 +22,7 @@ data class UtilsGetLinkStatsExtended(
     var key: String,
     var accessKey: String? = null,
     var interval: GetLinkStatsInterval? = null,
-    var intervalsCount: Long? = null
+    var intervalsCount: Int? = null
 ) : VkMethod<LinkStatsExtended>("utils.getLinkStats", jacksonTypeRef()),
     UserGroupServiceMethod {
     init {

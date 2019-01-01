@@ -24,7 +24,7 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
 ) {
     abstract suspend fun iteratorToUrl(iterator: IteratorType): String
 
-    abstract suspend fun iteratorWithTs(iterator: IteratorType, ts: Long): IteratorType
+    abstract suspend fun iteratorWithTs(iterator: IteratorType, ts: Int): IteratorType
 
     abstract suspend fun iterator(): IteratorType
 

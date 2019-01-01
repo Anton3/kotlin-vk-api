@@ -18,8 +18,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property offset Offset needed to return a specific subset of results.
  */
 data class GiftsGet(
-    var userId: Long? = null,
-    var count: Long? = null,
-    var offset: Long? = null
+    var userId: Int? = null,
+    var count: Int? = null,
+    var offset: Int? = null
 ) : VkMethod<VkList<Gift>>("gifts.get", jacksonTypeRef()),
     UserMethod

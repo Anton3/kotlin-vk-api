@@ -22,10 +22,10 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  */
 data class StoriesGetPhotoUploadServer(
     var addToNews: Boolean? = null,
-    var userIds: List<Long>? = null,
+    var userIds: List<Int>? = null,
     var replyToStory: String? = null,
     var linkText: GetPhotoUploadServerLinkText? = null,
     var linkUrl: String? = null,
-    var groupId: Long? = null
+    var groupId: Int? = null
 ) : VkMethod<GetPhotoUploadServerResponse>("stories.getPhotoUploadServer", jacksonTypeRef()),
     UserGroupMethod

@@ -22,15 +22,15 @@ import name.anton3.vkapi.vktypes.VkDate
  */
 @JsonDeserialize(`as` = WallpostImpl::class)
 interface Wallpost {
-    val id: Long?
-    val fromId: Long?
-    val ownerId: Long?
+    val id: Int?
+    val fromId: Int?
+    val ownerId: Int?
     val date: VkDate?
     val views: Views?
     val accessKey: String?
     val postType: PostType?
     val text: String?
-    val signerId: Long?
+    val signerId: Int?
     val attachments: List<WallpostAttachment>?
     val geo: Geo?
     val postSource: PostSource?

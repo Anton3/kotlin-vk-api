@@ -15,6 +15,6 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property userId User ID.
  */
 data class AccountBanUser(
-    var userId: Long
+    var userId: Int
 ) : VkMethod<OkResponse>("account.banUser", jacksonTypeRef()),
     UserMethod

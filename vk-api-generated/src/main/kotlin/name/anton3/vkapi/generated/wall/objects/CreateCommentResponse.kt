@@ -6,5 +6,5 @@ package name.anton3.vkapi.generated.wall.objects
  * @property commentId Created comment ID
  */
 data class CreateCommentResponse(
-    val commentId: Long
+    val commentId: Int
 )

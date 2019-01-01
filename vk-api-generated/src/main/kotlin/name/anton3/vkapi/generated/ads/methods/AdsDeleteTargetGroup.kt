@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property targetGroupId Group ID.
  */
 data class AdsDeleteTargetGroup(
-    var accountId: Long,
-    var clientId: Long? = null,
-    var targetGroupId: Long
+    var accountId: Int,
+    var clientId: Int? = null,
+    var targetGroupId: Int
 ) : VkMethod<OkResponse>("ads.deleteTargetGroup", jacksonTypeRef()),
     UserMethod

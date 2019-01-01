@@ -14,9 +14,9 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property fwdMessages Forwarded messages
  */
 data class PinnedMessage(
-    val id: Long,
+    val id: Int,
     val date: VkDate,
-    val fromId: Long,
+    val fromId: Int,
     val text: String,
     val attachments: List<MessageAttachment>,
     val geo: PinnedMessageGeo,

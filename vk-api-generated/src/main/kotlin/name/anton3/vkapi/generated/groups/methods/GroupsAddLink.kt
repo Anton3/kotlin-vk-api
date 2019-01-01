@@ -17,7 +17,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property text Description text for the link.
  */
 data class GroupsAddLink(
-    var groupId: Long,
+    var groupId: Int,
     var link: String,
     var text: String? = null
 ) : VkMethod<OkResponse>("groups.addLink", jacksonTypeRef()),

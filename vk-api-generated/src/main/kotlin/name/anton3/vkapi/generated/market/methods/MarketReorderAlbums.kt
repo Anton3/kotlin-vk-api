@@ -18,9 +18,9 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property after ID of a collection to place current collection after it.
  */
 data class MarketReorderAlbums(
-    var ownerId: Long,
-    var albumId: Long,
-    var before: Long? = null,
-    var after: Long? = null
+    var ownerId: Int,
+    var albumId: Int,
+    var before: Int? = null,
+    var after: Int? = null
 ) : VkMethod<OkResponse>("market.reorderAlbums", jacksonTypeRef()),
     UserMethod

@@ -17,9 +17,9 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property taggedName Tag text.
  */
 data class VideoPutTag(
-    var userId: Long,
-    var ownerId: Long? = null,
-    var videoId: Long,
+    var userId: Int,
+    var ownerId: Int? = null,
+    var videoId: Int,
     var taggedName: String? = null
-) : VkMethod<Long>("video.putTag", jacksonTypeRef()),
+) : VkMethod<Int>("video.putTag", jacksonTypeRef()),
     UserMethod

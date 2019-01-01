@@ -8,5 +8,5 @@ package name.anton3.vkapi.generated.utils.objects
  */
 data class DomainResolved(
     val type: DomainResolvedType? = null,
-    val objectId: Long? = null
+    val objectId: Int? = null
 )

@@ -11,10 +11,10 @@ package name.anton3.vkapi.generated.ads.objects
  * @property pixel Pixel code
  */
 data class TargetGroup(
-    val id: Long? = null,
+    val id: Int? = null,
     val name: String? = null,
     val domain: String? = null,
-    val audienceCount: Long? = null,
-    val lifetime: Long? = null,
+    val audienceCount: Int? = null,
+    val lifetime: Int? = null,
     val pixel: String? = null
 )

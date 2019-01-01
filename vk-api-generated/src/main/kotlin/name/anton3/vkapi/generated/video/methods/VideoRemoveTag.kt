@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property videoId Video ID.
  */
 data class VideoRemoveTag(
-    var tagId: Long,
-    var ownerId: Long? = null,
-    var videoId: Long
+    var tagId: Int,
+    var ownerId: Int? = null,
+    var videoId: Int
 ) : VkMethod<OkResponse>("video.removeTag", jacksonTypeRef()),
     UserMethod

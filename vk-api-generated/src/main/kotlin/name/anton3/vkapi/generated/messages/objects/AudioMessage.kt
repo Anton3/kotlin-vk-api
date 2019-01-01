@@ -15,11 +15,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @JsonDeserialize(`as` = Void::class)
 data class AudioMessage(
-    val id: Long,
-    val ownerId: Long,
-    val duration: Long,
+    val id: Int,
+    val ownerId: Int,
+    val duration: Int,
     val linkOgg: String,
     val linkMp3: String,
     val accessKey: String,
-    val waveform: List<Long>
+    val waveform: List<Int>
 ) : MessageAttachment

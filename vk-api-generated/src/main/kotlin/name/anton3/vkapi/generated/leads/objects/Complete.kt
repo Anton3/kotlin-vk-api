@@ -12,9 +12,9 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property success No description
  */
 data class Complete(
-    val limit: Long? = null,
-    val spent: Long? = null,
-    val cost: Long? = null,
+    val limit: Int? = null,
+    val spent: Int? = null,
+    val cost: Int? = null,
     val testMode: Boolean? = null,
     val success: OkResponse? = null
 )

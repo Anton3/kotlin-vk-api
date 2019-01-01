@@ -16,11 +16,11 @@ package name.anton3.vkapi.generated.messages.objects
  * @property kicked Shows that user has been kicked from the chat
  */
 data class Chat(
-    val id: Long,
+    val id: Int,
     val type: String,
     val title: String? = null,
-    val adminId: Long,
-    val users: List<Long>,
+    val adminId: Int,
+    val users: List<Int>,
     val pushSettings: ChatPushSettings? = null,
     val photo50: String? = null,
     val photo100: String? = null,

@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property title New title of the chat.
  */
 data class MessagesEditChat(
-    var chatId: Long,
+    var chatId: Int,
     var title: String
 ) : VkMethod<OkResponse>("messages.editChat", jacksonTypeRef()),
     UserGroupMethod

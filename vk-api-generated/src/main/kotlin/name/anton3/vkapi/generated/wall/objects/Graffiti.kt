@@ -12,8 +12,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @JsonDeserialize(`as` = Void::class)
 data class Graffiti(
-    val id: Long? = null,
-    val ownerId: Long? = null,
+    val id: Int? = null,
+    val ownerId: Int? = null,
     val photo200: String? = null,
     val photo586: String? = null
 ) : WallpostAttachment

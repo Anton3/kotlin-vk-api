@@ -18,9 +18,9 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property after ID of the photo after which the photo in question shall be placed.
  */
 data class PhotosReorderPhotos(
-    var ownerId: Long? = null,
-    var photoId: Long,
-    var before: Long? = null,
-    var after: Long? = null
+    var ownerId: Int? = null,
+    var photoId: Int,
+    var before: Int? = null,
+    var after: Int? = null
 ) : VkMethod<OkResponse>("photos.reorderPhotos", jacksonTypeRef()),
     UserMethod

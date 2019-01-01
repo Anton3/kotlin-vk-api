@@ -17,7 +17,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property privacy new access permissions for the album. Possible values: , *'0' – all users,, *'1' – friends only,, *'2' – friends and friends of friends,, *'3' – "only me".
  */
 data class VideoAddAlbum(
-    var groupId: Long? = null,
+    var groupId: Int? = null,
     var title: String? = null,
     var privacy: List<String>? = null
 ) : VkMethod<AddAlbumResponse>("video.addAlbum", jacksonTypeRef()),

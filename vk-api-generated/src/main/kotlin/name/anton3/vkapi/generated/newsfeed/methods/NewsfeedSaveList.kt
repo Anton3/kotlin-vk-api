@@ -17,9 +17,9 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property noReposts reposts display on and off ('1' is for off).
  */
 data class NewsfeedSaveList(
-    var listId: Long? = null,
+    var listId: Int? = null,
     var title: String,
-    var sourceIds: List<Long>? = null,
+    var sourceIds: List<Int>? = null,
     var noReposts: Boolean? = null
-) : VkMethod<Long>("newsfeed.saveList", jacksonTypeRef()),
+) : VkMethod<Int>("newsfeed.saveList", jacksonTypeRef()),
     UserMethod

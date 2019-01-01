@@ -16,7 +16,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property albumId Album ID.
  */
 data class VideoGetAlbumById(
-    var ownerId: Long? = null,
-    var albumId: Long
+    var ownerId: Int? = null,
+    var albumId: Int
 ) : VkMethod<VideoAlbumFull>("video.getAlbumById", jacksonTypeRef()),
     UserMethod

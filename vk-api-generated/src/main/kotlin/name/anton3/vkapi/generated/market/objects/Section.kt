@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.market.objects
  * @property name Section name
  */
 data class Section(
-    val id: Long,
+    val id: Int,
     val name: String
 )

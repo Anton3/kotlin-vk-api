@@ -16,8 +16,8 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property count Number of invitations to return.
  */
 data class GroupsGetInvitesExtended(
-    var offset: Long? = null,
-    var count: Long? = null
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<GetInvitesExtendedResponse>("groups.getInvites", jacksonTypeRef()),
     UserMethod {
     init {

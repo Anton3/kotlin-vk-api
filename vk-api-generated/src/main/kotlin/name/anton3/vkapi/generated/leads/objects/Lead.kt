@@ -12,11 +12,11 @@ package name.anton3.vkapi.generated.leads.objects
  * @property days No description
  */
 data class Lead(
-    val limit: Long? = null,
-    val spent: Long? = null,
-    val cost: Long? = null,
-    val impressions: Long? = null,
-    val started: Long? = null,
-    val completed: Long? = null,
+    val limit: Int? = null,
+    val spent: Int? = null,
+    val cost: Int? = null,
+    val impressions: Int? = null,
+    val started: Int? = null,
+    val completed: Int? = null,
     val days: LeadDays? = null
 )

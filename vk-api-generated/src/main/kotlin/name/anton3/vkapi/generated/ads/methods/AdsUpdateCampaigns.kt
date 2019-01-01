@@ -15,7 +15,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property data Serialized JSON array of objects that describe changes in campaigns. Description of 'campaign_mod' objects see below.
  */
 data class AdsUpdateCampaigns(
-    var accountId: Long,
+    var accountId: Int,
     var data: String
-) : VkMethod<Long>("ads.updateCampaigns", jacksonTypeRef()),
+) : VkMethod<Int>("ads.updateCampaigns", jacksonTypeRef()),
     UserMethod

@@ -28,10 +28,10 @@ interface User : UserMin {
     val photo100: String?
     val online: Boolean?
     val onlineMobile: Boolean?
-    val onlineApp: Long?
-    override val id: Long
+    val onlineApp: Int?
+    override val id: Int
     override val firstName: String
     override val lastName: String
     override val deactivated: String?
-    override val hidden: Long?
+    override val hidden: Int?
 }

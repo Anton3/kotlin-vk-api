@@ -18,8 +18,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property privacy new access permissions for the album. Possible values: , *'0' – all users,, *'1' – friends only,, *'2' – friends and friends of friends,, *'3' – "only me".
  */
 data class VideoEditAlbum(
-    var groupId: Long? = null,
-    var albumId: Long,
+    var groupId: Int? = null,
+    var albumId: Int,
     var title: String,
     var privacy: List<String>? = null
 ) : VkMethod<OkResponse>("video.editAlbum", jacksonTypeRef()),

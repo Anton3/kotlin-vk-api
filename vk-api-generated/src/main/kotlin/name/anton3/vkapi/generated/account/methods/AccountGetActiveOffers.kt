@@ -16,6 +16,6 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of results to return.
  */
 data class AccountGetActiveOffers(
-    var count: Long? = null
+    var count: Int? = null
 ) : VkMethod<VkList<Offer>>("account.getActiveOffers", jacksonTypeRef()),
     UserMethod

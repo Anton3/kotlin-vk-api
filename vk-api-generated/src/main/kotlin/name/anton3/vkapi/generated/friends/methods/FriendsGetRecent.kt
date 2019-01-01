@@ -14,6 +14,6 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property count Number of recently added friends to return.
  */
 data class FriendsGetRecent(
-    var count: Long? = null
-) : VkMethod<List<Long>>("friends.getRecent", jacksonTypeRef()),
+    var count: Int? = null
+) : VkMethod<List<Int>>("friends.getRecent", jacksonTypeRef()),
     UserMethod

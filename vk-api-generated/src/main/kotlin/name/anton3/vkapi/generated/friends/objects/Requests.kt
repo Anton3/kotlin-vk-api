@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.friends.objects
  * @property mutual No description
  */
 data class Requests(
-    val userId: Long? = null,
+    val userId: Int? = null,
     val from: String? = null,
     val mutual: RequestsMutual? = null
 )

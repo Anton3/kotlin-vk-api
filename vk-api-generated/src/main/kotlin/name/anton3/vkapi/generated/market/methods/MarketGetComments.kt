@@ -24,11 +24,11 @@ import name.anton3.vkapi.vktypes.VkList
  * @property fields List of additional profile fields to return. See the [vk.com/dev/fields|details]
  */
 data class MarketGetComments(
-    var ownerId: Long,
-    var itemId: Long,
+    var ownerId: Int,
+    var itemId: Int,
     var needLikes: Boolean? = null,
-    var startCommentId: Long? = null,
-    var count: Long? = null,
+    var startCommentId: Int? = null,
+    var count: Int? = null,
     var sort: GetCommentsSort? = null,
     var extended: Boolean? = null,
     var fields: List<String>? = null

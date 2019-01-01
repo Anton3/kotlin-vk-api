@@ -17,9 +17,9 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property groupId Group ID (for group messages with user access token)
  */
 data class MessagesDelete(
-    var messageIds: List<Long>? = null,
+    var messageIds: List<Int>? = null,
     var spam: Boolean? = null,
     var deleteForAll: Boolean? = null,
-    var groupId: Long? = null
-) : VkMethod<Map<Long, Boolean>>("messages.delete", jacksonTypeRef()),
+    var groupId: Int? = null
+) : VkMethod<Map<Int, Boolean>>("messages.delete", jacksonTypeRef()),
     UserGroupMethod

@@ -15,7 +15,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property ids Serialized JSON array with IDs of deleted campaigns.
  */
 data class AdsDeleteCampaigns(
-    var accountId: Long,
+    var accountId: Int,
     var ids: String
-) : VkMethod<Long>("ads.deleteCampaigns", jacksonTypeRef()),
+) : VkMethod<Int>("ads.deleteCampaigns", jacksonTypeRef()),
     UserMethod

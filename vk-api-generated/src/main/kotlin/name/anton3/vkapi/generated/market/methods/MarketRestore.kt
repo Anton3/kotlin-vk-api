@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property itemId Deleted item ID.
  */
 data class MarketRestore(
-    var ownerId: Long,
-    var itemId: Long
+    var ownerId: Int,
+    var itemId: Int
 ) : VkMethod<OkResponse>("market.restore", jacksonTypeRef()),
     UserMethod

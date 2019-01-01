@@ -19,6 +19,6 @@ import name.anton3.vkapi.tokens.UserServiceMethod
 data class VideoGetCatalogSection(
     var sectionId: String,
     var from: String,
-    var count: Long? = null
+    var count: Int? = null
 ) : VkMethod<GetCatalogSectionResponse>("video.getCatalogSection", jacksonTypeRef()),
     UserServiceMethod

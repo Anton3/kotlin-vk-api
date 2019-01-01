@@ -19,10 +19,10 @@ import name.anton3.vkapi.vktypes.VkList
  * @property offset Offset needed to return a specific subset of results.
  */
 data class StoriesGetViewersExtended(
-    var ownerId: Long,
-    var storyId: Long,
-    var count: Long? = null,
-    var offset: Long? = null
+    var ownerId: Int,
+    var storyId: Int,
+    var count: Int? = null,
+    var offset: Int? = null
 ) : VkMethod<VkList<UserFull>>("stories.getViewers", jacksonTypeRef()),
     UserGroupMethod {
     init {

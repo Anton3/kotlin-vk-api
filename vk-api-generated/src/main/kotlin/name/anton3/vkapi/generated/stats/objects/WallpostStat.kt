@@ -16,12 +16,12 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @JsonDeserialize(`as` = WallpostStatImpl::class)
 interface WallpostStat {
-    val reachSubscribers: Long?
-    val reachTotal: Long?
-    val links: Long?
-    val toGroup: Long?
-    val joinGroup: Long?
-    val report: Long?
-    val hide: Long?
-    val unsubscribe: Long?
+    val reachSubscribers: Int?
+    val reachTotal: Int?
+    val links: Int?
+    val toGroup: Int?
+    val joinGroup: Int?
+    val report: Int?
+    val hide: Int?
+    val unsubscribe: Int?
 }

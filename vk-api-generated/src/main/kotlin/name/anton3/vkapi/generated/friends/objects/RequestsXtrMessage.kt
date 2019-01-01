@@ -9,7 +9,7 @@ package name.anton3.vkapi.generated.friends.objects
  * @property message Message sent with a request
  */
 data class RequestsXtrMessage(
-    val userId: Long? = null,
+    val userId: Int? = null,
     val from: String? = null,
     val mutual: RequestsMutual? = null,
     val message: String? = null

@@ -32,7 +32,7 @@ import name.anton3.vkapi.generated.photos.objects.Photo
  * @property isInCatalog Information whether application is in mobile catalog
  */
 data class App(
-    val id: Long,
+    val id: Int,
     val title: String,
     val screenName: String? = null,
     val description: String? = null,
@@ -45,16 +45,16 @@ data class App(
     val type: AppType,
     val section: String? = null,
     val authorUrl: String? = null,
-    val authorId: Long? = null,
-    val authorGroup: Long? = null,
-    val membersCount: Long? = null,
-    val publishedDate: Long? = null,
-    val catalogPosition: Long? = null,
+    val authorId: Int? = null,
+    val authorGroup: Int? = null,
+    val membersCount: Int? = null,
+    val publishedDate: Int? = null,
+    val catalogPosition: Int? = null,
     val screenshots: List<Photo>? = null,
-    val international: Long? = null,
+    val international: Int? = null,
     val leaderboardType: AppLeaderboardType? = null,
-    val genreId: Long? = null,
+    val genreId: Int? = null,
     val genre: String? = null,
-    val platformId: Long? = null,
-    val isInCatalog: Long? = null
+    val platformId: Int? = null,
+    val isInCatalog: Int? = null
 )

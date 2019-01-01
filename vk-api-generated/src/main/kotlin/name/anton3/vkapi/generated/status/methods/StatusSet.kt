@@ -17,6 +17,6 @@ import name.anton3.vkapi.vktypes.OkResponse
  */
 data class StatusSet(
     var text: String? = null,
-    var groupId: Long? = null
+    var groupId: Int? = null
 ) : VkMethod<OkResponse>("status.set", jacksonTypeRef()),
     UserMethod

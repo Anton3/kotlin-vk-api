@@ -13,12 +13,12 @@ package name.anton3.vkapi.generated.video.objects
  * @property isSystem Information whether album is system
  */
 data class VideoAlbumFull(
-    val id: Long,
-    val ownerId: Long,
+    val id: Int,
+    val ownerId: Int,
     val title: String,
-    val count: Long,
+    val count: Int,
     val photo160: String? = null,
     val photo320: String? = null,
-    val updatedTime: Long,
-    val isSystem: Long? = null
+    val updatedTime: Int,
+    val isSystem: Int? = null
 )

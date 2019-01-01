@@ -18,7 +18,7 @@ import name.anton3.vkapi.tokens.UserMethod
  */
 data class AdsGetSuggestionsCities(
     var q: String? = null,
-    var country: Long? = null
+    var country: Int? = null
 ) : VkMethod<List<TargSuggestionsCities>>("ads.getSuggestions", jacksonTypeRef()),
     UserMethod {
     init {

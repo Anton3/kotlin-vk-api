@@ -9,6 +9,6 @@ import name.anton3.vkapi.generated.video.objects.Video
  * @property items No description
  */
 data class ItemVideoVideo(
-    val count: Long? = null,
+    val count: Int? = null,
     val items: List<Video>? = null
 )

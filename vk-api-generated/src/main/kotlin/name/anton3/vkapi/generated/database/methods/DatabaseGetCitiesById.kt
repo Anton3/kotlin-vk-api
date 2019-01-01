@@ -15,6 +15,6 @@ import name.anton3.vkapi.tokens.UserServiceMethod
  * @property cityIds City IDs.
  */
 data class DatabaseGetCitiesById(
-    var cityIds: List<Long>? = null
+    var cityIds: List<Int>? = null
 ) : VkMethod<List<Object>>("database.getCitiesById", jacksonTypeRef()),
     UserServiceMethod

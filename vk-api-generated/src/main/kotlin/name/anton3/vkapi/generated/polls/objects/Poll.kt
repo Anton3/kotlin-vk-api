@@ -18,12 +18,12 @@ import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
  */
 @JsonDeserialize(`as` = Void::class)
 data class Poll(
-    val id: Long,
-    val ownerId: Long,
-    val created: Long,
+    val id: Int,
+    val ownerId: Int,
+    val created: Int,
     val question: String,
     val votes: String,
-    val answerId: Long? = null,
+    val answerId: Int? = null,
     val answers: List<Answer>,
     val anonymous: Boolean
 ) : WallpostAttachment,

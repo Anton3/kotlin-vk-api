@@ -29,7 +29,7 @@ import name.anton3.vkapi.vktypes.VkDate
  */
 @JsonDeserialize(`as` = Void::class)
 data class ItemWallpost(
-    val postId: Long? = null,
+    val postId: Int? = null,
     val postType: ItemWallpostType? = null,
     val text: String? = null,
     val copyHistory: List<Wallpost>? = null,
@@ -40,6 +40,6 @@ data class ItemWallpost(
     val likes: LikesInfo? = null,
     val reposts: RepostsInfo? = null,
     override val type: NewsfeedItemType? = null,
-    override val sourceId: Long? = null,
+    override val sourceId: Int? = null,
     override val date: VkDate? = null
 ) : NewsfeedItem

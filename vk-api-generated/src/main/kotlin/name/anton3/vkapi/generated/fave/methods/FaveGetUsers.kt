@@ -17,7 +17,7 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of users to return.
  */
 data class FaveGetUsers(
-    var offset: Long? = null,
-    var count: Long? = null
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<UserMin>>("fave.getUsers", jacksonTypeRef()),
     UserMethod

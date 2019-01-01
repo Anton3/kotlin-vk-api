@@ -15,6 +15,6 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property userId Profile ID.
  */
 data class FaveRemoveUser(
-    var userId: Long
+    var userId: Int
 ) : VkMethod<OkResponse>("fave.removeUser", jacksonTypeRef()),
     UserMethod

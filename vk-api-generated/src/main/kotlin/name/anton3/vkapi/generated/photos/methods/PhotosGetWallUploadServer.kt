@@ -15,6 +15,6 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property groupId ID of community to whose wall the photo will be uploaded.
  */
 data class PhotosGetWallUploadServer(
-    var groupId: Long? = null
+    var groupId: Int? = null
 ) : VkMethod<PhotoUpload>("photos.getWallUploadServer", jacksonTypeRef()),
     UserMethod

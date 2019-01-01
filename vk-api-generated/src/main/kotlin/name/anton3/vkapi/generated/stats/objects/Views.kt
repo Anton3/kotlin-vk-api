@@ -13,9 +13,9 @@ package name.anton3.vkapi.generated.stats.objects
  * @property cities No description
  */
 data class Views(
-    val views: Long? = null,
-    val visitors: Long? = null,
-    val mobileViews: Long? = null,
+    val views: Int? = null,
+    val visitors: Int? = null,
+    val mobileViews: Int? = null,
     val sex: List<SexAge>? = null,
     val age: List<SexAge>? = null,
     val sexAge: List<SexAge>? = null,

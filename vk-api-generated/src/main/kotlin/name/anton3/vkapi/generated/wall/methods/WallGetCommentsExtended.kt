@@ -23,14 +23,14 @@ import name.anton3.vkapi.tokens.UserServiceMethod
  * @property previewLength Number of characters at which to truncate comments when previewed. By default, '90'. Specify '0' if you do not want to truncate comments.
  */
 data class WallGetCommentsExtended(
-    var ownerId: Long? = null,
-    var postId: Long,
+    var ownerId: Int? = null,
+    var postId: Int,
     var needLikes: Boolean? = null,
-    var startCommentId: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var startCommentId: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var sort: GetCommentsSort? = null,
-    var previewLength: Long? = null
+    var previewLength: Int? = null
 ) : VkMethod<GetCommentsExtendedResponse>("wall.getComments", jacksonTypeRef()),
     UserServiceMethod {
     init {

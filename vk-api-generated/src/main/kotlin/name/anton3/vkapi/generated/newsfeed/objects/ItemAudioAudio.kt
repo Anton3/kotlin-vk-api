@@ -9,6 +9,6 @@ import name.anton3.vkapi.generated.audio.objects.AudioFull
  * @property items No description
  */
 data class ItemAudioAudio(
-    val count: Long? = null,
+    val count: Int? = null,
     val items: List<AudioFull>? = null
 )

@@ -16,9 +16,9 @@ import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
  * @property geo No description
  */
 data class Feedback(
-    val id: Long? = null,
-    val toId: Long? = null,
-    val fromId: Long? = null,
+    val id: Int? = null,
+    val toId: Int? = null,
+    val fromId: Int? = null,
     val text: String? = null,
     val likes: LikesInfo? = null,
     val attachments: List<WallpostAttachment>? = null,

@@ -18,8 +18,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of video albums to return.
  */
 data class VideoGetAlbums(
-    var ownerId: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null
+    var ownerId: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<VideoAlbumFull>>("video.getAlbums", jacksonTypeRef()),
     UserMethod

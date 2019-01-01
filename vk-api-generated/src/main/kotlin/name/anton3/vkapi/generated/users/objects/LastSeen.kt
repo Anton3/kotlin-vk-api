@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.users.objects
  * @property platform Type of the platform that used for the last authorization
  */
 data class LastSeen(
-    val time: Long? = null,
-    val platform: Long? = null
+    val time: Int? = null,
+    val platform: Int? = null
 )

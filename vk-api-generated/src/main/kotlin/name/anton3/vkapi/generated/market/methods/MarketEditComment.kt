@@ -18,8 +18,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property attachments Comma-separated list of objects attached to a comment. The field is submitted the following way: , "'<owner_id>_<media_id>,<owner_id>_<media_id>'", , '' - media attachment type: "'photo' - photo, 'video' - video, 'audio' - audio, 'doc' - document", , '<owner_id>' - media owner id, '<media_id>' - media attachment id, , For example: "photo100172_166443618,photo66748_265827614",
  */
 data class MarketEditComment(
-    var ownerId: Long,
-    var commentId: Long,
+    var ownerId: Int,
+    var commentId: Int,
     var message: String? = null,
     var attachments: List<String>? = null
 ) : VkMethod<OkResponse>("market.editComment", jacksonTypeRef()),

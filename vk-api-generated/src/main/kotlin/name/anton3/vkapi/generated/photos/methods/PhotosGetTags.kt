@@ -17,8 +17,8 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property accessKey No description
  */
 data class PhotosGetTags(
-    var ownerId: Long? = null,
-    var photoId: Long,
+    var ownerId: Int? = null,
+    var photoId: Int,
     var accessKey: String? = null
 ) : VkMethod<List<PhotoTag>>("photos.getTags", jacksonTypeRef()),
     UserMethod

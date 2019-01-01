@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.common.objects
  * @property title Country title
  */
 data class Country(
-    val id: Long,
+    val id: Int,
     val title: String
 )

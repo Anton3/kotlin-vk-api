@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property itemId Item ID.
  */
 data class MarketDelete(
-    var ownerId: Long,
-    var itemId: Long
+    var ownerId: Int,
+    var itemId: Int
 ) : VkMethod<OkResponse>("market.delete", jacksonTypeRef()),
     UserMethod

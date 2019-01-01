@@ -15,7 +15,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property data Serialized JSON array of objects that describe created campaigns. Description of 'client_specification' objects see below.
  */
 data class AdsCreateClients(
-    var accountId: Long,
+    var accountId: Int,
     var data: String
-) : VkMethod<List<Long>>("ads.createClients", jacksonTypeRef()),
+) : VkMethod<List<Int>>("ads.createClients", jacksonTypeRef()),
     UserMethod

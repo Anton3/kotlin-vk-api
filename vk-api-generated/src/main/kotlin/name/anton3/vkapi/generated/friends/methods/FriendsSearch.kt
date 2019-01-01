@@ -22,11 +22,11 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of friends to return.
  */
 data class FriendsSearch(
-    var userId: Long,
+    var userId: Int,
     var q: String? = null,
     var fields: List<String>? = null,
     var nameCase: NameCase? = null,
-    var offset: Long? = null,
-    var count: Long? = null
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<UserFull>>("friends.search", jacksonTypeRef()),
     UserMethod

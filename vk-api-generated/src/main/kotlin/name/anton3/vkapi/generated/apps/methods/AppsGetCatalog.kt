@@ -28,15 +28,15 @@ import name.anton3.vkapi.vktypes.VkList
  */
 data class AppsGetCatalog(
     var sort: GetCatalogSort? = null,
-    var offset: Long? = null,
-    var count: Long,
+    var offset: Int? = null,
+    var count: Int,
     var platform: String? = null,
     var extended: Boolean? = null,
     var returnFriends: Boolean? = null,
     var fields: List<String>? = null,
     var nameCase: String? = null,
     var q: String? = null,
-    var genreId: Long? = null,
+    var genreId: Int? = null,
     var filter: String? = null
 ) : VkMethod<VkList<App>>("apps.getCatalog", jacksonTypeRef()),
     UserServiceMethod

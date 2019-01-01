@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.groups.objects
  * @property subtypesList No description
  */
 data class GroupPublicCategoryList(
-    val id: Long? = null,
+    val id: Int? = null,
     val name: String? = null,
     val subtypesList: List<GroupCategoryType>? = null
 )

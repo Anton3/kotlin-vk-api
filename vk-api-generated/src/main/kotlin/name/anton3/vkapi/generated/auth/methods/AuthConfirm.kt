@@ -21,10 +21,10 @@ import name.anton3.vkapi.tokens.ServiceMethod
  * @property intro No description
  */
 data class AuthConfirm(
-    var clientId: Long,
+    var clientId: Int,
     var phone: String,
     var code: String,
     var password: String? = null,
-    var intro: Long? = null
+    var intro: Int? = null
 ) : VkMethod<ConfirmResponse>("auth.confirm", jacksonTypeRef()),
     ServiceMethod

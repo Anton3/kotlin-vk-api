@@ -20,8 +20,8 @@ import name.anton3.vkapi.vktypes.VkList
  */
 data class DatabaseGetSchools(
     var q: String? = null,
-    var cityId: Long,
-    var offset: Long? = null,
-    var count: Long? = null
+    var cityId: Int,
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<School>>("database.getSchools", jacksonTypeRef()),
     UserServiceMethod

@@ -24,7 +24,7 @@ data class GroupsCreate(
     var title: String,
     var description: String? = null,
     var type: CreateType? = null,
-    var publicCategory: Long? = null,
+    var publicCategory: Int? = null,
     var subtype: CreateSubtype? = null
 ) : VkMethod<Group>("groups.create", jacksonTypeRef()),
     UserMethod

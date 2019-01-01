@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.utils.objects
  * @property views Total views number
  */
 data class Stats(
-    val timestamp: Long? = null,
-    val views: Long? = null
+    val timestamp: Int? = null,
+    val views: Int? = null
 )

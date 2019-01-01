@@ -18,8 +18,8 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property testMode if this parameter is set to 1, this method returns a list of test mode orders. By default — 0.
  */
 data class OrdersChangeState(
-    var orderId: Long,
+    var orderId: Int,
     var action: ChangeStateAction,
-    var appOrderId: Long? = null
+    var appOrderId: Int? = null
 ) : VkMethod<String>("orders.changeState", jacksonTypeRef()),
     UserMethod

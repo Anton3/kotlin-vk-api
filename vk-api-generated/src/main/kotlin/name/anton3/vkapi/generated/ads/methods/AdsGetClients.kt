@@ -15,6 +15,6 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property accountId Advertising account ID.
  */
 data class AdsGetClients(
-    var accountId: Long
+    var accountId: Int
 ) : VkMethod<List<Client>>("ads.getClients", jacksonTypeRef()),
     UserMethod

@@ -18,7 +18,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  */
 data class SecureSetUserLevel(
     var levels: List<String>? = null,
-    var userId: Long? = null,
-    var level: Long? = null
+    var userId: Int? = null,
+    var level: Int? = null
 ) : VkMethod<OkResponse>("secure.setUserLevel", jacksonTypeRef()),
     ServiceMethod

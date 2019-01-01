@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property important '1' — to add a star (mark as important), '0' — to remove the star
  */
 data class MessagesMarkAsImportantConversation(
-    var groupId: Long? = null,
-    var peerId: Long,
+    var groupId: Int? = null,
+    var peerId: Int,
     var important: Boolean? = null
 ) : VkMethod<OkResponse>("messages.markAsImportantConversation", jacksonTypeRef()),
     UserGroupMethod

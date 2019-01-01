@@ -21,9 +21,9 @@ import name.anton3.vkapi.vktypes.VkList
  */
 data class MessagesSearchConversations(
     var q: String? = null,
-    var count: Long? = null,
+    var count: Int? = null,
     var extended: Boolean? = null,
     var fields: List<String>? = null,
-    var groupId: Long? = null
+    var groupId: Int? = null
 ) : VkMethod<VkList<Conversation>>("messages.searchConversations", jacksonTypeRef()),
     UserGroupMethod

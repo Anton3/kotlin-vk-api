@@ -6,5 +6,5 @@ package name.anton3.vkapi.generated.groups.objects
  * @property serverId server id
  */
 data class AddCallbackServerResponse(
-    val serverId: Long? = null
+    val serverId: Int? = null
 )

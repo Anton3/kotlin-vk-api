@@ -21,9 +21,9 @@ import name.anton3.vkapi.vktypes.VkList
  */
 data class DatabaseGetUniversities(
     var q: String? = null,
-    var countryId: Long? = null,
-    var cityId: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null
+    var countryId: Int? = null,
+    var cityId: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<University>>("database.getUniversities", jacksonTypeRef()),
     UserServiceMethod

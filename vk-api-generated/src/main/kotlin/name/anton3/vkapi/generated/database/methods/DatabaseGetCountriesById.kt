@@ -15,6 +15,6 @@ import name.anton3.vkapi.tokens.UserServiceMethod
  * @property countryIds Country IDs.
  */
 data class DatabaseGetCountriesById(
-    var countryIds: List<Long>? = null
+    var countryIds: List<Int>? = null
 ) : VkMethod<List<Country>>("database.getCountriesById", jacksonTypeRef()),
     UserServiceMethod

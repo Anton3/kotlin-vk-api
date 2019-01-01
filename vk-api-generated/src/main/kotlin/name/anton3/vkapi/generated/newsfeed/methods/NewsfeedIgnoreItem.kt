@@ -19,7 +19,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  */
 data class NewsfeedIgnoreItem(
     var type: IgnoreItemType,
-    var ownerId: Long,
-    var itemId: Long
+    var ownerId: Int,
+    var itemId: Int
 ) : VkMethod<OkResponse>("newsfeed.ignoreItem", jacksonTypeRef()),
     UserMethod

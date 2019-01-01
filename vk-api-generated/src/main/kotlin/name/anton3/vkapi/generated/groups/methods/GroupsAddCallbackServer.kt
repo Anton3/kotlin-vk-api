@@ -17,7 +17,7 @@ import name.anton3.vkapi.generated.groups.objects.AddCallbackServerResponse
  * @property secretKey Secret key
  */
 data class GroupsAddCallbackServer(
-    var groupId: Long,
+    var groupId: Int,
     var url: String? = null,
     var title: String? = null,
     var secretKey: String? = null

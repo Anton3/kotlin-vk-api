@@ -6,5 +6,5 @@ package name.anton3.vkapi.generated.widgets.objects
  * @property count Likes number
  */
 data class WidgetLikes(
-    val count: Long? = null
+    val count: Int? = null
 )

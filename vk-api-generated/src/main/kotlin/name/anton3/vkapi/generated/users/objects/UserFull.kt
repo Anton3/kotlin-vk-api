@@ -104,7 +104,7 @@ interface UserFull : User {
     val bdate: VkBirthDate?
     val city: Object?
     val country: Country?
-    val timezone: Long?
+    val timezone: Int?
     val photo200: String?
     val photoMax: String?
     val photo200Orig: String?
@@ -115,7 +115,7 @@ interface UserFull : User {
     val trending: Boolean?
     val hasMobile: Boolean?
     val isFriend: Boolean?
-    val friendStatus: Long?
+    val friendStatus: Int?
     val wallComments: Boolean?
     val canPost: Boolean?
     val canSeeAllPosts: Boolean?
@@ -138,24 +138,24 @@ interface UserFull : User {
     val exports: Exports?
     val cropPhoto: CropPhoto?
     val verified: Boolean?
-    val followersCount: Long?
+    val followersCount: Int?
     val blacklisted: Boolean?
     val blacklistedByMe: Boolean?
     val isFavorite: Boolean?
     val isHiddenFromFeed: Boolean?
-    val commonCount: Long?
+    val commonCount: Int?
     val occupation: Occupation?
     val career: List<Career>?
     val military: List<Military>?
-    val university: Long?
+    val university: Int?
     val universityName: String?
-    val faculty: Long?
+    val faculty: Int?
     val facultyName: String?
-    val graduation: Long?
+    val graduation: Int?
     val educationForm: String?
     val educationStatus: String?
     val homeTown: String?
-    val relation: Long?
+    val relation: Int?
     val relationPartner: UserMin?
     val personal: Personal?
     val interests: String?
@@ -176,10 +176,10 @@ interface UserFull : User {
     override val photo100: String?
     override val online: Boolean?
     override val onlineMobile: Boolean?
-    override val onlineApp: Long?
-    override val id: Long
+    override val onlineApp: Int?
+    override val id: Int
     override val firstName: String
     override val lastName: String
     override val deactivated: String?
-    override val hidden: Long?
+    override val hidden: Int?
 }

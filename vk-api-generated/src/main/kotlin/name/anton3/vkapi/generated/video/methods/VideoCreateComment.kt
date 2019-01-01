@@ -21,13 +21,13 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property guid No description
  */
 data class VideoCreateComment(
-    var ownerId: Long? = null,
-    var videoId: Long,
+    var ownerId: Int? = null,
+    var videoId: Int,
     var message: String? = null,
     var attachments: List<String>? = null,
     var fromGroup: Boolean? = null,
-    var replyToComment: Long? = null,
-    var stickerId: Long? = null,
+    var replyToComment: Int? = null,
+    var stickerId: Int? = null,
     var guid: String? = null
-) : VkMethod<Long>("video.createComment", jacksonTypeRef()),
+) : VkMethod<Int>("video.createComment", jacksonTypeRef()),
     UserMethod

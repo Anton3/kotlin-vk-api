@@ -15,7 +15,7 @@ import org.junit.Test
 class ExecuteManyMethodsTest {
     @Test
     fun smokeSuccess1() = runBlocking {
-        val methods = (0..24L).map { page: Long ->
+        val methods = (0..24).map { page: Int ->
             WallGet(
                 domain = "departureMsk",
                 offset = page,
@@ -30,7 +30,7 @@ class ExecuteManyMethodsTest {
 
     @Test
     fun smokeError1() = runBlocking {
-        val methods = (0..24L).map { page: Long ->
+        val methods = (0..24).map { page: Int ->
             WallGet(
                 domain = "departureMsk",
                 offset = page,

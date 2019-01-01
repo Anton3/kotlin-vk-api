@@ -10,8 +10,8 @@ package name.anton3.vkapi.generated.utils.objects
  * @property cities No description
  */
 data class StatsExtended(
-    val timestamp: Long? = null,
-    val views: Long? = null,
+    val timestamp: Int? = null,
+    val views: Int? = null,
     val sexAge: List<StatsSexAge>? = null,
     val countries: List<StatsCountry>? = null,
     val cities: List<StatsCity>? = null

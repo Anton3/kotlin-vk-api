@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property groupId ID of the community that owns the album.
  */
 data class PhotosDeleteAlbum(
-    var albumId: Long,
-    var groupId: Long? = null
+    var albumId: Int,
+    var groupId: Int? = null
 ) : VkMethod<OkResponse>("photos.deleteAlbum", jacksonTypeRef()),
     UserMethod

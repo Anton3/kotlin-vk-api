@@ -16,7 +16,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property needSign '1' — to return 'sign' field. 'sign' is md5("{id}_{user_id}_{friends_status}_{application_secret}"), where id is current user ID. This field allows to check that data has not been modified by the client. By default: '0'.
  */
 data class FriendsAreFriends(
-    var userIds: List<Long>,
+    var userIds: List<Int>,
     var needSign: Boolean? = null
 ) : VkMethod<List<FriendStatus>>("friends.areFriends", jacksonTypeRef()),
     UserMethod

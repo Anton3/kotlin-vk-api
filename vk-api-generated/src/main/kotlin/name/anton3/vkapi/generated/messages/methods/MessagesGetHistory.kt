@@ -24,14 +24,14 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property rev Sort order: '1' — return messages in chronological order. '0' — return messages in reverse chronological order.
  */
 data class MessagesGetHistory(
-    var offset: Long? = null,
-    var count: Long? = null,
-    var userId: Long? = null,
-    var peerId: Long? = null,
-    var startMessageId: Long? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
+    var userId: Int? = null,
+    var peerId: Int? = null,
+    var startMessageId: Int? = null,
     var extended: Boolean? = null,
     var fields: List<String>? = null,
-    var groupId: Long? = null,
+    var groupId: Int? = null,
     var rev: GetHistoryRev? = null
 ) : VkMethod<GetHistoryResponse>("messages.getHistory", jacksonTypeRef()),
     UserGroupMethod

@@ -18,9 +18,9 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property hash Parameter returned when photos are [vk.com/dev/upload_files|uploaded to server].
  */
 data class PhotosSaveMarketAlbumPhoto(
-    var groupId: Long,
+    var groupId: Int,
     var photo: String,
-    var server: Long,
+    var server: Int,
     var hash: String
 ) : VkMethod<List<Photo>>("photos.saveMarketAlbumPhoto", jacksonTypeRef()),
     UserMethod

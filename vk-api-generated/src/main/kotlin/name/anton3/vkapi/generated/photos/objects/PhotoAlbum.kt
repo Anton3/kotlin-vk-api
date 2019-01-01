@@ -17,12 +17,12 @@ import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
  */
 @JsonDeserialize(`as` = Void::class)
 data class PhotoAlbum(
-    val id: Long,
+    val id: Int,
     val thumb: Photo? = null,
-    val ownerId: Long,
+    val ownerId: Int,
     val title: String,
     val description: String? = null,
-    val created: Long,
-    val updated: Long,
-    val size: Long
+    val created: Int,
+    val updated: Int,
+    val size: Int
 ) : WallpostAttachment

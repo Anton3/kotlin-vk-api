@@ -8,5 +8,5 @@ package name.anton3.vkapi.generated.common.objects
  */
 data class LinkRating(
     val stars: Double? = null,
-    val reviewsCount: Long? = null
+    val reviewsCount: Int? = null
 )

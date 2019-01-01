@@ -18,9 +18,9 @@ import name.anton3.vkapi.tokens.UserServiceMethod
  * @property count Number of reposts to return.
  */
 data class WallGetReposts(
-    var ownerId: Long? = null,
-    var postId: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null
+    var ownerId: Int? = null,
+    var postId: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<GetRepostsResponse>("wall.getReposts", jacksonTypeRef()),
     UserServiceMethod

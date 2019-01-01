@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.ads.objects
  * @property refresh Time to refresh in seconds
  */
 data class FloodStats(
-    val left: Long,
-    val refresh: Long
+    val left: Int,
+    val refresh: Int
 )

@@ -15,10 +15,10 @@ import name.anton3.vkapi.generated.market.objects.Currency
  */
 data class MarketInfo(
     val enabled: Boolean? = null,
-    val priceMin: Long? = null,
-    val priceMax: Long? = null,
-    val mainAlbumId: Long? = null,
-    val contactId: Long? = null,
+    val priceMin: Int? = null,
+    val priceMax: Int? = null,
+    val mainAlbumId: Int? = null,
+    val contactId: Int? = null,
     val currency: Currency? = null,
     val currencyText: String? = null
 )

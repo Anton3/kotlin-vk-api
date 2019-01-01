@@ -12,8 +12,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @JsonDeserialize(`as` = Void::class)
 data class PostedPhoto(
-    val id: Long? = null,
-    val ownerId: Long? = null,
+    val id: Int? = null,
+    val ownerId: Int? = null,
     val photo130: String? = null,
     val photo604: String? = null
 ) : WallpostAttachment

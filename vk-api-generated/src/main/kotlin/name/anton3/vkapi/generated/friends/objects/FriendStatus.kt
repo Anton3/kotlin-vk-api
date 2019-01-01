@@ -10,7 +10,7 @@ package name.anton3.vkapi.generated.friends.objects
  * @property sign MD5 hash for the result validation
  */
 data class FriendStatus(
-    val userId: Long,
+    val userId: Int,
     val friendStatus: FriendStatusStatus,
     val requestMessage: String? = null,
     val readState: Boolean? = null,

@@ -16,6 +16,6 @@ import name.anton3.vkapi.vktypes.VkList
  * @property ownerId Owner ID.
  */
 data class StoriesGet(
-    var ownerId: Long? = null
+    var ownerId: Int? = null
 ) : VkMethod<VkList<List<Story>>>("stories.get", jacksonTypeRef()),
     UserGroupMethod

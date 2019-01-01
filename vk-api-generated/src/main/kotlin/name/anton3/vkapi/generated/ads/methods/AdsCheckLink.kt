@@ -19,9 +19,9 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property campaignId Campaign ID
  */
 data class AdsCheckLink(
-    var accountId: Long,
+    var accountId: Int,
     var linkType: CheckLinkLinkType,
     var linkUrl: String,
-    var campaignId: Long? = null
+    var campaignId: Int? = null
 ) : VkMethod<LinkStatus>("ads.checkLink", jacksonTypeRef()),
     UserMethod

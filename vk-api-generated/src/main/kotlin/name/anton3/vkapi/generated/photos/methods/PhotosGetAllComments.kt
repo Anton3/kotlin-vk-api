@@ -20,10 +20,10 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of comments to return. By default, '20'. Maximum value, '100'.
  */
 data class PhotosGetAllComments(
-    var ownerId: Long? = null,
-    var albumId: Long? = null,
+    var ownerId: Int? = null,
+    var albumId: Int? = null,
     var needLikes: Boolean? = null,
-    var offset: Long? = null,
-    var count: Long? = null
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<CommentXtrPid>>("photos.getAllComments", jacksonTypeRef()),
     UserMethod

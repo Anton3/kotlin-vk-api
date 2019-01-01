@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.ads.objects
  * @property accesses No description
  */
 data class Users(
-    val userId: Long,
+    val userId: Int,
     val accesses: List<Accesses>
 )

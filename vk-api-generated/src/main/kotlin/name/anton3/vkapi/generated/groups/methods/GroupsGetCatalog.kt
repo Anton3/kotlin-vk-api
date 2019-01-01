@@ -17,7 +17,7 @@ import name.anton3.vkapi.vktypes.VkList
  * @property subcategoryId Subcategory id received from [vk.com/dev/groups.getCatalogInfo|groups.getCatalogInfo].
  */
 data class GroupsGetCatalog(
-    var categoryId: Long? = null,
-    var subcategoryId: Long? = null
+    var categoryId: Int? = null,
+    var subcategoryId: Int? = null
 ) : VkMethod<VkList<Group>>("groups.getCatalog", jacksonTypeRef()),
     UserMethod

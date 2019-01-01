@@ -14,10 +14,10 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @JsonDeserialize(`as` = Void::class)
 data class MessageGraffiti(
-    val id: Long? = null,
-    val ownerId: Long? = null,
+    val id: Int? = null,
+    val ownerId: Int? = null,
     val url: String? = null,
-    val width: Long? = null,
-    val height: Long? = null,
+    val width: Int? = null,
+    val height: Int? = null,
     val accessKey: String? = null
 ) : MessageAttachment

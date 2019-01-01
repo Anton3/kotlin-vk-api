@@ -18,8 +18,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property tags Document tags.
  */
 data class DocsEdit(
-    var ownerId: Long,
-    var docId: Long,
+    var ownerId: Int,
+    var docId: Int,
     var title: String? = null,
     var tags: List<String>? = null
 ) : VkMethod<OkResponse>("docs.edit", jacksonTypeRef()),

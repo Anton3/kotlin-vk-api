@@ -6,5 +6,5 @@ package name.anton3.vkapi.generated.market.objects
  * @property marketItemId Item ID
  */
 data class AddResponse(
-    val marketItemId: Long? = null
+    val marketItemId: Int? = null
 )

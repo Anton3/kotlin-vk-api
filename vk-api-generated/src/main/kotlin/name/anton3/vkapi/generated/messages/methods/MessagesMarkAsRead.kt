@@ -18,9 +18,9 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property groupId Group ID (for group messages with user access token)
  */
 data class MessagesMarkAsRead(
-    var messageIds: List<Long>? = null,
-    var peerId: Long? = null,
-    var startMessageId: Long? = null,
-    var groupId: Long? = null
+    var messageIds: List<Int>? = null,
+    var peerId: Int? = null,
+    var startMessageId: Int? = null,
+    var groupId: Int? = null
 ) : VkMethod<OkResponse>("messages.markAsRead", jacksonTypeRef()),
     UserGroupMethod

@@ -17,9 +17,9 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property count Number of videos to return.
  */
 data class VideoGetUserVideosExtended(
-    var userId: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null
+    var userId: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<GetUserVideosExtendedResponse>("video.getUserVideos", jacksonTypeRef()),
     UserMethod {
     init {

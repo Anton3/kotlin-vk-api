@@ -8,5 +8,5 @@ package name.anton3.vkapi.generated.messages.objects
  */
 data class LastActivity(
     val online: Boolean,
-    val time: Long
+    val time: Int
 )

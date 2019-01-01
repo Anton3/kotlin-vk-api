@@ -22,15 +22,15 @@ import name.anton3.vkapi.vktypes.VkDate
  */
 @JsonDeserialize(`as` = Void::class)
 data class WallpostImpl(
-    override val id: Long? = null,
-    override val fromId: Long? = null,
-    override val ownerId: Long? = null,
+    override val id: Int? = null,
+    override val fromId: Int? = null,
+    override val ownerId: Int? = null,
     override val date: VkDate? = null,
     override val views: Views? = null,
     override val accessKey: String? = null,
     override val postType: PostType? = null,
     override val text: String? = null,
-    override val signerId: Long? = null,
+    override val signerId: Int? = null,
     override val attachments: List<WallpostAttachment>? = null,
     override val geo: Geo? = null,
     override val postSource: PostSource? = null

@@ -51,8 +51,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property leadFormsNew New form in lead forms
  */
 data class GroupsSetCallbackSettings(
-    var groupId: Long,
-    var serverId: Long? = null,
+    var groupId: Int,
+    var serverId: Int? = null,
     var messageNew: Boolean? = null,
     var messageReply: Boolean? = null,
     var messageAllow: Boolean? = null,

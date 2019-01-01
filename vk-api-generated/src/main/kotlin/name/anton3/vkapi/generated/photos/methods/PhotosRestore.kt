@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property photoId Photo ID.
  */
 data class PhotosRestore(
-    var ownerId: Long? = null,
-    var photoId: Long
+    var ownerId: Int? = null,
+    var photoId: Int
 ) : VkMethod<OkResponse>("photos.restore", jacksonTypeRef()),
     UserMethod

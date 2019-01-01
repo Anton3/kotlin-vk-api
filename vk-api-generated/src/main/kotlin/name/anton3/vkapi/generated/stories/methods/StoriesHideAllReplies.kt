@@ -15,6 +15,6 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property ownerId ID of the user whose replies should be hidden.
  */
 data class StoriesHideAllReplies(
-    var ownerId: Long
+    var ownerId: Int
 ) : VkMethod<OkResponse>("stories.hideAllReplies", jacksonTypeRef()),
     UserGroupMethod

@@ -15,6 +15,6 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property ownersIds List of hidden sources to show stories from.
  */
 data class StoriesUnbanOwner(
-    var ownersIds: List<Long>
+    var ownersIds: List<Int>
 ) : VkMethod<OkResponse>("stories.unbanOwner", jacksonTypeRef()),
     UserMethod

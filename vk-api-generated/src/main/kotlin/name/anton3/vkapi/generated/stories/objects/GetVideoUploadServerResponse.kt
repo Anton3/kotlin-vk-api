@@ -8,5 +8,5 @@ package name.anton3.vkapi.generated.stories.objects
  */
 data class GetVideoUploadServerResponse(
     val uploadUrl: String,
-    val userIds: List<Long>
+    val userIds: List<Int>
 )

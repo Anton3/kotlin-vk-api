@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.widgets.objects
  * @property posts No description
  */
 data class GetCommentsResponse(
-    val count: Long,
+    val count: Int,
     val posts: List<WidgetComment>
 )

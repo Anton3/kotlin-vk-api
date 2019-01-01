@@ -22,7 +22,7 @@ import name.anton3.vkapi.vktypes.VkList
  * @property nameCase Case for declension of user name and surname: 'nom' — nominative (default),, 'gen' — genitive,, 'dat' — dative,, 'acc' — accusative,, 'ins' — instrumental,, 'abl' — prepositional. (only if 'return_friends' = '1')
  */
 data class AppsGet(
-    var appId: Long? = null,
+    var appId: Int? = null,
     var appIds: List<String>? = null,
     var platform: GetPlatform? = null,
     var fields: List<String>? = null,

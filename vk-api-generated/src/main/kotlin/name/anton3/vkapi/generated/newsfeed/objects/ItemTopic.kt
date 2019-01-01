@@ -18,11 +18,11 @@ import name.anton3.vkapi.vktypes.VkDate
  */
 @JsonDeserialize(`as` = Void::class)
 data class ItemTopic(
-    val postId: Long,
+    val postId: Int,
     val text: String,
     val comments: CommentsInfo? = null,
     val likes: LikesInfo? = null,
     override val type: NewsfeedItemType? = null,
-    override val sourceId: Long? = null,
+    override val sourceId: Int? = null,
     override val date: VkDate? = null
 ) : NewsfeedItem

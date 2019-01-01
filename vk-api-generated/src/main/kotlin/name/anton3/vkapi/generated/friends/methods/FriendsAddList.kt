@@ -17,6 +17,6 @@ import name.anton3.vkapi.tokens.UserMethod
  */
 data class FriendsAddList(
     var name: String,
-    var userIds: List<Long>? = null
+    var userIds: List<Int>? = null
 ) : VkMethod<AddListResponse>("friends.addList", jacksonTypeRef()),
     UserMethod

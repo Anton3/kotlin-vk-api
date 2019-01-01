@@ -16,7 +16,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property postId wall post id. Note that stats are available only for '300' last (newest) posts on a community wall.
  */
 data class StatsGetPostReach(
-    var ownerId: Long,
-    var postId: Long
+    var ownerId: Int,
+    var postId: Int
 ) : VkMethod<List<WallpostStat>>("stats.getPostReach", jacksonTypeRef()),
     UserMethod

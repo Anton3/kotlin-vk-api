@@ -13,7 +13,7 @@ import name.anton3.vkapi.vktypes.VkDate
  */
 data class TokenChecked(
     val success: OkResponse? = null,
-    val userId: Long? = null,
+    val userId: Int? = null,
     val date: VkDate? = null,
-    val expire: Long? = null
+    val expire: Int? = null
 )

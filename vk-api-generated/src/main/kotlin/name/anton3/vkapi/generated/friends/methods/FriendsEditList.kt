@@ -20,9 +20,9 @@ import name.anton3.vkapi.vktypes.OkResponse
  */
 data class FriendsEditList(
     var name: String? = null,
-    var listId: Long,
-    var userIds: List<Long>? = null,
-    var addUserIds: List<Long>? = null,
-    var deleteUserIds: List<Long>? = null
+    var listId: Int,
+    var userIds: List<Int>? = null,
+    var addUserIds: List<Int>? = null,
+    var deleteUserIds: List<Int>? = null
 ) : VkMethod<OkResponse>("friends.editList", jacksonTypeRef()),
     UserMethod

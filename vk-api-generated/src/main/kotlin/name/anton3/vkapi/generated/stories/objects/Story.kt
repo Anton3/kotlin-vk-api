@@ -29,14 +29,14 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property replies Replies to current story.
  */
 data class Story(
-    val id: Long,
-    val ownerId: Long,
+    val id: Int,
+    val ownerId: Int,
     val date: VkDate? = null,
     val seen: Boolean? = null,
     val type: StoryType? = null,
     val photo: Photo? = null,
     val video: StoryVideo? = null,
-    val views: Long? = null,
+    val views: Int? = null,
     val canSee: Boolean? = null,
     val canReply: Boolean? = null,
     val canShare: Boolean? = null,
@@ -44,8 +44,8 @@ data class Story(
     val isDeleted: Boolean? = null,
     val isExpired: Boolean? = null,
     val accessKey: String? = null,
-    val parentStoryOwnerId: Long? = null,
-    val parentStoryId: Long? = null,
+    val parentStoryOwnerId: Int? = null,
+    val parentStoryId: Int? = null,
     val parentStoryAccessKey: String? = null,
     val parentStory: Story? = null,
     val link: StoryLink? = null,

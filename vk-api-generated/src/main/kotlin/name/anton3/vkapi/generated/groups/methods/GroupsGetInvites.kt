@@ -17,7 +17,7 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of invitations to return.
  */
 data class GroupsGetInvites(
-    var offset: Long? = null,
-    var count: Long? = null
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<GroupXtrInvitedBy>>("groups.getInvites", jacksonTypeRef()),
     UserMethod

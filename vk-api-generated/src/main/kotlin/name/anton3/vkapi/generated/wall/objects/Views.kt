@@ -6,5 +6,5 @@ package name.anton3.vkapi.generated.wall.objects
  * @property count Count
  */
 data class Views(
-    val count: Long? = null
+    val count: Int? = null
 )

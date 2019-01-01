@@ -15,7 +15,7 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property important '1' — to add a star (mark as important), '0' — to remove the star
  */
 data class MessagesMarkAsImportant(
-    var messageIds: List<Long>? = null,
+    var messageIds: List<Int>? = null,
     var important: Boolean? = null
-) : VkMethod<List<Long>>("messages.markAsImportant", jacksonTypeRef()),
+) : VkMethod<List<Int>>("messages.markAsImportant", jacksonTypeRef()),
     UserGroupMethod

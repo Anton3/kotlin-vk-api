@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.users.objects
  * @property livejournal No description
  */
 data class Exports(
-    val twitter: Long? = null,
-    val facebook: Long? = null,
-    val livejournal: Long? = null
+    val twitter: Int? = null,
+    val facebook: Int? = null,
+    val livejournal: Int? = null
 )

@@ -17,5 +17,5 @@ import name.anton3.vkapi.vktypes.VkList
  */
 data class FriendsGetAvailableForCall(
     var nameCase: NameCase? = null
-) : VkMethod<VkList<Long>>("friends.getAvailableForCall", jacksonTypeRef()),
+) : VkMethod<VkList<Int>>("friends.getAvailableForCall", jacksonTypeRef()),
     UserMethod

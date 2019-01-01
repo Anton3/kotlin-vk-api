@@ -30,26 +30,26 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property tagId Tag ID
  */
 data class VideoTagInfo(
-    val id: Long? = null,
-    val ownerId: Long? = null,
+    val id: Int? = null,
+    val ownerId: Int? = null,
     val title: String? = null,
-    val duration: Long? = null,
+    val duration: Int? = null,
     val description: String? = null,
     val date: VkDate? = null,
-    val views: Long? = null,
-    val comments: Long? = null,
+    val views: Int? = null,
+    val comments: Int? = null,
     val photo130: String? = null,
     val photo320: String? = null,
     val photo800: String? = null,
     val accessKey: String? = null,
-    val addingDate: Long? = null,
+    val addingDate: Int? = null,
     val player: String? = null,
     val canEdit: Boolean? = null,
     val canAdd: Boolean? = null,
     val processing: PropertyExists? = null,
     val live: PropertyExists? = null,
     val files: VideoFiles? = null,
-    val placerId: Long? = null,
-    val tagCreated: Long? = null,
-    val tagId: Long? = null
+    val placerId: Int? = null,
+    val tagCreated: Int? = null,
+    val tagId: Int? = null
 )

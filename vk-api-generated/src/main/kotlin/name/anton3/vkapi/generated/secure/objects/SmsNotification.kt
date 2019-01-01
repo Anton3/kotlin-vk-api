@@ -12,9 +12,9 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property message Messsage text
  */
 data class SmsNotification(
-    val id: Long? = null,
-    val appId: Long? = null,
-    val userId: Long? = null,
+    val id: Int? = null,
+    val appId: Int? = null,
+    val userId: Int? = null,
     val date: VkDate? = null,
     val message: String? = null
 )

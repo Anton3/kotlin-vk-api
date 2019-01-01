@@ -18,8 +18,8 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property fields Additional fields to return
  */
 data class StoriesGetRepliesExtended(
-    var ownerId: Long,
-    var storyId: Long,
+    var ownerId: Int,
+    var storyId: Int,
     var accessKey: String? = null,
     var fields: List<String>? = null
 ) : VkMethod<GetRepliesExtendedResponse>("stories.getReplies", jacksonTypeRef()),

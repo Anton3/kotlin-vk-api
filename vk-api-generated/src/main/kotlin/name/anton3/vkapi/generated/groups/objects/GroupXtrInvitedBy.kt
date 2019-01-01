@@ -28,5 +28,5 @@ data class GroupXtrInvitedBy(
     val photo50: String? = null,
     val photo100: String? = null,
     val photo200: String? = null,
-    val invitedBy: Long? = null
+    val invitedBy: Int? = null
 )

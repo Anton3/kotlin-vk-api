@@ -17,9 +17,9 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property isBoard No description
  */
 data class PollsAddVote(
-    var ownerId: Long? = null,
-    var pollId: Long,
-    var answerId: Long,
+    var ownerId: Int? = null,
+    var pollId: Int,
+    var answerId: Int,
     var isBoard: Boolean? = null
 ) : VkMethod<Boolean>("polls.addVote", jacksonTypeRef()),
     UserMethod

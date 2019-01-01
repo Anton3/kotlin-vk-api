@@ -16,6 +16,6 @@ import name.anton3.vkapi.tokens.UserMethod
  */
 data class PagesParseWiki(
     var text: String,
-    var groupId: Long? = null
+    var groupId: Int? = null
 ) : VkMethod<String>("pages.parseWiki", jacksonTypeRef()),
     UserMethod

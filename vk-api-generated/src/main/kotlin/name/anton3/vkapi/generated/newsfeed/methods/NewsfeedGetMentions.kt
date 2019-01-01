@@ -20,10 +20,10 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of posts to return.
  */
 data class NewsfeedGetMentions(
-    var ownerId: Long? = null,
-    var startTime: Long? = null,
-    var endTime: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null
+    var ownerId: Int? = null,
+    var startTime: Int? = null,
+    var endTime: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<WallpostToId>>("newsfeed.getMentions", jacksonTypeRef()),
     UserMethod

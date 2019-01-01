@@ -10,7 +10,7 @@ import name.anton3.vkapi.generated.wall.objects.WallComment
  * @property items No description
  */
 data class GetCommentsResponse(
-    val count: Long? = null,
-    val realOffset: Long? = null,
+    val count: Int? = null,
+    val realOffset: Int? = null,
     val items: List<WallComment>? = null
 )

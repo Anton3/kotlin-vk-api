@@ -22,14 +22,14 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property guid No description
  */
 data class PhotosCreateComment(
-    var ownerId: Long? = null,
-    var photoId: Long,
+    var ownerId: Int? = null,
+    var photoId: Int,
     var message: String? = null,
     var attachments: List<String>? = null,
     var fromGroup: Boolean? = null,
-    var replyToComment: Long? = null,
-    var stickerId: Long? = null,
+    var replyToComment: Int? = null,
+    var stickerId: Int? = null,
     var accessKey: String? = null,
     var guid: String? = null
-) : VkMethod<Long>("photos.createComment", jacksonTypeRef()),
+) : VkMethod<Int>("photos.createComment", jacksonTypeRef()),
     UserMethod

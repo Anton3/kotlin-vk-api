@@ -13,5 +13,5 @@ import name.anton3.vkapi.tokens.UserGroupServiceMethod
  *
 
  */
-class UtilsGetServerTime : VkMethod<Long>("utils.getServerTime", jacksonTypeRef()),
+class UtilsGetServerTime : VkMethod<Int>("utils.getServerTime", jacksonTypeRef()),
     UserGroupServiceMethod

@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of results to return.
  */
 data class GroupsGetRequests(
-    var groupId: Long,
-    var offset: Long? = null,
-    var count: Long? = null
-) : VkMethod<VkList<Long>>("groups.getRequests", jacksonTypeRef()),
+    var groupId: Int,
+    var offset: Int? = null,
+    var count: Int? = null
+) : VkMethod<VkList<Int>>("groups.getRequests", jacksonTypeRef()),
     UserMethod

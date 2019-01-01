@@ -15,7 +15,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property count amount of variable names the info needs to be collected from.
  */
 data class StorageGetKeys(
-    var userId: Long? = null,
-    var count: Long? = null
+    var userId: Int? = null,
+    var count: Int? = null
 ) : VkMethod<List<String>>("storage.getKeys", jacksonTypeRef()),
     UserMethod

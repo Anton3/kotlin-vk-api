@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.newsfeed.objects
  * @property items No description
  */
 data class ItemPhotoPhotos(
-    val count: Long? = null,
+    val count: Int? = null,
     val items: List<NewsfeedPhoto>? = null
 )

@@ -18,9 +18,9 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property country User country code.
  */
 data class LeadsCheckUser(
-    var leadId: Long,
-    var testResult: Long? = null,
-    var age: Long? = null,
+    var leadId: Int,
+    var testResult: Int? = null,
+    var age: Int? = null,
     var country: String? = null
 ) : VkMethod<Checked>("leads.checkUser", jacksonTypeRef()),
     UserMethod

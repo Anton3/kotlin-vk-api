@@ -10,9 +10,9 @@ package name.anton3.vkapi.generated.groups.objects
  * @property pagePreviews No description
  */
 data class GroupCategoryFull(
-    val id: Long,
+    val id: Int,
     val name: String,
     val subcategories: List<GroupCategory>? = null,
-    val pageCount: Long,
+    val pageCount: Int,
     val pagePreviews: List<Group>
 )

@@ -18,8 +18,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of videos to return.
  */
 data class VideoGetUserVideos(
-    var userId: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null
+    var userId: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<Video>>("video.getUserVideos", jacksonTypeRef()),
     UserMethod

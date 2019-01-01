@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.database.objects
  * @property title Region title
  */
 data class Region(
-    val id: Long? = null,
+    val id: Int? = null,
     val title: String? = null
 )

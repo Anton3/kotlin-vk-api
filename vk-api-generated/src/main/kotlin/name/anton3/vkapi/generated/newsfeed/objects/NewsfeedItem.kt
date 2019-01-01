@@ -13,6 +13,6 @@ import name.anton3.vkapi.vktypes.VkDate
 @JsonDeserialize(`as` = NewsfeedItemImpl::class)
 interface NewsfeedItem {
     val type: NewsfeedItemType?
-    val sourceId: Long?
+    val sourceId: Int?
     val date: VkDate?
 }

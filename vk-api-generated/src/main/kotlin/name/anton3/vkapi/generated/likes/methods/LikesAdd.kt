@@ -20,8 +20,8 @@ import name.anton3.vkapi.tokens.UserMethod
  */
 data class LikesAdd(
     var type: Type,
-    var ownerId: Long? = null,
-    var itemId: Long,
+    var ownerId: Int? = null,
+    var itemId: Int,
     var accessKey: String? = null
 ) : VkMethod<AddResponse>("likes.add", jacksonTypeRef()),
     UserMethod

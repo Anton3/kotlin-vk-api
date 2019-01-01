@@ -16,6 +16,6 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property testMode if this parameter is set to 1, this method returns a list of test mode orders. By default — 0.
  */
 data class OrdersGet(
-    var count: Long? = null
+    var count: Int? = null
 ) : VkMethod<List<Order>>("orders.get", jacksonTypeRef()),
     UserMethod

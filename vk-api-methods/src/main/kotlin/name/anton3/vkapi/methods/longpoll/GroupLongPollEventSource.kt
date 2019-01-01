@@ -18,7 +18,7 @@ import kotlin.coroutines.CoroutineContext
 class GroupLongPollEventSource(
     longPollContext: CoroutineContext,
     private val api: VkClient<UserGroupMethod>,
-    private val groupId: Long,
+    private val groupId: Int,
     httpClient: TransportClient,
     private val timeout: Int
 ) : AbstractLongPollEventSource<CallbackEvent<*>, LongPollServer>(
@@ -31,7 +31,7 @@ class GroupLongPollEventSource(
         return "${iterator.server}?act=a_check&key=${iterator.key}&ts=${iterator.ts}&wait=$timeout&version=3"
     }
 
-    override suspend fun iteratorWithTs(iterator: LongPollServer, ts: Long): LongPollServer {
+    override suspend fun iteratorWithTs(iterator: LongPollServer, ts: Int): LongPollServer {
         return iterator.copy(ts = ts)
     }
 
@@ -49,7 +49,7 @@ fun CoroutineScope.groupLongPollEvents(
 
 fun CoroutineScope.groupLongPollEventsAsAdmin(
     api: VkClient<UserMethod>,
-    groupId: Long,
+    groupId: Int,
     httpClient: TransportClient = api.httpClient,
     timeout: Int
 ): ReceiveChannel<CallbackEvent<*>> =

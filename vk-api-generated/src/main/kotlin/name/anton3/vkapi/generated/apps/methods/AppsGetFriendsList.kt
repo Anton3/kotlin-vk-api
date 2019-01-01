@@ -19,7 +19,7 @@ import name.anton3.vkapi.vktypes.VkList
  * @property fields Additional profile fields, see [vk.com/dev/fields|description].
  */
 data class AppsGetFriendsList(
-    var count: Long? = null,
+    var count: Int? = null,
     var type: Type? = null,
     var fields: List<String>? = null
 ) : VkMethod<VkList<UserFull>>("apps.getFriendsList", jacksonTypeRef()),

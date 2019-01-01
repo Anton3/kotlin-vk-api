@@ -11,10 +11,10 @@ package name.anton3.vkapi.generated.utils.objects
  * @property accessKey Access key for private stats
  */
 data class LastShortenedLink(
-    val timestamp: Long? = null,
+    val timestamp: Int? = null,
     val url: String? = null,
     val shortUrl: String? = null,
     val key: String? = null,
-    val views: Long? = null,
+    val views: Int? = null,
     val accessKey: String? = null
 )

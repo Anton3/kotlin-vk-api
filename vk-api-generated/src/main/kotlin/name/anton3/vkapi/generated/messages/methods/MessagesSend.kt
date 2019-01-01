@@ -29,20 +29,20 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property keyboard keyboard to message
  */
 data class MessagesSend(
-    var userId: Long? = null,
-    var randomId: Long? = null,
-    var peerId: Long? = null,
+    var userId: Int? = null,
+    var randomId: Int? = null,
+    var peerId: Int? = null,
     var domain: String? = null,
-    var chatId: Long? = null,
-    var userIds: List<Long>? = null,
+    var chatId: Int? = null,
+    var userIds: List<Int>? = null,
     var message: String? = null,
     var lat: Double? = null,
     var long: Double? = null,
     var attachment: List<String>? = null,
     var forwardMessages: String? = null,
-    var stickerId: Long? = null,
+    var stickerId: Int? = null,
     var notification: Boolean? = null,
-    var groupId: Long? = null,
+    var groupId: Int? = null,
     var keyboard: Keyboard? = null
-) : VkMethod<Long>("messages.send", jacksonTypeRef()),
+) : VkMethod<Int>("messages.send", jacksonTypeRef()),
     UserGroupMethod

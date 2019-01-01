@@ -15,6 +15,6 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property listId ID of the friend list to delete.
  */
 data class FriendsDeleteList(
-    var listId: Long
+    var listId: Int
 ) : VkMethod<OkResponse>("friends.deleteList", jacksonTypeRef()),
     UserMethod

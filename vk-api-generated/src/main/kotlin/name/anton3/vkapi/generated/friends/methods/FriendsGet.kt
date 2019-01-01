@@ -22,11 +22,11 @@ import name.anton3.vkapi.vktypes.VkList
  * @property nameCase Case for declension of user name and surname: , 'nom' — nominative (default) , 'gen' — genitive , 'dat' — dative , 'acc' — accusative , 'ins' — instrumental , 'abl' — prepositional
  */
 data class FriendsGet(
-    var userId: Long? = null,
+    var userId: Int? = null,
     var order: GetOrder? = null,
-    var listId: Long? = null,
-    var count: Long? = null,
-    var offset: Long? = null,
+    var listId: Int? = null,
+    var count: Int? = null,
+    var offset: Int? = null,
     var nameCase: NameCase? = null
-) : VkMethod<VkList<Long>>("friends.get", jacksonTypeRef()),
+) : VkMethod<VkList<Int>>("friends.get", jacksonTypeRef()),
     UserServiceMethod

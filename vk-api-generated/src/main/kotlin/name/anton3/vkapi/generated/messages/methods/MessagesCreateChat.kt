@@ -15,7 +15,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property title Chat title.
  */
 data class MessagesCreateChat(
-    var userIds: List<Long>,
+    var userIds: List<Int>,
     var title: String? = null
-) : VkMethod<Long>("messages.createChat", jacksonTypeRef()),
+) : VkMethod<Int>("messages.createChat", jacksonTypeRef()),
     UserMethod

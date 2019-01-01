@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.newsfeed.objects
  * @property members No description
  */
 data class GetBannedResponse(
-    val groups: List<Long>? = null,
-    val members: List<Long>? = null
+    val groups: List<Int>? = null,
+    val members: List<Int>? = null
 )

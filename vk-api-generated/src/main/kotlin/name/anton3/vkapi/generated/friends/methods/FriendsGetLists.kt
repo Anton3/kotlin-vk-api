@@ -17,7 +17,7 @@ import name.anton3.vkapi.vktypes.VkList
  * @property returnSystem '1' — to return system friend lists. By default: '0'.
  */
 data class FriendsGetLists(
-    var userId: Long? = null,
+    var userId: Int? = null,
     var returnSystem: Boolean? = null
 ) : VkMethod<VkList<FriendsList>>("friends.getLists", jacksonTypeRef()),
     UserMethod

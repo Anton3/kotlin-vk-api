@@ -18,8 +18,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property reason Reason for the complaint: , 0 – spam , 1 – child pornography , 2 – extremism , 3 – violence , 4 – drug propaganda , 5 – adult material , 6 – insult, abuse
  */
 data class VideoReportComment(
-    var ownerId: Long,
-    var commentId: Long,
+    var ownerId: Int,
+    var commentId: Int,
     var reason: Reason? = null
 ) : VkMethod<OkResponse>("video.reportComment", jacksonTypeRef()),
     UserMethod

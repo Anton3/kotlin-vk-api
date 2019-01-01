@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property topicId Topic ID.
  */
 data class BoardOpenTopic(
-    var groupId: Long,
-    var topicId: Long
+    var groupId: Int,
+    var topicId: Int
 ) : VkMethod<OkResponse>("board.openTopic", jacksonTypeRef()),
     UserMethod

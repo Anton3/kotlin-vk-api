@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property tagId Tag ID.
  */
 data class PhotosConfirmTag(
-    var ownerId: Long? = null,
+    var ownerId: Int? = null,
     var photoId: String,
-    var tagId: Long
+    var tagId: Int
 ) : VkMethod<OkResponse>("photos.confirmTag", jacksonTypeRef()),
     UserMethod

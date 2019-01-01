@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.groups.objects
  * @property name Subject title
  */
 data class SubjectItem(
-    val id: Long? = null,
+    val id: Int? = null,
     val name: String? = null
 )

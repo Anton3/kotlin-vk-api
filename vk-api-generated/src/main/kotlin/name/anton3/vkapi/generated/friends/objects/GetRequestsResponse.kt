@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.friends.objects
  * @property countUnread Total unread requests number
  */
 data class GetRequestsResponse(
-    val count: Long? = null,
-    val items: List<Long>? = null,
-    val countUnread: Long? = null
+    val count: Int? = null,
+    val items: List<Int>? = null,
+    val countUnread: Int? = null
 )

@@ -27,14 +27,14 @@ import name.anton3.vkapi.tokens.UserMethod
 data class VideoSearchExtended(
     var q: String,
     var sort: SearchSort? = null,
-    var hd: Long? = null,
+    var hd: Int? = null,
     var adult: Boolean? = null,
     var filters: List<String>? = null,
     var searchOwn: Boolean? = null,
-    var offset: Long? = null,
-    var longer: Long? = null,
-    var shorter: Long? = null,
-    var count: Long? = null
+    var offset: Int? = null,
+    var longer: Int? = null,
+    var shorter: Int? = null,
+    var count: Int? = null
 ) : VkMethod<SearchExtendedResponse>("video.search", jacksonTypeRef()),
     UserMethod {
     init {

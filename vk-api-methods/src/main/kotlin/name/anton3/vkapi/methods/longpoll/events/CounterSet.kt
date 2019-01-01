@@ -5,5 +5,5 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class CounterSet(
     override val eventType: Int,
-    val count: Long
+    val count: Int
 ) : LongPollEvent(eventType)

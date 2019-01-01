@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @JsonDeserialize(`as` = Void::class)
 data class KeyboardReturned(
-    val authorId: Long,
+    val authorId: Int,
     override val oneTime: Boolean,
     override val buttons: List<List<KeyboardButton>>
 ) : Keyboard

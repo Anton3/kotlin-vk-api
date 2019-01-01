@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.utils.objects
  * @property views Views number
  */
 data class StatsCountry(
-    val countryId: Long? = null,
-    val views: Long? = null
+    val countryId: Int? = null,
+    val views: Int? = null
 )

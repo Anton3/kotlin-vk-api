@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property albumId Album ID.
  */
 data class VideoDeleteAlbum(
-    var groupId: Long? = null,
-    var albumId: Long
+    var groupId: Int? = null,
+    var albumId: Int
 ) : VkMethod<OkResponse>("video.deleteAlbum", jacksonTypeRef()),
     UserMethod

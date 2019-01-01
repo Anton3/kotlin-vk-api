@@ -15,14 +15,14 @@ package name.anton3.vkapi.generated.pages.objects
  * @property creatorName Page creator name
  */
 data class Wikipage(
-    val id: Long,
-    val groupId: Long,
+    val id: Int,
+    val groupId: Int,
     val title: String,
     val whoCanView: PrivacySettings,
     val whoCanEdit: PrivacySettings,
-    val views: Long,
-    val editorId: Long? = null,
+    val views: Int,
+    val editorId: Int? = null,
     val editorName: String? = null,
-    val creatorId: Long? = null,
-    val creatorName: Long? = null
+    val creatorId: Int? = null,
+    val creatorName: Int? = null
 )

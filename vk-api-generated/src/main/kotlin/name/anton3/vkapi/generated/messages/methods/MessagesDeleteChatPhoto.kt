@@ -15,6 +15,6 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property chatId Chat ID.
  */
 data class MessagesDeleteChatPhoto(
-    var chatId: Long
+    var chatId: Int
 ) : VkMethod<DeleteChatPhotoResponse>("messages.deleteChatPhoto", jacksonTypeRef()),
     UserMethod

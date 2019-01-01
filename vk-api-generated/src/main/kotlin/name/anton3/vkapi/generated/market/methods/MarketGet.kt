@@ -18,8 +18,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property offset Offset needed to return a specific subset of results.
  */
 data class MarketGet(
-    var ownerId: Long,
-    var count: Long? = null,
-    var offset: Long? = null
+    var ownerId: Int,
+    var count: Int? = null,
+    var offset: Int? = null
 ) : VkMethod<VkList<MarketItem>>("market.get", jacksonTypeRef()),
     UserMethod

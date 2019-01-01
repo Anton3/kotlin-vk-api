@@ -18,13 +18,13 @@ import name.anton3.vkapi.generated.notifications.objects.NotificationParent
  */
 @JsonDeserialize(`as` = Void::class)
 data class Topic(
-    val id: Long? = null,
+    val id: Int? = null,
     val title: String? = null,
-    val created: Long? = null,
-    val createdBy: Long? = null,
-    val updated: Long? = null,
-    val updatedBy: Long? = null,
+    val created: Int? = null,
+    val createdBy: Int? = null,
+    val updated: Int? = null,
+    val updatedBy: Int? = null,
     val isClosed: Boolean? = null,
     val isFixed: Boolean? = null,
-    val comments: Long? = null
+    val comments: Int? = null
 ) : NotificationParent

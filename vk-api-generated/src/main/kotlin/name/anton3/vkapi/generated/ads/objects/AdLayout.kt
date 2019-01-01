@@ -17,9 +17,9 @@ package name.anton3.vkapi.generated.ads.objects
  * @property imageSrc2x URL of the preview image in double size
  */
 data class AdLayout(
-    val id: Long,
-    val campaignId: Long,
-    val adFormat: Long,
+    val id: Int,
+    val campaignId: Int,
+    val adFormat: Int,
     val costType: AdLayoutCostType,
     val video: Boolean? = null,
     val title: String,
@@ -27,6 +27,6 @@ data class AdLayout(
     val linkUrl: String,
     val linkDomain: String? = null,
     val previewLink: String? = null,
-    val imageSrc: Long,
-    val imageSrc2x: Long? = null
+    val imageSrc: Int,
+    val imageSrc2x: Int? = null
 )

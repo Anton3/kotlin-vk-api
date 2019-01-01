@@ -10,7 +10,7 @@ import name.anton3.vkapi.generated.users.objects.UserMin
  * @property profiles No description
  */
 data class GetInvitesExtendedResponse(
-    val count: Long,
+    val count: Int,
     val items: List<GroupXtrInvitedBy>,
     val profiles: List<UserMin>
 )

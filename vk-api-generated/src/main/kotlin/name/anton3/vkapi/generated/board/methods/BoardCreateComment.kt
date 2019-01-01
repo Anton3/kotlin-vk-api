@@ -20,12 +20,12 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property guid Unique identifier to avoid repeated comments.
  */
 data class BoardCreateComment(
-    var groupId: Long,
-    var topicId: Long,
+    var groupId: Int,
+    var topicId: Int,
     var message: String? = null,
     var attachments: List<String>? = null,
     var fromGroup: Boolean? = null,
-    var stickerId: Long? = null,
+    var stickerId: Int? = null,
     var guid: String? = null
-) : VkMethod<Long>("board.createComment", jacksonTypeRef()),
+) : VkMethod<Int>("board.createComment", jacksonTypeRef()),
     UserMethod

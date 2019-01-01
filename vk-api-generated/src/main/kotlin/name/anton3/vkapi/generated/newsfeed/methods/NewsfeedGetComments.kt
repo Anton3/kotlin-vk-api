@@ -21,11 +21,11 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property fields Additional fields of [vk.com/dev/fields|profiles] and [vk.com/dev/fields_groups|communities] to return.
  */
 data class NewsfeedGetComments(
-    var count: Long? = null,
+    var count: Int? = null,
     var filters: List<String>? = null,
     var reposts: String? = null,
-    var startTime: Long? = null,
-    var endTime: Long? = null,
+    var startTime: Int? = null,
+    var endTime: Int? = null,
     var startFrom: String? = null,
     var fields: List<String>? = null
 ) : VkMethod<GetCommentsResponse>("newsfeed.getComments", jacksonTypeRef()),

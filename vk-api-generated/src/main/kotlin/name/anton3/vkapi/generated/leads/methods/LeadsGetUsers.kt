@@ -21,10 +21,10 @@ import name.anton3.vkapi.tokens.UserServiceMethod
  * @property reverse Sort order. Possible values: *'1' — chronological,, *'0' — reverse chronological.
  */
 data class LeadsGetUsers(
-    var offerId: Long,
+    var offerId: Int,
     var secret: String,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var status: GetUsersStatus? = null,
     var reverse: Boolean? = null
 ) : VkMethod<List<Entry>>("leads.getUsers", jacksonTypeRef()),

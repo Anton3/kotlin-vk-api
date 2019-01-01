@@ -1,18 +1,20 @@
 package name.anton3.vkapi.methods.longpoll.objects
 
-data class Flags(val flagsMask: Long) {
+import com.fasterxml.jackson.annotation.JsonCreator
 
-    fun has(flag: Long): Boolean {
+data class Flags @JsonCreator(mode = JsonCreator.Mode.DELEGATING) constructor(val flagsMask: Int) {
+
+    fun has(flag: Int): Boolean {
         checkSingleBit(flag)
-        return flagsMask and flag != 0L
+        return flagsMask and flag != 0
     }
 
-    fun set(flag: Long): Flags {
+    fun set(flag: Int): Flags {
         checkSingleBit(flag)
         return Flags(flagsMask or flag)
     }
 
-    fun unset(flag: Long): Flags {
+    fun unset(flag: Int): Flags {
         checkSingleBit(flag)
         return Flags(flagsMask and flag.inv())
     }
@@ -25,8 +27,8 @@ data class Flags(val flagsMask: Long) {
         return Flags(flagsMask and other.flagsMask.inv())
     }
 
-    private fun checkSingleBit(flag: Long) {
-        require(java.lang.Long.bitCount(flag) == 1)
+    private fun checkSingleBit(flag: Int) {
+        require(java.lang.Integer.bitCount(flag) == 1)
     }
 
     companion object {

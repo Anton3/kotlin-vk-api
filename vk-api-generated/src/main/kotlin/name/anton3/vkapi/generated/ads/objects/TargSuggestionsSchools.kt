@@ -10,7 +10,7 @@ package name.anton3.vkapi.generated.ads.objects
  * @property parent City name
  */
 data class TargSuggestionsSchools(
-    val id: Long? = null,
+    val id: Int? = null,
     val name: String? = null,
     val desc: String? = null,
     val type: TargSuggestionsSchoolsType? = null,

@@ -21,13 +21,13 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property guid Random value to avoid resending one comment.
  */
 data class MarketCreateComment(
-    var ownerId: Long,
-    var itemId: Long,
+    var ownerId: Int,
+    var itemId: Int,
     var message: String? = null,
     var attachments: List<String>? = null,
     var fromGroup: Boolean? = null,
-    var replyToComment: Long? = null,
-    var stickerId: Long? = null,
+    var replyToComment: Int? = null,
+    var stickerId: Int? = null,
     var guid: String? = null
-) : VkMethod<Long>("market.createComment", jacksonTypeRef()),
+) : VkMethod<Int>("market.createComment", jacksonTypeRef()),
     UserMethod

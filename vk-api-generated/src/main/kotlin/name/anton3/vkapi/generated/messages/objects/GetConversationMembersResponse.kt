@@ -12,7 +12,7 @@ import name.anton3.vkapi.generated.users.objects.User
  * @property groups Group member profiles
  */
 data class GetConversationMembersResponse(
-    val count: Long,
+    val count: Int,
     val items: List<ConversationMember>,
     val profiles: List<User>? = null,
     val groups: List<Group>? = null

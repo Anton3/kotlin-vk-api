@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue
 import name.anton3.vkapi.vktypes.Value
 import name.anton3.vkapi.vktypes.parseEnum
 
-enum class FriendPlatform(@JsonValue override val value: Long) : Value<Long> {
+enum class FriendPlatform(@JsonValue override val value: Int) : Value<Int> {
     MOBILE(1),
     IPHONE(2),
     IPAD(3),
@@ -17,6 +17,6 @@ enum class FriendPlatform(@JsonValue override val value: Long) : Value<Long> {
     companion object {
         @JvmStatic
         @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: Long): FriendPlatform = parseEnum(value)
+        fun parse(value: Int): FriendPlatform = parseEnum(value)
     }
 }

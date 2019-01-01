@@ -16,7 +16,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property groupId ID of community that owns the album (if the photo will be uploaded to a community album).
  */
 data class PhotosGetUploadServer(
-    var albumId: Long? = null,
-    var groupId: Long? = null
+    var albumId: Int? = null,
+    var groupId: Int? = null
 ) : VkMethod<PhotoUpload>("photos.getUploadServer", jacksonTypeRef()),
     UserMethod

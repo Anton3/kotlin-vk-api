@@ -17,7 +17,7 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of videos to return.
  */
 data class VideoGetNewTags(
-    var offset: Long? = null,
-    var count: Long? = null
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<VideoTagInfo>>("video.getNewTags", jacksonTypeRef()),
     UserMethod

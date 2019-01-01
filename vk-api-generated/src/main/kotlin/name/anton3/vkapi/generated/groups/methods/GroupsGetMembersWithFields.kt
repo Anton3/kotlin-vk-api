@@ -25,8 +25,8 @@ import name.anton3.vkapi.vktypes.VkList
 data class GroupsGetMembersWithFields(
     var groupId: String? = null,
     var sort: GetMembersSort? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var fields: List<String>? = null,
     var filter: GetMembersFilter? = null
 ) : VkMethod<VkList<UserXtrRole>>("groups.getMembers", jacksonTypeRef()),

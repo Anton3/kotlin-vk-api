@@ -10,6 +10,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @JsonDeserialize(`as` = Void::class)
 data class ListMinImpl(
-    override val id: Long,
+    override val id: Int,
     override val title: String
 ) : ListMin

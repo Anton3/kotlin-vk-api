@@ -9,6 +9,6 @@ package name.anton3.vkapi.generated.common.objects
  */
 data class Image(
     val url: String,
-    val width: Long,
-    val height: Long
+    val width: Int,
+    val height: Int
 )

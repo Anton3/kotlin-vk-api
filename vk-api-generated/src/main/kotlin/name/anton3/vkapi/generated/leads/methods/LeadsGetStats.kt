@@ -18,7 +18,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property dateEnd Day to finish stats (YYYY_MM_DD, e.g.2011-09-17).
  */
 data class LeadsGetStats(
-    var leadId: Long,
+    var leadId: Int,
     var secret: String? = null,
     var dateStart: String? = null,
     var dateEnd: String? = null

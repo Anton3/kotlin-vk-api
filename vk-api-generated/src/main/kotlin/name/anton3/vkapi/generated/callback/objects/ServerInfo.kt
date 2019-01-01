@@ -11,9 +11,9 @@ package name.anton3.vkapi.generated.callback.objects
  * @property status status
  */
 data class ServerInfo(
-    val id: Long? = null,
+    val id: Int? = null,
     val title: String? = null,
-    val creatorId: Long? = null,
+    val creatorId: Int? = null,
     val url: String? = null,
     val secretKey: String? = null,
     val status: ServerInfoStatus? = null

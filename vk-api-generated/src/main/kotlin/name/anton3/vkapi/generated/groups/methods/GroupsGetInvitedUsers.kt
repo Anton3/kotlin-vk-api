@@ -21,9 +21,9 @@ import name.anton3.vkapi.vktypes.VkList
  * @property nameCase Case for declension of user name and surname. Possible values: *'nom' — nominative (default),, *'gen' — genitive,, *'dat' — dative,, *'acc' — accusative, , *'ins' — instrumental,, *'abl' — prepositional.
  */
 data class GroupsGetInvitedUsers(
-    var groupId: Long,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var groupId: Int,
+    var offset: Int? = null,
+    var count: Int? = null,
     var fields: List<String>? = null,
     var nameCase: NameCase? = null
 ) : VkMethod<VkList<UserFull>>("groups.getInvitedUsers", jacksonTypeRef()),

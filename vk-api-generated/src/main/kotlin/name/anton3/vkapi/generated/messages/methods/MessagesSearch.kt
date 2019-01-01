@@ -23,11 +23,11 @@ import name.anton3.vkapi.vktypes.VkList
  */
 data class MessagesSearch(
     var q: String? = null,
-    var peerId: Long? = null,
-    var date: Long? = null,
-    var previewLength: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
-    var groupId: Long? = null
+    var peerId: Int? = null,
+    var date: Int? = null,
+    var previewLength: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
+    var groupId: Int? = null
 ) : VkMethod<VkList<Message>>("messages.search", jacksonTypeRef()),
     UserGroupMethod

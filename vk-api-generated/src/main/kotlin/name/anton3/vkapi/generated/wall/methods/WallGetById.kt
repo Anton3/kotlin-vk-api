@@ -18,7 +18,7 @@ import name.anton3.vkapi.tokens.UserServiceMethod
  */
 data class WallGetById(
     var posts: List<String>,
-    var copyHistoryDepth: Long? = null,
+    var copyHistoryDepth: Int? = null,
     var fields: List<String>? = null
 ) : VkMethod<List<WallpostFull>>("wall.getById", jacksonTypeRef()),
     UserServiceMethod

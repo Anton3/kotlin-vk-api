@@ -19,18 +19,18 @@ package name.anton3.vkapi.generated.users.objects
  * @property pages Public pages number
  */
 data class UserCounters(
-    val albums: Long? = null,
-    val videos: Long? = null,
-    val audios: Long? = null,
-    val notes: Long? = null,
-    val photos: Long? = null,
-    val groups: Long? = null,
-    val gifts: Long? = null,
-    val friends: Long? = null,
-    val onlineFriends: Long? = null,
-    val userPhotos: Long? = null,
-    val userVideos: Long? = null,
-    val followers: Long? = null,
-    val subscriptions: Long? = null,
-    val pages: Long? = null
+    val albums: Int? = null,
+    val videos: Int? = null,
+    val audios: Int? = null,
+    val notes: Int? = null,
+    val photos: Int? = null,
+    val groups: Int? = null,
+    val gifts: Int? = null,
+    val friends: Int? = null,
+    val onlineFriends: Int? = null,
+    val userPhotos: Int? = null,
+    val userVideos: Int? = null,
+    val followers: Int? = null,
+    val subscriptions: Int? = null,
+    val pages: Int? = null
 )

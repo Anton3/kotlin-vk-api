@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property storyId Story ID.
  */
 data class StoriesDelete(
-    var ownerId: Long,
-    var storyId: Long
+    var ownerId: Int,
+    var storyId: Int
 ) : VkMethod<OkResponse>("stories.delete", jacksonTypeRef()),
     UserGroupMethod

@@ -15,7 +15,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property ids Serialized JSON array with IDs of deleted managers.
  */
 data class AdsRemoveOfficeUsers(
-    var accountId: Long,
+    var accountId: Int,
     var ids: String
 ) : VkMethod<Boolean>("ads.removeOfficeUsers", jacksonTypeRef()),
     UserMethod

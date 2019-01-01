@@ -26,14 +26,14 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property linkImage Link image url
  */
 data class WallPostAdsStealth(
-    var ownerId: Long,
+    var ownerId: Int,
     var message: String? = null,
     var attachments: List<String>? = null,
     var signed: Boolean? = null,
     var lat: Double? = null,
     var long: Double? = null,
-    var placeId: Long? = null,
-    var postId: Long? = null,
+    var placeId: Int? = null,
+    var postId: Int? = null,
     var guid: String? = null,
     var linkButton: String? = null,
     var linkTitle: String? = null,

@@ -28,18 +28,18 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property markAsAds No description
  */
 data class WallPost(
-    var ownerId: Long? = null,
+    var ownerId: Int? = null,
     var friendsOnly: Boolean? = null,
     var fromGroup: Boolean? = null,
     var message: String? = null,
     var attachments: List<String>? = null,
     var services: String? = null,
     var signed: Boolean? = null,
-    var publishDate: Long? = null,
+    var publishDate: Int? = null,
     var lat: Double? = null,
     var long: Double? = null,
-    var placeId: Long? = null,
-    var postId: Long? = null,
+    var placeId: Int? = null,
+    var postId: Int? = null,
     var guid: String? = null,
     var markAsAds: Boolean? = null
 ) : VkMethod<PostResponse>("wall.post", jacksonTypeRef()),

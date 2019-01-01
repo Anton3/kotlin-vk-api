@@ -26,12 +26,12 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property keyboard No description
  */
 data class Message(
-    val id: Long,
+    val id: Int,
     val date: VkDate,
-    val peerId: Long,
-    val fromId: Long,
+    val peerId: Int,
+    val fromId: Int,
     val text: String,
-    val randomId: Long? = null,
+    val randomId: Int? = null,
     val ref: String? = null,
     val refSource: String? = null,
     val attachments: List<MessageAttachment>? = null,
@@ -41,7 +41,7 @@ data class Message(
     val fwdMessages: List<Message>? = null,
     val replyMessage: Message? = null,
     val action: MessageAction? = null,
-    val conversationMessageId: Long? = null,
-    val updateTime: Long? = null,
+    val conversationMessageId: Int? = null,
+    val updateTime: Int? = null,
     val keyboard: KeyboardReturned? = null
 )

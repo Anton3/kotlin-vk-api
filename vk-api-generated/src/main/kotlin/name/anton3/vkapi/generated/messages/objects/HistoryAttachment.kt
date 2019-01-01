@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.messages.objects
  * @property attachment No description
  */
 data class HistoryAttachment(
-    val messageId: Long? = null,
+    val messageId: Int? = null,
     val attachment: HistoryMessageAttachment
 )

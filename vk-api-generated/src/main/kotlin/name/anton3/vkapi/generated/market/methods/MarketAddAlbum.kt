@@ -18,9 +18,9 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property mainAlbum Set as main ('1' – set, '0' – no).
  */
 data class MarketAddAlbum(
-    var ownerId: Long,
+    var ownerId: Int,
     var title: String,
-    var photoId: Long? = null,
+    var photoId: Int? = null,
     var mainAlbum: Boolean? = null
 ) : VkMethod<AddAlbumResponse>("market.addAlbum", jacksonTypeRef()),
     UserMethod

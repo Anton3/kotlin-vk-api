@@ -19,8 +19,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  */
 data class AccountSetSilenceMode(
     var deviceId: String? = null,
-    var time: Long? = null,
-    var peerId: Long? = null,
-    var sound: Long? = null
+    var time: Int? = null,
+    var peerId: Int? = null,
+    var sound: Int? = null
 ) : VkMethod<OkResponse>("account.setSilenceMode", jacksonTypeRef()),
     UserMethod

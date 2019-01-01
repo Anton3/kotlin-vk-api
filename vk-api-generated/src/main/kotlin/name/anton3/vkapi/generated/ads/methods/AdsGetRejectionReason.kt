@@ -16,7 +16,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property adId Ad ID.
  */
 data class AdsGetRejectionReason(
-    var accountId: Long,
-    var adId: Long
+    var accountId: Int,
+    var adId: Int
 ) : VkMethod<RejectReason>("ads.getRejectionReason", jacksonTypeRef()),
     UserMethod

@@ -9,6 +9,6 @@ package name.anton3.vkapi.generated.orders.objects
  */
 data class AmountItem(
     val votes: String? = null,
-    val amount: Long? = null,
+    val amount: Int? = null,
     val description: String? = null
 )

@@ -8,5 +8,5 @@ package name.anton3.vkapi.generated.groups.objects
  */
 data class OnlineStatus(
     val status: OnlineStatusType,
-    val minutes: Long? = null
+    val minutes: Int? = null
 )

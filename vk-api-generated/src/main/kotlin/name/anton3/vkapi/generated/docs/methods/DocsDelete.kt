@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property docId Document ID.
  */
 data class DocsDelete(
-    var ownerId: Long,
-    var docId: Long
+    var ownerId: Int,
+    var docId: Int
 ) : VkMethod<OkResponse>("docs.delete", jacksonTypeRef()),
     UserMethod

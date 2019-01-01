@@ -22,7 +22,7 @@ import name.anton3.vkapi.vktypes.OkResponse
 data class AccountRegisterDevice(
     var token: String,
     var deviceModel: String? = null,
-    var deviceYear: Long? = null,
+    var deviceYear: Int? = null,
     var deviceId: String,
     var systemVersion: String? = null,
     var settings: String? = null

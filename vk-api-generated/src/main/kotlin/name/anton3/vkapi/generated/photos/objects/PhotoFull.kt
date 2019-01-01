@@ -27,14 +27,14 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property tags No description
  */
 data class PhotoFull(
-    val id: Long,
-    val albumId: Long,
-    val ownerId: Long,
-    val userId: Long? = null,
+    val id: Int,
+    val albumId: Int,
+    val ownerId: Int,
+    val userId: Int? = null,
     val sizes: List<Image>? = null,
-    val postId: Long? = null,
-    val width: Long? = null,
-    val height: Long? = null,
+    val postId: Int? = null,
+    val width: Int? = null,
+    val height: Int? = null,
     val text: String? = null,
     val date: VkDate,
     val lat: Double? = null,

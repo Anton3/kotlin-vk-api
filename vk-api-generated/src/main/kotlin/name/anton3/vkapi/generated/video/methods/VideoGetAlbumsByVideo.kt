@@ -15,7 +15,7 @@ import name.anton3.vkapi.core.VkMethod
  * @property videoId No description
  */
 data class VideoGetAlbumsByVideo(
-    var targetId: Long? = null,
-    var ownerId: Long,
-    var videoId: Long
-) : VkMethod<List<Long>>("video.getAlbumsByVideo", jacksonTypeRef())
+    var targetId: Int? = null,
+    var ownerId: Int,
+    var videoId: Int
+) : VkMethod<List<Int>>("video.getAlbumsByVideo", jacksonTypeRef())

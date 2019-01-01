@@ -22,8 +22,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property contactEmail Contact e-mail.
  */
 data class GroupsEditManager(
-    var groupId: Long,
-    var userId: Long,
+    var groupId: Int,
+    var userId: Int,
     var role: EditManagerRole? = null,
     var isContact: Boolean? = null,
     var contactPosition: String? = null,

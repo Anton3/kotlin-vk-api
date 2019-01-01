@@ -26,8 +26,8 @@ import name.anton3.vkapi.vktypes.VkList
 data class UsersGetNearby(
     var latitude: Double,
     var longitude: Double,
-    var accuracy: Long? = null,
-    var timeout: Long? = null,
+    var accuracy: Int? = null,
+    var timeout: Int? = null,
     var radius: GetNearbyRadius? = null,
     var fields: List<String>? = null,
     var nameCase: NameCase? = null

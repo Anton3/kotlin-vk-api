@@ -14,8 +14,8 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property giftHash Hash
  */
 data class Gift(
-    val id: Long? = null,
-    val fromId: Long? = null,
+    val id: Int? = null,
+    val fromId: Int? = null,
     val message: String? = null,
     val date: VkDate? = null,
     val gift: Layout? = null,

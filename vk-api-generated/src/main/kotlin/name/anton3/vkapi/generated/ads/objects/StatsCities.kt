@@ -11,6 +11,6 @@ package name.anton3.vkapi.generated.ads.objects
 data class StatsCities(
     val impressionsRate: Double? = null,
     val clicksRate: Double? = null,
-    val value: Long? = null,
+    val value: Int? = null,
     val name: String? = null
 )

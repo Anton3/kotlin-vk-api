@@ -15,7 +15,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property commentId ID of the deleted comment.
  */
 data class VideoRestoreComment(
-    var ownerId: Long? = null,
-    var commentId: Long
+    var ownerId: Int? = null,
+    var commentId: Int
 ) : VkMethod<Boolean>("video.restoreComment", jacksonTypeRef()),
     UserMethod

@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.secure.objects
  * @property level Level
  */
 data class Level(
-    val uid: Long? = null,
-    val level: Long? = null
+    val uid: Int? = null,
+    val level: Int? = null
 )

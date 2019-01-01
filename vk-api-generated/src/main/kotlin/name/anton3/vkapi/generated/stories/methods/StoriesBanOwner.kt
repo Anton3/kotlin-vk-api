@@ -15,6 +15,6 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property ownersIds List of sources IDs
  */
 data class StoriesBanOwner(
-    var ownersIds: List<Long>
+    var ownersIds: List<Int>
 ) : VkMethod<OkResponse>("stories.banOwner", jacksonTypeRef()),
     UserMethod

@@ -12,9 +12,9 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property date Transaction date in Unixtime
  */
 data class Transaction(
-    val id: Long? = null,
-    val uidFrom: Long? = null,
-    val uidTo: Long? = null,
-    val votes: Long? = null,
+    val id: Int? = null,
+    val uidFrom: Int? = null,
+    val uidTo: Int? = null,
+    val votes: Int? = null,
     val date: VkDate? = null
 )

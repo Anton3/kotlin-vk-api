@@ -23,11 +23,11 @@ import name.anton3.vkapi.tokens.UserServiceMethod
  */
 data class NewsfeedSearchExtended(
     var q: String? = null,
-    var count: Long? = null,
+    var count: Int? = null,
     var latitude: Double? = null,
     var longitude: Double? = null,
-    var startTime: Long? = null,
-    var endTime: Long? = null,
+    var startTime: Int? = null,
+    var endTime: Int? = null,
     var startFrom: String? = null,
     var fields: List<String>? = null
 ) : VkMethod<SearchExtendedResponse>("newsfeed.search", jacksonTypeRef()),

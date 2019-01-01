@@ -20,11 +20,11 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property separate No description
  */
 data class AppsSendRequest(
-    var userId: Long,
+    var userId: Int,
     var text: String? = null,
     var type: Type? = null,
     var name: String? = null,
     var key: String? = null,
     var separate: Boolean? = null
-) : VkMethod<Long>("apps.sendRequest", jacksonTypeRef()),
+) : VkMethod<Int>("apps.sendRequest", jacksonTypeRef()),
     UserMethod

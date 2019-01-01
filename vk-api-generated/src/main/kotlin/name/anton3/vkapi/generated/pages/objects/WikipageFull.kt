@@ -25,18 +25,18 @@ import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
  */
 @JsonDeserialize(`as` = Void::class)
 data class WikipageFull(
-    val id: Long,
-    val groupId: Long,
+    val id: Int,
+    val groupId: Int,
     val title: String,
     val currentUserCanEdit: Boolean? = null,
     val currentUserCanEditAccess: Boolean? = null,
     val whoCanView: PrivacySettings,
     val whoCanEdit: PrivacySettings,
-    val edited: Long,
-    val created: Long,
-    val views: Long,
-    val editorId: Long? = null,
-    val creatorId: Long? = null,
+    val edited: Int,
+    val created: Int,
+    val views: Int,
+    val editorId: Int? = null,
+    val creatorId: Int? = null,
     val source: String? = null,
     val html: String? = null,
     val viewUrl: String

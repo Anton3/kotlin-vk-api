@@ -21,12 +21,12 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property offset Offset needed to return a specific subset of results.
  */
 data class AdsGetAdsTargeting(
-    var accountId: Long,
-    var clientId: Long? = null,
+    var accountId: Int,
+    var clientId: Int? = null,
     var includeDeleted: Boolean? = null,
     var campaignIds: String? = null,
     var adIds: String? = null,
-    var limit: Long? = null,
-    var offset: Long? = null
+    var limit: Int? = null,
+    var offset: Int? = null
 ) : VkMethod<List<TargSettings>>("ads.getAdsTargeting", jacksonTypeRef()),
     UserMethod

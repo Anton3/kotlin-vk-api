@@ -19,10 +19,10 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property after ID of an item to place current item after it.
  */
 data class MarketReorderItems(
-    var ownerId: Long,
-    var albumId: Long? = null,
-    var itemId: Long,
-    var before: Long? = null,
-    var after: Long? = null
+    var ownerId: Int,
+    var albumId: Int? = null,
+    var itemId: Int,
+    var before: Int? = null,
+    var after: Int? = null
 ) : VkMethod<OkResponse>("market.reorderItems", jacksonTypeRef()),
     UserMethod

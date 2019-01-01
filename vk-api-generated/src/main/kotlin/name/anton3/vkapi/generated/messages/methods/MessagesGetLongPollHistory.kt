@@ -23,14 +23,14 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property groupId Group ID (for group messages with user access token)
  */
 data class MessagesGetLongPollHistory(
-    var ts: Long? = null,
-    var pts: Long? = null,
-    var previewLength: Long? = null,
+    var ts: Int? = null,
+    var pts: Int? = null,
+    var previewLength: Int? = null,
     var onlines: Boolean? = null,
     var fields: List<String>? = null,
-    var eventsLimit: Long? = null,
-    var msgsLimit: Long? = null,
-    var maxMsgId: Long? = null,
-    var groupId: Long? = null
+    var eventsLimit: Int? = null,
+    var msgsLimit: Int? = null,
+    var maxMsgId: Int? = null,
+    var groupId: Int? = null
 ) : VkMethod<GetLongPollHistoryResponse>("messages.getLongPollHistory", jacksonTypeRef()),
     UserGroupMethod

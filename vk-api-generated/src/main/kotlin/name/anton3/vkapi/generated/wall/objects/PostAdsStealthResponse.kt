@@ -6,5 +6,5 @@ package name.anton3.vkapi.generated.wall.objects
  * @property postId Created post ID
  */
 data class PostAdsStealthResponse(
-    val postId: Long
+    val postId: Int
 )

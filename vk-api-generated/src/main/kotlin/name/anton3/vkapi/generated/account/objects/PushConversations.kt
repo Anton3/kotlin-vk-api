@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.account.objects
  * @property items No description
  */
 data class PushConversations(
-    val count: Long? = null,
+    val count: Int? = null,
     val items: List<PushConversationsItem>? = null
 )

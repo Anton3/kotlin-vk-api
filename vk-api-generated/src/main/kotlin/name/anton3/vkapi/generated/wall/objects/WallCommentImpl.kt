@@ -19,13 +19,13 @@ import name.anton3.vkapi.vktypes.VkDate
  */
 @JsonDeserialize(`as` = Void::class)
 data class WallCommentImpl(
-    override val id: Long,
-    override val fromId: Long,
+    override val id: Int,
+    override val fromId: Int,
     override val date: VkDate,
     override val text: String,
     override val likes: LikesInfo? = null,
-    override val replyToUser: Long? = null,
-    override val replyToComment: Long? = null,
+    override val replyToUser: Int? = null,
+    override val replyToComment: Int? = null,
     override val attachments: List<CommentAttachment>? = null,
-    override val realOffset: Long? = null
+    override val realOffset: Int? = null
 ) : WallComment

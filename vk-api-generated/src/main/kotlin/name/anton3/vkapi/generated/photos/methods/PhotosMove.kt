@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property photoId Photo ID.
  */
 data class PhotosMove(
-    var ownerId: Long? = null,
-    var targetAlbumId: Long,
-    var photoId: Long
+    var ownerId: Int? = null,
+    var targetAlbumId: Int,
+    var photoId: Int
 ) : VkMethod<OkResponse>("photos.move", jacksonTypeRef()),
     UserMethod

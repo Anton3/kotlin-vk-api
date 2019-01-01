@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @JsonDeserialize(`as` = Void::class)
 data class GroupImpl(
-    override val id: Long? = null,
+    override val id: Int? = null,
     override val name: String? = null,
     override val screenName: String? = null,
     override val deactivated: String? = null,

@@ -9,8 +9,8 @@ package name.anton3.vkapi.generated.stats.objects
  * @property name Country name
  */
 data class Country(
-    val count: Long? = null,
-    val value: Long? = null,
+    val count: Int? = null,
+    val value: Int? = null,
     val code: String? = null,
     val name: String? = null
 )

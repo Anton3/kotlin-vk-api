@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.places.objects
  * @property icon URL of the place's icon
  */
 data class Types(
-    val id: Long? = null,
+    val id: Int? = null,
     val title: String? = null,
     val icon: String? = null
 )

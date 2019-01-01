@@ -10,9 +10,9 @@ package name.anton3.vkapi.generated.messages.objects
  * @property canKick `true` if current user can kick this member
  */
 data class ConversationMember(
-    val memberId: Long,
-    val invitedBy: Long,
-    val joinDate: Long,
+    val memberId: Int,
+    val invitedBy: Int,
+    val joinDate: Int,
     val isAdmin: Boolean,
     val canKick: Boolean
 )

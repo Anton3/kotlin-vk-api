@@ -12,11 +12,11 @@ package name.anton3.vkapi.generated.messages.objects
  * @property isGroupChannel true, if this conversation is a community channel
  */
 data class ConversationChatSettings(
-    val memberCount: Long,
+    val memberCount: Int,
     val title: String,
     val pinnedMessage: PinnedMessage? = null,
     val state: ConversationChatSettingsState,
     val photo: ConversationChatSettingsPhoto,
-    val activeIds: List<Long>,
+    val activeIds: List<Int>,
     val isGroupChannel: Boolean
 )

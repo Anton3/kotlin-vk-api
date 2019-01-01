@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.market.objects
  * @property section No description
  */
 data class MarketCategory(
-    val id: Long,
+    val id: Int,
     val name: String,
     val section: Section
 )

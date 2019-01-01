@@ -12,7 +12,7 @@ package name.anton3.vkapi.generated.fave.objects
  * @property photo200 URL of the preview image with 200 px in width
  */
 data class FavesLink(
-    val id: Long? = null,
+    val id: Int? = null,
     val url: String? = null,
     val title: String? = null,
     val description: String? = null,

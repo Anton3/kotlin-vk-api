@@ -24,13 +24,13 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property nameCase Case for declension of user name and surname: , 'nom' — nominative (default) , 'gen' — genitive , 'dat' — dative , 'acc' — accusative , 'ins' — instrumental , 'abl' — prepositional
  */
 data class PollsGetVoters(
-    var ownerId: Long? = null,
-    var pollId: Long,
-    var answerIds: List<Long>,
+    var ownerId: Int? = null,
+    var pollId: Int,
+    var answerIds: List<Int>,
     var isBoard: Boolean? = null,
     var friendsOnly: Boolean? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var fields: List<String>? = null,
     var nameCase: NameCase? = null
 ) : VkMethod<List<Voters>>("polls.getVoters", jacksonTypeRef()),

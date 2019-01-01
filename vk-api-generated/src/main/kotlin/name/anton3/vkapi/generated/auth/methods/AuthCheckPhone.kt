@@ -19,7 +19,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  */
 data class AuthCheckPhone(
     var phone: String,
-    var clientId: Long? = null,
+    var clientId: Int? = null,
     var authByPhone: Boolean? = null
 ) : VkMethod<OkResponse>("auth.checkPhone", jacksonTypeRef()),
     ServiceMethod

@@ -19,10 +19,10 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property cropWidth Width of the cropped photo in px.
  */
 data class PhotosGetMarketUploadServer(
-    var groupId: Long,
+    var groupId: Int,
     var mainPhoto: Boolean? = null,
-    var cropX: Long? = null,
-    var cropY: Long? = null,
-    var cropWidth: Long? = null
+    var cropX: Int? = null,
+    var cropY: Int? = null,
+    var cropWidth: Int? = null
 ) : VkMethod<UploadServer>("photos.getMarketUploadServer", jacksonTypeRef()),
     UserMethod

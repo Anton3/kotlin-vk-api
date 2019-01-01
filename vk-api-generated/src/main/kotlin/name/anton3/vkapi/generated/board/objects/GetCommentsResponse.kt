@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.board.objects
  * @property poll No description
  */
 data class GetCommentsResponse(
-    val count: Long,
+    val count: Int,
     val items: List<TopicComment>,
     val poll: TopicPoll? = null
 )

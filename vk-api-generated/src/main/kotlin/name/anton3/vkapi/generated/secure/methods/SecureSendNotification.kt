@@ -16,8 +16,8 @@ import name.anton3.vkapi.tokens.ServiceMethod
  * @property message notification text which should be sent in 'UTF-8' encoding ('254' characters maximum).
  */
 data class SecureSendNotification(
-    var userIds: List<Long>? = null,
-    var userId: Long? = null,
+    var userIds: List<Int>? = null,
+    var userId: Int? = null,
     var message: String
-) : VkMethod<List<Long>>("secure.sendNotification", jacksonTypeRef()),
+) : VkMethod<List<Int>>("secure.sendNotification", jacksonTypeRef()),
     ServiceMethod

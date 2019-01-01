@@ -15,6 +15,6 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property sectionId 'id' value returned with a block to hide by the '' method.
  */
 data class VideoHideCatalogSection(
-    var sectionId: Long
+    var sectionId: Int
 ) : VkMethod<OkResponse>("video.hideCatalogSection", jacksonTypeRef()),
     UserMethod

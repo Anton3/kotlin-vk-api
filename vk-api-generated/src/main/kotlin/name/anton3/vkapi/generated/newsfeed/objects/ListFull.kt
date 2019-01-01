@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 @JsonDeserialize(`as` = Void::class)
 data class ListFull(
     val noReposts: Boolean? = null,
-    val sourceIds: List<Long>? = null,
-    override val id: Long,
+    val sourceIds: List<Int>? = null,
+    override val id: Int,
     override val title: String
 ) : ListMin

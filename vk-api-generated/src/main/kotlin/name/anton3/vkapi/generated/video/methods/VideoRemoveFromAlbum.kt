@@ -18,9 +18,9 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property videoId No description
  */
 data class VideoRemoveFromAlbum(
-    var targetId: Long? = null,
-    var albumId: Long? = null,
-    var albumIds: List<Long>? = null,
-    var ownerId: Long,
-    var videoId: Long
+    var targetId: Int? = null,
+    var albumId: Int? = null,
+    var albumIds: List<Int>? = null,
+    var ownerId: Int,
+    var videoId: Int
 ) : VkMethod<OkResponse>("video.removeFromAlbum", jacksonTypeRef())

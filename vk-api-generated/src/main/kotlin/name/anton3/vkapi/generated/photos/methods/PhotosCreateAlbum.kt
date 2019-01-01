@@ -22,7 +22,7 @@ import name.anton3.vkapi.tokens.UserMethod
  */
 data class PhotosCreateAlbum(
     var title: String,
-    var groupId: Long? = null,
+    var groupId: Int? = null,
     var description: String? = null,
     var privacyView: List<String>? = null,
     var privacyComment: List<String>? = null,

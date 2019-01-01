@@ -22,12 +22,12 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property sort Sort order: 'asc' — oldest comment first, 'desc' — newest comment first
  */
 data class VideoGetComments(
-    var ownerId: Long? = null,
-    var videoId: Long,
+    var ownerId: Int? = null,
+    var videoId: Int,
     var needLikes: Boolean? = null,
-    var startCommentId: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var startCommentId: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var sort: GetCommentsSort? = null
 ) : VkMethod<GetCommentsResponse>("video.getComments", jacksonTypeRef()),
     UserMethod

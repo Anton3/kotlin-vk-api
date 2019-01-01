@@ -18,8 +18,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property extended Return an additional information about videos. Also returns all owners profiles and groups.
  */
 data class FaveGetVideos(
-    var offset: Long? = null,
-    var count: Long? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var extended: Boolean? = null
 ) : VkMethod<VkList<Video>>("fave.getVideos", jacksonTypeRef()),
     UserMethod

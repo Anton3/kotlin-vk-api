@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.widgets.objects
  * @property pages No description
  */
 data class GetPagesResponse(
-    val count: Long,
+    val count: Int,
     val pages: List<WidgetPage>
 )

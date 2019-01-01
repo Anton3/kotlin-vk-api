@@ -18,8 +18,8 @@ import name.anton3.vkapi.tokens.UserServiceMethod
  * @property filters list of requested catalog sections
  */
 data class VideoGetCatalog(
-    var count: Long? = null,
-    var itemsCount: Long? = null,
+    var count: Int? = null,
+    var itemsCount: Int? = null,
     var from: String? = null,
     var filters: List<String>? = null
 ) : VkMethod<GetCatalogResponse>("video.getCatalog", jacksonTypeRef()),

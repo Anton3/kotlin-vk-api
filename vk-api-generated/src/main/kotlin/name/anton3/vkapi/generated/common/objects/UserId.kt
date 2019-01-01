@@ -6,5 +6,5 @@ package name.anton3.vkapi.generated.common.objects
  * @property userId User ID
  */
 data class UserId(
-    val userId: Long? = null
+    val userId: Int? = null
 )

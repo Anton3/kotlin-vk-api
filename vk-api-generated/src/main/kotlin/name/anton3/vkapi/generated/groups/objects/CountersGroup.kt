@@ -12,11 +12,11 @@ package name.anton3.vkapi.generated.groups.objects
  * @property market Market items number
  */
 data class CountersGroup(
-    val photos: Long? = null,
-    val albums: Long? = null,
-    val topics: Long? = null,
-    val videos: Long? = null,
-    val audios: Long? = null,
-    val docs: Long? = null,
-    val market: Long? = null
+    val photos: Int? = null,
+    val albums: Int? = null,
+    val topics: Int? = null,
+    val videos: Int? = null,
+    val audios: Int? = null,
+    val docs: Int? = null,
+    val market: Int? = null
 )

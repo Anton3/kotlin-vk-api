@@ -14,8 +14,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @JsonDeserialize(`as` = AudioImpl::class)
 interface Audio {
-    val id: Long
-    val ownerId: Long
+    val id: Int
+    val ownerId: Int
     val artist: String
     val title: String
     val url: String?

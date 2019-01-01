@@ -9,7 +9,7 @@ package name.anton3.vkapi.generated.board.objects
  * @property canAddTopics Information whether current user can add topic
  */
 data class GetTopicsResponse(
-    val count: Long,
+    val count: Int,
     val items: List<Topic>,
     val defaultOrder: DefaultOrder,
     val canAddTopics: Boolean

@@ -25,14 +25,14 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count No description
  */
 data class PhotosGet(
-    var ownerId: Long? = null,
+    var ownerId: Int? = null,
     var albumId: GetAlbumId? = null,
     var photoIds: List<String>? = null,
     var rev: Boolean? = null,
     var feedType: String? = null,
-    var feed: Long? = null,
+    var feed: Int? = null,
     var photoSizes: Boolean? = null,
-    var offset: Long? = null,
-    var count: Long? = null
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<Photo>>("photos.get", jacksonTypeRef()),
     UserServiceMethod

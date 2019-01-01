@@ -30,12 +30,12 @@ data class UserXtrType(
     override val photo100: String? = null,
     override val online: Boolean? = null,
     override val onlineMobile: Boolean? = null,
-    override val onlineApp: Long? = null,
-    override val id: Long,
+    override val onlineApp: Int? = null,
+    override val id: Int,
     override val firstName: String,
     override val lastName: String,
     override val deactivated: String? = null,
-    override val hidden: Long? = null
+    override val hidden: Int? = null
 ) : User,
     GetSubscriptionsExtendedResponse,
     GetSuggestedSourcesResponse

@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property linkId Link ID.
  */
 data class GroupsDeleteLink(
-    var groupId: Long,
-    var linkId: Long
+    var groupId: Int,
+    var linkId: Int
 ) : VkMethod<OkResponse>("groups.deleteLink", jacksonTypeRef()),
     UserMethod

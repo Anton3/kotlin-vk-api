@@ -13,5 +13,5 @@ import name.anton3.vkapi.tokens.ServiceMethod
  *
 
  */
-class SecureGetAppBalance : VkMethod<Long>("secure.getAppBalance", jacksonTypeRef()),
+class SecureGetAppBalance : VkMethod<Int>("secure.getAppBalance", jacksonTypeRef()),
     ServiceMethod

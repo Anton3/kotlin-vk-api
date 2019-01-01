@@ -26,12 +26,12 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property reposts No description
  */
 data class WidgetComment(
-    val id: Long,
-    val fromId: Long,
-    val toId: Long,
+    val id: Int,
+    val fromId: Int,
+    val toId: Int,
     val date: VkDate,
     val user: UserFull? = null,
-    val postType: Long,
+    val postType: Int,
     val text: String,
     val canDelete: Boolean? = null,
     val media: CommentMedia? = null,

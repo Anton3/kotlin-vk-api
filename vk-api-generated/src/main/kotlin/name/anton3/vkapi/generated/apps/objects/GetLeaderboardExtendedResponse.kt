@@ -10,7 +10,7 @@ import name.anton3.vkapi.generated.users.objects.UserMin
  * @property profiles No description
  */
 data class GetLeaderboardExtendedResponse(
-    val count: Long? = null,
+    val count: Int? = null,
     val items: List<Leaderboard>? = null,
     val profiles: List<UserMin>? = null
 )

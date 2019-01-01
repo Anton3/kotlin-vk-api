@@ -23,13 +23,13 @@ import name.anton3.vkapi.tokens.UserServiceMethod
  * @property previewLength Number of characters after which to truncate the previewed comment. To preview the full comment, specify '0'.
  */
 data class BoardGetTopicsExtended(
-    var groupId: Long,
-    var topicIds: List<Long>? = null,
+    var groupId: Int,
+    var topicIds: List<Int>? = null,
     var order: GetTopicsOrder? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var preview: GetTopicsPreview? = null,
-    var previewLength: Long? = null
+    var previewLength: Int? = null
 ) : VkMethod<GetTopicsExtendedResponse>("board.getTopics", jacksonTypeRef()),
     UserServiceMethod {
     init {

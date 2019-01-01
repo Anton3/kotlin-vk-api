@@ -23,8 +23,8 @@ import name.anton3.vkapi.vktypes.VkList
 data class GroupsGetMembers(
     var groupId: String? = null,
     var sort: GetMembersSort? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var filter: GetMembersFilter? = null
-) : VkMethod<VkList<Long>>("groups.getMembers", jacksonTypeRef()),
+) : VkMethod<VkList<Int>>("groups.getMembers", jacksonTypeRef()),
     UserGroupServiceMethod

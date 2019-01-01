@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.ads.objects
  * @property name Object name
  */
 data class TargSuggestions(
-    val id: Long? = null,
+    val id: Int? = null,
     val name: String? = null
 )

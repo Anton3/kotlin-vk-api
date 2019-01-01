@@ -17,7 +17,7 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of results to return.
  */
 data class AccountGetBanned(
-    var offset: Long? = null,
-    var count: Long? = null
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<UserMin>>("account.getBanned", jacksonTypeRef()),
     UserMethod

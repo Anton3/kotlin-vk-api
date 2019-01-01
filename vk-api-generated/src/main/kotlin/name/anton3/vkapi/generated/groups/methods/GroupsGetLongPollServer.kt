@@ -15,6 +15,6 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property groupId Community ID
  */
 data class GroupsGetLongPollServer(
-    var groupId: Long
+    var groupId: Int
 ) : VkMethod<LongPollServer>("groups.getLongPollServer", jacksonTypeRef()),
     UserGroupMethod

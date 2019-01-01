@@ -15,6 +15,6 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property groupId Community ID.
  */
 data class GroupsGetCallbackConfirmationCode(
-    var groupId: Long
+    var groupId: Int
 ) : VkMethod<GetCallbackConfirmationCodeResponse>("groups.getCallbackConfirmationCode", jacksonTypeRef()),
     UserGroupMethod

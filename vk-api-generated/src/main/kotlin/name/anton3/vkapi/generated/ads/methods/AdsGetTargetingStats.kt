@@ -22,9 +22,9 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property linkDomain Domain of the advertised object.
  */
 data class AdsGetTargetingStats(
-    var accountId: Long,
+    var accountId: Int,
     var criteria: String? = null,
-    var adId: Long? = null,
+    var adId: Int? = null,
     var adFormat: GetTargetingStatsAdFormat? = null,
     var adPlatform: String? = null,
     var linkUrl: String,

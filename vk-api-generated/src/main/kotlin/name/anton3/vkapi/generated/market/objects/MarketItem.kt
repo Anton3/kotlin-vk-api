@@ -24,8 +24,8 @@ interface MarketItem : WallpostAttachment,
     CommentAttachment,
     MessageAttachment {
 
-    val id: Long
-    val ownerId: Long
+    val id: Int
+    val ownerId: Int
     val title: String
     val description: String
     val price: Price

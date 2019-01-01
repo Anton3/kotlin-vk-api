@@ -15,6 +15,6 @@ import name.anton3.vkapi.generated.orders.objects.Amount
  * @property votes No description
  */
 data class OrdersGetAmount(
-    var userId: Long,
+    var userId: Int,
     var votes: List<String>
 ) : VkMethod<Amount>("orders.getAmount", jacksonTypeRef())

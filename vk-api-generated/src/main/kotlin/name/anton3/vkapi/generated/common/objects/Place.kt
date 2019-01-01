@@ -16,13 +16,13 @@ package name.anton3.vkapi.generated.common.objects
  * @property address Place address
  */
 data class Place(
-    val id: Long? = null,
+    val id: Int? = null,
     val title: String? = null,
     val latitude: Double? = null,
     val longitude: Double? = null,
-    val created: Long? = null,
+    val created: Int? = null,
     val icon: String? = null,
-    val checkins: Long? = null,
+    val checkins: Int? = null,
     val type: String? = null,
     val country: String? = null,
     val city: String? = null,

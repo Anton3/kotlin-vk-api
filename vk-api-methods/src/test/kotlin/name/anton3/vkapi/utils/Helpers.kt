@@ -38,8 +38,8 @@ fun readResource(path: String): ByteArray =
 
 val groupAccessToken = readConfigParam("groupAccessToken")
 val userAccessToken = readConfigParam("userAccessToken")
-val groupId = readConfigParam("groupId").toLong()
-val peerId = readConfigParam("peerId").toLong()
+val groupId = readConfigParam("groupId").toInt()
+val peerId = readConfigParam("peerId").toInt()
 
 const val timeout = 9
 val httpClient = KtorTransportClient(HttpClient(Apache) {

@@ -22,13 +22,13 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property photoIds IDs of additional photos.
  */
 data class MarketAdd(
-    var ownerId: Long,
+    var ownerId: Int,
     var name: String,
     var description: String,
-    var categoryId: Long,
+    var categoryId: Int,
     var price: Double,
     var deleted: Boolean? = null,
-    var mainPhotoId: Long,
-    var photoIds: List<Long>? = null
+    var mainPhotoId: Int,
+    var photoIds: List<Int>? = null
 ) : VkMethod<AddResponse>("market.add", jacksonTypeRef()),
     UserMethod

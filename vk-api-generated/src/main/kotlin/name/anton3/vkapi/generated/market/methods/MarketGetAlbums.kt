@@ -18,8 +18,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of items to return.
  */
 data class MarketGetAlbums(
-    var ownerId: Long,
-    var offset: Long? = null,
-    var count: Long? = null
+    var ownerId: Int,
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<MarketAlbum>>("market.getAlbums", jacksonTypeRef()),
     UserMethod

@@ -20,8 +20,8 @@ import name.anton3.vkapi.tokens.UserMethod
  */
 data class SearchGetHints(
     var q: String? = null,
-    var offset: Long? = null,
-    var limit: Long? = null,
+    var offset: Int? = null,
+    var limit: Int? = null,
     var filters: List<String>? = null,
     var searchGlobal: Boolean? = null
 ) : VkMethod<GetHintsResponse>("search.getHints", jacksonTypeRef()),

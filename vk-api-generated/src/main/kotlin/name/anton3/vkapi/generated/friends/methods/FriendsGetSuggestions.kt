@@ -22,8 +22,8 @@ import name.anton3.vkapi.vktypes.VkList
  */
 data class FriendsGetSuggestions(
     var filter: List<String>? = null,
-    var count: Long? = null,
-    var offset: Long? = null,
+    var count: Int? = null,
+    var offset: Int? = null,
     var fields: List<String>? = null,
     var nameCase: NameCase? = null
 ) : VkMethod<VkList<UserFull>>("friends.getSuggestions", jacksonTypeRef()),

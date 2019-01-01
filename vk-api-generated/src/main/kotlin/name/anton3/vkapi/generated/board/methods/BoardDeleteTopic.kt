@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property topicId Topic ID.
  */
 data class BoardDeleteTopic(
-    var groupId: Long,
-    var topicId: Long
+    var groupId: Int,
+    var topicId: Int
 ) : VkMethod<OkResponse>("board.deleteTopic", jacksonTypeRef()),
     UserMethod

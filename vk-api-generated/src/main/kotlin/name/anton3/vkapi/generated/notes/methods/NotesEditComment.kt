@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property message New comment text.
  */
 data class NotesEditComment(
-    var commentId: Long,
-    var ownerId: Long? = null,
+    var commentId: Int,
+    var ownerId: Int? = null,
     var message: String? = null
 ) : VkMethod<OkResponse>("notes.editComment", jacksonTypeRef()),
     UserMethod

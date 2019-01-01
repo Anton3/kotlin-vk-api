@@ -10,5 +10,5 @@ import name.anton3.vkapi.generated.auth.responses.ConfirmResponseSuccess
  */
 data class ConfirmResponse(
     val success: ConfirmResponseSuccess? = null,
-    val userId: Long? = null
+    val userId: Int? = null
 )

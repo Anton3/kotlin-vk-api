@@ -9,8 +9,8 @@ package name.anton3.vkapi.generated.polls.objects
  * @property rate Answer rate in percents
  */
 data class Answer(
-    val id: Long,
+    val id: Int,
     val text: String,
-    val votes: Long,
+    val votes: Int,
     val rate: Double
 )

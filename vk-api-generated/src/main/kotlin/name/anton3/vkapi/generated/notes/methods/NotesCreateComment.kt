@@ -18,10 +18,10 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property guid No description
  */
 data class NotesCreateComment(
-    var noteId: Long,
-    var ownerId: Long? = null,
-    var replyTo: Long? = null,
+    var noteId: Int,
+    var ownerId: Int? = null,
+    var replyTo: Int? = null,
     var message: String,
     var guid: String? = null
-) : VkMethod<Long>("notes.createComment", jacksonTypeRef()),
+) : VkMethod<Int>("notes.createComment", jacksonTypeRef()),
     UserMethod

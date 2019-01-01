@@ -18,8 +18,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property ownerId ID of the user or community that owns the documents. Use a negative value to designate a community ID.
  */
 data class DocsGet(
-    var count: Long? = null,
-    var offset: Long? = null,
-    var ownerId: Long? = null
+    var count: Int? = null,
+    var offset: Int? = null,
+    var ownerId: Int? = null
 ) : VkMethod<VkList<Doc>>("docs.get", jacksonTypeRef()),
     UserMethod

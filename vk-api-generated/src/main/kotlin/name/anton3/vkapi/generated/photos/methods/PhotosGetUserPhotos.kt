@@ -20,9 +20,9 @@ import name.anton3.vkapi.vktypes.VkList
  * @property sort Sort order: '1' — by date the tag was added in ascending order, '0' — by date the tag was added in descending order
  */
 data class PhotosGetUserPhotos(
-    var userId: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var userId: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
     var extended: Boolean? = null,
     var sort: String? = null
 ) : VkMethod<VkList<Photo>>("photos.getUserPhotos", jacksonTypeRef()),

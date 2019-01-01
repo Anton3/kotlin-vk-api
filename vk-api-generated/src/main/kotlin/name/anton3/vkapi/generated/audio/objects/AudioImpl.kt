@@ -14,8 +14,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @JsonDeserialize(`as` = Void::class)
 data class AudioImpl(
-    override val id: Long,
-    override val ownerId: Long,
+    override val id: Int,
+    override val ownerId: Int,
     override val artist: String,
     override val title: String,
     override val url: String? = null,

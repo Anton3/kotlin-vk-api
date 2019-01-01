@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property ownerId ID of the user or community that owns the video.
  */
 data class VideoRestore(
-    var videoId: Long,
-    var ownerId: Long? = null
+    var videoId: Int,
+    var ownerId: Int? = null
 ) : VkMethod<OkResponse>("video.restore", jacksonTypeRef()),
     UserMethod

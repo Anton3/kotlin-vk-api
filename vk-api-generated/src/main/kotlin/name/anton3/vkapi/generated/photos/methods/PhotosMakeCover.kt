@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property albumId Album ID.
  */
 data class PhotosMakeCover(
-    var ownerId: Long? = null,
-    var photoId: Long,
-    var albumId: Long? = null
+    var ownerId: Int? = null,
+    var photoId: Int,
+    var albumId: Int? = null
 ) : VkMethod<OkResponse>("photos.makeCover", jacksonTypeRef()),
     UserMethod

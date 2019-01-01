@@ -19,9 +19,9 @@ import name.anton3.vkapi.vktypes.VkList
  * @property fields Profile fields to return.
  */
 data class GroupsGetRequestsWithFields(
-    var groupId: Long,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var groupId: Int,
+    var offset: Int? = null,
+    var count: Int? = null,
     var fields: List<String>? = null
 ) : VkMethod<VkList<UserFull>>("groups.getRequests", jacksonTypeRef()),
     UserMethod

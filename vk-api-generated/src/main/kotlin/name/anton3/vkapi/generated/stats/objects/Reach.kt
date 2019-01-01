@@ -13,9 +13,9 @@ package name.anton3.vkapi.generated.stats.objects
  * @property cities No description
  */
 data class Reach(
-    val reach: Long? = null,
-    val reachSubscribers: Long? = null,
-    val mobileReach: Long? = null,
+    val reach: Int? = null,
+    val reachSubscribers: Int? = null,
+    val mobileReach: Int? = null,
     val sex: List<SexAge>? = null,
     val age: List<SexAge>? = null,
     val sexAge: List<SexAge>? = null,

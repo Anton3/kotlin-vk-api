@@ -41,13 +41,13 @@ import name.anton3.vkapi.vktypes.PropertyExists
  */
 @JsonDeserialize(`as` = Void::class)
 data class TargSettings(
-    val id: Long? = null,
-    val campaignId: Long? = null,
+    val id: Int? = null,
+    val campaignId: Int? = null,
     override val sex: CriteriaSex? = null,
-    override val ageFrom: Long? = null,
-    override val ageTo: Long? = null,
-    override val birthday: Long? = null,
-    override val country: Long? = null,
+    override val ageFrom: Int? = null,
+    override val ageTo: Int? = null,
+    override val birthday: Int? = null,
+    override val country: Int? = null,
     override val cities: String? = null,
     override val citiesNot: String? = null,
     override val statuses: String? = null,
@@ -69,8 +69,8 @@ data class TargSettings(
     override val retargetingGroupsNot: String? = null,
     override val paying: Boolean? = null,
     override val travellers: PropertyExists? = null,
-    override val schoolFrom: Long? = null,
-    override val schoolTo: Long? = null,
-    override val uniFrom: Long? = null,
-    override val uniTo: Long? = null
+    override val schoolFrom: Int? = null,
+    override val schoolTo: Int? = null,
+    override val uniFrom: Int? = null,
+    override val uniTo: Int? = null
 ) : Criteria

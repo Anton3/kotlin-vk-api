@@ -9,7 +9,7 @@ package name.anton3.vkapi.generated.ads.objects
  * @property accessRole No description
  */
 data class Account(
-    val accountId: Long,
+    val accountId: Int,
     val accountType: AccountType,
     val accountStatus: Boolean,
     val accessRole: AccessRole

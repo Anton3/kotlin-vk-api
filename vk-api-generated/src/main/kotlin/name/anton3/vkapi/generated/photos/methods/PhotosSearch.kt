@@ -27,11 +27,11 @@ data class PhotosSearch(
     var q: String? = null,
     var lat: Double? = null,
     var long: Double? = null,
-    var startTime: Long? = null,
-    var endTime: Long? = null,
-    var sort: Long? = null,
-    var offset: Long? = null,
-    var count: Long? = null,
-    var radius: Long? = null
+    var startTime: Int? = null,
+    var endTime: Int? = null,
+    var sort: Int? = null,
+    var offset: Int? = null,
+    var count: Int? = null,
+    var radius: Int? = null
 ) : VkMethod<VkList<Photo>>("photos.search", jacksonTypeRef()),
     UserServiceMethod

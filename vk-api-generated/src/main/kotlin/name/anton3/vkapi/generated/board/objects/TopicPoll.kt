@@ -15,12 +15,12 @@ import name.anton3.vkapi.generated.polls.objects.Answer
  * @property answers No description
  */
 data class TopicPoll(
-    val pollId: Long,
-    val ownerId: Long,
-    val created: Long,
+    val pollId: Int,
+    val ownerId: Int,
+    val created: Int,
     val isClosed: Boolean? = null,
     val question: String,
     val votes: String,
-    val answerId: Long,
+    val answerId: Int,
     val answers: List<Answer>
 )

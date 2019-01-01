@@ -15,5 +15,5 @@ import name.anton3.vkapi.vktypes.VkList
  * @property groupId Community ID.
  */
 data class GroupsGetCallbackServers(
-    var groupId: Long
+    var groupId: Int
 ) : VkMethod<VkList<ServerInfo>>("groups.getCallbackServers", jacksonTypeRef())

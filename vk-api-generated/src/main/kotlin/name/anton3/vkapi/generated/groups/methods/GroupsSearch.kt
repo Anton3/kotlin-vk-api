@@ -28,12 +28,12 @@ import name.anton3.vkapi.vktypes.VkList
 data class GroupsSearch(
     var q: String,
     var type: Type? = null,
-    var countryId: Long? = null,
-    var cityId: Long? = null,
+    var countryId: Int? = null,
+    var cityId: Int? = null,
     var future: Boolean? = null,
     var market: Boolean? = null,
     var sort: SearchSort? = null,
-    var offset: Long? = null,
-    var count: Long? = null
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<Group>>("groups.search", jacksonTypeRef()),
     UserMethod

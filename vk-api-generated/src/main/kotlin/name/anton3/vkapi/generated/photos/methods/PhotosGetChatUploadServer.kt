@@ -18,9 +18,9 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property cropWidth Width (in pixels) of the photo after cropping.
  */
 data class PhotosGetChatUploadServer(
-    var chatId: Long,
-    var cropX: Long? = null,
-    var cropY: Long? = null,
-    var cropWidth: Long? = null
+    var chatId: Int,
+    var cropX: Int? = null,
+    var cropY: Int? = null,
+    var cropWidth: Int? = null
 ) : VkMethod<UploadServer>("photos.getChatUploadServer", jacksonTypeRef()),
     UserMethod

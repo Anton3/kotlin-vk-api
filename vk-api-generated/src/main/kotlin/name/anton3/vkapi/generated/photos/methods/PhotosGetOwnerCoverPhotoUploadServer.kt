@@ -19,10 +19,10 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  * @property cropY2 Y coordinate of the right-bottom corner
  */
 data class PhotosGetOwnerCoverPhotoUploadServer(
-    var groupId: Long? = null,
-    var cropX: Long? = null,
-    var cropY: Long? = null,
-    var cropX2: Long? = null,
-    var cropY2: Long? = null
+    var groupId: Int? = null,
+    var cropX: Int? = null,
+    var cropY: Int? = null,
+    var cropX2: Int? = null,
+    var cropY2: Int? = null
 ) : VkMethod<UploadServer>("photos.getOwnerCoverPhotoUploadServer", jacksonTypeRef()),
     UserGroupMethod

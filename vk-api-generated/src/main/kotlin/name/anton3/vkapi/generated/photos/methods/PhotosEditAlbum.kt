@@ -22,10 +22,10 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property commentsDisabled No description
  */
 data class PhotosEditAlbum(
-    var albumId: Long,
+    var albumId: Int,
     var title: String? = null,
     var description: String? = null,
-    var ownerId: Long? = null,
+    var ownerId: Int? = null,
     var privacyView: List<String>? = null,
     var privacyComment: List<String>? = null,
     var uploadByAdminsOnly: Boolean? = null,

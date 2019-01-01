@@ -11,10 +11,10 @@ package name.anton3.vkapi.generated.stats.objects
  * @property hidden Hidden from news count
  */
 data class Activity(
-    val likes: Long? = null,
-    val comments: Long? = null,
-    val copies: Long? = null,
-    val subscribed: Long? = null,
-    val unsubscribed: Long? = null,
-    val hidden: Long? = null
+    val likes: Int? = null,
+    val comments: Int? = null,
+    val copies: Int? = null,
+    val subscribed: Int? = null,
+    val unsubscribed: Int? = null,
+    val hidden: Int? = null
 )

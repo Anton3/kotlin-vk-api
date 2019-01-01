@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property value depends on activity_id: * 1 – number, current level number,, * 2 – number, current user's points amount, , Any other value is ignored
  */
 data class SecureAddAppEvent(
-    var userId: Long,
-    var activityId: Long,
-    var value: Long? = null
+    var userId: Int,
+    var activityId: Int,
+    var value: Int? = null
 ) : VkMethod<OkResponse>("secure.addAppEvent", jacksonTypeRef()),
     UserMethod

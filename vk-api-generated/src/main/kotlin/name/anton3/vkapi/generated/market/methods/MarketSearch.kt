@@ -24,13 +24,13 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of items to return.
  */
 data class MarketSearch(
-    var ownerId: Long,
+    var ownerId: Int,
     var q: String? = null,
-    var priceFrom: Long? = null,
-    var priceTo: Long? = null,
-    var tags: List<Long>? = null,
+    var priceFrom: Int? = null,
+    var priceTo: Int? = null,
+    var tags: List<Int>? = null,
     var rev: SearchRev? = null,
-    var offset: Long? = null,
-    var count: Long? = null
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<MarketItem>>("market.search", jacksonTypeRef()),
     UserMethod

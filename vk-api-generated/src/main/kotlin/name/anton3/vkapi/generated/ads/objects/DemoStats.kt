@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.ads.objects
  * @property stats No description
  */
 data class DemoStats(
-    val id: Long? = null,
+    val id: Int? = null,
     val type: Type? = null,
     val stats: DemostatsFormat? = null
 )

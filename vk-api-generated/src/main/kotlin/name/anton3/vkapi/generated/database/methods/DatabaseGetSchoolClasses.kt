@@ -14,6 +14,6 @@ import name.anton3.vkapi.tokens.UserServiceMethod
  * @property countryId Country ID.
  */
 data class DatabaseGetSchoolClasses(
-    var countryId: Long? = null
+    var countryId: Int? = null
 ) : VkMethod<List<List<String>>>("database.getSchoolClasses", jacksonTypeRef()),
     UserServiceMethod

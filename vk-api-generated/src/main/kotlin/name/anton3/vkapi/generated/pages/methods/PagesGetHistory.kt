@@ -17,8 +17,8 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property userId 
  */
 data class PagesGetHistory(
-    var pageId: Long,
-    var groupId: Long? = null,
-    var userId: Long? = null
+    var pageId: Int,
+    var groupId: Int? = null,
+    var userId: Int? = null
 ) : VkMethod<List<WikipageVersion>>("pages.getHistory", jacksonTypeRef()),
     UserMethod

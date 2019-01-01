@@ -21,11 +21,11 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property longitude Geographical longitude.
  */
 data class GroupsEditPlace(
-    var groupId: Long,
+    var groupId: Int,
     var title: String? = null,
     var address: String? = null,
-    var countryId: Long? = null,
-    var cityId: Long? = null,
+    var countryId: Int? = null,
+    var cityId: Int? = null,
     var latitude: Double? = null,
     var longitude: Double? = null
 ) : VkMethod<EditPlaceResponse>("groups.editPlace", jacksonTypeRef()),

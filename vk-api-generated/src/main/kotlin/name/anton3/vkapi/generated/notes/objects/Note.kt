@@ -16,9 +16,9 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property viewUrl URL of the page with note preview
  */
 data class Note(
-    val id: Long,
-    val ownerId: Long,
-    val comments: Long,
+    val id: Int,
+    val ownerId: Int,
+    val comments: Int,
     val canComment: Boolean? = null,
     val date: VkDate,
     val title: String,

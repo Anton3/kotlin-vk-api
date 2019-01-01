@@ -9,7 +9,7 @@ package name.anton3.vkapi.generated.ads.objects
  * @property allLimit Client's total limit, rubles
  */
 data class Client(
-    val id: Long,
+    val id: Int,
     val name: String,
     val dayLimit: String,
     val allLimit: String

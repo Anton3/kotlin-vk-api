@@ -22,8 +22,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property repeat '1' — to repeat the playback of the video, '0' — to play the video once,
  */
 data class VideoEdit(
-    var ownerId: Long? = null,
-    var videoId: Long,
+    var ownerId: Int? = null,
+    var videoId: Int,
     var name: String? = null,
     var desc: String? = null,
     var privacyView: List<String>? = null,

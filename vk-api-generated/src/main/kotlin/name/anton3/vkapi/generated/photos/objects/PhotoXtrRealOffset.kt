@@ -29,10 +29,10 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property realOffset Real position of the photo
  */
 data class PhotoXtrRealOffset(
-    val id: Long,
-    val albumId: Long,
-    val ownerId: Long,
-    val userId: Long? = null,
+    val id: Int,
+    val albumId: Int,
+    val ownerId: Int,
+    val userId: Int? = null,
     val sizes: List<PhotoSizes>? = null,
     val photo75: String? = null,
     val photo130: String? = null,
@@ -40,14 +40,14 @@ data class PhotoXtrRealOffset(
     val photo807: String? = null,
     val photo1280: String? = null,
     val photo2560: String? = null,
-    val postId: Long? = null,
-    val width: Long? = null,
-    val height: Long? = null,
+    val postId: Int? = null,
+    val width: Int? = null,
+    val height: Int? = null,
     val text: String? = null,
     val date: VkDate,
     val lat: Double? = null,
     val long: Double? = null,
     val accessKey: String? = null,
     val hidden: PropertyExists? = null,
-    val realOffset: Long? = null
+    val realOffset: Int? = null
 )

@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.common.objects
  * @property groupsCanPost Information whether groups can comment the post
  */
 data class CommentsInfo(
-    val count: Long? = null,
+    val count: Int? = null,
     val canPost: Boolean? = null,
     val groupsCanPost: Boolean? = null
 )

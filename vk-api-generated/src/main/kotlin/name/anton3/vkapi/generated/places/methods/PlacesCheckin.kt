@@ -20,7 +20,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property services List of services or websites (e.g., 'twitter', 'facebook') to which the check-in will be exported, if the user has set up the respective option.
  */
 data class PlacesCheckin(
-    var placeId: Long? = null,
+    var placeId: Int? = null,
     var text: String? = null,
     var latitude: Double? = null,
     var longitude: Double? = null,

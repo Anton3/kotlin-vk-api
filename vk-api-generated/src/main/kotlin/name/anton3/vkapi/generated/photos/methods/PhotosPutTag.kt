@@ -20,12 +20,12 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property y2 Lower right-corner coordinate of the tagged area (as a percentage of the photo's height).
  */
 data class PhotosPutTag(
-    var ownerId: Long? = null,
-    var photoId: Long,
-    var userId: Long,
+    var ownerId: Int? = null,
+    var photoId: Int,
+    var userId: Int,
     var x: Double? = null,
     var y: Double? = null,
     var x2: Double? = null,
     var y2: Double? = null
-) : VkMethod<Long>("photos.putTag", jacksonTypeRef()),
+) : VkMethod<Int>("photos.putTag", jacksonTypeRef()),
     UserMethod

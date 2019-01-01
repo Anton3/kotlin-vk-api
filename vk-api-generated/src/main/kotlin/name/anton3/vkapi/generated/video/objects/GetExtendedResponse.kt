@@ -12,7 +12,7 @@ import name.anton3.vkapi.generated.users.objects.UserMin
  * @property groups No description
  */
 data class GetExtendedResponse(
-    val count: Long,
+    val count: Int,
     val items: List<VideoFull>,
     val profiles: List<UserMin>,
     val groups: List<GroupFull>

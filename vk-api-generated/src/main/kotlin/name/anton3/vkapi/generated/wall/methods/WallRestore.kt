@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property postId ID of the post to be restored.
  */
 data class WallRestore(
-    var ownerId: Long? = null,
-    var postId: Long? = null
+    var ownerId: Int? = null,
+    var postId: Int? = null
 ) : VkMethod<OkResponse>("wall.restore", jacksonTypeRef()),
     UserMethod

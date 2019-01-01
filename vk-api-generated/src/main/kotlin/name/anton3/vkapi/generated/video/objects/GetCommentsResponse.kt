@@ -13,7 +13,7 @@ import name.anton3.vkapi.generated.wall.objects.WallComment
  * @property groups No description
  */
 data class GetCommentsResponse(
-    val count: Long,
+    val count: Int,
     val items: List<WallComment>,
     val profiles: List<UserMin>,
     val groups: List<GroupFull>

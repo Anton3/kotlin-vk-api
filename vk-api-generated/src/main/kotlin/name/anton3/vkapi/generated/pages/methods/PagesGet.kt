@@ -21,8 +21,8 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property needHtml '1' — to return the page as HTML,
  */
 data class PagesGet(
-    var ownerId: Long? = null,
-    var pageId: Long? = null,
+    var ownerId: Int? = null,
+    var pageId: Int? = null,
     var global: Boolean? = null,
     var sitePreview: Boolean? = null,
     var title: String? = null,

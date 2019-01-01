@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.messages.objects
  * @property items No description
  */
 data class LongpollMessages(
-    val count: Long? = null,
+    val count: Int? = null,
     val items: List<Message>? = null
 )

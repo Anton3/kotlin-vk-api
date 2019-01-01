@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.docs.objects
  * @property count Number of docs
  */
 data class DocTypes(
-    val id: Long? = null,
+    val id: Int? = null,
     val title: String? = null,
-    val count: Long? = null
+    val count: Int? = null
 )

@@ -12,8 +12,8 @@ import name.anton3.vkapi.generated.users.objects.UserFull
  * @property groups No description
  */
 data class GetBannedExtendedResponse(
-    val count: Long,
-    val items: List<Long>,
+    val count: Int,
+    val items: List<Int>,
     val profiles: List<UserFull>,
     val groups: List<GroupFull>
 )

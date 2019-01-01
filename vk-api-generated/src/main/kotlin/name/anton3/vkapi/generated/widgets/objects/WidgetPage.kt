@@ -17,7 +17,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property pageId page_id parameter value
  */
 data class WidgetPage(
-    val id: Long? = null,
+    val id: Int? = null,
     val title: String? = null,
     val description: String? = null,
     val photo: String? = null,

@@ -13,8 +13,8 @@ import name.anton3.vkapi.generated.users.objects.UserFull
  * @property groups No description
  */
 data class GetConversationsResponse(
-    val count: Long,
-    val unreadCount: Long? = null,
+    val count: Int,
+    val unreadCount: Int? = null,
     val items: List<ConversationWithMessage>,
     val profiles: List<UserFull>? = null,
     val groups: List<GroupFull>? = null

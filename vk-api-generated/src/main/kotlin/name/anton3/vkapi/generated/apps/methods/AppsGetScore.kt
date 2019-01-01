@@ -14,6 +14,6 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property userId No description
  */
 data class AppsGetScore(
-    var userId: Long
-) : VkMethod<Long>("apps.getScore", jacksonTypeRef()),
+    var userId: Int
+) : VkMethod<Int>("apps.getScore", jacksonTypeRef()),
     UserMethod

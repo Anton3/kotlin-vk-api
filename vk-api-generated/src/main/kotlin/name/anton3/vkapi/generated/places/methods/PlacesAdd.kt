@@ -21,12 +21,12 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property address Street address of the location (e.g., '125 Elm Street').
  */
 data class PlacesAdd(
-    var type: Long? = null,
+    var type: Int? = null,
     var title: String,
     var latitude: Double,
     var longitude: Double,
-    var country: Long? = null,
-    var city: Long? = null,
+    var country: Int? = null,
+    var city: Int? = null,
     var address: String? = null
 ) : VkMethod<AddResponse>("places.add", jacksonTypeRef()),
     UserMethod

@@ -15,6 +15,6 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property accountId Advertising account ID.
  */
 data class AdsGetFloodStats(
-    var accountId: Long
+    var accountId: Int
 ) : VkMethod<FloodStats>("ads.getFloodStats", jacksonTypeRef()),
     UserMethod

@@ -12,7 +12,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  */
 data class RepostResponse(
     val success: OkResponse,
-    val postId: Long,
-    val repostsCount: Long,
-    val likesCount: Long
+    val postId: Int,
+    val repostsCount: Int,
+    val likesCount: Int
 )

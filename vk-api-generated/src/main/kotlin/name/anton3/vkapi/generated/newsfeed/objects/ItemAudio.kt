@@ -15,8 +15,8 @@ import name.anton3.vkapi.vktypes.VkDate
 @JsonDeserialize(`as` = Void::class)
 data class ItemAudio(
     val audio: ItemAudioAudio? = null,
-    val postId: Long? = null,
+    val postId: Int? = null,
     override val type: NewsfeedItemType? = null,
-    override val sourceId: Long? = null,
+    override val sourceId: Int? = null,
     override val date: VkDate? = null
 ) : NewsfeedItem

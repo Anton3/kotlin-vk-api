@@ -9,7 +9,7 @@ package name.anton3.vkapi.generated.account.objects
  * @property lastName Last name in request
  */
 data class NameRequest(
-    val id: Long? = null,
+    val id: Int? = null,
     val status: NameRequestStatus? = null,
     val firstName: String? = null,
     val lastName: String? = null

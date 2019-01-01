@@ -17,8 +17,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property accessKey Access key for the private object.
  */
 data class StoriesHideReply(
-    var ownerId: Long,
-    var storyId: Long,
+    var ownerId: Int,
+    var storyId: Int,
     var accessKey: String? = null
 ) : VkMethod<OkResponse>("stories.hideReply", jacksonTypeRef()),
     UserGroupMethod

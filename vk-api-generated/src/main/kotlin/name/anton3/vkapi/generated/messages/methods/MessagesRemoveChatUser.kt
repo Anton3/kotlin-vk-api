@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property userId ID of the user to be removed from the chat.
  */
 data class MessagesRemoveChatUser(
-    var chatId: Long,
+    var chatId: Int,
     var userId: String
 ) : VkMethod<OkResponse>("messages.removeChatUser", jacksonTypeRef()),
     UserGroupMethod

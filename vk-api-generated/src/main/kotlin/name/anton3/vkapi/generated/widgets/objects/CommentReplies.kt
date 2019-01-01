@@ -8,7 +8,7 @@ package name.anton3.vkapi.generated.widgets.objects
  * @property replies No description
  */
 data class CommentReplies(
-    val count: Long? = null,
+    val count: Int? = null,
     val canPost: Boolean? = null,
     val replies: List<CommentRepliesItem>? = null
 )

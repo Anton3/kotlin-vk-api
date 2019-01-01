@@ -18,8 +18,8 @@ import name.anton3.vkapi.vktypes.VkDate
  */
 @JsonDeserialize(`as` = Void::class)
 data class MarketItemImpl(
-    override val id: Long,
-    override val ownerId: Long,
+    override val id: Int,
+    override val ownerId: Int,
     override val title: String,
     override val description: String,
     override val price: Price,

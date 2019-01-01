@@ -15,7 +15,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property data Serialized JSON array of objects that describe added managers. Description of 'user_specification' objects see below.
  */
 data class AdsAddOfficeUsers(
-    var accountId: Long,
+    var accountId: Int,
     var data: String
 ) : VkMethod<Boolean>("ads.addOfficeUsers", jacksonTypeRef()),
     UserMethod

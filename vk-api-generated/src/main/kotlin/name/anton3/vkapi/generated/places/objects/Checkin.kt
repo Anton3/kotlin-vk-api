@@ -20,17 +20,17 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property placeIcon URL of the place's icon
  */
 data class Checkin(
-    val id: Long,
-    val userId: Long,
+    val id: Int,
+    val userId: Int,
     val date: VkDate,
     val latitude: Double? = null,
     val longitude: Double? = null,
-    val placeId: Long? = null,
+    val placeId: Int? = null,
     val text: String? = null,
-    val distance: Long? = null,
+    val distance: Int? = null,
     val placeTitle: String? = null,
-    val placeCountry: Long? = null,
-    val placeCity: Long? = null,
+    val placeCountry: Int? = null,
+    val placeCity: Int? = null,
     val placeType: String? = null,
     val placeIcon: String? = null
 )

@@ -18,6 +18,6 @@ import name.anton3.vkapi.tokens.UserMethod
 data class StorageGet(
     var key: String? = null,
     var keys: List<String>? = null,
-    var userId: Long? = null
+    var userId: Int? = null
 ) : VkMethod<String>("storage.get", jacksonTypeRef()),
     UserMethod

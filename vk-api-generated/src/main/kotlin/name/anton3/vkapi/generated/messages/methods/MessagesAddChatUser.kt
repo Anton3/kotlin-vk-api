@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property userId ID of the user to be added to the chat.
  */
 data class MessagesAddChatUser(
-    var chatId: Long,
-    var userId: Long
+    var chatId: Int,
+    var userId: Int
 ) : VkMethod<OkResponse>("messages.addChatUser", jacksonTypeRef()),
     UserMethod

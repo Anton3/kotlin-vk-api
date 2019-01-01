@@ -16,10 +16,10 @@ import name.anton3.vkapi.vktypes.VkDate
  */
 @JsonDeserialize(`as` = Void::class)
 data class AttachedNote(
-    val id: Long,
-    val ownerId: Long,
-    val comments: Long,
-    val readComments: Long,
+    val id: Int,
+    val ownerId: Int,
+    val comments: Int,
+    val readComments: Int,
     val date: VkDate,
     val title: String,
     val viewUrl: String

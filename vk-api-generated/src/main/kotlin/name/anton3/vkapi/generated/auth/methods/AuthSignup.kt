@@ -29,7 +29,7 @@ data class AuthSignup(
     var firstName: String,
     var lastName: String,
     var birthday: String,
-    var clientId: Long,
+    var clientId: Int,
     var phone: String,
     var password: String? = null,
     var voice: Boolean? = null,

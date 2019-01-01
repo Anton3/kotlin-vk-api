@@ -16,7 +16,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property adsIds Ads IDS separated by comma.
  */
 data class AdsGetAdsPostsReach(
-    var accountId: Long,
+    var accountId: Int,
     var adsIds: String
 ) : VkMethod<List<PostStats>>("ads.getAdsPostsReach", jacksonTypeRef()),
     UserMethod

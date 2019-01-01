@@ -16,7 +16,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property groupId No description
  */
 data class StatusGet(
-    var userId: Long? = null,
-    var groupId: Long? = null
+    var userId: Int? = null,
+    var groupId: Int? = null
 ) : VkMethod<Status>("status.get", jacksonTypeRef()),
     UserMethod

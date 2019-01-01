@@ -41,20 +41,20 @@ interface Video : WallpostAttachment,
     MessageAttachment,
     NotificationParent {
 
-    val id: Long?
-    val ownerId: Long?
+    val id: Int?
+    val ownerId: Int?
     val title: String?
-    val duration: Long?
+    val duration: Int?
     val description: String?
     val date: VkDate?
-    val views: Long?
-    val comments: Long?
+    val views: Int?
+    val comments: Int?
     val photo130: String?
     val photo320: String?
     val photo640: String?
     val photo800: String?
     val accessKey: String?
-    val addingDate: Long?
+    val addingDate: Int?
     val player: String?
     val canEdit: Boolean?
     val canAdd: Boolean?
@@ -62,6 +62,6 @@ interface Video : WallpostAttachment,
     val live: PropertyExists?
     val files: VideoFiles?
     val platform: String?
-    val width: Long?
-    val height: Long?
+    val width: Int?
+    val height: Int?
 }

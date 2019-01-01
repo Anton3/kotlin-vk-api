@@ -15,6 +15,6 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property userId User ID.
  */
 data class MessagesGetLastActivity(
-    var userId: Long
+    var userId: Int
 ) : VkMethod<LastActivity>("messages.getLastActivity", jacksonTypeRef()),
     UserMethod

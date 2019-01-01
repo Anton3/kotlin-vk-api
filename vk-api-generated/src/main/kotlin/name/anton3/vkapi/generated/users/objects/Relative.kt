@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.users.objects
  * @property type Relative type
  */
 data class Relative(
-    val id: Long? = null,
+    val id: Int? = null,
     val type: String? = null
 )

@@ -26,17 +26,17 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property markAsAds No description
  */
 data class WallEdit(
-    var ownerId: Long? = null,
-    var postId: Long,
+    var ownerId: Int? = null,
+    var postId: Int,
     var friendsOnly: Boolean? = null,
     var message: String? = null,
     var attachments: List<String>? = null,
     var services: String? = null,
     var signed: Boolean? = null,
-    var publishDate: Long? = null,
+    var publishDate: Int? = null,
     var lat: Double? = null,
     var long: Double? = null,
-    var placeId: Long? = null,
+    var placeId: Int? = null,
     var markAsAds: Boolean? = null
 ) : VkMethod<OkResponse>("wall.edit", jacksonTypeRef()),
     UserMethod

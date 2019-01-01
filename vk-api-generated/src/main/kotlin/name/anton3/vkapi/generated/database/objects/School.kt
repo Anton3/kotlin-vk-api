@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.database.objects
  * @property title School title
  */
 data class School(
-    val id: Long? = null,
+    val id: Int? = null,
     val title: String? = null
 )

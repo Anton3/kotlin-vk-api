@@ -18,7 +18,7 @@ import name.anton3.vkapi.tokens.UserGroupMethod
  */
 data class PhotosSaveMessagesPhoto(
     var photo: String,
-    var server: Long? = null,
+    var server: Int? = null,
     var hash: String? = null
 ) : VkMethod<List<Photo>>("photos.saveMessagesPhoto", jacksonTypeRef()),
     UserGroupMethod

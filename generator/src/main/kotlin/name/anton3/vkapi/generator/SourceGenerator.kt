@@ -345,7 +345,7 @@ class SourceGenerator(val basePackage: String) {
             }
 
             val finalType = when {
-                name == "date" && typeId.name == "Long" -> TypeId("name.anton3.vkapi.vktypes.VkDate")
+                name == "date" && typeId.name == "Int" -> TypeId("name.anton3.vkapi.vktypes.VkDate")
                 name == "bdate" && typeId.name == "String" -> TypeId("name.anton3.vkapi.vktypes.VkBirthDate")
                 else -> typeId
             }
@@ -367,7 +367,7 @@ class SourceGenerator(val basePackage: String) {
             "kotlin.collections",
             "Map",
             listOf(
-                TypeId("kotlin.Long"),
+                TypeId("kotlin.Int"),
                 TypeId("kotlin.Boolean")
             )
         )
@@ -435,7 +435,7 @@ class SourceGenerator(val basePackage: String) {
         typeSpace.registerBuiltin("name.anton3.vkapi.tokens.UserGroupServiceMethod")
 
         // Primitive schema types
-        typeSpace.registerVkPrimitiveType("integer", "kotlin.Long")
+        typeSpace.registerVkPrimitiveType("integer", "kotlin.Int")
         typeSpace.registerVkPrimitiveType("string", "kotlin.String")
         typeSpace.registerVkPrimitiveType("boolean", "kotlin.Boolean")
         typeSpace.registerVkPrimitiveType("number", "kotlin.Double")

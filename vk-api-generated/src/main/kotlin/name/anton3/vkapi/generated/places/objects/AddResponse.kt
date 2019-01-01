@@ -6,5 +6,5 @@ package name.anton3.vkapi.generated.places.objects
  * @property id Place ID
  */
 data class AddResponse(
-    val id: Long? = null
+    val id: Int? = null
 )

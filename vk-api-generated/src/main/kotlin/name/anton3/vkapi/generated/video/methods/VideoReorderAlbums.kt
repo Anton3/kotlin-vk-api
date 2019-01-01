@@ -18,9 +18,9 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property after ID of the album after which the album in question shall be placed.
  */
 data class VideoReorderAlbums(
-    var ownerId: Long? = null,
-    var albumId: Long,
-    var before: Long? = null,
-    var after: Long? = null
+    var ownerId: Int? = null,
+    var albumId: Int,
+    var before: Int? = null,
+    var after: Int? = null
 ) : VkMethod<OkResponse>("video.reorderAlbums", jacksonTypeRef()),
     UserMethod

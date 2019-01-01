@@ -22,13 +22,13 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property guid Unique identifier to avoid repeated comments.
  */
 data class WallCreateComment(
-    var ownerId: Long? = null,
-    var postId: Long,
-    var fromGroup: Long? = null,
+    var ownerId: Int? = null,
+    var postId: Int,
+    var fromGroup: Int? = null,
     var message: String? = null,
-    var replyToComment: Long? = null,
+    var replyToComment: Int? = null,
     var attachments: List<String>? = null,
-    var stickerId: Long? = null,
+    var stickerId: Int? = null,
     var guid: String? = null
 ) : VkMethod<CreateCommentResponse>("wall.createComment", jacksonTypeRef()),
     UserMethod

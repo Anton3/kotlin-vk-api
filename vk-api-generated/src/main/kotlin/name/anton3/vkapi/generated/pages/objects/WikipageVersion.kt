@@ -10,9 +10,9 @@ package name.anton3.vkapi.generated.pages.objects
  * @property editorName Last editor name
  */
 data class WikipageVersion(
-    val id: Long? = null,
-    val length: Long? = null,
-    val edited: Long? = null,
-    val editorId: Long? = null,
+    val id: Int? = null,
+    val length: Int? = null,
+    val edited: Int? = null,
+    val editorId: Int? = null,
     val editorName: String? = null
 )

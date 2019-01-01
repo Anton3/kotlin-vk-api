@@ -20,10 +20,10 @@ import name.anton3.vkapi.vktypes.VkList
  * @property userId No description
  */
 data class GroupsGetBanned(
-    var groupId: Long,
-    var offset: Long? = null,
-    var count: Long? = null,
+    var groupId: Int,
+    var offset: Int? = null,
+    var count: Int? = null,
     var fields: List<String>? = null,
-    var userId: Long? = null
+    var userId: Int? = null
 ) : VkMethod<VkList<OwnerXtrBanInfo>>("groups.getBanned", jacksonTypeRef()),
     UserMethod

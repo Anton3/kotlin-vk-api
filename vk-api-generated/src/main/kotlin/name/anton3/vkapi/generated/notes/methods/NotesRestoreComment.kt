@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property ownerId Note owner ID.
  */
 data class NotesRestoreComment(
-    var commentId: Long,
-    var ownerId: Long? = null
+    var commentId: Int,
+    var ownerId: Int? = null
 ) : VkMethod<OkResponse>("notes.restoreComment", jacksonTypeRef()),
     UserMethod

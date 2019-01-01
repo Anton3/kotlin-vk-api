@@ -12,7 +12,7 @@ import name.anton3.vkapi.generated.users.objects.UserFull
  * @property groups No description
  */
 data class GetRepliesExtendedResponse(
-    val count: Long,
+    val count: Int,
     val items: List<List<Story>>,
     val profiles: List<UserFull>,
     val groups: List<GroupFull>

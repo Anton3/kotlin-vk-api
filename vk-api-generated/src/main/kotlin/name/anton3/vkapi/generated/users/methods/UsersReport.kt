@@ -18,7 +18,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property comment Comment describing the complaint.
  */
 data class UsersReport(
-    var userId: Long,
+    var userId: Int,
     var type: ReportType,
     var comment: String? = null
 ) : VkMethod<OkResponse>("users.report", jacksonTypeRef()),

@@ -19,8 +19,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property fields Additional fields to return
  */
 data class StoriesGetReplies(
-    var ownerId: Long,
-    var storyId: Long,
+    var ownerId: Int,
+    var storyId: Int,
     var accessKey: String? = null,
     var fields: List<String>? = null
 ) : VkMethod<VkList<List<Story>>>("stories.getReplies", jacksonTypeRef()),

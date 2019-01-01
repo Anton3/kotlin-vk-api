@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property notSure Optional parameter which is taken into account when 'gid' belongs to the event: '1' — Perhaps I will attend, '0' — I will be there for sure (default), ,
  */
 data class GroupsJoin(
-    var groupId: Long? = null,
+    var groupId: Int? = null,
     var notSure: String? = null
 ) : VkMethod<OkResponse>("groups.join", jacksonTypeRef()),
     UserMethod

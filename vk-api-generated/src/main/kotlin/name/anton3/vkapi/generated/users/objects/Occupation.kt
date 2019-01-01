@@ -9,6 +9,6 @@ package name.anton3.vkapi.generated.users.objects
  */
 data class Occupation(
     val type: String? = null,
-    val id: Long? = null,
+    val id: Int? = null,
     val name: String? = null
 )

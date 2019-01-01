@@ -16,7 +16,7 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property ownerId Note owner ID.
  */
 data class NotesGetById(
-    var noteId: Long,
-    var ownerId: Long? = null
+    var noteId: Int,
+    var ownerId: Int? = null
 ) : VkMethod<Note>("notes.getById", jacksonTypeRef()),
     UserMethod

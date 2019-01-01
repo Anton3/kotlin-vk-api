@@ -16,6 +16,6 @@ import name.anton3.vkapi.vktypes.VkList
  * @property listIds numeric list identifiers.
  */
 data class NewsfeedGetLists(
-    var listIds: List<Long>? = null
+    var listIds: List<Int>? = null
 ) : VkMethod<VkList<ListMin>>("newsfeed.getLists", jacksonTypeRef()),
     UserMethod

@@ -17,6 +17,6 @@ data class Info(
     val ownPostsDefault: Boolean? = null,
     val noWallReplies: Boolean? = null,
     val intro: Boolean? = null,
-    val lang: Long? = null,
+    val lang: Int? = null,
     val `2faRequired`: Boolean? = null
 )

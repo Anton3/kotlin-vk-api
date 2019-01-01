@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property commentId ID of the comment to be deleted.
  */
 data class VideoDeleteComment(
-    var ownerId: Long? = null,
-    var commentId: Long
+    var ownerId: Int? = null,
+    var commentId: Int
 ) : VkMethod<OkResponse>("video.deleteComment", jacksonTypeRef()),
     UserMethod

@@ -15,7 +15,7 @@ data class CatBlock(
     val items: List<CatElement>,
     val next: String,
     val name: String,
-    val id: Long,
+    val id: Int,
     val view: CatBlockView,
     val canHide: Boolean,
     val type: CatBlockView? = null

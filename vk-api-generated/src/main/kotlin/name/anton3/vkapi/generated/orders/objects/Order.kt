@@ -17,14 +17,14 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property cancelTransactionId Cancel transaction ID
  */
 data class Order(
-    val id: Long? = null,
-    val appOrderId: Long? = null,
+    val id: Int? = null,
+    val appOrderId: Int? = null,
     val status: String? = null,
-    val userId: Long? = null,
-    val receiverId: Long? = null,
+    val userId: Int? = null,
+    val receiverId: Int? = null,
     val item: String? = null,
-    val amount: Long? = null,
+    val amount: Int? = null,
     val date: VkDate? = null,
-    val transactionId: Long? = null,
-    val cancelTransactionId: Long? = null
+    val transactionId: Int? = null,
+    val cancelTransactionId: Int? = null
 )

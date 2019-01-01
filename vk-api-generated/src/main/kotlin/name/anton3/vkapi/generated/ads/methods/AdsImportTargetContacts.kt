@@ -17,9 +17,9 @@ import name.anton3.vkapi.tokens.UserMethod
  * @property contacts List of phone numbers, emails or user IDs separated with a comma.
  */
 data class AdsImportTargetContacts(
-    var accountId: Long,
-    var clientId: Long? = null,
-    var targetGroupId: Long,
+    var accountId: Int,
+    var clientId: Int? = null,
+    var targetGroupId: Int,
     var contacts: String
-) : VkMethod<Long>("ads.importTargetContacts", jacksonTypeRef()),
+) : VkMethod<Int>("ads.importTargetContacts", jacksonTypeRef()),
     UserMethod

@@ -15,6 +15,6 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property noteId Note ID.
  */
 data class NotesDelete(
-    var noteId: Long
+    var noteId: Int
 ) : VkMethod<OkResponse>("notes.delete", jacksonTypeRef()),
     UserMethod

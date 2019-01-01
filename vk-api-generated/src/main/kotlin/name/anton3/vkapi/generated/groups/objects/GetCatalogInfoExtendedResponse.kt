@@ -7,6 +7,6 @@ package name.anton3.vkapi.generated.groups.objects
  * @property categories No description
  */
 data class GetCatalogInfoExtendedResponse(
-    val enabled: Long,
+    val enabled: Int,
     val categories: List<GroupCategoryFull>? = null
 )

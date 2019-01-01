@@ -19,14 +19,14 @@ package name.anton3.vkapi.generated.ads.objects
 data class StatsFormat(
     val day: String? = null,
     val month: String? = null,
-    val overall: Long? = null,
-    val spent: Long? = null,
-    val impressions: Long? = null,
-    val clicks: Long? = null,
-    val reach: Long? = null,
-    val videoViews: Long? = null,
-    val videoViewsHalf: Long? = null,
-    val videoViewsFull: Long? = null,
-    val videoClicksSite: Long? = null,
-    val joinRate: Long? = null
+    val overall: Int? = null,
+    val spent: Int? = null,
+    val impressions: Int? = null,
+    val clicks: Int? = null,
+    val reach: Int? = null,
+    val videoViews: Int? = null,
+    val videoViewsHalf: Int? = null,
+    val videoViewsFull: Int? = null,
+    val videoClicksSite: Int? = null,
+    val joinRate: Int? = null
 )

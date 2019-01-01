@@ -24,11 +24,11 @@ import name.anton3.vkapi.vktypes.VkList
  */
 data class PlacesSearch(
     var q: String? = null,
-    var city: Long? = null,
+    var city: Int? = null,
     var latitude: Double,
     var longitude: Double,
     var radius: SearchRadius? = null,
-    var offset: Long? = null,
-    var count: Long? = null
+    var offset: Int? = null,
+    var count: Int? = null
 ) : VkMethod<VkList<PlaceFull>>("places.search", jacksonTypeRef()),
     UserMethod

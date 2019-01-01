@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property albumId Collection ID.
  */
 data class MarketDeleteAlbum(
-    var ownerId: Long,
-    var albumId: Long
+    var ownerId: Int,
+    var albumId: Int
 ) : VkMethod<OkResponse>("market.deleteAlbum", jacksonTypeRef()),
     UserMethod

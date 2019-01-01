@@ -13,12 +13,12 @@ package name.anton3.vkapi.generated.users.objects
  * @property alcohol User's views on alcohol
  */
 data class Personal(
-    val political: Long? = null,
+    val political: Int? = null,
     val langs: List<String>? = null,
     val religion: String? = null,
     val inspiredBy: String? = null,
-    val peopleMain: Long? = null,
-    val lifeMain: Long? = null,
-    val smoking: Long? = null,
-    val alcohol: Long? = null
+    val peopleMain: Int? = null,
+    val lifeMain: Int? = null,
+    val smoking: Int? = null,
+    val alcohol: Int? = null
 )
