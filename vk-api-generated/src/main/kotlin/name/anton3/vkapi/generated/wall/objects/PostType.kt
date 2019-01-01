@@ -10,7 +10,8 @@ enum class PostType(@JsonValue override val value: String) : Value<String> {
     COPY("copy"),
     REPLY("reply"),
     POSTPONE("postpone"),
-    SUGGEST("suggest");
+    SUGGEST("suggest"),
+    POST_ADS("post_ads");
 
     companion object {
         @JvmStatic

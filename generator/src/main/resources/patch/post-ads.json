@@ -1,0 +1,16 @@
+{
+  "objects": {
+    "wall_post_type": {
+      "type": "string",
+      "description": "Post type",
+      "enum": [
+        "post",
+        "copy",
+        "reply",
+        "postpone",
+        "suggest",
+        "post_ads"
+      ]
+    }
+  }
+}
