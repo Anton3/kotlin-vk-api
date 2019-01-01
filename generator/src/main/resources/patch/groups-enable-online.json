@@ -1,0 +1,46 @@
+{
+  "methods": [
+    {
+      "name": "groups.enableOnline",
+      "description": "Enables 'online' status in a community",
+      "access_token_type": [
+        "user",
+        "group"
+      ],
+      "parameters": [
+        {
+          "name": "group_id",
+          "description": "Group ID",
+          "type": "integer",
+          "required": true
+        }
+      ],
+      "responses": {
+        "response": {
+          "$ref": "responses.json#/definitions/ok_response"
+        }
+      }
+    },
+    {
+      "name": "groups.disableOnline",
+      "description": "Disables 'online' status in a community",
+      "access_token_type": [
+        "user",
+        "group"
+      ],
+      "parameters": [
+        {
+          "name": "group_id",
+          "description": "Group ID",
+          "type": "integer",
+          "required": true
+        }
+      ],
+      "responses": {
+        "response": {
+          "$ref": "responses.json#/definitions/ok_response"
+        }
+      }
+    }
+  ]
+}
