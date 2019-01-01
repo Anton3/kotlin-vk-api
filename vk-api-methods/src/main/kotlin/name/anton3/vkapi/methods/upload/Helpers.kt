@@ -9,10 +9,14 @@ import name.anton3.vkapi.generated.docs.methods.DocsGetMessagesUploadServer
 import name.anton3.vkapi.generated.docs.methods.DocsSave
 import name.anton3.vkapi.generated.docs.objects.Doc
 import name.anton3.vkapi.generated.docs.objects.GetMessagesUploadServerType
+import name.anton3.vkapi.generated.messages.methods.MessagesSetChatPhoto
+import name.anton3.vkapi.generated.messages.objects.SetChatPhotoResponse
+import name.anton3.vkapi.generated.photos.methods.PhotosGetChatUploadServer
 import name.anton3.vkapi.generated.photos.methods.PhotosGetMessagesUploadServer
 import name.anton3.vkapi.generated.photos.methods.PhotosSaveMessagesPhoto
 import name.anton3.vkapi.generated.photos.objects.Photo
 import name.anton3.vkapi.tokens.UserGroupMethod
+import name.anton3.vkapi.tokens.UserMethod
 import java.nio.charset.Charset
 
 data class UploadPhotoResponse(val server: Int, val hash: String, val photo: String)
@@ -54,4 +58,20 @@ suspend fun VkClient<UserGroupMethod>.uploadMessageDocument(
             tags = tags.joinToString(",")
         )
     ).first()
+}
+
+data class UploadChatPhotoResponse(val response: String)
+
+suspend fun VkClient<UserMethod>.uploadChatPhoto(
+    chatId: Int,
+    fileName: String,
+    byteArray: ByteArray
+): SetChatPhotoResponse {
+    val uploadUrl = this(PhotosGetChatUploadServer(chatId = chatId)).uploadUrl
+
+    val response = httpClient.post(uploadUrl, RequestContent.File("file", fileName, byteArray))
+    val uploadPhotoResponse: UploadChatPhotoResponse =
+        objectMapper.readValue(response.data.toString(Charset.forName("UTF-8")))
+
+    return this(MessagesSetChatPhoto(file = uploadPhotoResponse.response))
 }
