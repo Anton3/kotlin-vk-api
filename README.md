@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.Anton3.kotlin-vk-api:vk-api-simple:0.3.0")
+    implementation("com.github.Anton3.kotlin-vk-api:vk-api-simple:0.4.0")
 }
 ```
 
@@ -88,7 +88,7 @@ while (true) {
 воспользоваться `swallowing`:
 
 ```kotlin
-import name.anton3.vkapi.client.catching
+import name.anton3.vkapi.client.swallowing
 
 val response: WallpostFull? = api.swallowing(WallGet(domain = "departureMsk"))
 println(response?.text)
@@ -130,7 +130,7 @@ clientFactory.closeAndJoin()
 
 ## Процесс разработки
 Разработка ведётся в ветке `develop`. После прогона нескольких тестов,
-новый функционал отправляется в `master`. Для отдельных
+новый функционал отправляется в `master`.
 
 ## Как внести свой вклад
 Для любых ошибок или предложений заводите Issue, будем разбираться. Если есть
