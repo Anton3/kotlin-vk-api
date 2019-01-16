@@ -22,6 +22,7 @@ subprojects {
 
     repositories {
         mavenCentral()
+        maven(url = "https://dl.bintray.com/kotlin/kotlinx/")
     }
 
     apply(plugin = "java-library")
