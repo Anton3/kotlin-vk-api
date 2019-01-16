@@ -1,4 +1,4 @@
-package name.anton3.vkapi.executors
+package name.anton3.vkapi.rate
 
 import java.io.Closeable
 

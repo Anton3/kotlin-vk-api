@@ -1,78 +1,50 @@
 package name.anton3.vkapi.executors
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import name.anton3.vkapi.core.MethodExecutor
 import name.anton3.vkapi.core.VkMethod
-import name.anton3.vkapi.core.VkResult
+import name.anton3.vkapi.core.extractExecuteResult
 import name.anton3.vkapi.core.wrapInSimpleResponse
-import name.anton3.vkapi.methods.execute.batchUnchecked
-import name.anton3.vkapi.methods.execute.supportsBatch
+import name.anton3.vkapi.methods.execute.BatchExecuteMethod
+import name.anton3.vkapi.methods.execute.BatchExecuteResult
+import name.anton3.vkapi.methods.execute.parseBatchResponse
+import name.anton3.vkapi.rate.*
 import name.anton3.vkapi.tokens.Token
 import name.anton3.vkapi.tokens.UserGroupMethod
+import name.anton3.vkapi.tokens.attach
 import name.anton3.vkapi.vktypes.VkResponse
 import java.time.Duration
-import java.util.concurrent.atomic.AtomicBoolean
-import kotlin.coroutines.CoroutineContext
 
 class BatchMethodExecutor(
     private val base: MethodExecutor,
     private val token: Token<UserGroupMethod>,
-    private val rateProvider: RateProvider,
-    flushDelay: Duration,
-    coroutineContext: CoroutineContext = Dispatchers.Default
+    flushDelay: Duration
 ) : MethodExecutor by base, AsyncCloseable {
 
-    init {
-        rateProvider.addFreeRateHandler(this::freeRateHandler)
-    }
-
-    private val coroutineScope: CoroutineScope = CoroutineScope(coroutineContext)
-
-    private val batcher: Batcher<VkMethod<*>, VkResult<*>> = Batcher(
-        scope = coroutineScope,
-        batchLimit = BATCH_EXECUTE_LIMIT,
-        flushDelay = flushDelay,
-        timeoutHandler = this::timeoutHandler,
-        preExecute = this::preExecute,
-        executor = this::executeBatch
-    )
-
-    private suspend fun executeBatch(methods: List<VkMethod<*>>): List<VkResult<*>> {
-        return base.batchUnchecked(methods, token)
-    }
-
-    private var throttledTimeoutReceived: AtomicBoolean = AtomicBoolean(false)
-
-    private fun timeoutHandler(): Boolean {
-        val throttling = rateProvider.isThrottling
-        throttledTimeoutReceived.set(throttling)
-        return !throttling
-    }
-
-    private fun preExecute() {
-        throttledTimeoutReceived.set(false)
-    }
-
-    private fun freeRateHandler(): Boolean {
-        val shouldFlush = throttledTimeoutReceived.getAndSet(false)
-        if (shouldFlush) {
-            coroutineScope.launch {
-                batcher.flush()
+    private val batchExecutor: RatedExecutor<List<VkMethod<*>>, List<VkResponse<*>>> =
+        MappedRatedExecutor(
+            base = base,
+            preprocessor = { methods ->
+                BatchExecuteMethod(methods, objectMapper).attach(token)
+            },
+            postprocessor = { response ->
+                @Suppress("UNCHECKED_CAST")
+                val executeResponse = (response as VkResponse<BatchExecuteResult>).extractExecuteResult().unwrap()
+                executeResponse.parseBatchResponse().map { it.wrapInSimpleResponse() }
             }
-        }
-        return shouldFlush
+        )
+
+    private val batcher: BatchExecutor<VkMethod<*>, VkResponse<*>> =
+        BatchExecutor(batchExecutor, flushDelay, BATCH_EXECUTE_LIMIT)
+
+    override suspend fun execute(request: VkMethod<*>): VkResponse<*> {
+        return batcher.execute(request)
     }
 
-    override suspend fun <T> invoke(method: VkMethod<T>): VkResponse<T> {
-        return if (method.supportsBatch()) {
-            method.accessToken = null  // shorter requests
-            @Suppress("UNCHECKED_CAST")
-            batcher(method).wrapInSimpleResponse() as VkResponse<T>
-        } else {
-            base(method)
-        }
+    override val rateLeft: Int
+        get() = batcher.rateLeft
+
+    override fun addRequestProducer(producer: RequestProducer<VkMethod<*>, VkResponse<*>>) {
+        batcher.addRequestProducer(producer)
     }
 
     override fun close() {

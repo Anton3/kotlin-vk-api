@@ -2,18 +2,25 @@ package name.anton3.vkapi.client
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import name.anton3.vkapi.core.MethodExecutor
 import name.anton3.vkapi.core.TransportClient
-import name.anton3.vkapi.executors.AsyncCloseable
 import name.anton3.vkapi.executors.BatchMethodExecutor
 import name.anton3.vkapi.executors.SimpleMethodExecutor
 import name.anton3.vkapi.executors.ThrottledMethodExecutor
+import name.anton3.vkapi.rate.AsyncCloseable
 import name.anton3.vkapi.tokens.*
 import java.time.Duration
+import kotlin.coroutines.CoroutineContext
 
-class VkClientFactory(httpClient: TransportClient, objectMapper: ObjectMapper) {
-
-    private val baseExecutor: MethodExecutor = SimpleMethodExecutor(httpClient, objectMapper)
+class VkClientFactory(
+    httpClient: TransportClient,
+    objectMapper: ObjectMapper,
+    parentContext: CoroutineContext = Dispatchers.Default
+) {
+    private val context = parentContext + Job(parentContext[Job])
+    private val baseExecutor: MethodExecutor = SimpleMethodExecutor(context, httpClient, objectMapper)
     private val closeableExecutors: MutableList<AsyncCloseable> = mutableListOf()
 
     @Synchronized
@@ -23,7 +30,7 @@ class VkClientFactory(httpClient: TransportClient, objectMapper: ObjectMapper) {
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
     ): VkClient<UserMethod> {
         val throttled = ThrottledMethodExecutor(baseExecutor, 3)
-        val batch = BatchMethodExecutor(throttled, token, throttled, Duration.ofMillis(flushDelayMillis), Dispatchers.Default)
+        val batch = BatchMethodExecutor(throttled, token, Duration.ofMillis(flushDelayMillis))
         closeableExecutors.add(throttled)
         closeableExecutors.add(batch)
         return executorWrapper(batch).attach(token)
@@ -36,7 +43,7 @@ class VkClientFactory(httpClient: TransportClient, objectMapper: ObjectMapper) {
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
     ): VkClient<GroupMethod> {
         val throttled = ThrottledMethodExecutor(baseExecutor, 20)
-        val batch = BatchMethodExecutor(throttled, token, throttled, Duration.ofMillis(flushDelayMillis), Dispatchers.Default)
+        val batch = BatchMethodExecutor(throttled, token, Duration.ofMillis(flushDelayMillis))
         closeableExecutors.add(throttled)
         closeableExecutors.add(batch)
         return executorWrapper(batch).attach(token)
@@ -72,6 +79,7 @@ class VkClientFactory(httpClient: TransportClient, objectMapper: ObjectMapper) {
             executor.close()
             executor.join()
         }
+        context.cancel()
     }
 }
 
