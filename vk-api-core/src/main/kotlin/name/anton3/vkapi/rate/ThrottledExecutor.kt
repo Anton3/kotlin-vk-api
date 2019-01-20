@@ -20,7 +20,7 @@ class ThrottledExecutor<Request, Response>(
 
     private val tickets: Channel<Instant> = Channel(rateLimit)
     private val requests: MutableList<SuspendedRequest<Request, Response>> = mutableListOf()
-    private val newRequests: Channel<SuspendedRequest<Request, Response>> = Channel(Channel.UNLIMITED)
+    private val newRequests: Channel<SuspendedRequest<Request, Response>> = Channel()
     private val schedulerJob: Job
 
     init {
@@ -40,7 +40,7 @@ class ThrottledExecutor<Request, Response>(
     }
 
     override suspend fun execute(dynamicRequest: DynamicRequest<Request>): Response = dynamicRequest.submit {
-        newRequests.offer(it)
+        newRequests.send(it)
     }
 
     private suspend fun receiveTicket(): Boolean {
@@ -78,11 +78,14 @@ class ThrottledExecutor<Request, Response>(
 
     private fun sendRequest(suspendedRequest: SuspendedRequest<Request, Response>) {
         launch {
-            base.execute(suspendedRequest)
             try {
-                tickets.send(Instant.now() + ratePeriod)
-            } catch (e: ClosedSendChannelException) {
-                // Executor is closed
+                base.execute(suspendedRequest)
+            } finally {
+                try {
+                    tickets.send(Instant.now() + ratePeriod)
+                } catch (e: ClosedSendChannelException) {
+                    // Executor is closed
+                }
             }
         }
     }
