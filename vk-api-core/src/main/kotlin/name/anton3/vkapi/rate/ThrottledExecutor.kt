@@ -19,7 +19,7 @@ class ThrottledExecutor<Request, Response>(
 ) : DynamicExecutor<Request, Response>, AsyncCloseable, CoroutineScope {
 
     private val tickets: Channel<Instant> = Channel(rateLimit)
-    private val requests: MutableList<SuspendedRequest<Request, Response>> = mutableListOf()
+    private val requests: MutableSet<SuspendedRequest<Request, Response>> = LinkedHashSet()
     private val newRequests: Channel<SuspendedRequest<Request, Response>> = Channel()
     private val schedulerJob: Job
 
@@ -33,7 +33,7 @@ class ThrottledExecutor<Request, Response>(
             while (true) {
                 if (!receiveTicket()) break
                 if (!receiveRequest()) break
-                val request = selectRequest()
+                val request = takeRequest()
                 sendRequest(request)
             }
         }
@@ -72,8 +72,10 @@ class ThrottledExecutor<Request, Response>(
         }
     }
 
-    private fun selectRequest(): SuspendedRequest<Request, Response> {
-        return requests.find { !it.request.isIncompleteBatch } ?: requests.first()
+    private fun takeRequest(): SuspendedRequest<Request, Response> {
+        val request = requests.find { !it.request.isIncompleteBatch } ?: requests.first()
+        requests.remove(request)
+        return request
     }
 
     private fun sendRequest(suspendedRequest: SuspendedRequest<Request, Response>) {
