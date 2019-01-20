@@ -1,105 +1,152 @@
 package name.anton3.vkapi.rate
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.ClosedSendChannelException
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.time.delay
 import java.time.Duration
-import java.util.concurrent.atomic.AtomicBoolean
-import java.util.concurrent.atomic.AtomicInteger
 import kotlin.coroutines.CoroutineContext
 
-class RatedBatchStrategy<Request, Response>(
-    private val base: RatedExecutor<List<Request>, List<Response>>,
-    private val batchSizeLimit: Int
-) : BatchStrategy<Request, Response> {
-
-    private val throttledTimeoutReceived: AtomicBoolean = AtomicBoolean(false)
-    private val batchCount: AtomicInteger = AtomicInteger(0)
-    private val requestProducers: RequestProducers<Request, Response> =
-        RequestProducers()
-
-    override fun isFull(requests: List<Request>): Boolean {
-        batchCount.set(requests.size)
-        return requests.size >= batchSizeLimit
-    }
-
-    override fun shouldFlushOnTimeout(): Boolean {
-        val throttling = base.isThrottling
-        throttledTimeoutReceived.set(throttling)
-        return !throttling
-    }
-
-    override suspend fun selectBatch(requests: List<Request>): SelectedBatch<Request, Response> {
-        batchCount.set(0)
-        throttledTimeoutReceived.set(false)
-        val batch = requests.take(batchSizeLimit)
-        val spaceLeft = batchSizeLimit - batch.size
-        val additionalRequests = requestProducers.produceRequests(spaceLeft)
-        return SelectedBatch(batch, additionalRequests)
-    }
-
-    override suspend fun execute(batch: List<Request>): List<Response> {
-        return base.execute(batch)
-    }
-
-    fun getThrottledTimeoutReceived(): Boolean {
-        return throttledTimeoutReceived.get()
-    }
-
-    fun getBatchCount(): Int {
-        return batchCount.get()
-    }
-
-    fun addRequestProducer(producer: RequestProducer<Request, Response>) {
-        requestProducers.add(producer)
-    }
-}
-
 class BatchExecutor<Request, Response>(
-    private val base: RatedExecutor<List<Request>, List<Response>>,
-    flushDelay: Duration,
-    private val batchSizeLimit: Int
-) : RatedExecutor<Request, Response>,
-    AsyncCloseable {
+    private val base: DynamicExecutor<List<Request>, List<Response>>,
+    override val coroutineContext: CoroutineContext,
+    private val batchSize: Int,
+    private val flushDelay: Duration
+) : DynamicExecutor<Request, Response>, AsyncCloseable, CoroutineScope {
 
-    private val strategy: RatedBatchStrategy<Request, Response> =
-        RatedBatchStrategy(base, batchSizeLimit)
+    private data class RequestData<Request, Response>(
+        val request: SuspendedRequest<Request, Response>,
+        var isTimedOut: Boolean = false
+    )
 
-    private val batcher: Batcher<Request, Response> =
-        Batcher(coroutineContext, strategy, flushDelay)
+    private val pendingRequests: MutableMap<DynamicRequest<Request>, RequestData<Request, Response>> = LinkedHashMap()
+    private val pendingBatchRequests: MutableList<DynamicRequest<List<Request>>> = mutableListOf()
+    private var requestsTimedOut: Int = 0
+    private val mutex: Mutex = Mutex()
 
     init {
-        base.addRequestProducer(object :
-            RequestProducer<List<Request>, List<Response>> {
-            override val isUrgent: Boolean
-                get() = strategy.getThrottledTimeoutReceived()
+        require(!flushDelay.isNegative)
+    }
 
-            override suspend fun sendRequest(): SuspendedRequest<List<Request>, List<Response>>? {
-                return batcher.extract().takeIf { it.request.isNotEmpty() }
+    override suspend fun execute(dynamicRequest: DynamicRequest<Request>): Response = dynamicRequest.submit {
+        mutex.withLock {
+            pendingRequests[dynamicRequest] = RequestData(it)
+
+            if (pendingRequests.size >= pendingBatchRequests.size * batchSize + batchSize) {
+                sendDynamicBatchRequest()
+            } else {
+                ensureTimeLimit(dynamicRequest)
             }
-        })
+        }
     }
 
-    override val coroutineContext: CoroutineContext
-        get() = base.coroutineContext
-
-    override suspend fun execute(request: Request): Response {
-        return batcher(request)
+    suspend fun flush() = mutex.withLock {
+        if (pendingRequests.size >= pendingBatchRequests.size * batchSize + 1) {
+            sendDynamicBatchRequest()
+        }
     }
 
-    override val rateLeft: Int
-        get() = base.rateLeft * batchSizeLimit - strategy.getBatchCount()
+    private suspend fun timeElapsed(dynamicRequest: DynamicRequest<Request>) = mutex.withLock {
+        val requestData = pendingRequests[dynamicRequest]
+        if (requestData?.isTimedOut == false) {
+            requestData.isTimedOut = true
+            ++requestsTimedOut
+        }
+        if (requestsTimedOut >= pendingBatchRequests.size * batchSize + 1) sendDynamicBatchRequest()
+    }
 
-    override fun addRequestProducer(producer: RequestProducer<Request, Response>) {
-        strategy.addRequestProducer(producer)
+    private fun CoroutineScope.ensureTimeLimit(queuedRequest: DynamicRequest<Request>): Job = launch {
+        delay(flushDelay)
+        try {
+            timeElapsed(queuedRequest)
+        } catch (e: ClosedSendChannelException) {
+            // No worries, requests will be flushed anyway
+        }
+    }
+
+    private fun CoroutineScope.sendDynamicBatchRequest() {
+        lateinit var selectedChildRequests: List<SuspendedRequest<Request, Response>>
+
+        val dynamicBatchRequest = object : DynamicRequest<List<Request>>() {
+            override val isIncompleteBatch: Boolean
+                get() = pendingRequests.size < batchSize * pendingBatchRequests.indexOf(this)
+
+            override suspend fun finalize(): List<Request> = mutex.withLock {
+                pendingBatchRequests.remove(this)
+
+                val allRequestsWithData = zip(
+                    pendingRequests.keys,
+                    pendingRequests.keys.map { it.isIncompleteBatch },
+                    pendingRequests.values.map { it.isTimedOut }
+                )
+
+                val selectedRequestsWithData = concatenate(
+                    allRequestsWithData.asSequence().filter { !it.second && it.third },
+                    allRequestsWithData.asSequence().filter { !it.second && !it.third },
+                    allRequestsWithData.asSequence().filter { it.second }
+                ).take(batchSize).toList()
+
+                requestsTimedOut -= selectedRequestsWithData.count { it.third }
+                selectedChildRequests = selectedRequestsWithData.map { pendingRequests[it.first]!!.request }
+                selectedRequestsWithData.map { it.first.get() }
+            }
+        }
+
+        pendingBatchRequests.add(dynamicBatchRequest)
+
+        launch {
+            val batchResult = runCatching {
+                base.execute(dynamicBatchRequest)
+            }
+
+            batchResult.fold(
+                onSuccess = { batchResponse ->
+                    selectedChildRequests.zip(batchResponse) { request, response ->
+                        request.complete(response)
+                    }
+                },
+                onFailure = { exception ->
+                    selectedChildRequests.forEach { request ->
+                        request.completeExceptionally(exception)
+                    }
+                }
+            )
+        }
     }
 
     override fun close() {
-        batcher.close()
+        while (pendingBatchRequests.size * batchSize < pendingRequests.size) {
+            sendDynamicBatchRequest()
+        }
     }
 
     override suspend fun join() {
-        batcher.join()
-    }
-
-    suspend fun flush() {
-        batcher.flush()
+        coroutineContext[Job]!!.join()
     }
 }
+
+private fun <E> concatenate(vararg sequences: Sequence<E>): Sequence<E> {
+    return if (sequences.isEmpty()) {
+        emptySequence()
+    } else {
+        concatenate(*sequences.dropLast(1).toTypedArray()) + sequences.last()
+    }
+}
+
+private fun <E1, S1: Iterable<E1>, E2, S2: Iterable<E2>, E3, S3: Iterable<E3>, R> zip(
+    s1: S1,
+    s2: S2,
+    s3: S3,
+    transform: (E1, E2, E3) -> R
+): List<R> {
+    return s1.zip(s2).zip(s3) { (e1, e2), e3 -> transform(e1, e2, e3) }
+}
+
+private fun <E1, S1: Iterable<E1>, E2, S2: Iterable<E2>, E3, S3: Iterable<E3>> zip(
+    s1: S1,
+    s2: S2,
+    s3: S3
+): List<Triple<E1, E2, E3>> = zip(s1, s2, s3) { e1, e2, e3 -> Triple(e1, e2, e3) }

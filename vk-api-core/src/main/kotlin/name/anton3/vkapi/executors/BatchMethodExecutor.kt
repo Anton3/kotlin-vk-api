@@ -13,15 +13,17 @@ import name.anton3.vkapi.tokens.UserGroupMethod
 import name.anton3.vkapi.tokens.attach
 import name.anton3.vkapi.vktypes.VkResponse
 import java.time.Duration
+import kotlin.coroutines.CoroutineContext
 
 class BatchMethodExecutor(
     private val base: MethodExecutor,
+    coroutineContext: CoroutineContext,
     private val token: Token<UserGroupMethod>,
     flushDelay: Duration
 ) : MethodExecutor by base, AsyncCloseable {
 
-    private val batchExecutor: RatedExecutor<List<VkMethod<*>>, List<VkResponse<*>>> =
-        MappedRatedExecutor(
+    private val batchExecutor: DynamicExecutor<List<VkMethod<*>>, List<VkResponse<*>>> =
+        MappedDynamicExecutor(
             base = base,
             preprocessor = { methods ->
                 BatchExecuteMethod(methods, objectMapper).attach(token)
@@ -34,17 +36,10 @@ class BatchMethodExecutor(
         )
 
     private val batcher: BatchExecutor<VkMethod<*>, VkResponse<*>> =
-        BatchExecutor(batchExecutor, flushDelay, BATCH_EXECUTE_LIMIT)
+        BatchExecutor(batchExecutor, coroutineContext, BATCH_EXECUTE_LIMIT, flushDelay)
 
-    override suspend fun execute(request: VkMethod<*>): VkResponse<*> {
-        return batcher.execute(request)
-    }
-
-    override val rateLeft: Int
-        get() = batcher.rateLeft
-
-    override fun addRequestProducer(producer: RequestProducer<VkMethod<*>, VkResponse<*>>) {
-        batcher.addRequestProducer(producer)
+    override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*>>): VkResponse<*> {
+        return batcher.execute(dynamicRequest)
     }
 
     override fun close() {

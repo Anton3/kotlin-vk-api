@@ -1,24 +1,25 @@
 package name.anton3.vkapi.rate
 
-import kotlin.coroutines.CoroutineContext
+class MappedDynamicRequest<Request, BaseRequest>(
+    private val base: DynamicRequest<BaseRequest>,
+    private val preprocessor: (BaseRequest) -> Request
+) : DynamicRequest<Request>() {
 
-class MappedRatedExecutor<Request, Response, BaseRequest, BaseResponse>(
-    private val base: RatedExecutor<BaseRequest, BaseResponse>,
+    override val isIncompleteBatch: Boolean
+        get() = base.isIncompleteBatch
+
+    override suspend fun finalize(): Request {
+        return preprocessor(base.get())
+    }
+}
+
+class MappedDynamicExecutor<Request, Response, BaseRequest, BaseResponse>(
+    private val base: DynamicExecutor<BaseRequest, BaseResponse>,
     private val preprocessor: (Request) -> BaseRequest,
     private val postprocessor: (BaseResponse) -> Response
-) : RatedExecutor<Request, Response> {
+) : DynamicExecutor<Request, Response> {
 
-    override val coroutineContext: CoroutineContext
-        get() = base.coroutineContext
-
-    override suspend fun execute(request: Request): Response {
-        return postprocessor(base.execute(preprocessor(request)))
-    }
-
-    override val rateLeft: Int
-        get() = base.rateLeft
-
-    override fun addRequestProducer(producer: RequestProducer<Request, Response>) {
-        base.addRequestProducer(MappedRequestProducer(coroutineContext, producer, preprocessor, postprocessor))
+    override suspend fun execute(dynamicRequest: DynamicRequest<Request>): Response {
+        return postprocessor(base.execute(MappedDynamicRequest(dynamicRequest, preprocessor)))
     }
 }

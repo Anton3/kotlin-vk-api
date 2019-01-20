@@ -1,10 +1,10 @@
 package name.anton3.vkapi.core
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import name.anton3.vkapi.rate.RatedExecutor
+import name.anton3.vkapi.rate.DynamicExecutor
 import name.anton3.vkapi.vktypes.VkResponse
 
-interface MethodExecutor : RatedExecutor<VkMethod<*>, VkResponse<*>> {
+interface MethodExecutor : DynamicExecutor<VkMethod<*>, VkResponse<*>> {
     val httpClient: TransportClient
     val objectMapper: ObjectMapper
 }

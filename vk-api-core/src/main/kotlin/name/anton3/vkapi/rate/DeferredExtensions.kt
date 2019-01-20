@@ -15,7 +15,7 @@ inline fun <T> CompletableDeferred<T>.complete(block: () -> T) {
 
 fun <Response, ResponseBase> CompletableDeferred<ResponseBase>.andThen(
     context: CoroutineContext,
-    postprocessor: (ResponseBase) -> Response
+    postprocessor: suspend (ResponseBase) -> Response
 ): CompletableDeferred<Response> {
     val result = CompletableDeferred<Response>()
     CoroutineScope(context).launch {
@@ -26,7 +26,7 @@ fun <Response, ResponseBase> CompletableDeferred<ResponseBase>.andThen(
 
 fun <Response, ResponseBase> CompletableDeferred<ResponseBase>.dependOn(
     context: CoroutineContext,
-    postprocessor: (Response) -> ResponseBase
+    postprocessor: suspend (Response) -> ResponseBase
 ): CompletableDeferred<Response> {
     val result = CompletableDeferred<Response>()
     CoroutineScope(context).launch {
@@ -35,28 +35,14 @@ fun <Response, ResponseBase> CompletableDeferred<ResponseBase>.dependOn(
     return result
 }
 
-
-inline fun <Request, Response> SuspendedRequest<Request, Response>.complete(block: (Request) -> Response) {
-    response.complete { block(request) }
+suspend inline fun <Request, Response> DynamicRequest<Request>.submit(
+    block: (SuspendedRequest<Request, Response>) -> Unit
+): Response {
+    val suspendedRequest = SuspendedRequest<Request, Response>(this)
+    block(suspendedRequest)
+    return suspendedRequest.await()
 }
 
-
-class MappedRequestProducer<Request, Response, BaseRequest, BaseResponse>(
-    private val context: CoroutineContext,
-    private val base: RequestProducer<BaseRequest, BaseResponse>,
-    private val preprocessor: (BaseRequest) -> Request,
-    private val postprocessor: (Response) -> BaseResponse
-) : RequestProducer<Request, Response> {
-
-    override val isUrgent: Boolean
-        get() = base.isUrgent
-
-    override suspend fun sendRequest(): SuspendedRequest<Request, Response>? {
-        return base.sendRequest()?.let { suspendedRequest ->
-            SuspendedRequest(
-                request = preprocessor(suspendedRequest.request),
-                response = suspendedRequest.response.dependOn(context, postprocessor)
-            )
-        }
-    }
+suspend fun <Request, Response> DynamicExecutor<Request, Response>.execute(suspendedRequest: SuspendedRequest<Request, Response>) {
+    suspendedRequest.complete { execute(suspendedRequest.request) }
 }

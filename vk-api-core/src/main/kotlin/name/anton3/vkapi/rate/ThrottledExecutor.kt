@@ -1,94 +1,98 @@
 package name.anton3.vkapi.rate
 
-import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.ClosedReceiveChannelException
 import kotlinx.coroutines.channels.ClosedSendChannelException
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.time.delay
 import java.time.Duration
-import java.util.concurrent.atomic.AtomicBoolean
-import java.util.concurrent.atomic.AtomicInteger
+import java.time.Instant
 import kotlin.coroutines.CoroutineContext
 
 class ThrottledExecutor<Request, Response>(
-    private val base: RatedExecutor<Request, Response>,
-    private val rateLimit: Int,
+    private val base: DynamicExecutor<Request, Response>,
+    override val coroutineContext: CoroutineContext,
+    rateLimit: Int,
     private val ratePeriod: Duration
-) : RatedExecutor<Request, Response>,
-    AsyncCloseable {
+) : DynamicExecutor<Request, Response>, AsyncCloseable, CoroutineScope {
 
-    private val tickets: Channel<Unit> = Channel(rateLimit)
-    private val ticketsLeft: AtomicInteger = AtomicInteger(rateLimit)
-    private val isClosed: AtomicBoolean = AtomicBoolean(false)
-    private val requestProducers: RequestProducers<Request, Response> =
-        RequestProducers()
+    private val tickets: Channel<Instant> = Channel(rateLimit)
+    private val requests: MutableList<SuspendedRequest<Request, Response>> = mutableListOf()
+    private val newRequests: Channel<SuspendedRequest<Request, Response>> = Channel(Channel.UNLIMITED)
+    private val schedulerJob: Job
 
     init {
         require(rateLimit > 0 && ratePeriod > Duration.ZERO)
-        repeat(rateLimit) { tickets.offer(Unit) }
-    }
 
-    override val coroutineContext: CoroutineContext
-        get() = base.coroutineContext
+        val now = Instant.now()
+        repeat(rateLimit) { tickets.offer(now) }
 
-    override suspend fun execute(request: Request): Response {
-        if (isClosed.get()) throw CancellationException("Closed ThrottledExecutor")
-        ticketsLeft.getAndDecrement()
-        tickets.receive()
-
-        return executeWithTicket(request)
-    }
-
-    private suspend fun executeWithTicket(request: Request): Response {
-        return try {
-            base.execute(request)
-        } finally {
-            launch {
-                delay(ratePeriod)
-
-                val hasFreeRate = ticketsLeft.get() >= 0 && !base.isThrottling
-                val suspendedRequest = if (hasFreeRate) requestProducers.produceRequest() else null
-
-                if (suspendedRequest != null) {
-                    suspendedRequest.complete { executeWithTicket(it) }
-                } else {
-                    ticketsLeft.getAndIncrement()
-                    try {
-                        tickets.offer(Unit)
-                    } catch (e: ClosedSendChannelException) {
-                    }
-                }
+        schedulerJob = launch {
+            while (true) {
+                if (!receiveTicket()) break
+                if (!receiveRequest()) break
+                val request = selectRequest()
+                sendRequest(request)
             }
         }
     }
 
-    override val rateLeft: Int
-        get() = minOf(ticketsLeft.get(), base.rateLeft)
+    override suspend fun execute(dynamicRequest: DynamicRequest<Request>): Response = dynamicRequest.submit {
+        newRequests.offer(it)
+    }
 
-    override fun addRequestProducer(producer: RequestProducer<Request, Response>) {
-        requestProducers.add(producer)
+    private suspend fun receiveTicket(): Boolean {
+        val ticket = try {
+            tickets.receive()
+        } catch (e: ClosedReceiveChannelException) {
+            return false
+        }
 
-        base.addRequestProducer(object : RequestProducer<Request, Response> {
-            override val isUrgent: Boolean
-                get() = producer.isUrgent && !this@ThrottledExecutor.isThrottling
+        val now = Instant.now()
+        if (ticket > now) delay(Duration.between(now, ticket))
+        return true
+    }
 
-            override suspend fun sendRequest(): SuspendedRequest<Request, Response>? {
-                if (this@ThrottledExecutor.isThrottling) return null
-                return producer.sendRequest()
+    private suspend fun receiveRequest(): Boolean {
+        return try {
+            var newRequest = newRequests.poll()
+            while (newRequest != null) {
+                requests.add(newRequest)
+                newRequest = newRequests.poll()
             }
-        })
+            if (requests.isEmpty()) {
+                newRequest = newRequests.receive()
+                requests.add(newRequest)
+            }
+            true
+        } catch (e: ClosedReceiveChannelException) {
+            !requests.isEmpty()
+        }
+    }
+
+    private fun selectRequest(): SuspendedRequest<Request, Response> {
+        return requests.find { !it.request.isIncompleteBatch } ?: requests.first()
+    }
+
+    private fun sendRequest(suspendedRequest: SuspendedRequest<Request, Response>) {
+        launch {
+            base.execute(suspendedRequest)
+            try {
+                tickets.send(Instant.now() + ratePeriod)
+            } catch (e: ClosedSendChannelException) {
+                // Executor is closed
+            }
+        }
     }
 
     override fun close() {
-        isClosed.set(true)
+        newRequests.close()
+        tickets.close()
     }
 
     override suspend fun join() {
-        require(isClosed.get())
-        repeat(rateLimit) {
-            ticketsLeft.getAndDecrement()
-            tickets.receive()
-        }
-        tickets.close()
+        schedulerJob.join()
     }
 }

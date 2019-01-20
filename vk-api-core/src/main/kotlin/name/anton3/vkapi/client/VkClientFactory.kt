@@ -20,7 +20,7 @@ class VkClientFactory(
     parentContext: CoroutineContext = Dispatchers.Default
 ) {
     private val context = parentContext + Job(parentContext[Job])
-    private val baseExecutor: MethodExecutor = SimpleMethodExecutor(context, httpClient, objectMapper)
+    private val baseExecutor: MethodExecutor = SimpleMethodExecutor(httpClient, objectMapper)
     private val closeableExecutors: MutableList<AsyncCloseable> = mutableListOf()
 
     @Synchronized
@@ -29,8 +29,8 @@ class VkClientFactory(
         flushDelayMillis: Long = 500L,
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
     ): VkClient<UserMethod> {
-        val throttled = ThrottledMethodExecutor(baseExecutor, 3)
-        val batch = BatchMethodExecutor(throttled, token, Duration.ofMillis(flushDelayMillis))
+        val throttled = ThrottledMethodExecutor(baseExecutor, context, 3)
+        val batch = BatchMethodExecutor(throttled, context, token, Duration.ofMillis(flushDelayMillis))
         closeableExecutors.add(throttled)
         closeableExecutors.add(batch)
         return executorWrapper(batch).attach(token)
@@ -42,8 +42,8 @@ class VkClientFactory(
         flushDelayMillis: Long = 60L,
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
     ): VkClient<GroupMethod> {
-        val throttled = ThrottledMethodExecutor(baseExecutor, 20)
-        val batch = BatchMethodExecutor(throttled, token, Duration.ofMillis(flushDelayMillis))
+        val throttled = ThrottledMethodExecutor(baseExecutor, context, 20)
+        val batch = BatchMethodExecutor(throttled, context, token, Duration.ofMillis(flushDelayMillis))
         closeableExecutors.add(throttled)
         closeableExecutors.add(batch)
         return executorWrapper(batch).attach(token)
@@ -55,8 +55,8 @@ class VkClientFactory(
         serviceType: AdServiceType = AdServiceType.NORMAL,
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
     ): VkClient<UserMethod> {
-        val throttled1 = ThrottledMethodExecutor(baseExecutor, 2)
-        val throttled2 = ThrottledMethodExecutor(throttled1, serviceType.requestsPerHour, Duration.ofHours(1))
+        val throttled1 = ThrottledMethodExecutor(baseExecutor, context, 2)
+        val throttled2 = ThrottledMethodExecutor(throttled1, context, serviceType.requestsPerHour, Duration.ofHours(1))
         closeableExecutors.add(throttled1)
         closeableExecutors.add(throttled2)
         return executorWrapper(throttled2).attach(token)
@@ -68,7 +68,7 @@ class VkClientFactory(
         appPopularity: SecureAppPopularity = SecureAppPopularity.SMALL,
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
     ): VkClient<ServiceMethod> {
-        val throttled = ThrottledMethodExecutor(baseExecutor, appPopularity.requestsPerSecond)
+        val throttled = ThrottledMethodExecutor(baseExecutor, context, appPopularity.requestsPerSecond)
         closeableExecutors.add(throttled)
         return executorWrapper(throttled).attach(token)
     }
