@@ -1,11 +1,12 @@
 package name.anton3.vkapi.vktypes
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import java.util.*
 
-class VkDate(date: Long) {
-    private val date: Date = Date(date * 1000)
+@JsonFormat(shape = JsonFormat.Shape.NUMBER_INT)
+class VkDate(val unixTimeSeconds: Long) {
 
-    fun toDate(): Date = date
+    fun toDate(): Date = Date(unixTimeSeconds * 1000)
 
-    override fun toString(): String = (date.time / 1000).toString()
+    override fun toString(): String = unixTimeSeconds.toString()
 }
