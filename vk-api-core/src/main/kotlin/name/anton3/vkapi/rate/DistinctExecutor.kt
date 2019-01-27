@@ -12,10 +12,10 @@ class DistinctExecutor<Request, Response>(
     private val mutex: Mutex = Mutex()
 
     override suspend fun execute(request: Request): Response {
-        var isFirst = true
+        var isFirst = false
         val handle = mutex.withLock {
             pendingRequests.getOrPut(request) {
-                isFirst = false
+                isFirst = true
                 CompletableDeferred()
             }
         }
