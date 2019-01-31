@@ -3,7 +3,6 @@ package name.anton3.vkapi.client
 import com.fasterxml.jackson.databind.ObjectMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import name.anton3.vkapi.core.MethodExecutor
 import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.executors.BatchMethodExecutor
@@ -19,7 +18,8 @@ class VkClientFactory(
     objectMapper: ObjectMapper,
     parentContext: CoroutineContext = Dispatchers.Default
 ) {
-    private val context = parentContext + Job(parentContext[Job])
+    private val job = Job(parentContext[Job])
+    private val context = parentContext + job
     private val baseExecutor: MethodExecutor = SimpleMethodExecutor(httpClient, objectMapper)
     private val closeableExecutors: MutableList<AsyncCloseable> = mutableListOf()
 
@@ -79,7 +79,7 @@ class VkClientFactory(
             executor.close()
             executor.join()
         }
-        context.cancel()
+        job.join()
     }
 }
 

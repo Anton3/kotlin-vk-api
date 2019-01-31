@@ -1,6 +1,4 @@
-package name.anton3.vkapi.methods.execute
-
-import name.anton3.vkapi.core.VkMethod
+package name.anton3.vkapi.core
 
 fun VkMethod<*>.supportsBatch(): Boolean {
     return when (apiMethodName.substringBefore('.')) {

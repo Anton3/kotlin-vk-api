@@ -2,18 +2,20 @@ package name.anton3.vkapi.tokens
 
 import name.anton3.vkapi.client.VkClient
 import name.anton3.vkapi.client.invoke
-import name.anton3.vkapi.core.VkMethod
 import name.anton3.vkapi.core.MethodExecutor
+import name.anton3.vkapi.core.VkMethod
 
-class ExampleUserMethod : VkMethod<Int>(TODO(), TODO()), UserMethod
-class ExampleServiceMethod : VkMethod<Long>(TODO(), TODO()), ServiceMethod
-class ExampleUserGroupMethod : VkMethod<Short>(TODO(), TODO()), UserGroupMethod
-class ExampleUserServiceMethod : VkMethod<Char>(TODO(), TODO()), UserServiceMethod
-class ExampleUserGroupServiceMethod : VkMethod<Double>(TODO(), TODO()), UserGroupServiceMethod
+private val error: Nothing get() = error("")
 
-fun getSomeExecutor(): MethodExecutor = TODO()
+class ExampleUserMethod : VkMethod<Int>(error, error), UserMethod
+class ExampleServiceMethod : VkMethod<Long>(error, error), ServiceMethod
+class ExampleUserGroupMethod : VkMethod<Short>(error, error), UserGroupMethod
+class ExampleUserServiceMethod : VkMethod<Char>(error, error), UserServiceMethod
+class ExampleUserGroupServiceMethod : VkMethod<Double>(error, error), UserGroupServiceMethod
 
-fun getUserToken(): UserToken = TODO()
+fun getSomeExecutor(): MethodExecutor = error
+
+fun getUserToken(): UserToken = error
 fun getSomeUserToken(): Token<UserMethod> = getUserToken()
 fun getSomeUserGroupToken(): Token<UserGroupMethod> = getSomeUserToken()
 fun getSomeUserGroupServiceToken(): Token<UserGroupServiceMethod> = getSomeUserGroupToken()

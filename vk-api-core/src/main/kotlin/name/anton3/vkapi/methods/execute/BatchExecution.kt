@@ -7,7 +7,7 @@ import java.io.IOException
 
 suspend fun MethodExecutor.batchUnchecked(methods: List<VkMethod<*>>, token: Token<*>): List<VkResult<*>> {
     val batchMethod = BatchExecuteMethod(methods, objectMapper).attach(token)
-    return this(batchMethod).extractExecuteResult().unwrap().parseBatchResponse()
+    return execute(batchMethod).extractExecuteResult().unwrap().parseBatchResponse()
 }
 
 internal fun ExecuteResponse<BatchExecuteResult>.parseBatchResponse(): List<VkResult<*>> {

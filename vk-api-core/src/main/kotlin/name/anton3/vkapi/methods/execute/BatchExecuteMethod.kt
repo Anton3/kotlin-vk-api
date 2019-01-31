@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.core.supportsBatch
 import name.anton3.vkapi.json.serializeMethod
 
 class BatchExecuteMethod(@JsonIgnore val methods: List<VkMethod<*>>, objectMapper: ObjectMapper) :

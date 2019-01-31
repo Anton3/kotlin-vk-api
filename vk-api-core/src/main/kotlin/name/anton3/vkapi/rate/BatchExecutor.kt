@@ -2,7 +2,6 @@ package name.anton3.vkapi.rate
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.channels.ClosedSendChannelException
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -12,15 +11,19 @@ import kotlin.coroutines.CoroutineContext
 
 class BatchExecutor<Request, Response>(
     private val base: DynamicExecutor<List<Request>, List<Response>>,
-    override val coroutineContext: CoroutineContext,
+    coroutineContext: CoroutineContext,
     private val batchSize: Int,
-    private val flushDelay: Duration
+    private val flushDelay: Duration,
+    private val canBeBatched: Boolean
 ) : DynamicExecutor<Request, Response>, AsyncCloseable, CoroutineScope {
 
     private data class RequestData<Request, Response>(
         val request: SuspendedRequest<Request, Response>,
         var isTimedOut: Boolean = false
     )
+
+    private val job = Job(coroutineContext[Job])
+    override val coroutineContext = coroutineContext + job
 
     private val pendingRequests: MutableMap<DynamicRequest<Request>, RequestData<Request, Response>> = LinkedHashMap()
     private val pendingBatchRequests: MutableList<DynamicRequest<List<Request>>> = mutableListOf()
@@ -32,68 +35,45 @@ class BatchExecutor<Request, Response>(
     }
 
     override suspend fun execute(dynamicRequest: DynamicRequest<Request>): Response = dynamicRequest.submit {
-        mutex.withLock {
+        mutex.withLock<Unit> {
             pendingRequests[dynamicRequest] = RequestData(it)
 
             if (pendingRequests.size >= pendingBatchRequests.size * batchSize + batchSize) {
                 sendDynamicBatchRequest()
             } else {
-                ensureTimeLimit(dynamicRequest)
+                launch {
+                    delay(flushDelay)
+                    timeElapsed(dynamicRequest)
+                }
             }
         }
     }
 
-    suspend fun flush() = mutex.withLock {
-        if (pendingRequests.size >= pendingBatchRequests.size * batchSize + 1) {
-            sendDynamicBatchRequest()
-        }
-    }
-
-    private suspend fun timeElapsed(dynamicRequest: DynamicRequest<Request>) = mutex.withLock {
-        val requestData = pendingRequests[dynamicRequest]
-        if (requestData?.isTimedOut == false) {
-            requestData.isTimedOut = true
-            ++requestsTimedOut
-        }
-        if (requestsTimedOut >= pendingBatchRequests.size * batchSize + 1) sendDynamicBatchRequest()
-    }
-
-    private fun CoroutineScope.ensureTimeLimit(queuedRequest: DynamicRequest<Request>): Job = launch {
-        delay(flushDelay)
-        try {
-            timeElapsed(queuedRequest)
-        } catch (e: ClosedSendChannelException) {
-            // No worries, requests will be flushed anyway
-        }
-    }
-
-    private fun CoroutineScope.sendDynamicBatchRequest() {
-        lateinit var selectedChildRequests: List<SuspendedRequest<Request, Response>>
-
-        val dynamicBatchRequest = object : DynamicRequest<List<Request>>() {
-            override val isIncompleteBatch: Boolean
-                get() = pendingRequests.size < batchSize * pendingBatchRequests.indexOf(this)
-
-            override suspend fun finalize(): List<Request> = mutex.withLock {
-                pendingBatchRequests.remove(this)
-
-                val allRequestsWithData = zip(
-                    pendingRequests.keys,
-                    pendingRequests.keys.map { it.isIncompleteBatch },
-                    pendingRequests.values.map { it.isTimedOut }
-                )
-
-                val selectedRequestsWithData = concatenate(
-                    allRequestsWithData.asSequence().filter { !it.second && it.third },
-                    allRequestsWithData.asSequence().filter { !it.second && !it.third },
-                    allRequestsWithData.asSequence().filter { it.second }
-                ).take(batchSize).toList()
-
-                requestsTimedOut -= selectedRequestsWithData.count { it.third }
-                selectedChildRequests = selectedRequestsWithData.map { pendingRequests[it.first]!!.request }
-                selectedRequestsWithData.map { it.first.get() }
+    suspend fun flush() {
+        mutex.withLock {
+            if (pendingRequests.size >= pendingBatchRequests.size * batchSize + 1) {
+                sendDynamicBatchRequest()
             }
         }
+    }
+
+    private suspend fun timeElapsed(dynamicRequest: DynamicRequest<Request>) {
+        mutex.withLock {
+            val requestData = pendingRequests[dynamicRequest]
+
+            if (requestData?.isTimedOut == false) {
+                requestData.isTimedOut = true
+                ++requestsTimedOut
+
+                if (requestsTimedOut >= pendingBatchRequests.size * batchSize + 1) {
+                    sendDynamicBatchRequest()
+                }
+            }
+        }
+    }
+
+    private fun sendDynamicBatchRequest() {
+        val dynamicBatchRequest = BatchDynamicRequest()
 
         pendingBatchRequests.add(dynamicBatchRequest)
 
@@ -104,17 +84,61 @@ class BatchExecutor<Request, Response>(
 
             batchResult.fold(
                 onSuccess = { batchResponse ->
-                    selectedChildRequests.zip(batchResponse) { request, response ->
+                    dynamicBatchRequest.batch.zip(batchResponse) { request, response ->
                         request.complete(response)
                     }
                 },
                 onFailure = { exception ->
-                    selectedChildRequests.forEach { request ->
+                    dynamicBatchRequest.batch.forEach { request ->
                         request.completeExceptionally(exception)
                     }
                 }
             )
         }
+    }
+
+    private inner class BatchDynamicRequest : SynchronizedDynamicRequest<List<Request>>() {
+        var batch: List<SuspendedRequest<Request, Response>> = emptyList()
+
+        override val canBeBatched: Boolean
+            get() = this@BatchExecutor.canBeBatched
+
+        override val isIncompleteBatch: Boolean
+            get() = pendingRequests.size < batchSize * pendingBatchRequests.indexOf(this)
+
+        override suspend fun finalize(): List<Request> {
+            mutex.withLock {
+                pendingBatchRequests.remove(this)
+                batch = extractBatch()
+            }
+
+            return batch.map { it.request.get() }
+        }
+    }
+
+    private fun extractBatch(): List<SuspendedRequest<Request, Response>> {
+        val allRequestsWithData = zip(
+            pendingRequests.values.map { it.request },
+            pendingRequests.keys.map { it.isIncompleteBatch },
+            pendingRequests.values.map { it.isTimedOut }
+        )
+
+        val selectedRequestsWithData = concatenate(
+            allRequestsWithData.asSequence().filter { !it.second && it.third },
+            allRequestsWithData.asSequence().filter { !it.second && !it.third },
+            allRequestsWithData.asSequence().filter { it.second }
+        ).take(batchSize).toList()
+
+        requestsTimedOut -= selectedRequestsWithData.count { it.third }
+
+        if (requestsTimedOut >= pendingBatchRequests.size * batchSize + 1) {
+            sendDynamicBatchRequest()
+        }
+
+        val selectedRequests = selectedRequestsWithData.map { it.first }
+        selectedRequests.forEach { pendingRequests.remove(it.request)?.isTimedOut = true }
+
+        return selectedRequests
     }
 
     override fun close() {
@@ -124,7 +148,7 @@ class BatchExecutor<Request, Response>(
     }
 
     override suspend fun join() {
-        coroutineContext[Job]!!.join()
+        job.join()
     }
 }
 
