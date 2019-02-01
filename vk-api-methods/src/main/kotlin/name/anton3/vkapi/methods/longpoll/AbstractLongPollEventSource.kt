@@ -3,6 +3,7 @@ package name.anton3.vkapi.methods.longpoll
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.channels.ClosedSendChannelException
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.withContext
@@ -12,6 +13,7 @@ import name.anton3.vkapi.core.get
 import name.anton3.vkapi.methods.longpoll.objects.LongPollFailure
 import java.io.IOException
 import java.nio.charset.Charset
+import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.coroutines.CoroutineContext
 
 private val log = KotlinLogging.logger {}
@@ -22,6 +24,8 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
     protected val httpClient: TransportClient,
     private val responseType: TypeReference<LongPollResponse<EventType>>
 ) {
+    private val shutdown = AtomicBoolean(false)
+
     abstract suspend fun iteratorToUrl(iterator: IteratorType): String
 
     abstract suspend fun iteratorWithTs(iterator: IteratorType, ts: Int): IteratorType
@@ -36,6 +40,7 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
         val vkJson = vkResponse.data.toString(Charset.forName("UTF-8"))
         log.debug("VK long poll responds with $vkJson")
 
+        @Suppress("BlockingMethodInNonBlockingContext")
         val lpResponse: LongPollResponse<EventType> = objectMapper.readValue(vkJson, responseType)
 
         return when (lpResponse.failed) {
@@ -64,20 +69,36 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
 
     @Suppress("EXPERIMENTAL_API_USAGE")
     fun produceEvents(scope: CoroutineScope): ReceiveChannel<EventType> = scope.produce {
-        var iter = iterator()
+        var iter = iteratorSwallowing()
 
         while (true) {
             val response = try {
                 getEvents(iter)
             } catch (e: IOException) {
                 log.warn("LongPoll error", e)
-                iter = iterator()
+                iter = iteratorSwallowing()
                 continue
             }
 
             iter = response.first
             val events = response.second
-            events.forEach { send(it) }
+
+            if (channel.isClosedForSend) break
+            try {
+                events.forEach { send(it) }
+            } catch (e: ClosedSendChannelException) {
+                break
+            }
+        }
+    }
+
+    private suspend fun iteratorSwallowing(): IteratorType {
+        while (true) {
+            try {
+                return iterator()
+            } catch (e: IOException) {
+                log.warn("LongPoll iterator error", e)
+            }
         }
     }
 }
