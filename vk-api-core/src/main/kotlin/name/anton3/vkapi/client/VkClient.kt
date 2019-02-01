@@ -19,7 +19,8 @@ data class VkClient<in M: MethodRequirement>(val executor: MethodExecutor, val t
     }
 
     suspend fun <T> unchecked(method: VkMethod<T>): T {
-        return executor.execute(method.attach(token)).extractSimpleResult().unwrap()
+        val withToken: VkMethod<T> = method.attach(token)
+        return executor.executeTyped(withToken).extractSimpleResult().unwrap()
     }
 
     suspend fun <T> uncheckedSwallowing(dynamicRequest: DynamicRequest<VkMethod<T>>): T? {
