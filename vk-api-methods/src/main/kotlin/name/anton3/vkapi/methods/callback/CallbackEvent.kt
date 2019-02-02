@@ -62,18 +62,24 @@ interface Attachment
     JsonSubTypes.Type(name = "board_post_restore", value = BoardPostCallbackEvent::class),
     JsonSubTypes.Type(name = "board_post_delete", value = BoardPostDelete::class),
 
-    // TODO market*
+    JsonSubTypes.Type(name = "market_comment_new", value = MarketCommentCallbackEvent::class),
+    JsonSubTypes.Type(name = "market_comment_edit", value = MarketCommentCallbackEvent::class),
+    JsonSubTypes.Type(name = "market_comment_restore", value = MarketCommentCallbackEvent::class),
+    JsonSubTypes.Type(name = "market_comment_delete", value = MarketCommentDelete::class),
 
     JsonSubTypes.Type(name = "group_leave", value = GroupLeave::class),
     JsonSubTypes.Type(name = "group_join", value = GroupJoin::class),
 
-
     JsonSubTypes.Type(name = "user_block", value = UserBlock::class),
-    JsonSubTypes.Type(name = "poll_vote_new", value = PollVoteNew::class)
+    JsonSubTypes.Type(name = "user_unblock", value = UserUnblock::class),
 
-    // TODO poll_vote
-    // TODO group_*
-    // TODO vkpay
+    JsonSubTypes.Type(name = "poll_vote_new", value = PollVoteNew::class),
+
+    JsonSubTypes.Type(name = "group_officers_edit", value = GroupOfficersEdit::class),
+    JsonSubTypes.Type(name = "group_change_settings", value = GroupChangeSettings::class),
+    JsonSubTypes.Type(name = "group_change_photo", value = GroupChangePhoto::class),
+
+    JsonSubTypes.Type(name = "vkpay_transaction", value = VkPayTransaction::class)
 )
 sealed class CallbackEvent<T>(
     val groupId: Int,
@@ -105,6 +111,7 @@ class MessageAllow(groupId: Int, @JsonProperty("object") attachment: ToggleMessa
 class MessageDeny(groupId: Int, @JsonProperty("object") attachment: ToggleMessageAllowance) :
     CallbackEvent<ToggleMessageAllowance>(groupId, attachment)
 
+
 class WallReply(
     val postId: Int,
     val postOwnerId: Int,
@@ -122,12 +129,10 @@ class WallReply(
 class WallReplyCallbackEvent(groupId: Int, @JsonProperty("object") attachment: WallReply) :
     CallbackEvent<WallReply>(groupId, attachment)
 
+class WallReplyDeleteAttachment(val ownerId: Int, val id: Int, val userId: Int, val deleteId: Int, val postId: Int)
 
-class WallReplyDelete(groupId: Int, @JsonProperty("object") attachment: Attachment) :
-    CallbackEvent<WallReplyDelete.Attachment>(groupId, attachment) {
-
-    class Attachment(val ownerId: Int, val id: Int, val userId: Int, val deleteId: Int, val postId: Int)
-}
+class WallReplyDelete(groupId: Int, @JsonProperty("object") attachment: WallReplyDeleteAttachment) :
+    CallbackEvent<WallReplyDeleteAttachment>(groupId, attachment)
 
 class WallPostNew(groupId: Int, @JsonProperty("object") attachment: WallpostFull) :
     CallbackEvent<WallpostFull>(groupId, attachment)
@@ -150,12 +155,43 @@ data class BoardPostEventAttach(
 class BoardPostCallbackEvent(groupId: Int, @JsonProperty("object") attachment: BoardPostEventAttach) :
     CallbackEvent<BoardPostEventAttach>(groupId, attachment)
 
-class BoardPostDelete(groupId: Int, @JsonProperty("object") attachment: Attach) :
-    CallbackEvent<BoardPostDelete.Attach>(groupId, attachment) {
-    class Attach(val topicId: Int, val topicOwnerId: Int, val id: Int)
-}
+data class BoardPostDeleteAttachment(val topicId: Int, val topicOwnerId: Int, val id: Int)
 
-class PhotoNew(groupId: Int, @JsonProperty("object") attachment: Photo) : CallbackEvent<Photo>(groupId, attachment)
+class BoardPostDelete(groupId: Int, @JsonProperty("object") attachment: BoardPostDeleteAttachment) :
+    CallbackEvent<BoardPostDeleteAttachment>(groupId, attachment)
+
+
+class MarketCommentAttach(
+    val itemId: Int,
+    val marketOwnerId: Int,
+    override val id: Int,
+    override val fromId: Int,
+    override val date: VkDate,
+    override val text: String,
+    override val likes: LikesInfo?,
+    override val replyToUser: Int?,
+    override val replyToComment: Int?,
+    override val attachments: List<CommentAttachment>?,
+    override val realOffset: Int?
+) : WallComment
+
+class MarketCommentCallbackEvent(groupId: Int, @JsonProperty("object") attachment: MarketCommentAttach) :
+    CallbackEvent<MarketCommentAttach>(groupId, attachment)
+
+data class MarketCommentDeleteAttachment(
+    val ownerId: Int,
+    val id: Int,
+    val userId: Int,
+    val deleterId: Int,
+    val itemId: Int
+)
+
+class MarketCommentDelete(groupId: Int, @JsonProperty("object") attachment: MarketCommentDeleteAttachment) :
+    CallbackEvent<MarketCommentDeleteAttachment>(groupId, attachment)
+
+
+class PhotoNew(groupId: Int, @JsonProperty("object") attachment: Photo) :
+    CallbackEvent<Photo>(groupId, attachment)
 
 class PhotoCommentAttach(
     val photoId: Int,
@@ -171,16 +207,22 @@ class PhotoCommentAttach(
     override val realOffset: Int?
 ) : WallComment
 
-
 class PhotoCommentCallbackEvent(groupId: Int, @JsonProperty("object") attachment: PhotoCommentAttach) :
     CallbackEvent<PhotoCommentAttach>(groupId, attachment)
 
-class PhotoCommentDelete(groupId: Int, @JsonProperty("object") attachment: Attach) :
-    CallbackEvent<PhotoCommentDelete.Attach>(groupId, attachment) {
-    class Attach(val ownerId: Int, val id: Int, val userId: Int, val deleterId: Int, val photoId: Int)
-}
+class PhotoCommentDeleteAttachment(
+    val ownerId: Int,
+    val id: Int,
+    val userId: Int,
+    val deleterId: Int,
+    val photoId: Int
+)
 
-class VideoCommentAttach(
+class PhotoCommentDelete(groupId: Int, @JsonProperty("object") attachment: PhotoCommentDeleteAttachment) :
+    CallbackEvent<PhotoCommentDeleteAttachment>(groupId, attachment)
+
+
+class VideoCommentAttachment(
     val videoId: Int,
     val videoOwnerId: Int,
     override val id: Int,
@@ -194,33 +236,52 @@ class VideoCommentAttach(
     override val realOffset: Int?
 ) : WallComment
 
+class VideoCommentCallbackEvent(groupId: Int, @JsonProperty("object") attachment: VideoCommentAttachment) :
+    CallbackEvent<VideoCommentAttachment>(groupId, attachment)
 
-class VideoCommentCallbackEvent(groupId: Int, @JsonProperty("object") attachment: VideoCommentAttach) :
-    CallbackEvent<VideoCommentAttach>(groupId, attachment)
+class VideoCommentDeleteAttachment(
+    val ownerId: Int,
+    val id: Int,
+    val userId: Int,
+    val deleterId: Int,
+    val videoId: Int
+)
 
-class VideoCommentDelete(groupId: Int, @JsonProperty("object") attachment: Attach) :
-    CallbackEvent<VideoCommentDelete.Attach>(groupId, attachment) {
-    class Attach(val ownerId: Int, val id: Int, val userId: Int, val deleterId: Int, val videoId: Int)
-}
+class VideoCommentDelete(groupId: Int, @JsonProperty("object") attachment: VideoCommentDeleteAttachment) :
+    CallbackEvent<VideoCommentDeleteAttachment>(groupId, attachment)
 
-//{"admin_id":271651224,"user_id":302484804,"unblock_date":0,"reason":"other","comment":""}
-class UserBlock(groupId: Int, @JsonProperty("object") attachment: Attachment) :
-    CallbackEvent<UserBlock.Attachment>(groupId, attachment) {
 
-    class Attachment(
-        val adminId: Int,
-        val userId: Int,
-        val unblockDate: Int,
-        val reason: String,
-        val comment: String
-    )
-}
+class UserBlockAttachment(
+    val adminId: Int,
+    val userId: Int,
+    val unblockDate: Int,
+    val reason: String,
+    val comment: String
+)
 
-class PollVoteNew(groupId: Int, @JsonProperty("object") attachment: Attachment) :
-    CallbackEvent<PollVoteNew.Attachment>(groupId, attachment) {
+class UserBlock(groupId: Int, @JsonProperty("object") attachment: UserBlockAttachment) :
+    CallbackEvent<UserBlockAttachment>(groupId, attachment)
 
-    class Attachment(val ownerId: Int, val userId: Int, val pollId: Int, val optionId: Int)
-}
+class UserUnblockAttachment(
+    val adminId: Int,
+    val userId: Int,
+    val byEndDate: Boolean
+)
+
+class UserUnblock(groupId: Int, @JsonProperty("object") attachment: UserUnblockAttachment) :
+    CallbackEvent<UserUnblockAttachment>(groupId, attachment)
+
+
+class PollVoteNewAttachment(
+    val ownerId: Int,
+    val userId: Int,
+    val pollId: Int,
+    val optionId: Int
+)
+
+class PollVoteNew(groupId: Int, @JsonProperty("object") attachment: PollVoteNewAttachment) :
+    CallbackEvent<PollVoteNewAttachment>(groupId, attachment)
+
 
 enum class JoinType(@JsonValue override val value: String) : Value<String> {
     JOIN("join"),
@@ -245,3 +306,72 @@ class GroupJoin(groupId: Int, @JsonProperty("object") attachment: GroupJoinAttac
 
 class GroupLeave(groupId: Int, @JsonProperty("object") attachment: GroupLeaveAttach) :
     CallbackEvent<GroupLeaveAttach>(groupId, attachment)
+
+
+enum class OfficerType(@JsonValue override val value: Int) : Value<Int> {
+    USER(0),
+    MODERATOR(1),
+    EDITOR(2),
+    ADMIN(3)
+}
+
+data class GroupOfficersEditAttachment(
+    val adminId: Int,
+    val userId: Int,
+    val levelOld: OfficerType,
+    val levelNew: OfficerType
+)
+
+class GroupOfficersEdit(groupId: Int, @JsonProperty("object") attachment: GroupOfficersEditAttachment) :
+    CallbackEvent<GroupOfficersEditAttachment>(groupId, attachment)
+
+
+
+enum class GroupSettingsField(@JsonValue override val value: String) : Value<String> {
+    TITLE("title"),
+    DESCRIPTION("description"),
+    ACCESS("access"),
+    SCREEN_NAME("screen_name"),
+    PUBLIC_CATEGORY("public_category"),
+    PUBLIC_SUBCATEGORY("public_subcategory"),
+    AGE_LIMITS("age_limits"),
+    WEBSITE("website"),
+    ENABLE_STATUS_DEFAULT("enable_status_default"),
+    ENABLE_AUDIO("enable_audio"),
+    ENABLE_PHOTO("enable_photo"),
+    ENABLE_VIDEO("enable_video"),
+    ENABLE_MARKET("enable_market")
+}
+
+data class GroupSettingsFieldChange(
+    val oldValue: String,
+    val newValue: String
+)
+
+data class GroupChangeSettingsAttachment(
+    val userId: Int,
+    val changes: Map<GroupSettingsField, GroupSettingsFieldChange>
+)
+
+class GroupChangeSettings(groupId: Int, @JsonProperty("object") attachment: GroupChangeSettingsAttachment) :
+    CallbackEvent<GroupChangeSettingsAttachment>(groupId, attachment)
+
+
+data class GroupChangePhotoAttachment(
+    val userId: Int,
+    val photo: Photo
+)
+
+class GroupChangePhoto(groupId: Int, @JsonProperty("object") attachment: GroupChangePhotoAttachment) :
+    CallbackEvent<GroupChangePhotoAttachment>(groupId, attachment)
+
+
+data class VkPayTransactionAttachment(
+    val fromId: Int,
+    val amount: Int,
+    val description: String,
+    val date: VkDate
+)
+
+class VkPayTransaction(groupId: Int, @JsonProperty("object") attachment: VkPayTransactionAttachment) :
+    CallbackEvent<VkPayTransactionAttachment>(groupId, attachment)
