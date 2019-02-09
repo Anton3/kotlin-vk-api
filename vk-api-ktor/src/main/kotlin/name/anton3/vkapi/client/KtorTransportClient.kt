@@ -1,5 +1,6 @@
 package name.anton3.vkapi.client
 
+import io.ktor.client.HttpClient
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.HttpRequestData
 import io.ktor.client.request.forms.MultiPartFormDataContent
@@ -15,7 +16,6 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.OutgoingContent
 import io.ktor.http.content.TextContent
 import io.ktor.http.takeFrom
-import io.ktor.util.toMap
 import mu.KotlinLogging
 import name.anton3.vkapi.core.RequestContent
 import name.anton3.vkapi.core.TransportClient
@@ -24,7 +24,7 @@ import java.time.Duration
 import java.time.Instant
 
 class KtorTransportClient(
-    private val client: io.ktor.client.HttpClient,
+    private val client: HttpClient,
     private val retryAttemptsNetworkErrorCount: Int = 3,
     private val retryAttemptsInvalidStatusCount: Int = 3
 ) : TransportClient {
@@ -33,11 +33,11 @@ class KtorTransportClient(
         private val log = KotlinLogging.logger {}
     }
 
-    private suspend fun callWithStatusCheck(request: HttpRequestData): TransportClient.Response {
+    private suspend fun callWithStatusCheck(request: HttpRequestData, rawRequest: TransportClient.Request): TransportClient.Response {
         lateinit var response: TransportClient.Response
 
         repeat(retryAttemptsInvalidStatusCount) {
-            response = call(request)
+            response = call(request, rawRequest)
             if (!isInvalidGatewayStatus(HttpStatusCode.fromValue(response.status))) return response
         }
 
@@ -48,7 +48,7 @@ class KtorTransportClient(
         return status == HttpStatusCode.BadGateway || status == HttpStatusCode.GatewayTimeout
     }
 
-    private suspend fun call(request: HttpRequestData): TransportClient.Response {
+    private suspend fun call(request: HttpRequestData, rawRequest: TransportClient.Request): TransportClient.Response {
         lateinit var exception: IOException
 
         repeat(retryAttemptsNetworkErrorCount) {
@@ -63,15 +63,16 @@ class KtorTransportClient(
 
                 val endTime = Instant.now()!!
                 val resultTime = Duration.between(startTime, endTime)!!
+                val vkResponse = toVkResponse(response, result)
 
-                logRequest(request, response, result, resultTime)
+                logRequest(rawRequest, vkResponse, result, resultTime)
                 return toVkResponse(response, result)
 
             } catch (e: IOException) {
                 val endTime = Instant.now()!!
                 val resultTime = Duration.between(startTime, endTime)
 
-                logRequest(request, null, null, resultTime)
+                logRequest(rawRequest, null, null, resultTime)
                 log.warn("Network troubles")
                 exception = e
             }
@@ -81,25 +82,35 @@ class KtorTransportClient(
     }
 
     private fun logRequest(
-        request: HttpRequestData,
-        response: HttpResponse?,
+        request: TransportClient.Request,
+        response: TransportClient.Response?,
         result: ByteArray?,
         resultTime: Duration?
     ) {
-        log.info {
-            "Request: ${request.url}"
-        }
-        log.debug {
-            """
-            URI: ${request.url}
-            Method: ${request.method}
-            Request headers: ${request.headers.entries().joinToString { "${it.key}=${it.value}" }}
-            Request: ${request.body}
-            Response time: ${resultTime ?: "-"}
-            Status: ${response?.status ?: "-"}
-            Response headers: ${response?.headers?.toMap()?.toString() ?: "-"}
-            Response: ${result?.toString(Charsets.UTF_8) ?: "-"}
-            """.trimIndent()
+        if (!log.isInfoEnabled) return
+
+        if (log.isDebugEnabled) {
+            log.debug {
+                val content = request.content
+                val contentString = when (content) {
+                    is RequestContent.Empty -> "$content"
+                    is RequestContent.Text -> "$content"
+                    is RequestContent.Form -> "$content"
+                    is RequestContent.File -> "File(key=${content.key}, fileName=${content.fileName})"
+                }
+
+                """
+                ${request.method} ${request.url}
+                Request: $contentString
+                Response time: ${resultTime ?: "-"}
+                Status: ${response?.status ?: "-"}
+                Response: ${result?.toString(Charsets.UTF_8)?.take(10000) ?: "-"}
+                """.trimIndent()
+            }
+        } else {
+            log.info {
+                "Request: ${request.method} ${request.url}"
+            }
         }
     }
 
@@ -123,12 +134,12 @@ class KtorTransportClient(
     }
 
     override suspend fun invoke(request: TransportClient.Request): TransportClient.Response {
-        return callWithStatusCheck(
-            HttpRequestBuilder().apply {
-                method = HttpMethod.parse(request.method.toString())
-                url.takeFrom(request.url)
-                body = convertBody(request.content)
-            }.build()
-        )
+        val httpRequest = HttpRequestBuilder().apply {
+            method = HttpMethod.parse(request.method.toString())
+            url.takeFrom(request.url)
+            body = convertBody(request.content)
+        }.build()
+
+        return callWithStatusCheck(httpRequest, request)
     }
 }

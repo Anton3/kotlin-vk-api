@@ -5,17 +5,13 @@ enum class HttpMethod {
 }
 
 sealed class RequestContent {
-    class Empty(val contentType: String = FORM_CONTENT_TYPE) : RequestContent()
+    data class Empty(val contentType: String = FORM_CONTENT_TYPE) : RequestContent()
 
-    class Text(val data: String, val contentType: String = FORM_CONTENT_TYPE) : RequestContent()
+    data class Text(val data: String, val contentType: String = FORM_CONTENT_TYPE) : RequestContent()
 
-    class Form(val data: Map<String, String>) : RequestContent()
+    data class Form(val data: Map<String, String>) : RequestContent()
 
-    class File(
-        val key: String,
-        val fileName: String,
-        val data: ByteArray
-    ) : RequestContent()
+    class File(val key: String, val fileName: String, val data: ByteArray) : RequestContent()
 
     companion object {
         const val FORM_CONTENT_TYPE = "application/x-www-form-urlencoded"
