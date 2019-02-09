@@ -33,7 +33,7 @@ abstract class SynchronizedDynamicRequest<out Request> : DynamicRequest<Request>
 
 class MappedDynamicRequest<Request, BaseRequest>(
     private val base: DynamicRequest<BaseRequest>,
-    private val preprocessor: (BaseRequest) -> Request
+    private val preprocessor: suspend (BaseRequest) -> Request
 ) : SynchronizedDynamicRequest<Request>() {
 
     override val isIncompleteBatch: Boolean get() = base.isIncompleteBatch
@@ -43,3 +43,7 @@ class MappedDynamicRequest<Request, BaseRequest>(
         return preprocessor(base.get())
     }
 }
+
+fun <Request, BaseRequest> DynamicRequest<BaseRequest>.map(
+    block: suspend (BaseRequest) -> Request
+): DynamicRequest<Request> = MappedDynamicRequest(this, block)

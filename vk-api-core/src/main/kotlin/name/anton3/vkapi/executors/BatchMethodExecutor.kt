@@ -46,7 +46,7 @@ private class MethodListExecutor(
 ) : DynamicExecutor<List<VkMethod<*>>, List<VkResponse<*>>> {
 
     override suspend fun execute(dynamicRequest: DynamicRequest<List<VkMethod<*>>>): List<VkResponse<*>> {
-        val response = base.executeTyped(MappedDynamicRequest(dynamicRequest) { methods ->
+        val response = base.executeTyped(dynamicRequest.map { methods ->
             methods.forEach { it.accessToken = null }  // shorter requests
             BatchExecuteMethod(methods, base.objectMapper).attach(token)
         })

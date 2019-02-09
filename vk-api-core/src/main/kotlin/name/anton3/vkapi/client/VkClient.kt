@@ -3,7 +3,7 @@ package name.anton3.vkapi.client
 import com.fasterxml.jackson.databind.ObjectMapper
 import name.anton3.vkapi.core.*
 import name.anton3.vkapi.rate.DynamicRequest
-import name.anton3.vkapi.rate.MappedDynamicRequest
+import name.anton3.vkapi.rate.map
 import name.anton3.vkapi.tokens.MethodRequirement
 import name.anton3.vkapi.tokens.Token
 import name.anton3.vkapi.tokens.attach
@@ -14,7 +14,7 @@ data class VkClient<in M: MethodRequirement>(val executor: MethodExecutor, val t
     val objectMapper: ObjectMapper get() = executor.objectMapper
 
     suspend fun <T> unchecked(dynamicRequest: DynamicRequest<VkMethod<T>>): T {
-        val withToken: DynamicRequest<VkMethod<T>> = MappedDynamicRequest(dynamicRequest) { it.attach(token) }
+        val withToken: DynamicRequest<VkMethod<T>> = dynamicRequest.map { it.attach(token) }
         return executor.executeTyped(withToken).extractSimpleResult().unwrap()
     }
 
