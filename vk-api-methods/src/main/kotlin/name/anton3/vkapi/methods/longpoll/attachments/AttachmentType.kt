@@ -12,7 +12,7 @@ enum class AttachmentType(internal var typeId: String) {
     },
 
     DOC("doc") {
-        override fun readFromJson(node: JsonNode, idx: Int) = DocAttachment(node, idx)
+        override fun readFromJson(node: JsonNode, idx: Int): Attachment = DocAttachment(node, idx)
     };
 
     open fun readFromJson(node: JsonNode, idx: Int): Attachment = Attachment(node, idx)

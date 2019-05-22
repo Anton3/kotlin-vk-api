@@ -2,28 +2,14 @@ package name.anton3.vkapi.methods.longpoll.attachments
 
 import com.fasterxml.jackson.databind.JsonNode
 
-class LinkAttachment(node: JsonNode, idx: Int) : Attachment(node, idx) {
-    internal var photo: String
-    internal var title: String
-    internal var description: String
-    internal var url: String
+class LinkAttachment internal constructor(node: JsonNode, idx: Int) : Attachment(node, idx) {
 
-    init {
-        val prop = prop(node, idx)
-
-        photo = prop("photo").textValue()
-        title = prop("title").textValue()
-        description = prop("desc").textValue()
-        url = prop("url").textValue()
-    }
+    val photo: String = prop(node, idx, "photo").textValue()
+    val title: String = prop(node, idx, "title").textValue()
+    val description: String = prop(node, idx, "desc").textValue()
+    val url: String = prop(node, idx, "url").textValue()
 
     override fun toString(): String {
-        val sb = StringBuffer("LinkAttachment{")
-        sb.append("description='").append(description).append('\'')
-        sb.append(", photo='").append(photo).append('\'')
-        sb.append(", title='").append(title).append('\'')
-        sb.append(", url='").append(url).append('\'')
-        sb.append('}')
-        return sb.toString()
+        return "LinkAttachment(type=$type, id=$id, photo=$photo, title=\"$title\", description=\"$description\", url=$url"
     }
 }

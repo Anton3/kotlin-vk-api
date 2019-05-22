@@ -41,6 +41,6 @@ data class Attachments(
             return Attachments(attachments, sourceAct, sourceMid, fromAdmin, geo, emoji)
         }
 
-        val EMPTY = Attachments(emptyList(), null, null, null, false, false)
+        val EMPTY = Attachments(emptyList(), null, null, null, geo = false, emoji = false)
     }
 }

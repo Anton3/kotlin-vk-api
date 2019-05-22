@@ -28,7 +28,7 @@ data class Flags @JsonCreator(mode = JsonCreator.Mode.DELEGATING) constructor(va
     }
 
     private fun checkSingleBit(flag: Int) {
-        require(java.lang.Integer.bitCount(flag) == 1)
+        require(Integer.bitCount(flag) == 1)
     }
 
     companion object {

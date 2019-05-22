@@ -1,4 +1,3 @@
-import org.gradle.api.tasks.bundling.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
@@ -7,18 +6,18 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.11")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.31")
     }
 }
 
 plugins {
     `java-library`
-    kotlin("jvm") version "1.3.11"
+    kotlin("jvm") version "1.3.31"
 }
 
 subprojects {
     group = "com.github.Anton3"
-    version = "0.4.0"
+    version = "0.4.1"
 
     repositories {
         mavenCentral()
@@ -41,7 +40,7 @@ subprojects {
         api("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
         api("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
 
-        val kotlinVersion = "1.3.11"
+        val kotlinVersion = "1.3.31"
         implementation(kotlin("stdlib-jdk8:$kotlinVersion"))
         implementation(kotlin("reflect:$kotlinVersion"))
 

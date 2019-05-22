@@ -2,20 +2,16 @@ package name.anton3.vkapi.client
 
 import io.ktor.client.HttpClient
 import io.ktor.client.request.HttpRequestBuilder
-import io.ktor.client.request.HttpRequestData
 import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.forms.append
 import io.ktor.client.request.forms.formData
 import io.ktor.client.request.request
-import io.ktor.client.request.takeFrom
 import io.ktor.client.response.HttpResponse
 import io.ktor.client.response.readBytes
-import io.ktor.http.ContentType
-import io.ktor.http.HttpMethod
-import io.ktor.http.HttpStatusCode
+import io.ktor.http.*
 import io.ktor.http.content.OutgoingContent
 import io.ktor.http.content.TextContent
-import io.ktor.http.takeFrom
+import kotlinx.io.charsets.Charsets
 import mu.KotlinLogging
 import name.anton3.vkapi.core.RequestContent
 import name.anton3.vkapi.core.TransportClient
@@ -33,7 +29,7 @@ class KtorTransportClient(
         private val log = KotlinLogging.logger {}
     }
 
-    private suspend fun callWithStatusCheck(request: HttpRequestData, rawRequest: TransportClient.Request): TransportClient.Response {
+    private suspend fun callWithStatusCheck(request: HttpRequestBuilder, rawRequest: TransportClient.Request): TransportClient.Response {
         lateinit var response: TransportClient.Response
 
         repeat(retryAttemptsInvalidStatusCount) {
@@ -48,7 +44,7 @@ class KtorTransportClient(
         return status == HttpStatusCode.BadGateway || status == HttpStatusCode.GatewayTimeout
     }
 
-    private suspend fun call(request: HttpRequestData, rawRequest: TransportClient.Request): TransportClient.Response {
+    private suspend fun call(request: HttpRequestBuilder, rawRequest: TransportClient.Request): TransportClient.Response {
         lateinit var exception: IOException
 
         repeat(retryAttemptsNetworkErrorCount) {
@@ -119,8 +115,8 @@ class KtorTransportClient(
     }
 
     private fun convertBody(body: RequestContent): OutgoingContent = when (body) {
-        is RequestContent.Empty -> TextContent("", ContentType.parse(body.contentType))
-        is RequestContent.Text -> TextContent(body.data, ContentType.parse(body.contentType))
+        is RequestContent.Empty -> TextContent("", ContentType.parse(body.contentType).withCharset(Charsets.UTF_8))
+        is RequestContent.Text -> TextContent(body.data, ContentType.parse(body.contentType).withCharset(Charsets.UTF_8))
         is RequestContent.Form -> MultiPartFormDataContent(formData {
             for ((key, value) in body.data) {
                 append(key, value)
@@ -138,7 +134,7 @@ class KtorTransportClient(
             method = HttpMethod.parse(request.method.toString())
             url.takeFrom(request.url)
             body = convertBody(request.content)
-        }.build()
+        }
 
         return callWithStatusCheck(httpRequest, request)
     }

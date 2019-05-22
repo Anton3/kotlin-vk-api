@@ -9,6 +9,7 @@
 
 .gradle
 build
+*/out
 /gradle.properties
 
 /generator/log

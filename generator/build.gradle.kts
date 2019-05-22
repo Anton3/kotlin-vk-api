@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 dependencies {
     // For naming conversions
     implementation("com.google.guava:guava:11.0.2")
