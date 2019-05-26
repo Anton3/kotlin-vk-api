@@ -25,7 +25,7 @@ interface VkClient {
     val objectMapper: ObjectMapper get() = executor.objectMapper
 }
 
-inline class UncheckedClient(override val executor: MethodExecutor) : VkClient {
+class UncheckedClient(override val executor: MethodExecutor) : VkClient {
     override val unchecked: UncheckedClient get() = this
 
     suspend inline operator fun <T> invoke(dynamicMethod: DynamicRequest<VkMethod<T>>): T {
@@ -38,7 +38,7 @@ inline class UncheckedClient(override val executor: MethodExecutor) : VkClient {
 }
 
 
-inline class UserClient(override val unchecked: UncheckedClient) : VkClient {
+class UserClient(override val unchecked: UncheckedClient) : VkClient {
     suspend inline operator fun <T, M> invoke(dynamicMethod: DynamicRequest<M>): T
             where M : VkMethod<T>, M : UserMethod = unchecked(dynamicMethod)
 
@@ -50,7 +50,7 @@ inline class UserClient(override val unchecked: UncheckedClient) : VkClient {
     inline val userGroupService: UserGroupServiceClient get() = UserGroupServiceClient(unchecked)
 }
 
-inline class GroupClient(override val unchecked: UncheckedClient) : VkClient {
+class GroupClient(override val unchecked: UncheckedClient) : VkClient {
     suspend inline operator fun <T, M> invoke(dynamicMethod: DynamicRequest<M>): T
             where M : VkMethod<T>, M : GroupMethod = unchecked(dynamicMethod)
 
@@ -61,7 +61,7 @@ inline class GroupClient(override val unchecked: UncheckedClient) : VkClient {
     inline val userGroupService: UserGroupServiceClient get() = UserGroupServiceClient(unchecked)
 }
 
-inline class ServiceClient(override val unchecked: UncheckedClient) : VkClient {
+class ServiceClient(override val unchecked: UncheckedClient) : VkClient {
     suspend inline operator fun <T, M> invoke(dynamicMethod: DynamicRequest<VkMethod<T>>): T
             where M : VkMethod<T>, M : ServiceMethod = unchecked(dynamicMethod)
 
@@ -72,7 +72,7 @@ inline class ServiceClient(override val unchecked: UncheckedClient) : VkClient {
     inline val userGroupService: UserGroupServiceClient get() = UserGroupServiceClient(unchecked)
 }
 
-inline class UserGroupClient(override val unchecked: UncheckedClient) : VkClient {
+class UserGroupClient(override val unchecked: UncheckedClient) : VkClient {
     suspend inline operator fun <T, M> invoke(dynamicMethod: DynamicRequest<M>): T
             where M : VkMethod<T>, M : UserGroupMethod = unchecked(dynamicMethod)
 
@@ -82,7 +82,7 @@ inline class UserGroupClient(override val unchecked: UncheckedClient) : VkClient
     inline val userGroupService: UserGroupServiceClient get() = UserGroupServiceClient(unchecked)
 }
 
-inline class UserServiceClient(override val unchecked: UncheckedClient) : VkClient {
+class UserServiceClient(override val unchecked: UncheckedClient) : VkClient {
     suspend inline operator fun <T, M> invoke(dynamicMethod: DynamicRequest<M>): T
             where M : VkMethod<T>, M : UserServiceMethod = unchecked(dynamicMethod)
 
@@ -92,7 +92,7 @@ inline class UserServiceClient(override val unchecked: UncheckedClient) : VkClie
     inline val userGroupService: UserGroupServiceClient get() = UserGroupServiceClient(unchecked)
 }
 
-inline class UserGroupServiceClient(override val unchecked: UncheckedClient) : VkClient {
+class UserGroupServiceClient(override val unchecked: UncheckedClient) : VkClient {
     suspend inline operator fun <T, M> invoke(dynamicMethod: DynamicRequest<M>): T
             where M : VkMethod<T>, M : UserGroupServiceMethod = unchecked(dynamicMethod)
 
@@ -100,9 +100,9 @@ inline class UserGroupServiceClient(override val unchecked: UncheckedClient) : V
             where M : VkMethod<T>, M : UserGroupServiceMethod = unchecked(method)
 }
 
-fun UserClient(executor: MethodExecutor): UserClient = UserClient(UncheckedClient(executor))
-fun GroupClient(executor: MethodExecutor): GroupClient = GroupClient(UncheckedClient(executor))
-fun ServiceClient(executor: MethodExecutor): ServiceClient = ServiceClient(UncheckedClient(executor))
-fun UserGroupClient(executor: MethodExecutor): UserGroupClient = UserGroupClient(UncheckedClient(executor))
-fun UserServiceClient(executor: MethodExecutor): UserServiceClient = UserServiceClient(UncheckedClient(executor))
-fun UserGroupServiceClient(executor: MethodExecutor): UserGroupServiceClient = UserGroupServiceClient(UncheckedClient(executor))
+inline fun UserClient(executor: MethodExecutor): UserClient = UserClient(UncheckedClient(executor))
+inline fun GroupClient(executor: MethodExecutor): GroupClient = GroupClient(UncheckedClient(executor))
+inline fun ServiceClient(executor: MethodExecutor): ServiceClient = ServiceClient(UncheckedClient(executor))
+inline fun UserGroupClient(executor: MethodExecutor): UserGroupClient = UserGroupClient(UncheckedClient(executor))
+inline fun UserServiceClient(executor: MethodExecutor): UserServiceClient = UserServiceClient(UncheckedClient(executor))
+inline fun UserGroupServiceClient(executor: MethodExecutor): UserGroupServiceClient = UserGroupServiceClient(UncheckedClient(executor))
