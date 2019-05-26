@@ -4,20 +4,18 @@ import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.ReceiveChannel
-import name.anton3.vkapi.client.VkClient
-import name.anton3.vkapi.client.invoke
+import name.anton3.vkapi.client.GroupClient
+import name.anton3.vkapi.client.UserClient
+import name.anton3.vkapi.client.UserGroupClient
 import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.generated.messages.methods.MessagesGetLongPollServer
 import name.anton3.vkapi.generated.messages.objects.LongpollParams
 import name.anton3.vkapi.methods.longpoll.events.LongPollEvent
-import name.anton3.vkapi.tokens.GroupMethod
-import name.anton3.vkapi.tokens.UserGroupMethod
-import name.anton3.vkapi.tokens.UserMethod
 import kotlin.coroutines.CoroutineContext
 
 class UserLongPollEventSource(
     longPollContext: CoroutineContext,
-    private val api: VkClient<UserGroupMethod>,
+    private val api: UserGroupClient,
     private val groupId: Int?,
     httpClient: TransportClient,
     private val timeout: Int
@@ -43,23 +41,23 @@ class UserLongPollEventSource(
 }
 
 fun CoroutineScope.messageLongPollEvents(
-    api: VkClient<GroupMethod>,
+    api: GroupClient,
     httpClient: TransportClient = api.httpClient,
     timeout: Int
 ): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, api, null, httpClient, timeout).produceEvents(this)
+    UserLongPollEventSource(Dispatchers.IO, api.userGroup, null, httpClient, timeout).produceEvents(this)
 
 fun CoroutineScope.messageLongPollEventsAsAdmin(
-    api: VkClient<UserMethod>,
+    api: UserClient,
     groupId: Int,
     httpClient: TransportClient = api.httpClient,
     timeout: Int
 ): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, api, groupId, httpClient, timeout).produceEvents(this)
+    UserLongPollEventSource(Dispatchers.IO, api.userGroup, groupId, httpClient, timeout).produceEvents(this)
 
 fun CoroutineScope.messageLongPollEventsForUser(
-    api: VkClient<UserMethod>,
+    api: UserClient,
     httpClient: TransportClient = api.httpClient,
     timeout: Int
 ): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, api, null, httpClient, timeout).produceEvents(this)
+    UserLongPollEventSource(Dispatchers.IO, api.userGroup, null, httpClient, timeout).produceEvents(this)

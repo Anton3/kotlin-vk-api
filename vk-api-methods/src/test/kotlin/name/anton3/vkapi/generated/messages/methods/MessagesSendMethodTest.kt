@@ -2,7 +2,6 @@ package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.readValue
 import kotlinx.coroutines.runBlocking
-import name.anton3.vkapi.client.invoke
 import name.anton3.vkapi.generated.messages.objects.KeyboardImpl
 import name.anton3.vkapi.utils.groupApi
 import name.anton3.vkapi.utils.groupId

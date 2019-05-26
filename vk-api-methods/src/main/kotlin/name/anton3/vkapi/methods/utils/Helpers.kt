@@ -1,7 +1,5 @@
 package name.anton3.vkapi.methods.utils
 
-import name.anton3.vkapi.client.VkClient
-import name.anton3.vkapi.client.invoke
 import name.anton3.vkapi.generated.audio.objects.Audio
 import name.anton3.vkapi.generated.docs.objects.Doc
 import name.anton3.vkapi.generated.market.objects.MarketItem
@@ -12,7 +10,6 @@ import name.anton3.vkapi.generated.polls.objects.Poll
 import name.anton3.vkapi.generated.video.objects.Video
 import name.anton3.vkapi.generated.video.objects.VideoFull
 import name.anton3.vkapi.generated.wall.objects.Wallpost
-import name.anton3.vkapi.tokens.UserGroupMethod
 
 private fun attachmentId(type: String, id: Int, ownerId: Int, accessKey: String? = null): String =
     "$type${ownerId}_$id${accessKey?.let { "_$it" }.orEmpty()}"
@@ -43,12 +40,6 @@ fun Poll.fullId() = attachmentId("", id, ownerId)
 
 fun AudioMessage.fullId() = attachmentId("", id, ownerId)
 
-suspend fun VkClient<UserGroupMethod>.sendTypings(groupId: Int, peerId: Int) {
-    this(
-        MessagesSetActivity(
-            peerId = peerId,
-            type = "typing",
-            groupId = groupId
-        )
-    )
+fun typing(groupId: Int?, peerId: Int): MessagesSetActivity {
+    return MessagesSetActivity(peerId = peerId, type = "typing", groupId = groupId)
 }

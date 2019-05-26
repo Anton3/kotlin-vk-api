@@ -2,15 +2,11 @@ package name.anton3.vkapi.methods.longpoll
 
 import com.fasterxml.jackson.module.kotlin.readValue
 import kotlinx.coroutines.runBlocking
-import name.anton3.vkapi.client.invoke
 import name.anton3.vkapi.generated.messages.methods.MessagesSend
 import name.anton3.vkapi.generated.messages.objects.*
 import name.anton3.vkapi.generated.photos.objects.Photo
 import name.anton3.vkapi.methods.callback.MessageNew
-import name.anton3.vkapi.utils.executor
-import name.anton3.vkapi.utils.groupApi
-import name.anton3.vkapi.utils.peerId
-import name.anton3.vkapi.utils.timeout
+import name.anton3.vkapi.utils.*
 import org.junit.Assert.assertTrue
 import org.junit.Ignore
 import org.junit.Test
@@ -20,7 +16,7 @@ class GroupLongPollEventSourceTest {
     @Test
     @Ignore
     fun smokeTest1() = runBlocking {
-        val source = groupLongPollEvents(groupApi, timeout = timeout)
+        val source = groupLongPollEvents(groupApi.userGroup, groupId, timeout = timeout)
 
         for (event in source) {
             println(event.toString())

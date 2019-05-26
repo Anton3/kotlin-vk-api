@@ -1,24 +1,27 @@
 package name.anton3.vkapi.executors
 
-import name.anton3.vkapi.core.*
-import name.anton3.vkapi.methods.execute.BatchExecuteMethod
-import name.anton3.vkapi.methods.execute.parseBatchResponse
-import name.anton3.vkapi.rate.*
-import name.anton3.vkapi.tokens.Token
-import name.anton3.vkapi.tokens.UserGroupMethod
-import name.anton3.vkapi.tokens.attach
+import name.anton3.vkapi.core.MethodExecutor
+import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.core.wrapInSimpleResponse
+import name.anton3.vkapi.methods.execute.batch
+import name.anton3.vkapi.rate.AsyncCloseable
+import name.anton3.vkapi.rate.BatchExecutor
+import name.anton3.vkapi.rate.DynamicExecutor
+import name.anton3.vkapi.rate.DynamicRequest
 import name.anton3.vkapi.vktypes.VkResponse
 import java.time.Duration
 import kotlin.coroutines.CoroutineContext
 
+/**
+ * Note: BatchMethodExecutor does not add token to Execute requests. Add a TokenMethodExecutor under it
+ */
 class BatchMethodExecutor(
     private val base: MethodExecutor,
     coroutineContext: CoroutineContext,
-    token: Token<UserGroupMethod>,
     flushDelay: Duration
 ) : MethodExecutor by base, AsyncCloseable {
 
-    private val methodListExecutor = MethodListExecutor(base, token)
+    private val methodListExecutor = MethodListExecutor(base)
 
     private val batcher: BatchExecutor<VkMethod<*>, VkResponse<*>> =
         BatchExecutor(methodListExecutor, coroutineContext, BATCH_EXECUTE_LIMIT, flushDelay, false)
@@ -41,15 +44,10 @@ class BatchMethodExecutor(
 }
 
 private class MethodListExecutor(
-    private val base: MethodExecutor,
-    private val token: Token<UserGroupMethod>
+    private val base: MethodExecutor
 ) : DynamicExecutor<List<VkMethod<*>>, List<VkResponse<*>>> {
 
     override suspend fun execute(dynamicRequest: DynamicRequest<List<VkMethod<*>>>): List<VkResponse<*>> {
-        val response = base.executeTyped(dynamicRequest.map { methods ->
-            methods.forEach { it.accessToken = null }  // shorter requests
-            BatchExecuteMethod(methods, base.objectMapper).attach(token)
-        })
-        return response.extractExecuteResult().unwrap().parseBatchResponse().map { it.wrapInSimpleResponse() }
+        return base.batch(dynamicRequest).map { it.wrapInSimpleResponse() }
     }
 }

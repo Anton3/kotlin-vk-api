@@ -1,7 +1,6 @@
 package name.anton3.vkapi.generated.wall.methods
 
 import kotlinx.coroutines.runBlocking
-import name.anton3.vkapi.client.invoke
 import name.anton3.vkapi.utils.userApi
 import org.junit.Test
 

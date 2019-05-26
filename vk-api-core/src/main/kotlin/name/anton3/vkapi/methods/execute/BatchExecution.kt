@@ -1,12 +1,17 @@
 package name.anton3.vkapi.methods.execute
 
 import name.anton3.vkapi.core.*
-import name.anton3.vkapi.tokens.Token
-import name.anton3.vkapi.tokens.attach
+import name.anton3.vkapi.rate.DynamicRequest
+import name.anton3.vkapi.rate.map
 import java.io.IOException
 
-suspend fun MethodExecutor.batchUnchecked(methods: List<VkMethod<*>>, token: Token<*>): List<VkResult<*>> {
-    val batchMethod = BatchExecuteMethod(methods, objectMapper).attach(token)
+suspend fun MethodExecutor.batch(methods: List<VkMethod<*>>): List<VkResult<*>> {
+    val batchMethod = BatchExecuteMethod(methods, objectMapper)
+    return executeTyped(batchMethod).extractExecuteResult().unwrap().parseBatchResponse()
+}
+
+suspend fun MethodExecutor.batch(dynamicMethods: DynamicRequest<List<VkMethod<*>>>): List<VkResult<*>> {
+    val batchMethod = dynamicMethods.map { BatchExecuteMethod(it, objectMapper) }
     return executeTyped(batchMethod).extractExecuteResult().unwrap().parseBatchResponse()
 }
 
@@ -21,7 +26,7 @@ internal fun ExecuteResponse<BatchExecuteResult>.parseBatchResponse(): List<VkRe
             VkResult.Success(result)
         } else {
             if (errorIndex >= errors.size) throw IOException("Some error descriptions are missing")
-            VkResult.Failure<Any?>(errors[errorIndex]).also { ++errorIndex }
+            VkResult.Failure<Any?>(errors[errorIndex++])
         }
     }
 }

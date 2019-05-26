@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.Anton3.kotlin-vk-api:vk-api-simple:0.4.1")
+    implementation("com.github.Anton3.kotlin-vk-api:vk-api-simple:0.5.0")
 }
 ```
 
@@ -38,15 +38,14 @@ val clientFactory: VkClientFactory = ktorClientFactory(httpClient)
 Создайте токен нужного типа и создайте ваш клиент ВК с его помощью:
 
 ```kotlin
-import name.anton3.vkapi.client.VkClient
-import name.anton3.vkapi.tokens.GroupMethod
+import name.anton3.vkapi.client.GroupClient
 import name.anton3.vkapi.tokens.GroupToken
 
-val api: VkClient<GroupMethod> = clientFactory.group(GroupToken(accessToken, id))
+val api: GroupClient = clientFactory.group(GroupToken(accessToken, id))
 ```
 
-Клиент учитывает ограничения ВК на запросы к API и объединяет несколько запросов
-в один через Execute, когда это возможно. Тип клиента параметризован типом прав
+> **Замечание.** Клиент учитывает ограничения ВК на запросы к API и объединяет несколько запросов
+в один через Execute, когда это возможно. Тип клиента зависит от прав
 на выполнение методов. Выполнение метода на клиенте с несовместимым токеном
 порождает ошибку на этапе компиляции.
 
@@ -54,7 +53,6 @@ val api: VkClient<GroupMethod> = clientFactory.group(GroupToken(accessToken, id)
 же лимит запросов ВК:
 
 ```kotlin
-import name.anton3.vkapi.client.invoke
 import name.anton3.vkapi.generated.wall.methods.WallGet
 import name.anton3.vkapi.generated.wall.objects.WallpostFull
 
@@ -68,7 +66,7 @@ println(response.text)
 - Ошибки API ВК: `VkAPiException`
 - Ошибки соединения: `IOException`
 - Ошибки парсинга JSON: `JsonProcessingException`
-- Другие ошибки: `IOException`
+- Другие ошибки при запросе и парсинге ответа: `IOException`
 
 Где-то на высоком уровне их следует перехватывать и обрабатывать:
 
@@ -84,19 +82,18 @@ while (true) {
 }
 ```
 
-Чтобы «проглотить» ожидаемую ошибку при выполнении какого-то метода, можно
-воспользоваться `swallowing`:
+Чтобы «проглотить» ошибки при выполнении какого-то метода, можно
+воспользоваться `swallow`:
 
 ```kotlin
-import name.anton3.vkapi.client.swallowing
+import name.anton3.vkapi.client.swallow
 
-val response: WallpostFull? = api.swallowing(WallGet(domain = "departureMsk"))
+val response: WallpostFull? = swallow { api(WallGet(domain = "departureMsk")) }
 println(response?.text)
 ```
 
 Так как запросы к ВК отправляются не сразу при поступлении, а с учётом лимитов,
-то при завершении работы хорошая идея — подождать, пока все запросы
-выполнятся:
+то при завершении работы стоит подождать, пока все запросы выполнятся:
 
 ```kotlin
 clientFactory.closeAndJoin()

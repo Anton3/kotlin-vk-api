@@ -1,13 +1,10 @@
 package name.anton3.vkapi.methods.execute
 
 import kotlinx.coroutines.runBlocking
-import name.anton3.vkapi.core.VkResult
 import name.anton3.vkapi.generated.wall.methods.WallGet
-import name.anton3.vkapi.generated.wall.objects.WallpostFull
 import name.anton3.vkapi.utils.groupApi
 import name.anton3.vkapi.utils.userApi
 import name.anton3.vkapi.vktypes.VkApiException
-import name.anton3.vkapi.vktypes.VkList
 import org.junit.Assert.assertEquals
 import org.junit.Assert.fail
 import org.junit.Test
@@ -38,11 +35,7 @@ class ExecuteManyMethodsTest {
             )
         }
 
-        val rawResult = groupApi.batchUnchecked(methods)
-
-        @Suppress("UNCHECKED_CAST")
-        val result = rawResult as List<VkResult<VkList<WallpostFull>>>
-
+        val result = groupApi.unchecked.batch(methods)
         println(result.joinToString("\n"))
         assertEquals(result.size, 25)
     }

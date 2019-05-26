@@ -4,20 +4,16 @@ import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.ReceiveChannel
-import name.anton3.vkapi.client.VkClient
-import name.anton3.vkapi.client.invoke
+import name.anton3.vkapi.client.UserGroupClient
 import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.generated.groups.methods.GroupsGetLongPollServer
 import name.anton3.vkapi.generated.groups.objects.LongPollServer
 import name.anton3.vkapi.methods.callback.CallbackEvent
-import name.anton3.vkapi.tokens.GroupMethod
-import name.anton3.vkapi.tokens.UserGroupMethod
-import name.anton3.vkapi.tokens.UserMethod
 import kotlin.coroutines.CoroutineContext
 
 class GroupLongPollEventSource(
     longPollContext: CoroutineContext,
-    private val api: VkClient<UserGroupMethod>,
+    private val api: UserGroupClient,
     private val groupId: Int,
     httpClient: TransportClient,
     private val timeout: Int
@@ -41,16 +37,9 @@ class GroupLongPollEventSource(
 }
 
 fun CoroutineScope.groupLongPollEvents(
-    api: VkClient<GroupMethod>,
-    httpClient: TransportClient = api.httpClient,
-    timeout: Int
-): ReceiveChannel<CallbackEvent<*>> =
-    GroupLongPollEventSource(Dispatchers.IO, api, api.token.id, httpClient, timeout).produceEvents(this)
-
-fun CoroutineScope.groupLongPollEventsAsAdmin(
-    api: VkClient<UserMethod>,
+    api: UserGroupClient,
     groupId: Int,
-    httpClient: TransportClient = api.httpClient,
-    timeout: Int
+    timeout: Int,
+    httpClient: TransportClient = api.httpClient
 ): ReceiveChannel<CallbackEvent<*>> =
     GroupLongPollEventSource(Dispatchers.IO, api, groupId, httpClient, timeout).produceEvents(this)

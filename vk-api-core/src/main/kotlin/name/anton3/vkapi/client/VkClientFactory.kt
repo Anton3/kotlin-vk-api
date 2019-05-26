@@ -8,8 +8,11 @@ import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.executors.BatchMethodExecutor
 import name.anton3.vkapi.executors.SimpleMethodExecutor
 import name.anton3.vkapi.executors.ThrottledMethodExecutor
+import name.anton3.vkapi.executors.TokenMethodExecutor
 import name.anton3.vkapi.rate.AsyncCloseable
-import name.anton3.vkapi.tokens.*
+import name.anton3.vkapi.tokens.GroupToken
+import name.anton3.vkapi.tokens.ServiceToken
+import name.anton3.vkapi.tokens.UserToken
 import java.time.Duration
 import kotlin.coroutines.CoroutineContext
 
@@ -28,12 +31,13 @@ class VkClientFactory(
         token: UserToken,
         flushDelayMillis: Long = 500L,
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
-    ): VkClient<UserMethod> {
-        val throttled = ThrottledMethodExecutor(baseExecutor, context, 3)
-        val batch = BatchMethodExecutor(throttled, context, token, Duration.ofMillis(flushDelayMillis))
+    ): UserClient {
+        val withToken = TokenMethodExecutor(baseExecutor, token)
+        val throttled = ThrottledMethodExecutor(withToken, context, 3)
+        val batch = BatchMethodExecutor(throttled, context, Duration.ofMillis(flushDelayMillis))
         closeableExecutors.add(throttled)
         closeableExecutors.add(batch)
-        return executorWrapper(batch).attach(token)
+        return UserClient(executorWrapper(batch))
     }
 
     @Synchronized
@@ -41,12 +45,13 @@ class VkClientFactory(
         token: GroupToken,
         flushDelayMillis: Long = 60L,
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
-    ): VkClient<GroupMethod> {
-        val throttled = ThrottledMethodExecutor(baseExecutor, context, 20)
-        val batch = BatchMethodExecutor(throttled, context, token, Duration.ofMillis(flushDelayMillis))
+    ): GroupClient {
+        val withToken = TokenMethodExecutor(baseExecutor, token)
+        val throttled = ThrottledMethodExecutor(withToken, context, 20)
+        val batch = BatchMethodExecutor(throttled, context, Duration.ofMillis(flushDelayMillis))
         closeableExecutors.add(throttled)
         closeableExecutors.add(batch)
-        return executorWrapper(batch).attach(token)
+        return GroupClient(executorWrapper(batch))
     }
 
     @Synchronized
@@ -54,23 +59,25 @@ class VkClientFactory(
         token: UserToken,
         serviceType: AdServiceType = AdServiceType.NORMAL,
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
-    ): VkClient<UserMethod> {
-        val throttled1 = ThrottledMethodExecutor(baseExecutor, context, 2)
+    ): UserClient {
+        val withToken = TokenMethodExecutor(baseExecutor, token)
+        val throttled1 = ThrottledMethodExecutor(withToken, context, 2)
         val throttled2 = ThrottledMethodExecutor(throttled1, context, serviceType.requestsPerHour, Duration.ofHours(1))
         closeableExecutors.add(throttled1)
         closeableExecutors.add(throttled2)
-        return executorWrapper(throttled2).attach(token)
+        return UserClient(executorWrapper(throttled2))
     }
 
     @Synchronized
-    fun secureAndOpen(
+    fun secure(
         token: ServiceToken,
         appPopularity: SecureAppPopularity = SecureAppPopularity.SMALL,
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
-    ): VkClient<ServiceMethod> {
-        val throttled = ThrottledMethodExecutor(baseExecutor, context, appPopularity.requestsPerSecond)
+    ): ServiceClient {
+        val withToken = TokenMethodExecutor(baseExecutor, token)
+        val throttled = ThrottledMethodExecutor(withToken, context, appPopularity.requestsPerSecond)
         closeableExecutors.add(throttled)
-        return executorWrapper(throttled).attach(token)
+        return ServiceClient(executorWrapper(throttled))
     }
 
     @Synchronized

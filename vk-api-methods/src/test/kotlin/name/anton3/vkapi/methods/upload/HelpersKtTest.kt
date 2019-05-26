@@ -10,14 +10,14 @@ class HelpersKtTest {
     @Test
     fun uploadPhotoToMessagesTest1() = runBlocking {
         val testPicture = readResource("testPicture.jpg")
-        val result = groupApi.uploadMessagePhoto(5518788, testPicture)
+        val result = groupApi.userGroup.uploadMessagePhoto(5518788, testPicture)
         println(result.toAttachmentId())
     }
 
     @Test
     fun uploadDocToMessagesTest1() = runBlocking {
         val testPicture = readResource("testPicture.jpg")
-        val result = groupApi.uploadMessageDocument(5518788, "testPicture.jpg", testPicture)
+        val result = groupApi.userGroup.uploadMessageDocument(5518788, "testPicture.jpg", testPicture)
         println(result.toAttachmentId())
     }
 }

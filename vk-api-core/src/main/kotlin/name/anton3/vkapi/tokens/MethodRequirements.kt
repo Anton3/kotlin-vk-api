@@ -8,24 +8,18 @@ interface MethodRequirement
 
 
 /**
- * The method is be available either with a "user" or "group" access token (exact requirement is unknown)
- */
-interface UserOrGroupMethod : MethodRequirement
-
-
-/**
  * The method is available at least for "user"
  * Or:
  * This token is a "user" token
  */
-interface UserMethod : UserOrGroupMethod
+interface UserMethod : MethodRequirement
 
 /**
  * The method is available at least for "group"
  * Or:
  * This token is a "group" token
  */
-interface GroupMethod : UserOrGroupMethod
+interface GroupMethod : MethodRequirement
 
 /**
  * The method is available at least for "service"
