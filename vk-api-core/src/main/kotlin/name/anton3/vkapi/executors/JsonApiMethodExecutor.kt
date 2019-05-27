@@ -7,7 +7,7 @@ import name.anton3.vkapi.json.serializeMethod
 import name.anton3.vkapi.rate.DynamicRequest
 import name.anton3.vkapi.vktypes.VkResponse
 
-data class SimpleMethodExecutor(
+data class JsonApiMethodExecutor(
     override val transportClient: TransportClient,
     override val objectMapper: ObjectMapper
 ) : MethodExecutor {

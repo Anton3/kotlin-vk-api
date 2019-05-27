@@ -6,7 +6,7 @@ import kotlinx.coroutines.Job
 import name.anton3.vkapi.core.MethodExecutor
 import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.executors.BatchMethodExecutor
-import name.anton3.vkapi.executors.SimpleMethodExecutor
+import name.anton3.vkapi.executors.JsonApiMethodExecutor
 import name.anton3.vkapi.executors.ThrottledMethodExecutor
 import name.anton3.vkapi.executors.TokenMethodExecutor
 import name.anton3.vkapi.rate.AsyncCloseable
@@ -23,7 +23,7 @@ class VkClientFactory(
 ) {
     private val job = Job(parentContext[Job])
     private val context = parentContext + job
-    private val baseExecutor: MethodExecutor = SimpleMethodExecutor(transportClient, objectMapper)
+    private val baseExecutor: MethodExecutor = JsonApiMethodExecutor(transportClient, objectMapper)
     private val closeableExecutors: MutableList<AsyncCloseable> = mutableListOf()
 
     @Synchronized

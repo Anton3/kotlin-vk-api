@@ -5,7 +5,7 @@ import io.ktor.client.engine.apache.Apache
 import name.anton3.vkapi.client.GroupClient
 import name.anton3.vkapi.client.KtorTransportClient
 import name.anton3.vkapi.client.UserClient
-import name.anton3.vkapi.executors.SimpleMethodExecutor
+import name.anton3.vkapi.executors.JsonApiMethodExecutor
 import name.anton3.vkapi.executors.TokenMethodExecutor
 import name.anton3.vkapi.json.vkObjectMapper
 import name.anton3.vkapi.tokens.GroupToken
@@ -49,7 +49,7 @@ val httpClient = KtorTransportClient(HttpClient(Apache) {
         socketTimeout = 10_000
     }
 })
-val executor = SimpleMethodExecutor(httpClient, vkObjectMapper())
+val executor = JsonApiMethodExecutor(httpClient, vkObjectMapper())
 val groupToken = GroupToken(groupAccessToken, groupId)
 val userToken = UserToken(userAccessToken, groupId)
 val groupApi = GroupClient(TokenMethodExecutor(executor, groupToken))
