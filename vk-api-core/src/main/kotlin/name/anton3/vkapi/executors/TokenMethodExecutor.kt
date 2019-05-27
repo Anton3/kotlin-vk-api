@@ -1,6 +1,8 @@
 package name.anton3.vkapi.executors
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import name.anton3.vkapi.core.MethodExecutor
+import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.core.VkMethod
 import name.anton3.vkapi.rate.DynamicRequest
 import name.anton3.vkapi.rate.map
@@ -11,9 +13,12 @@ import name.anton3.vkapi.vktypes.VkResponse
 class TokenMethodExecutor(
     private val base: MethodExecutor,
     private val token: Token<*>
-) : MethodExecutor by base {
+) : MethodExecutor {
 
     override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*>>): VkResponse<*> {
         return base.execute(dynamicRequest.map { it.attach(token) })
     }
+
+    override val httpClient: TransportClient get() = base.httpClient
+    override val objectMapper: ObjectMapper get() = base.objectMapper
 }

@@ -1,6 +1,8 @@
 package name.anton3.vkapi.executors
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import name.anton3.vkapi.core.MethodExecutor
+import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.core.VkMethod
 import name.anton3.vkapi.core.wrapInSimpleResponse
 import name.anton3.vkapi.methods.execute.batch
@@ -19,7 +21,7 @@ class BatchMethodExecutor(
     private val base: MethodExecutor,
     coroutineContext: CoroutineContext,
     flushDelay: Duration
-) : MethodExecutor by base, AsyncCloseable {
+) : MethodExecutor, AsyncCloseable {
 
     private val methodListExecutor = MethodListExecutor(base)
 
@@ -29,6 +31,9 @@ class BatchMethodExecutor(
     override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*>>): VkResponse<*> {
         return (if (dynamicRequest.canBeBatched) batcher else base).execute(dynamicRequest)
     }
+
+    override val httpClient: TransportClient get() = base.httpClient
+    override val objectMapper: ObjectMapper get() = base.objectMapper
 
     override fun close() {
         batcher.close()
