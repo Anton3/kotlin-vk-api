@@ -17,13 +17,13 @@ import java.time.Duration
 import kotlin.coroutines.CoroutineContext
 
 class VkClientFactory(
-    httpClient: TransportClient,
+    transportClient: TransportClient,
     objectMapper: ObjectMapper,
     parentContext: CoroutineContext = Dispatchers.Default
 ) {
     private val job = Job(parentContext[Job])
     private val context = parentContext + job
-    private val baseExecutor: MethodExecutor = SimpleMethodExecutor(httpClient, objectMapper)
+    private val baseExecutor: MethodExecutor = SimpleMethodExecutor(transportClient, objectMapper)
     private val closeableExecutors: MutableList<AsyncCloseable> = mutableListOf()
 
     @Synchronized

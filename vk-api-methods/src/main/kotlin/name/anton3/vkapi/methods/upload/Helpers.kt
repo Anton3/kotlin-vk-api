@@ -21,7 +21,7 @@ data class UploadPhotoResponse(val server: Int, val hash: String, val photo: Str
 
 suspend fun UserGroupClient.uploadMessagePhoto(peerId: Int, byteArray: ByteArray): Photo {
     val uploadUrl = this(PhotosGetMessagesUploadServer(peerId)).uploadUrl
-    val response = httpClient.post(uploadUrl, RequestContent.File("photo", "someName.jpg", byteArray))
+    val response = transportClient.post(uploadUrl, RequestContent.File("photo", "someName.jpg", byteArray))
 
     val uploadPhotoResponse: UploadPhotoResponse =
         objectMapper.readValue(response.data.toString(Charset.forName("UTF-8")))
@@ -45,7 +45,7 @@ suspend fun UserGroupClient.uploadMessageDocument(
 ): Doc {
     val uploadUrl = this(DocsGetMessagesUploadServer(GetMessagesUploadServerType.DOC, peerId)).uploadUrl
 
-    val response = httpClient.post(uploadUrl, RequestContent.File("file", fileName, byteArray))
+    val response = transportClient.post(uploadUrl, RequestContent.File("file", fileName, byteArray))
     val uploadDocumentResponse: UploadDocumentResponse =
         objectMapper.readValue(response.data.toString(Charset.forName("UTF-8")))
 
@@ -67,7 +67,7 @@ suspend fun UserClient.uploadChatPhoto(
 ): SetChatPhotoResponse {
     val uploadUrl = this(PhotosGetChatUploadServer(chatId = chatId)).uploadUrl
 
-    val response = httpClient.post(uploadUrl, RequestContent.File("file", fileName, byteArray))
+    val response = transportClient.post(uploadUrl, RequestContent.File("file", fileName, byteArray))
     val uploadPhotoResponse: UploadChatPhotoResponse =
         objectMapper.readValue(response.data.toString(Charset.forName("UTF-8")))
 

@@ -21,7 +21,7 @@ private val log = KotlinLogging.logger {}
 abstract class AbstractLongPollEventSource<EventType, IteratorType>(
     private val longPollContext: CoroutineContext,
     protected val objectMapper: ObjectMapper,
-    protected val httpClient: TransportClient,
+    protected val transportClient: TransportClient,
     private val responseType: TypeReference<LongPollResponse<EventType>>
 ) {
     private val shutdown = AtomicBoolean(false)
@@ -34,7 +34,7 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
 
     suspend fun getEvents(iterator: IteratorType): Pair<IteratorType, List<EventType>> {
         val vkResponse = withContext(longPollContext) {
-            httpClient.get(iteratorToUrl(iterator))
+            transportClient.get(iteratorToUrl(iterator))
         }
 
         val vkJson = vkResponse.data.toString(Charset.forName("UTF-8"))

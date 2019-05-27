@@ -21,7 +21,7 @@ interface VkClient {
     val unchecked: UncheckedClient
 
     val executor: MethodExecutor get() = unchecked.executor
-    val httpClient: TransportClient get() = executor.httpClient
+    val transportClient: TransportClient get() = executor.transportClient
     val objectMapper: ObjectMapper get() = executor.objectMapper
 }
 

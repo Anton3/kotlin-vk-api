@@ -25,7 +25,7 @@ class ThrottledMethodExecutor(
         return throttler.execute(dynamicRequest)
     }
 
-    override val httpClient: TransportClient get() = base.httpClient
+    override val transportClient: TransportClient get() = base.transportClient
     override val objectMapper: ObjectMapper get() = base.objectMapper
 
     override fun close() {

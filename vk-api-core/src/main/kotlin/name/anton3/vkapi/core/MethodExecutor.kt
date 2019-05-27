@@ -7,7 +7,7 @@ import name.anton3.vkapi.rate.SimpleDynamicRequest
 import name.anton3.vkapi.vktypes.VkResponse
 
 interface MethodExecutor : DynamicExecutor<VkMethod<*>, VkResponse<*>> {
-    val httpClient: TransportClient
+    val transportClient: TransportClient
     val objectMapper: ObjectMapper
 
     override suspend fun execute(request: VkMethod<*>): VkResponse<*> {

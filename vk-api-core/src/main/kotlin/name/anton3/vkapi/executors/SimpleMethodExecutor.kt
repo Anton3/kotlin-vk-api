@@ -8,14 +8,14 @@ import name.anton3.vkapi.rate.DynamicRequest
 import name.anton3.vkapi.vktypes.VkResponse
 
 data class SimpleMethodExecutor(
-    override val httpClient: TransportClient,
+    override val transportClient: TransportClient,
     override val objectMapper: ObjectMapper
 ) : MethodExecutor {
 
     override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*>>): VkResponse<*> {
         val request = dynamicRequest.get()
         val params = objectMapper.serializeMethod(request)
-        val response = httpClient.post(
+        val response = transportClient.post(
             url = URL_PREFIX + request.apiMethodName,
             content = RequestContent.Form(params)
         )

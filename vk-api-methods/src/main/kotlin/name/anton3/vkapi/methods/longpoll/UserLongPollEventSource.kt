@@ -17,12 +17,12 @@ class UserLongPollEventSource(
     longPollContext: CoroutineContext,
     private val api: UserGroupClient,
     private val groupId: Int?,
-    httpClient: TransportClient,
+    transportClient: TransportClient,
     private val timeout: Int
 ) : AbstractLongPollEventSource<LongPollEvent, LongpollParams>(
     longPollContext = longPollContext,
     objectMapper = api.objectMapper,
-    httpClient = httpClient,
+    transportClient = transportClient,
     responseType = jacksonTypeRef()
 ) {
     override suspend fun iteratorToUrl(iterator: LongpollParams): String {
@@ -42,22 +42,22 @@ class UserLongPollEventSource(
 
 fun CoroutineScope.messageLongPollEvents(
     api: GroupClient,
-    httpClient: TransportClient = api.httpClient,
+    transportClient: TransportClient = api.transportClient,
     timeout: Int
 ): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, api.userGroup, null, httpClient, timeout).produceEvents(this)
+    UserLongPollEventSource(Dispatchers.IO, api.userGroup, null, transportClient, timeout).produceEvents(this)
 
 fun CoroutineScope.messageLongPollEventsAsAdmin(
     api: UserClient,
     groupId: Int,
-    httpClient: TransportClient = api.httpClient,
+    transportClient: TransportClient = api.transportClient,
     timeout: Int
 ): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, api.userGroup, groupId, httpClient, timeout).produceEvents(this)
+    UserLongPollEventSource(Dispatchers.IO, api.userGroup, groupId, transportClient, timeout).produceEvents(this)
 
 fun CoroutineScope.messageLongPollEventsForUser(
     api: UserClient,
-    httpClient: TransportClient = api.httpClient,
+    transportClient: TransportClient = api.transportClient,
     timeout: Int
 ): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, api.userGroup, null, httpClient, timeout).produceEvents(this)
+    UserLongPollEventSource(Dispatchers.IO, api.userGroup, null, transportClient, timeout).produceEvents(this)

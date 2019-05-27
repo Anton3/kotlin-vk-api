@@ -15,12 +15,12 @@ class GroupLongPollEventSource(
     longPollContext: CoroutineContext,
     private val api: UserGroupClient,
     private val groupId: Int,
-    httpClient: TransportClient,
+    transportClient: TransportClient,
     private val timeout: Int
 ) : AbstractLongPollEventSource<CallbackEvent<*>, LongPollServer>(
     longPollContext = longPollContext,
     objectMapper = api.objectMapper,
-    httpClient = httpClient,
+    transportClient = transportClient,
     responseType = jacksonTypeRef()
 ) {
     override suspend fun iteratorToUrl(iterator: LongPollServer): String {
@@ -40,6 +40,6 @@ fun CoroutineScope.groupLongPollEvents(
     api: UserGroupClient,
     groupId: Int,
     timeout: Int,
-    httpClient: TransportClient = api.httpClient
+    transportClient: TransportClient = api.transportClient
 ): ReceiveChannel<CallbackEvent<*>> =
-    GroupLongPollEventSource(Dispatchers.IO, api, groupId, httpClient, timeout).produceEvents(this)
+    GroupLongPollEventSource(Dispatchers.IO, api, groupId, transportClient, timeout).produceEvents(this)
