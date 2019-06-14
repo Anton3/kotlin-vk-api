@@ -15,7 +15,7 @@ private fun getResourceAsStream(resource: String): InputStream? {
         ?: resource::class.java.getResourceAsStream(resource)
 }
 
-fun main(vararg args: String) {
+fun main() {
     log.warn("Root path: " + Paths.get(".").toAbsolutePath())
 
     val generator = SourceGenerator(basePackage = "name.anton3.vkapi.generated")
@@ -28,5 +28,5 @@ fun main(vararg args: String) {
 
     generator.resolveTypes()
 
-    generator.writeSourceTo(Paths.get("../vk-api-generated/src/main/kotlin"))
+    generator.writeSourceTo(Paths.get("./vk-api-generated/src/main/kotlin"))
 }

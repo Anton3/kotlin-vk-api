@@ -21,7 +21,6 @@ import name.anton3.vkapi.generated.common.objects.Sex
  */
 @JsonDeserialize(`as` = UserImpl::class)
 interface User : UserMin {
-
     val sex: Sex?
     val screenName: String?
     val photo50: String?

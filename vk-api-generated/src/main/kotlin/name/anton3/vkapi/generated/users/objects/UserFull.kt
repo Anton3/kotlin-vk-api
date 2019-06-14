@@ -97,7 +97,6 @@ import name.anton3.vkapi.vktypes.VkBirthDate
  */
 @JsonDeserialize(`as` = UserFullImpl::class)
 interface UserFull : User {
-
     val nickname: String?
     val maidenName: String?
     val domain: String?

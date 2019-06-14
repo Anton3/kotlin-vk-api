@@ -74,7 +74,7 @@ data class ObjectType(
         if (props.isNotEmpty()) {
             if (kind == Kind.INTERFACE) {
                 builder.append(" {\n")
-                if (parents.isNotEmpty()) builder.append("\n")
+                if (parents.size > 1) builder.append("\n")
             } else {
                 builder.append("(\n")
             }

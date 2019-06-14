@@ -20,7 +20,6 @@ import name.anton3.vkapi.vktypes.VkDate
  */
 @JsonDeserialize(`as` = WallCommentImpl::class)
 interface WallComment : MessageAttachment {
-
     val id: Int
     val fromId: Int
     val date: VkDate
