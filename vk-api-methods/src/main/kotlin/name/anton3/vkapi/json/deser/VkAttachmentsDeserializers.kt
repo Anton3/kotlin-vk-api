@@ -96,7 +96,7 @@ internal val VkCommentAttachmentsDeserializer = VkAttachmentsDeserializer(weakTy
 internal val VkMessageAttachmentsDeserializer = VkAttachmentsDeserializer(weakType(), messageAttachmentTypes)
 
 
-internal class AbstractVkAttachmentsSerializer<T: Any>(
+internal class VkAttachmentsSerializer<T: Any>(
     private val weakType: Class<T>,
     private val types: List<Pair<String, Class<out T>>>
 ) : StdSerializer<T>(weakType), ContextualSerializer {
@@ -125,8 +125,8 @@ internal class AbstractVkAttachmentsSerializer<T: Any>(
     }
 }
 
-internal val VkWallPostAttachmentsSerializer = AbstractVkAttachmentsSerializer(weakType(), wallPostAttachmentTypes)
+internal val VkWallPostAttachmentsSerializer = VkAttachmentsSerializer(weakType(), wallPostAttachmentTypes)
 
-internal val VkCommentAttachmentsSerializer = AbstractVkAttachmentsSerializer(weakType(), commentAttachmentTypes)
+internal val VkCommentAttachmentsSerializer = VkAttachmentsSerializer(weakType(), commentAttachmentTypes)
 
-internal val VkMessageAttachmentsSerializer = AbstractVkAttachmentsSerializer(weakType(), messageAttachmentTypes)
+internal val VkMessageAttachmentsSerializer = VkAttachmentsSerializer(weakType(), messageAttachmentTypes)
