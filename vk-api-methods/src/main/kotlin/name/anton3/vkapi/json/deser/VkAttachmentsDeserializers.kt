@@ -98,10 +98,8 @@ internal val VkMessageAttachmentsDeserializer = VkAttachmentsDeserializer(weakTy
 
 internal class AbstractVkAttachmentsSerializer<T: Any>(
     private val weakType: Class<T>,
-    types: List<Pair<String, Class<out T>>>
+    private val types: List<Pair<String, Class<out T>>>
 ) : StdSerializer<T>(weakType), ContextualSerializer {
-
-    private val typeMap = types.associate { it.second to it.first }
 
     override fun serialize(value: T, gen: JsonGenerator, provider: SerializerProvider) {
         error("This serializer requires context")
@@ -114,7 +112,8 @@ internal class AbstractVkAttachmentsSerializer<T: Any>(
         return object : StdSerializer<T>(weakType) {
             override fun serialize(value: T, gen: JsonGenerator, provider: SerializerProvider) {
                 val attachmentClass = value::class.java
-                val attachmentType = typeMap[attachmentClass] ?: error("Unknown attachment class ${attachmentClass.canonicalName}")
+                val attachmentType = types.find { it.second.isAssignableFrom(attachmentClass) }?.first
+                    ?: error("Unknown attachment class ${attachmentClass.canonicalName}")
 
                 gen.writeStartObject()
                 gen.writeStringField("type", attachmentType)
