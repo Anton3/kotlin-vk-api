@@ -2,10 +2,10 @@ package name.anton3.vkapi.json.deser
 
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.core.JsonParser
-import com.fasterxml.jackson.databind.DeserializationContext
-import com.fasterxml.jackson.databind.JsonNode
-import com.fasterxml.jackson.databind.SerializerProvider
+import com.fasterxml.jackson.databind.*
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
+import com.fasterxml.jackson.databind.ser.BeanSerializerFactory
+import com.fasterxml.jackson.databind.ser.ContextualSerializer
 import com.fasterxml.jackson.databind.ser.std.StdSerializer
 import name.anton3.vkapi.generated.audio.objects.AudioFull
 import name.anton3.vkapi.generated.common.objects.Link
@@ -15,7 +15,6 @@ import name.anton3.vkapi.generated.gifts.objects.Layout
 import name.anton3.vkapi.generated.market.objects.MarketAlbum
 import name.anton3.vkapi.generated.market.objects.MarketItem
 import name.anton3.vkapi.generated.messages.objects.AudioMessage
-import name.anton3.vkapi.generated.messages.objects.MessageAttachment
 import name.anton3.vkapi.generated.messages.objects.MessageGraffiti
 import name.anton3.vkapi.generated.pages.objects.WikipageFull
 import name.anton3.vkapi.generated.photos.objects.Photo
@@ -74,7 +73,7 @@ private val messageAttachmentTypes = listOf(
 )
 
 
-internal sealed class AbstractVkAttachmentsDeserializer<T: Any>(
+internal class VkAttachmentsDeserializer<T: Any>(
     attachmentsBaseClass: Class<T>,
     types: List<Pair<String, Class<out T>>>
 ) : StdDeserializer<T>(attachmentsBaseClass) {
@@ -90,38 +89,45 @@ internal sealed class AbstractVkAttachmentsDeserializer<T: Any>(
     }
 }
 
-internal object VkWallPostAttachmentsDeserializer :
-    AbstractVkAttachmentsDeserializer<WallpostAttachment>(weakType(), wallPostAttachmentTypes)
+internal val VkWallPostAttachmentsDeserializer = VkAttachmentsDeserializer(weakType(), wallPostAttachmentTypes)
 
-internal object VkCommentAttachmentsDeserializer :
-    AbstractVkAttachmentsDeserializer<CommentAttachment>(weakType(), commentAttachmentTypes)
+internal val VkCommentAttachmentsDeserializer = VkAttachmentsDeserializer(weakType(), commentAttachmentTypes)
 
-internal object VkMessageAttachmentsDeserializer :
-    AbstractVkAttachmentsDeserializer<MessageAttachment>(weakType(), messageAttachmentTypes)
+internal val VkMessageAttachmentsDeserializer = VkAttachmentsDeserializer(weakType(), messageAttachmentTypes)
 
 
-internal sealed class AbstractVkAttachmentsSerializer<T: Any>(
-    attachmentsBaseClass: Class<T>,
+internal class AbstractVkAttachmentsSerializer<T: Any>(
+    private val weakType: Class<T>,
     types: List<Pair<String, Class<out T>>>
-) : StdSerializer<T>(attachmentsBaseClass) {
+) : StdSerializer<T>(weakType), ContextualSerializer {
 
     private val typeMap = types.associate { it.second to it.first }
 
     override fun serialize(value: T, gen: JsonGenerator, provider: SerializerProvider) {
-        val attachmentClass = value::class.java
-        val attachmentType = typeMap[attachmentClass] ?: error("Unknown attachment class ${attachmentClass.canonicalName}")
-        gen.writeStartObject()
-        gen.writeStringField("type", attachmentType)
-        gen.writeObjectField(attachmentType, value)
-        gen.writeEndObject()
+        error("This serializer requires context")
+    }
+
+    override fun createContextual(prov: SerializerProvider, property: BeanProperty?): JsonSerializer<*> {
+        val strongType = prov.typeFactory.constructType(weakType)
+        val basicSerializer = BeanSerializerFactory.instance.createSerializer(prov, strongType)
+
+        return object : StdSerializer<T>(weakType) {
+            override fun serialize(value: T, gen: JsonGenerator, provider: SerializerProvider) {
+                val attachmentClass = value::class.java
+                val attachmentType = typeMap[attachmentClass] ?: error("Unknown attachment class ${attachmentClass.canonicalName}")
+
+                gen.writeStartObject()
+                gen.writeStringField("type", attachmentType)
+                gen.writeFieldName(attachmentType)
+                basicSerializer.serialize(value, gen, prov)
+                gen.writeEndObject()
+            }
+        }
     }
 }
 
-internal object VkWallPostAttachmentsSerializer :
-    AbstractVkAttachmentsSerializer<WallpostAttachment>(weakType(), wallPostAttachmentTypes)
+internal val VkWallPostAttachmentsSerializer = AbstractVkAttachmentsSerializer(weakType(), wallPostAttachmentTypes)
 
-internal object VkCommentAttachmentsSerializer :
-    AbstractVkAttachmentsSerializer<CommentAttachment>(weakType(), commentAttachmentTypes)
+internal val VkCommentAttachmentsSerializer = AbstractVkAttachmentsSerializer(weakType(), commentAttachmentTypes)
 
-internal object VkMessageAttachmentsSerializer :
-    AbstractVkAttachmentsSerializer<MessageAttachment>(weakType(), messageAttachmentTypes)
+internal val VkMessageAttachmentsSerializer = AbstractVkAttachmentsSerializer(weakType(), messageAttachmentTypes)
