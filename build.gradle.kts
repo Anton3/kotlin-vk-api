@@ -15,6 +15,10 @@ plugins {
     kotlin("jvm") version "1.3.31"
 }
 
+repositories {
+    mavenCentral()
+}
+
 subprojects {
     group = "com.github.Anton3"
     version = "0.5.0"
