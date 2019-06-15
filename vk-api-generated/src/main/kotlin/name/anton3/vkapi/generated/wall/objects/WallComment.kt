@@ -2,7 +2,7 @@ package name.anton3.vkapi.generated.wall.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.common.objects.LikesInfo
-import name.anton3.vkapi.generated.messages.objects.MessageAttachment
+import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -19,7 +19,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property realOffset Real position of the comment
  */
 @JsonDeserialize(`as` = WallCommentImpl::class)
-interface WallComment : MessageAttachment {
+interface WallComment : MessageAttachmentBody {
     val id: Int
     val fromId: Int
     val date: VkDate

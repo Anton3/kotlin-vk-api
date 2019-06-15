@@ -1,7 +1,7 @@
 package name.anton3.vkapi.generated.photos.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
+import name.anton3.vkapi.generated.wall.objects.WallPostAttachmentBody
 
 /**
  * No description
@@ -25,4 +25,4 @@ data class PhotoAlbum(
     val created: Int,
     val updated: Int,
     val size: Int
-) : WallpostAttachment
+) : WallPostAttachmentBody

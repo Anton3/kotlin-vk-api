@@ -23,5 +23,4 @@ data class AttachedNote(
     val date: VkDate,
     val title: String,
     val viewUrl: String
-) : WallpostAttachment,
-    CommentAttachment
+) : WallPostAttachmentBody, CommentAttachmentBody

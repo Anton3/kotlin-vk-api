@@ -40,10 +40,9 @@ data class ObjectType(
             )
         }
 
-        val parentTypes = parents.joinToString(",\n    ") { arg ->
+        val parentClause = parents.joinIfNotEmpty(", ", prefix = " : ") { arg ->
             sourceWriter.parentType(arg)
         }
-        val parentClause = parents.isNotEmpty()(" : $parentTypes")
 
         val implType = implementation ?: TypeId("java.lang.Void").takeIf { parents.isNotEmpty() }
         val implClause = implType?.let {
@@ -74,7 +73,6 @@ data class ObjectType(
         if (props.isNotEmpty()) {
             if (kind == Kind.INTERFACE) {
                 builder.append(" {\n")
-                if (parents.size > 1) builder.append("\n")
             } else {
                 builder.append("(\n")
             }
@@ -96,15 +94,13 @@ data class ObjectType(
     }
 
     private fun renderDescription(sourceWriter: SourceWriter): String {
-        val propertyDescriptions = props.joinToString("\n") { arg ->
+        val propertyDescriptions = props.joinIfNotEmpty("\n", prefix = "\n *\n") { arg ->
             " * @property ${sourceWriter.fieldName(arg.name)} ${arg.description?.trim() ?: "No description"}"
         }
 
         return """
         |/**
-        | * ${description ?: "No description"}
-        | *
-        |$propertyDescriptions
+        | * ${description ?: "No description"}$propertyDescriptions
         | */
         """.trimMargin()
     }

@@ -102,6 +102,4 @@ data class GroupFull(
     override val photo50: String? = null,
     override val photo100: String? = null,
     override val photo200: String? = null
-) : Group,
-    GetSubscriptionsExtendedResponse,
-    GetSuggestedSourcesResponse
+) : Group, GetSubscriptionsExtendedResponse, GetSuggestedSourcesResponse

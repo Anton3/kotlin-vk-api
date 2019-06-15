@@ -22,4 +22,4 @@ data class AudioMessage(
     val linkMp3: String,
     val accessKey: String,
     val waveform: List<Int>
-) : MessageAttachment
+) : MessageAttachmentBody

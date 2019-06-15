@@ -1,10 +1,10 @@
 package name.anton3.vkapi.generated.video.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import name.anton3.vkapi.generated.messages.objects.MessageAttachment
+import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
 import name.anton3.vkapi.generated.notifications.objects.NotificationParent
-import name.anton3.vkapi.generated.wall.objects.CommentAttachment
-import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
+import name.anton3.vkapi.generated.wall.objects.CommentAttachmentBody
+import name.anton3.vkapi.generated.wall.objects.WallPostAttachmentBody
 import name.anton3.vkapi.vktypes.PropertyExists
 import name.anton3.vkapi.vktypes.VkDate
 
@@ -36,11 +36,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property height Video height
  */
 @JsonDeserialize(`as` = VideoImpl::class)
-interface Video : WallpostAttachment,
-    CommentAttachment,
-    MessageAttachment,
-    NotificationParent {
-
+interface Video : WallPostAttachmentBody, CommentAttachmentBody, MessageAttachmentBody, NotificationParent {
     val id: Int?
     val ownerId: Int?
     val title: String?

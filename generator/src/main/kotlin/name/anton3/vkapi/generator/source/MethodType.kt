@@ -28,7 +28,7 @@ data class MethodType(
         val filteredArguments = arguments.filter { it.name !in baseFields }
         val hasParams = filteredArguments.isNotEmpty()
 
-        val fieldsDefinition = filteredArguments.joinToString(",\n", prefix = "\n", postfix = "\n") { arg ->
+        val fieldsDefinition = filteredArguments.joinIfNotEmpty(",\n", prefix = "(\n", postfix = "\n)") { arg ->
             sourceWriter.constructorField(
                 name = arg.name,
                 type = arg.typeId,
@@ -53,7 +53,7 @@ data class MethodType(
         val packageClause = sourceWriter.packageClause(typeId)
         val importClause = sourceWriter.importClause(typeId)
 
-        val dataClass = hasParams("data ")
+        val dataClass = if (hasParams) "data " else ""
 
         val builder = StringBuilder()
 
@@ -64,7 +64,7 @@ data class MethodType(
             |$packageClause$importClause
             |
             |$description
-            |${dataClass}class ${typeId.name}${hasParams("($fieldsDefinition)")} : $parentClass("$methodUrl", $classRef)$implementsClause
+            |${dataClass}class ${typeId.name}$fieldsDefinition : $parentClass("$methodUrl", $classRef)$implementsClause
             """.trimMargin()
         )
 

@@ -36,6 +36,4 @@ data class UserXtrType(
     override val lastName: String,
     override val deactivated: String? = null,
     override val hidden: Int? = null
-) : User,
-    GetSubscriptionsExtendedResponse,
-    GetSuggestedSourcesResponse
+) : User, GetSubscriptionsExtendedResponse, GetSuggestedSourcesResponse

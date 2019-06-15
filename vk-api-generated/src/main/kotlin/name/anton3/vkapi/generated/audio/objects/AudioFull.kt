@@ -1,9 +1,9 @@
 package name.anton3.vkapi.generated.audio.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import name.anton3.vkapi.generated.messages.objects.MessageAttachment
-import name.anton3.vkapi.generated.wall.objects.CommentAttachment
-import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
+import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
+import name.anton3.vkapi.generated.wall.objects.CommentAttachmentBody
+import name.anton3.vkapi.generated.wall.objects.WallPostAttachmentBody
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -38,7 +38,4 @@ data class AudioFull(
     override val title: String,
     override val url: String? = null,
     override val accessKey: String? = null
-) : Audio,
-    WallpostAttachment,
-    CommentAttachment,
-    MessageAttachment
+) : Audio, WallPostAttachmentBody, CommentAttachmentBody, MessageAttachmentBody

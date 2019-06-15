@@ -16,4 +16,4 @@ data class AppPost(
     val name: String? = null,
     val photo130: String? = null,
     val photo604: String? = null
-) : WallpostAttachment
+) : WallPostAttachmentBody

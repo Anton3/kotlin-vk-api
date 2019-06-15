@@ -5,7 +5,7 @@ import name.anton3.vkapi.generated.common.objects.CommentsInfo
 import name.anton3.vkapi.generated.common.objects.Geo
 import name.anton3.vkapi.generated.common.objects.LikesInfo
 import name.anton3.vkapi.generated.common.objects.RepostsInfo
-import name.anton3.vkapi.generated.messages.objects.MessageAttachment
+import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -48,4 +48,4 @@ data class WallpostAttached(
     val copyOwnerId: Int? = null,
     val copyPostId: Int? = null,
     val copyText: String? = null
-) : MessageAttachment
+) : MessageAttachmentBody

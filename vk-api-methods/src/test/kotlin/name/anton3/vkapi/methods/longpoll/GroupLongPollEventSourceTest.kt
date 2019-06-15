@@ -70,8 +70,8 @@ class GroupLongPollEventSourceTest {
         val messageAttachments = (message as Message).attachments!!
         assertTrue(messageAttachments.size == 1)
         val attach = messageAttachments.first()
-        assertTrue(attach is Photo)
-        assertTrue((attach as Photo).sizes!!.isNotEmpty())
+        assertTrue(attach.body is Photo)
+        assertTrue((attach.body as Photo).sizes!!.isNotEmpty())
     }
 
     @Test

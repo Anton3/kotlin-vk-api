@@ -16,4 +16,4 @@ data class PostedPhoto(
     val ownerId: Int? = null,
     val photo130: String? = null,
     val photo604: String? = null
-) : WallpostAttachment
+) : WallPostAttachmentBody

@@ -1,10 +1,10 @@
 package name.anton3.vkapi.generated.photos.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import name.anton3.vkapi.generated.messages.objects.MessageAttachment
+import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
 import name.anton3.vkapi.generated.notifications.objects.NotificationParent
-import name.anton3.vkapi.generated.wall.objects.CommentAttachment
-import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
+import name.anton3.vkapi.generated.wall.objects.CommentAttachmentBody
+import name.anton3.vkapi.generated.wall.objects.WallPostAttachmentBody
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -25,11 +25,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property accessKey Access key for the photo
  */
 @JsonDeserialize(`as` = PhotoImpl::class)
-interface Photo : WallpostAttachment,
-    CommentAttachment,
-    MessageAttachment,
-    NotificationParent {
-
+interface Photo : WallPostAttachmentBody, CommentAttachmentBody, MessageAttachmentBody, NotificationParent {
     val id: Int
     val albumId: Int
     val ownerId: Int

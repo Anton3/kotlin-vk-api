@@ -1,8 +1,8 @@
 package name.anton3.vkapi.generated.common.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import name.anton3.vkapi.generated.messages.objects.MessageAttachment
-import name.anton3.vkapi.generated.wall.objects.CommentAttachment
+import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
+import name.anton3.vkapi.generated.wall.objects.CommentAttachmentBody
 
 /**
  * No description
@@ -18,5 +18,4 @@ data class Sticker(
     val productId: Int? = null,
     val images: List<Image>? = null,
     val imagesWithBackground: List<Image>? = null
-) : CommentAttachment,
-    MessageAttachment
+) : CommentAttachmentBody, MessageAttachmentBody

@@ -1,7 +1,7 @@
 package name.anton3.vkapi.generated.gifts.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import name.anton3.vkapi.generated.messages.objects.MessageAttachment
+import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
 
 /**
  * No description
@@ -17,4 +17,4 @@ data class Layout(
     val thumb256: String? = null,
     val thumb96: String? = null,
     val thumb48: String? = null
-) : MessageAttachment
+) : MessageAttachmentBody

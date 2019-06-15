@@ -16,4 +16,4 @@ data class Graffiti(
     val ownerId: Int? = null,
     val photo200: String? = null,
     val photo586: String? = null
-) : WallpostAttachment
+) : WallPostAttachmentBody

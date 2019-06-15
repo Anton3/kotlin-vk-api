@@ -2,6 +2,22 @@
   "objects": {
     "wall_wallpost_attachment": {
       "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "body": {
+          "$ref": "#/definitions/wall_wall_post_attachment_body"
+        }
+      },
+      "required": [
+        "type",
+        "body"
+      ],
+      "additionalProperties": false
+    },
+    "wall_wall_post_attachment_body": {
+      "type": "object",
       "oneOf": [
         {
           "$ref": "#/definitions/photos_photo"
@@ -60,6 +76,22 @@
     },
     "wall_comment_attachment": {
       "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "body": {
+          "$ref": "#/definitions/wall_comment_attachment_body"
+        }
+      },
+      "required": [
+        "type",
+        "body"
+      ],
+      "additionalProperties": false
+    },
+    "wall_comment_attachment_body": {
+      "type": "object",
       "oneOf": [
         {
           "$ref": "#/definitions/photos_photo"
@@ -94,6 +126,22 @@
       ]
     },
     "messages_message_attachment": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "body": {
+          "$ref": "#/definitions/messages_message_attachment_body"
+        }
+      },
+      "required": [
+        "type",
+        "body"
+      ],
+      "additionalProperties": false
+    },
+    "messages_message_attachment_body": {
       "type": "object",
       "oneOf": [
         {

@@ -45,11 +45,11 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
 
         return when (lpResponse.failed) {
             null -> {
-                iteratorWithTs(iterator, lpResponse.ts!!) to lpResponse.updates
+                iteratorWithTs(iterator, lpResponse.ts!!.toInt()) to lpResponse.updates
             }
             LongPollFailure.NEW_TS -> {
                 log.debug("LongPoll failed with error 1")
-                iteratorWithTs(iterator, lpResponse.ts!!) to emptyList()
+                iteratorWithTs(iterator, lpResponse.ts!!.toInt()) to emptyList()
             }
             LongPollFailure.REQUEST_NEW_KEY -> {
                 val newServer = iterator()

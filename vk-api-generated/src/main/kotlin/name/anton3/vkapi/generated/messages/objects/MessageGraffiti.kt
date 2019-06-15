@@ -20,4 +20,4 @@ data class MessageGraffiti(
     val width: Int? = null,
     val height: Int? = null,
     val accessKey: String? = null
-) : MessageAttachment
+) : MessageAttachmentBody

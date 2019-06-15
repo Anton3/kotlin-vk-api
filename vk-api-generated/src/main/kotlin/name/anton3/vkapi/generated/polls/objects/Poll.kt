@@ -1,8 +1,8 @@
 package name.anton3.vkapi.generated.polls.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import name.anton3.vkapi.generated.messages.objects.MessageAttachment
-import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
+import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
+import name.anton3.vkapi.generated.wall.objects.WallPostAttachmentBody
 
 /**
  * No description
@@ -26,5 +26,4 @@ data class Poll(
     val answerId: Int? = null,
     val answers: List<Answer>,
     val anonymous: Boolean
-) : WallpostAttachment,
-    MessageAttachment
+) : WallPostAttachmentBody, MessageAttachmentBody

@@ -40,7 +40,15 @@ interface SourceWriter {
     fun importType(importedTypeId: TypeId)
 }
 
-operator fun Boolean.invoke(onTrue: String, onFalse: String = ""): String = if (this) onTrue else onFalse
+fun <T> Collection<T>.joinIfNotEmpty(
+    separator: CharSequence = ", ",
+    prefix: CharSequence = "",
+    postfix: CharSequence = "",
+    limit: Int = -1,
+    truncated: CharSequence = "...",
+    transform: ((T) -> CharSequence)? = null
+): String =
+    if (isEmpty()) "" else joinTo(StringBuilder(), separator, prefix, postfix, limit, truncated, transform).toString()
 
 class KotlinSourceWriter(private val typeSpace: TypeSpace) : SourceWriter {
 
@@ -55,18 +63,17 @@ class KotlinSourceWriter(private val typeSpace: TypeSpace) : SourceWriter {
         defaultValue: String?,
         delegateBy: String?
     ): String {
-        return "    " + inherited("override ") + final("val ", "var ") + argument(
-            name,
-            type,
-            nullable,
-            defaultValue
-        ) + (delegateBy?.let { " by $it" } ?: "")
+        return "    " +
+                (if (inherited) "override " else "") +
+                (if (final) "val " else "var ") +
+                argument(name, type, nullable, defaultValue) +
+                (delegateBy?.let { " by $it" } ?: "")
     }
 
     override fun argument(name: String, type: TypeId, nullable: Boolean, defaultValue: String?): String {
         val realType = typeSpace.resolveTypeAliases(type)
         importType(realType)
-        return "${fieldNameEscaped(name)}: ${realType.fullName()}${nullable("?")}" +
+        return "${fieldNameEscaped(name)}: ${realType.fullName()}${if (nullable) "?" else ""}" +
                 defaultValue?.let { " = $it" }.orEmpty()
     }
 

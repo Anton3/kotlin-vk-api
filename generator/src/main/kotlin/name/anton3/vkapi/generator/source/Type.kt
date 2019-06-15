@@ -36,9 +36,7 @@ data class TypeId (
     }
 
     fun fullName(): String {
-        return name + genericParameters.isNotEmpty()(
-            onTrue = "<${genericParameters.joinToString(", ") { it.fullName() }}>"
-        )
+        return name + genericParameters.joinIfNotEmpty(", ", prefix = "<", postfix = ">") { it.fullName() }
     }
 
     private fun fullPackage(): String = packages.joinToString(".")
@@ -50,9 +48,7 @@ data class TypeId (
     fun filePath(): String = joinToPath(packages + listOf(fileName()))
 
     override fun toString(): String {
-        return "${fullPackage()}.$name" + genericParameters.isNotEmpty()(
-            onTrue = "<${genericParameters.joinToString(", ")}>"
-        )
+        return "${fullPackage()}.$name" + genericParameters.joinIfNotEmpty(", ", prefix = "<", postfix = ">")
     }
 }
 

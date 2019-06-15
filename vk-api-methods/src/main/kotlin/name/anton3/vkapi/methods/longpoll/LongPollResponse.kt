@@ -8,7 +8,7 @@ import name.anton3.vkapi.methods.longpoll.objects.LongPollFailure
 @JsonIgnoreProperties(ignoreUnknown = true)
 class LongPollResponse<EventType>(
     val failed: LongPollFailure? = null,
-    val ts: Int? = null,
+    val ts: String? = null,
     val updates: List<EventType> = emptyList()
 )
 

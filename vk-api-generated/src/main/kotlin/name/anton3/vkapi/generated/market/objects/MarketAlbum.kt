@@ -1,10 +1,10 @@
 package name.anton3.vkapi.generated.market.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import name.anton3.vkapi.generated.messages.objects.MessageAttachment
+import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
 import name.anton3.vkapi.generated.photos.objects.Photo
-import name.anton3.vkapi.generated.wall.objects.CommentAttachment
-import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
+import name.anton3.vkapi.generated.wall.objects.CommentAttachmentBody
+import name.anton3.vkapi.generated.wall.objects.WallPostAttachmentBody
 
 /**
  * No description
@@ -24,6 +24,4 @@ data class MarketAlbum(
     val count: Int,
     val updatedTime: Int,
     val photo: Photo? = null
-) : WallpostAttachment,
-    CommentAttachment,
-    MessageAttachment
+) : WallPostAttachmentBody, CommentAttachmentBody, MessageAttachmentBody

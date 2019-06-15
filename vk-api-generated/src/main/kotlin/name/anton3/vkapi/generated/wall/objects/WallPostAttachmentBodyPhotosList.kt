@@ -8,6 +8,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  * @property photosList No description
  */
 @JsonDeserialize(`as` = Void::class)
-data class WallpostAttachmentPhotosList(
+data class WallPostAttachmentBodyPhotosList(
     val photosList: List<String>? = null
-) : WallpostAttachment
+) : WallPostAttachmentBody
