@@ -22,20 +22,12 @@ fun <T> SimpleModule.addDeserializer(deserializer: JsonDeserializer<T>): SimpleM
 
 class VkMainSerialModule : SimpleModule() {
     init {
-        registerSubtypes(*wallPostAttachmentTypes.toTypedArray())
-        registerSubtypes(*commentAttachmentTypes.toTypedArray())
-        registerSubtypes(*messageAttachmentTypes.toTypedArray())
-
-        setMixInAnnotation(WallPostAttachmentBody::class.java, AttachmentBodyMixin::class.java)
-        setMixInAnnotation(CommentAttachmentBody::class.java, AttachmentBodyMixin::class.java)
-        setMixInAnnotation(MessageAttachmentBody::class.java, AttachmentBodyMixin::class.java)
-
         addSerializer(attachmentSerializer<WallpostAttachment, WallPostAttachmentBody>())
         addSerializer(attachmentSerializer<CommentAttachment, CommentAttachmentBody>())
         addSerializer(attachmentSerializer<MessageAttachment, MessageAttachmentBody>())
-        addDeserializer(attachmentDeserializer<WallpostAttachment, WallPostAttachmentBody>())
-        addDeserializer(attachmentDeserializer<CommentAttachment, CommentAttachmentBody>())
-        addDeserializer(attachmentDeserializer<MessageAttachment, MessageAttachmentBody>())
+        addDeserializer(attachmentDeserializer<WallpostAttachment, WallPostAttachmentBody>(wallPostAttachmentTypes))
+        addDeserializer(attachmentDeserializer<CommentAttachment, CommentAttachmentBody>(commentAttachmentTypes))
+        addDeserializer(attachmentDeserializer<MessageAttachment, MessageAttachmentBody>(messageAttachmentTypes))
 
         addDeserializer(LongPollEvent::class.java, LongPollEventDeserializer)
     }

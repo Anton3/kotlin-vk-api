@@ -1,6 +1,5 @@
 package name.anton3.vkapi.json.deser
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
@@ -82,11 +81,9 @@ internal val messageAttachmentTypes: List<NamedType> = listOf(
 )
 
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.WRAPPER_ARRAY)
-internal abstract class AttachmentBodyMixin
-
-internal inline fun <reified Attachment: Any, reified Body: Any> attachmentDeserializer(): StdDeserializer<Attachment> {
+internal inline fun <reified Attachment: Any, reified Body: Any> attachmentDeserializer(attachmentTypes: List<NamedType>): StdDeserializer<Attachment> {
     val constructor = Attachment::class.primaryConstructor!!
+    val typeToClass = attachmentTypes.associate { it.name!! to it.type!! }
 
     return object : StdDeserializer<Attachment>(weakType<Attachment>()) {
         override fun deserialize(p: JsonParser, ctxt: DeserializationContext): Attachment {
@@ -96,8 +93,8 @@ internal inline fun <reified Attachment: Any, reified Body: Any> attachmentDeser
             val type = node["type"]?.asText() ?: error("No `type` field")
             val bodyNode = node[type]
 
-            val syntheticNode = ArrayNode(codec.nodeFactory, listOf(TextNode(type), bodyNode))
-            val body = codec.treeToValue(syntheticNode, Body::class.java)
+            val klass = typeToClass.getOrElse(type) { error("Incorrect attachment type: $type") }
+            val body = codec.treeToValue(bodyNode, klass) as Body
 
             return constructor.call(type, body)
         }
@@ -115,8 +112,7 @@ internal inline fun <reified Attachment: Any, reified Body: Any> attachmentSeria
             val type = typeProperty.get(value) as String
             val body = bodyProperty.get(value) as Body
 
-            val syntheticNode = codec.valueToTree<ArrayNode>(body)
-            val bodyNode = syntheticNode[1]
+            val bodyNode = codec.valueToTree<ArrayNode>(body)
 
             val resultNode = ObjectNode(codec.nodeFactory, mapOf("type" to TextNode(type), type to bodyNode))
             return codec.writeTree(gen, resultNode)
