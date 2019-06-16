@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializerProvider
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import com.fasterxml.jackson.databind.jsontype.NamedType
-import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.ObjectNode
 import com.fasterxml.jackson.databind.node.TextNode
 import com.fasterxml.jackson.databind.ser.std.StdSerializer
@@ -112,7 +111,7 @@ internal inline fun <reified Attachment: Any, reified Body: Any> attachmentSeria
             val type = typeProperty.get(value) as String
             val body = bodyProperty.get(value) as Body
 
-            val bodyNode = codec.valueToTree<ArrayNode>(body)
+            val bodyNode = codec.valueToTree<ObjectNode>(body)
 
             val resultNode = ObjectNode(codec.nodeFactory, mapOf("type" to TextNode(type), type to bodyNode))
             return codec.writeTree(gen, resultNode)
