@@ -72,6 +72,7 @@ class GroupLongPollEventSourceTest {
         val attach = messageAttachments.first()
         assertTrue(attach.body is Photo)
         assertTrue((attach.body as Photo).sizes!!.isNotEmpty())
+        executor.objectMapper.writeValueAsString(lpResponse)
     }
 
     @Test
