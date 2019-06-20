@@ -66,7 +66,7 @@ val WallComment.safeAttachments: List<CommentAttachmentBody> get() = attachments
 val WallReply.safeAttachments: List<CommentAttachmentBody> get() = attachments?.map { it.body }.orEmpty()
 val WidgetComment.safeAttachments: List<CommentAttachmentBody> get() = attachments?.map { it.body }.orEmpty()
 val Message.safeAttachments: List<MessageAttachmentBody> get() = attachments?.map { it.body }.orEmpty()
-val PinnedMessage.safeAttachments: List<MessageAttachmentBody> get() = attachments.map { it.body }
+val PinnedMessage.safeAttachments: List<MessageAttachmentBody> get() = attachments?.map { it.body }.orEmpty()
 
 
 fun typing(groupId: Int?, peerId: Int): MessagesSetActivity {
