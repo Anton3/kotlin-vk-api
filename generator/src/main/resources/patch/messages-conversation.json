@@ -255,11 +255,9 @@
         "id",
         "date",
         "from_id",
-        "text",
-        "attachments",
-        "geo"
+        "text"
       ],
-      "additionalProperties": false
+      "additionalProperties": true
     }
   }
 }

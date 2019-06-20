@@ -18,7 +18,7 @@ data class PinnedMessage(
     val date: VkDate,
     val fromId: Int,
     val text: String,
-    val attachments: List<MessageAttachment>,
-    val geo: PinnedMessageGeo,
+    val attachments: List<MessageAttachment>? = null,
+    val geo: PinnedMessageGeo? = null,
     val fwdMessages: List<Message>? = null
 )
