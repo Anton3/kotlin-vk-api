@@ -22,6 +22,7 @@ enum class ImageType(@JsonValue override val value: String) : Value<String> {
     A("a"),
     T("t"),
     U("u"),
+    B("b"),
     TEMP("temp");
 
     companion object {
