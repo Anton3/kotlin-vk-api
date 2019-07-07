@@ -197,6 +197,12 @@
           }
         },
         {
+          "name": "reply_to",
+          "description": "Id of replied message.",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
           "name": "forward_messages",
           "description": "ID of forwarded messages, separated with a comma. Listed messages of the sender will be shown in the message body at the recipient's. Example: \"123,431,544\"",
           "type": "string"
@@ -208,11 +214,6 @@
           "minimum": 0
         },
         {
-          "name": "notification",
-          "description": "'1' if the message is a notification (for community messages).",
-          "type": "boolean"
-        },
-        {
           "name": "group_id",
           "description": "Group ID (for group messages with group access token)",
           "type": "integer",
@@ -220,8 +221,28 @@
         },
         {
           "name": "keyboard",
-          "type": "messages_keyboard",
-          "description": "keyboard to message"
+          "description": "keyboard to message",
+          "type": "messages_keyboard"
+        },
+        {
+          "name": "payload",
+          "description": "Hidden message (escaped JSON)",
+          "type": "string"
+        },
+        {
+          "name": "dont_parse_links",
+          "description": "1 - links will not attach snippet",
+          "type": "boolean"
+        },
+        {
+          "name": "disable_mentions",
+          "description": "1 - mention of user will not generate notification for him",
+          "type": "boolean"
+        },
+        {
+          "name": "notification",
+          "description": "'1' if the message is a notification (for community messages).",
+          "type": "boolean"
         }
       ],
       "errors": [
