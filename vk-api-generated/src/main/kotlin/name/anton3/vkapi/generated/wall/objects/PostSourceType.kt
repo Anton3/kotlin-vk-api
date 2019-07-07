@@ -10,7 +10,8 @@ enum class PostSourceType(@JsonValue override val value: String) : Value<String>
     WIDGET("widget"),
     API("api"),
     RSS("rss"),
-    SMS("sms");
+    SMS("sms"),
+    MVK("mvk");
 
     companion object {
         @JvmStatic

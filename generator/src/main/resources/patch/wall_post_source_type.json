@@ -1,0 +1,16 @@
+{
+  "objects": {
+    "wall_post_source_type": {
+      "type": "string",
+      "description": "Type of post source",
+      "enum": [
+        "vk",
+        "widget",
+        "api",
+        "rss",
+        "sms",
+        "mvk"
+      ]
+    }
+  }
+}
