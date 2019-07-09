@@ -6,13 +6,13 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.31")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.41")
     }
 }
 
 plugins {
     `java-library`
-    kotlin("jvm") version "1.3.31"
+    kotlin("jvm") version "1.3.41"
 }
 
 repositories {
@@ -39,19 +39,19 @@ subprojects {
     }
 
     dependencies {
-        val jacksonVersion = "2.9.7"
+        val jacksonVersion = "2.9.9"
         api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
         api("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
         api("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
 
-        val kotlinVersion = "1.3.31"
+        val kotlinVersion = "1.3.41"
         implementation(kotlin("stdlib-jdk8:$kotlinVersion"))
         implementation(kotlin("reflect:$kotlinVersion"))
 
-        implementation("io.github.microutils:kotlin-logging:1.6.22")
+        implementation("io.github.microutils:kotlin-logging:1.6.26")
 
         testImplementation("junit:junit:4.12")
-        testImplementation("org.apache.logging.log4j:log4j-slf4j-impl:2.11.0")
+        testImplementation("org.apache.logging.log4j:log4j-slf4j-impl:2.12.0")
     }
 
     val sourcesJar by tasks.creating(Jar::class) {
