@@ -1,6 +1,8 @@
 package name.anton3.vkapi.executors
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import name.anton3.vkapi.core.MethodExecutor
 import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.core.VkMethod
@@ -9,6 +11,7 @@ import name.anton3.vkapi.methods.execute.batch
 import name.anton3.vkapi.rate.BatchExecutor
 import name.anton3.vkapi.rate.DynamicExecutor
 import name.anton3.vkapi.rate.DynamicRequest
+import name.anton3.vkapi.vktypes.VkApiException
 import name.anton3.vkapi.vktypes.VkResponse
 import java.io.Closeable
 import java.time.Duration
@@ -49,6 +52,45 @@ private class MethodListExecutor(
 ) : DynamicExecutor<List<VkMethod<*>>, List<VkResponse<*>>> {
 
     override suspend fun execute(dynamicRequest: DynamicRequest<List<VkMethod<*>>>): List<VkResponse<*>> {
-        return base.batch(dynamicRequest).map { it.wrapInSimpleResponse() }
+        return try {
+            base.batch(dynamicRequest).map { it.wrapInSimpleResponse() }
+        } catch (e: VkApiException) {
+            if (shouldSplitBatch(e)) {
+                splitAndExecute(dynamicRequest.get())  // Handle Execute error 13 correctly
+            } else {
+                throw e
+            }
+        }
+    }
+
+    private fun shouldSplitBatch(e: VkApiException): Boolean {
+        return e.vkError.errorCode == 13 && e.vkError.errorMsg == "response size is too big"
+    }
+
+    private suspend fun executeMethodSublist(methods: List<VkMethod<*>>): List<VkResponse<*>> {
+        if (methods.size == 1) return listOf(base.execute(methods.single()))
+
+        return try {
+            base.batch(methods).map { it.wrapInSimpleResponse() }
+        } catch (e: VkApiException) {
+            if (shouldSplitBatch(e)) {
+                splitAndExecute(methods)
+            } else {
+                throw e
+            }
+        }
+    }
+
+    private suspend fun splitAndExecute(methods: List<VkMethod<*>>): List<VkResponse<*>> {
+        val halfSize = (methods.size + 1) / 2
+        val requestSplit1 = methods.subList(0, halfSize)
+        val requestSplit2 = methods.subList(halfSize, methods.size)
+
+        return coroutineScope {
+            val responseSplit1Async = async { executeMethodSublist(requestSplit1) }
+            val responseSplit2 = executeMethodSublist(requestSplit2)
+
+            responseSplit1Async.await() + responseSplit2
+        }
     }
 }
