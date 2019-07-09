@@ -7,15 +7,15 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.type.TypeFactory
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 
-internal inline fun <reified T: JsonNode> JsonParser.readNode(): T {
+inline fun <reified T: JsonNode> JsonParser.readNode(): T {
     val node = codec.readTree<JsonNode>(this)
     return node as? T ?: throw JsonMappingException(this, "Expected ${T::class.simpleName}")
 }
 
-internal inline fun <reified T> weakType(): Class<T> {
+inline fun <reified T> weakType(): Class<T> {
     return T::class.java
 }
 
-internal inline fun <reified T> strongType(): JavaType {
+inline fun <reified T> strongType(): JavaType {
     return TypeFactory.defaultInstance().constructType(jacksonTypeRef<T>())!!
 }
