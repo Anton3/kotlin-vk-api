@@ -87,8 +87,7 @@ class KtorTransportClient(
 
         if (log.isDebugEnabled) {
             log.debug {
-                val content = request.content
-                val contentString = when (content) {
+                val contentString = when (val content = request.content) {
                     is RequestContent.Empty -> "$content"
                     is RequestContent.Text -> "$content"
                     is RequestContent.Form -> "$content"
