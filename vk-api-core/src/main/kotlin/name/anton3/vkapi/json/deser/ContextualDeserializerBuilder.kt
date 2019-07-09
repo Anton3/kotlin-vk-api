@@ -10,7 +10,6 @@ internal class ContextualDeserializerBuilder<T>(private val build: (Deserializat
     : JsonDeserializer<T>(), ContextualDeserializer {
 
     override fun createContextual(ctxt: DeserializationContext, property: BeanProperty?): JsonDeserializer<*> {
-        require(ctxt.contextualType?.isTypeOrSubTypeOf(handledType()) ?: true) { "Wrong base type" }
         return build(ctxt)
     }
 
