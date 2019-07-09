@@ -13,7 +13,7 @@ import name.anton3.vkapi.json.weakType
 import name.anton3.vkapi.vktypes.VkError
 import name.anton3.vkapi.vktypes.VkResponse
 
-class VkResponseDeserializer(private val context: DeserializationContext) :
+internal class VkResponseDeserializer(private val context: DeserializationContext) :
     StdDeserializer<VkResponse<*>>(weakType<VkResponse<*>>()) {
 
     override fun getValueType(): JavaType = context.contextualType

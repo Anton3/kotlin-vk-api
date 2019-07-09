@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.JsonMappingException
 import name.anton3.vkapi.vktypes.VkBirthDate
 
-object VkBirthDateDeserializer : JsonDeserializer<VkBirthDate>() {
+internal object VkBirthDateDeserializer : JsonDeserializer<VkBirthDate>() {
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext): VkBirthDate {
         val dateValue = p.text ?: throw JsonMappingException(p, "Expected string", p.currentLocation)
 

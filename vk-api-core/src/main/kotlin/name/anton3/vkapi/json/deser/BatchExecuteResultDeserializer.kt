@@ -12,7 +12,7 @@ import name.anton3.vkapi.json.readNode
 import name.anton3.vkapi.methods.execute.BatchExecuteMethod
 import name.anton3.vkapi.methods.execute.BatchExecuteResult
 
-object BatchExecuteResultDeserializer : StdDeserializer<BatchExecuteResult>(BatchExecuteResult::class.java) {
+internal object BatchExecuteResultDeserializer : StdDeserializer<BatchExecuteResult>(BatchExecuteResult::class.java) {
 
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext): BatchExecuteResult {
         val codec = p.codec as ObjectMapper
