@@ -18,7 +18,7 @@ data class SimpleDynamicRequest<Request>(
 }
 
 abstract class SynchronizedDynamicRequest<out Request> : DynamicRequest<Request> {
-    override suspend fun get(): Request {
+    final override suspend fun get(): Request {
         if (!internalRequestStarted.getAndSet(true)) {
             internalRequest.complete { finalize() }
         }
@@ -31,7 +31,12 @@ abstract class SynchronizedDynamicRequest<out Request> : DynamicRequest<Request>
     private val internalRequestStarted: AtomicBoolean = AtomicBoolean(false)
 }
 
-class MappedDynamicRequest<Request, BaseRequest>(
+fun <Request, BaseRequest> DynamicRequest<BaseRequest>.map(
+    block: suspend (BaseRequest) -> Request
+): SynchronizedDynamicRequest<Request> = MappedDynamicRequest(this, block)
+
+
+internal class MappedDynamicRequest<Request, BaseRequest>(
     private val base: DynamicRequest<BaseRequest>,
     private val preprocessor: suspend (BaseRequest) -> Request
 ) : SynchronizedDynamicRequest<Request>() {
@@ -43,7 +48,3 @@ class MappedDynamicRequest<Request, BaseRequest>(
         return preprocessor(base.get())
     }
 }
-
-fun <Request, BaseRequest> DynamicRequest<BaseRequest>.map(
-    block: suspend (BaseRequest) -> Request
-): DynamicRequest<Request> = MappedDynamicRequest(this, block)

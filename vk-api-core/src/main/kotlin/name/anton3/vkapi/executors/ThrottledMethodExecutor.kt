@@ -4,10 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import name.anton3.vkapi.core.MethodExecutor
 import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.core.VkMethod
-import name.anton3.vkapi.rate.AsyncCloseable
 import name.anton3.vkapi.rate.DynamicRequest
 import name.anton3.vkapi.rate.ThrottledExecutor
 import name.anton3.vkapi.vktypes.VkResponse
+import java.io.Closeable
 import java.time.Duration
 import kotlin.coroutines.CoroutineContext
 
@@ -16,7 +16,7 @@ class ThrottledMethodExecutor(
     coroutineContext: CoroutineContext,
     rateLimit: Int,
     ratePeriod: Duration = Duration.ofSeconds(1L)
-) : MethodExecutor, AsyncCloseable {
+) : MethodExecutor, Closeable {
 
     private val throttler: ThrottledExecutor<VkMethod<*>, VkResponse<*>> =
         ThrottledExecutor(base, coroutineContext, rateLimit, ratePeriod)
@@ -30,9 +30,5 @@ class ThrottledMethodExecutor(
 
     override fun close() {
         throttler.close()
-    }
-
-    override suspend fun join() {
-        throttler.join()
     }
 }

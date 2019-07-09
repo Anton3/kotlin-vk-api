@@ -3,16 +3,18 @@ package name.anton3.vkapi.client
 import com.fasterxml.jackson.databind.ObjectMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.withContext
 import name.anton3.vkapi.core.MethodExecutor
 import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.executors.BatchMethodExecutor
 import name.anton3.vkapi.executors.JsonApiMethodExecutor
 import name.anton3.vkapi.executors.ThrottledMethodExecutor
 import name.anton3.vkapi.executors.TokenMethodExecutor
-import name.anton3.vkapi.rate.AsyncCloseable
 import name.anton3.vkapi.tokens.GroupToken
 import name.anton3.vkapi.tokens.ServiceToken
 import name.anton3.vkapi.tokens.UserToken
+import java.io.Closeable
 import java.time.Duration
 import kotlin.coroutines.CoroutineContext
 
@@ -24,7 +26,7 @@ class VkClientFactory(
     private val job = Job(parentContext[Job])
     private val context = parentContext + job
     private val baseExecutor: MethodExecutor = JsonApiMethodExecutor(transportClient, objectMapper)
-    private val closeableExecutors: MutableList<AsyncCloseable> = mutableListOf()
+    private val closeableExecutors: MutableList<Closeable> = mutableListOf()
 
     @Synchronized
     fun user(
@@ -82,11 +84,10 @@ class VkClientFactory(
 
     @Synchronized
     suspend fun closeAndJoin() {
-        for (executor in closeableExecutors.asReversed()) {
-            executor.close()
-            executor.join()
+        withContext(Dispatchers.IO) {
+            closeableExecutors.asReversed().forEach { it.close() }
         }
-        job.join()
+        job.cancelAndJoin()
     }
 }
 

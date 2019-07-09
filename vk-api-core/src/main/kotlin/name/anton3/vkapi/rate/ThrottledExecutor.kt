@@ -5,23 +5,28 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ClosedReceiveChannelException
 import kotlinx.coroutines.channels.ClosedSendChannelException
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.time.delay
+import java.io.Closeable
 import java.time.Duration
 import java.time.Instant
 import kotlin.coroutines.CoroutineContext
 
 class ThrottledExecutor<Request, Response>(
     private val base: DynamicExecutor<Request, Response>,
-    override val coroutineContext: CoroutineContext,
+    coroutineContext: CoroutineContext,
     rateLimit: Int,
     private val ratePeriod: Duration
-) : DynamicExecutor<Request, Response>, AsyncCloseable, CoroutineScope {
+) : DynamicExecutor<Request, Response>, Closeable {
+
+    private val job: Job = Job(parent = coroutineContext[Job])
+    private val coroutineContext: CoroutineContext = coroutineContext + job
+    private val coroutineScope: CoroutineScope = CoroutineScope(this.coroutineContext)
 
     private val tickets: Channel<Instant> = Channel(rateLimit)
-    private val requests: MutableSet<SuspendedRequest<Request, Response>> = LinkedHashSet()
-    private val newRequests: Channel<SuspendedRequest<Request, Response>> = Channel()
-    private val schedulerJob: Job
+    private val requests: MutableSet<CompletableRequest<Request, Response>> = LinkedHashSet()
+    private val newRequests: Channel<CompletableRequest<Request, Response>> = Channel()
 
     init {
         require(rateLimit > 0 && ratePeriod > Duration.ZERO)
@@ -29,8 +34,8 @@ class ThrottledExecutor<Request, Response>(
         val now = Instant.now()
         repeat(rateLimit) { tickets.offer(now) }
 
-        schedulerJob = launch {
-            while (true) {
+        coroutineScope.launch {
+            while (isActive) {
                 if (!receiveTicket()) break
                 if (!receiveRequest()) break
                 val request = takeRequest()
@@ -39,7 +44,7 @@ class ThrottledExecutor<Request, Response>(
         }
     }
 
-    override suspend fun execute(dynamicRequest: DynamicRequest<Request>): Response = dynamicRequest.submit {
+    override suspend fun execute(dynamicRequest: DynamicRequest<Request>): Response = dynamicRequest.submit(coroutineContext) {
         newRequests.send(it)
     }
 
@@ -68,20 +73,20 @@ class ThrottledExecutor<Request, Response>(
             }
             true
         } catch (e: ClosedReceiveChannelException) {
-            !requests.isEmpty()
+            requests.isNotEmpty()
         }
     }
 
-    private fun takeRequest(): SuspendedRequest<Request, Response> {
+    private fun takeRequest(): CompletableRequest<Request, Response> {
         val request = requests.find { !it.request.isIncompleteBatch } ?: requests.first()
         requests.remove(request)
         return request
     }
 
-    private fun sendRequest(suspendedRequest: SuspendedRequest<Request, Response>) {
-        launch {
+    private fun sendRequest(completableRequest: CompletableRequest<Request, Response>) {
+        coroutineScope.launch {
             try {
-                base.execute(suspendedRequest)
+                base.complete(completableRequest)
             } finally {
                 try {
                     tickets.send(Instant.now() + ratePeriod)
@@ -93,11 +98,8 @@ class ThrottledExecutor<Request, Response>(
     }
 
     override fun close() {
-        newRequests.close()
+        newRequests.cancel()
         tickets.close()
-    }
-
-    override suspend fun join() {
-        schedulerJob.join()
+        job.cancel()
     }
 }

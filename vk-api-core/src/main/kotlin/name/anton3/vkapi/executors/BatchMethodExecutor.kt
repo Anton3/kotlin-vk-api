@@ -6,11 +6,11 @@ import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.core.VkMethod
 import name.anton3.vkapi.core.wrapInSimpleResponse
 import name.anton3.vkapi.methods.execute.batch
-import name.anton3.vkapi.rate.AsyncCloseable
 import name.anton3.vkapi.rate.BatchExecutor
 import name.anton3.vkapi.rate.DynamicExecutor
 import name.anton3.vkapi.rate.DynamicRequest
 import name.anton3.vkapi.vktypes.VkResponse
+import java.io.Closeable
 import java.time.Duration
 import kotlin.coroutines.CoroutineContext
 
@@ -21,7 +21,7 @@ class BatchMethodExecutor(
     private val base: MethodExecutor,
     coroutineContext: CoroutineContext,
     flushDelay: Duration
-) : MethodExecutor, AsyncCloseable {
+) : MethodExecutor, Closeable {
 
     private val methodListExecutor = MethodListExecutor(base)
 
@@ -37,10 +37,6 @@ class BatchMethodExecutor(
 
     override fun close() {
         batcher.close()
-    }
-
-    override suspend fun join() {
-        batcher.join()
     }
 
     companion object {
