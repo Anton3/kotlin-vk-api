@@ -2,7 +2,9 @@ package name.anton3.vkapi.json.deser
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
+import com.fasterxml.jackson.databind.JavaType
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import com.fasterxml.jackson.databind.node.ObjectNode
 import name.anton3.vkapi.json.attributes.reader
 import name.anton3.vkapi.json.readNode
@@ -11,15 +13,13 @@ import name.anton3.vkapi.json.weakType
 import name.anton3.vkapi.vktypes.VkError
 import name.anton3.vkapi.vktypes.VkResponse
 
-class VkResponseDeserializer(context: DeserializationContext? = null) :
-    StrongStdDeserializer<VkResponse<*>>(weakType(), context) {
+class VkResponseDeserializer(private val context: DeserializationContext) :
+    StdDeserializer<VkResponse<*>>(weakType<VkResponse<*>>()) {
 
-    private val wrappedType = valueType?.containedType(0)
+    override fun getValueType(): JavaType = context.contextualType
+    private val wrappedType = valueType.containedType(0)
     private val errorType = strongType<VkError>()
     private val errorsType = strongType<List<VkError>>()
-
-    override fun copy(context: DeserializationContext): VkResponseDeserializer =
-        VkResponseDeserializer(context)
 
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext): VkResponse<*> {
         val codec = p.codec as ObjectMapper
@@ -36,5 +36,9 @@ class VkResponseDeserializer(context: DeserializationContext? = null) :
         }
 
         return VkResponse(response, error, executeErrors ?: emptyList())
+    }
+
+    companion object {
+        fun builder() = ContextualDeserializerBuilder { VkResponseDeserializer(it) }
     }
 }

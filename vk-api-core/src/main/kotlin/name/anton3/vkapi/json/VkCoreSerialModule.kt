@@ -12,7 +12,7 @@ class VkCoreSerialModule : SimpleModule() {
         addDeserializer(OkResponse::class.java, OkResponseDeserializer)
         addDeserializer(PropertyExists::class.java, PropertyExistsDeserializer)
 
-        addDeserializer(VkResponse::class.java, VkResponseDeserializer())
+        addDeserializer(VkResponse::class.java, VkResponseDeserializer.builder())
         addDeserializer(BatchExecuteResult::class.java, BatchExecuteResultDeserializer)
     }
 }
