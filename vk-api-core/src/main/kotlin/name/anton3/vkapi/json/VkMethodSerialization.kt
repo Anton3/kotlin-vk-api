@@ -23,7 +23,7 @@ fun <T> ObjectMapper.deserializeResponse(method: VkMethod<T>, response: ByteArra
     val responseType = typeFactory.constructCollectionLikeType(VkResponse::class.java, resultType)
 
     val reader = this.reader(ForwardableAttributes(METHOD_ATTRIBUTE, method))
-    return reader.forType(responseType).readValue<VkResponse<T>>(response)
+    return reader.forType(responseType).readValue(response)
 }
 
 private fun restorePropertyName(name: String): String = when (name) {
