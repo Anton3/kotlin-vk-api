@@ -49,14 +49,6 @@ fun ObjectMapper.writer(attributes: ForwardableAttributes): ObjectWriter {
     return writer(attributes.toAttributes())
 }
 
-fun ObjectMapper.reader(context: DatabindContext): ObjectReader {
-    return reader(context.forwardableAttributes)
-}
-
-fun ObjectMapper.writer(context: DatabindContext): ObjectWriter {
-    return writer(context.forwardableAttributes)
-}
-
 
 private val UNIVERSAL_ATTRIBUTE_NAME = ForwardableAttributes::class.simpleName!!
 

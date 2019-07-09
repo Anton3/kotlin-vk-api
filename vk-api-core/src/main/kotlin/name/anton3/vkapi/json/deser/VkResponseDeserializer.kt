@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JavaType
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import com.fasterxml.jackson.databind.node.ObjectNode
+import name.anton3.vkapi.json.attributes.forwardableAttributes
 import name.anton3.vkapi.json.attributes.reader
 import name.anton3.vkapi.json.readNode
 import name.anton3.vkapi.json.strongType
@@ -26,7 +27,7 @@ internal class VkResponseDeserializer(private val context: DeserializationContex
         val node = p.readNode<ObjectNode>()
 
         val response = node["response"]?.let {
-            codec.reader(ctxt).readValue<Any>(it.traverse(codec), wrappedType!!)!!
+            codec.reader(ctxt.forwardableAttributes).readValue<Any>(it.traverse(codec), wrappedType!!)!!
         }
         val error = node["error"]?.let {
             codec.readValue<VkError>(it.traverse(codec), errorType)!!

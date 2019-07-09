@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.NumericNode
 import com.fasterxml.jackson.module.kotlin.convertValue
+import name.anton3.vkapi.json.attributes.forwardableAttributes
 import name.anton3.vkapi.json.attributes.reader
 import name.anton3.vkapi.json.readNode
 import name.anton3.vkapi.json.strongType
@@ -21,7 +22,7 @@ object LongPollEventDeserializer : StdDeserializer<LongPollEvent>(LongPollEvent:
         val typeId = (node[0] as NumericNode).intValue()
         val type = eventTypes[typeId] ?: return UnknownLongPollEvent(typeId, codec.convertValue(node))
 
-        return codec.reader(ctxt).readValue<LongPollEvent>(node.traverse(codec), type)
+        return codec.reader(ctxt.forwardableAttributes).readValue<LongPollEvent>(node.traverse(codec), type)
     }
 
     private val eventTypes = mapOf(
