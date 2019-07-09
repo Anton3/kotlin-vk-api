@@ -41,7 +41,7 @@ val clientFactory: VkClientFactory = ktorClientFactory(httpClient)
 import name.anton3.vkapi.client.GroupClient
 import name.anton3.vkapi.tokens.GroupToken
 
-val api: GroupClient = clientFactory.group(GroupToken(accessToken, id))
+val api: GroupClient = clientFactory.group(GroupToken(accessToken))
 ```
 
 > **Замечание.** Клиент учитывает ограничения ВК на запросы к API и объединяет несколько запросов
