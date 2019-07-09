@@ -12,11 +12,11 @@ import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
 import name.anton3.vkapi.json.deser.*
 import name.anton3.vkapi.methods.longpoll.events.LongPollEvent
 
-fun <T> SimpleModule.addDeserializer(deserializer: JsonDeserializer<T>): SimpleModule {
+internal fun <T> SimpleModule.addDeserializer(deserializer: JsonDeserializer<T>): SimpleModule {
     @Suppress("UNCHECKED_CAST")
-    val type = deserializer.handledType() as Class<T>
+    val type = deserializer.handledType() as Class<T>?
 
-    addDeserializer(type, deserializer)
+    addDeserializer(type!!, deserializer)
     return this
 }
 

@@ -13,7 +13,7 @@ import name.anton3.vkapi.json.readNode
 import name.anton3.vkapi.json.strongType
 import name.anton3.vkapi.methods.longpoll.events.*
 
-object LongPollEventDeserializer : StdDeserializer<LongPollEvent>(LongPollEvent::class.java) {
+internal object LongPollEventDeserializer : StdDeserializer<LongPollEvent>(LongPollEvent::class.java) {
 
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext): LongPollEvent {
         val codec = p.codec as ObjectMapper
