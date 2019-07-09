@@ -56,15 +56,13 @@ private class MethodListExecutor(
             base.batch(dynamicRequest).map { it.wrapInSimpleResponse() }
         } catch (e: VkApiException) {
             if (shouldSplitBatch(e)) {
-                splitAndExecute(dynamicRequest.get())  // Handle Execute error 13 correctly
+                // Handle Execute error 13 correctly
+                val methods = dynamicRequest.get()
+                if (methods.size == 1) listOf(base.execute(methods.single())) else splitAndExecute(methods)
             } else {
                 throw e
             }
         }
-    }
-
-    private fun shouldSplitBatch(e: VkApiException): Boolean {
-        return e.vkError.errorCode == 13 && e.vkError.errorMsg == "response size is too big"
     }
 
     private suspend fun executeMethodSublist(methods: List<VkMethod<*>>): List<VkResponse<*>> {
@@ -92,5 +90,9 @@ private class MethodListExecutor(
 
             responseSplit1Async.await() + responseSplit2
         }
+    }
+
+    private fun shouldSplitBatch(e: VkApiException): Boolean {
+        return e.vkError.errorCode == 13 && e.vkError.errorMsg == "response size is too big"
     }
 }
