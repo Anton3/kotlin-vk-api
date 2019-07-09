@@ -4,37 +4,21 @@ import name.anton3.vkapi.core.VkMethod
 
 sealed class Token<in M: MethodRequirement> {
     abstract fun <T> attachTo(method: VkMethod<T>)
-
-    abstract val accessToken: String
-    abstract val id: Int
 }
 
-data class UserToken(
-    override val accessToken: String,
-    override val id: Int
-) : Token<UserMethod>() {
-
+data class UserToken(val accessToken: String) : Token<UserMethod>() {
     override fun <T> attachTo(method: VkMethod<T>) {
         method.accessToken = accessToken
     }
 }
 
-data class GroupToken(
-    override val accessToken: String,
-    override val id: Int
-) : Token<GroupMethod>() {
-
+data class GroupToken(val accessToken: String) : Token<GroupMethod>() {
     override fun <T> attachTo(method: VkMethod<T>) {
         method.accessToken = accessToken
     }
 }
 
-data class ServiceToken(
-    override val accessToken: String,
-    override val id: Int,
-    val clientSecret: String
-) : Token<ServiceMethod>() {
-
+data class ServiceToken(val accessToken: String, val clientSecret: String) : Token<ServiceMethod>() {
     override fun <T> attachTo(method: VkMethod<T>) {
         method.accessToken = accessToken
         if (method.apiMethodName.substringBefore('.') in listOf("secure", "auth")) {

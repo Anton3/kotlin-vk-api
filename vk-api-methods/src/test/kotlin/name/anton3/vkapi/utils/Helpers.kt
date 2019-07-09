@@ -50,7 +50,7 @@ val httpClient = KtorTransportClient(HttpClient(Apache) {
     }
 })
 val executor = JsonApiMethodExecutor(httpClient, vkObjectMapper())
-val groupToken = GroupToken(groupAccessToken, groupId)
-val userToken = UserToken(userAccessToken, groupId)
+val groupToken = GroupToken(groupAccessToken)
+val userToken = UserToken(userAccessToken)
 val groupApi = GroupClient(TokenMethodExecutor(executor, groupToken))
 val userApi = UserClient(TokenMethodExecutor(executor, userToken))
