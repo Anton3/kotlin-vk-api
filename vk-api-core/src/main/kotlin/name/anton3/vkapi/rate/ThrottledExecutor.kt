@@ -3,14 +3,14 @@ package name.anton3.vkapi.rate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.sync.Semaphore
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.time.delay
 import java.io.Closeable
 import java.time.Duration
+import java.time.Instant
 import java.util.*
-import java.util.concurrent.ConcurrentLinkedQueue
 import kotlin.coroutines.CoroutineContext
 
 class ThrottledExecutor<Request, Response>(
@@ -24,44 +24,52 @@ class ThrottledExecutor<Request, Response>(
     private val coroutineContext: CoroutineContext = coroutineContext + job
     private val coroutineScope: CoroutineScope = CoroutineScope(this.coroutineContext)
 
-    private val timeTickets: Semaphore = Semaphore(rateLimit)
-    private val requestTickets: Channel<Unit> = Channel()
-    private val requests: Queue<CompletableRequest<Request, Response>> = ConcurrentLinkedQueue()
+    private val tickets: Channel<Instant> = Channel(rateLimit)
+    private val requests: Queue<CompletableRequest<Request, Response>> = ArrayDeque()
+    private val requestsMutex: Mutex = Mutex()
 
     init {
         require(rateLimit > 0 && ratePeriod > Duration.ZERO)
 
-        coroutineScope.launch {
-            while (isActive) handleNextRequest()
-        }
+        val now = Instant.now()
+        repeat(rateLimit) { tickets.offer(now) }
     }
 
     override suspend fun execute(dynamicRequest: DynamicRequest<Request>): Response {
         return dynamicRequest.submit(coroutineContext) {
-            requests.add(it)
-            requestTickets.send(Unit)
+            requestsMutex.withLock { requests.add(it) }
+            sendSomeRequest()
         }
     }
 
-    private suspend fun handleNextRequest() {
-        timeTickets.acquire()
-        requestTickets.receive()
-        val request = requests.find { !it.request.isIncompleteBatch } ?: requests.first()
-        requests.remove(request)
+    private suspend fun sendSomeRequest() {
+        delay(Duration.between(Instant.now(), tickets.receive()))
+
+        val request = requestsMutex.withLock {
+            requests.findAndRemove { !it.request.isIncompleteBatch } ?: requests.poll()
+        }
 
         coroutineScope.launch {
-            try {
-                base.complete(request)
-            } finally {
-                coroutineScope.launch {
-                    delay(ratePeriod)
-                    timeTickets.release()
-                }
-            }
+            base.complete(request)
+            tickets.offer(Instant.now() + ratePeriod)
         }
     }
 
     override fun close() {
+        tickets.cancel()
         job.cancel()
     }
+}
+
+private inline fun <T> MutableIterable<T>.findAndRemove(predicate: (T) -> Boolean): T? {
+    with(iterator()) {
+        while (hasNext()) {
+            val element = next()
+            if (predicate(element)) {
+                remove()
+                return element
+            }
+        }
+    }
+    return null
 }
