@@ -2,6 +2,7 @@ package name.anton3.vkapi.rate
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Semaphore
@@ -24,7 +25,7 @@ class ThrottledExecutor<Request, Response>(
     private val coroutineScope: CoroutineScope = CoroutineScope(this.coroutineContext)
 
     private val timeTickets: Semaphore = Semaphore(rateLimit)
-    private val requestTickets: Semaphore = Semaphore(Int.MAX_VALUE, Int.MAX_VALUE)
+    private val requestTickets: Channel<Unit> = Channel()
     private val requests: Queue<CompletableRequest<Request, Response>> = ConcurrentLinkedQueue()
 
     init {
@@ -38,13 +39,13 @@ class ThrottledExecutor<Request, Response>(
     override suspend fun execute(dynamicRequest: DynamicRequest<Request>): Response {
         return dynamicRequest.submit(coroutineContext) {
             requests.add(it)
-            requestTickets.release()
+            requestTickets.send(Unit)
         }
     }
 
     private suspend fun handleNextRequest() {
         timeTickets.acquire()
-        requestTickets.acquire()
+        requestTickets.receive()
         val request = requests.find { !it.request.isIncompleteBatch } ?: requests.first()
         requests.remove(request)
 
