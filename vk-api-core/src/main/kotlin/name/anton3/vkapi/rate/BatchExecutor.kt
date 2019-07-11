@@ -130,7 +130,6 @@ class BatchExecutor<Request, Response>(
 
         selectedRequestsWithData.forEach {
             pendingRequests.remove(it)
-            it.isTimedOut = true
         }
 
         return selectedRequestsWithData.map { it.completableRequest }
