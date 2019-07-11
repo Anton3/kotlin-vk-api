@@ -36,7 +36,7 @@ private fun readPropsFrom(strPath: String): Properties? {
 }
 
 fun readResource(path: String): ByteArray =
-        String::class.java.classLoader.getResourceAsStream(path).readBytes()
+        String::class.java.classLoader.getResourceAsStream(path)!!.readBytes()
 
 val groupAccessToken = readConfigParam("groupAccessToken")
 val userAccessToken = readConfigParam("userAccessToken")
