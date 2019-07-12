@@ -2,6 +2,7 @@ package name.anton3.vkapi.rate
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
@@ -20,7 +21,7 @@ class ThrottledExecutor<Request, Response>(
     private val ratePeriod: Duration
 ) : DynamicExecutor<Request, Response>, Closeable {
 
-    private val job: Job = Job(parent = coroutineContext[Job])
+    private val job: Job = SupervisorJob(parent = coroutineContext[Job])
     private val coroutineContext: CoroutineContext = coroutineContext + job
     private val coroutineScope: CoroutineScope = CoroutineScope(this.coroutineContext)
 
