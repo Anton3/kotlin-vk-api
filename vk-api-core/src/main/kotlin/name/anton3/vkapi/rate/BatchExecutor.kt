@@ -9,6 +9,7 @@ import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.time.delay
 import java.io.Closeable
 import java.time.Duration
+import java.util.concurrent.atomic.AtomicReference
 import kotlin.coroutines.CoroutineContext
 
 class BatchExecutor<Request, Response>(
@@ -29,7 +30,8 @@ class BatchExecutor<Request, Response>(
     private val coroutineScope: CoroutineScope = CoroutineScope(this.coroutineContext)
 
     private val pendingRequests: MutableSet<RequestData<Request, Response>> = LinkedHashSet()
-    private val pendingBatchRequests: MutableList<DynamicRequest<List<Request>>> = mutableListOf()
+    private var pendingBatchRequests: Int = 0
+    private val incompleteBatchRequest: AtomicReference<BatchDynamicRequest?> = AtomicReference(null)
     private var requestsTimedOut: Int = 0
     private val mutex: Mutex = Mutex()
 
@@ -42,9 +44,15 @@ class BatchExecutor<Request, Response>(
             val requestData = RequestData(it)
             pendingRequests.add(requestData)
 
-            if (pendingRequests.size >= pendingBatchRequests.size * batchSize + batchSize) {
+            if (pendingRequests.size == pendingBatchRequests * batchSize + batchSize) {
+                // There are enough requests for a new complete batch.
                 sendDynamicBatchRequest()
             } else {
+                if (pendingRequests.size == pendingBatchRequests * batchSize) {
+                    // Last batch was created because of timed out requests. Now it becomes complete.
+                    incompleteBatchRequest.set(null)
+                }
+
                 coroutineScope.launch {
                     delay(flushDelay)
                     timeElapsed(requestData)
@@ -55,7 +63,7 @@ class BatchExecutor<Request, Response>(
 
     suspend fun flush() {
         mutex.withLock {
-            while (pendingRequests.size > pendingBatchRequests.size * batchSize) {
+            if (pendingRequests.size > pendingBatchRequests * batchSize) {
                 sendDynamicBatchRequest()
             }
         }
@@ -67,7 +75,7 @@ class BatchExecutor<Request, Response>(
                 requestData.isTimedOut = true
                 ++requestsTimedOut
 
-                if (requestsTimedOut > pendingBatchRequests.size * batchSize) {
+                if (requestsTimedOut > pendingBatchRequests * batchSize) {
                     sendDynamicBatchRequest()
                 }
             }
@@ -77,7 +85,12 @@ class BatchExecutor<Request, Response>(
     private fun sendDynamicBatchRequest() {
         val dynamicBatchRequest = BatchDynamicRequest()
 
-        pendingBatchRequests.add(dynamicBatchRequest)
+        if (pendingRequests.size < pendingBatchRequests * batchSize + batchSize) {
+            // This batch is being created by timeElapsed() or flush(). It's incomplete.
+            incompleteBatchRequest.set(dynamicBatchRequest)
+        }
+
+        ++pendingBatchRequests
 
         coroutineScope.launch {
             val batchResult = runCatching {
@@ -106,11 +119,11 @@ class BatchExecutor<Request, Response>(
             get() = this@BatchExecutor.canBeBatched
 
         override val isIncompleteBatch: Boolean
-            get() = pendingRequests.size < batchSize * pendingBatchRequests.indexOf(this)
+            get() = incompleteBatchRequest.get() == this
 
         override suspend fun finalize(): List<Request> {
             mutex.withLock {
-                pendingBatchRequests.remove(this)
+                --pendingBatchRequests
                 batch = extractBatch()
             }
 
@@ -124,10 +137,6 @@ class BatchExecutor<Request, Response>(
         }.take(batchSize)
 
         requestsTimedOut -= selectedRequestsWithData.count { it.isTimedOut }
-
-        if (requestsTimedOut >= pendingBatchRequests.size * batchSize + 1) {
-            sendDynamicBatchRequest()
-        }
 
         selectedRequestsWithData.forEach {
             pendingRequests.remove(it)
