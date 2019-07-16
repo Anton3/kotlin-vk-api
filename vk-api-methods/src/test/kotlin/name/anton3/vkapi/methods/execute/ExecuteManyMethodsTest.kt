@@ -6,7 +6,7 @@ import name.anton3.vkapi.utils.groupApi
 import name.anton3.vkapi.utils.userApi
 import name.anton3.vkapi.vktypes.VkApiException
 import org.junit.Assert.assertEquals
-import org.junit.Assert.fail
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class ExecuteManyMethodsTest {
@@ -50,7 +50,7 @@ class ExecuteManyMethodsTest {
                     count = 100
                 )
             )
-            fail("must throw exception")
+            assertTrue("must throw exception", false)
         } catch (e: VkApiException) {
             val vkError = e.vkError
             println(vkError)
