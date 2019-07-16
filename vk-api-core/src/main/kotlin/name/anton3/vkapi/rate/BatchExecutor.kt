@@ -16,8 +16,7 @@ class BatchExecutor<Request, Response>(
     private val base: DynamicExecutor<List<Request>, List<Response>>,
     coroutineContext: CoroutineContext,
     private val batchSize: Int,
-    private val flushDelay: Duration,
-    private val canBeBatched: Boolean
+    private val flushDelay: Duration
 ) : DynamicExecutor<Request, Response>, Closeable {
 
     private val job: Job = SupervisorJob(parent = coroutineContext[Job])
@@ -109,7 +108,7 @@ class BatchExecutor<Request, Response>(
         var batch: List<CompletableRequest<Request, Response>> = emptyList()
 
         override val canBeBatched: Boolean
-            get() = this@BatchExecutor.canBeBatched
+            get() = true
 
         override val isIncompleteBatch: Boolean
             get() = incompleteBatchRequest.get() == this

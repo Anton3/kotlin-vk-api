@@ -29,7 +29,7 @@ class BatchMethodExecutor(
     private val methodListExecutor = MethodListExecutor(base)
 
     private val batcher: BatchExecutor<VkMethod<*>, VkResponse<*>> =
-        BatchExecutor(methodListExecutor, coroutineContext, BATCH_EXECUTE_LIMIT, flushDelay, false)
+        BatchExecutor(methodListExecutor, coroutineContext, BATCH_EXECUTE_LIMIT, flushDelay)
 
     override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*>>): VkResponse<*> {
         return (if (dynamicRequest.canBeBatched) batcher else base).execute(dynamicRequest)
