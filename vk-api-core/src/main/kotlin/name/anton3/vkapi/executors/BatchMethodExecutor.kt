@@ -3,10 +3,7 @@ package name.anton3.vkapi.executors
 import com.fasterxml.jackson.databind.ObjectMapper
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import name.anton3.vkapi.core.MethodExecutor
-import name.anton3.vkapi.core.TransportClient
-import name.anton3.vkapi.core.VkMethod
-import name.anton3.vkapi.core.wrapInSimpleResponse
+import name.anton3.vkapi.core.*
 import name.anton3.vkapi.methods.execute.batch
 import name.anton3.vkapi.rate.BatchExecutor
 import name.anton3.vkapi.rate.DynamicExecutor
@@ -32,7 +29,7 @@ class BatchMethodExecutor(
         BatchExecutor(methodListExecutor, coroutineContext, BATCH_EXECUTE_LIMIT, flushDelay)
 
     override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*>>): VkResponse<*> {
-        return (if (dynamicRequest.canBeBatched) batcher else base).execute(dynamicRequest)
+        return (if (dynamicRequest[SupportsVkScript] == true) batcher else base).execute(dynamicRequest)
     }
 
     override val transportClient: TransportClient get() = base.transportClient
@@ -47,16 +44,18 @@ class BatchMethodExecutor(
     }
 }
 
-private class MethodListExecutor(
-    private val base: MethodExecutor
-) : DynamicExecutor<List<VkMethod<*>>, List<VkResponse<*>>> {
+private class MethodListExecutor(private val base: MethodExecutor)
+    : DynamicExecutor<List<VkMethod<*>>, List<VkResponse<*>>> {
 
     override suspend fun execute(dynamicRequest: DynamicRequest<List<VkMethod<*>>>): List<VkResponse<*>> {
         return try {
             base.batch(dynamicRequest).map { it.wrapInSimpleResponse() }
         } catch (e: VkApiException) {
             if (shouldSplitBatch(e)) {
-                // Handle Execute error 13 correctly
+                // Handle Execute error 13 correctly: bisect the batch until mini-batches succeed
+                //
+                // This requires up to twice the amount of requests if they all fail,
+                // but can save a lot of requests if some of them succeed early
                 val methods = dynamicRequest.get()
                 if (methods.size == 1) listOf(base.execute(methods.single())) else splitAndExecute(methods)
             } else {

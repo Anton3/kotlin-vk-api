@@ -1,50 +1,33 @@
 package name.anton3.vkapi.rate
 
-import kotlinx.coroutines.CompletableDeferred
-import java.util.concurrent.atomic.AtomicBoolean
-
+/**
+ * DynamicRequest is a request that is aware of when it is executed.
+ */
 interface DynamicRequest<out Request> {
+
+    /**
+     * Compose and return the request.
+     * It's encouraged (but not required) to cache the request, so that on second and later calls,
+     * no computations are performed.
+     */
     suspend fun get(): Request
-    val isIncompleteBatch: Boolean
-    val canBeBatched: Boolean
+
+    /**
+     * Retrieve meta-info about the request, or return null if this kind of meta-info is not present.
+     * Executors should not typically require any meta-info. Reasonable defaults should be used.
+     * This method is essentially a typed map, bound to each request.
+     */
+    operator fun <T: Any> get(key: Key<T>): T?
+
+    /**
+     * Represents a kind of meta-info that might be bound to the request.
+     */
+    interface Key<T: Any>
 }
 
-data class SimpleDynamicRequest<Request>(
-    val request: Request,
-    override val isIncompleteBatch: Boolean = false,
-    override val canBeBatched: Boolean = true
-) : DynamicRequest<Request> {
-    override suspend fun get(): Request = request
-}
-
-abstract class SynchronizedDynamicRequest<out Request> : DynamicRequest<Request> {
-    final override suspend fun get(): Request {
-        if (!internalRequestStarted.getAndSet(true)) {
-            internalRequest.complete { finalize() }
-        }
-        return internalRequest.await()
-    }
-
-    protected abstract suspend fun finalize(): Request
-
-    private val internalRequest: CompletableDeferred<Request> = CompletableDeferred()
-    private val internalRequestStarted: AtomicBoolean = AtomicBoolean(false)
-}
-
-fun <Request, BaseRequest> DynamicRequest<BaseRequest>.map(
-    block: suspend (BaseRequest) -> Request
-): SynchronizedDynamicRequest<Request> = MappedDynamicRequest(this, block)
-
-
-internal class MappedDynamicRequest<Request, BaseRequest>(
-    private val base: DynamicRequest<BaseRequest>,
-    private val preprocessor: suspend (BaseRequest) -> Request
-) : SynchronizedDynamicRequest<Request>() {
-
-    override val isIncompleteBatch: Boolean get() = base.isIncompleteBatch
-    override val canBeBatched: Boolean get() = base.canBeBatched
-
-    override suspend fun finalize(): Request {
-        return preprocessor(base.get())
-    }
-}
+/**
+ * This trait can be implemented by a DynamicRequest that is some composite batch request.
+ * True, if this request still has space for more mini-requests.
+ * Default: `false`
+ */
+object IsIncompleteBatch : DynamicRequest.Key<Boolean>

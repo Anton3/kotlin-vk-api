@@ -105,13 +105,8 @@ class BatchExecutor<Request, Response>(
     }
 
     private inner class BatchDynamicRequest : SynchronizedDynamicRequest<List<Request>>() {
+
         var batch: List<CompletableRequest<Request, Response>> = emptyList()
-
-        override val canBeBatched: Boolean
-            get() = true
-
-        override val isIncompleteBatch: Boolean
-            get() = incompleteBatchRequest.get() == this
 
         override suspend fun finalize(): List<Request> {
             mutex.withLock {
@@ -121,11 +116,17 @@ class BatchExecutor<Request, Response>(
 
             return batch.map { it.request.get() }
         }
+
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : Any> get(key: DynamicRequest.Key<T>): T? = when(key) {
+            is IsIncompleteBatch -> (incompleteBatchRequest.get() == this) as T
+            else -> null
+        }
     }
 
     private fun extractBatch(): List<CompletableRequest<Request, Response>> {
         pendingRequests.sortBy { completableRequest ->
-            (if (!completableRequest.request.isIncompleteBatch) 2 else 0) + (if (completableRequest in timedOutRequests) 1 else 0)
+            (if (completableRequest.request[IsIncompleteBatch] != true) 2 else 0) + (if (completableRequest in timedOutRequests) 1 else 0)
         }
 
         return List(minOf(batchSize, pendingRequests.size)) {

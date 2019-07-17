@@ -3,15 +3,39 @@ package name.anton3.vkapi.core
 import com.fasterxml.jackson.databind.ObjectMapper
 import name.anton3.vkapi.rate.DynamicExecutor
 import name.anton3.vkapi.rate.DynamicRequest
-import name.anton3.vkapi.rate.SimpleDynamicRequest
 import name.anton3.vkapi.vktypes.VkResponse
+
+/**
+ * `true`, if the method is allowed to be used in VK Execute method.
+ * Default: `false`
+ */
+object SupportsVkScript : DynamicRequest.Key<Boolean>
+
+
+/**
+ * An extension of SimpleDynamicRequest that has SupportsVkScript key.
+ */
+data class SimpleMethodRequest<T>(
+    private val request: VkMethod<T>,
+    private val supportsBatch: Boolean = request.supportsBatch()
+) : DynamicRequest<VkMethod<T>> {
+
+    override suspend fun get(): VkMethod<T> = request
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : Any> get(key: DynamicRequest.Key<T>): T? = when (key) {
+        is SupportsVkScript -> supportsBatch as T
+        else -> null
+    }
+}
+
 
 interface MethodExecutor : DynamicExecutor<VkMethod<*>, VkResponse<*>> {
     val transportClient: TransportClient
     val objectMapper: ObjectMapper
 
     override suspend fun execute(request: VkMethod<*>): VkResponse<*> {
-        return execute(SimpleDynamicRequest(request, canBeBatched = request.supportsBatch()))
+        return execute(SimpleMethodRequest(request))
     }
 }
 

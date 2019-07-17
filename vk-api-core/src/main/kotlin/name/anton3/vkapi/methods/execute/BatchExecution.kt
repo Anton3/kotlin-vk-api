@@ -7,10 +7,15 @@ import java.io.IOException
 
 suspend fun MethodExecutor.batch(methods: List<VkMethod<*>>): List<VkResult<*>> {
     val batchMethod = BatchExecuteMethod(methods, objectMapper)
+
+    // executeTyped will lead to creation of SimpleMethodRequest, where supportsBatch = false (which is needed)
     return executeTyped(batchMethod).extractExecuteResult().unwrap().parseBatchResponse()
 }
 
 suspend fun MethodExecutor.batch(dynamicMethods: DynamicRequest<List<VkMethod<*>>>): List<VkResult<*>> {
+    // If dynamicMethods[SupportsVkScript] == true, then batchMethod[SupportsVkBatch] == true, which is incorrect
+    require(dynamicMethods[SupportsVkScript] != true)
+
     val batchMethod = dynamicMethods.map { BatchExecuteMethod(it, objectMapper) }
     return executeTyped(batchMethod).extractExecuteResult().unwrap().parseBatchResponse()
 }

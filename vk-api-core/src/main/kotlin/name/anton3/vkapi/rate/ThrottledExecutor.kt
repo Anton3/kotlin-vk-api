@@ -47,7 +47,7 @@ class ThrottledExecutor<Request, Response>(
         delay(Duration.between(Instant.now(), tickets.receive()))
 
         val request = requestsMutex.withLock {
-            requests.findAndRemove { !it.request.isIncompleteBatch } ?: requests.poll()
+            requests.findAndRemove { it.request[IsIncompleteBatch] != true } ?: requests.poll()
         }
 
         coroutineScope.launch {
