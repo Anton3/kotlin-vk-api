@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import name.anton3.vkapi.core.*
 import name.anton3.vkapi.json.deserializeResponse
 import name.anton3.vkapi.json.serializeMethod
-import name.anton3.vkapi.rate.DynamicRequest
+import name.anton3.executors.core.DynamicRequest
 import name.anton3.vkapi.vktypes.VkResponse
 
 data class JsonApiMethodExecutor(

@@ -1,7 +1,8 @@
-package name.anton3.vkapi.rate
+package name.anton3.executors.instances
 
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import name.anton3.executors.core.Executor
 import java.time.Duration
 import java.time.Instant
 import java.util.*

@@ -1,6 +1,7 @@
-package name.anton3.vkapi.rate
+package name.anton3.executors.core
 
 import kotlinx.coroutines.CompletableDeferred
+import name.anton3.executors.util.complete
 import java.util.concurrent.atomic.AtomicBoolean
 
 data class SimpleDynamicRequest<Request>(private val request: Request) : DynamicRequest<Request> {

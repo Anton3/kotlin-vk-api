@@ -4,7 +4,7 @@ package name.anton3.vkapi.client
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import name.anton3.vkapi.core.*
-import name.anton3.vkapi.rate.DynamicRequest
+import name.anton3.executors.core.DynamicRequest
 import name.anton3.vkapi.tokens.*
 import java.io.IOException
 

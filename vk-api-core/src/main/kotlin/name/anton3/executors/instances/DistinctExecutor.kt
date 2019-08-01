@@ -1,8 +1,10 @@
-package name.anton3.vkapi.rate
+package name.anton3.executors.instances
 
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import name.anton3.executors.core.Executor
+import name.anton3.executors.util.complete
 
 class DistinctExecutor<Request, Response>(
     private val base: Executor<Request, Response>

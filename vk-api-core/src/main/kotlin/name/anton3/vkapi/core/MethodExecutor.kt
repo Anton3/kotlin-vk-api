@@ -1,8 +1,8 @@
 package name.anton3.vkapi.core
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import name.anton3.vkapi.rate.DynamicExecutor
-import name.anton3.vkapi.rate.DynamicRequest
+import name.anton3.executors.core.DynamicExecutor
+import name.anton3.executors.core.DynamicRequest
 import name.anton3.vkapi.vktypes.VkResponse
 
 /**

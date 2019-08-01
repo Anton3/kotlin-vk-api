@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import name.anton3.vkapi.core.MethodExecutor
 import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.core.VkMethod
-import name.anton3.vkapi.rate.DynamicRequest
-import name.anton3.vkapi.rate.ThrottledExecutor
+import name.anton3.executors.core.DynamicRequest
+import name.anton3.executors.instances.ThrottledExecutor
 import name.anton3.vkapi.vktypes.VkResponse
 import java.io.Closeable
 import java.time.Duration

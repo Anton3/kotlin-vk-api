@@ -1,4 +1,4 @@
-package name.anton3.vkapi.rate
+package name.anton3.executors.core
 
 /**
  * DynamicRequest is a request that is aware of when it is executed.

@@ -1,7 +1,11 @@
-package name.anton3.vkapi.rate
+package name.anton3.executors.instances
 
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Job
+import name.anton3.executors.core.DynamicExecutor
+import name.anton3.executors.core.DynamicRequest
+import name.anton3.executors.core.RequestStorage
+import name.anton3.executors.util.CompletableRequest
 import java.util.concurrent.ConcurrentHashMap
 
 abstract class StoringDynamicExecutor<Request, Response> : DynamicExecutor<Request, Response> {

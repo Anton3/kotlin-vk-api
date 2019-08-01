@@ -1,8 +1,10 @@
-package name.anton3.vkapi.rate
+package name.anton3.executors.util
 
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.withContext
+import name.anton3.executors.core.DynamicExecutor
+import name.anton3.executors.core.DynamicRequest
 import kotlin.coroutines.CoroutineContext
 
 class CompletableRequest<out Request, Response>(

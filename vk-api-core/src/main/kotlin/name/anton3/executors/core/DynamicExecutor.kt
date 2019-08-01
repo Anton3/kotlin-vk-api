@@ -1,4 +1,4 @@
-package name.anton3.vkapi.rate
+package name.anton3.executors.core
 
 interface Executor<Request, Response> {
     suspend fun execute(request: Request): Response

@@ -1,4 +1,4 @@
-package name.anton3.vkapi.rate
+package name.anton3.executors.instances
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -7,6 +7,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.time.delay
+import name.anton3.executors.core.*
+import name.anton3.executors.util.CompletableRequest
+import name.anton3.executors.util.FifoRequestStorage
 import java.io.Closeable
 import java.time.Duration
 import java.util.concurrent.atomic.AtomicReference

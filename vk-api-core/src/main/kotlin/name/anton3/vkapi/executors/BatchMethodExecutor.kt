@@ -3,11 +3,11 @@ package name.anton3.vkapi.executors
 import com.fasterxml.jackson.databind.ObjectMapper
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import name.anton3.executors.core.DynamicExecutor
+import name.anton3.executors.core.DynamicRequest
+import name.anton3.executors.instances.BatchExecutor
 import name.anton3.vkapi.core.*
 import name.anton3.vkapi.methods.execute.batch
-import name.anton3.vkapi.rate.BatchExecutor
-import name.anton3.vkapi.rate.DynamicExecutor
-import name.anton3.vkapi.rate.DynamicRequest
 import name.anton3.vkapi.vktypes.VkApiException
 import name.anton3.vkapi.vktypes.VkResponse
 import java.io.Closeable
