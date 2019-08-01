@@ -5,50 +5,44 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.time.delay
 import java.io.Closeable
 import java.time.Duration
 import java.time.Instant
-import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 class ThrottledExecutor<Request, Response>(
     private val base: DynamicExecutor<Request, Response>,
     coroutineContext: CoroutineContext,
     rateLimit: Int,
-    private val ratePeriod: Duration
-) : DynamicExecutor<Request, Response>, Closeable {
+    private val ratePeriod: Duration,
+    override val requestStorage: RequestStorage<Request> = FifoRequestStorage()
+) : StoringDynamicExecutor<Request, Response>(), Closeable {
 
-    private val job: Job = SupervisorJob(parent = coroutineContext[Job])
-    private val coroutineContext: CoroutineContext = coroutineContext + job
-    private val coroutineScope: CoroutineScope = CoroutineScope(this.coroutineContext)
-
+    override val job: Job = SupervisorJob(parent = coroutineContext[Job])
+    private val coroutineScope: CoroutineScope = CoroutineScope(coroutineContext + job)
     private val tickets: Channel<Instant> = Channel(rateLimit)
-    private val requests: Queue<CompletableRequest<Request, Response>> = ArrayDeque()
-    private val requestsMutex: Mutex = Mutex()
 
     init {
-        require(rateLimit > 0 && ratePeriod > Duration.ZERO)
+        require(rateLimit > 0 && ratePeriod >= Duration.ZERO)
 
         val now = Instant.now()
         repeat(rateLimit) { tickets.offer(now) }
     }
 
-    override suspend fun execute(dynamicRequest: DynamicRequest<Request>): Response {
-        return dynamicRequest.submit(coroutineContext) {
-            requestsMutex.withLock { requests.add(it) }
-            sendSomeRequest()
-        }
+    override suspend fun execute(dynamicRequest: DynamicRequest<Request>): Response = submit(dynamicRequest) {
+        sendSomeRequest()
     }
 
     private suspend fun sendSomeRequest() {
         val ticket = tickets.receive()
         delay(Duration.between(Instant.now(), ticket))
 
-        val request = requestsMutex.withLock {
-            requests.findAndRemove { it.request[IsIncompleteBatch] != true } ?: requests.poll()
+        val request = try {
+            poll()
+        } catch (e: Throwable) {
+            tickets.offer(Instant.now())
+            throw e
         }
 
         coroutineScope.launch {
@@ -61,17 +55,4 @@ class ThrottledExecutor<Request, Response>(
         tickets.cancel()
         job.cancel()
     }
-}
-
-private inline fun <T> MutableIterable<T>.findAndRemove(predicate: (T) -> Boolean): T? {
-    with(iterator()) {
-        while (hasNext()) {
-            val element = next()
-            if (predicate(element)) {
-                remove()
-                return element
-            }
-        }
-    }
-    return null
 }

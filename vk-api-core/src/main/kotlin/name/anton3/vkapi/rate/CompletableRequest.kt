@@ -5,7 +5,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
-internal class CompletableRequest<out Request, Response>(
+class CompletableRequest<out Request, Response>(
     val request: DynamicRequest<Request>,
     private val handle: CompletableDeferred<Response>
 ) : CompletableDeferred<Response> by handle
