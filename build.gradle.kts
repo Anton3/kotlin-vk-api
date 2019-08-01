@@ -57,7 +57,7 @@ subprojects {
 
     val sourcesJar by tasks.creating(Jar::class) {
         dependsOn("classes")
-        classifier = "sources"
+        archiveClassifier.set("sources")
         val sourceSets: SourceSetContainer by project
         from(sourceSets["main"].allSource)
     }

@@ -9,6 +9,7 @@
 
 rootProject.name = "kotlin-vk-api"
 include("generator")
+include("executors")
 include("vk-api-core")
 include("vk-api-generated")
 include("vk-api-methods")
