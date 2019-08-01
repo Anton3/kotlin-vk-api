@@ -44,7 +44,8 @@ class ThrottledExecutor<Request, Response>(
     }
 
     private suspend fun sendSomeRequest() {
-        delay(Duration.between(Instant.now(), tickets.receive()))
+        val ticket = tickets.receive()
+        delay(Duration.between(Instant.now(), ticket))
 
         val request = requestsMutex.withLock {
             requests.findAndRemove { it.request[IsIncompleteBatch] != true } ?: requests.poll()
