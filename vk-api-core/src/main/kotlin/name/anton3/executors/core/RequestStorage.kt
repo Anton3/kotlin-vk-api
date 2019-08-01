@@ -32,23 +32,6 @@ interface RequestStorage<Request> {
 }
 
 
-private class RequestStorageReference {
-    var value: RequestStorage<*>? = null
-    val mutex: ReadWriteMutex = ReadWriteMutex()
-
-    internal suspend inline fun <Request, R> get(block: (RequestStorage<Request>?) -> R): R {
-        @Suppress("UNCHECKED_CAST")
-        return mutex.read.withLock { block(value as RequestStorage<Request>?) }
-    }
-
-    internal suspend inline fun <Request> set(block: () -> RequestStorage<Request>?) {
-        mutex.write.withLock { value = block() }
-    }
-}
-
-private val requestStorageReferences: MutableMap<DynamicRequest<*>, RequestStorageReference> =
-    Collections.synchronizedMap(ConcurrentHashMap())
-
 /**
  * Must be called in RequestStorage.add and RequestStorage.poll
  */
@@ -75,3 +58,20 @@ suspend fun <Request> DynamicRequest<Request>.modify(block: suspend () -> Unit) 
 
     if (!hasStorage) block()
 }
+
+private class RequestStorageReference {
+    var value: RequestStorage<*>? = null
+    val mutex: ReadWriteMutex = ReadWriteMutex()
+
+    suspend inline fun <Request, R> get(block: (RequestStorage<Request>?) -> R): R {
+        @Suppress("UNCHECKED_CAST")
+        return mutex.read.withLock { block(value as RequestStorage<Request>?) }
+    }
+
+    suspend inline fun <Request> set(block: () -> RequestStorage<Request>?) {
+        mutex.write.withLock { value = block() }
+    }
+}
+
+private val requestStorageReferences: MutableMap<DynamicRequest<*>, RequestStorageReference> =
+    Collections.synchronizedMap(ConcurrentHashMap())
