@@ -57,7 +57,11 @@ subprojects {
 
     val sourcesJar by tasks.creating(Jar::class) {
         dependsOn("classes")
-        archiveClassifier.set("sources")
+
+        // archiveClassifier is available since Gradle 5.0 :-(
+        @Suppress("DEPRECATION")
+        classifier = "sources"
+
         val sourceSets: SourceSetContainer by project
         from(sourceSets["main"].allSource)
     }
