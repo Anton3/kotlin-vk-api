@@ -1,9 +1,5 @@
 package name.anton3.executors.instances
 
-import name.anton3.executors.core.IsIncompleteBatch
-import name.anton3.executors.core.RequestStorage
-import name.anton3.executors.core.SynchronizedDynamicRequest
-import name.anton3.executors.core.modify
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
@@ -135,7 +131,7 @@ class BatchExecutor<Request, Response>(
     // Should be called while `mutex` is locked.
     private suspend fun setIncompleteBatchRequest(batchRequest: BatchRequest?) {
         val oldIncompleteBatchRequest = incompleteBatchRequest.get()
-        val affectedRequest = oldIncompleteBatchRequest ?: batchRequest!!
+        val affectedRequest = oldIncompleteBatchRequest ?: batchRequest ?: return
 
         affectedRequest.modify {
             incompleteBatchRequest.set(batchRequest)
