@@ -118,6 +118,7 @@ class BatchExecutor<Request, Response>(
             mutex.withLock {
                 --pendingBatchRequests
                 batch = pollMany(minOf(batchSize, pendingRequestCount))
+                pendingRequestCount -= batch.size
                 batch.forEach { timedOutRequests.remove(it.request) }
             }
 
