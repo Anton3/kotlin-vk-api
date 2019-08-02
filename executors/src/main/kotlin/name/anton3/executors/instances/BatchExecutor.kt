@@ -38,24 +38,27 @@ class BatchExecutor<Request, Response>(
         require(batchSize > 0)
     }
 
-    override suspend fun execute(dynamicRequest: DynamicRequest<Request>): Response = submit(dynamicRequest) {
-        mutex.withLock<Unit> {
-            if (pendingRequestCount >= pendingBatchRequests * batchSize + batchSize) {
-                // There are enough requests for a new complete batch.
-                sendBatchRequest()
-            } else {
-                if (pendingRequestCount == pendingBatchRequests * batchSize) {
-                    // Last batch was created because of timed out requests. Now it becomes complete.
-                    setIncompleteBatchRequest(null)
-                }
+    override suspend fun execute(dynamicRequest: DynamicRequest<Request>): Response = mutex.withLock {
+        val handle = add(dynamicRequest)
+        ++pendingRequestCount
 
-                coroutineScope.launch {
-                    delay(flushDelay)
-                    timeElapsed(dynamicRequest)
-                }
+        if (pendingRequestCount >= pendingBatchRequests * batchSize + batchSize) {
+            // There are enough requests for a new complete batch.
+            sendBatchRequest()
+        } else {
+            if (pendingRequestCount == pendingBatchRequests * batchSize) {
+                // Last batch was created because of timed out requests. Now it becomes complete.
+                setIncompleteBatchRequest(null)
+            }
+
+            coroutineScope.launch {
+                delay(flushDelay)
+                timeElapsed(dynamicRequest)
             }
         }
-    }
+
+        handle
+    }.await()
 
     suspend fun flush() {
         mutex.withLock {
