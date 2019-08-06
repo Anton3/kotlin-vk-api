@@ -22,7 +22,7 @@ internal object LongPollEventDeserializer : StdDeserializer<LongPollEvent>(LongP
         val typeId = (node[0] as NumericNode).intValue()
         val type = eventTypes[typeId] ?: return UnknownLongPollEvent(typeId, codec.convertValue(node))
 
-        return codec.reader(ctxt.forwardableAttributes).readValue<LongPollEvent>(node.traverse(codec), type)
+        return codec.reader(ctxt.forwardableAttributes).readValue(node.traverse(codec), type)
     }
 
     private val eventTypes = mapOf(

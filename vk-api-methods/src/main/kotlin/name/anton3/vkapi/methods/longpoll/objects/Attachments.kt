@@ -3,7 +3,6 @@ package name.anton3.vkapi.methods.longpoll.objects
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.databind.node.ObjectNode
 import name.anton3.vkapi.methods.longpoll.attachments.Attachment
-import name.anton3.vkapi.methods.longpoll.attachments.AttachmentType
 
 data class Attachments(
     val attachments: List<Attachment>,
@@ -32,10 +31,7 @@ data class Attachments(
 
             val attachments = generateSequence(1) { it + 1 }
                 .takeWhile { node.has("attach$it") }
-                .mapNotNull { idx ->
-                    val attachId = node.get("attach${idx}_type").asText()
-                    AttachmentType.fromStringId(attachId)?.readFromJson(node, idx)
-                }
+                .mapNotNull { idx -> Attachment.parse(node, idx) }
                 .toList()
 
             return Attachments(attachments, sourceAct, sourceMid, fromAdmin, geo, emoji)

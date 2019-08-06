@@ -1,25 +1,14 @@
 package name.anton3.vkapi.methods.longpoll.attachments
 
-import com.fasterxml.jackson.databind.JsonNode
+import name.anton3.vkapi.vktypes.Value
 
-enum class AttachmentType(internal var typeId: String) {
+enum class AttachmentType(override val value: String) : Value<String> {
     PHOTO("photo"),
-    AUDIO("audio"),
     VIDEO("video"),
-
-    LINK("link") {
-        override fun readFromJson(node: JsonNode, idx: Int): Attachment = LinkAttachment(node, idx)
-    },
-
-    DOC("doc") {
-        override fun readFromJson(node: JsonNode, idx: Int): Attachment = DocAttachment(node, idx)
-    };
-
-    open fun readFromJson(node: JsonNode, idx: Int): Attachment = Attachment(node, idx)
-
-    companion object {
-        fun fromStringId(id: String): AttachmentType? {
-            return values().find { type -> type.typeId == id }
-        }
-    }
+    AUDIO("audio"),
+    DOC("doc"),
+    WALL("wall"),
+    STICKER("sticker"),
+    LINK("link"),
+    MONEY("money");
 }
