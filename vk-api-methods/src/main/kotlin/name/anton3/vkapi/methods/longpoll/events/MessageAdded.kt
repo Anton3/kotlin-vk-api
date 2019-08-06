@@ -14,6 +14,6 @@ data class MessageAdded(
     val timestamp: VkDate?,
     val text: String?,
     val extra: ExtraFields?,
-    val attachments: Attachments = Attachments.EMPTY,
+    val attachments: Attachments?,
     val randomId: Int = 0
 ) : LongPollEvent(eventType)
