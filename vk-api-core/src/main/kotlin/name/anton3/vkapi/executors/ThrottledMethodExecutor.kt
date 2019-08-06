@@ -1,11 +1,12 @@
 package name.anton3.vkapi.executors
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import name.anton3.executors.core.DynamicRequest
+import name.anton3.executors.instances.ThrottledExecutor
+import name.anton3.executors.util.batchAwareRequestStorage
 import name.anton3.vkapi.core.MethodExecutor
 import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.core.VkMethod
-import name.anton3.executors.core.DynamicRequest
-import name.anton3.executors.instances.ThrottledExecutor
 import name.anton3.vkapi.vktypes.VkResponse
 import java.io.Closeable
 import java.time.Duration
@@ -19,7 +20,7 @@ class ThrottledMethodExecutor(
 ) : MethodExecutor, Closeable {
 
     private val throttler: ThrottledExecutor<VkMethod<*>, VkResponse<*>> =
-        ThrottledExecutor(base, coroutineContext, rateLimit, ratePeriod)
+        ThrottledExecutor(base, coroutineContext, rateLimit, ratePeriod, batchAwareRequestStorage())
 
     override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*>>): VkResponse<*> {
         return throttler.execute(dynamicRequest)

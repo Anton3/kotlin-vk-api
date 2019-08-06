@@ -6,6 +6,7 @@ import kotlinx.coroutines.coroutineScope
 import name.anton3.executors.core.DynamicExecutor
 import name.anton3.executors.core.DynamicRequest
 import name.anton3.executors.instances.BatchExecutor
+import name.anton3.executors.util.batchAwareRequestStorage
 import name.anton3.vkapi.core.*
 import name.anton3.vkapi.methods.execute.batch
 import name.anton3.vkapi.vktypes.VkApiException
@@ -26,7 +27,7 @@ class BatchMethodExecutor(
     private val methodListExecutor = MethodListExecutor(base)
 
     private val batcher: BatchExecutor<VkMethod<*>, VkResponse<*>> =
-        BatchExecutor(methodListExecutor, coroutineContext, BATCH_EXECUTE_LIMIT, flushDelay)
+        BatchExecutor(methodListExecutor, coroutineContext, BATCH_EXECUTE_LIMIT, flushDelay, batchAwareRequestStorage())
 
     override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*>>): VkResponse<*> {
         return (if (dynamicRequest[SupportsVkScript] == true) batcher else base).execute(dynamicRequest)
