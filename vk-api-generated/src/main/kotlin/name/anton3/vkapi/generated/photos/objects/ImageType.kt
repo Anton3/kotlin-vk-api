@@ -23,7 +23,8 @@ enum class ImageType(@JsonValue override val value: String) : Value<String> {
     T("t"),
     U("u"),
     B("b"),
-    TEMP("temp");
+    TEMP("temp"),
+    MAX("max");
 
     companion object {
         @JvmStatic
