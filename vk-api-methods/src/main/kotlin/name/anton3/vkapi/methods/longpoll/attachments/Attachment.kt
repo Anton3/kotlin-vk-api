@@ -15,7 +15,10 @@ abstract class Attachment internal constructor(node: JsonNode, idx: Int) {
         }
 
         fun parse(node: JsonNode, idx: Int): Attachment {
-            return when (parseEnum(prop(node, idx, "type").textValue())) {
+            @Suppress("MoveVariableDeclarationIntoWhen")
+            val type: AttachmentType = parseEnum(prop(node, idx, "type").textValue())
+
+            return when (type) {
                 AttachmentType.LINK -> LinkAttachment(node, idx)
                 AttachmentType.DOC -> DocAttachment(node, idx)
                 else -> GenericAttachment(node, idx)
