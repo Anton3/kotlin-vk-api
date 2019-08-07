@@ -2,28 +2,7 @@
   "objects": {
     "photos_image_type": {
       "type": "string",
-      "description": "Photo's type.",
-      "enum": [
-        "s",
-        "m",
-        "x",
-        "o",
-        "p",
-        "q",
-        "r",
-        "y",
-        "z",
-        "w",
-        "k",
-        "l",
-        "j",
-        "a",
-        "t",
-        "u",
-        "b",
-        "temp",
-        "max"
-      ]
+      "description": "Photo's type."
     }
   }
 }

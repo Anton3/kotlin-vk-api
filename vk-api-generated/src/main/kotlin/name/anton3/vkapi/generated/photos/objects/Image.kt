@@ -9,7 +9,7 @@ package name.anton3.vkapi.generated.photos.objects
  * @property height Height of the photo in px.
  */
 data class Image(
-    val type: ImageType? = null,
+    val type: String? = null,
     val url: String? = null,
     val width: Int? = null,
     val height: Int? = null
