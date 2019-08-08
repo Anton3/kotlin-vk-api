@@ -3,10 +3,10 @@
 package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.messages.objects.GetHistoryAttachmentsMediaType
 import name.anton3.vkapi.generated.messages.objects.GetHistoryAttachmentsResponse
-import name.anton3.vkapi.tokens.UserGroupMethod
+import name.anton3.vkapi.method.UserGroupMethod
 
 /**
  * [https://vk.com/dev/messages.getHistoryAttachments]

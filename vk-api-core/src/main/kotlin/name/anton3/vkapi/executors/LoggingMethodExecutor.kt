@@ -5,8 +5,8 @@ import name.anton3.executors.core.DynamicRequest
 import name.anton3.executors.core.map
 import name.anton3.vkapi.core.MethodExecutor
 import name.anton3.vkapi.core.TransportClient
-import name.anton3.vkapi.core.VkMethod
-import name.anton3.vkapi.json.serializeMethod
+import name.anton3.vkapi.json.core.serializeMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkResponse
 import org.apache.logging.log4j.kotlin.Logging
 

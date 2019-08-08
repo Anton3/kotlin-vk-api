@@ -3,11 +3,11 @@
 package name.anton3.vkapi.generated.users.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.common.objects.NameCase
 import name.anton3.vkapi.generated.users.objects.GetNearbyRadius
 import name.anton3.vkapi.generated.users.objects.UserFull
-import name.anton3.vkapi.tokens.UserMethod
+import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**

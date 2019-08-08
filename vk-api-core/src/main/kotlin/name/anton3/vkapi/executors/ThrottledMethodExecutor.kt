@@ -6,7 +6,7 @@ import name.anton3.executors.instances.ThrottledExecutor
 import name.anton3.executors.util.batchAwareRequestStorage
 import name.anton3.vkapi.core.MethodExecutor
 import name.anton3.vkapi.core.TransportClient
-import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkResponse
 import java.io.Closeable
 import java.time.Duration

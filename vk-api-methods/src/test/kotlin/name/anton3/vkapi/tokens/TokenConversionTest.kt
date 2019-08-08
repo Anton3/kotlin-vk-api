@@ -4,7 +4,7 @@ import name.anton3.vkapi.client.UserClient
 import name.anton3.vkapi.client.UserGroupClient
 import name.anton3.vkapi.client.UserGroupServiceClient
 import name.anton3.vkapi.core.MethodExecutor
-import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.method.*
 
 private val error: Nothing get() = error("")
 

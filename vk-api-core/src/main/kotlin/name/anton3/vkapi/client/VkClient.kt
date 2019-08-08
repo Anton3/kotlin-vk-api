@@ -3,9 +3,12 @@
 package name.anton3.vkapi.client
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import name.anton3.vkapi.core.*
 import name.anton3.executors.core.DynamicRequest
-import name.anton3.vkapi.tokens.*
+import name.anton3.vkapi.core.MethodExecutor
+import name.anton3.vkapi.core.TransportClient
+import name.anton3.vkapi.core.executeTyped
+import name.anton3.vkapi.core.extractSimpleResult
+import name.anton3.vkapi.method.*
 import java.io.IOException
 
 inline fun <T> swallow(block: () -> T): T? {

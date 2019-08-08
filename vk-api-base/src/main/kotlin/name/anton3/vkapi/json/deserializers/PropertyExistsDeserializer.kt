@@ -1,4 +1,4 @@
-package name.anton3.vkapi.json.deser
+package name.anton3.vkapi.json.deserializers
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext

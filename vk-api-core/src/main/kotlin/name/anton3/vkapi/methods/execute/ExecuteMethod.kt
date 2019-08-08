@@ -1,8 +1,8 @@
 package name.anton3.vkapi.methods.execute
 
 import com.fasterxml.jackson.core.type.TypeReference
-import name.anton3.vkapi.core.VkMethod
-import name.anton3.vkapi.tokens.UserGroupMethod
+import name.anton3.vkapi.method.UserGroupMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  *  [https://vk.com/dev/execute]

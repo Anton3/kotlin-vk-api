@@ -3,10 +3,10 @@
 package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.video.objects.GetCommentsResponse
 import name.anton3.vkapi.generated.video.objects.GetCommentsSort
-import name.anton3.vkapi.tokens.UserMethod
+import name.anton3.vkapi.method.UserMethod
 
 /**
  * [https://vk.com/dev/video.getComments]

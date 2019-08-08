@@ -1,4 +1,4 @@
-package name.anton3.vkapi.json.deser
+package name.anton3.vkapi.json.deserializers
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.core.JsonGenerator
@@ -11,8 +11,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import com.fasterxml.jackson.databind.node.ObjectNode
 import com.fasterxml.jackson.databind.ser.std.StdSerializer
-import name.anton3.vkapi.json.readNode
-import name.anton3.vkapi.json.strongType
+import name.anton3.vkapi.json.core.readNode
+import name.anton3.vkapi.json.core.strongType
 import name.anton3.vkapi.methods.longpoll.attachments.Attachment
 
 @JsonIgnoreProperties(ignoreUnknown = true)

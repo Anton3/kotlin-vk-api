@@ -147,7 +147,7 @@ class SourceGenerator(val basePackage: String) {
     }
 
     private fun makeVkResult(typeId: TypeId): TypeId {
-        return TypeId("name.anton3.vkapi.core.VkMethod", listOf(typeId))
+        return TypeId("name.anton3.vkapi.method.VkMethod", listOf(typeId))
     }
 
     private fun makeVkList(typeId: TypeId): TypeId {
@@ -429,13 +429,12 @@ class SourceGenerator(val basePackage: String) {
         typeSpace.registerBuiltin("name.anton3.vkapi.vktypes.VkDate")
         typeSpace.registerBuiltin("name.anton3.vkapi.vktypes.VkList")
         typeSpace.registerBuiltin("name.anton3.vkapi.vktypes.VkBirthDate")
-        typeSpace.registerBuiltin("name.anton3.vkapi.core.VkMethod")
-        typeSpace.registerBuiltin("name.anton3.vkapi.json.successReference")
-        typeSpace.registerBuiltin("name.anton3.vkapi.tokens.UserMethod")
-        typeSpace.registerBuiltin("name.anton3.vkapi.tokens.ServiceMethod")
-        typeSpace.registerBuiltin("name.anton3.vkapi.tokens.UserGroupMethod")
-        typeSpace.registerBuiltin("name.anton3.vkapi.tokens.UserServiceMethod")
-        typeSpace.registerBuiltin("name.anton3.vkapi.tokens.UserGroupServiceMethod")
+        typeSpace.registerBuiltin("name.anton3.vkapi.method.VkMethod")
+        typeSpace.registerBuiltin("name.anton3.vkapi.method.UserMethod")
+        typeSpace.registerBuiltin("name.anton3.vkapi.method.ServiceMethod")
+        typeSpace.registerBuiltin("name.anton3.vkapi.method.UserGroupMethod")
+        typeSpace.registerBuiltin("name.anton3.vkapi.method.UserServiceMethod")
+        typeSpace.registerBuiltin("name.anton3.vkapi.method.UserGroupServiceMethod")
 
         // Primitive schema types
         typeSpace.registerVkPrimitiveType("integer", "kotlin.Int")

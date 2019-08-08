@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.utils.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.utils.objects.LinkChecked
-import name.anton3.vkapi.tokens.UserGroupServiceMethod
+import name.anton3.vkapi.method.UserGroupServiceMethod
 
 /**
  * [https://vk.com/dev/utils.checkLink]

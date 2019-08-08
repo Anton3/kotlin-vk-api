@@ -1,8 +1,9 @@
 package name.anton3.vkapi.methods.execute
 
-import name.anton3.vkapi.core.*
 import name.anton3.executors.core.DynamicRequest
 import name.anton3.executors.core.map
+import name.anton3.vkapi.core.*
+import name.anton3.vkapi.method.VkMethod
 import java.io.IOException
 
 suspend fun MethodExecutor.batch(methods: List<VkMethod<*>>): List<VkResult<*>> {

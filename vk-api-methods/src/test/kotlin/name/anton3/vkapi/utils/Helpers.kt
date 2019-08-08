@@ -7,7 +7,7 @@ import name.anton3.vkapi.client.KtorTransportClient
 import name.anton3.vkapi.client.UserClient
 import name.anton3.vkapi.executors.JsonApiMethodExecutor
 import name.anton3.vkapi.executors.TokenMethodExecutor
-import name.anton3.vkapi.json.vkObjectMapper
+import name.anton3.vkapi.json.core.vkObjectMapper
 import name.anton3.vkapi.tokens.GroupToken
 import name.anton3.vkapi.tokens.UserToken
 import java.io.FileInputStream

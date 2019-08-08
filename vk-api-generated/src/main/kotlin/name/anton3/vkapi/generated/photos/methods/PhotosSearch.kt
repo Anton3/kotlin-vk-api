@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.photos.objects.Photo
-import name.anton3.vkapi.tokens.UserServiceMethod
+import name.anton3.vkapi.method.UserServiceMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -16,8 +16,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property q Search query string.
  * @property lat Geographical latitude, in degrees (from '-90' to '90').
  * @property long Geographical longitude, in degrees (from '-180' to '180').
- * @property startTime 
- * @property endTime 
+ * @property startTime
+ * @property endTime
  * @property sort Sort order:
  * @property offset Offset needed to return a specific subset of photos.
  * @property count Number of photos to return.

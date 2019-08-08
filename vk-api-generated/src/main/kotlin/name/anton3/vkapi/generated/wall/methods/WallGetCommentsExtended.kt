@@ -3,10 +3,10 @@
 package name.anton3.vkapi.generated.wall.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.common.objects.GetCommentsSort
 import name.anton3.vkapi.generated.wall.objects.GetCommentsExtendedResponse
-import name.anton3.vkapi.tokens.UserServiceMethod
+import name.anton3.vkapi.method.UserServiceMethod
 
 /**
  * [https://vk.com/dev/wall.getComments]

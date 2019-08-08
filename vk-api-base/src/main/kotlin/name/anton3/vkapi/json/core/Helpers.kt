@@ -1,4 +1,4 @@
-package name.anton3.vkapi.json
+package name.anton3.vkapi.json.core
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.JavaType

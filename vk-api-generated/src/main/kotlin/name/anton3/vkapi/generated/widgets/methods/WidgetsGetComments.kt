@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.widgets.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.widgets.objects.GetCommentsResponse
-import name.anton3.vkapi.tokens.UserServiceMethod
+import name.anton3.vkapi.method.UserServiceMethod
 
 /**
  * [https://vk.com/dev/widgets.getComments]

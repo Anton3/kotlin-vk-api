@@ -1,4 +1,4 @@
-package name.anton3.vkapi.json.deser
+package name.anton3.vkapi.json.deserializers
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
@@ -9,8 +9,8 @@ import com.fasterxml.jackson.databind.node.NumericNode
 import com.fasterxml.jackson.module.kotlin.convertValue
 import name.anton3.vkapi.json.attributes.forwardableAttributes
 import name.anton3.vkapi.json.attributes.reader
-import name.anton3.vkapi.json.readNode
-import name.anton3.vkapi.json.strongType
+import name.anton3.vkapi.json.core.readNode
+import name.anton3.vkapi.json.core.strongType
 import name.anton3.vkapi.methods.longpoll.events.*
 
 internal object LongPollEventDeserializer : StdDeserializer<LongPollEvent>(LongPollEvent::class.java) {

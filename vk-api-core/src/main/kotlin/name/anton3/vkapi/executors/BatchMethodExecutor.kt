@@ -8,6 +8,7 @@ import name.anton3.executors.core.DynamicRequest
 import name.anton3.executors.instances.BatchExecutor
 import name.anton3.executors.util.batchAwareRequestStorage
 import name.anton3.vkapi.core.*
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.methods.execute.batch
 import name.anton3.vkapi.vktypes.VkApiException
 import name.anton3.vkapi.vktypes.VkResponse
@@ -58,7 +59,7 @@ private class MethodListExecutor(private val base: MethodExecutor)
                 // This requires up to twice the amount of requests if they all fail,
                 // but can save a lot of requests if some of them succeed early
                 val methods = dynamicRequest.get()
-                if (methods.size == 1) listOf(base.execute(methods.single())) else splitAndExecute(methods)
+                if (methods.size == 1) executeSingle(methods) else splitAndExecute(methods)
             } else {
                 throw e
             }
@@ -66,7 +67,7 @@ private class MethodListExecutor(private val base: MethodExecutor)
     }
 
     private suspend fun executeMethodSublist(methods: List<VkMethod<*>>): List<VkResponse<*>> {
-        if (methods.size == 1) return listOf(base.execute(methods.single()))
+        if (methods.size == 1) return executeSingle(methods)
 
         return try {
             base.batch(methods).map { it.wrapInSimpleResponse() }
@@ -90,6 +91,10 @@ private class MethodListExecutor(private val base: MethodExecutor)
 
             responseSplit1Async.await() + responseSplit2
         }
+    }
+
+    private suspend inline fun executeSingle(methods: List<VkMethod<*>>): List<VkResponse<*>> {
+        return listOf(base.execute(SimpleMethodRequest(methods.single(), false)))
     }
 
     private fun shouldSplitBatch(e: VkApiException): Boolean {

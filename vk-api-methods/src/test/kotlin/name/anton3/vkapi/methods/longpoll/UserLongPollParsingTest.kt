@@ -1,7 +1,7 @@
 package name.anton3.vkapi.methods.longpoll
 
 import com.fasterxml.jackson.module.kotlin.readValue
-import name.anton3.vkapi.json.vkObjectMapper
+import name.anton3.vkapi.json.core.vkObjectMapper
 import name.anton3.vkapi.methods.longpoll.events.LongPollEvent
 import name.anton3.vkapi.methods.longpoll.events.MessageAdded
 import name.anton3.vkapi.methods.longpoll.events.MessageEdited

@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.pages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.pages.objects.WikipageVersion
-import name.anton3.vkapi.tokens.UserMethod
+import name.anton3.vkapi.method.UserMethod
 
 /**
  * [https://vk.com/dev/pages.getHistory]
@@ -14,7 +14,7 @@ import name.anton3.vkapi.tokens.UserMethod
  *
  * @property pageId Wiki page ID.
  * @property groupId ID of the community that owns the wiki page.
- * @property userId 
+ * @property userId
  */
 data class PagesGetHistory(
     var pageId: Int,

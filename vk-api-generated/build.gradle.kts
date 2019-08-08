@@ -1,3 +1,3 @@
 dependencies {
-    api(project(":vk-api-core"))
+    api(project(":vk-api-base"))
 }

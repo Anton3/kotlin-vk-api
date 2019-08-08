@@ -66,7 +66,7 @@ inline fun <T> treeNodesToList(root: T, estimatedCount: Int = 16, children: (T) 
     nodesToVisit.addLast(root)
 
     while (nodesToVisit.isNotEmpty()) {
-        val node = nodesToVisit.removeFirst()!!
+        val node = nodesToVisit.removeFirst()
         result.add(node)
         children(node).forEach { nodesToVisit.addLast(it) }
     }

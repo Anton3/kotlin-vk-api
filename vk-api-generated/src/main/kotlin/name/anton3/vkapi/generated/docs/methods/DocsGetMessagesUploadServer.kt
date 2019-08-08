@@ -3,10 +3,10 @@
 package name.anton3.vkapi.generated.docs.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.common.objects.UploadServer
 import name.anton3.vkapi.generated.docs.objects.GetMessagesUploadServerType
-import name.anton3.vkapi.tokens.UserGroupMethod
+import name.anton3.vkapi.method.UserGroupMethod
 
 /**
  * [https://vk.com/dev/docs.getMessagesUploadServer]

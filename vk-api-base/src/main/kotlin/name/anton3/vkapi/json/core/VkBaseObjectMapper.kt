@@ -1,4 +1,4 @@
-package name.anton3.vkapi.json
+package name.anton3.vkapi.json.core
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.DeserializationFeature
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 
-fun vkCoreObjectMapper(): ObjectMapper = ObjectMapper().apply {
+fun vkBaseObjectMapper(): ObjectMapper = ObjectMapper().apply {
     propertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
     configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
@@ -15,5 +15,5 @@ fun vkCoreObjectMapper(): ObjectMapper = ObjectMapper().apply {
     setDefaultPropertyInclusion(JsonInclude.Value.construct(includeClassFields, includeMapFields))
 
     registerModule(KotlinModule())
-    registerModule(VkCoreSerialModule())
+    registerModule(VkBaseSerialModule())
 }

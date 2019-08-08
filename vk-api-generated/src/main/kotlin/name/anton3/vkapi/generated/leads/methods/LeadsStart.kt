@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.leads.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.leads.objects.Start
-import name.anton3.vkapi.tokens.UserServiceMethod
+import name.anton3.vkapi.method.UserServiceMethod
 
 /**
  * [https://vk.com/dev/leads.start]

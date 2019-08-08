@@ -3,10 +3,10 @@
 package name.anton3.vkapi.generated.stories.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.stories.objects.GetPhotoUploadServerLinkText
 import name.anton3.vkapi.generated.stories.objects.GetPhotoUploadServerResponse
-import name.anton3.vkapi.tokens.UserGroupMethod
+import name.anton3.vkapi.method.UserGroupMethod
 
 /**
  * [https://vk.com/dev/stories.getPhotoUploadServer]

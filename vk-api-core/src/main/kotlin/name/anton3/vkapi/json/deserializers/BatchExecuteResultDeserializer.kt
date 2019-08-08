@@ -1,4 +1,4 @@
-package name.anton3.vkapi.json.deser
+package name.anton3.vkapi.json.deserializers
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
@@ -6,9 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.BooleanNode
-import name.anton3.vkapi.json.METHOD_ATTRIBUTE
+import name.anton3.vkapi.json.core.METHOD_ATTRIBUTE
 import name.anton3.vkapi.json.attributes.forwardableAttributes
-import name.anton3.vkapi.json.readNode
+import name.anton3.vkapi.json.core.readNode
 import name.anton3.vkapi.methods.execute.BatchExecuteMethod
 import name.anton3.vkapi.methods.execute.BatchExecuteResult
 

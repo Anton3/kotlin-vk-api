@@ -4,11 +4,11 @@ import name.anton3.vkapi.client.GroupClient
 import name.anton3.vkapi.client.UncheckedClient
 import name.anton3.vkapi.client.UserClient
 import name.anton3.vkapi.client.UserGroupClient
-import name.anton3.vkapi.core.VkMethod
 import name.anton3.vkapi.core.VkResult
-import name.anton3.vkapi.tokens.GroupMethod
-import name.anton3.vkapi.tokens.UserGroupMethod
-import name.anton3.vkapi.tokens.UserMethod
+import name.anton3.vkapi.method.GroupMethod
+import name.anton3.vkapi.method.UserGroupMethod
+import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 @Suppress("UNCHECKED_CAST")
 suspend inline fun <T> UncheckedClient.batch(methods: List<VkMethod<T>>): List<VkResult<T>> =

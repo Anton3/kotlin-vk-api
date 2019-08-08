@@ -5,7 +5,7 @@ import name.anton3.vkapi.generator.under2Camel
 
 /**
 Распределение типов возвращаемых значений по типам
-просто реализуем расширение мписка методов
+просто реализуем расширение списка методов
 (MethodResponses, 384)
 (MethodExtendedResponses, 36)
 (FieldsResponses, 3)

@@ -1,4 +1,4 @@
-package name.anton3.vkapi.json
+package name.anton3.vkapi.json.core
 
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -9,7 +9,7 @@ import name.anton3.vkapi.generated.wall.objects.CommentAttachment
 import name.anton3.vkapi.generated.wall.objects.CommentAttachmentBody
 import name.anton3.vkapi.generated.wall.objects.WallPostAttachmentBody
 import name.anton3.vkapi.generated.wall.objects.WallpostAttachment
-import name.anton3.vkapi.json.deser.*
+import name.anton3.vkapi.json.deserializers.*
 import name.anton3.vkapi.methods.longpoll.events.LongPollEvent
 import name.anton3.vkapi.methods.longpoll.events.MessageAdded
 import name.anton3.vkapi.methods.longpoll.events.MessageEdited

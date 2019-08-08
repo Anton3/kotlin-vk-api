@@ -1,4 +1,4 @@
-package name.anton3.vkapi.core
+package name.anton3.vkapi.method
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.core.type.TypeReference

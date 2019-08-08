@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.secure.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.core.VkMethod
-import name.anton3.vkapi.tokens.ServiceMethod
+import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.ServiceMethod
 
 /**
  * [https://vk.com/dev/secure.getAppBalance]

@@ -1,6 +1,6 @@
 package name.anton3.vkapi.tokens
 
-import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.method.*
 
 sealed class Token<in M: MethodRequirement> {
     abstract fun <T> attachTo(method: VkMethod<T>)

@@ -3,17 +3,11 @@ package name.anton3.vkapi.methods.execute
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.core.VkMethod
-import name.anton3.vkapi.core.supportsBatch
-import name.anton3.vkapi.json.serializeMethod
+import name.anton3.vkapi.json.core.serializeMethod
+import name.anton3.vkapi.method.VkMethod
 
 class BatchExecuteMethod(@JsonIgnore val methods: List<VkMethod<*>>, objectMapper: ObjectMapper) :
-    ExecuteMethod<BatchExecuteResult>(makeBatchVkScript(methods, objectMapper), jacksonTypeRef()) {
-
-    init {
-        assert(methods.all { it.supportsBatch() })
-    }
-}
+    ExecuteMethod<BatchExecuteResult>(makeBatchVkScript(methods, objectMapper), jacksonTypeRef())
 
 // TODO Resolve cyclic dependency on `name.anton3.vkapi.json` package (serializeMethod)
 private fun makeBatchVkScript(methods: List<VkMethod<*>>, objectMapper: ObjectMapper): String {

@@ -1,4 +1,4 @@
-package name.anton3.vkapi.tokens
+package name.anton3.vkapi.method
 
 /**
  * The method is available with an access token of some (matching) kind.

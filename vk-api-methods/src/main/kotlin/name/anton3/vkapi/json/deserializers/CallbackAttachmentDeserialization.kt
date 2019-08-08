@@ -1,4 +1,4 @@
-package name.anton3.vkapi.json.deser
+package name.anton3.vkapi.json.deserializers
 
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.core.JsonParser
@@ -25,8 +25,8 @@ import name.anton3.vkapi.generated.photos.objects.PhotoAlbum
 import name.anton3.vkapi.generated.polls.objects.Poll
 import name.anton3.vkapi.generated.video.objects.Video
 import name.anton3.vkapi.generated.wall.objects.*
-import name.anton3.vkapi.json.readNode
-import name.anton3.vkapi.json.weakType
+import name.anton3.vkapi.json.core.readNode
+import name.anton3.vkapi.json.core.weakType
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.full.primaryConstructor
 

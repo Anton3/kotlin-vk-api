@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.auth.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.core.VkMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.auth.objects.ConfirmResponse
-import name.anton3.vkapi.tokens.ServiceMethod
+import name.anton3.vkapi.method.ServiceMethod
 
 /**
  * [https://vk.com/dev/auth.confirm]

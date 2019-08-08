@@ -40,14 +40,8 @@ subprojects {
     }
 
     dependencies {
-        val jacksonVersion = "2.9.9"
-        api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
-        api("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
-        api("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
-
         val kotlinVersion = "1.3.41"
         implementation(kotlin("stdlib-jdk8:$kotlinVersion"))
-        implementation(kotlin("reflect:$kotlinVersion"))
 
         implementation("org.apache.logging.log4j:log4j-core:2.12.0")
         implementation("org.apache.logging.log4j:log4j-api-kotlin:1.0.0")
