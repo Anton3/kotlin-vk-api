@@ -1,28 +1,20 @@
 package name.anton3.vkapi.methods.longpoll.attachments
 
-import com.fasterxml.jackson.databind.JsonNode
-import name.anton3.vkapi.vktypes.parseEnum
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonSubTypes
+import com.fasterxml.jackson.annotation.JsonTypeInfo
 
-abstract class Attachment internal constructor(node: JsonNode, idx: Int) {
-
-    val type: AttachmentType = parseEnum(prop(node, idx, "type")!!.textValue())
-    val id: String = prop(node, idx, "")!!.textValue()
-
-    companion object {
-        @JvmStatic
-        protected fun prop(root: JsonNode, idx: Int, name: String): JsonNode? {
-            return root.get("attach" + idx + if (name.isNotEmpty()) "_$name" else "")
-        }
-
-        fun parse(node: JsonNode, idx: Int): Attachment {
-            @Suppress("MoveVariableDeclarationIntoWhen")
-            val type: AttachmentType = parseEnum(prop(node, idx, "type")!!.textValue())
-
-            return when (type) {
-                AttachmentType.LINK -> LinkAttachment(node, idx)
-                AttachmentType.DOC -> DocAttachment(node, idx)
-                else -> GenericAttachment(node, idx)
-            }
-        }
-    }
-}
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(
+    defaultImpl = GenericAttachment::class,
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    property = "type",
+    visible = true
+)
+@JsonSubTypes(
+    JsonSubTypes.Type(name = "link", value = LinkAttachment::class),
+    JsonSubTypes.Type(name = "doc", value = DocAttachment::class),
+    JsonSubTypes.Type(name = "sticker", value = StickerAttachment::class)
+)
+open class Attachment(open val type: AttachmentType, open val id: String)

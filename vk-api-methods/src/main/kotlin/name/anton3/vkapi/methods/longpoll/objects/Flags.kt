@@ -1,8 +1,9 @@
 package name.anton3.vkapi.methods.longpoll.objects
 
 import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonValue
 
-data class Flags @JsonCreator(mode = JsonCreator.Mode.DELEGATING) constructor(val flagsMask: Int) {
+data class Flags @JsonCreator(mode = JsonCreator.Mode.DELEGATING) constructor(@JsonValue val flagsMask: Int) {
 
     fun has(flag: Int): Boolean {
         checkSingleBit(flag)

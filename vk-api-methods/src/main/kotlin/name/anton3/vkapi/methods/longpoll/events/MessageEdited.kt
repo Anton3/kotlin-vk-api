@@ -1,11 +1,10 @@
 package name.anton3.vkapi.methods.longpoll.events
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import name.anton3.vkapi.methods.longpoll.objects.Attachments
+import name.anton3.vkapi.methods.longpoll.attachments.Attachment
+import name.anton3.vkapi.methods.longpoll.objects.ExtraFields
 import name.anton3.vkapi.methods.longpoll.objects.Flags
 import name.anton3.vkapi.vktypes.VkDate
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 data class MessageEdited(
     override val eventType: Int,
     val messageId: Int,
@@ -14,6 +13,6 @@ data class MessageEdited(
     val timestamp: VkDate?,
     val text: String?,
     val extra: ExtraFields?,
-    val attachments: Attachments?,
+    val attachments: List<Attachment>?,
     val randomId: Int = 0
 ) : LongPollEvent(eventType)

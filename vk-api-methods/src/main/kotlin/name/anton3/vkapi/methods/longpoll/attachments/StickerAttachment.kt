@@ -1,7 +1,7 @@
 package name.anton3.vkapi.methods.longpoll.attachments
 
-data class DocAttachment(
+data class StickerAttachment(
     override val type: AttachmentType,
     override val id: String,
-    val kind: String?
+    val productId: String
 ) : Attachment(type, id)

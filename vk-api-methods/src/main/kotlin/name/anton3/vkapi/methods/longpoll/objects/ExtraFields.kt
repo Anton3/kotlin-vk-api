@@ -1,16 +1,20 @@
-package name.anton3.vkapi.methods.longpoll.events
+package name.anton3.vkapi.methods.longpoll.objects
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import name.anton3.vkapi.generated.messages.objects.MessageActionStatus
-import name.anton3.vkapi.vktypes.PropertyExists
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class ExtraFields(
     val title: String?,
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     val from: Int?,
     val sourceAct: MessageActionStatus?,
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     val sourceMid: Int?,
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     val fromAdmin: Int?,
     val geo: String?,
-    val emoji: PropertyExists?
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    val emoji: Int?
 )
