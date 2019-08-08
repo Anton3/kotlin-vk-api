@@ -31,7 +31,7 @@ import io.ktor.client.HttpClient
 import name.anton3.vkapi.client.VkClientFactory
 import name.anton3.vkapi.client.ktorClientFactory
 
-val httpClient = HttpClient(...) { ... }
+val httpClient = HttpClient(TODO()) { TODO() }
 val clientFactory: VkClientFactory = ktorClientFactory(httpClient)
 ```
 
