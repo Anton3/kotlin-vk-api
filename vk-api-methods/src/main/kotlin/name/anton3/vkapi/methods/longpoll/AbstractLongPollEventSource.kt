@@ -7,16 +7,14 @@ import kotlinx.coroutines.channels.ClosedSendChannelException
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.withContext
-import mu.KotlinLogging
 import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.core.get
 import name.anton3.vkapi.methods.longpoll.objects.LongPollFailure
+import org.apache.logging.log4j.kotlin.Logging
 import java.io.IOException
 import java.nio.charset.Charset
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.coroutines.CoroutineContext
-
-private val log = KotlinLogging.logger {}
 
 abstract class AbstractLongPollEventSource<EventType, IteratorType>(
     private val longPollContext: CoroutineContext,
@@ -24,6 +22,8 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
     protected val transportClient: TransportClient,
     private val responseType: TypeReference<LongPollResponse<EventType>>
 ) {
+    companion object : Logging
+
     private val shutdown = AtomicBoolean(false)
 
     abstract suspend fun iteratorToUrl(iterator: IteratorType): String
@@ -38,7 +38,7 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
         }
 
         val vkJson = vkResponse.data.toString(Charset.forName("UTF-8"))
-        log.debug("VK long poll responds with $vkJson")
+        logger.debug("VK long poll responds with $vkJson")
 
         @Suppress("BlockingMethodInNonBlockingContext")
         val lpResponse: LongPollResponse<EventType> = objectMapper.readValue(vkJson, responseType)
@@ -48,17 +48,17 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
                 iteratorWithTs(iterator, lpResponse.ts!!.toInt()) to lpResponse.updates
             }
             LongPollFailure.NEW_TS -> {
-                log.debug("LongPoll failed with error 1")
+                logger.debug("LongPoll failed with error 1")
                 iteratorWithTs(iterator, lpResponse.ts!!.toInt()) to emptyList()
             }
             LongPollFailure.REQUEST_NEW_KEY -> {
                 val newServer = iterator()
-                log.debug("LongPoll failed with error 2")
+                logger.debug("LongPoll failed with error 2")
                 newServer to emptyList()
             }
             LongPollFailure.REQUEST_NEW_KEY_TS -> {
                 val newServer = iterator()
-                log.debug("LongPoll failed with error 3")
+                logger.debug("LongPoll failed with error 3")
                 newServer to emptyList()
             }
             LongPollFailure.INVALID_VERSION -> {
@@ -75,7 +75,7 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
             val response = try {
                 getEvents(iter)
             } catch (e: IOException) {
-                log.warn("LongPoll error", e)
+                logger.warn("LongPoll error", e)
                 iter = iteratorSwallowing()
                 continue
             }
@@ -83,7 +83,7 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
             iter = response.first
             val events = response.second
 
-            if (channel.isClosedForSend) break
+            if (isClosedForSend) break
             try {
                 events.forEach { send(it) }
             } catch (e: ClosedSendChannelException) {
@@ -97,7 +97,7 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
             try {
                 return iterator()
             } catch (e: IOException) {
-                log.warn("LongPoll iterator error", e)
+                logger.warn("LongPoll iterator error", e)
             }
         }
     }

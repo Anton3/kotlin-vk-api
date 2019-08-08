@@ -3,19 +3,20 @@ package name.anton3.vkapi.generator
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
-import mu.KotlinLogging
 import name.anton3.vkapi.generator.json.*
 import name.anton3.vkapi.generator.source.*
+import org.apache.logging.log4j.kotlin.Logging
 import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.streams.asSequence
 
-private val log = KotlinLogging.logger {}
-
 class SourceGenerator(val basePackage: String) {
-    lateinit var methodsSchema: MethodsSchema
-    lateinit var objectsSchema: ObjectsSchema
-    lateinit var responsesSchema: ResponsesSchema
+
+    companion object : Logging
+
+    private lateinit var methodsSchema: MethodsSchema
+    private lateinit var objectsSchema: ObjectsSchema
+    private lateinit var responsesSchema: ResponsesSchema
 
     private val jsonObjects = HashMap<JsonTypeRef, Object>()
 
@@ -49,7 +50,7 @@ class SourceGenerator(val basePackage: String) {
         resolveMethods()
         splitSomeObjects()
 
-        log.info("Defined ${typeSpace.typesCount} types")
+        logger.info("Defined ${typeSpace.typesCount} types")
         typeSpace.printDefinedTypesNames()
     }
 
@@ -71,17 +72,17 @@ class SourceGenerator(val basePackage: String) {
      *  Объявить Type для метода
      */
     private fun resolveMethods() {
-        log.info("Total methods: ${methodsSchema.methods.size}")
+        logger.info("Total methods: ${methodsSchema.methods.size}")
         val normalizedMethods = methodsSchema.methods.mapNotNull { normalizeMethodDefinition(it) }.flatten()
             .filter { responseSchemaIsDefined(it.responses.response) }
-        log.info("Normalized  methods: ${normalizedMethods.size}")
+        logger.info("Normalized  methods: ${normalizedMethods.size}")
         normalizedMethods.forEach(this::makeMethod)
     }
 
     private fun responseSchemaIsDefined(ref: SchemaFileRef): Boolean {
         val result = responsesSchema.definitions.containsKey(ref.toJsonRef())
         if (!result)
-            log.warn("No response type defined $ref")
+            logger.warn("No response type defined $ref")
         return result
     }
 
@@ -96,7 +97,7 @@ class SourceGenerator(val basePackage: String) {
     private fun makeMethod(methodsSchema: MethodSchema) {
         val methodResultType = makeMethodResultType(methodsSchema)
         if (methodResultType == null) {
-            log.warn("Can't define method ${methodsSchema.name} because of problems with result")
+            logger.warn("Can't define method ${methodsSchema.name} because of problems with result")
             return
         }
 
@@ -167,13 +168,13 @@ class SourceGenerator(val basePackage: String) {
 
     private fun makeType(nameStrategy: NameStrategy, responseRef: JsonTypeRef, typeObject: Object?): TypeId? {
         if (typeObject == null) {
-            log.warn("Type $responseRef is undefined")
+            logger.warn("Type $responseRef is undefined")
             return null
         }
         val alreadyDefined = typeSpace.resolveTypeIdByJsonRefOrNull(responseRef)
 
         if (alreadyDefined != null) {
-            log.debug("$responseRef already defined to $alreadyDefined")
+            logger.debug("$responseRef already defined to $alreadyDefined")
             return alreadyDefined
         }
 
@@ -243,7 +244,7 @@ class SourceGenerator(val basePackage: String) {
                     typeSpace.addParentToType(refType, rootTypeId)
                 }
                 else -> {
-                    log.warn("Can't process ${item.javaClass.simpleName}")
+                    logger.warn("Can't process ${item.javaClass.simpleName}")
                     return null
                 }
             }
@@ -297,7 +298,7 @@ class SourceGenerator(val basePackage: String) {
                         )!!
                         typeSpace.addParentToType(refType, rootTypeId)
                     }
-                    else -> log.warn("Cant process ${item.javaClass.simpleName}")
+                    else -> logger.warn("Cant process ${item.javaClass.simpleName}")
                 }
 
 
@@ -340,7 +341,7 @@ class SourceGenerator(val basePackage: String) {
         return properties.mapNotNull { (name, propObj) ->
             val typeId = makeType(nameStrategy, responseRef + "_" + name, propObj)
             if (typeId == null) {
-                log.warn("Can't resolve $responseRef > $name")
+                logger.warn("Can't resolve $responseRef > $name")
                 return@mapNotNull null
             }
 
@@ -406,11 +407,11 @@ class SourceGenerator(val basePackage: String) {
         val mergedTypeId = oldTypeId?.let { mergeEqualTypes(oldTypeId, expectedTypeId, basePackage) }
 
         return if (mergedTypeId != null && !definition.fixedName) {
-            log.info("Merge ${oldTypeId.name} + ${expectedTypeId.name} -> ${mergedTypeId.name}")
+            logger.info("Merge ${oldTypeId.name} + ${expectedTypeId.name} -> ${mergedTypeId.name}")
             typeSpace.renameType(oldTypeId, mergedTypeId)
         } else {
             if (oldTypeId != null) {
-                log.info("Equal types $oldTypeId and $expectedTypeId were not merged")
+                logger.info("Equal types $oldTypeId and $expectedTypeId were not merged")
             }
             typeSpace.registerTypeImplementation(expectedTypeId, definition)
             expectedTypeId
@@ -462,7 +463,7 @@ class SourceGenerator(val basePackage: String) {
             .flatten()
             .filter { responseSchemaIsDefined(it.responses.response) }
 
-        log.info("Normalized  methods: ${normalizedMethods.size}")
+        logger.info("Normalized  methods: ${normalizedMethods.size}")
         normalizedMethods.forEach(this::makeMethod)
     }
 

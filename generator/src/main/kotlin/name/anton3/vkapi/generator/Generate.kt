@@ -1,10 +1,10 @@
 package name.anton3.vkapi.generator
 
-import mu.KotlinLogging
+import org.apache.logging.log4j.kotlin.logger
 import java.io.InputStream
 import java.nio.file.Paths
 
-private val log = KotlinLogging.logger {}
+private val logger = logger("Generate")
 
 fun getResourceFiles(path: String): List<String> {
     return getResourceAsStream(path)?.use { it.reader().buffered().readLines() }.orEmpty()
@@ -16,7 +16,7 @@ private fun getResourceAsStream(resource: String): InputStream? {
 }
 
 fun main() {
-    log.warn("Root path: " + Paths.get(".").toAbsolutePath())
+    logger.warn("Root path: " + Paths.get(".").toAbsolutePath())
 
     val generator = SourceGenerator(basePackage = "name.anton3.vkapi.generated")
 

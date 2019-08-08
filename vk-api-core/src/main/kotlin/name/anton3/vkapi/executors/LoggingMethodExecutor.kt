@@ -1,7 +1,6 @@
 package name.anton3.vkapi.executors
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import mu.KotlinLogging
 import name.anton3.executors.core.DynamicRequest
 import name.anton3.executors.core.map
 import name.anton3.vkapi.core.MethodExecutor
@@ -9,10 +8,11 @@ import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.core.VkMethod
 import name.anton3.vkapi.json.serializeMethod
 import name.anton3.vkapi.vktypes.VkResponse
-
-private val log = KotlinLogging.logger {}
+import org.apache.logging.log4j.kotlin.Logging
 
 class LoggingMethodExecutor(private val base: MethodExecutor, private val name: String) : MethodExecutor {
+
+    companion object : Logging
 
     override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*>>): VkResponse<*> {
         val loggingRequest = dynamicRequest.map { request ->
@@ -26,10 +26,10 @@ class LoggingMethodExecutor(private val base: MethodExecutor, private val name: 
 
     private fun logRequest(request: VkMethod<*>) {
         val parameters = objectMapper.serializeMethod(request)
-        log.info("$name has requested \"${request.apiMethodName}\": $parameters")
+        logger.info("$name has requested \"${request.apiMethodName}\": $parameters")
     }
 
     private fun logResponse(request: VkMethod<*>, response: VkResponse<*>) {
-        log.info("$name got response \"${request.apiMethodName}\": $response")
+        logger.info("$name got response \"${request.apiMethodName}\": $response")
     }
 }

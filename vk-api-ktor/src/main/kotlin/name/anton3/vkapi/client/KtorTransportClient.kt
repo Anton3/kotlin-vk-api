@@ -12,9 +12,9 @@ import io.ktor.http.*
 import io.ktor.http.content.OutgoingContent
 import io.ktor.http.content.TextContent
 import kotlinx.io.charsets.Charsets
-import mu.KotlinLogging
 import name.anton3.vkapi.core.RequestContent
 import name.anton3.vkapi.core.TransportClient
+import org.apache.logging.log4j.kotlin.Logging
 import java.io.IOException
 import java.time.Duration
 import java.time.Instant
@@ -25,9 +25,7 @@ class KtorTransportClient(
     private val retryAttemptsInvalidStatusCount: Int = 3
 ) : TransportClient {
 
-    companion object {
-        private val log = KotlinLogging.logger {}
-    }
+    companion object : Logging
 
     private suspend fun callWithStatusCheck(request: HttpRequestBuilder, rawRequest: TransportClient.Request): TransportClient.Response {
         lateinit var response: TransportClient.Response
@@ -69,7 +67,7 @@ class KtorTransportClient(
                 val resultTime = Duration.between(startTime, endTime)
 
                 logRequest(rawRequest, null, null, resultTime)
-                log.warn("Network troubles")
+                logger.warn("Network troubles")
                 exception = e
             }
         }
@@ -83,29 +81,18 @@ class KtorTransportClient(
         result: ByteArray?,
         resultTime: Duration?
     ) {
-        if (!log.isInfoEnabled) return
+        logger.info {
+            "Request: ${request.method} ${request.url}"
+        }
 
-        if (log.isDebugEnabled) {
-            log.debug {
-                val contentString = when (val content = request.content) {
-                    is RequestContent.Empty -> "$content"
-                    is RequestContent.Text -> "$content"
-                    is RequestContent.Form -> "$content"
-                    is RequestContent.File -> "File(key=${content.key}, fileName=${content.fileName})"
-                }
-
-                """
-                ${request.method} ${request.url}
-                Request: $contentString
-                Response time: ${resultTime ?: "-"}
-                Status: ${response?.status ?: "-"}
-                Response: ${result?.toString(Charsets.UTF_8)?.take(10000) ?: "-"}
-                """.trimIndent()
-            }
-        } else {
-            log.info {
-                "Request: ${request.method} ${request.url}"
-            }
+        logger.debug {
+            """
+            Request details
+              Body: ${request.content}
+              Response time: ${resultTime ?: "-"}
+              Status: ${response?.status ?: "-"}
+              Response: ${result?.toString(Charsets.UTF_8)?.take(10000) ?: "-"}
+            """.trimIndent()
         }
     }
 

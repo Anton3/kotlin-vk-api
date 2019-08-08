@@ -1,11 +1,12 @@
 package name.anton3.vkapi.generator
 
-import mu.KotlinLogging
 import name.anton3.vkapi.generator.source.*
-
-private val log = KotlinLogging.logger {}
+import org.apache.logging.log4j.kotlin.Logging
 
 class TypeSpace {
+
+    companion object : Logging
+
     private val typeReferences = mutableMapOf<JsonTypeRef, TypeId>()
     val definedTypes = mutableMapOf<TypeId, TypeDefinition>()
     private val typeAliases = mutableMapOf<TypeId, TypeId>()
@@ -19,13 +20,13 @@ class TypeSpace {
         require(type is ObjectType) { "Only ObjectType can be split" }
 
         if (type.kind == ObjectType.Kind.INTERFACE) {
-            log.debug("$typeId is already split")
+            logger.debug("$typeId is already split")
             return
         }
 
         val implTypeId = typeId.copy(name = typeId.name + "Impl")
         if (definedTypes[resolveTypeAliasesUnchecked(implTypeId)] != null) {
-            log.debug("$typeId is already split")
+            logger.debug("$typeId is already split")
             return
         }
 
@@ -49,7 +50,7 @@ class TypeSpace {
     fun renameType(oldTypeId: TypeId, newTypeId: TypeId): TypeId {
         if (oldTypeId == newTypeId) return oldTypeId
 
-        log.debug("Rename $oldTypeId to $newTypeId")
+        logger.debug("Rename $oldTypeId to $newTypeId")
 
         typeAliases[oldTypeId] = newTypeId
         val definition = definedTypes.remove(oldTypeId)!!
@@ -74,7 +75,7 @@ class TypeSpace {
     fun registerTypeImplementation(typeId: TypeId, type: TypeDefinition): TypeId {
         val oldObject = definedTypes[typeId]
         if (definedTypes.containsKey(typeId) && oldObject != type) {
-            log.warn("Collision with name $typeId. New: $type; Old: $oldObject")
+            logger.warn("Collision with name $typeId. New: $type; Old: $oldObject")
         }
         return replaceTypeImplementation(typeId, type)
     }
@@ -85,7 +86,7 @@ class TypeSpace {
     }
 
     fun printDefinedTypesNames() {
-        definedTypes.map { it.key.qualifiedName() }.sorted().forEach { log.debug(it) }
+        definedTypes.map { it.key.qualifiedName() }.sorted().forEach { logger.debug(it) }
     }
 
     fun resolveTypeIdByJsonRef(jsonRef: JsonTypeRef): TypeId {
@@ -102,7 +103,7 @@ class TypeSpace {
         val result = resolveTypeAliasesUnchecked(typeId)
 
         result.allWildcardGenerics().filter { it !in definedTypes }.forEach {
-            log.info("Type $it is not defined, but may get defined later")
+            logger.info("Type $it is not defined, but may get defined later")
         }
 
         return result

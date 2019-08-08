@@ -11,7 +11,8 @@ sealed class RequestContent {
 
     data class Form(val data: Map<String, String>) : RequestContent()
 
-    class File(val key: String, val fileName: String, val data: ByteArray) : RequestContent()
+    @Suppress("ArrayInDataClass")
+    data class File(val key: String, val fileName: String, val data: ByteArray) : RequestContent()
 
     companion object {
         const val FORM_CONTENT_TYPE = "application/x-www-form-urlencoded"
