@@ -30,7 +30,7 @@ class SourceGenerator(val basePackage: String) {
     fun loadObjectsDefinitionsFrom(fileName: String) {
         val jsonString = readSchemaTextFromFile(fileName)
         objectsSchema = OBJECT_MAPPER.readValue(jsonString)
-        objectsSchema.definitions.forEach { ref, obj ->
+        objectsSchema.definitions.forEach { (ref, obj) ->
             jsonObjects[ref] = obj
         }
     }
@@ -38,7 +38,7 @@ class SourceGenerator(val basePackage: String) {
     fun loadResponsesDefinitionsFrom(fileName: String) {
         val jsonString = readSchemaTextFromFile(fileName)
         responsesSchema = OBJECT_MAPPER.readValue(jsonString)
-        responsesSchema.definitions.forEach { ref, obj ->
+        responsesSchema.definitions.forEach { (ref, obj) ->
             jsonObjects[ref] = obj.properties.response!!
         }
 
@@ -345,8 +345,10 @@ class SourceGenerator(val basePackage: String) {
             }
 
             val finalType = when {
-                name == "date" && typeId.name == "Int" -> TypeId("name.anton3.vkapi.vktypes.VkDate")
-                name == "bdate" && typeId.name == "String" -> TypeId("name.anton3.vkapi.vktypes.VkBirthDate")
+                name in listOf("date", "timestamp", "update_time") && typeId.name == "Int" ->
+                    TypeId("name.anton3.vkapi.vktypes.VkDate")
+                name == "bdate" && typeId.name == "String" ->
+                    TypeId("name.anton3.vkapi.vktypes.VkBirthDate")
                 else -> typeId
             }
 
@@ -446,7 +448,7 @@ class SourceGenerator(val basePackage: String) {
         typeSpace.registerVkPrimitiveType("base_ok_response", "name.anton3.vkapi.vktypes.OkResponse")
     }
 
-    private fun deleteOldAndRecreate(absPath: Path?) {
+    private fun deleteOldAndRecreate(absPath: Path) {
         Files.createDirectories(absPath)
         Files.walk(absPath).asSequence().map(Path::toFile).sortedDescending().forEach { it.delete() }
         Files.createDirectories(absPath)

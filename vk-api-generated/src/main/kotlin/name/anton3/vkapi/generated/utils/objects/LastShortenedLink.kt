@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.utils.objects
 
+import name.anton3.vkapi.vktypes.VkDate
+
 /**
  * No description
  *
@@ -11,7 +13,7 @@ package name.anton3.vkapi.generated.utils.objects
  * @property accessKey Access key for private stats
  */
 data class LastShortenedLink(
-    val timestamp: Int? = null,
+    val timestamp: VkDate? = null,
     val url: String? = null,
     val shortUrl: String? = null,
     val key: String? = null,

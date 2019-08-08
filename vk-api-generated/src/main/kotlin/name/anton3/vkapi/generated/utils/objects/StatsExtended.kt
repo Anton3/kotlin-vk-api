@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.utils.objects
 
+import name.anton3.vkapi.vktypes.VkDate
+
 /**
  * No description
  *
@@ -10,7 +12,7 @@ package name.anton3.vkapi.generated.utils.objects
  * @property cities No description
  */
 data class StatsExtended(
-    val timestamp: Int? = null,
+    val timestamp: VkDate? = null,
     val views: Int? = null,
     val sexAge: List<StatsSexAge>? = null,
     val countries: List<StatsCountry>? = null,

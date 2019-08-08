@@ -42,6 +42,6 @@ data class Message(
     val replyMessage: Message? = null,
     val action: MessageAction? = null,
     val conversationMessageId: Int? = null,
-    val updateTime: Int? = null,
+    val updateTime: VkDate? = null,
     val keyboard: KeyboardReturned? = null
 )
