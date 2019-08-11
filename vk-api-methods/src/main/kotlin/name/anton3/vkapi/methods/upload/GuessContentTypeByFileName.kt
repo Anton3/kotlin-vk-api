@@ -1,8 +1,7 @@
 package name.anton3.vkapi.methods.upload
 
 fun guessContentTypeByFilename(fileName: String): String {
-    val extension = fileName.substringAfterLast(".").toLowerCase()
-    return when (extension) {
+    return when (fileName.substringAfterLast(".").toLowerCase()) {
         "jpg" -> "image/jpg"
         "jpeg" -> "image/jpg"
         "gif" -> "image/gif"

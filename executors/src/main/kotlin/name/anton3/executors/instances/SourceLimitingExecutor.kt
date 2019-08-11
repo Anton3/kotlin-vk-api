@@ -15,7 +15,7 @@ object RequestSource : DynamicRequest.Key<Any>
 /**
  * The exception type thrown on per-source rate limit violation
  */
-class RateLimitExceededException(val source: Any, val nextRequestTime: Instant) :
+class RateLimitExceededException(val source: Any, nextRequestTime: Instant) :
     Exception("Rate limit exceeded, reset at $nextRequestTime")
 
 /**
