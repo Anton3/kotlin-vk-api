@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.Anton3.kotlin-vk-api:vk-api-simple:0.7.0")
+    implementation("com.github.Anton3.kotlin-vk-api:vk-api-simple:0.8.0")
 }
 ```
 
