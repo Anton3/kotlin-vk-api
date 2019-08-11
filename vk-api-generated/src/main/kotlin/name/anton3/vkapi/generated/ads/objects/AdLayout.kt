@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.ads.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -21,7 +23,7 @@ data class AdLayout(
     val campaignId: Int,
     val adFormat: Int,
     val costType: AdLayoutCostType,
-    val video: Boolean? = null,
+    val video: BoolInt? = null,
     val title: String,
     val description: String,
     val linkUrl: String,

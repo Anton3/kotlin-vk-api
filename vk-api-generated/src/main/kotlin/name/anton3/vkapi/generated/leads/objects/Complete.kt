@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.leads.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.OkResponse
 
 /**
@@ -15,6 +16,6 @@ data class Complete(
     val limit: Int? = null,
     val spent: Int? = null,
     val cost: Int? = null,
-    val testMode: Boolean? = null,
+    val testMode: BoolInt? = null,
     val success: OkResponse? = null
 )

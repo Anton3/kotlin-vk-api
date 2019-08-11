@@ -5,6 +5,7 @@ import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
 import name.anton3.vkapi.generated.photos.objects.Photo
 import name.anton3.vkapi.generated.wall.objects.CommentAttachmentBody
 import name.anton3.vkapi.generated.wall.objects.WallPostAttachmentBody
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -26,7 +27,7 @@ import name.anton3.vkapi.generated.wall.objects.WallPostAttachmentBody
 @JsonDeserialize(`as` = Void::class)
 data class Link(
     val target: LinkTarget? = null,
-    val isExternal: Boolean? = null,
+    val isExternal: BoolInt? = null,
     val url: String,
     val title: String? = null,
     val caption: String? = null,

@@ -2,6 +2,7 @@ package name.anton3.vkapi.generated.users.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.common.objects.Sex
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -25,8 +26,8 @@ interface User : UserMin {
     val screenName: String?
     val photo50: String?
     val photo100: String?
-    val online: Boolean?
-    val onlineMobile: Boolean?
+    val online: BoolInt?
+    val onlineMobile: BoolInt?
     val onlineApp: Int?
     override val id: Int
     override val firstName: String

@@ -5,6 +5,7 @@ package name.anton3.vkapi.generated.groups.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupServiceMethod
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * [https://vk.com/dev/groups.isMember]
@@ -17,4 +18,4 @@ import name.anton3.vkapi.method.UserGroupServiceMethod
 data class GroupsIsMemberUserIds(
     var groupId: String,
     var userIds: List<Int>? = null
-) : CheckedMethod<Boolean, UserGroupServiceMethod>("groups.isMember", jacksonTypeRef())
+) : CheckedMethod<BoolInt, UserGroupServiceMethod>("groups.isMember", jacksonTypeRef())

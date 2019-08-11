@@ -5,6 +5,7 @@ package name.anton3.vkapi.generated.polls.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * [https://vk.com/dev/polls.deleteVote]
@@ -21,4 +22,4 @@ data class PollsDeleteVote(
     var pollId: Int,
     var answerId: Int,
     var isBoard: Boolean? = null
-) : CheckedMethod<Boolean, UserMethod>("polls.deleteVote", jacksonTypeRef())
+) : CheckedMethod<BoolInt, UserMethod>("polls.deleteVote", jacksonTypeRef())

@@ -5,6 +5,7 @@ import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
 import name.anton3.vkapi.generated.notifications.objects.NotificationParent
 import name.anton3.vkapi.generated.wall.objects.CommentAttachmentBody
 import name.anton3.vkapi.generated.wall.objects.WallPostAttachmentBody
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.PropertyExists
 import name.anton3.vkapi.vktypes.VkDate
 
@@ -52,8 +53,8 @@ interface Video : WallPostAttachmentBody, CommentAttachmentBody, MessageAttachme
     val accessKey: String?
     val addingDate: Int?
     val player: String?
-    val canEdit: Boolean?
-    val canAdd: Boolean?
+    val canEdit: BoolInt?
+    val canAdd: BoolInt?
     val processing: PropertyExists?
     val live: PropertyExists?
     val files: VideoFiles?

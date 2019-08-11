@@ -1,6 +1,7 @@
 package name.anton3.vkapi.generated.groups.objects
 
 import name.anton3.vkapi.generated.market.objects.Currency
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -14,7 +15,7 @@ import name.anton3.vkapi.generated.market.objects.Currency
  * @property currencyText Currency name
  */
 data class MarketInfo(
-    val enabled: Boolean? = null,
+    val enabled: BoolInt? = null,
     val priceMin: Int? = null,
     val priceMax: Int? = null,
     val mainAlbumId: Int? = null,

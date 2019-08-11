@@ -1,6 +1,7 @@
 package name.anton3.vkapi.generated.newsfeed.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -12,7 +13,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @JsonDeserialize(`as` = Void::class)
 data class ListFull(
-    val noReposts: Boolean? = null,
+    val noReposts: BoolInt? = null,
     val sourceIds: List<Int>? = null,
     override val id: Int,
     override val title: String

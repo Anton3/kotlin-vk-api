@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.friends.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -13,6 +15,6 @@ data class FriendStatus(
     val userId: Int,
     val friendStatus: FriendStatusStatus,
     val requestMessage: String? = null,
-    val readState: Boolean? = null,
+    val readState: BoolInt? = null,
     val sign: String? = null
 )

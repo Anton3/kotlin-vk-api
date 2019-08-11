@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.leads.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -20,7 +21,7 @@ data class Entry(
     val sid: String? = null,
     val date: VkDate? = null,
     val status: Int? = null,
-    val testMode: Boolean? = null,
+    val testMode: BoolInt? = null,
     val startDate: Int? = null,
     val comment: String? = null
 )

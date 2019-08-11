@@ -1,6 +1,7 @@
 package name.anton3.vkapi.generated.ads.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.PropertyExists
 
 /**
@@ -63,7 +64,7 @@ data class CriteriaImpl(
     override val userBrowsers: String? = null,
     override val retargetingGroups: String? = null,
     override val retargetingGroupsNot: String? = null,
-    override val paying: Boolean? = null,
+    override val paying: BoolInt? = null,
     override val travellers: PropertyExists? = null,
     override val schoolFrom: Int? = null,
     override val schoolTo: Int? = null,

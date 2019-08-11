@@ -6,6 +6,7 @@ import name.anton3.vkapi.generated.common.objects.Geo
 import name.anton3.vkapi.generated.common.objects.LikesInfo
 import name.anton3.vkapi.generated.common.objects.RepostsInfo
 import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -37,7 +38,7 @@ data class WallpostAttached(
     val date: VkDate? = null,
     val postType: PostType? = null,
     val text: String? = null,
-    val canDelete: Boolean? = null,
+    val canDelete: BoolInt? = null,
     val signerId: Int? = null,
     val attachments: List<WallpostAttachment>? = null,
     val geo: Geo? = null,

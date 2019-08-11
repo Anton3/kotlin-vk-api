@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.photos.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -32,9 +34,9 @@ data class PhotoAlbumFull(
     val size: Int,
     val privacyView: List<String>? = null,
     val privacyComment: List<String>? = null,
-    val uploadByAdminsOnly: Boolean? = null,
-    val commentsDisabled: Boolean? = null,
-    val canUpload: Boolean? = null,
-    val thumbIsLast: Boolean? = null,
+    val uploadByAdminsOnly: BoolInt? = null,
+    val commentsDisabled: BoolInt? = null,
+    val canUpload: BoolInt? = null,
+    val thumbIsLast: BoolInt? = null,
     val sizes: List<PhotoSizes>? = null
 )

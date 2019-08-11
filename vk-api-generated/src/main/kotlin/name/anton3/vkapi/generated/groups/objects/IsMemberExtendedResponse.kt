@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.groups.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -8,7 +10,7 @@ package name.anton3.vkapi.generated.groups.objects
  * @property request Information whether user has sent request to the group
  */
 data class IsMemberExtendedResponse(
-    val member: Boolean,
-    val invitation: Boolean? = null,
-    val request: Boolean? = null
+    val member: BoolInt,
+    val invitation: BoolInt? = null,
+    val request: BoolInt? = null
 )

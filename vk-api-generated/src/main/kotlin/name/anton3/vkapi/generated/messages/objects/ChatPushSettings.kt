@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.messages.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -7,6 +9,6 @@ package name.anton3.vkapi.generated.messages.objects
  * @property disabledUntil Time until that notifications are disabled
  */
 data class ChatPushSettings(
-    val sound: Boolean? = null,
+    val sound: BoolInt? = null,
     val disabledUntil: Int? = null
 )

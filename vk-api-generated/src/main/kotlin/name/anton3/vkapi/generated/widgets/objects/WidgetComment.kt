@@ -5,6 +5,7 @@ import name.anton3.vkapi.generated.common.objects.RepostsInfo
 import name.anton3.vkapi.generated.users.objects.UserFull
 import name.anton3.vkapi.generated.wall.objects.CommentAttachment
 import name.anton3.vkapi.generated.wall.objects.PostSource
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -33,7 +34,7 @@ data class WidgetComment(
     val user: UserFull? = null,
     val postType: Int,
     val text: String,
-    val canDelete: Boolean? = null,
+    val canDelete: BoolInt? = null,
     val media: CommentMedia? = null,
     val attachments: List<CommentAttachment>? = null,
     val postSource: PostSource? = null,

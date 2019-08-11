@@ -3,6 +3,7 @@ package name.anton3.vkapi.generated.pages.objects
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.wall.objects.CommentAttachmentBody
 import name.anton3.vkapi.generated.wall.objects.WallPostAttachmentBody
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -28,8 +29,8 @@ data class WikipageFull(
     val id: Int,
     val groupId: Int,
     val title: String,
-    val currentUserCanEdit: Boolean? = null,
-    val currentUserCanEditAccess: Boolean? = null,
+    val currentUserCanEdit: BoolInt? = null,
+    val currentUserCanEditAccess: BoolInt? = null,
     val whoCanView: PrivacySettings,
     val whoCanEdit: PrivacySettings,
     val edited: Int,

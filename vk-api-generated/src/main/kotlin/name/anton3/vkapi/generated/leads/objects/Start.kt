@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.leads.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -7,6 +9,6 @@ package name.anton3.vkapi.generated.leads.objects
  * @property vkSid Session data
  */
 data class Start(
-    val testMode: Boolean? = null,
+    val testMode: BoolInt? = null,
     val vkSid: String? = null
 )

@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.video.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -40,9 +41,9 @@ data class CatElement(
     val date: VkDate? = null,
     val views: Int? = null,
     val comments: Int? = null,
-    val canAdd: Boolean? = null,
-    val canEdit: Boolean? = null,
-    val isPrivate: Boolean? = null,
+    val canAdd: BoolInt? = null,
+    val canEdit: BoolInt? = null,
+    val isPrivate: BoolInt? = null,
     val count: Int? = null,
     val updatedTime: Int? = null
 )

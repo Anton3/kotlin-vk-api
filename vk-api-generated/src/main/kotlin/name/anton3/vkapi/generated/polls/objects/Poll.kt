@@ -3,6 +3,7 @@ package name.anton3.vkapi.generated.polls.objects
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
 import name.anton3.vkapi.generated.wall.objects.WallPostAttachmentBody
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -25,5 +26,5 @@ data class Poll(
     val votes: String,
     val answerId: Int? = null,
     val answers: List<Answer>,
-    val anonymous: Boolean
+    val anonymous: BoolInt
 ) : WallPostAttachmentBody, MessageAttachmentBody

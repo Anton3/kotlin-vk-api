@@ -3,6 +3,7 @@ package name.anton3.vkapi.generated.users.objects
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.common.objects.Sex
 import name.anton3.vkapi.generated.newsfeed.objects.GetSuggestedSourcesResponse
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -28,8 +29,8 @@ data class UserXtrType(
     override val screenName: String? = null,
     override val photo50: String? = null,
     override val photo100: String? = null,
-    override val online: Boolean? = null,
-    override val onlineMobile: Boolean? = null,
+    override val online: BoolInt? = null,
+    override val onlineMobile: BoolInt? = null,
     override val onlineApp: Int? = null,
     override val id: Int,
     override val firstName: String,

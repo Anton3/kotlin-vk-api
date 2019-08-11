@@ -5,6 +5,7 @@ import name.anton3.vkapi.generated.common.objects.Country
 import name.anton3.vkapi.generated.common.objects.Object
 import name.anton3.vkapi.generated.newsfeed.objects.GetSuggestedSourcesResponse
 import name.anton3.vkapi.generated.users.objects.GetSubscriptionsExtendedResponse
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -59,32 +60,32 @@ import name.anton3.vkapi.generated.users.objects.GetSubscriptionsExtendedRespons
 data class GroupFull(
     val market: MarketInfo? = null,
     val memberStatus: GroupFullMemberStatus? = null,
-    val isFavorite: Boolean? = null,
-    val isSubscribed: Boolean? = null,
+    val isFavorite: BoolInt? = null,
+    val isSubscribed: BoolInt? = null,
     val city: Object? = null,
     val country: Country? = null,
-    val verified: Boolean? = null,
+    val verified: BoolInt? = null,
     val description: String? = null,
     val wikiPage: String? = null,
     val membersCount: Int? = null,
     val counters: CountersGroup? = null,
     val cover: Cover? = null,
-    val canPost: Boolean? = null,
-    val canSeeAllPosts: Boolean? = null,
+    val canPost: BoolInt? = null,
+    val canSeeAllPosts: BoolInt? = null,
     val activity: String? = null,
     val fixedPost: Int? = null,
-    val canCreateTopic: Boolean? = null,
-    val canUploadVideo: Boolean? = null,
-    val hasPhoto: Boolean? = null,
+    val canCreateTopic: BoolInt? = null,
+    val canUploadVideo: BoolInt? = null,
+    val hasPhoto: BoolInt? = null,
     val status: String? = null,
     val mainAlbumId: Int? = null,
     val links: List<LinksItem>? = null,
     val contacts: List<ContactsItem>? = null,
     val site: String? = null,
     val mainSection: GroupFullMainSection? = null,
-    val trending: Boolean? = null,
-    val canMessage: Boolean? = null,
-    val isMessagesBlocked: Boolean? = null,
+    val trending: BoolInt? = null,
+    val canMessage: BoolInt? = null,
+    val isMessagesBlocked: BoolInt? = null,
     val onlineStatus: OnlineStatus? = null,
     val startDate: Int? = null,
     val finishDate: Int? = null,
@@ -96,9 +97,9 @@ data class GroupFull(
     override val deactivated: String? = null,
     override val isClosed: Visibility? = null,
     override val type: Type? = null,
-    override val isAdmin: Boolean? = null,
+    override val isAdmin: BoolInt? = null,
     override val adminLevel: GroupAdminLevel? = null,
-    override val isMember: Boolean? = null,
+    override val isMember: BoolInt? = null,
     override val photo50: String? = null,
     override val photo100: String? = null,
     override val photo200: String? = null

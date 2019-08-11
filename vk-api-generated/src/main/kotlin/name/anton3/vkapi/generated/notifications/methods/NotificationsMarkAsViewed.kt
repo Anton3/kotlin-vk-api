@@ -5,6 +5,7 @@ package name.anton3.vkapi.generated.notifications.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * [https://vk.com/dev/notifications.markAsViewed]
@@ -13,4 +14,4 @@ import name.anton3.vkapi.method.UserMethod
  *
 
  */
-class NotificationsMarkAsViewed : CheckedMethod<Boolean, UserMethod>("notifications.markAsViewed", jacksonTypeRef())
+class NotificationsMarkAsViewed : CheckedMethod<BoolInt, UserMethod>("notifications.markAsViewed", jacksonTypeRef())

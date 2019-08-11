@@ -1,6 +1,7 @@
 package name.anton3.vkapi.generated.groups.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -26,9 +27,9 @@ interface Group {
     val deactivated: String?
     val isClosed: Visibility?
     val type: Type?
-    val isAdmin: Boolean?
+    val isAdmin: BoolInt?
     val adminLevel: GroupAdminLevel?
-    val isMember: Boolean?
+    val isMember: BoolInt?
     val photo50: String?
     val photo100: String?
     val photo200: String?

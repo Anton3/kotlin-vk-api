@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.account.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -7,6 +9,6 @@ package name.anton3.vkapi.generated.account.objects
  * @property nameRequest No description
  */
 data class SaveProfileInfoResponse(
-    val changed: Boolean? = null,
+    val changed: BoolInt? = null,
     val nameRequest: NameRequest? = null
 )

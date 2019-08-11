@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.ads.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -31,7 +33,7 @@ data class Ad(
     val cpc: Int? = null,
     val cpm: Int? = null,
     val impressionsLimit: Int? = null,
-    val impressionsLimited: Boolean? = null,
+    val impressionsLimited: BoolInt? = null,
     val adPlatform: String? = null,
     val allLimit: Int,
     val category1Id: Int? = null,
@@ -39,8 +41,8 @@ data class Ad(
     val status: AdStatus,
     val name: String,
     val approved: AdApproved,
-    val video: Boolean? = null,
-    val disclaimerMedical: Boolean? = null,
-    val disclaimerSpecialist: Boolean? = null,
-    val disclaimerSupplements: Boolean? = null
+    val video: BoolInt? = null,
+    val disclaimerMedical: BoolInt? = null,
+    val disclaimerSpecialist: BoolInt? = null,
+    val disclaimerSupplements: BoolInt? = null
 )

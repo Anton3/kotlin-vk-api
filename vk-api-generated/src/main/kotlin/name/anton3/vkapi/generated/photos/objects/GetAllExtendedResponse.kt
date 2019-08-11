@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.photos.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -10,5 +12,5 @@ package name.anton3.vkapi.generated.photos.objects
 data class GetAllExtendedResponse(
     val count: Int? = null,
     val items: List<PhotoFullXtrRealOffset>? = null,
-    val more: Boolean? = null
+    val more: BoolInt? = null
 )

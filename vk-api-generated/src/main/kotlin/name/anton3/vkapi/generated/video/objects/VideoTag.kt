@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.video.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -18,5 +19,5 @@ data class VideoTag(
     val placerId: Int,
     val taggedName: String,
     val date: VkDate,
-    val viewed: Boolean
+    val viewed: BoolInt
 )

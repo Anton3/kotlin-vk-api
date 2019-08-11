@@ -3,6 +3,7 @@ package name.anton3.vkapi.generated.stories.objects
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.video.objects.Video
 import name.anton3.vkapi.generated.video.objects.VideoFiles
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.PropertyExists
 import name.anton3.vkapi.vktypes.VkDate
 
@@ -44,7 +45,7 @@ data class StoryVideo(
     val firstFrame320: String? = null,
     val firstFrame160: String? = null,
     val firstFrame130: String? = null,
-    val isPrivate: Boolean? = null,
+    val isPrivate: BoolInt? = null,
     override val id: Int? = null,
     override val ownerId: Int? = null,
     override val title: String? = null,
@@ -60,8 +61,8 @@ data class StoryVideo(
     override val accessKey: String? = null,
     override val addingDate: Int? = null,
     override val player: String? = null,
-    override val canEdit: Boolean? = null,
-    override val canAdd: Boolean? = null,
+    override val canEdit: BoolInt? = null,
+    override val canAdd: BoolInt? = null,
     override val processing: PropertyExists? = null,
     override val live: PropertyExists? = null,
     override val files: VideoFiles? = null,

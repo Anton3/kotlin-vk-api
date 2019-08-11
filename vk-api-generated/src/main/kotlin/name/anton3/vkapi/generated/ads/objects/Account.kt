@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.ads.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -11,6 +13,6 @@ package name.anton3.vkapi.generated.ads.objects
 data class Account(
     val accountId: Int,
     val accountType: AccountType,
-    val accountStatus: Boolean,
+    val accountStatus: BoolInt,
     val accessRole: AccessRole
 )

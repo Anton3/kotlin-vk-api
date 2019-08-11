@@ -3,6 +3,7 @@ package name.anton3.vkapi.generated.market.objects
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.common.objects.Likes
 import name.anton3.vkapi.generated.photos.objects.Photo
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -26,8 +27,8 @@ import name.anton3.vkapi.vktypes.VkDate
 @JsonDeserialize(`as` = Void::class)
 data class MarketItemFull(
     val photos: List<Photo>? = null,
-    val canComment: Boolean? = null,
-    val canRepost: Boolean? = null,
+    val canComment: BoolInt? = null,
+    val canRepost: BoolInt? = null,
     val likes: Likes? = null,
     val viewsCount: Int? = null,
     override val id: Int,

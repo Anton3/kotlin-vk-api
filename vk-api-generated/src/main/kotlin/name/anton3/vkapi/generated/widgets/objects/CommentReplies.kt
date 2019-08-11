@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.widgets.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -9,6 +11,6 @@ package name.anton3.vkapi.generated.widgets.objects
  */
 data class CommentReplies(
     val count: Int? = null,
-    val canPost: Boolean? = null,
+    val canPost: BoolInt? = null,
     val replies: List<CommentRepliesItem>? = null
 )

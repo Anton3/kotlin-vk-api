@@ -1,6 +1,7 @@
 package name.anton3.vkapi.generated.groups.objects
 
 import name.anton3.vkapi.generated.common.objects.Image
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -9,6 +10,6 @@ import name.anton3.vkapi.generated.common.objects.Image
  * @property images No description
  */
 data class Cover(
-    val enabled: Boolean,
+    val enabled: BoolInt,
     val images: List<Image>? = null
 )

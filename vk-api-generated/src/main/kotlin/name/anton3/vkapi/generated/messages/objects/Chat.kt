@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.messages.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -25,6 +27,6 @@ data class Chat(
     val photo50: String? = null,
     val photo100: String? = null,
     val photo200: String? = null,
-    val left: Boolean? = null,
-    val kicked: Boolean? = null
+    val left: BoolInt? = null,
+    val kicked: BoolInt? = null
 )

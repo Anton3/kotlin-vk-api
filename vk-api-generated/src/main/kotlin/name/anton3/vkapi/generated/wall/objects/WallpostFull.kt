@@ -5,6 +5,7 @@ import name.anton3.vkapi.generated.common.objects.CommentsInfo
 import name.anton3.vkapi.generated.common.objects.Geo
 import name.anton3.vkapi.generated.common.objects.LikesInfo
 import name.anton3.vkapi.generated.common.objects.RepostsInfo
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -36,15 +37,15 @@ import name.anton3.vkapi.vktypes.VkDate
 @JsonDeserialize(`as` = Void::class)
 data class WallpostFull(
     val copyHistory: List<Wallpost>? = null,
-    val canEdit: Boolean? = null,
+    val canEdit: BoolInt? = null,
     val createdBy: Int? = null,
-    val canDelete: Boolean? = null,
-    val canPin: Boolean? = null,
+    val canDelete: BoolInt? = null,
+    val canPin: BoolInt? = null,
     val isPinned: Int? = null,
     val comments: CommentsInfo? = null,
     val likes: LikesInfo? = null,
     val reposts: RepostsInfo? = null,
-    val markedAsAds: Boolean? = null,
+    val markedAsAds: BoolInt? = null,
     override val id: Int? = null,
     override val fromId: Int? = null,
     override val ownerId: Int? = null,

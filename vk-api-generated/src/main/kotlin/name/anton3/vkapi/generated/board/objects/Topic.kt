@@ -2,6 +2,7 @@ package name.anton3.vkapi.generated.board.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.notifications.objects.NotificationParent
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -24,7 +25,7 @@ data class Topic(
     val createdBy: Int? = null,
     val updated: Int? = null,
     val updatedBy: Int? = null,
-    val isClosed: Boolean? = null,
-    val isFixed: Boolean? = null,
+    val isClosed: BoolInt? = null,
+    val isFixed: BoolInt? = null,
     val comments: Int? = null
 ) : NotificationParent

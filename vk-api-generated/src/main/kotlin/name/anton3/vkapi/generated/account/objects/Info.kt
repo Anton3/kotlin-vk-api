@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.account.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -13,10 +15,10 @@ package name.anton3.vkapi.generated.account.objects
  */
 data class Info(
     val country: String? = null,
-    val httpsRequired: Boolean? = null,
-    val ownPostsDefault: Boolean? = null,
-    val noWallReplies: Boolean? = null,
-    val intro: Boolean? = null,
+    val httpsRequired: BoolInt? = null,
+    val ownPostsDefault: BoolInt? = null,
+    val noWallReplies: BoolInt? = null,
+    val intro: BoolInt? = null,
     val lang: Int? = null,
-    val `2faRequired`: Boolean? = null
+    val `2faRequired`: BoolInt? = null
 )

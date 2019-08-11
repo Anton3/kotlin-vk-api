@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.photos.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -26,5 +27,5 @@ data class PhotoTag(
     val y: Double,
     val x2: Double,
     val y2: Double,
-    val viewed: Boolean
+    val viewed: BoolInt
 )

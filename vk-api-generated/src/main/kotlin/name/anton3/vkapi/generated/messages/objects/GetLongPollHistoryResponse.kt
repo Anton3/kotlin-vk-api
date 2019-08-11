@@ -2,6 +2,7 @@ package name.anton3.vkapi.generated.messages.objects
 
 import name.anton3.vkapi.generated.groups.objects.Group
 import name.anton3.vkapi.generated.users.objects.UserFull
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -21,5 +22,5 @@ data class GetLongPollHistoryResponse(
     val profiles: List<UserFull>? = null,
     val chats: List<Chat>? = null,
     val newPts: Int? = null,
-    val more: Boolean? = null
+    val more: BoolInt? = null
 )

@@ -1,6 +1,7 @@
 package name.anton3.vkapi.generated.board.objects
 
 import name.anton3.vkapi.generated.polls.objects.Answer
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -18,7 +19,7 @@ data class TopicPoll(
     val pollId: Int,
     val ownerId: Int,
     val created: Int,
-    val isClosed: Boolean? = null,
+    val isClosed: BoolInt? = null,
     val question: String,
     val votes: String,
     val answerId: Int,

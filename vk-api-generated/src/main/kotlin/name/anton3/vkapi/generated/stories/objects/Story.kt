@@ -1,6 +1,7 @@
 package name.anton3.vkapi.generated.stories.objects
 
 import name.anton3.vkapi.generated.photos.objects.Photo
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -32,15 +33,15 @@ data class Story(
     val id: Int,
     val ownerId: Int,
     val date: VkDate? = null,
-    val seen: Boolean? = null,
+    val seen: BoolInt? = null,
     val type: StoryType? = null,
     val photo: Photo? = null,
     val video: StoryVideo? = null,
     val views: Int? = null,
-    val canSee: Boolean? = null,
-    val canReply: Boolean? = null,
-    val canShare: Boolean? = null,
-    val canComment: Boolean? = null,
+    val canSee: BoolInt? = null,
+    val canReply: BoolInt? = null,
+    val canShare: BoolInt? = null,
+    val canComment: BoolInt? = null,
     val isDeleted: Boolean? = null,
     val isExpired: Boolean? = null,
     val accessKey: String? = null,

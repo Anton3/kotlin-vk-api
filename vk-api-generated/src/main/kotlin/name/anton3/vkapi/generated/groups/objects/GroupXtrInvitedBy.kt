@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.groups.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -20,11 +22,11 @@ data class GroupXtrInvitedBy(
     val id: String? = null,
     val name: String? = null,
     val screenName: String? = null,
-    val isClosed: Boolean? = null,
+    val isClosed: BoolInt? = null,
     val type: GroupXtrInvitedByType? = null,
-    val isAdmin: Boolean? = null,
+    val isAdmin: BoolInt? = null,
     val adminLevel: GroupXtrInvitedByAdminLevel? = null,
-    val isMember: Boolean? = null,
+    val isMember: BoolInt? = null,
     val photo50: String? = null,
     val photo100: String? = null,
     val photo200: String? = null,

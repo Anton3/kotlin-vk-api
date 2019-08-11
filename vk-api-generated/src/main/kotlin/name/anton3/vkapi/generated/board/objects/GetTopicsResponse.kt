@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.board.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -12,5 +14,5 @@ data class GetTopicsResponse(
     val count: Int,
     val items: List<Topic>,
     val defaultOrder: DefaultOrder,
-    val canAddTopics: Boolean
+    val canAddTopics: BoolInt
 )

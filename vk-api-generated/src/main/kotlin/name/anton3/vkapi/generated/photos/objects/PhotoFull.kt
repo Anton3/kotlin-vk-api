@@ -2,6 +2,7 @@ package name.anton3.vkapi.generated.photos.objects
 
 import name.anton3.vkapi.generated.common.objects.Likes
 import name.anton3.vkapi.generated.common.objects.ObjectCount
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -43,6 +44,6 @@ data class PhotoFull(
     val likes: Likes? = null,
     val reposts: ObjectCount? = null,
     val comments: ObjectCount? = null,
-    val canComment: Boolean? = null,
+    val canComment: BoolInt? = null,
     val tags: ObjectCount? = null
 )

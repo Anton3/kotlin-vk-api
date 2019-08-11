@@ -5,6 +5,7 @@ import name.anton3.vkapi.generated.audio.objects.AudioFull
 import name.anton3.vkapi.generated.common.objects.Country
 import name.anton3.vkapi.generated.common.objects.Object
 import name.anton3.vkapi.generated.common.objects.Sex
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.VkBirthDate
 
 /**
@@ -110,17 +111,17 @@ interface UserFull : User {
     val photo400Orig: String?
     val photoMaxOrig: String?
     val photoId: String?
-    val hasPhoto: Boolean?
-    val trending: Boolean?
-    val hasMobile: Boolean?
-    val isFriend: Boolean?
+    val hasPhoto: BoolInt?
+    val trending: BoolInt?
+    val hasMobile: BoolInt?
+    val isFriend: BoolInt?
     val friendStatus: Int?
-    val wallComments: Boolean?
-    val canPost: Boolean?
-    val canSeeAllPosts: Boolean?
-    val canSeeAudio: Boolean?
-    val canWritePrivateMessage: Boolean?
-    val canSendFriendRequest: Boolean?
+    val wallComments: BoolInt?
+    val canPost: BoolInt?
+    val canSeeAllPosts: BoolInt?
+    val canSeeAudio: BoolInt?
+    val canWritePrivateMessage: BoolInt?
+    val canSendFriendRequest: BoolInt?
     val mobilePhone: String?
     val homePhone: String?
     val skype: String?
@@ -136,12 +137,12 @@ interface UserFull : User {
     val lastSeen: LastSeen?
     val exports: Exports?
     val cropPhoto: CropPhoto?
-    val verified: Boolean?
+    val verified: BoolInt?
     val followersCount: Int?
-    val blacklisted: Boolean?
-    val blacklistedByMe: Boolean?
-    val isFavorite: Boolean?
-    val isHiddenFromFeed: Boolean?
+    val blacklisted: BoolInt?
+    val blacklistedByMe: BoolInt?
+    val isFavorite: BoolInt?
+    val isHiddenFromFeed: BoolInt?
     val commonCount: Int?
     val occupation: Occupation?
     val career: List<Career>?
@@ -173,8 +174,8 @@ interface UserFull : User {
     override val screenName: String?
     override val photo50: String?
     override val photo100: String?
-    override val online: Boolean?
-    override val onlineMobile: Boolean?
+    override val online: BoolInt?
+    override val onlineMobile: BoolInt?
     override val onlineApp: Int?
     override val id: Int
     override val firstName: String

@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.common.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -7,6 +9,6 @@ package name.anton3.vkapi.generated.common.objects
  * @property count Likes number
  */
 data class Likes(
-    val userLikes: Boolean? = null,
+    val userLikes: BoolInt? = null,
     val count: Int? = null
 )

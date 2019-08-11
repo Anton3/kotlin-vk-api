@@ -1,6 +1,7 @@
 package name.anton3.vkapi.generated.groups.objects
 
 import name.anton3.vkapi.generated.places.objects.PlaceMin
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -40,11 +41,11 @@ data class GroupSettings(
     val docs: Int? = null,
     val topics: Int? = null,
     val wiki: Int? = null,
-    val obsceneFilter: Boolean? = null,
+    val obsceneFilter: BoolInt? = null,
     val publicCategory: Int? = null,
     val publicSubcategory: Int? = null,
     val publicCategoryList: List<GroupPublicCategoryList>? = null,
-    val obsceneStopwords: Boolean? = null,
+    val obsceneStopwords: BoolInt? = null,
     val obsceneWords: String? = null,
     val access: Int? = null,
     val subject: Int? = null,

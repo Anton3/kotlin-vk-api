@@ -5,6 +5,7 @@ import name.anton3.vkapi.generated.common.objects.Likes
 import name.anton3.vkapi.generated.common.objects.ObjectCount
 import name.anton3.vkapi.generated.photos.objects.Image
 import name.anton3.vkapi.generated.photos.objects.Photo
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -32,8 +33,8 @@ import name.anton3.vkapi.vktypes.VkDate
 data class NewsfeedPhoto(
     val likes: Likes? = null,
     val comments: ObjectCount? = null,
-    val canComment: Boolean? = null,
-    val canRepost: Boolean? = null,
+    val canComment: BoolInt? = null,
+    val canRepost: BoolInt? = null,
     override val id: Int,
     override val albumId: Int,
     override val ownerId: Int,

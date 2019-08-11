@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.notes.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -19,7 +20,7 @@ data class Note(
     val id: Int,
     val ownerId: Int,
     val comments: Int,
-    val canComment: Boolean? = null,
+    val canComment: BoolInt? = null,
     val date: VkDate,
     val title: String,
     val text: String? = null,

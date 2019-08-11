@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
 import name.anton3.vkapi.generated.wall.objects.CommentAttachmentBody
 import name.anton3.vkapi.generated.wall.objects.WallPostAttachmentBody
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.VkDate
 
 /**
@@ -30,8 +31,8 @@ data class AudioFull(
     val albumId: Int? = null,
     val lyricsId: Int? = null,
     val genreId: Int? = null,
-    val noSearch: Boolean? = null,
-    val isHq: Boolean? = null,
+    val noSearch: BoolInt? = null,
+    val isHq: BoolInt? = null,
     override val id: Int,
     override val ownerId: Int,
     override val artist: String,

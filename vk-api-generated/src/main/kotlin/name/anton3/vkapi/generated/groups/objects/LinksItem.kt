@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.groups.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -14,7 +16,7 @@ package name.anton3.vkapi.generated.groups.objects
 data class LinksItem(
     val id: Int? = null,
     val url: String? = null,
-    val editTitle: Boolean? = null,
+    val editTitle: BoolInt? = null,
     val name: String? = null,
     val desc: String? = null,
     val photo50: String? = null,

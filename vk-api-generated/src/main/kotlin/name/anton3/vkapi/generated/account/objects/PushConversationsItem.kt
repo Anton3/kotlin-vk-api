@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.account.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -9,6 +11,6 @@ package name.anton3.vkapi.generated.account.objects
  */
 data class PushConversationsItem(
     val peerId: Int? = null,
-    val sound: Boolean? = null,
+    val sound: BoolInt? = null,
     val disabledUntil: Int? = null
 )

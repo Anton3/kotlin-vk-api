@@ -1,6 +1,7 @@
 package name.anton3.vkapi.generated.board.objects
 
 import name.anton3.vkapi.generated.users.objects.UserMin
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -15,6 +16,6 @@ data class GetTopicsExtendedResponse(
     val count: Int,
     val items: List<Topic>,
     val defaultOrder: DefaultOrder,
-    val canAddTopics: Boolean,
+    val canAddTopics: BoolInt,
     val profiles: List<UserMin>
 )

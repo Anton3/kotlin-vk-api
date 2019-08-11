@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.video.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -17,6 +19,6 @@ data class CatBlock(
     val name: String,
     val id: Int,
     val view: CatBlockView,
-    val canHide: Boolean,
+    val canHide: BoolInt,
     val type: CatBlockView? = null
 )

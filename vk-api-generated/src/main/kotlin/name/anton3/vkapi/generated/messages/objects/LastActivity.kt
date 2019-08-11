@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.messages.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -7,6 +9,6 @@ package name.anton3.vkapi.generated.messages.objects
  * @property time Time when user was online in Unixtime
  */
 data class LastActivity(
-    val online: Boolean,
+    val online: BoolInt,
     val time: Int
 )

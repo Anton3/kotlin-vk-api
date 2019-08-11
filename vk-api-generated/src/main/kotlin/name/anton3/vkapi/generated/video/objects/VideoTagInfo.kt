@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generated.video.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.PropertyExists
 import name.anton3.vkapi.vktypes.VkDate
 
@@ -44,8 +45,8 @@ data class VideoTagInfo(
     val accessKey: String? = null,
     val addingDate: Int? = null,
     val player: String? = null,
-    val canEdit: Boolean? = null,
-    val canAdd: Boolean? = null,
+    val canEdit: BoolInt? = null,
+    val canAdd: BoolInt? = null,
     val processing: PropertyExists? = null,
     val live: PropertyExists? = null,
     val files: VideoFiles? = null,

@@ -1,6 +1,7 @@
 package name.anton3.vkapi.generated.groups.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -26,9 +27,9 @@ data class GroupImpl(
     override val deactivated: String? = null,
     override val isClosed: Visibility? = null,
     override val type: Type? = null,
-    override val isAdmin: Boolean? = null,
+    override val isAdmin: BoolInt? = null,
     override val adminLevel: GroupAdminLevel? = null,
-    override val isMember: Boolean? = null,
+    override val isMember: BoolInt? = null,
     override val photo50: String? = null,
     override val photo100: String? = null,
     override val photo200: String? = null

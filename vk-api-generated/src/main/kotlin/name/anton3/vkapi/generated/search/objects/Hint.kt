@@ -2,6 +2,7 @@ package name.anton3.vkapi.generated.search.objects
 
 import name.anton3.vkapi.generated.groups.objects.Group
 import name.anton3.vkapi.generated.users.objects.UserMin
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -17,7 +18,7 @@ data class Hint(
     val type: HintType,
     val section: HintSection,
     val description: String,
-    val global: Boolean? = null,
+    val global: BoolInt? = null,
     val group: Group? = null,
     val profile: UserMin? = null
 )

@@ -366,12 +366,8 @@ class SourceGenerator(val basePackage: String) {
 
     private fun makeMapResultType(): TypeId {
         val typeId = TypeId(
-            "kotlin.collections",
-            "Map",
-            listOf(
-                TypeId("kotlin.Int"),
-                TypeId("kotlin.Boolean")
-            )
+            qualifiedName = "kotlin.collections.Map",
+            genericParameters = listOf(TypeId("kotlin.Int"), TypeId("kotlin.Boolean"))
         )
 
         return typeSpace.registerTypeImplementation(typeId, BuiltinType)
@@ -446,7 +442,7 @@ class SourceGenerator(val basePackage: String) {
         typeSpace.registerVkPrimitiveType("number", "kotlin.Double")
 
         // Redefine some schema types to better representations
-        typeSpace.registerVkPrimitiveType("base_bool_int", "kotlin.Boolean")
+        typeSpace.registerVkPrimitiveType("base_bool_int", "name.anton3.vkapi.vktypes.BoolInt")
         typeSpace.registerVkPrimitiveType("base_property_exists", "name.anton3.vkapi.vktypes.PropertyExists")
         typeSpace.registerVkPrimitiveType("base_ok_response", "name.anton3.vkapi.vktypes.OkResponse")
     }

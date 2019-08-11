@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generated.common.objects
 
+import name.anton3.vkapi.vktypes.BoolInt
+
 /**
  * No description
  *
@@ -9,6 +11,6 @@ package name.anton3.vkapi.generated.common.objects
  */
 data class CommentsInfo(
     val count: Int? = null,
-    val canPost: Boolean? = null,
-    val groupsCanPost: Boolean? = null
+    val canPost: BoolInt? = null,
+    val groupsCanPost: BoolInt? = null
 )

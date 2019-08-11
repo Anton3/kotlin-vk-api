@@ -2,6 +2,7 @@ package name.anton3.vkapi.generated.database.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.common.objects.Object
+import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -16,7 +17,7 @@ import name.anton3.vkapi.generated.common.objects.Object
 data class City(
     val area: String? = null,
     val region: String? = null,
-    val important: Boolean? = null,
+    val important: BoolInt? = null,
     override val id: Int,
     override val title: String
 ) : Object
