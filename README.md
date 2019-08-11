@@ -38,10 +38,11 @@ val clientFactory: VkClientFactory = ktorClientFactory(httpClient)
 Создайте токен нужного типа и создайте ваш клиент ВК с его помощью:
 
 ```kotlin
-import name.anton3.vkapi.client.GroupClient
+import name.anton3.vkapi.client.VkClient
+import name.anton3.vkapi.method.GroupMethod
 import name.anton3.vkapi.tokens.GroupToken
 
-val api: GroupClient = clientFactory.group(GroupToken(accessToken))
+val api: VkClient<GroupMethod> = clientFactory.group(GroupToken(accessToken))
 ```
 
 > **Замечание.** Клиент учитывает ограничения ВК на запросы к API и объединяет несколько запросов
@@ -90,13 +91,6 @@ import name.anton3.vkapi.client.swallow
 
 val response: WallpostFull? = swallow { api(WallGet(domain = "departureMsk")) }
 println(response?.text)
-```
-
-Так как запросы к ВК отправляются не сразу при поступлении, а с учётом лимитов,
-то при завершении работы стоит подождать, пока все запросы выполнятся:
-
-```kotlin
-clientFactory.closeAndJoin()
 ```
 
 ## Структура библиотеки
