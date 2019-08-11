@@ -1,5 +1,3 @@
-@file:Suppress("NOTHING_TO_INLINE")
-
 package name.anton3.vkapi.client
 
 import com.fasterxml.jackson.databind.ObjectMapper

@@ -79,7 +79,6 @@ class SortedRequestStorage<Request, State>(
         return mutex.withLock { requests.contains(request) }
     }
 
-    @Suppress("NOTHING_TO_INLINE")
     private suspend inline fun pollInternal(): DynamicRequest<Request> {
         val result = requests.pollLast()!!
         states.remove(result)
