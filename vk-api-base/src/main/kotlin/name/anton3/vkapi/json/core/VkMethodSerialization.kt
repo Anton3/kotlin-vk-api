@@ -1,5 +1,6 @@
 package name.anton3.vkapi.json.core
 
+import com.fasterxml.jackson.databind.JavaType
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ArrayNode
@@ -11,19 +12,18 @@ import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkResponse
 
 fun ObjectMapper.serializeMethod(method: VkMethod<*>): Map<String, String> {
-    return valueToTree<ObjectNode>(method)
-        .fields()
-        .asSequence()
-        .associate { it.key to propertyValueToParameter(it.value, this) } + method.unsafeParams
+    return valueToTree<ObjectNode>(method).fields().asSequence()
+        .associate { it.key to propertyValueToParameter(it.value, this) }
 }
 
 fun <T> ObjectMapper.deserializeResponse(method: VkMethod<T>, response: ByteArray): VkResponse<T> {
+    return reader(ForwardableAttributes(METHOD_ATTRIBUTE, method)).forType(responseType(method)).readValue(response)
+}
+
+private fun ObjectMapper.responseType(method: VkMethod<*>): JavaType {
     val typeFactory = this.typeFactory
     val resultType = typeFactory.constructType(method.responseType)
-    val responseType = typeFactory.constructCollectionLikeType(VkResponse::class.java, resultType)
-
-    val reader = this.reader(ForwardableAttributes(METHOD_ATTRIBUTE, method))
-    return reader.forType(responseType).readValue(response)
+    return typeFactory.constructCollectionLikeType(VkResponse::class.java, resultType)
 }
 
 private fun propertyValueToParameter(value: JsonNode, objectMapper: ObjectMapper): String = when (value) {
