@@ -3,8 +3,9 @@
 package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.groups.objects.AddCallbackServerResponse
+import name.anton3.vkapi.method.CheckedMethod
+import name.anton3.vkapi.method.MethodRequirement
 
 /**
  * [https://vk.com/dev/groups.addCallbackServer]
@@ -21,4 +22,4 @@ data class GroupsAddCallbackServer(
     var url: String? = null,
     var title: String? = null,
     var secretKey: String? = null
-) : VkMethod<AddCallbackServerResponse>("groups.addCallbackServer", jacksonTypeRef())
+) : CheckedMethod<AddCallbackServerResponse, MethodRequirement>("groups.addCallbackServer", jacksonTypeRef())

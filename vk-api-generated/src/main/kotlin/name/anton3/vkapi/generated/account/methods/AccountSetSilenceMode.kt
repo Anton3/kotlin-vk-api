@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.account.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -22,5 +22,4 @@ data class AccountSetSilenceMode(
     var time: Int? = null,
     var peerId: Int? = null,
     var sound: Int? = null
-) : VkMethod<OkResponse>("account.setSilenceMode", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<OkResponse, UserMethod>("account.setSilenceMode", jacksonTypeRef())

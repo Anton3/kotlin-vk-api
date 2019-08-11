@@ -3,10 +3,10 @@
 package name.anton3.vkapi.generated.board.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.board.objects.GetTopicsOrder
 import name.anton3.vkapi.generated.board.objects.GetTopicsPreview
 import name.anton3.vkapi.generated.board.objects.GetTopicsResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
 
 /**
@@ -30,5 +30,4 @@ data class BoardGetTopics(
     var count: Int? = null,
     var preview: GetTopicsPreview? = null,
     var previewLength: Int? = null
-) : VkMethod<GetTopicsResponse>("board.getTopics", jacksonTypeRef()),
-    UserServiceMethod
+) : CheckedMethod<GetTopicsResponse, UserServiceMethod>("board.getTopics", jacksonTypeRef())

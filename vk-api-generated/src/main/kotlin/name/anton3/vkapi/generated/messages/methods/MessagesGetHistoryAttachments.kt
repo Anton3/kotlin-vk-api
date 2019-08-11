@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.messages.objects.GetHistoryAttachmentsMediaType
 import name.anton3.vkapi.generated.messages.objects.GetHistoryAttachmentsResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
 
 /**
@@ -29,5 +29,4 @@ data class MessagesGetHistoryAttachments(
     var photoSizes: Boolean? = null,
     var fields: List<String>? = null,
     var groupId: Int? = null
-) : VkMethod<GetHistoryAttachmentsResponse>("messages.getHistoryAttachments", jacksonTypeRef()),
-    UserGroupMethod
+) : CheckedMethod<GetHistoryAttachmentsResponse, UserGroupMethod>("messages.getHistoryAttachments", jacksonTypeRef())

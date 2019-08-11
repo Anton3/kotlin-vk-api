@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.video.objects.GetCommentsResponse
 import name.anton3.vkapi.generated.video.objects.GetCommentsSort
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -29,5 +29,4 @@ data class VideoGetComments(
     var offset: Int? = null,
     var count: Int? = null,
     var sort: GetCommentsSort? = null
-) : VkMethod<GetCommentsResponse>("video.getComments", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<GetCommentsResponse, UserMethod>("video.getComments", jacksonTypeRef())

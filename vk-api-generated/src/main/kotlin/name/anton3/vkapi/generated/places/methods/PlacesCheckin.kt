@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.places.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.places.objects.CheckinResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -26,5 +26,4 @@ data class PlacesCheckin(
     var longitude: Double? = null,
     var friendsOnly: Boolean? = null,
     var services: List<String>? = null
-) : VkMethod<CheckinResponse>("places.checkin", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<CheckinResponse, UserMethod>("places.checkin", jacksonTypeRef())

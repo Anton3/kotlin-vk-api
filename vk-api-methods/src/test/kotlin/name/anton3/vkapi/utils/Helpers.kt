@@ -2,12 +2,13 @@ package name.anton3.vkapi.utils
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.apache.Apache
-import name.anton3.vkapi.client.GroupClient
 import name.anton3.vkapi.client.KtorTransportClient
-import name.anton3.vkapi.client.UserClient
+import name.anton3.vkapi.client.VkClient
 import name.anton3.vkapi.executors.JsonApiMethodExecutor
 import name.anton3.vkapi.executors.TokenMethodExecutor
 import name.anton3.vkapi.json.core.vkObjectMapper
+import name.anton3.vkapi.method.GroupMethod
+import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.tokens.GroupToken
 import name.anton3.vkapi.tokens.UserToken
 import java.io.FileInputStream
@@ -52,5 +53,5 @@ val httpClient = KtorTransportClient(HttpClient(Apache) {
 val executor = JsonApiMethodExecutor(httpClient, vkObjectMapper())
 val groupToken = GroupToken(groupAccessToken)
 val userToken = UserToken(userAccessToken)
-val groupApi = GroupClient(TokenMethodExecutor(executor, groupToken))
-val userApi = UserClient(TokenMethodExecutor(executor, userToken))
+val groupApi = VkClient<GroupMethod>(TokenMethodExecutor(executor, groupToken))
+val userApi = VkClient<UserMethod>(TokenMethodExecutor(executor, userToken))

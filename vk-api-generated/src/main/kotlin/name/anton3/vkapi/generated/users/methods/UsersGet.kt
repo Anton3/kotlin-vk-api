@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.users.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.common.objects.NameCase
 import name.anton3.vkapi.generated.users.objects.UserXtrCounters
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupServiceMethod
 
 /**
@@ -21,5 +21,4 @@ data class UsersGet(
     var userIds: List<String>? = null,
     var fields: List<String>? = null,
     var nameCase: NameCase? = null
-) : VkMethod<List<UserXtrCounters>>("users.get", jacksonTypeRef()),
-    UserGroupServiceMethod
+) : CheckedMethod<List<UserXtrCounters>, UserGroupServiceMethod>("users.get", jacksonTypeRef())

@@ -12,7 +12,6 @@ data class MethodType(
     val arguments: List<MethodArgument>,
     val result: TypeId,
     val defaultParams: Map<String, String?> = emptyMap(),
-    val methodAccessType: TypeId?,
     val description: String?
 ) : TypeDefinition {
 
@@ -40,11 +39,6 @@ data class MethodType(
             )
         }
 
-        val implementsClause = methodAccessType?.let {
-            sourceWriter.importType(it)
-            ",\n    ${it.name}"
-        }.orEmpty()
-
         val classRef = renderClassRef(sourceWriter)
         val description = renderDescription(sourceWriter)
 
@@ -64,11 +58,9 @@ data class MethodType(
             |$packageClause$importClause
             |
             |$description
-            |${dataClass}class ${typeId.name}$fieldsDefinition : $parentClass("$methodUrl", $classRef)$implementsClause
+            |${dataClass}class ${typeId.name}$fieldsDefinition : $parentClass("$methodUrl", $classRef)
             """.trimMargin()
         )
-
-        renderMutableMap(defaultParams)
 
         val filteredDefaultParams = defaultParams
             .mapNotNull { (key, value) -> value?.let { key to value } }
@@ -93,10 +85,6 @@ data class MethodType(
     private fun renderClassRef(sourceWriter: SourceWriter): String {
         sourceWriter.importType(TypeId("com.fasterxml.jackson.module.kotlin.jacksonTypeRef"))
         return "jacksonTypeRef()"
-    }
-
-    private fun renderMutableMap(map: Map<String, String?>): String {
-        return map.filterValues { it != null }.entries.joinToString(", ", prefix = "mutableMapOf(", postfix = ")") { "\"${it.key}\" to \"${it.value!!}\"" }
     }
 
     private fun renderDescription(sourceWriter: SourceWriter): String {

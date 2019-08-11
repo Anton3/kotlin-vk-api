@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.auth.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.ServiceMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -21,5 +21,4 @@ data class AuthCheckPhone(
     var phone: String,
     var clientId: Int? = null,
     var authByPhone: Boolean? = null
-) : VkMethod<OkResponse>("auth.checkPhone", jacksonTypeRef()),
-    ServiceMethod
+) : CheckedMethod<OkResponse, ServiceMethod>("auth.checkPhone", jacksonTypeRef())

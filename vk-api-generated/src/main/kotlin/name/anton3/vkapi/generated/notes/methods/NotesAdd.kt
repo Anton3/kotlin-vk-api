@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.notes.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -21,5 +21,4 @@ data class NotesAdd(
     var text: String,
     var privacyView: List<String>? = null,
     var privacyComment: List<String>? = null
-) : VkMethod<Int>("notes.add", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<Int, UserMethod>("notes.add", jacksonTypeRef())

@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.docs.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.docs.objects.DocTypes
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -17,5 +17,4 @@ import name.anton3.vkapi.vktypes.VkList
  */
 data class DocsGetTypes(
     var ownerId: Int
-) : VkMethod<VkList<DocTypes>>("docs.getTypes", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<VkList<DocTypes>, UserMethod>("docs.getTypes", jacksonTypeRef())

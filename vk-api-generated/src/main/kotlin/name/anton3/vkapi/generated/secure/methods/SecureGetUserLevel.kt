@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.secure.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.secure.objects.Level
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.ServiceMethod
 
 /**
@@ -16,5 +16,4 @@ import name.anton3.vkapi.method.ServiceMethod
  */
 data class SecureGetUserLevel(
     var userIds: List<Int>
-) : VkMethod<List<Level>>("secure.getUserLevel", jacksonTypeRef()),
-    ServiceMethod
+) : CheckedMethod<List<Level>, ServiceMethod>("secure.getUserLevel", jacksonTypeRef())

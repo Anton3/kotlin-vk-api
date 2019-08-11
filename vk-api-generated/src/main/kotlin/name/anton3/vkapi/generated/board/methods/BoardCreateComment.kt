@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.board.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -27,5 +27,4 @@ data class BoardCreateComment(
     var fromGroup: Boolean? = null,
     var stickerId: Int? = null,
     var guid: String? = null
-) : VkMethod<Int>("board.createComment", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<Int, UserMethod>("board.createComment", jacksonTypeRef())

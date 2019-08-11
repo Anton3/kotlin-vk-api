@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.account.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.account.objects.ChangePasswordResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -22,5 +22,4 @@ data class AccountChangePassword(
     var changePasswordHash: String? = null,
     var oldPassword: String? = null,
     var newPassword: String
-) : VkMethod<ChangePasswordResponse>("account.changePassword", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<ChangePasswordResponse, UserMethod>("account.changePassword", jacksonTypeRef())

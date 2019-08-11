@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.likes.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.likes.objects.IsLikedResponse
 import name.anton3.vkapi.generated.likes.objects.IsLikedType
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -23,5 +23,4 @@ data class LikesIsLiked(
     var type: IsLikedType,
     var ownerId: Int? = null,
     var itemId: Int
-) : VkMethod<IsLikedResponse>("likes.isLiked", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<IsLikedResponse, UserMethod>("likes.isLiked", jacksonTypeRef())

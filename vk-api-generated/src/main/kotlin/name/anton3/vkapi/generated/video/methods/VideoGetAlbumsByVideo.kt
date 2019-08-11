@@ -3,7 +3,8 @@
 package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
+import name.anton3.vkapi.method.MethodRequirement
 
 /**
  * [https://vk.com/dev/video.getAlbumsByVideo]
@@ -18,4 +19,4 @@ data class VideoGetAlbumsByVideo(
     var targetId: Int? = null,
     var ownerId: Int,
     var videoId: Int
-) : VkMethod<List<Int>>("video.getAlbumsByVideo", jacksonTypeRef())
+) : CheckedMethod<List<Int>, MethodRequirement>("video.getAlbumsByVideo", jacksonTypeRef())

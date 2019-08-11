@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.messages.objects.GetLongPollHistoryResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
 
 /**
@@ -32,5 +32,4 @@ data class MessagesGetLongPollHistory(
     var msgsLimit: Int? = null,
     var maxMsgId: Int? = null,
     var groupId: Int? = null
-) : VkMethod<GetLongPollHistoryResponse>("messages.getLongPollHistory", jacksonTypeRef()),
-    UserGroupMethod
+) : CheckedMethod<GetLongPollHistoryResponse, UserGroupMethod>("messages.getLongPollHistory", jacksonTypeRef())

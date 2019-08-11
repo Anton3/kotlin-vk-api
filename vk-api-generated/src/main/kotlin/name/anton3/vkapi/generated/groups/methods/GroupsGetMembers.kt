@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.groups.objects.GetMembersFilter
 import name.anton3.vkapi.generated.groups.objects.GetMembersSort
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupServiceMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -26,5 +26,4 @@ data class GroupsGetMembers(
     var offset: Int? = null,
     var count: Int? = null,
     var filter: GetMembersFilter? = null
-) : VkMethod<VkList<Int>>("groups.getMembers", jacksonTypeRef()),
-    UserGroupServiceMethod
+) : CheckedMethod<VkList<Int>, UserGroupServiceMethod>("groups.getMembers", jacksonTypeRef())

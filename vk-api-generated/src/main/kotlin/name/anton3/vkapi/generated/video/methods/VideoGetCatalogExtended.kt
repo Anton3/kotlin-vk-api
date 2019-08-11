@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.video.objects.GetCatalogExtendedResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
 
 /**
@@ -22,8 +22,7 @@ data class VideoGetCatalogExtended(
     var itemsCount: Int? = null,
     var from: String? = null,
     var filters: List<String>? = null
-) : VkMethod<GetCatalogExtendedResponse>("video.getCatalog", jacksonTypeRef()),
-    UserServiceMethod {
+) : CheckedMethod<GetCatalogExtendedResponse, UserServiceMethod>("video.getCatalog", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")
     }

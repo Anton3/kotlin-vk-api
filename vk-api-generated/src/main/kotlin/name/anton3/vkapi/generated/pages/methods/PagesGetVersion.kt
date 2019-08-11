@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.pages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.pages.objects.WikipageFull
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -12,9 +12,9 @@ import name.anton3.vkapi.method.UserMethod
  *
  * Returns the text of one of the previous versions of a wiki page.
  *
- * @property versionId
+ * @property versionId 
  * @property groupId ID of the community that owns the wiki page.
- * @property userId
+ * @property userId 
  * @property needHtml '1' — to return the page as HTML
  */
 data class PagesGetVersion(
@@ -22,5 +22,4 @@ data class PagesGetVersion(
     var groupId: Int? = null,
     var userId: Int? = null,
     var needHtml: Boolean? = null
-) : VkMethod<WikipageFull>("pages.getVersion", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<WikipageFull, UserMethod>("pages.getVersion", jacksonTypeRef())

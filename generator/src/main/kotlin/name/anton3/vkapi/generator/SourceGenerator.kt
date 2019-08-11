@@ -91,7 +91,7 @@ class SourceGenerator(val basePackage: String) {
     }
 
     /**
-     *  Сформировать Type для возвращаемого значени
+     *  Сформировать Type для возвращаемого значения
      *  Объявить Type для метода
      */
     private fun makeMethod(methodsSchema: MethodSchema) {
@@ -110,10 +110,9 @@ class SourceGenerator(val basePackage: String) {
                     required = it.required ?: false,
                     description = it.description
                 )
-            }.map { it.name to it }.toMap().values.toList(),
+            }.distinctBy { it.name },
             result = methodResultType,
             defaultParams = methodsSchema.fixedParams,
-            methodAccessType = makeMethodAccessType(methodsSchema),
             description = methodsSchema.description
         )
 
@@ -137,29 +136,29 @@ class SourceGenerator(val basePackage: String) {
         }
 
         val type = makeType(::nameResponse, responseRef, items) ?: return null
-
         val vkListWrapped = if (needsVkListWrapping) makeVkList(type) else type
-        return makeVkResult(vkListWrapped)
+
+        return makeVkMethod(vkListWrapped, makeMethodAccessType(methodSchema))
     }
 
     private fun makeArrayType(itemType: TypeId): TypeId {
         return TypeId("kotlin.collections.List", listOf(itemType))
     }
 
-    private fun makeVkResult(typeId: TypeId): TypeId {
-        return TypeId("name.anton3.vkapi.method.VkMethod", listOf(typeId))
+    private fun makeVkMethod(resultType: TypeId, methodRequirement: TypeId): TypeId {
+        return TypeId("name.anton3.vkapi.method.CheckedMethod", listOf(resultType, methodRequirement))
     }
 
     private fun makeVkList(typeId: TypeId): TypeId {
         return TypeId("name.anton3.vkapi.vktypes.VkList", listOf(typeId))
     }
 
-    private fun makeMethodAccessType(methodSchema: MethodSchema): TypeId? {
-        val interfacePackage = "name.anton3.vkapi.tokens"
+    private fun makeMethodAccessType(methodSchema: MethodSchema): TypeId {
+        val interfacePackage = "name.anton3.vkapi.method"
 
         val tokenTypes = methodSchema.accessTokenType.toSet()
         val filteredTokenTypes = listOf("user", "group", "service").filter { tokenTypes.contains(it) }
-        if (filteredTokenTypes.isEmpty()) return null
+        if (filteredTokenTypes.isEmpty()) return TypeId(interfacePackage, "MethodRequirement")
 
         val interfaceName = filteredTokenTypes.joinToString("", postfix = "Method") { it.capitalize() }
 
@@ -420,6 +419,7 @@ class SourceGenerator(val basePackage: String) {
 
     private fun defineCommonTypes() {
         // Types that are not generated
+        typeSpace.registerBuiltin("java.lang.Void")
         typeSpace.registerBuiltin("kotlin.collections.List")
         typeSpace.registerBuiltin("kotlin.collections.Map")
         typeSpace.registerBuiltin("com.fasterxml.jackson.databind.annotation.JsonDeserialize")
@@ -429,12 +429,15 @@ class SourceGenerator(val basePackage: String) {
         typeSpace.registerBuiltin("name.anton3.vkapi.vktypes.VkDate")
         typeSpace.registerBuiltin("name.anton3.vkapi.vktypes.VkList")
         typeSpace.registerBuiltin("name.anton3.vkapi.vktypes.VkBirthDate")
-        typeSpace.registerBuiltin("name.anton3.vkapi.method.VkMethod")
+        typeSpace.registerBuiltin("name.anton3.vkapi.method.CheckedMethod")
+        typeSpace.registerBuiltin("name.anton3.vkapi.method.MethodRequirement")
         typeSpace.registerBuiltin("name.anton3.vkapi.method.UserMethod")
         typeSpace.registerBuiltin("name.anton3.vkapi.method.ServiceMethod")
         typeSpace.registerBuiltin("name.anton3.vkapi.method.UserGroupMethod")
         typeSpace.registerBuiltin("name.anton3.vkapi.method.UserServiceMethod")
         typeSpace.registerBuiltin("name.anton3.vkapi.method.UserGroupServiceMethod")
+        typeSpace.registerBuiltin("name.anton3.vkapi.vktypes.Value")
+        typeSpace.registerBuiltin("name.anton3.vkapi.vktypes.parseEnum")
 
         // Primitive schema types
         typeSpace.registerVkPrimitiveType("integer", "kotlin.Int")

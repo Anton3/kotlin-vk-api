@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.secure.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.secure.objects.Transaction
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.ServiceMethod
 
 /**
@@ -14,5 +14,4 @@ import name.anton3.vkapi.method.ServiceMethod
  *
 
  */
-class SecureGetTransactionsHistory : VkMethod<List<Transaction>>("secure.getTransactionsHistory", jacksonTypeRef()),
-    ServiceMethod
+class SecureGetTransactionsHistory : CheckedMethod<List<Transaction>, ServiceMethod>("secure.getTransactionsHistory", jacksonTypeRef())

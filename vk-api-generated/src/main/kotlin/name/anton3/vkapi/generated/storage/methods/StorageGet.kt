@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.storage.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -19,5 +19,4 @@ data class StorageGet(
     var key: String? = null,
     var keys: List<String>? = null,
     var userId: Int? = null
-) : VkMethod<String>("storage.get", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<String, UserMethod>("storage.get", jacksonTypeRef())

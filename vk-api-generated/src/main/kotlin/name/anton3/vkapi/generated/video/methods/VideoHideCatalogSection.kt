@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -16,5 +16,4 @@ import name.anton3.vkapi.vktypes.OkResponse
  */
 data class VideoHideCatalogSection(
     var sectionId: Int
-) : VkMethod<OkResponse>("video.hideCatalogSection", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<OkResponse, UserMethod>("video.hideCatalogSection", jacksonTypeRef())

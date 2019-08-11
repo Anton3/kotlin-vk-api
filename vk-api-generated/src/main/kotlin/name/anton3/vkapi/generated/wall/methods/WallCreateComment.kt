@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.wall.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.wall.objects.CreateCommentResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -30,5 +30,4 @@ data class WallCreateComment(
     var attachments: List<String>? = null,
     var stickerId: Int? = null,
     var guid: String? = null
-) : VkMethod<CreateCommentResponse>("wall.createComment", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<CreateCommentResponse, UserMethod>("wall.createComment", jacksonTypeRef())

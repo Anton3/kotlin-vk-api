@@ -3,10 +3,10 @@
 package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.groups.objects.CreateSubtype
 import name.anton3.vkapi.generated.groups.objects.CreateType
 import name.anton3.vkapi.generated.groups.objects.Group
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -26,5 +26,4 @@ data class GroupsCreate(
     var type: CreateType? = null,
     var publicCategory: Int? = null,
     var subtype: CreateSubtype? = null
-) : VkMethod<Group>("groups.create", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<Group, UserMethod>("groups.create", jacksonTypeRef())

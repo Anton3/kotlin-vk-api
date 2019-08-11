@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.common.objects.NameCase
 import name.anton3.vkapi.generated.messages.objects.GetConversationMembersResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
 
 /**
@@ -23,5 +23,4 @@ data class MessagesGetConversationMembers(
     var peerId: Int? = null,
     var fields: List<String>? = null,
     var nameCase: NameCase? = null
-) : VkMethod<GetConversationMembersResponse>("messages.getConversationMembers", jacksonTypeRef()),
-    UserGroupMethod
+) : CheckedMethod<GetConversationMembersResponse, UserGroupMethod>("messages.getConversationMembers", jacksonTypeRef())

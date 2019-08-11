@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.docs.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.docs.objects.Doc
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
 
 /**
@@ -20,5 +20,4 @@ data class DocsSave(
     var file: String,
     var title: String? = null,
     var tags: String? = null
-) : VkMethod<List<Doc>>("docs.save", jacksonTypeRef()),
-    UserGroupMethod
+) : CheckedMethod<List<Doc>, UserGroupMethod>("docs.save", jacksonTypeRef())

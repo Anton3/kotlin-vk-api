@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.stories.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.stories.objects.GetPhotoUploadServerLinkText
 import name.anton3.vkapi.generated.stories.objects.GetPhotoUploadServerResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
 
 /**
@@ -27,5 +27,4 @@ data class StoriesGetPhotoUploadServer(
     var linkText: GetPhotoUploadServerLinkText? = null,
     var linkUrl: String? = null,
     var groupId: Int? = null
-) : VkMethod<GetPhotoUploadServerResponse>("stories.getPhotoUploadServer", jacksonTypeRef()),
-    UserGroupMethod
+) : CheckedMethod<GetPhotoUploadServerResponse, UserGroupMethod>("stories.getPhotoUploadServer", jacksonTypeRef())

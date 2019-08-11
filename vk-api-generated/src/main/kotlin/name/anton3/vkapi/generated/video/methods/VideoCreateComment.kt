@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -16,7 +16,7 @@ import name.anton3.vkapi.method.UserMethod
  * @property message New comment text.
  * @property attachments List of objects attached to the comment, in the following format: "<owner_id>_<media_id>,<owner_id>_<media_id>", '' — Type of media attachment: 'photo' — photo, 'video' — video, 'audio' — audio, 'doc' — document, '<owner_id>' — ID of the media attachment owner. '<media_id>' — Media attachment ID. Example: "photo100172_166443618,photo66748_265827614"
  * @property fromGroup '1' — to post the comment from a community name (only if 'owner_id'<0)
- * @property replyToComment
+ * @property replyToComment 
  * @property stickerId No description
  * @property guid No description
  */
@@ -29,5 +29,4 @@ data class VideoCreateComment(
     var replyToComment: Int? = null,
     var stickerId: Int? = null,
     var guid: String? = null
-) : VkMethod<Int>("video.createComment", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<Int, UserMethod>("video.createComment", jacksonTypeRef())

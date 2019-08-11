@@ -13,6 +13,9 @@ import name.anton3.vkapi.executors.BatchMethodExecutor
 import name.anton3.vkapi.executors.JsonApiMethodExecutor
 import name.anton3.vkapi.executors.ThrottledMethodExecutor
 import name.anton3.vkapi.executors.TokenMethodExecutor
+import name.anton3.vkapi.method.GroupMethod
+import name.anton3.vkapi.method.ServiceMethod
+import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.tokens.GroupToken
 import name.anton3.vkapi.tokens.ServiceToken
 import name.anton3.vkapi.tokens.UserToken
@@ -35,47 +38,47 @@ class VkClientFactory(
         token: UserToken,
         flushDelayMillis: Long = 500L,
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
-    ): UserClient {
+    ): VkClient<UserMethod> {
         val withToken = TokenMethodExecutor(baseExecutor, token)
         val throttled = ThrottledMethodExecutor(withToken, context, 3)
         val batch = BatchMethodExecutor(throttled, context, Duration.ofMillis(flushDelayMillis))
         closeableExecutorsMutex.withLock { closeableExecutors.addAll(listOf(throttled, batch)) }
-        return UserClient(executorWrapper(batch))
+        return VkClient<UserMethod>(executorWrapper(batch))
     }
 
     suspend fun group(
         token: GroupToken,
         flushDelayMillis: Long = 60L,
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
-    ): GroupClient {
+    ): VkClient<GroupMethod> {
         val withToken = TokenMethodExecutor(baseExecutor, token)
         val throttled = ThrottledMethodExecutor(withToken, context, 20)
         val batch = BatchMethodExecutor(throttled, context, Duration.ofMillis(flushDelayMillis))
         closeableExecutorsMutex.withLock { closeableExecutors.addAll(listOf(throttled, batch)) }
-        return GroupClient(executorWrapper(batch))
+        return VkClient<GroupMethod>(executorWrapper(batch))
     }
 
     suspend fun ads(
         token: UserToken,
         serviceType: AdServiceType = AdServiceType.NORMAL,
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
-    ): UserClient {
+    ): VkClient<UserMethod> {
         val withToken = TokenMethodExecutor(baseExecutor, token)
         val throttled1 = ThrottledMethodExecutor(withToken, context, 2)
         val throttled2 = ThrottledMethodExecutor(throttled1, context, serviceType.requestsPerHour, Duration.ofHours(1))
         closeableExecutorsMutex.withLock { closeableExecutors.addAll(listOf(throttled1, throttled2)) }
-        return UserClient(executorWrapper(throttled2))
+        return VkClient<UserMethod>(executorWrapper(throttled2))
     }
 
     suspend fun secure(
         token: ServiceToken,
         appPopularity: SecureAppPopularity = SecureAppPopularity.SMALL,
         executorWrapper: (MethodExecutor) -> MethodExecutor = { it }
-    ): ServiceClient {
+    ): VkClient<ServiceMethod> {
         val withToken = TokenMethodExecutor(baseExecutor, token)
         val throttled = ThrottledMethodExecutor(withToken, context, appPopularity.requestsPerSecond)
         closeableExecutorsMutex.withLock { closeableExecutors.add(throttled) }
-        return ServiceClient(executorWrapper(throttled))
+        return VkClient<ServiceMethod>(executorWrapper(throttled))
     }
 
     suspend fun closeAndJoin() {

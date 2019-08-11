@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.orders.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.orders.objects.ChangeStateAction
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -21,5 +21,4 @@ data class OrdersChangeState(
     var orderId: Int,
     var action: ChangeStateAction,
     var appOrderId: Int? = null
-) : VkMethod<String>("orders.changeState", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<String, UserMethod>("orders.changeState", jacksonTypeRef())

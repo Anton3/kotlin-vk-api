@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.photos.objects.CommentXtrPid
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -25,5 +25,4 @@ data class PhotosGetAllComments(
     var needLikes: Boolean? = null,
     var offset: Int? = null,
     var count: Int? = null
-) : VkMethod<VkList<CommentXtrPid>>("photos.getAllComments", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<VkList<CommentXtrPid>, UserMethod>("photos.getAllComments", jacksonTypeRef())

@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.market.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.market.objects.MarketItemFull
 import name.anton3.vkapi.generated.market.objects.SearchRev
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -32,8 +32,7 @@ data class MarketSearchExtended(
     var rev: SearchRev? = null,
     var offset: Int? = null,
     var count: Int? = null
-) : VkMethod<VkList<MarketItemFull>>("market.search", jacksonTypeRef()),
-    UserMethod {
+) : CheckedMethod<VkList<MarketItemFull>, UserMethod>("market.search", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")
     }

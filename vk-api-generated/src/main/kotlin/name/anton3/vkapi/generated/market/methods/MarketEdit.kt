@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.market.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -32,5 +32,4 @@ data class MarketEdit(
     var deleted: Boolean? = null,
     var mainPhotoId: Int,
     var photoIds: List<Int>? = null
-) : VkMethod<OkResponse>("market.edit", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<OkResponse, UserMethod>("market.edit", jacksonTypeRef())

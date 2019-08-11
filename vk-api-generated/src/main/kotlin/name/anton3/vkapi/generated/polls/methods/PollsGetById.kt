@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.polls.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.polls.objects.Poll
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -20,5 +20,4 @@ data class PollsGetById(
     var ownerId: Int? = null,
     var isBoard: Boolean? = null,
     var pollId: Int
-) : VkMethod<Poll>("polls.getById", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<Poll, UserMethod>("polls.getById", jacksonTypeRef())

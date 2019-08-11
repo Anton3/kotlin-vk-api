@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.newsfeed.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.newsfeed.objects.IgnoreItemType
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -21,5 +21,4 @@ data class NewsfeedIgnoreItem(
     var type: IgnoreItemType,
     var ownerId: Int,
     var itemId: Int
-) : VkMethod<OkResponse>("newsfeed.ignoreItem", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<OkResponse, UserMethod>("newsfeed.ignoreItem", jacksonTypeRef())

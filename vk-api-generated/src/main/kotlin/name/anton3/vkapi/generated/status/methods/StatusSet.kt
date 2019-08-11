@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.status.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -18,5 +18,4 @@ import name.anton3.vkapi.vktypes.OkResponse
 data class StatusSet(
     var text: String? = null,
     var groupId: Int? = null
-) : VkMethod<OkResponse>("status.set", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<OkResponse, UserMethod>("status.set", jacksonTypeRef())

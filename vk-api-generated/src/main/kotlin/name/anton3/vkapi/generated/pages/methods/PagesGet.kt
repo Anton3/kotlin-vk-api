@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.pages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.pages.objects.WikipageFull
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -28,5 +28,4 @@ data class PagesGet(
     var title: String? = null,
     var needSource: Boolean? = null,
     var needHtml: Boolean? = null
-) : VkMethod<WikipageFull>("pages.get", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<WikipageFull, UserMethod>("pages.get", jacksonTypeRef())

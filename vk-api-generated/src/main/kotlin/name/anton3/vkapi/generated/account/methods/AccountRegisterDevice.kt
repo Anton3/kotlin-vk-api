@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.account.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -26,5 +26,4 @@ data class AccountRegisterDevice(
     var deviceId: String,
     var systemVersion: String? = null,
     var settings: String? = null
-) : VkMethod<OkResponse>("account.registerDevice", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<OkResponse, UserMethod>("account.registerDevice", jacksonTypeRef())

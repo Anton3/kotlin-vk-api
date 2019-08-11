@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.database.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.database.objects.School
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -23,5 +23,4 @@ data class DatabaseGetSchools(
     var cityId: Int,
     var offset: Int? = null,
     var count: Int? = null
-) : VkMethod<VkList<School>>("database.getSchools", jacksonTypeRef()),
-    UserServiceMethod
+) : CheckedMethod<VkList<School>, UserServiceMethod>("database.getSchools", jacksonTypeRef())

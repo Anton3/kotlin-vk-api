@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -18,5 +18,4 @@ import name.anton3.vkapi.vktypes.OkResponse
 data class MessagesRemoveChatUser(
     var chatId: Int,
     var userId: String
-) : VkMethod<OkResponse>("messages.removeChatUser", jacksonTypeRef()),
-    UserGroupMethod
+) : CheckedMethod<OkResponse, UserGroupMethod>("messages.removeChatUser", jacksonTypeRef())

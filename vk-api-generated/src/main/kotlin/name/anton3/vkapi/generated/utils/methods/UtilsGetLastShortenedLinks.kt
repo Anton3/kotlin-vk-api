@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.utils.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.utils.objects.LastShortenedLink
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupServiceMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -19,5 +19,4 @@ import name.anton3.vkapi.vktypes.VkList
 data class UtilsGetLastShortenedLinks(
     var count: Int? = null,
     var offset: Int? = null
-) : VkMethod<VkList<LastShortenedLink>>("utils.getLastShortenedLinks", jacksonTypeRef()),
-    UserGroupServiceMethod
+) : CheckedMethod<VkList<LastShortenedLink>, UserGroupServiceMethod>("utils.getLastShortenedLinks", jacksonTypeRef())

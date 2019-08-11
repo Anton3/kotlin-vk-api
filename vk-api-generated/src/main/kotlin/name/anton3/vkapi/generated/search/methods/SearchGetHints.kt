@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.search.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.search.objects.GetHintsResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -24,5 +24,4 @@ data class SearchGetHints(
     var limit: Int? = null,
     var filters: List<String>? = null,
     var searchGlobal: Boolean? = null
-) : VkMethod<GetHintsResponse>("search.getHints", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<GetHintsResponse, UserMethod>("search.getHints", jacksonTypeRef())

@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.groups.objects.EditManagerRole
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -29,5 +29,4 @@ data class GroupsEditManager(
     var contactPosition: String? = null,
     var contactPhone: String? = null,
     var contactEmail: String? = null
-) : VkMethod<OkResponse>("groups.editManager", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<OkResponse, UserMethod>("groups.editManager", jacksonTypeRef())

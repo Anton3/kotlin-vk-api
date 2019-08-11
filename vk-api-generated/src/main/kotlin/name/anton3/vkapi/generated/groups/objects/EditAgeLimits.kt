@@ -7,8 +7,8 @@ import name.anton3.vkapi.vktypes.parseEnum
 
 enum class EditAgeLimits(@JsonValue override val value: String) : Value<String> {
     UNLIMITED("1"),
-    PLUS_16("2"),
-    PLUS_18("3");
+    N_16_PLUS("2"),
+    N_18_PLUS("3");
 
     companion object {
         @JvmStatic

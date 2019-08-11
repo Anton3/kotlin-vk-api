@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.get.objects.InviteLinkResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
 
 /**
@@ -20,5 +20,4 @@ data class MessagesGetInviteLink(
     var peerId: Int,
     var reset: Boolean? = null,
     var groupId: Int? = null
-) : VkMethod<InviteLinkResponse>("messages.getInviteLink", jacksonTypeRef()),
-    UserGroupMethod
+) : CheckedMethod<InviteLinkResponse, UserGroupMethod>("messages.getInviteLink", jacksonTypeRef())

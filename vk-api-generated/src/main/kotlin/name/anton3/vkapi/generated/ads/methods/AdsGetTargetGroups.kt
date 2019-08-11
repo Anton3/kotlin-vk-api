@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.ads.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.ads.objects.TargetGroup
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -20,5 +20,4 @@ data class AdsGetTargetGroups(
     var accountId: Int,
     var clientId: Int? = null,
     var extended: Boolean? = null
-) : VkMethod<List<TargetGroup>>("ads.getTargetGroups", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<List<TargetGroup>, UserMethod>("ads.getTargetGroups", jacksonTypeRef())

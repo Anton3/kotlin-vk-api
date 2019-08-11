@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.photos.objects.GetAllResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -28,5 +28,4 @@ data class PhotosGetAll(
     var noServiceAlbums: Boolean? = null,
     var needHidden: Boolean? = null,
     var skipHidden: Boolean? = null
-) : VkMethod<GetAllResponse>("photos.getAll", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<GetAllResponse, UserMethod>("photos.getAll", jacksonTypeRef())

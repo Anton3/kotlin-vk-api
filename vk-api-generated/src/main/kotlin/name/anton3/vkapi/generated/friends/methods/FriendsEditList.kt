@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.friends.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -24,5 +24,4 @@ data class FriendsEditList(
     var userIds: List<Int>? = null,
     var addUserIds: List<Int>? = null,
     var deleteUserIds: List<Int>? = null
-) : VkMethod<OkResponse>("friends.editList", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<OkResponse, UserMethod>("friends.editList", jacksonTypeRef())

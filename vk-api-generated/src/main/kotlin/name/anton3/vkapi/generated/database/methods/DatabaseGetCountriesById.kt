@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.database.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.common.objects.Country
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
 
 /**
@@ -16,5 +16,4 @@ import name.anton3.vkapi.method.UserServiceMethod
  */
 data class DatabaseGetCountriesById(
     var countryIds: List<Int>? = null
-) : VkMethod<List<Country>>("database.getCountriesById", jacksonTypeRef()),
-    UserServiceMethod
+) : CheckedMethod<List<Country>, UserServiceMethod>("database.getCountriesById", jacksonTypeRef())

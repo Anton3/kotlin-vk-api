@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.auth.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.auth.objects.ConfirmResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.ServiceMethod
 
 /**
@@ -26,5 +26,4 @@ data class AuthConfirm(
     var code: String,
     var password: String? = null,
     var intro: Int? = null
-) : VkMethod<ConfirmResponse>("auth.confirm", jacksonTypeRef()),
-    ServiceMethod
+) : CheckedMethod<ConfirmResponse, ServiceMethod>("auth.confirm", jacksonTypeRef())

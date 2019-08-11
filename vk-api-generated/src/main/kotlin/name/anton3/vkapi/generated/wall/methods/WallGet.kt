@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.wall.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.wall.objects.GetFilter
 import name.anton3.vkapi.generated.wall.objects.WallpostFull
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -28,5 +28,4 @@ data class WallGet(
     var count: Int? = null,
     var filter: GetFilter? = null,
     var fields: List<String>? = null
-) : VkMethod<VkList<WallpostFull>>("wall.get", jacksonTypeRef()),
-    UserServiceMethod
+) : CheckedMethod<VkList<WallpostFull>, UserServiceMethod>("wall.get", jacksonTypeRef())

@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.notes.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.notes.objects.Note
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -21,5 +21,4 @@ data class NotesGet(
     var noteIds: List<Int>? = null,
     var userId: Int? = null,
     var count: Int? = null
-) : VkMethod<VkList<Note>>("notes.get", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<VkList<Note>, UserMethod>("notes.get", jacksonTypeRef())

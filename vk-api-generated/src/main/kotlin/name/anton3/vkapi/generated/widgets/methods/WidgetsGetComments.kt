@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.widgets.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.widgets.objects.GetCommentsResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
 
 /**
@@ -26,5 +26,4 @@ data class WidgetsGetComments(
     var order: String? = null,
     var fields: List<String>? = null,
     var count: Int? = null
-) : VkMethod<GetCommentsResponse>("widgets.getComments", jacksonTypeRef()),
-    UserServiceMethod
+) : CheckedMethod<GetCommentsResponse, UserServiceMethod>("widgets.getComments", jacksonTypeRef())

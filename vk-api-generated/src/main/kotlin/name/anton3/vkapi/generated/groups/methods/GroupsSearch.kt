@@ -3,10 +3,10 @@
 package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.groups.objects.Group
 import name.anton3.vkapi.generated.groups.objects.SearchSort
 import name.anton3.vkapi.generated.groups.objects.Type
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -35,5 +35,4 @@ data class GroupsSearch(
     var sort: SearchSort? = null,
     var offset: Int? = null,
     var count: Int? = null
-) : VkMethod<VkList<Group>>("groups.search", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<VkList<Group>, UserMethod>("groups.search", jacksonTypeRef())

@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.groups.objects.IsMemberExtendedResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupServiceMethod
 
 /**
@@ -18,8 +18,7 @@ import name.anton3.vkapi.method.UserGroupServiceMethod
 data class GroupsIsMemberExtended(
     var groupId: String,
     var userId: Int? = null
-) : VkMethod<IsMemberExtendedResponse>("groups.isMember", jacksonTypeRef()),
-    UserGroupServiceMethod {
+) : CheckedMethod<IsMemberExtendedResponse, UserGroupServiceMethod>("groups.isMember", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")
     }

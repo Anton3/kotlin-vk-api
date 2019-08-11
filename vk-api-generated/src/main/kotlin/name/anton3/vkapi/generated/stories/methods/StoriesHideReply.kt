@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.stories.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -20,5 +20,4 @@ data class StoriesHideReply(
     var ownerId: Int,
     var storyId: Int,
     var accessKey: String? = null
-) : VkMethod<OkResponse>("stories.hideReply", jacksonTypeRef()),
-    UserGroupMethod
+) : CheckedMethod<OkResponse, UserGroupMethod>("stories.hideReply", jacksonTypeRef())

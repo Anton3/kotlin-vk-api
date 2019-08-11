@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.newsfeed.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.newsfeed.objects.ListMin
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -17,5 +17,4 @@ import name.anton3.vkapi.vktypes.VkList
  */
 data class NewsfeedGetLists(
     var listIds: List<Int>? = null
-) : VkMethod<VkList<ListMin>>("newsfeed.getLists", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<VkList<ListMin>, UserMethod>("newsfeed.getLists", jacksonTypeRef())

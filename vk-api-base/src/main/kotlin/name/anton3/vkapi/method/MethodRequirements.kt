@@ -3,8 +3,19 @@ package name.anton3.vkapi.method
 /**
  * The method is available with an access token of some (matching) kind.
  * However, the exact types of supported access tokens are unknown.
+ *
+ * This interface and all derived interfaces should not be implemented by any classes.
+ * They allow to statically type-check that a VkClient can execute a given CheckedMethod.
  */
 interface MethodRequirement
+
+
+/**
+ * The method is available for "user" or for "group" (exact requirement is unknown)
+ * Or:
+ * This token can execute both "user" and "group" requests
+ */
+interface UserOrGroupMethod : MethodRequirement
 
 
 /**
@@ -12,14 +23,14 @@ interface MethodRequirement
  * Or:
  * This token is a "user" token
  */
-interface UserMethod : MethodRequirement
+interface UserMethod : UserOrGroupMethod
 
 /**
  * The method is available at least for "group"
  * Or:
  * This token is a "group" token
  */
-interface GroupMethod : MethodRequirement
+interface GroupMethod : UserOrGroupMethod
 
 /**
  * The method is available at least for "service"

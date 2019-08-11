@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.account.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -14,5 +14,4 @@ import name.anton3.vkapi.vktypes.OkResponse
  *
 
  */
-class AccountSetOffline : VkMethod<OkResponse>("account.setOffline", jacksonTypeRef()),
-    UserMethod
+class AccountSetOffline : CheckedMethod<OkResponse, UserMethod>("account.setOffline", jacksonTypeRef())

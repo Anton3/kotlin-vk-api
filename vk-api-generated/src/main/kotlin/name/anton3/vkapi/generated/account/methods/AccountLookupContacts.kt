@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.account.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.account.objects.LookupContactsService
 import name.anton3.vkapi.generated.account.objects.LookupResult
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -25,5 +25,4 @@ data class AccountLookupContacts(
     var mycontact: String? = null,
     var returnAll: Boolean? = null,
     var fields: List<String>? = null
-) : VkMethod<LookupResult>("account.lookupContacts", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<LookupResult, UserMethod>("account.lookupContacts", jacksonTypeRef())

@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -20,5 +20,4 @@ data class PhotosMove(
     var ownerId: Int? = null,
     var targetAlbumId: Int,
     var photoId: Int
-) : VkMethod<OkResponse>("photos.move", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<OkResponse, UserMethod>("photos.move", jacksonTypeRef())

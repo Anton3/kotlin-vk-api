@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.leads.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.leads.objects.Complete
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
 
 /**
@@ -20,5 +20,4 @@ data class LeadsComplete(
     var vkSid: String,
     var secret: String,
     var comment: String? = null
-) : VkMethod<Complete>("leads.complete", jacksonTypeRef()),
-    UserServiceMethod
+) : CheckedMethod<Complete, UserServiceMethod>("leads.complete", jacksonTypeRef())

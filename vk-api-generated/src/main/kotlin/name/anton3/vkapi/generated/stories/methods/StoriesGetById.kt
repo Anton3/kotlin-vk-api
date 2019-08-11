@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.stories.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.stories.objects.Story
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -19,5 +19,4 @@ import name.anton3.vkapi.vktypes.VkList
 data class StoriesGetById(
     var stories: List<String>? = null,
     var fields: List<String>? = null
-) : VkMethod<VkList<Story>>("stories.getById", jacksonTypeRef()),
-    UserGroupMethod
+) : CheckedMethod<VkList<Story>, UserGroupMethod>("stories.getById", jacksonTypeRef())

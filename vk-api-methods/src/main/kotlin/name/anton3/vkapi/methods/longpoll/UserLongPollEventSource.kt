@@ -4,18 +4,19 @@ import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.ReceiveChannel
-import name.anton3.vkapi.client.GroupClient
-import name.anton3.vkapi.client.UserClient
-import name.anton3.vkapi.client.UserGroupClient
+import name.anton3.vkapi.client.VkClient
 import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.generated.messages.methods.MessagesGetLongPollServer
 import name.anton3.vkapi.generated.messages.objects.LongpollParams
+import name.anton3.vkapi.method.GroupMethod
+import name.anton3.vkapi.method.UserGroupMethod
+import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.methods.longpoll.events.LongPollEvent
 import kotlin.coroutines.CoroutineContext
 
 class UserLongPollEventSource(
     longPollContext: CoroutineContext,
-    private val api: UserGroupClient,
+    private val api: VkClient<UserGroupMethod>,
     private val groupId: Int?,
     transportClient: TransportClient,
     private val timeout: Int
@@ -41,23 +42,23 @@ class UserLongPollEventSource(
 }
 
 fun CoroutineScope.messageLongPollEvents(
-    api: GroupClient,
+    api: VkClient<GroupMethod>,
     transportClient: TransportClient = api.transportClient,
     timeout: Int
 ): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, api.userGroup, null, transportClient, timeout).produceEvents(this)
+    UserLongPollEventSource(Dispatchers.IO, api, null, transportClient, timeout).produceEvents(this)
 
 fun CoroutineScope.messageLongPollEventsAsAdmin(
-    api: UserClient,
+    api: VkClient<UserMethod>,
     groupId: Int,
     transportClient: TransportClient = api.transportClient,
     timeout: Int
 ): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, api.userGroup, groupId, transportClient, timeout).produceEvents(this)
+    UserLongPollEventSource(Dispatchers.IO, api, groupId, transportClient, timeout).produceEvents(this)
 
 fun CoroutineScope.messageLongPollEventsForUser(
-    api: UserClient,
+    api: VkClient<UserMethod>,
     transportClient: TransportClient = api.transportClient,
     timeout: Int
 ): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, api.userGroup, null, transportClient, timeout).produceEvents(this)
+    UserLongPollEventSource(Dispatchers.IO, api, null, transportClient, timeout).produceEvents(this)

@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.market.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -29,5 +29,4 @@ data class MarketCreateComment(
     var replyToComment: Int? = null,
     var stickerId: Int? = null,
     var guid: String? = null
-) : VkMethod<Int>("market.createComment", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<Int, UserMethod>("market.createComment", jacksonTypeRef())

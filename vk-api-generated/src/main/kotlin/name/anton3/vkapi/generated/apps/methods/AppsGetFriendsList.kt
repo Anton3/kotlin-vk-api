@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.apps.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.apps.objects.Type
 import name.anton3.vkapi.generated.users.objects.UserFull
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -22,5 +22,4 @@ data class AppsGetFriendsList(
     var count: Int? = null,
     var type: Type? = null,
     var fields: List<String>? = null
-) : VkMethod<VkList<UserFull>>("apps.getFriendsList", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<VkList<UserFull>, UserMethod>("apps.getFriendsList", jacksonTypeRef())

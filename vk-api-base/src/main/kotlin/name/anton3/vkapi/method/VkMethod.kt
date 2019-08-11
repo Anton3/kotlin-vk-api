@@ -31,3 +31,6 @@ open class VkMethod<T>(
     var lang: VkLang? = null
     var testMode: Int? = null
 }
+
+open class CheckedMethod<T, out R : MethodRequirement>(apiMethodName: String, responseType: TypeReference<T>)
+    : VkMethod<T>(apiMethodName, responseType)

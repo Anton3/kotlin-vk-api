@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.apps.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.apps.objects.GetLeaderboardType
 import name.anton3.vkapi.generated.apps.objects.Leaderboard
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -20,5 +20,4 @@ import name.anton3.vkapi.vktypes.VkList
 data class AppsGetLeaderboard(
     var type: GetLeaderboardType,
     var global: Boolean? = null
-) : VkMethod<VkList<Leaderboard>>("apps.getLeaderboard", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<VkList<Leaderboard>, UserMethod>("apps.getLeaderboard", jacksonTypeRef())

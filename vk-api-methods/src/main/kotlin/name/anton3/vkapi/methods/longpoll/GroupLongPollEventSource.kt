@@ -4,16 +4,17 @@ import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.ReceiveChannel
-import name.anton3.vkapi.client.UserGroupClient
+import name.anton3.vkapi.client.VkClient
 import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.generated.groups.methods.GroupsGetLongPollServer
 import name.anton3.vkapi.generated.groups.objects.LongPollServer
+import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.methods.callback.CallbackEvent
 import kotlin.coroutines.CoroutineContext
 
 class GroupLongPollEventSource(
     longPollContext: CoroutineContext,
-    private val api: UserGroupClient,
+    private val api: VkClient<UserGroupMethod>,
     private val groupId: Int,
     transportClient: TransportClient,
     private val timeout: Int
@@ -37,7 +38,7 @@ class GroupLongPollEventSource(
 }
 
 fun CoroutineScope.groupLongPollEvents(
-    api: UserGroupClient,
+    api: VkClient<UserGroupMethod>,
     groupId: Int,
     timeout: Int,
     transportClient: TransportClient = api.transportClient

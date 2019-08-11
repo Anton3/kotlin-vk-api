@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.utils.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.utils.objects.GetLinkStatsInterval
 import name.anton3.vkapi.generated.utils.objects.LinkStatsExtended
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupServiceMethod
 
 /**
@@ -23,8 +23,7 @@ data class UtilsGetLinkStatsExtended(
     var accessKey: String? = null,
     var interval: GetLinkStatsInterval? = null,
     var intervalsCount: Int? = null
-) : VkMethod<LinkStatsExtended>("utils.getLinkStats", jacksonTypeRef()),
-    UserGroupServiceMethod {
+) : CheckedMethod<LinkStatsExtended, UserGroupServiceMethod>("utils.getLinkStats", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")
     }

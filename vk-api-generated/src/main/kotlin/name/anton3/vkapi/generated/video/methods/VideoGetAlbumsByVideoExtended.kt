@@ -3,8 +3,9 @@
 package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.video.objects.VideoAlbumFull
+import name.anton3.vkapi.method.CheckedMethod
+import name.anton3.vkapi.method.MethodRequirement
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -20,7 +21,7 @@ data class VideoGetAlbumsByVideoExtended(
     var targetId: Int? = null,
     var ownerId: Int,
     var videoId: Int
-) : VkMethod<VkList<VideoAlbumFull>>("video.getAlbumsByVideo", jacksonTypeRef()) {
+) : CheckedMethod<VkList<VideoAlbumFull>, MethodRequirement>("video.getAlbumsByVideo", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")
     }

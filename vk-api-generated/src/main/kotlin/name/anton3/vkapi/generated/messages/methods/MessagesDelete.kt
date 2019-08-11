@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
 
 /**
@@ -21,5 +21,4 @@ data class MessagesDelete(
     var spam: Boolean? = null,
     var deleteForAll: Boolean? = null,
     var groupId: Int? = null
-) : VkMethod<Map<Int, Boolean>>("messages.delete", jacksonTypeRef()),
-    UserGroupMethod
+) : CheckedMethod<Map<Int, Boolean>, UserGroupMethod>("messages.delete", jacksonTypeRef())

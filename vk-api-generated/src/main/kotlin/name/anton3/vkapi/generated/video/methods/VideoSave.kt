@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.video.objects.SaveResult
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -36,5 +36,4 @@ data class VideoSave(
     var privacyComment: List<String>? = null,
     var noComments: Boolean? = null,
     var repeat: Boolean? = null
-) : VkMethod<SaveResult>("video.save", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<SaveResult, UserMethod>("video.save", jacksonTypeRef())

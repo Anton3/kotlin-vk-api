@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.market.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.market.objects.MarketItem
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -21,5 +21,4 @@ data class MarketGet(
     var ownerId: Int,
     var count: Int? = null,
     var offset: Int? = null
-) : VkMethod<VkList<MarketItem>>("market.get", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<VkList<MarketItem>, UserMethod>("market.get", jacksonTypeRef())

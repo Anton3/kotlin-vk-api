@@ -3,11 +3,11 @@
 package name.anton3.vkapi.generated.account.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.account.objects.SaveProfileInfoBdateVisibility
 import name.anton3.vkapi.generated.account.objects.SaveProfileInfoRelation
 import name.anton3.vkapi.generated.account.objects.SaveProfileInfoResponse
 import name.anton3.vkapi.generated.common.objects.OwnSex
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -45,5 +45,4 @@ data class AccountSaveProfileInfo(
     var countryId: Int? = null,
     var cityId: Int? = null,
     var status: String? = null
-) : VkMethod<SaveProfileInfoResponse>("account.saveProfileInfo", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<SaveProfileInfoResponse, UserMethod>("account.saveProfileInfo", jacksonTypeRef())

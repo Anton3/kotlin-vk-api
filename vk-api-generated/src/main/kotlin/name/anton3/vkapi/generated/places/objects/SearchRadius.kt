@@ -6,10 +6,10 @@ import name.anton3.vkapi.vktypes.Value
 import name.anton3.vkapi.vktypes.parseEnum
 
 enum class SearchRadius(@JsonValue override val value: String) : Value<String> {
-    M_100("1"),
-    M_800("2"),
-    KM_6("3"),
-    KM_50("4");
+    N_100_M("1"),
+    N_800_M("2"),
+    N_6_KM("3"),
+    N_50_KM("4");
 
     companion object {
         @JvmStatic

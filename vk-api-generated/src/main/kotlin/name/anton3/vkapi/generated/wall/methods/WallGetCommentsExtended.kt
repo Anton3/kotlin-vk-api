@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.wall.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.common.objects.GetCommentsSort
 import name.anton3.vkapi.generated.wall.objects.GetCommentsExtendedResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
 
 /**
@@ -31,8 +31,7 @@ data class WallGetCommentsExtended(
     var count: Int? = null,
     var sort: GetCommentsSort? = null,
     var previewLength: Int? = null
-) : VkMethod<GetCommentsExtendedResponse>("wall.getComments", jacksonTypeRef()),
-    UserServiceMethod {
+) : CheckedMethod<GetCommentsExtendedResponse, UserServiceMethod>("wall.getComments", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")
     }

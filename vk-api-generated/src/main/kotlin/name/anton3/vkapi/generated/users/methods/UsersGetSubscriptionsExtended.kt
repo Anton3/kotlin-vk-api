@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.users.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.users.objects.GetSubscriptionsExtendedResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -23,8 +23,7 @@ data class UsersGetSubscriptionsExtended(
     var offset: Int? = null,
     var count: Int? = null,
     var fields: List<String>? = null
-) : VkMethod<VkList<GetSubscriptionsExtendedResponse>>("users.getSubscriptions", jacksonTypeRef()),
-    UserServiceMethod {
+) : CheckedMethod<VkList<GetSubscriptionsExtendedResponse>, UserServiceMethod>("users.getSubscriptions", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")
     }

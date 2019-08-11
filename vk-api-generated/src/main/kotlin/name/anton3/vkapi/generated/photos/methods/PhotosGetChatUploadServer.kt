@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.common.objects.UploadServer
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -13,8 +13,8 @@ import name.anton3.vkapi.method.UserMethod
  * Returns an upload link for chat cover pictures.
  *
  * @property chatId ID of the chat for which you want to upload a cover photo.
- * @property cropX
- * @property cropY
+ * @property cropX 
+ * @property cropY 
  * @property cropWidth Width (in pixels) of the photo after cropping.
  */
 data class PhotosGetChatUploadServer(
@@ -22,5 +22,4 @@ data class PhotosGetChatUploadServer(
     var cropX: Int? = null,
     var cropY: Int? = null,
     var cropWidth: Int? = null
-) : VkMethod<UploadServer>("photos.getChatUploadServer", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<UploadServer, UserMethod>("photos.getChatUploadServer", jacksonTypeRef())

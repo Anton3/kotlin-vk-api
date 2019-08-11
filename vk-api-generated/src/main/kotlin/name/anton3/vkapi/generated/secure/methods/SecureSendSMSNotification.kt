@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.secure.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.ServiceMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -18,5 +18,4 @@ import name.anton3.vkapi.vktypes.OkResponse
 data class SecureSendSMSNotification(
     var userId: Int,
     var message: String
-) : VkMethod<OkResponse>("secure.sendSMSNotification", jacksonTypeRef()),
-    ServiceMethod
+) : CheckedMethod<OkResponse, ServiceMethod>("secure.sendSMSNotification", jacksonTypeRef())

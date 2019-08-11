@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.pages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -16,5 +16,4 @@ import name.anton3.vkapi.vktypes.OkResponse
  */
 data class PagesClearCache(
     var url: String
-) : VkMethod<OkResponse>("pages.clearCache", jacksonTypeRef()),
-    UserServiceMethod
+) : CheckedMethod<OkResponse, UserServiceMethod>("pages.clearCache", jacksonTypeRef())

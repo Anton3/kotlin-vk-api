@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.utils.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.utils.objects.ShortLink
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupServiceMethod
 
 /**
@@ -18,5 +18,4 @@ import name.anton3.vkapi.method.UserGroupServiceMethod
 data class UtilsGetShortLink(
     var url: String,
     var private: Boolean? = null
-) : VkMethod<ShortLink>("utils.getShortLink", jacksonTypeRef()),
-    UserGroupServiceMethod
+) : CheckedMethod<ShortLink, UserGroupServiceMethod>("utils.getShortLink", jacksonTypeRef())

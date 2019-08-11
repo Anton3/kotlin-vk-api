@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.apps.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -15,5 +15,4 @@ import name.anton3.vkapi.method.UserMethod
  */
 data class AppsGetScore(
     var userId: Int
-) : VkMethod<Int>("apps.getScore", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<Int, UserMethod>("apps.getScore", jacksonTypeRef())

@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.groups.objects.GroupXtrInvitedBy
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -19,5 +19,4 @@ import name.anton3.vkapi.vktypes.VkList
 data class GroupsGetInvites(
     var offset: Int? = null,
     var count: Int? = null
-) : VkMethod<VkList<GroupXtrInvitedBy>>("groups.getInvites", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<VkList<GroupXtrInvitedBy>, UserMethod>("groups.getInvites", jacksonTypeRef())

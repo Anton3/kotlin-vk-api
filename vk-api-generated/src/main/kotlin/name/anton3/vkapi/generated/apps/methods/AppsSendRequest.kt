@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.apps.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.apps.objects.Type
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -26,5 +26,4 @@ data class AppsSendRequest(
     var name: String? = null,
     var key: String? = null,
     var separate: Boolean? = null
-) : VkMethod<Int>("apps.sendRequest", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<Int, UserMethod>("apps.sendRequest", jacksonTypeRef())

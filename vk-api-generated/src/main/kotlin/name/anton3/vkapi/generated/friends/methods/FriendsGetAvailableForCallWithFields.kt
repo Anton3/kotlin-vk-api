@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.friends.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.common.objects.NameCase
 import name.anton3.vkapi.generated.users.objects.UserFull
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -20,5 +20,4 @@ import name.anton3.vkapi.vktypes.VkList
 data class FriendsGetAvailableForCallWithFields(
     var fields: List<String>? = null,
     var nameCase: NameCase? = null
-) : VkMethod<VkList<UserFull>>("friends.getAvailableForCall", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<VkList<UserFull>, UserMethod>("friends.getAvailableForCall", jacksonTypeRef())

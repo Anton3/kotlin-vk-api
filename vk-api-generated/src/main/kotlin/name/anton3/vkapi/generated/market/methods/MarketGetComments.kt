@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.market.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.market.objects.GetCommentsSort
 import name.anton3.vkapi.generated.wall.objects.WallComment
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -32,5 +32,4 @@ data class MarketGetComments(
     var sort: GetCommentsSort? = null,
     var extended: Boolean? = null,
     var fields: List<String>? = null
-) : VkMethod<VkList<WallComment>>("market.getComments", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<VkList<WallComment>, UserMethod>("market.getComments", jacksonTypeRef())

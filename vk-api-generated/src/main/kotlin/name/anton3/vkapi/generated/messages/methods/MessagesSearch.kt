@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.messages.objects.Message
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -29,5 +29,4 @@ data class MessagesSearch(
     var offset: Int? = null,
     var count: Int? = null,
     var groupId: Int? = null
-) : VkMethod<VkList<Message>>("messages.search", jacksonTypeRef()),
-    UserGroupMethod
+) : CheckedMethod<VkList<Message>, UserGroupMethod>("messages.search", jacksonTypeRef())

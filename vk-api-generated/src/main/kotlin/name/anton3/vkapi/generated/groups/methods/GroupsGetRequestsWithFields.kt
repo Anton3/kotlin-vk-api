@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.users.objects.UserFull
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -23,5 +23,4 @@ data class GroupsGetRequestsWithFields(
     var offset: Int? = null,
     var count: Int? = null,
     var fields: List<String>? = null
-) : VkMethod<VkList<UserFull>>("groups.getRequests", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<VkList<UserFull>, UserMethod>("groups.getRequests", jacksonTypeRef())

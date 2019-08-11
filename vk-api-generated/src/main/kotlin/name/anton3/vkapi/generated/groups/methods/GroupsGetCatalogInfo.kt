@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.groups.objects.GetCatalogInfoResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -16,5 +16,4 @@ import name.anton3.vkapi.method.UserMethod
  */
 data class GroupsGetCatalogInfo(
     var subcategories: Boolean? = null
-) : VkMethod<GetCatalogInfoResponse>("groups.getCatalogInfo", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<GetCatalogInfoResponse, UserMethod>("groups.getCatalogInfo", jacksonTypeRef())

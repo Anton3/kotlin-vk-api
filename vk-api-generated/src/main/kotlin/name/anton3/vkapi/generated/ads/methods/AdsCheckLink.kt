@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.ads.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.ads.objects.CheckLinkLinkType
 import name.anton3.vkapi.generated.ads.objects.LinkStatus
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -23,5 +23,4 @@ data class AdsCheckLink(
     var linkType: CheckLinkLinkType,
     var linkUrl: String,
     var campaignId: Int? = null
-) : VkMethod<LinkStatus>("ads.checkLink", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<LinkStatus, UserMethod>("ads.checkLink", jacksonTypeRef())

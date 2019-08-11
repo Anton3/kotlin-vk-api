@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.docs.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.docs.objects.Doc
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -23,5 +23,4 @@ data class DocsSearch(
     var searchOwn: Boolean? = null,
     var count: Int? = null,
     var offset: Int? = null
-) : VkMethod<VkList<Doc>>("docs.search", jacksonTypeRef()),
-    UserGroupMethod
+) : CheckedMethod<VkList<Doc>, UserGroupMethod>("docs.search", jacksonTypeRef())

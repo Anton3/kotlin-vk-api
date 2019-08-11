@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.places.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.places.objects.PlaceMin
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -16,5 +16,4 @@ import name.anton3.vkapi.method.UserMethod
  */
 data class PlacesGetById(
     var places: List<Int>
-) : VkMethod<List<PlaceMin>>("places.getById", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<List<PlaceMin>, UserMethod>("places.getById", jacksonTypeRef())

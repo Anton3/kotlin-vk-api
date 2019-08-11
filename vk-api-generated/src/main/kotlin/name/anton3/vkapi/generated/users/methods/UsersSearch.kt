@@ -3,11 +3,11 @@
 package name.anton3.vkapi.generated.users.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.users.objects.SearchSex
 import name.anton3.vkapi.generated.users.objects.SearchSort
 import name.anton3.vkapi.generated.users.objects.SearchStatus
 import name.anton3.vkapi.generated.users.objects.UserFull
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -84,5 +84,4 @@ data class UsersSearch(
     var position: String? = null,
     var groupId: Int? = null,
     var fromList: List<String>? = null
-) : VkMethod<VkList<UserFull>>("users.search", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<VkList<UserFull>, UserMethod>("users.search", jacksonTypeRef())

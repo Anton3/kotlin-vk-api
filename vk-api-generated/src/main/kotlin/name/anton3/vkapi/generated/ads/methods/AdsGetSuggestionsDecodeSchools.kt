@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.ads.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.ads.objects.TargSuggestionsSchools
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -17,8 +17,7 @@ import name.anton3.vkapi.method.UserMethod
  */
 data class AdsGetSuggestionsDecodeSchools(
     var ids: String? = null
-) : VkMethod<List<TargSuggestionsSchools>>("ads.getSuggestions", jacksonTypeRef()),
-    UserMethod {
+) : CheckedMethod<List<TargSuggestionsSchools>, UserMethod>("ads.getSuggestions", jacksonTypeRef()) {
     init {
         unsafeParam("section", "schools")
     }

@@ -133,17 +133,15 @@ class KotlinSourceWriter(private val typeSpace: TypeSpace) : SourceWriter {
     }
 
     override fun enumItem(name: String, vararg values: String): String {
-        val preResultName = name.toUpperCase().replace("[^\\w\\d]+".toRegex(), "_")
-        val finalName = if ("0123456789".contains(preResultName[0])) {
-            val parts = preResultName.split("_")
-            if (parts.size == 2)
-                parts[1] + "_" + parts[0]
-            else
-                "_$preResultName"
-        } else
-            preResultName
+        val upperCasedName = name
+            .toUpperCase()
+            .split(Regex("[^\\w\\d]+"))
+            .filter { it.isNotEmpty() }
+            .joinToString("_")
 
-        return finalName + "(" + values.joinToString(", ") { "\"$it\"" } + ")"
+        val namePrefix = if (upperCasedName.first().isDigit()) "N_" else ""
+
+        return values.joinToString(", ", "$namePrefix$upperCasedName(", ")") { "\"$it\"" }
     }
 
     override fun realType(typeId: TypeId): TypeId {

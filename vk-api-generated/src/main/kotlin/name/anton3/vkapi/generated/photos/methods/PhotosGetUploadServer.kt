@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.photos.objects.PhotoUpload
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -18,5 +18,4 @@ import name.anton3.vkapi.method.UserMethod
 data class PhotosGetUploadServer(
     var albumId: Int? = null,
     var groupId: Int? = null
-) : VkMethod<PhotoUpload>("photos.getUploadServer", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<PhotoUpload, UserMethod>("photos.getUploadServer", jacksonTypeRef())

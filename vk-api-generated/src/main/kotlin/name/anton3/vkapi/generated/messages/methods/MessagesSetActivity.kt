@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -22,5 +22,4 @@ data class MessagesSetActivity(
     var type: String? = null,
     var peerId: Int? = null,
     var groupId: Int? = null
-) : VkMethod<OkResponse>("messages.setActivity", jacksonTypeRef()),
-    UserGroupMethod
+) : CheckedMethod<OkResponse, UserGroupMethod>("messages.setActivity", jacksonTypeRef())

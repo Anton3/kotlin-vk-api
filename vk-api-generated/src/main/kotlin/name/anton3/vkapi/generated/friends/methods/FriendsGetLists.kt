@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.friends.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.friends.objects.FriendsList
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -19,5 +19,4 @@ import name.anton3.vkapi.vktypes.VkList
 data class FriendsGetLists(
     var userId: Int? = null,
     var returnSystem: Boolean? = null
-) : VkMethod<VkList<FriendsList>>("friends.getLists", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<VkList<FriendsList>, UserMethod>("friends.getLists", jacksonTypeRef())

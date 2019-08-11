@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.board.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -20,5 +20,4 @@ data class BoardRestoreComment(
     var groupId: Int,
     var topicId: Int,
     var commentId: Int
-) : VkMethod<OkResponse>("board.restoreComment", jacksonTypeRef()),
-    UserGroupMethod
+) : CheckedMethod<OkResponse, UserGroupMethod>("board.restoreComment", jacksonTypeRef())

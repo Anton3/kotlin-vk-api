@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.wall.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.wall.objects.RepostResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -22,5 +22,4 @@ data class WallRepost(
     var message: String? = null,
     var groupId: Int? = null,
     var markAsAds: Boolean? = null
-) : VkMethod<RepostResponse>("wall.repost", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<RepostResponse, UserMethod>("wall.repost", jacksonTypeRef())

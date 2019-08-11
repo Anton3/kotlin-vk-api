@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.friends.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.friends.objects.GetOnlineOnlineMobileResponse
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 
 /**
@@ -24,8 +24,7 @@ data class FriendsGetOnlineOnlineMobile(
     var order: String? = null,
     var count: Int? = null,
     var offset: Int? = null
-) : VkMethod<GetOnlineOnlineMobileResponse>("friends.getOnline", jacksonTypeRef()),
-    UserMethod {
+) : CheckedMethod<GetOnlineOnlineMobileResponse, UserMethod>("friends.getOnline", jacksonTypeRef()) {
     init {
         unsafeParam("online_mobile", "1")
     }

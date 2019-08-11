@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.groups.objects.CallbackSettings
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
 
 /**
@@ -18,5 +18,4 @@ import name.anton3.vkapi.method.UserGroupMethod
 data class GroupsGetCallbackSettings(
     var groupId: Int,
     var serverId: Int? = null
-) : VkMethod<CallbackSettings>("groups.getCallbackSettings", jacksonTypeRef()),
-    UserGroupMethod
+) : CheckedMethod<CallbackSettings, UserGroupMethod>("groups.getCallbackSettings", jacksonTypeRef())

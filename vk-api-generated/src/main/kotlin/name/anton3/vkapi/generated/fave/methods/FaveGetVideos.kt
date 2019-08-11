@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.fave.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.generated.video.objects.Video
+import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -21,5 +21,4 @@ data class FaveGetVideos(
     var offset: Int? = null,
     var count: Int? = null,
     var extended: Boolean? = null
-) : VkMethod<VkList<Video>>("fave.getVideos", jacksonTypeRef()),
-    UserMethod
+) : CheckedMethod<VkList<Video>, UserMethod>("fave.getVideos", jacksonTypeRef())
