@@ -11,8 +11,8 @@ import name.anton3.vkapi.vktypes.BoolInt
  * @property canPublish Information whether current user can repost
  */
 data class LikesInfo(
-    val count: Int,
-    val userLikes: Int,
-    val canLike: BoolInt,
+    val count: Int? = null,
+    val userLikes: Int? = null,
+    val canLike: BoolInt? = null,
     val canPublish: BoolInt? = null
 )
