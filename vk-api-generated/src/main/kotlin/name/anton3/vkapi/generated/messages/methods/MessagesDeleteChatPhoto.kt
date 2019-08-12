@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.messages.objects.DeleteChatPhotoResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/messages.deleteChatPhoto]
@@ -16,4 +16,4 @@ import name.anton3.vkapi.method.UserMethod
  */
 data class MessagesDeleteChatPhoto(
     var chatId: Int
-) : CheckedMethod<DeleteChatPhotoResponse, UserMethod>("messages.deleteChatPhoto", jacksonTypeRef())
+) : VkMethod<DeleteChatPhotoResponse, UserMethod>("messages.deleteChatPhoto", jacksonTypeRef())

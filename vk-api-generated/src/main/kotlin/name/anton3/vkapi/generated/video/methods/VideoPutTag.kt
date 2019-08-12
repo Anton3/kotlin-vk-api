@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/video.putTag]
@@ -21,4 +21,4 @@ data class VideoPutTag(
     var ownerId: Int? = null,
     var videoId: Int,
     var taggedName: String? = null
-) : CheckedMethod<Int, UserMethod>("video.putTag", jacksonTypeRef())
+) : VkMethod<Int, UserMethod>("video.putTag", jacksonTypeRef())

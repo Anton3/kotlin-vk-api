@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.pages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/pages.parseWiki]
@@ -17,4 +17,4 @@ import name.anton3.vkapi.method.UserMethod
 data class PagesParseWiki(
     var text: String,
     var groupId: Int? = null
-) : CheckedMethod<String, UserMethod>("pages.parseWiki", jacksonTypeRef())
+) : VkMethod<String, UserMethod>("pages.parseWiki", jacksonTypeRef())

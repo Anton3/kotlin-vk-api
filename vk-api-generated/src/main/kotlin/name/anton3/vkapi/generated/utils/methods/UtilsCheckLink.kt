@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.utils.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.utils.objects.LinkChecked
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/utils.checkLink]
@@ -16,4 +16,4 @@ import name.anton3.vkapi.method.UserGroupServiceMethod
  */
 data class UtilsCheckLink(
     var url: String
-) : CheckedMethod<LinkChecked, UserGroupServiceMethod>("utils.checkLink", jacksonTypeRef())
+) : VkMethod<LinkChecked, UserGroupServiceMethod>("utils.checkLink", jacksonTypeRef())

@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.stats.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.stats.objects.WallpostStat
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/stats.getPostReach]
@@ -18,4 +18,4 @@ import name.anton3.vkapi.method.UserMethod
 data class StatsGetPostReach(
     var ownerId: Int,
     var postId: Int
-) : CheckedMethod<List<WallpostStat>, UserMethod>("stats.getPostReach", jacksonTypeRef())
+) : VkMethod<List<WallpostStat>, UserMethod>("stats.getPostReach", jacksonTypeRef())

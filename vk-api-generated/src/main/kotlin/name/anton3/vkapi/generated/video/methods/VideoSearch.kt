@@ -5,8 +5,8 @@ package name.anton3.vkapi.generated.video.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.video.objects.SearchSort
 import name.anton3.vkapi.generated.video.objects.Video
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -36,4 +36,4 @@ data class VideoSearch(
     var longer: Int? = null,
     var shorter: Int? = null,
     var count: Int? = null
-) : CheckedMethod<VkList<Video>, UserMethod>("video.search", jacksonTypeRef())
+) : VkMethod<VkList<Video>, UserMethod>("video.search", jacksonTypeRef())

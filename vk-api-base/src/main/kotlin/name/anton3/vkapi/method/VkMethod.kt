@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.core.type.TypeReference
 import name.anton3.vkapi.vktypes.VkLang
 
-open class VkMethod<T>(
+open class VkMethod<T, out R : MethodRequirement>(
     @JsonIgnore val apiMethodName: String,
     @JsonIgnore val responseType: TypeReference<T>
 ) {
@@ -31,6 +31,3 @@ open class VkMethod<T>(
     var lang: VkLang? = null
     var testMode: Int? = null
 }
-
-open class CheckedMethod<T, out R : MethodRequirement>(apiMethodName: String, responseType: TypeReference<T>)
-    : VkMethod<T>(apiMethodName, responseType)

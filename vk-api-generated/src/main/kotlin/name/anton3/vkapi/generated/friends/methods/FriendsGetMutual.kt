@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.friends.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/friends.getMutual]
@@ -23,4 +23,4 @@ data class FriendsGetMutual(
     var order: String? = null,
     var count: Int? = null,
     var offset: Int? = null
-) : CheckedMethod<List<Int>, UserMethod>("friends.getMutual", jacksonTypeRef())
+) : VkMethod<List<Int>, UserMethod>("friends.getMutual", jacksonTypeRef())

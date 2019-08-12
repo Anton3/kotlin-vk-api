@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.places.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.places.objects.AddResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/places.add]
@@ -28,4 +28,4 @@ data class PlacesAdd(
     var country: Int? = null,
     var city: Int? = null,
     var address: String? = null
-) : CheckedMethod<AddResponse, UserMethod>("places.add", jacksonTypeRef())
+) : VkMethod<AddResponse, UserMethod>("places.add", jacksonTypeRef())

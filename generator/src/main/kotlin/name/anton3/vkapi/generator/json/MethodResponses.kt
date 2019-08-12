@@ -18,7 +18,7 @@ import name.anton3.vkapi.generator.under2Camel
  */
 
 open class MethodResponses(val response: SchemaFileRef) {
-    protected fun methodUrl(jsonTypeRef: JsonTypeRef) =
+    protected fun methodUrl(jsonTypeRef: JsonTypeRef): JsonTypeRef =
         jsonTypeRef
 
     open fun normalizeMethodDefinition(methodSchema: MethodSchema): List<MethodSchema> {

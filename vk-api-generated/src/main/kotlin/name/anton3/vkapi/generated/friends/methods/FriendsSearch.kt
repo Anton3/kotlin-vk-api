@@ -5,8 +5,8 @@ package name.anton3.vkapi.generated.friends.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.common.objects.NameCase
 import name.anton3.vkapi.generated.users.objects.UserFull
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -28,4 +28,4 @@ data class FriendsSearch(
     var nameCase: NameCase? = null,
     var offset: Int? = null,
     var count: Int? = null
-) : CheckedMethod<VkList<UserFull>, UserMethod>("friends.search", jacksonTypeRef())
+) : VkMethod<VkList<UserFull>, UserMethod>("friends.search", jacksonTypeRef())

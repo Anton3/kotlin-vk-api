@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/messages.markAsImportant]
@@ -17,4 +17,4 @@ import name.anton3.vkapi.method.UserGroupMethod
 data class MessagesMarkAsImportant(
     var messageIds: List<Int>? = null,
     var important: Boolean? = null
-) : CheckedMethod<List<Int>, UserGroupMethod>("messages.markAsImportant", jacksonTypeRef())
+) : VkMethod<List<Int>, UserGroupMethod>("messages.markAsImportant", jacksonTypeRef())

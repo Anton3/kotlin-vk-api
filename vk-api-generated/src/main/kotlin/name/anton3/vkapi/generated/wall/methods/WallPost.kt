@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.wall.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.wall.objects.PostResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/wall.post]
@@ -42,4 +42,4 @@ data class WallPost(
     var postId: Int? = null,
     var guid: String? = null,
     var markAsAds: Boolean? = null
-) : CheckedMethod<PostResponse, UserMethod>("wall.post", jacksonTypeRef())
+) : VkMethod<PostResponse, UserMethod>("wall.post", jacksonTypeRef())

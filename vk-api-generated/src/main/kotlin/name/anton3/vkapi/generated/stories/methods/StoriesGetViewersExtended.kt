@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.stories.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.users.objects.UserFull
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -23,7 +23,7 @@ data class StoriesGetViewersExtended(
     var storyId: Int,
     var count: Int? = null,
     var offset: Int? = null
-) : CheckedMethod<VkList<UserFull>, UserGroupMethod>("stories.getViewers", jacksonTypeRef()) {
+) : VkMethod<VkList<UserFull>, UserGroupMethod>("stories.getViewers", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")
     }

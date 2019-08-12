@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.ads.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.ads.objects.Account
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/ads.getAccounts]
@@ -14,4 +14,4 @@ import name.anton3.vkapi.method.UserMethod
  *
 
  */
-class AdsGetAccounts : CheckedMethod<List<Account>, UserMethod>("ads.getAccounts", jacksonTypeRef())
+class AdsGetAccounts : VkMethod<List<Account>, UserMethod>("ads.getAccounts", jacksonTypeRef())

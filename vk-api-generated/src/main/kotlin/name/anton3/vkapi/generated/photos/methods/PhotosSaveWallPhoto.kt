@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.photos.objects.Photo
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/photos.saveWallPhoto]
@@ -30,4 +30,4 @@ data class PhotosSaveWallPhoto(
     var latitude: Double? = null,
     var longitude: Double? = null,
     var caption: String? = null
-) : CheckedMethod<List<Photo>, UserMethod>("photos.saveWallPhoto", jacksonTypeRef())
+) : VkMethod<List<Photo>, UserMethod>("photos.saveWallPhoto", jacksonTypeRef())

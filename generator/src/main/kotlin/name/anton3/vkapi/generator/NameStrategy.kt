@@ -5,7 +5,7 @@ import name.anton3.vkapi.generator.source.TypeId
 
 typealias NameStrategy = (str: JsonTypeRef, basePackage: String) -> TypeId
 
-fun toCamelCase(string: String) =
+fun toCamelCase(string: String): String =
     string.split('.', '_').joinToString("") { it.capitalize() }
 
 private fun beforeDot(path: String) =

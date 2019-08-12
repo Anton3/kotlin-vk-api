@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.newsfeed.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
 /**
@@ -18,4 +18,4 @@ import name.anton3.vkapi.vktypes.OkResponse
 data class NewsfeedAddBan(
     var userIds: List<Int>? = null,
     var groupIds: List<Int>? = null
-) : CheckedMethod<OkResponse, UserMethod>("newsfeed.addBan", jacksonTypeRef())
+) : VkMethod<OkResponse, UserMethod>("newsfeed.addBan", jacksonTypeRef())

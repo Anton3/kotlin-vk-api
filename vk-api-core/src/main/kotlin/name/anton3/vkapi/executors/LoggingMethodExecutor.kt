@@ -14,7 +14,7 @@ class LoggingMethodExecutor(private val base: MethodExecutor, private val name: 
 
     companion object : Logging
 
-    override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*>>): VkResponse<*> {
+    override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*, *>>): VkResponse<*> {
         val loggingRequest = dynamicRequest.map { request ->
             request.also { logRequest(it) }
         }
@@ -24,12 +24,12 @@ class LoggingMethodExecutor(private val base: MethodExecutor, private val name: 
     override val objectMapper: ObjectMapper get() = base.objectMapper
     override val transportClient: TransportClient get() = base.transportClient
 
-    private fun logRequest(request: VkMethod<*>) {
+    private fun logRequest(request: VkMethod<*, *>) {
         val parameters = objectMapper.serializeMethod(request)
         logger.info("$name has requested \"${request.apiMethodName}\": $parameters")
     }
 
-    private fun logResponse(request: VkMethod<*>, response: VkResponse<*>) {
+    private fun logResponse(request: VkMethod<*, *>, response: VkResponse<*>) {
         logger.info("$name got response \"${request.apiMethodName}\": $response")
     }
 }

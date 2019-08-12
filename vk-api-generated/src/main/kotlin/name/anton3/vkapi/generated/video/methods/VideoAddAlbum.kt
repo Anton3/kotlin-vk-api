@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.video.objects.AddAlbumResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/video.addAlbum]
@@ -20,4 +20,4 @@ data class VideoAddAlbum(
     var groupId: Int? = null,
     var title: String? = null,
     var privacy: List<String>? = null
-) : CheckedMethod<AddAlbumResponse, UserMethod>("video.addAlbum", jacksonTypeRef())
+) : VkMethod<AddAlbumResponse, UserMethod>("video.addAlbum", jacksonTypeRef())

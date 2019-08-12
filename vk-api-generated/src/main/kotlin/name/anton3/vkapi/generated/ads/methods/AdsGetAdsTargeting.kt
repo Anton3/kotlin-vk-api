@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.ads.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.ads.objects.TargSettings
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/ads.getAdsTargeting]
@@ -28,4 +28,4 @@ data class AdsGetAdsTargeting(
     var adIds: String? = null,
     var limit: Int? = null,
     var offset: Int? = null
-) : CheckedMethod<List<TargSettings>, UserMethod>("ads.getAdsTargeting", jacksonTypeRef())
+) : VkMethod<List<TargSettings>, UserMethod>("ads.getAdsTargeting", jacksonTypeRef())

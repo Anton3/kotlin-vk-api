@@ -5,8 +5,8 @@ package name.anton3.vkapi.generated.photos.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.photos.objects.GetCommentsResponse
 import name.anton3.vkapi.generated.photos.objects.GetCommentsSort
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/photos.getComments]
@@ -33,4 +33,4 @@ data class PhotosGetComments(
     var sort: GetCommentsSort? = null,
     var accessKey: String? = null,
     var fields: List<String>? = null
-) : CheckedMethod<GetCommentsResponse, UserMethod>("photos.getComments", jacksonTypeRef())
+) : VkMethod<GetCommentsResponse, UserMethod>("photos.getComments", jacksonTypeRef())

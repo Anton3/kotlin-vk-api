@@ -6,8 +6,8 @@ import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.board.objects.GetTopicsExtendedResponse
 import name.anton3.vkapi.generated.board.objects.GetTopicsOrder
 import name.anton3.vkapi.generated.board.objects.GetTopicsPreview
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/board.getTopics]
@@ -30,7 +30,7 @@ data class BoardGetTopicsExtended(
     var count: Int? = null,
     var preview: GetTopicsPreview? = null,
     var previewLength: Int? = null
-) : CheckedMethod<GetTopicsExtendedResponse, UserServiceMethod>("board.getTopics", jacksonTypeRef()) {
+) : VkMethod<GetTopicsExtendedResponse, UserServiceMethod>("board.getTopics", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")
     }

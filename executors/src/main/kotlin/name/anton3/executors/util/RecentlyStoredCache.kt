@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicLong
 /**
  * A map-like container, which automatically removes older entries
  */
-class RecentlyStoredCache<Key: Any, Value: Any>(cacheSize: Int) {
+class RecentlyStoredCache<Key : Any, Value : Any>(cacheSize: Int) {
 
     fun merge(key: Key, block: (Value?) -> Value): Value {
         val newTick = ticker.getAndIncrement()

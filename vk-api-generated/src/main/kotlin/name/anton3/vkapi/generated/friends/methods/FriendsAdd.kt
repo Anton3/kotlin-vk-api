@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.friends.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.friends.responses.AddResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/friends.add]
@@ -20,4 +20,4 @@ data class FriendsAdd(
     var userId: Int,
     var text: String? = null,
     var follow: Boolean? = null
-) : CheckedMethod<AddResponse, UserMethod>("friends.add", jacksonTypeRef())
+) : VkMethod<AddResponse, UserMethod>("friends.add", jacksonTypeRef())

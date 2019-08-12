@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.auth.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.auth.objects.RestoreResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.ServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/auth.restore]
@@ -18,4 +18,4 @@ import name.anton3.vkapi.method.ServiceMethod
 data class AuthRestore(
     var phone: String,
     var lastName: String
-) : CheckedMethod<RestoreResponse, ServiceMethod>("auth.restore", jacksonTypeRef())
+) : VkMethod<RestoreResponse, ServiceMethod>("auth.restore", jacksonTypeRef())

@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.market.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.market.objects.MarketAlbum
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -21,4 +21,4 @@ data class MarketGetAlbums(
     var ownerId: Int,
     var offset: Int? = null,
     var count: Int? = null
-) : CheckedMethod<VkList<MarketAlbum>, UserMethod>("market.getAlbums", jacksonTypeRef())
+) : VkMethod<VkList<MarketAlbum>, UserMethod>("market.getAlbums", jacksonTypeRef())

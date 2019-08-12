@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.photos.objects.GetAllExtendedResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/photos.getAll]
@@ -28,7 +28,7 @@ data class PhotosGetAllExtended(
     var noServiceAlbums: Boolean? = null,
     var needHidden: Boolean? = null,
     var skipHidden: Boolean? = null
-) : CheckedMethod<GetAllExtendedResponse, UserMethod>("photos.getAll", jacksonTypeRef()) {
+) : VkMethod<GetAllExtendedResponse, UserMethod>("photos.getAll", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")
     }

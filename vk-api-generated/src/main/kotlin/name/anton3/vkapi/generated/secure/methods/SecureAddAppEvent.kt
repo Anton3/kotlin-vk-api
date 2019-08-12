@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.secure.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
 /**
@@ -20,4 +20,4 @@ data class SecureAddAppEvent(
     var userId: Int,
     var activityId: Int,
     var value: Int? = null
-) : CheckedMethod<OkResponse, UserMethod>("secure.addAppEvent", jacksonTypeRef())
+) : VkMethod<OkResponse, UserMethod>("secure.addAppEvent", jacksonTypeRef())

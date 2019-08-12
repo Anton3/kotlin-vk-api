@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.account.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.account.objects.Info
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/account.getInfo]
@@ -16,4 +16,4 @@ import name.anton3.vkapi.method.UserMethod
  */
 data class AccountGetInfo(
     var fields: List<String>? = null
-) : CheckedMethod<Info, UserMethod>("account.getInfo", jacksonTypeRef())
+) : VkMethod<Info, UserMethod>("account.getInfo", jacksonTypeRef())

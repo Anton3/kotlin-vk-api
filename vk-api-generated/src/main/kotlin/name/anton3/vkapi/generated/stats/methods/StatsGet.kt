@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.stats.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.stats.objects.Period
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/stats.get]
@@ -22,4 +22,4 @@ data class StatsGet(
     var appId: Int? = null,
     var dateFrom: String? = null,
     var dateTo: String? = null
-) : CheckedMethod<List<Period>, UserMethod>("stats.get", jacksonTypeRef())
+) : VkMethod<List<Period>, UserMethod>("stats.get", jacksonTypeRef())

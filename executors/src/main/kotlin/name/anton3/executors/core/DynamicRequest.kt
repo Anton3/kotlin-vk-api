@@ -17,12 +17,12 @@ interface DynamicRequest<out Request> {
      * Executors should not typically require any meta-info. Reasonable defaults should be used.
      * This method is essentially a typed map, bound to each request.
      */
-    operator fun <T: Any> get(key: Key<T>): T?
+    operator fun <T : Any> get(key: Key<T>): T?
 
     /**
      * Represents a kind of meta-info that might be bound to the request.
      */
-    interface Key<T: Any>
+    interface Key<T : Any>
 }
 
 /**

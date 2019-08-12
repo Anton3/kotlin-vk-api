@@ -31,18 +31,17 @@ import io.ktor.client.HttpClient
 import name.anton3.vkapi.client.VkClientFactory
 import name.anton3.vkapi.client.ktorClientFactory
 
-val httpClient = HttpClient(TODO()) { TODO() }
+val httpClient: HttpClient = TODO()
 val clientFactory: VkClientFactory = ktorClientFactory(httpClient)
 ```
 
 Создайте токен нужного типа и создайте ваш клиент ВК с его помощью:
 
 ```kotlin
-import name.anton3.vkapi.client.VkClient
-import name.anton3.vkapi.method.GroupMethod
+import name.anton3.vkapi.client.GroupClient
 import name.anton3.vkapi.tokens.GroupToken
 
-val api: VkClient<GroupMethod> = clientFactory.group(GroupToken(accessToken))
+val api: GroupClient = clientFactory.group(GroupToken(accessToken))
 ```
 
 > **Замечание.** Клиент учитывает ограничения ВК на запросы к API и объединяет несколько запросов

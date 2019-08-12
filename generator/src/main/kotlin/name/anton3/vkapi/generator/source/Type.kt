@@ -3,7 +3,7 @@ package name.anton3.vkapi.generator.source
 import java.nio.file.FileSystems
 import java.util.*
 
-data class TypeId (
+data class TypeId(
     val packages: List<String>,
     val name: String,
     val genericParameters: List<TypeId> = emptyList()

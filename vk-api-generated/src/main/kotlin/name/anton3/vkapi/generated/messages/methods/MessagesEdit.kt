@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.BoolInt
 
 /**
@@ -30,4 +30,4 @@ data class MessagesEdit(
     var keepForwardMessages: Boolean? = null,
     var keepSnippets: Boolean? = null,
     var groupId: Int? = null
-) : CheckedMethod<BoolInt, UserGroupMethod>("messages.edit", jacksonTypeRef())
+) : VkMethod<BoolInt, UserGroupMethod>("messages.edit", jacksonTypeRef())

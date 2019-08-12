@@ -42,7 +42,8 @@ class FifoRequestStorage<Request> : RequestStorage<Request> {
     }
 
     private val queue: Queue<DynamicRequest<Request>> = ConcurrentLinkedQueue()
-    private val set: MutableSet<DynamicRequest<Request>> = ConcurrentHashMap<DynamicRequest<Request>, Unit>().keySet(Unit)
+    private val set: MutableSet<DynamicRequest<Request>> =
+        ConcurrentHashMap<DynamicRequest<Request>, Unit>().keySet(Unit)
 }
 
 class SortedRequestStorage<Request, State>(

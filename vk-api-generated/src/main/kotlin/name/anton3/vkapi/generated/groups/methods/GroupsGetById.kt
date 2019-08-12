@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.groups.objects.GroupFull
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/groups.getById]
@@ -20,4 +20,4 @@ data class GroupsGetById(
     var groupIds: List<String>? = null,
     var groupId: String? = null,
     var fields: List<String>? = null
-) : CheckedMethod<List<GroupFull>, UserGroupServiceMethod>("groups.getById", jacksonTypeRef())
+) : VkMethod<List<GroupFull>, UserGroupServiceMethod>("groups.getById", jacksonTypeRef())

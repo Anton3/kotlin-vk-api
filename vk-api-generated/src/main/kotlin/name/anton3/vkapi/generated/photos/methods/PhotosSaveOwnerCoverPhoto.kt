@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.common.objects.Image
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/photos.saveOwnerCoverPhoto]
@@ -18,4 +18,4 @@ import name.anton3.vkapi.method.UserMethod
 data class PhotosSaveOwnerCoverPhoto(
     var photo: String,
     var hash: String
-) : CheckedMethod<List<Image>, UserMethod>("photos.saveOwnerCoverPhoto", jacksonTypeRef())
+) : VkMethod<List<Image>, UserMethod>("photos.saveOwnerCoverPhoto", jacksonTypeRef())

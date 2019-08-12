@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.photos.objects.PhotoAlbumFull
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/photos.createAlbum]
@@ -28,4 +28,4 @@ data class PhotosCreateAlbum(
     var privacyComment: List<String>? = null,
     var uploadByAdminsOnly: Boolean? = null,
     var commentsDisabled: Boolean? = null
-) : CheckedMethod<PhotoAlbumFull, UserMethod>("photos.createAlbum", jacksonTypeRef())
+) : VkMethod<PhotoAlbumFull, UserMethod>("photos.createAlbum", jacksonTypeRef())

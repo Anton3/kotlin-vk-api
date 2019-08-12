@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.database.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.database.objects.Region
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -23,4 +23,4 @@ data class DatabaseGetRegions(
     var q: String? = null,
     var offset: Int? = null,
     var count: Int? = null
-) : CheckedMethod<VkList<Region>, UserServiceMethod>("database.getRegions", jacksonTypeRef())
+) : VkMethod<VkList<Region>, UserServiceMethod>("database.getRegions", jacksonTypeRef())

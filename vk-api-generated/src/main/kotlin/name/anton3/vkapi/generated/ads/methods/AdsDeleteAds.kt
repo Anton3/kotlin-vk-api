@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.ads.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/ads.deleteAds]
@@ -17,4 +17,4 @@ import name.anton3.vkapi.method.UserMethod
 data class AdsDeleteAds(
     var accountId: Int,
     var ids: String
-) : CheckedMethod<List<Int>, UserMethod>("ads.deleteAds", jacksonTypeRef())
+) : VkMethod<List<Int>, UserMethod>("ads.deleteAds", jacksonTypeRef())

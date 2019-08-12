@@ -11,8 +11,10 @@ object MethodResponsesSchemaDeserializer : StdDeserializer<MethodResponses>(Meth
         val node: JsonNode = oc.readTree(p)
         val subParser = node.traverse(oc)
         subParser.nextToken()
+
         try {
-            return ctxt.readValue(subParser,
+            return ctxt.readValue(
+                subParser,
                 when {
                     node.has("userIdsResponse") -> UserIdsResponse::class.java
                     node.has("needMutualResponse") -> NeedMutualResponse::class.java

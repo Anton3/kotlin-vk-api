@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.messages.objects.PinnedMessage
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/messages.pin]
@@ -18,4 +18,4 @@ import name.anton3.vkapi.method.UserGroupMethod
 data class MessagesPin(
     var peerId: Int,
     var messageId: Int
-) : CheckedMethod<PinnedMessage, UserGroupMethod>("messages.pin", jacksonTypeRef())
+) : VkMethod<PinnedMessage, UserGroupMethod>("messages.pin", jacksonTypeRef())

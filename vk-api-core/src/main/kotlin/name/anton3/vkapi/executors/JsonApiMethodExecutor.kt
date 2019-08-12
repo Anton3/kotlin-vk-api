@@ -16,7 +16,7 @@ data class JsonApiMethodExecutor(
     override val objectMapper: ObjectMapper
 ) : MethodExecutor {
 
-    override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*>>): VkResponse<*> {
+    override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*, *>>): VkResponse<*> {
         val request = dynamicRequest.get()
         val params = objectMapper.serializeMethod(request)
         val response = transportClient.post(

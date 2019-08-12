@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.wall.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.wall.objects.GetRepostsResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/wall.getReposts]
@@ -22,4 +22,4 @@ data class WallGetReposts(
     var postId: Int? = null,
     var offset: Int? = null,
     var count: Int? = null
-) : CheckedMethod<GetRepostsResponse, UserServiceMethod>("wall.getReposts", jacksonTypeRef())
+) : VkMethod<GetRepostsResponse, UserServiceMethod>("wall.getReposts", jacksonTypeRef())

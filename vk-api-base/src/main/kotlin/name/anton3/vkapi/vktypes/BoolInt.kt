@@ -8,7 +8,8 @@ class BoolInt(@JsonIgnore val value: Boolean) {
 
     @Suppress("unused")
     @get:JsonValue
-    internal val intValue: Int get() = if (value) 1 else 0
+    internal val intValue: Int
+        get() = if (value) 1 else 0
 
     internal companion object {
         @JvmStatic

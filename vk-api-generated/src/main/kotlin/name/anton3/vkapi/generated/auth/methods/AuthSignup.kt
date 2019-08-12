@@ -5,8 +5,8 @@ package name.anton3.vkapi.generated.auth.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.auth.objects.SignupResponse
 import name.anton3.vkapi.generated.common.objects.OwnSex
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.ServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/auth.signup]
@@ -35,4 +35,4 @@ data class AuthSignup(
     var voice: Boolean? = null,
     var sex: OwnSex? = null,
     var sid: String? = null
-) : CheckedMethod<SignupResponse, ServiceMethod>("auth.signup", jacksonTypeRef())
+) : VkMethod<SignupResponse, ServiceMethod>("auth.signup", jacksonTypeRef())

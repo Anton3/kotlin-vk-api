@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/photos.getAlbumsCount]
@@ -17,4 +17,4 @@ import name.anton3.vkapi.method.UserMethod
 data class PhotosGetAlbumsCount(
     var userId: Int? = null,
     var groupId: Int? = null
-) : CheckedMethod<Int, UserMethod>("photos.getAlbumsCount", jacksonTypeRef())
+) : VkMethod<Int, UserMethod>("photos.getAlbumsCount", jacksonTypeRef())

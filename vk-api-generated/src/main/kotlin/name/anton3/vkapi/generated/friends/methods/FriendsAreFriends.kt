@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.friends.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.friends.objects.FriendStatus
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/friends.areFriends]
@@ -18,4 +18,4 @@ import name.anton3.vkapi.method.UserMethod
 data class FriendsAreFriends(
     var userIds: List<Int>,
     var needSign: Boolean? = null
-) : CheckedMethod<List<FriendStatus>, UserMethod>("friends.areFriends", jacksonTypeRef())
+) : VkMethod<List<FriendStatus>, UserMethod>("friends.areFriends", jacksonTypeRef())

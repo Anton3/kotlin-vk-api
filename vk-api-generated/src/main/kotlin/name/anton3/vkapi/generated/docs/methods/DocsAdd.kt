@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.docs.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.docs.objects.AddResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/docs.add]
@@ -20,4 +20,4 @@ data class DocsAdd(
     var ownerId: Int,
     var docId: Int,
     var accessKey: String? = null
-) : CheckedMethod<AddResponse, UserMethod>("docs.add", jacksonTypeRef())
+) : VkMethod<AddResponse, UserMethod>("docs.add", jacksonTypeRef())

@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.pages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.pages.objects.Wikipage
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/pages.getTitles]
@@ -16,4 +16,4 @@ import name.anton3.vkapi.method.UserMethod
  */
 data class PagesGetTitles(
     var groupId: Int? = null
-) : CheckedMethod<List<Wikipage>, UserMethod>("pages.getTitles", jacksonTypeRef())
+) : VkMethod<List<Wikipage>, UserMethod>("pages.getTitles", jacksonTypeRef())

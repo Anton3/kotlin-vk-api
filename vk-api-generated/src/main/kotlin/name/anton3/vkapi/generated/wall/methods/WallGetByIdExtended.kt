@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.wall.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.wall.objects.GetByIdExtendedResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/wall.getById]
@@ -20,7 +20,7 @@ data class WallGetByIdExtended(
     var posts: List<String>,
     var copyHistoryDepth: Int? = null,
     var fields: List<String>? = null
-) : CheckedMethod<GetByIdExtendedResponse, UserServiceMethod>("wall.getById", jacksonTypeRef()) {
+) : VkMethod<GetByIdExtendedResponse, UserServiceMethod>("wall.getById", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")
     }

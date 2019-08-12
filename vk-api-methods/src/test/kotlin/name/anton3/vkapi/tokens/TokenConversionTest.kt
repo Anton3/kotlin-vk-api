@@ -6,11 +6,11 @@ import name.anton3.vkapi.method.*
 
 private val error: Nothing get() = error("")
 
-class ExampleUserMethod : CheckedMethod<Int, UserMethod>(error, error)
-class ExampleServiceMethod : CheckedMethod<Long, ServiceMethod>(error, error)
-class ExampleUserGroupMethod : CheckedMethod<Short, UserGroupMethod>(error, error)
-class ExampleUserServiceMethod : CheckedMethod<Char, UserServiceMethod>(error, error)
-class ExampleUserGroupServiceMethod : CheckedMethod<Double, UserGroupServiceMethod>(error, error)
+class ExampleUserMethod : VkMethod<Int, UserMethod>(error, error)
+class ExampleServiceMethod : VkMethod<Long, ServiceMethod>(error, error)
+class ExampleUserGroupMethod : VkMethod<Short, UserGroupMethod>(error, error)
+class ExampleUserServiceMethod : VkMethod<Char, UserServiceMethod>(error, error)
+class ExampleUserGroupServiceMethod : VkMethod<Double, UserGroupServiceMethod>(error, error)
 
 fun getSomeExecutor(): MethodExecutor = error
 

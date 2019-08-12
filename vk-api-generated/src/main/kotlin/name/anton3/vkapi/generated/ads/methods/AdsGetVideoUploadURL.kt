@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.ads.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.MethodRequirement
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/ads.getVideoUploadURL]
@@ -13,4 +13,4 @@ import name.anton3.vkapi.method.MethodRequirement
  *
 
  */
-class AdsGetVideoUploadURL : CheckedMethod<String, MethodRequirement>("ads.getVideoUploadURL", jacksonTypeRef())
+class AdsGetVideoUploadURL : VkMethod<String, MethodRequirement>("ads.getVideoUploadURL", jacksonTypeRef())

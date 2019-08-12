@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.board.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/board.addTopic]
@@ -23,4 +23,4 @@ data class BoardAddTopic(
     var text: String? = null,
     var fromGroup: Boolean? = null,
     var attachments: List<String>? = null
-) : CheckedMethod<Int, UserMethod>("board.addTopic", jacksonTypeRef())
+) : VkMethod<Int, UserMethod>("board.addTopic", jacksonTypeRef())

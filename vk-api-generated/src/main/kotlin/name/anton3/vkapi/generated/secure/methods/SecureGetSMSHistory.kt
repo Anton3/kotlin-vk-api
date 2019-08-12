@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.secure.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.secure.objects.SmsNotification
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.ServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/secure.getSMSHistory]
@@ -22,4 +22,4 @@ data class SecureGetSMSHistory(
     var dateFrom: Int? = null,
     var dateTo: Int? = null,
     var limit: Int? = null
-) : CheckedMethod<List<SmsNotification>, ServiceMethod>("secure.getSMSHistory", jacksonTypeRef())
+) : VkMethod<List<SmsNotification>, ServiceMethod>("secure.getSMSHistory", jacksonTypeRef())

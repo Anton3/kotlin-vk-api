@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.newsfeed.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.newsfeed.objects.SearchResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/newsfeed.search]
@@ -30,4 +30,4 @@ data class NewsfeedSearch(
     var endTime: Int? = null,
     var startFrom: String? = null,
     var fields: List<String>? = null
-) : CheckedMethod<SearchResponse, UserServiceMethod>("newsfeed.search", jacksonTypeRef())
+) : VkMethod<SearchResponse, UserServiceMethod>("newsfeed.search", jacksonTypeRef())

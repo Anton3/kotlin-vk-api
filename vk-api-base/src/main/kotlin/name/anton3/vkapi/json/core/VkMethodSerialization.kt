@@ -11,16 +11,16 @@ import name.anton3.vkapi.json.attributes.reader
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkResponse
 
-fun ObjectMapper.serializeMethod(method: VkMethod<*>): Map<String, String> {
+fun ObjectMapper.serializeMethod(method: VkMethod<*, *>): Map<String, String> {
     return valueToTree<ObjectNode>(method).fields().asSequence()
         .associate { it.key to propertyValueToParameter(it.value, this) }
 }
 
-fun <T> ObjectMapper.deserializeResponse(method: VkMethod<T>, response: ByteArray): VkResponse<T> {
+fun <T> ObjectMapper.deserializeResponse(method: VkMethod<T, *>, response: ByteArray): VkResponse<T> {
     return reader(ForwardableAttributes(METHOD_ATTRIBUTE, method)).forType(responseType(method)).readValue(response)
 }
 
-private fun ObjectMapper.responseType(method: VkMethod<*>): JavaType {
+private fun ObjectMapper.responseType(method: VkMethod<*, *>): JavaType {
     val typeFactory = this.typeFactory
     val resultType = typeFactory.constructType(method.responseType)
     return typeFactory.constructCollectionLikeType(VkResponse::class.java, resultType)
@@ -32,4 +32,4 @@ private fun propertyValueToParameter(value: JsonNode, objectMapper: ObjectMapper
     else -> objectMapper.writeValueAsString(value)
 }
 
-const val METHOD_ATTRIBUTE = "method"
+const val METHOD_ATTRIBUTE: String = "method"

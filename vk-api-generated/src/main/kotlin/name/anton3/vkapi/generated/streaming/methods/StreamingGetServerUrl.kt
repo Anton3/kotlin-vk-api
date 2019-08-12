@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.streaming.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.streaming.objects.GetServerUrlResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.ServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/streaming.getServerUrl]
@@ -14,4 +14,4 @@ import name.anton3.vkapi.method.ServiceMethod
  *
 
  */
-class StreamingGetServerUrl : CheckedMethod<GetServerUrlResponse, ServiceMethod>("streaming.getServerUrl", jacksonTypeRef())
+class StreamingGetServerUrl : VkMethod<GetServerUrlResponse, ServiceMethod>("streaming.getServerUrl", jacksonTypeRef())

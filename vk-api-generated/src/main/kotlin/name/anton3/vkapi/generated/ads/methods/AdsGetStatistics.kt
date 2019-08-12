@@ -6,8 +6,8 @@ import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.ads.objects.Period
 import name.anton3.vkapi.generated.ads.objects.Stats
 import name.anton3.vkapi.generated.ads.objects.Type
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/ads.getStatistics]
@@ -28,4 +28,4 @@ data class AdsGetStatistics(
     var period: Period,
     var dateFrom: String,
     var dateTo: String
-) : CheckedMethod<List<Stats>, UserMethod>("ads.getStatistics", jacksonTypeRef())
+) : VkMethod<List<Stats>, UserMethod>("ads.getStatistics", jacksonTypeRef())

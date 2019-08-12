@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.places.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.places.objects.Checkin
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -33,4 +33,4 @@ data class PlacesGetCheckins(
     var timestamp: Int? = null,
     var friendsOnly: Boolean? = null,
     var needPlaces: Boolean? = null
-) : CheckedMethod<VkList<Checkin>, UserMethod>("places.getCheckins", jacksonTypeRef())
+) : VkMethod<VkList<Checkin>, UserMethod>("places.getCheckins", jacksonTypeRef())

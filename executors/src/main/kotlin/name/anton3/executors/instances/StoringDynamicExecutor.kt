@@ -13,7 +13,8 @@ abstract class StoringDynamicExecutor<Request, Response> : DynamicExecutor<Reque
     protected abstract val requestStorage: RequestStorage<Request>
     protected abstract val job: Job
 
-    private val responseHandles: MutableMap<DynamicRequest<Request>, CompletableDeferred<Response>> = ConcurrentHashMap()
+    private val responseHandles: MutableMap<DynamicRequest<Request>, CompletableDeferred<Response>> =
+        ConcurrentHashMap()
 
     protected suspend fun add(request: DynamicRequest<Request>): CompletableDeferred<Response> {
         val handle = CompletableDeferred<Response>(parent = job)

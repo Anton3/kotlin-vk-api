@@ -5,8 +5,8 @@ package name.anton3.vkapi.generated.leads.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.leads.objects.Entry
 import name.anton3.vkapi.generated.leads.objects.GetUsersStatus
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/leads.getUsers]
@@ -27,4 +27,4 @@ data class LeadsGetUsers(
     var count: Int? = null,
     var status: GetUsersStatus? = null,
     var reverse: Boolean? = null
-) : CheckedMethod<List<Entry>, UserServiceMethod>("leads.getUsers", jacksonTypeRef())
+) : VkMethod<List<Entry>, UserServiceMethod>("leads.getUsers", jacksonTypeRef())

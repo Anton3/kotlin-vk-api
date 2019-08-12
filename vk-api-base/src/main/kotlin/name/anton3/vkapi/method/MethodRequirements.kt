@@ -5,7 +5,7 @@ package name.anton3.vkapi.method
  * However, the exact types of supported access tokens are unknown.
  *
  * This interface and all derived interfaces should not be implemented by any classes.
- * They allow to statically type-check that a VkClient can execute a given CheckedMethod.
+ * They allow to statically type-check that a VkClient can execute a given VkMethod.
  */
 interface MethodRequirement
 

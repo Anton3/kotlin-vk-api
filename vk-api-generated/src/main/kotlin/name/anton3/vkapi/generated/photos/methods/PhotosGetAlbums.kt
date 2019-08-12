@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.photos.objects.PhotoAlbumFull
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -29,4 +29,4 @@ data class PhotosGetAlbums(
     var needSystem: Boolean? = null,
     var needCovers: Boolean? = null,
     var photoSizes: Boolean? = null
-) : CheckedMethod<VkList<PhotoAlbumFull>, UserServiceMethod>("photos.getAlbums", jacksonTypeRef())
+) : VkMethod<VkList<PhotoAlbumFull>, UserServiceMethod>("photos.getAlbums", jacksonTypeRef())

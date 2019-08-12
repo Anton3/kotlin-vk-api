@@ -7,8 +7,8 @@ import name.anton3.vkapi.generated.account.objects.SaveProfileInfoBdateVisibilit
 import name.anton3.vkapi.generated.account.objects.SaveProfileInfoRelation
 import name.anton3.vkapi.generated.account.objects.SaveProfileInfoResponse
 import name.anton3.vkapi.generated.common.objects.OwnSex
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/account.saveProfileInfo]
@@ -45,4 +45,4 @@ data class AccountSaveProfileInfo(
     var countryId: Int? = null,
     var cityId: Int? = null,
     var status: String? = null
-) : CheckedMethod<SaveProfileInfoResponse, UserMethod>("account.saveProfileInfo", jacksonTypeRef())
+) : VkMethod<SaveProfileInfoResponse, UserMethod>("account.saveProfileInfo", jacksonTypeRef())

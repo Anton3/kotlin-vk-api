@@ -126,7 +126,7 @@ class BatchExecutor<Request, Response>(
         }
 
         @Suppress("UNCHECKED_CAST")
-        override fun <T : Any> get(key: DynamicRequest.Key<T>): T? = when(key) {
+        override fun <T : Any> get(key: DynamicRequest.Key<T>): T? = when (key) {
             is IsIncompleteBatch -> (incompleteBatchRequest.get() == this) as T
             else -> null
         }

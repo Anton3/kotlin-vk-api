@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.wall.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.wall.objects.WallpostFull
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/wall.getById]
@@ -20,4 +20,4 @@ data class WallGetById(
     var posts: List<String>,
     var copyHistoryDepth: Int? = null,
     var fields: List<String>? = null
-) : CheckedMethod<List<WallpostFull>, UserServiceMethod>("wall.getById", jacksonTypeRef())
+) : VkMethod<List<WallpostFull>, UserServiceMethod>("wall.getById", jacksonTypeRef())

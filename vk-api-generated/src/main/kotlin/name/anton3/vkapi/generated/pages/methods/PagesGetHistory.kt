@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.pages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.pages.objects.WikipageVersion
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/pages.getHistory]
@@ -20,4 +20,4 @@ data class PagesGetHistory(
     var pageId: Int,
     var groupId: Int? = null,
     var userId: Int? = null
-) : CheckedMethod<List<WikipageVersion>, UserMethod>("pages.getHistory", jacksonTypeRef())
+) : VkMethod<List<WikipageVersion>, UserMethod>("pages.getHistory", jacksonTypeRef())

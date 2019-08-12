@@ -24,31 +24,31 @@ private fun attachmentId(type: String, id: Int, ownerId: Int, accessKey: String?
     "$type${ownerId}_$id${accessKey?.let { "_$it" }.orEmpty()}"
 
 
-fun Photo.toAttachmentId() = attachmentId("photo", id, ownerId, accessKey)
-fun Photo.fullId() = attachmentId("", id, ownerId, accessKey)
+fun Photo.toAttachmentId(): String = attachmentId("photo", id, ownerId, accessKey)
+fun Photo.fullId(): String = attachmentId("", id, ownerId, accessKey)
 
-fun VideoFull.toAttachmentId() = attachmentId("video", id!!, ownerId!!, accessKey)
-fun VideoFull.fullId() = attachmentId("", id!!, ownerId!!, accessKey)
+fun VideoFull.toAttachmentId(): String = attachmentId("video", id!!, ownerId!!, accessKey)
+fun VideoFull.fullId(): String = attachmentId("", id!!, ownerId!!, accessKey)
 
-fun Video.toAttachmentId() = attachmentId("video", id!!, ownerId!!, accessKey)
-fun Video.fullId() = attachmentId("", id!!, ownerId!!, accessKey)
+fun Video.toAttachmentId(): String = attachmentId("video", id!!, ownerId!!, accessKey)
+fun Video.fullId(): String = attachmentId("", id!!, ownerId!!, accessKey)
 
-fun Audio.toAttachmentId() = attachmentId("audio", id, ownerId, accessKey)
-fun Audio.fullId() = attachmentId("", id, ownerId, accessKey)
+fun Audio.toAttachmentId(): String = attachmentId("audio", id, ownerId, accessKey)
+fun Audio.fullId(): String = attachmentId("", id, ownerId, accessKey)
 
-fun Doc.toAttachmentId() = attachmentId("doc", id, ownerId, accessKey)
-fun Doc.fullId() = attachmentId("", id, ownerId, accessKey)
+fun Doc.toAttachmentId(): String = attachmentId("doc", id, ownerId, accessKey)
+fun Doc.fullId(): String = attachmentId("", id, ownerId, accessKey)
 
-fun Wallpost.toAttachmentId() = attachmentId("wall", id!!, ownerId!!, accessKey)
-fun Wallpost.fullId() = attachmentId("", id!!, ownerId!!, accessKey)
+fun Wallpost.toAttachmentId(): String = attachmentId("wall", id!!, ownerId!!, accessKey)
+fun Wallpost.fullId(): String = attachmentId("", id!!, ownerId!!, accessKey)
 
-fun MarketItem.toAttachmentId() = attachmentId("market", id, ownerId)
-fun MarketItem.fullId() = attachmentId("", id, ownerId)
+fun MarketItem.toAttachmentId(): String = attachmentId("market", id, ownerId)
+fun MarketItem.fullId(): String = attachmentId("", id, ownerId)
 
-fun Poll.toAttachmentId() = attachmentId("poll", id, ownerId)
-fun Poll.fullId() = attachmentId("", id, ownerId)
+fun Poll.toAttachmentId(): String = attachmentId("poll", id, ownerId)
+fun Poll.fullId(): String = attachmentId("", id, ownerId)
 
-fun AudioMessage.fullId() = attachmentId("", id, ownerId)
+fun AudioMessage.fullId(): String = attachmentId("", id, ownerId)
 
 
 val Feedback.safeAttachments: List<WallPostAttachmentBody> get() = attachments?.map { it.body }.orEmpty()

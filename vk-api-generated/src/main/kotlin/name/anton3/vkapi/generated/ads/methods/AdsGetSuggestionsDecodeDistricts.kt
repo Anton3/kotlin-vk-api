@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.ads.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.ads.objects.TargSuggestionsCities
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/ads.getSuggestions]
@@ -17,7 +17,7 @@ import name.anton3.vkapi.method.UserMethod
  */
 data class AdsGetSuggestionsDecodeDistricts(
     var ids: String? = null
-) : CheckedMethod<List<TargSuggestionsCities>, UserMethod>("ads.getSuggestions", jacksonTypeRef()) {
+) : VkMethod<List<TargSuggestionsCities>, UserMethod>("ads.getSuggestions", jacksonTypeRef()) {
     init {
         unsafeParam("section", "districts")
     }

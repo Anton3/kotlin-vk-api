@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.ads.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.ads.objects.RejectReason
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/ads.getRejectionReason]
@@ -18,4 +18,4 @@ import name.anton3.vkapi.method.UserMethod
 data class AdsGetRejectionReason(
     var accountId: Int,
     var adId: Int
-) : CheckedMethod<RejectReason, UserMethod>("ads.getRejectionReason", jacksonTypeRef())
+) : VkMethod<RejectReason, UserMethod>("ads.getRejectionReason", jacksonTypeRef())

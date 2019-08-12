@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.polls.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.polls.objects.Poll
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/polls.create]
@@ -22,4 +22,4 @@ data class PollsCreate(
     var isAnonymous: Boolean? = null,
     var ownerId: Int? = null,
     var addAnswers: String? = null
-) : CheckedMethod<Poll, UserMethod>("polls.create", jacksonTypeRef())
+) : VkMethod<Poll, UserMethod>("polls.create", jacksonTypeRef())

@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.places.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.places.objects.Types
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/places.getTypes]
@@ -14,4 +14,4 @@ import name.anton3.vkapi.method.UserMethod
  *
 
  */
-class PlacesGetTypes : CheckedMethod<List<Types>, UserMethod>("places.getTypes", jacksonTypeRef())
+class PlacesGetTypes : VkMethod<List<Types>, UserMethod>("places.getTypes", jacksonTypeRef())

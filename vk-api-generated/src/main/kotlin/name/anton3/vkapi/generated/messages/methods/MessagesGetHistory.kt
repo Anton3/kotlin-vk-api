@@ -5,8 +5,8 @@ package name.anton3.vkapi.generated.messages.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.messages.objects.GetHistoryResponse
 import name.anton3.vkapi.generated.messages.objects.GetHistoryRev
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/messages.getHistory]
@@ -33,4 +33,4 @@ data class MessagesGetHistory(
     var fields: List<String>? = null,
     var groupId: Int? = null,
     var rev: GetHistoryRev? = null
-) : CheckedMethod<GetHistoryResponse, UserGroupMethod>("messages.getHistory", jacksonTypeRef())
+) : VkMethod<GetHistoryResponse, UserGroupMethod>("messages.getHistory", jacksonTypeRef())

@@ -19,10 +19,10 @@ class ThrottledMethodExecutor(
     ratePeriod: Duration = Duration.ofSeconds(1L)
 ) : MethodExecutor, Closeable {
 
-    private val throttler: ThrottledExecutor<VkMethod<*>, VkResponse<*>> =
+    private val throttler: ThrottledExecutor<VkMethod<*, *>, VkResponse<*>> =
         ThrottledExecutor(base, coroutineContext, rateLimit, ratePeriod, batchAwareRequestStorage())
 
-    override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*>>): VkResponse<*> {
+    override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*, *>>): VkResponse<*> {
         return throttler.execute(dynamicRequest)
     }
 

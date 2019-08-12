@@ -5,8 +5,8 @@ package name.anton3.vkapi.generated.board.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.board.objects.GetCommentsExtendedResponse
 import name.anton3.vkapi.generated.common.objects.GetCommentsSort
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/board.getComments]
@@ -29,7 +29,7 @@ data class BoardGetCommentsExtended(
     var offset: Int? = null,
     var count: Int? = null,
     var sort: GetCommentsSort? = null
-) : CheckedMethod<GetCommentsExtendedResponse, UserServiceMethod>("board.getComments", jacksonTypeRef()) {
+) : VkMethod<GetCommentsExtendedResponse, UserServiceMethod>("board.getComments", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")
     }

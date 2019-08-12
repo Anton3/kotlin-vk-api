@@ -6,8 +6,8 @@ import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.common.objects.NameCase
 import name.anton3.vkapi.generated.users.objects.GetNearbyRadius
 import name.anton3.vkapi.generated.users.objects.UserFull
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -31,4 +31,4 @@ data class UsersGetNearby(
     var radius: GetNearbyRadius? = null,
     var fields: List<String>? = null,
     var nameCase: NameCase? = null
-) : CheckedMethod<VkList<UserFull>, UserMethod>("users.getNearby", jacksonTypeRef())
+) : VkMethod<VkList<UserFull>, UserMethod>("users.getNearby", jacksonTypeRef())

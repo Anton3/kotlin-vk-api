@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.pages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/pages.save]
@@ -23,4 +23,4 @@ data class PagesSave(
     var groupId: Int? = null,
     var userId: Int? = null,
     var title: String? = null
-) : CheckedMethod<Int, UserMethod>("pages.save", jacksonTypeRef())
+) : VkMethod<Int, UserMethod>("pages.save", jacksonTypeRef())

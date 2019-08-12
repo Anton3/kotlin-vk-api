@@ -8,7 +8,7 @@ data class NotificationSettingsSet(
 ) : LongPollEvent(eventType) {
 
     companion object {
-        const val ENABLED = 0L
-        const val FOREVER = -1L
+        const val ENABLED: Long = 0L
+        const val FOREVER: Long = -1L
     }
 }

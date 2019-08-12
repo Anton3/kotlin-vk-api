@@ -5,8 +5,8 @@ package name.anton3.vkapi.generated.likes.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.likes.objects.DeleteResponse
 import name.anton3.vkapi.generated.likes.objects.Type
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/likes.delete]
@@ -21,4 +21,4 @@ data class LikesDelete(
     var type: Type,
     var ownerId: Int? = null,
     var itemId: Int
-) : CheckedMethod<DeleteResponse, UserMethod>("likes.delete", jacksonTypeRef())
+) : VkMethod<DeleteResponse, UserMethod>("likes.delete", jacksonTypeRef())

@@ -40,7 +40,7 @@ class SourceGenerator(val basePackage: String) {
         val jsonString = readSchemaTextFromFile(fileName)
         responsesSchema = OBJECT_MAPPER.readValue(jsonString)
         responsesSchema.definitions.forEach { (ref, obj) ->
-            jsonObjects[ref] = obj.properties.response!!
+            jsonObjects[ref] = obj.properties.response
         }
 
     }
@@ -122,7 +122,7 @@ class SourceGenerator(val basePackage: String) {
 
     private fun makeMethodResultType(methodSchema: MethodSchema): TypeId? {
         val responseRef = methodSchema.responses.response.toJsonRef()
-        val responseObject = responsesSchema.definitions[responseRef]!!.properties.response!!
+        val responseObject = responsesSchema.definitions[responseRef]!!.properties.response
 
         val needsVkListWrapping = responseObject is GeneralObject &&
                 responseObject.properties.containsKey("items") &&
@@ -146,7 +146,7 @@ class SourceGenerator(val basePackage: String) {
     }
 
     private fun makeVkMethod(resultType: TypeId, methodRequirement: TypeId): TypeId {
-        return TypeId("name.anton3.vkapi.method.CheckedMethod", listOf(resultType, methodRequirement))
+        return TypeId("name.anton3.vkapi.method.VkMethod", listOf(resultType, methodRequirement))
     }
 
     private fun makeVkList(typeId: TypeId): TypeId {
@@ -332,10 +332,10 @@ class SourceGenerator(val basePackage: String) {
     }
 
     private fun objectPropsToClassProps(
-            properties: Map<String, Object>,
-            nameStrategy: NameStrategy,
-            responseRef: JsonTypeRef,
-            required: List<String> = emptyList()
+        properties: Map<String, Object>,
+        nameStrategy: NameStrategy,
+        responseRef: JsonTypeRef,
+        required: List<String> = emptyList()
     ): List<Prop> {
         return properties.mapNotNull { (name, propObj) ->
             val typeId = makeType(nameStrategy, responseRef + "_" + name, propObj)
@@ -425,7 +425,7 @@ class SourceGenerator(val basePackage: String) {
         typeSpace.registerBuiltin("name.anton3.vkapi.vktypes.VkDate")
         typeSpace.registerBuiltin("name.anton3.vkapi.vktypes.VkList")
         typeSpace.registerBuiltin("name.anton3.vkapi.vktypes.VkBirthDate")
-        typeSpace.registerBuiltin("name.anton3.vkapi.method.CheckedMethod")
+        typeSpace.registerBuiltin("name.anton3.vkapi.method.VkMethod")
         typeSpace.registerBuiltin("name.anton3.vkapi.method.MethodRequirement")
         typeSpace.registerBuiltin("name.anton3.vkapi.method.UserMethod")
         typeSpace.registerBuiltin("name.anton3.vkapi.method.ServiceMethod")
@@ -484,7 +484,7 @@ class SourceGenerator(val basePackage: String) {
     fun loadPatchesFromPackage(patchPackage: String) {
         val packageWithSlash = concatenatePackage(patchPackage, "")
         val packageResource = Thread.currentThread().contextClassLoader.getResourceAsStream(packageWithSlash)
-                ?: String::class.java.getResourceAsStream(packageWithSlash) ?: error("Package $patchPackage not found")
+            ?: String::class.java.getResourceAsStream(packageWithSlash) ?: error("Package $patchPackage not found")
         val fileNames = packageResource.use { it.reader().buffered().readLines() }
         loadPatchesFromFiles(fileNames, patchPackage = patchPackage)
     }

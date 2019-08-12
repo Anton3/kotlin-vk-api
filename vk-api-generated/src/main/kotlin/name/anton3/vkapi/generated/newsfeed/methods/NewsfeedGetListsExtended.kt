@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.newsfeed.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.newsfeed.objects.ListFull
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -17,7 +17,7 @@ import name.anton3.vkapi.vktypes.VkList
  */
 data class NewsfeedGetListsExtended(
     var listIds: List<Int>? = null
-) : CheckedMethod<VkList<ListFull>, UserMethod>("newsfeed.getLists", jacksonTypeRef()) {
+) : VkMethod<VkList<ListFull>, UserMethod>("newsfeed.getLists", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")
     }

@@ -27,10 +27,10 @@ class BatchMethodExecutor(
 
     private val methodListExecutor = MethodListExecutor(base)
 
-    private val batcher: BatchExecutor<VkMethod<*>, VkResponse<*>> =
+    private val batcher: BatchExecutor<VkMethod<*, *>, VkResponse<*>> =
         BatchExecutor(methodListExecutor, coroutineContext, BATCH_EXECUTE_LIMIT, flushDelay, batchAwareRequestStorage())
 
-    override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*>>): VkResponse<*> {
+    override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*, *>>): VkResponse<*> {
         return (if (dynamicRequest[SupportsVkScript] == true) batcher else base).execute(dynamicRequest)
     }
 
@@ -42,14 +42,14 @@ class BatchMethodExecutor(
     }
 
     companion object {
-        const val BATCH_EXECUTE_LIMIT = 25
+        const val BATCH_EXECUTE_LIMIT: Int = 25
     }
 }
 
-private class MethodListExecutor(private val base: MethodExecutor)
-    : DynamicExecutor<List<VkMethod<*>>, List<VkResponse<*>>> {
+private class MethodListExecutor(private val base: MethodExecutor) :
+    DynamicExecutor<List<VkMethod<*, *>>, List<VkResponse<*>>> {
 
-    override suspend fun execute(dynamicRequest: DynamicRequest<List<VkMethod<*>>>): List<VkResponse<*>> {
+    override suspend fun execute(dynamicRequest: DynamicRequest<List<VkMethod<*, *>>>): List<VkResponse<*>> {
         return try {
             base.batch(dynamicRequest).map { it.wrapInSimpleResponse() }
         } catch (e: VkApiException) {
@@ -66,7 +66,7 @@ private class MethodListExecutor(private val base: MethodExecutor)
         }
     }
 
-    private suspend fun executeMethodSublist(methods: List<VkMethod<*>>): List<VkResponse<*>> {
+    private suspend fun executeMethodSublist(methods: List<VkMethod<*, *>>): List<VkResponse<*>> {
         if (methods.size == 1) return executeSingle(methods)
 
         return try {
@@ -80,7 +80,7 @@ private class MethodListExecutor(private val base: MethodExecutor)
         }
     }
 
-    private suspend fun splitAndExecute(methods: List<VkMethod<*>>): List<VkResponse<*>> {
+    private suspend fun splitAndExecute(methods: List<VkMethod<*, *>>): List<VkResponse<*>> {
         val halfSize = (methods.size + 1) / 2
         val requestSplit1 = methods.subList(0, halfSize)
         val requestSplit2 = methods.subList(halfSize, methods.size)
@@ -93,7 +93,7 @@ private class MethodListExecutor(private val base: MethodExecutor)
         }
     }
 
-    private suspend inline fun executeSingle(methods: List<VkMethod<*>>): List<VkResponse<*>> {
+    private suspend inline fun executeSingle(methods: List<VkMethod<*, *>>): List<VkResponse<*>> {
         return listOf(base.execute(SimpleMethodRequest(methods.single(), false)))
     }
 

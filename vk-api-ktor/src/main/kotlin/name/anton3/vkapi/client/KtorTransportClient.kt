@@ -27,7 +27,10 @@ class KtorTransportClient(
 
     companion object : Logging
 
-    private suspend fun callWithStatusCheck(request: HttpRequestBuilder, rawRequest: TransportClient.Request): TransportClient.Response {
+    private suspend fun callWithStatusCheck(
+        request: HttpRequestBuilder,
+        rawRequest: TransportClient.Request
+    ): TransportClient.Response {
         lateinit var response: TransportClient.Response
 
         repeat(retryAttemptsInvalidStatusCount) {
@@ -42,11 +45,14 @@ class KtorTransportClient(
         return status == HttpStatusCode.BadGateway || status == HttpStatusCode.GatewayTimeout
     }
 
-    private suspend fun call(request: HttpRequestBuilder, rawRequest: TransportClient.Request): TransportClient.Response {
+    private suspend fun call(
+        request: HttpRequestBuilder,
+        rawRequest: TransportClient.Request
+    ): TransportClient.Response {
         lateinit var exception: IOException
 
         repeat(retryAttemptsNetworkErrorCount) {
-            val startTime = Instant.now()!!
+            val startTime: Instant = Instant.now()
 
             try {
                 val response = client.request<HttpResponse>(HttpRequestBuilder().takeFrom(request))
@@ -55,15 +61,15 @@ class KtorTransportClient(
 
                 val result = response.readBytes()
 
-                val endTime = Instant.now()!!
-                val resultTime = Duration.between(startTime, endTime)!!
+                val endTime: Instant = Instant.now()
+                val resultTime: Duration = Duration.between(startTime, endTime)
                 val vkResponse = toVkResponse(response, result)
 
                 logRequest(rawRequest, vkResponse, result, resultTime)
                 return toVkResponse(response, result)
 
             } catch (e: IOException) {
-                val endTime = Instant.now()!!
+                val endTime: Instant = Instant.now()
                 val resultTime = Duration.between(startTime, endTime)
 
                 logRequest(rawRequest, null, null, resultTime)
@@ -102,7 +108,10 @@ class KtorTransportClient(
 
     private fun convertBody(body: RequestContent): OutgoingContent = when (body) {
         is RequestContent.Empty -> TextContent("", ContentType.parse(body.contentType).withCharset(Charsets.UTF_8))
-        is RequestContent.Text -> TextContent(body.data, ContentType.parse(body.contentType).withCharset(Charsets.UTF_8))
+        is RequestContent.Text -> TextContent(
+            body.data,
+            ContentType.parse(body.contentType).withCharset(Charsets.UTF_8)
+        )
         is RequestContent.Form -> MultiPartFormDataContent(formData {
             for ((key, value) in body.data) {
                 append(key, value)

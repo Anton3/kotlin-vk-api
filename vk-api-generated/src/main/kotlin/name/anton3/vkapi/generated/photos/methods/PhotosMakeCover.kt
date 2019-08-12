@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
 /**
@@ -20,4 +20,4 @@ data class PhotosMakeCover(
     var ownerId: Int? = null,
     var photoId: Int,
     var albumId: Int? = null
-) : CheckedMethod<OkResponse, UserMethod>("photos.makeCover", jacksonTypeRef())
+) : VkMethod<OkResponse, UserMethod>("photos.makeCover", jacksonTypeRef())

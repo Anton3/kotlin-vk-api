@@ -1,7 +1,8 @@
 package name.anton3.vkapi.methods.upload
 
 import com.fasterxml.jackson.module.kotlin.readValue
-import name.anton3.vkapi.client.VkClient
+import name.anton3.vkapi.client.UserClient
+import name.anton3.vkapi.client.UserGroupClient
 import name.anton3.vkapi.core.RequestContent
 import name.anton3.vkapi.core.post
 import name.anton3.vkapi.generated.docs.methods.DocsGetMessagesUploadServer
@@ -14,13 +15,11 @@ import name.anton3.vkapi.generated.photos.methods.PhotosGetChatUploadServer
 import name.anton3.vkapi.generated.photos.methods.PhotosGetMessagesUploadServer
 import name.anton3.vkapi.generated.photos.methods.PhotosSaveMessagesPhoto
 import name.anton3.vkapi.generated.photos.objects.Photo
-import name.anton3.vkapi.method.UserGroupMethod
-import name.anton3.vkapi.method.UserMethod
 import java.nio.charset.Charset
 
 data class UploadPhotoResponse(val server: Int, val hash: String, val photo: String)
 
-suspend fun VkClient<UserGroupMethod>.uploadMessagePhoto(peerId: Int, byteArray: ByteArray): Photo {
+suspend fun UserGroupClient.uploadMessagePhoto(peerId: Int, byteArray: ByteArray): Photo {
     val uploadUrl = this(PhotosGetMessagesUploadServer(peerId)).uploadUrl
     val response = transportClient.post(uploadUrl, RequestContent.File("photo", "someName.jpg", byteArray))
 
@@ -38,7 +37,7 @@ suspend fun VkClient<UserGroupMethod>.uploadMessagePhoto(peerId: Int, byteArray:
 
 data class UploadDocumentResponse(val file: String)
 
-suspend fun VkClient<UserGroupMethod>.uploadMessageDocument(
+suspend fun UserGroupClient.uploadMessageDocument(
     peerId: Int,
     fileName: String,
     byteArray: ByteArray,
@@ -61,7 +60,7 @@ suspend fun VkClient<UserGroupMethod>.uploadMessageDocument(
 
 data class UploadChatPhotoResponse(val response: String)
 
-suspend fun VkClient<UserMethod>.uploadChatPhoto(
+suspend fun UserClient.uploadChatPhoto(
     chatId: Int,
     fileName: String,
     byteArray: ByteArray

@@ -1,13 +1,13 @@
 package name.anton3.vkapi.methods.longpoll.objects
 
 object MessageFlags {
-    const val UNREAD = 1
-    const val OUTBOX = 2
-    const val REPLIED = 4
-    const val IMPORTANT = 8
-    const val FROM_FRIEND = 32
-    const val SPAM = 64
-    const val DELETED = 128
-    const val HIDDEN = 65536
-    const val DELETED_FOR_ALL = 131072
+    const val UNREAD: Int = 1
+    const val OUTBOX: Int = 2
+    const val REPLIED: Int = 4
+    const val IMPORTANT: Int = 8
+    const val FROM_FRIEND: Int = 32
+    const val SPAM: Int = 64
+    const val DELETED: Int = 128
+    const val HIDDEN: Int = 65536
+    const val DELETED_FOR_ALL: Int = 131072
 }

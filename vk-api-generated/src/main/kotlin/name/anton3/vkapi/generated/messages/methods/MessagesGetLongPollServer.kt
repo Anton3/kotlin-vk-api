@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.messages.objects.LongpollParams
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/messages.getLongPollServer]
@@ -20,4 +20,4 @@ data class MessagesGetLongPollServer(
     var lpVersion: Int? = null,
     var needPts: Boolean? = null,
     var groupId: Int? = null
-) : CheckedMethod<LongpollParams, UserGroupMethod>("messages.getLongPollServer", jacksonTypeRef())
+) : VkMethod<LongpollParams, UserGroupMethod>("messages.getLongPollServer", jacksonTypeRef())

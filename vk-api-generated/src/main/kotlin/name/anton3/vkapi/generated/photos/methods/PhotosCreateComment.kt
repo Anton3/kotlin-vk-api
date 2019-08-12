@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/photos.createComment]
@@ -31,4 +31,4 @@ data class PhotosCreateComment(
     var stickerId: Int? = null,
     var accessKey: String? = null,
     var guid: String? = null
-) : CheckedMethod<Int, UserMethod>("photos.createComment", jacksonTypeRef())
+) : VkMethod<Int, UserMethod>("photos.createComment", jacksonTypeRef())

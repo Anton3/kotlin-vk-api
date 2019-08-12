@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.messages.objects.Keyboard
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/messages.send]
@@ -52,4 +52,4 @@ data class MessagesSend(
     var dontParseLinks: Boolean? = null,
     var disableMentions: Boolean? = null,
     var notification: Boolean? = null
-) : CheckedMethod<Int, UserGroupMethod>("messages.send", jacksonTypeRef())
+) : VkMethod<Int, UserGroupMethod>("messages.send", jacksonTypeRef())

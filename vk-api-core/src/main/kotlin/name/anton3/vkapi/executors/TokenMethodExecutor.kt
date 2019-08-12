@@ -14,7 +14,7 @@ class TokenMethodExecutor(
     private val token: Token<*>
 ) : MethodExecutor {
 
-    override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*>>): VkResponse<*> {
+    override suspend fun execute(dynamicRequest: DynamicRequest<VkMethod<*, *>>): VkResponse<*> {
         return base.execute(dynamicRequest.map { token.attachTo(it); it })
     }
 

@@ -6,7 +6,7 @@ import name.anton3.executors.core.DynamicRequest
 /**
  * Sets given meta-info on all requests passing through
  */
-class KeySettingExecutor<Request, Response, Value: Any>(
+class KeySettingExecutor<Request, Response, Value : Any>(
     private val base: DynamicExecutor<Request, Response>,
     private val key: DynamicRequest.Key<Value>,
     private val value: Value

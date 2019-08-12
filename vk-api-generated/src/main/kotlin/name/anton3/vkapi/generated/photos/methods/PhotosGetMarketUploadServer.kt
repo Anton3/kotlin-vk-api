@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.common.objects.UploadServer
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/photos.getMarketUploadServer]
@@ -24,4 +24,4 @@ data class PhotosGetMarketUploadServer(
     var cropX: Int? = null,
     var cropY: Int? = null,
     var cropWidth: Int? = null
-) : CheckedMethod<UploadServer, UserMethod>("photos.getMarketUploadServer", jacksonTypeRef())
+) : VkMethod<UploadServer, UserMethod>("photos.getMarketUploadServer", jacksonTypeRef())

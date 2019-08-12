@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.utils.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupServiceMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
 /**
@@ -16,4 +16,4 @@ import name.anton3.vkapi.vktypes.OkResponse
  */
 data class UtilsDeleteFromLastShortened(
     var key: String
-) : CheckedMethod<OkResponse, UserGroupServiceMethod>("utils.deleteFromLastShortened", jacksonTypeRef())
+) : VkMethod<OkResponse, UserGroupServiceMethod>("utils.deleteFromLastShortened", jacksonTypeRef())

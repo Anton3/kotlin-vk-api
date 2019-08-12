@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
 /**
@@ -20,4 +20,4 @@ data class MessagesMarkAsAnsweredConversation(
     var groupId: Int? = null,
     var peerId: Int,
     var answered: Boolean? = null
-) : CheckedMethod<OkResponse, UserGroupMethod>("messages.markAsAnsweredConversation", jacksonTypeRef())
+) : VkMethod<OkResponse, UserGroupMethod>("messages.markAsAnsweredConversation", jacksonTypeRef())

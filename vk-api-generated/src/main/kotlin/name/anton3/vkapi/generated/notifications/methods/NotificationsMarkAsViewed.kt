@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.notifications.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.BoolInt
 
 /**
@@ -14,4 +14,4 @@ import name.anton3.vkapi.vktypes.BoolInt
  *
 
  */
-class NotificationsMarkAsViewed : CheckedMethod<BoolInt, UserMethod>("notifications.markAsViewed", jacksonTypeRef())
+class NotificationsMarkAsViewed : VkMethod<BoolInt, UserMethod>("notifications.markAsViewed", jacksonTypeRef())

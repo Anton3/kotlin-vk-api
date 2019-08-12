@@ -80,7 +80,7 @@ internal val messageAttachmentTypes: List<NamedType> = listOf(
 )
 
 
-internal inline fun <reified Attachment: Any, reified Body: Any> attachmentDeserializer(attachmentTypes: List<NamedType>): StdDeserializer<Attachment> {
+internal inline fun <reified Attachment : Any, reified Body : Any> attachmentDeserializer(attachmentTypes: List<NamedType>): StdDeserializer<Attachment> {
     val constructor = Attachment::class.primaryConstructor!!
     val typeToClass = attachmentTypes.associate { it.name!! to it.type!! }
 
@@ -100,7 +100,7 @@ internal inline fun <reified Attachment: Any, reified Body: Any> attachmentDeser
     }
 }
 
-internal inline fun <reified Attachment: Any, reified Body: Any> attachmentSerializer(): StdSerializer<Attachment> {
+internal inline fun <reified Attachment : Any, reified Body : Any> attachmentSerializer(): StdSerializer<Attachment> {
     val typeProperty = Attachment::class.memberProperties.first { it.name == "type" }
     val bodyProperty = Attachment::class.memberProperties.first { it.name == "body" }
 

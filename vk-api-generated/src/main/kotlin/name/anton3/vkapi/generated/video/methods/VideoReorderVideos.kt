@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
 /**
@@ -30,4 +30,4 @@ data class VideoReorderVideos(
     var beforeVideoId: Int? = null,
     var afterOwnerId: Int? = null,
     var afterVideoId: Int? = null
-) : CheckedMethod<OkResponse, UserMethod>("video.reorderVideos", jacksonTypeRef())
+) : VkMethod<OkResponse, UserMethod>("video.reorderVideos", jacksonTypeRef())

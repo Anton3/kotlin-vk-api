@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.wall.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.wall.objects.SearchExtendedResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/wall.search]
@@ -28,7 +28,7 @@ data class WallSearchExtended(
     var count: Int? = null,
     var offset: Int? = null,
     var fields: List<String>? = null
-) : CheckedMethod<SearchExtendedResponse, UserServiceMethod>("wall.search", jacksonTypeRef()) {
+) : VkMethod<SearchExtendedResponse, UserServiceMethod>("wall.search", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")
     }

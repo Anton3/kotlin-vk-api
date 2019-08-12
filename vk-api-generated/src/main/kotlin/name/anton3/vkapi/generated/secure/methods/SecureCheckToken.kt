@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.secure.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.secure.objects.TokenChecked
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/secure.checkToken]
@@ -18,4 +18,4 @@ import name.anton3.vkapi.method.UserMethod
 data class SecureCheckToken(
     var token: String? = null,
     var ip: String? = null
-) : CheckedMethod<TokenChecked, UserMethod>("secure.checkToken", jacksonTypeRef())
+) : VkMethod<TokenChecked, UserMethod>("secure.checkToken", jacksonTypeRef())

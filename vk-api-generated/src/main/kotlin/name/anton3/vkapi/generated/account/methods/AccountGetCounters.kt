@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.account.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.account.objects.AccountCounters
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/account.getCounters]
@@ -16,4 +16,4 @@ import name.anton3.vkapi.method.UserMethod
  */
 data class AccountGetCounters(
     var filter: List<String>? = null
-) : CheckedMethod<AccountCounters, UserMethod>("account.getCounters", jacksonTypeRef())
+) : VkMethod<AccountCounters, UserMethod>("account.getCounters", jacksonTypeRef())

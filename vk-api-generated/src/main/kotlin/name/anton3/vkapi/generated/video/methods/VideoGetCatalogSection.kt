@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.video.objects.GetCatalogSectionResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/video.getCatalogSection]
@@ -20,4 +20,4 @@ data class VideoGetCatalogSection(
     var sectionId: String,
     var from: String,
     var count: Int? = null
-) : CheckedMethod<GetCatalogSectionResponse, UserServiceMethod>("video.getCatalogSection", jacksonTypeRef())
+) : VkMethod<GetCatalogSectionResponse, UserServiceMethod>("video.getCatalogSection", jacksonTypeRef())

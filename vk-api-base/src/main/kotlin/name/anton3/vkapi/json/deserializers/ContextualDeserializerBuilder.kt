@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.deser.ContextualDeserializer
 
-internal class ContextualDeserializerBuilder<T>(private val build: (DeserializationContext) -> JsonDeserializer<T>)
-    : JsonDeserializer<T>(), ContextualDeserializer {
+internal class ContextualDeserializerBuilder<T>(private val build: (DeserializationContext) -> JsonDeserializer<T>) :
+    JsonDeserializer<T>(), ContextualDeserializer {
 
     override fun createContextual(ctxt: DeserializationContext, property: BeanProperty?): JsonDeserializer<*> {
         return build(ctxt)

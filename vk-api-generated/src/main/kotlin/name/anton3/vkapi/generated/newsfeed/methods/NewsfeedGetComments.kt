@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.newsfeed.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.newsfeed.objects.GetCommentsResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/newsfeed.getComments]
@@ -28,4 +28,4 @@ data class NewsfeedGetComments(
     var endTime: Int? = null,
     var startFrom: String? = null,
     var fields: List<String>? = null
-) : CheckedMethod<GetCommentsResponse, UserMethod>("newsfeed.getComments", jacksonTypeRef())
+) : VkMethod<GetCommentsResponse, UserMethod>("newsfeed.getComments", jacksonTypeRef())

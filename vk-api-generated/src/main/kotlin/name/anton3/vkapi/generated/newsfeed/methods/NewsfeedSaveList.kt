@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.newsfeed.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/newsfeed.saveList]
@@ -21,4 +21,4 @@ data class NewsfeedSaveList(
     var title: String,
     var sourceIds: List<Int>? = null,
     var noReposts: Boolean? = null
-) : CheckedMethod<Int, UserMethod>("newsfeed.saveList", jacksonTypeRef())
+) : VkMethod<Int, UserMethod>("newsfeed.saveList", jacksonTypeRef())

@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.leads.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.leads.objects.MetricHitResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/leads.metricHit]
@@ -16,4 +16,4 @@ import name.anton3.vkapi.method.UserServiceMethod
  */
 data class LeadsMetricHit(
     var data: String
-) : CheckedMethod<MetricHitResponse, UserServiceMethod>("leads.metricHit", jacksonTypeRef())
+) : VkMethod<MetricHitResponse, UserServiceMethod>("leads.metricHit", jacksonTypeRef())

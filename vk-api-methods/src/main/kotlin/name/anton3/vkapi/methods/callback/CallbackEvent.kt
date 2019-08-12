@@ -326,7 +326,6 @@ class GroupOfficersEdit(groupId: Int, @JsonProperty("object") attachment: GroupO
     CallbackEvent<GroupOfficersEditAttachment>(groupId, attachment)
 
 
-
 enum class GroupSettingsField(@JsonValue override val value: String) : Value<String> {
     TITLE("title"),
     DESCRIPTION("description"),

@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.orders.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.orders.objects.Order
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/orders.getById]
@@ -19,4 +19,4 @@ import name.anton3.vkapi.method.UserMethod
 data class OrdersGetById(
     var orderId: Int? = null,
     var orderIds: List<Int>? = null
-) : CheckedMethod<List<Order>, UserMethod>("orders.getById", jacksonTypeRef())
+) : VkMethod<List<Order>, UserMethod>("orders.getById", jacksonTypeRef())

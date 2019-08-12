@@ -5,8 +5,8 @@ package name.anton3.vkapi.generated.messages.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.messages.objects.GetConversationsFilter
 import name.anton3.vkapi.generated.messages.objects.GetConversationsResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/messages.getConversations]
@@ -29,4 +29,4 @@ data class MessagesGetConversations(
     var extended: Boolean? = null,
     var startMessageId: Int? = null,
     var fields: List<String>? = null
-) : CheckedMethod<GetConversationsResponse, UserGroupMethod>("messages.getConversations", jacksonTypeRef())
+) : VkMethod<GetConversationsResponse, UserGroupMethod>("messages.getConversations", jacksonTypeRef())

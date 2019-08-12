@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.messages.objects.SetChatPhotoResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/messages.setChatPhoto]
@@ -16,4 +16,4 @@ import name.anton3.vkapi.method.UserGroupMethod
  */
 data class MessagesSetChatPhoto(
     var file: String
-) : CheckedMethod<SetChatPhotoResponse, UserGroupMethod>("messages.setChatPhoto", jacksonTypeRef())
+) : VkMethod<SetChatPhotoResponse, UserGroupMethod>("messages.setChatPhoto", jacksonTypeRef())

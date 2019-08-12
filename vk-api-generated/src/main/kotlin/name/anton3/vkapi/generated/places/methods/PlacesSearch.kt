@@ -5,8 +5,8 @@ package name.anton3.vkapi.generated.places.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.places.objects.PlaceFull
 import name.anton3.vkapi.generated.places.objects.SearchRadius
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -30,4 +30,4 @@ data class PlacesSearch(
     var radius: SearchRadius? = null,
     var offset: Int? = null,
     var count: Int? = null
-) : CheckedMethod<VkList<PlaceFull>, UserMethod>("places.search", jacksonTypeRef())
+) : VkMethod<VkList<PlaceFull>, UserMethod>("places.search", jacksonTypeRef())

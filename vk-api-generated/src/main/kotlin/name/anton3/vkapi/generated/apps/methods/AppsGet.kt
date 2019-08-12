@@ -6,8 +6,8 @@ import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.apps.objects.App
 import name.anton3.vkapi.generated.apps.objects.GetPlatform
 import name.anton3.vkapi.generated.common.objects.NameCase
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -27,4 +27,4 @@ data class AppsGet(
     var platform: GetPlatform? = null,
     var fields: List<String>? = null,
     var nameCase: NameCase? = null
-) : CheckedMethod<VkList<App>, UserServiceMethod>("apps.get", jacksonTypeRef())
+) : VkMethod<VkList<App>, UserServiceMethod>("apps.get", jacksonTypeRef())

@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.fave.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
 /**
@@ -16,4 +16,4 @@ import name.anton3.vkapi.vktypes.OkResponse
  */
 data class FaveRemoveUser(
     var userId: Int
-) : CheckedMethod<OkResponse, UserMethod>("fave.removeUser", jacksonTypeRef())
+) : VkMethod<OkResponse, UserMethod>("fave.removeUser", jacksonTypeRef())

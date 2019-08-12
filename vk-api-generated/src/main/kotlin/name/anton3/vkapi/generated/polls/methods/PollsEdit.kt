@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.polls.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
 /**
@@ -26,4 +26,4 @@ data class PollsEdit(
     var addAnswers: String? = null,
     var editAnswers: String? = null,
     var deleteAnswers: String? = null
-) : CheckedMethod<OkResponse, UserMethod>("polls.edit", jacksonTypeRef())
+) : VkMethod<OkResponse, UserMethod>("polls.edit", jacksonTypeRef())

@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.wall.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.wall.objects.PostAdsStealthResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/wall.postAdsStealth]
@@ -38,4 +38,4 @@ data class WallPostAdsStealth(
     var linkButton: String? = null,
     var linkTitle: String? = null,
     var linkImage: String? = null
-) : CheckedMethod<PostAdsStealthResponse, UserMethod>("wall.postAdsStealth", jacksonTypeRef())
+) : VkMethod<PostAdsStealthResponse, UserMethod>("wall.postAdsStealth", jacksonTypeRef())

@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.friends.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/friends.getRecent]
@@ -15,4 +15,4 @@ import name.anton3.vkapi.method.UserMethod
  */
 data class FriendsGetRecent(
     var count: Int? = null
-) : CheckedMethod<List<Int>, UserMethod>("friends.getRecent", jacksonTypeRef())
+) : VkMethod<List<Int>, UserMethod>("friends.getRecent", jacksonTypeRef())

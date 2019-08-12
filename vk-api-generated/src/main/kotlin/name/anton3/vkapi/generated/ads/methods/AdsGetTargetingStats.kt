@@ -5,8 +5,8 @@ package name.anton3.vkapi.generated.ads.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.ads.objects.GetTargetingStatsAdFormat
 import name.anton3.vkapi.generated.ads.objects.TargStats
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/ads.getTargetingStats]
@@ -29,4 +29,4 @@ data class AdsGetTargetingStats(
     var adPlatform: String? = null,
     var linkUrl: String,
     var linkDomain: String? = null
-) : CheckedMethod<TargStats, UserMethod>("ads.getTargetingStats", jacksonTypeRef())
+) : VkMethod<TargStats, UserMethod>("ads.getTargetingStats", jacksonTypeRef())

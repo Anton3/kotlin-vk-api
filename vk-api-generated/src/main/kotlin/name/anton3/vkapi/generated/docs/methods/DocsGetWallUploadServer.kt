@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.docs.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.common.objects.UploadServer
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/docs.getWallUploadServer]
@@ -16,4 +16,4 @@ import name.anton3.vkapi.method.UserGroupMethod
  */
 data class DocsGetWallUploadServer(
     var groupId: Int? = null
-) : CheckedMethod<UploadServer, UserGroupMethod>("docs.getWallUploadServer", jacksonTypeRef())
+) : VkMethod<UploadServer, UserGroupMethod>("docs.getWallUploadServer", jacksonTypeRef())

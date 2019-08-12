@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
 /**
@@ -22,4 +22,4 @@ data class PhotosReorderAlbums(
     var albumId: Int,
     var before: Int? = null,
     var after: Int? = null
-) : CheckedMethod<OkResponse, UserMethod>("photos.reorderAlbums", jacksonTypeRef())
+) : VkMethod<OkResponse, UserMethod>("photos.reorderAlbums", jacksonTypeRef())

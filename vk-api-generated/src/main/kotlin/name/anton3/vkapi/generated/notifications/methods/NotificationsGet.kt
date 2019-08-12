@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.notifications.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.notifications.objects.GetResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/notifications.get]
@@ -24,4 +24,4 @@ data class NotificationsGet(
     var filters: List<String>? = null,
     var startTime: Int? = null,
     var endTime: Int? = null
-) : CheckedMethod<GetResponse, UserMethod>("notifications.get", jacksonTypeRef())
+) : VkMethod<GetResponse, UserMethod>("notifications.get", jacksonTypeRef())

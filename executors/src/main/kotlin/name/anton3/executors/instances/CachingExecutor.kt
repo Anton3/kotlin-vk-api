@@ -11,7 +11,7 @@ class CachingExecutor<Request, Response>(
     private val base: Executor<Request, Response>,
     private val timeToLive: Duration,
     private val cacheSizeLimit: Int
-): Executor<Request, Response> {
+) : Executor<Request, Response> {
 
     private data class CacheEntry<Response>(val response: Response, val expirationDate: Instant)
 
@@ -23,7 +23,7 @@ class CachingExecutor<Request, Response>(
             cache[request]
         }
 
-        val now = Instant.now()!!
+        val now: Instant = Instant.now()
         if (cacheEntry != null && cacheEntry.expirationDate > now) {
             return cacheEntry.response
         }

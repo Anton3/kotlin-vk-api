@@ -7,10 +7,10 @@ class TypeSpace {
 
     companion object : Logging
 
-    private val typeReferences = mutableMapOf<JsonTypeRef, TypeId>()
-    val definedTypes = mutableMapOf<TypeId, TypeDefinition>()
-    private val typeAliases = mutableMapOf<TypeId, TypeId>()
-    val interfaceImplementations = mutableSetOf<Pair<TypeId, TypeId>>()
+    private val typeReferences: MutableMap<JsonTypeRef, TypeId> = HashMap()
+    val definedTypes: MutableMap<TypeId, TypeDefinition> = HashMap()
+    private val typeAliases: MutableMap<TypeId, TypeId> = HashMap()
+    val interfaceImplementations: MutableSet<Pair<TypeId, TypeId>> = HashSet()
 
     val typesCount: Int get() = definedTypes.size
 
@@ -123,8 +123,8 @@ class TypeSpace {
     }
 
     fun addParentToType(typeId: TypeId, parentTypeId: TypeId) {
-        val type = definedTypes[typeId]!! as ObjectType
-        val parentType = definedTypes[parentTypeId]!! as ObjectType
+        val type = definedTypes[typeId] as ObjectType
+        val parentType = definedTypes[parentTypeId] as ObjectType
 
         splitToInterfaceImplementationPairIfNeeded(parentTypeId)
 

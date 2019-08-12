@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.ads.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/ads.importTargetContacts]
@@ -21,4 +21,4 @@ data class AdsImportTargetContacts(
     var clientId: Int? = null,
     var targetGroupId: Int,
     var contacts: String
-) : CheckedMethod<Int, UserMethod>("ads.importTargetContacts", jacksonTypeRef())
+) : VkMethod<Int, UserMethod>("ads.importTargetContacts", jacksonTypeRef())

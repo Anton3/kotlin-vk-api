@@ -33,6 +33,6 @@ data class Flags @JsonCreator(mode = JsonCreator.Mode.DELEGATING) constructor(@J
     }
 
     companion object {
-        val EMPTY = Flags(0)
+        val EMPTY: Flags = Flags(0)
     }
 }

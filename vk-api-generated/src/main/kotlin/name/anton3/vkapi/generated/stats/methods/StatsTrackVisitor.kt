@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.stats.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
 /**
@@ -14,4 +14,4 @@ import name.anton3.vkapi.vktypes.OkResponse
  *
 
  */
-class StatsTrackVisitor : CheckedMethod<OkResponse, UserMethod>("stats.trackVisitor", jacksonTypeRef())
+class StatsTrackVisitor : VkMethod<OkResponse, UserMethod>("stats.trackVisitor", jacksonTypeRef())

@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.groups.objects.GroupSettings
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/groups.getSettings]
@@ -16,4 +16,4 @@ import name.anton3.vkapi.method.UserMethod
  */
 data class GroupsGetSettings(
     var groupId: Int
-) : CheckedMethod<GroupSettings, UserMethod>("groups.getSettings", jacksonTypeRef())
+) : VkMethod<GroupSettings, UserMethod>("groups.getSettings", jacksonTypeRef())

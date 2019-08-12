@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.account.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/account.getAppPermissions]
@@ -15,4 +15,4 @@ import name.anton3.vkapi.method.UserMethod
  */
 data class AccountGetAppPermissions(
     var userId: Int
-) : CheckedMethod<Int, UserMethod>("account.getAppPermissions", jacksonTypeRef())
+) : VkMethod<Int, UserMethod>("account.getAppPermissions", jacksonTypeRef())

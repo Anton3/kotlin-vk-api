@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/photos.copy]
@@ -19,4 +19,4 @@ data class PhotosCopy(
     var ownerId: Int,
     var photoId: Int,
     var accessKey: String? = null
-) : CheckedMethod<Int, UserMethod>("photos.copy", jacksonTypeRef())
+) : VkMethod<Int, UserMethod>("photos.copy", jacksonTypeRef())

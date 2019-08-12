@@ -33,13 +33,21 @@ private class ReadWriteMutexImpl : ReadWriteMutex {
     // count x > 0: x read locks held
     // waiters: number of coroutines waiting for a lock
     private class State(val count: Int, val waiters: Int, val owner: Any?)
+
     private val _state = AtomicReference<Any>(State(0, 0, null)) // S | OpDescriptor
 
-    private class Waiter(val cont: Continuation<Unit>, val isWriter: Boolean, val owner: Any?) :  LockFreeLinkedListNode()
+    private class Waiter(val cont: Continuation<Unit>, val isWriter: Boolean, val owner: Any?) :
+        LockFreeLinkedListNode()
+
     val queue = LockFreeLinkedListHead() // queue of waiters
 
     // create an op to atomically enqueue a waiter and increment the waiter count in the state
-    private fun createAddWaiterOp(state: State, cont: Continuation<Unit>, isWriter: Boolean, owner: Any?) : OpDescriptor {
+    private fun createAddWaiterOp(
+        state: State,
+        cont: Continuation<Unit>,
+        isWriter: Boolean,
+        owner: Any?
+    ): OpDescriptor {
         val waiter = Waiter(cont, isWriter, owner)
         val addLastDesc = queue.describeAddLast(waiter)
         return object : AtomicOp<Any?>() {
@@ -55,15 +63,16 @@ private class ReadWriteMutexImpl : ReadWriteMutex {
     }
 
     override val read = object : Mutex {
-        override val isLocked: Boolean get() {
-            _state.loop { state ->
-                when (state) {
-                    is OpDescriptor -> state.perform(this) // help
-                    is State -> return state.count > 0
-                    else -> error("unexpected state $state")
+        override val isLocked: Boolean
+            get() {
+                _state.loop { state ->
+                    when (state) {
+                        is OpDescriptor -> state.perform(this) // help
+                        is State -> return state.count > 0
+                        else -> error("unexpected state $state")
+                    }
                 }
             }
-        }
 
         override fun tryLock(owner: Any?): Boolean {
             require(owner == null) { "owners not supported for read mutex" }
@@ -126,8 +135,9 @@ private class ReadWriteMutexImpl : ReadWriteMutex {
                         } else {
                             // this seems to be the easiest way to peek the queue
                             val waiter = (queue.removeFirstIfIsInstanceOfOrPeekIf<Waiter> { true })!!
+
                             if (_state.compareAndSet(state, State(-1, state.waiters - 1, waiter.owner))) {
-                                val writer = queue.removeFirstOrNull()!! as Waiter
+                                val writer = queue.removeFirstOrNull() as Waiter
                                 writer.cont.resume(Unit)
                                 return
                             }
@@ -147,15 +157,16 @@ private class ReadWriteMutexImpl : ReadWriteMutex {
     }
 
     override val write = object : Mutex {
-        override val isLocked: Boolean get() {
-            _state.loop { state ->
-                when (state) {
-                    is OpDescriptor -> state.perform(this) // help
-                    is State -> return state.count < 0
-                    else -> error("unexpected state $state")
+        override val isLocked: Boolean
+            get() {
+                _state.loop { state ->
+                    when (state) {
+                        is OpDescriptor -> state.perform(this) // help
+                        is State -> return state.count < 0
+                        else -> error("unexpected state $state")
+                    }
                 }
             }
-        }
 
         override fun tryLock(owner: Any?): Boolean {
             _state.loop { state ->
@@ -221,7 +232,7 @@ private class ReadWriteMutexImpl : ReadWriteMutex {
 
                             if (waiter.isWriter) {
                                 if (_state.compareAndSet(state, State(-1, state.waiters - 1, waiter.owner))) {
-                                    val writer = queue.removeFirstOrNull()!! as Waiter
+                                    val writer = queue.removeFirstOrNull() as Waiter
                                     writer.cont.resume(Unit)
                                     return
                                 }
@@ -229,7 +240,7 @@ private class ReadWriteMutexImpl : ReadWriteMutex {
                                 var readers = consecutiveWaitingReaderCount()
                                 if (_state.compareAndSet(state, State(readers, state.waiters - readers, null))) {
                                     while (readers-- > 0) {
-                                        val reader = queue.removeFirstOrNull()!! as Waiter
+                                        val reader = queue.removeFirstOrNull() as Waiter
                                         reader.cont.resume(Unit)
                                     }
                                     return

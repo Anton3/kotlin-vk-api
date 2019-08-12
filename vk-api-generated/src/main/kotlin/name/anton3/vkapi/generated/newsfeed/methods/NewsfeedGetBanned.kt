@@ -5,8 +5,8 @@ package name.anton3.vkapi.generated.newsfeed.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.common.objects.NameCase
 import name.anton3.vkapi.generated.newsfeed.objects.GetBannedResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/newsfeed.getBanned]
@@ -19,4 +19,4 @@ import name.anton3.vkapi.method.UserMethod
 data class NewsfeedGetBanned(
     var fields: List<String>? = null,
     var nameCase: NameCase? = null
-) : CheckedMethod<GetBannedResponse, UserMethod>("newsfeed.getBanned", jacksonTypeRef())
+) : VkMethod<GetBannedResponse, UserMethod>("newsfeed.getBanned", jacksonTypeRef())

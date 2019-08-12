@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.gifts.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.gifts.objects.Gift
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -21,4 +21,4 @@ data class GiftsGet(
     var userId: Int? = null,
     var count: Int? = null,
     var offset: Int? = null
-) : CheckedMethod<VkList<Gift>, UserMethod>("gifts.get", jacksonTypeRef())
+) : VkMethod<VkList<Gift>, UserMethod>("gifts.get", jacksonTypeRef())

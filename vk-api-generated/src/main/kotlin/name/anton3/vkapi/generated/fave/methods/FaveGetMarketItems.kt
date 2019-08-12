@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.fave.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.market.objects.MarketItem
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -19,4 +19,4 @@ import name.anton3.vkapi.vktypes.VkList
 data class FaveGetMarketItems(
     var count: Int? = null,
     var extended: Boolean? = null
-) : CheckedMethod<VkList<MarketItem>, UserMethod>("fave.getMarketItems", jacksonTypeRef())
+) : VkMethod<VkList<MarketItem>, UserMethod>("fave.getMarketItems", jacksonTypeRef())

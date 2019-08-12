@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.messages.objects.IsMessagesFromGroupAllowedResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/messages.isMessagesFromGroupAllowed]
@@ -18,4 +18,4 @@ import name.anton3.vkapi.method.UserGroupMethod
 data class MessagesIsMessagesFromGroupAllowed(
     var groupId: Int,
     var userId: Int
-) : CheckedMethod<IsMessagesFromGroupAllowedResponse, UserGroupMethod>("messages.isMessagesFromGroupAllowed", jacksonTypeRef())
+) : VkMethod<IsMessagesFromGroupAllowedResponse, UserGroupMethod>("messages.isMessagesFromGroupAllowed", jacksonTypeRef())

@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.newsfeed.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.newsfeed.objects.GetSuggestedSourcesResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -23,4 +23,4 @@ data class NewsfeedGetSuggestedSources(
     var count: Int? = null,
     var shuffle: Boolean? = null,
     var fields: List<String>? = null
-) : CheckedMethod<VkList<GetSuggestedSourcesResponse>, UserMethod>("newsfeed.getSuggestedSources", jacksonTypeRef())
+) : VkMethod<VkList<GetSuggestedSourcesResponse>, UserMethod>("newsfeed.getSuggestedSources", jacksonTypeRef())

@@ -15,7 +15,7 @@ sealed class RequestContent {
     data class File(val key: String, val fileName: String, val data: ByteArray) : RequestContent()
 
     companion object {
-        const val FORM_CONTENT_TYPE = "application/x-www-form-urlencoded"
+        const val FORM_CONTENT_TYPE: String = "application/x-www-form-urlencoded"
     }
 }
 

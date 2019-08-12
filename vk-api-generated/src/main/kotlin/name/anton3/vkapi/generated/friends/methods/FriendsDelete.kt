@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.friends.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.friends.objects.DeleteResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/friends.delete]
@@ -16,4 +16,4 @@ import name.anton3.vkapi.method.UserMethod
  */
 data class FriendsDelete(
     var userId: Int
-) : CheckedMethod<DeleteResponse, UserMethod>("friends.delete", jacksonTypeRef())
+) : VkMethod<DeleteResponse, UserMethod>("friends.delete", jacksonTypeRef())

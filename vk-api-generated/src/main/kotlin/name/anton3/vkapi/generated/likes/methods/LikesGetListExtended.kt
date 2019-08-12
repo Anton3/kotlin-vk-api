@@ -6,8 +6,8 @@ import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.likes.objects.GetListFilter
 import name.anton3.vkapi.generated.likes.objects.Type
 import name.anton3.vkapi.generated.users.objects.UserMin
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -35,7 +35,7 @@ data class LikesGetListExtended(
     var offset: Int? = null,
     var count: Int? = null,
     var skipOwn: Boolean? = null
-) : CheckedMethod<VkList<UserMin>, UserServiceMethod>("likes.getList", jacksonTypeRef()) {
+) : VkMethod<VkList<UserMin>, UserServiceMethod>("likes.getList", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")
     }

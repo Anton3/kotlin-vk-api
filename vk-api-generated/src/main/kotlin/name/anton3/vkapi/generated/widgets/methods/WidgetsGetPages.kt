@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.widgets.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.widgets.objects.GetPagesResponse
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/widgets.getPages]
@@ -22,4 +22,4 @@ data class WidgetsGetPages(
     var order: String? = null,
     var period: String? = null,
     var count: Int? = null
-) : CheckedMethod<GetPagesResponse, UserServiceMethod>("widgets.getPages", jacksonTypeRef())
+) : VkMethod<GetPagesResponse, UserServiceMethod>("widgets.getPages", jacksonTypeRef())

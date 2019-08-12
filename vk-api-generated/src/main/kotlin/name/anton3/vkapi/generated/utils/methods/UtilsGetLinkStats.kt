@@ -5,8 +5,8 @@ package name.anton3.vkapi.generated.utils.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.utils.objects.GetLinkStatsInterval
 import name.anton3.vkapi.generated.utils.objects.LinkStats
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserGroupServiceMethod
+import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/utils.getLinkStats]
@@ -23,4 +23,4 @@ data class UtilsGetLinkStats(
     var accessKey: String? = null,
     var interval: GetLinkStatsInterval? = null,
     var intervalsCount: Int? = null
-) : CheckedMethod<LinkStats, UserGroupServiceMethod>("utils.getLinkStats", jacksonTypeRef())
+) : VkMethod<LinkStats, UserGroupServiceMethod>("utils.getLinkStats", jacksonTypeRef())

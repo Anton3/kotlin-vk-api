@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.photos.objects.Photo
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -25,4 +25,4 @@ data class PhotosGetUserPhotos(
     var count: Int? = null,
     var extended: Boolean? = null,
     var sort: String? = null
-) : CheckedMethod<VkList<Photo>, UserMethod>("photos.getUserPhotos", jacksonTypeRef())
+) : VkMethod<VkList<Photo>, UserMethod>("photos.getUserPhotos", jacksonTypeRef())

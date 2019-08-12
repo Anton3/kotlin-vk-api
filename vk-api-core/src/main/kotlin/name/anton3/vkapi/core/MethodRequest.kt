@@ -14,11 +14,11 @@ object SupportsVkScript : DynamicRequest.Key<Boolean>
  * An extension of SimpleDynamicRequest that has SupportsVkScript key.
  */
 data class SimpleMethodRequest<T>(
-    private val request: VkMethod<T>,
+    private val request: VkMethod<T, *>,
     private val supportsBatch: Boolean = request.supportsBatch()
-) : DynamicRequest<VkMethod<T>> {
+) : DynamicRequest<VkMethod<T, *>> {
 
-    override suspend fun get(): VkMethod<T> = request
+    override suspend fun get(): VkMethod<T, *> = request
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : Any> get(key: DynamicRequest.Key<T>): T? = when (key) {
@@ -27,7 +27,7 @@ data class SimpleMethodRequest<T>(
     }
 }
 
-fun VkMethod<*>.supportsBatch(): Boolean {
+fun VkMethod<*, *>.supportsBatch(): Boolean {
     return when (apiMethodName.substringBefore('.')) {
         "execute" -> false
         "messages" -> apiMethodName.substringAfter('.') != "setChatPhoto"

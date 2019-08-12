@@ -19,5 +19,5 @@ data class ResponseDefinitionSchema(
 
 data class ResponseObjectDefinition(
     @JsonDeserialize(using = ObjectSchemaDeserializer::class)
-    val response: Object? = null
+    val response: Object
 )

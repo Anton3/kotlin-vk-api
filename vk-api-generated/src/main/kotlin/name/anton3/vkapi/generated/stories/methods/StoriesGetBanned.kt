@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.stories.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -16,4 +16,4 @@ import name.anton3.vkapi.vktypes.VkList
  */
 data class StoriesGetBanned(
     var fields: List<String>? = null
-) : CheckedMethod<VkList<Int>, UserMethod>("stories.getBanned", jacksonTypeRef())
+) : VkMethod<VkList<Int>, UserMethod>("stories.getBanned", jacksonTypeRef())

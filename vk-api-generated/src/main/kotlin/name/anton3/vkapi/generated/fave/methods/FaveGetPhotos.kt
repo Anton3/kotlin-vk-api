@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.fave.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.photos.objects.Photo
-import name.anton3.vkapi.method.CheckedMethod
 import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
 /**
@@ -21,4 +21,4 @@ data class FaveGetPhotos(
     var offset: Int? = null,
     var count: Int? = null,
     var photoSizes: Boolean? = null
-) : CheckedMethod<VkList<Photo>, UserMethod>("fave.getPhotos", jacksonTypeRef())
+) : VkMethod<VkList<Photo>, UserMethod>("fave.getPhotos", jacksonTypeRef())
