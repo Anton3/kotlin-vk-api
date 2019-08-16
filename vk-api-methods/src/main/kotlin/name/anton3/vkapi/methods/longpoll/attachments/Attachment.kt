@@ -17,4 +17,4 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo
     JsonSubTypes.Type(name = "doc", value = DocAttachment::class),
     JsonSubTypes.Type(name = "sticker", value = StickerAttachment::class)
 )
-open class Attachment(open val type: AttachmentType, open val id: String)
+open class Attachment(open val type: AttachmentType, open val id: String?)
