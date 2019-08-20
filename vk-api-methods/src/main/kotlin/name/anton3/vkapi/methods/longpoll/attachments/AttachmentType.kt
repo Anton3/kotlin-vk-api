@@ -16,5 +16,6 @@ enum class AttachmentType(@JsonValue override val value: String) : Value<String>
     ARTICLE("article"),
     STORY("story"),
     POLL("poll"),
-    WALL_REPLY("wall_reply");
+    WALL_REPLY("wall_reply"),
+    MONEY_REQUEST("money_request");
 }
