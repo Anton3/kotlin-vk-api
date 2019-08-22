@@ -14,13 +14,16 @@ data class FriendOnline(
     companion object {
         @JvmStatic
         @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-        fun parse(eventType: Int, userId: Int, extra: Int, timestamp: VkDate): FriendOnline {
-            return FriendOnline(
-                eventType,
-                -userId,
-                (extra and 0xFF).takeIf { it != 0 }?.let { FriendPlatform.parse(it) },
-                timestamp
-            )
+        fun parse(
+            eventType: Int,
+            userId: Int,
+            extra: Int,
+            timestamp: VkDate,
+            @Suppress("UNUSED_PARAMETER") unused1: Int?,
+            @Suppress("UNUSED_PARAMETER") unused2: Int?
+        ): FriendOnline {
+            val platform = (extra and 0xFF).takeIf { it != 0 }?.let { FriendPlatform.parse(it) }
+            return FriendOnline(eventType, -userId, platform, timestamp)
         }
     }
 }
