@@ -1,9 +1,12 @@
 package name.anton3.vkapi.json.deserializers
 
+import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.JsonMappingException
+import com.fasterxml.jackson.databind.SerializerProvider
+import com.fasterxml.jackson.databind.ser.std.StdSerializer
 import name.anton3.vkapi.vktypes.VkBirthDate
 
 internal object VkBirthDateDeserializer : JsonDeserializer<VkBirthDate>() {
@@ -21,5 +24,11 @@ internal object VkBirthDateDeserializer : JsonDeserializer<VkBirthDate>() {
         } catch (e: NumberFormatException) {
             throw JsonMappingException(p, "Incorrect birthday parts", e)
         }
+    }
+}
+
+internal object VkBirthDateSerializer : StdSerializer<VkBirthDate>(VkBirthDate::class.java) {
+    override fun serialize(value: VkBirthDate, gen: JsonGenerator, serializers: SerializerProvider) {
+        gen.writeString("${value.day}.${value.month}.${value.year}")
     }
 }
