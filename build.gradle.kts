@@ -6,13 +6,13 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.41")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.50")
     }
 }
 
 plugins {
     `java-library`
-    kotlin("jvm") version "1.3.41"
+    kotlin("jvm") version "1.3.50"
 }
 
 repositories {
