@@ -10,6 +10,8 @@ package name.anton3.vkapi.generated.messages.objects
  * @property photo conversation cover image
  * @property activeIds IDs of the last users who wrote to the conversation
  * @property isGroupChannel true, if this conversation is a community channel
+ * @property ownerId ID of chat creator, if any
+ * @property adminIds IDs of admins of the chat, if any
  */
 data class ConversationChatSettings(
     val memberCount: Int,
@@ -18,5 +20,7 @@ data class ConversationChatSettings(
     val state: ConversationChatSettingsState,
     val photo: ConversationChatSettingsPhoto,
     val activeIds: List<Int>,
-    val isGroupChannel: Boolean
+    val isGroupChannel: Boolean? = null,
+    val ownerId: Int? = null,
+    val adminIds: List<Int>? = null
 )
