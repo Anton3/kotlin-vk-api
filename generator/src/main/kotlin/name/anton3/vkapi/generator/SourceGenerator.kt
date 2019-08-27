@@ -210,7 +210,7 @@ class SourceGenerator(val basePackage: String) {
         if (typeSpace.definedTypes[typeId]?.fixedName == true)
             return typeId
 
-        val type = EnumType.decodeTypeDefinition(typeObject.enum, typeObject.enumNames)
+        val type = EnumType.decodeTypeDefinition(typeObject.enum, typeObject.enumNames, typeObject.type == "integer")
 
         return if (type == BuiltinType)
             TypeId("kotlin.Boolean")
@@ -387,15 +387,16 @@ class SourceGenerator(val basePackage: String) {
         val candidateTypeId = nameObject((parts + nameCandidate).joinToString("_"), basePackage)
         val enumValues = param.enum!!
         val enumNames = param.enumNames
-        return defineEnumType(enumValues, enumNames, candidateTypeId)
+        return defineEnumType(enumValues, enumNames, candidateTypeId, param.type == "integer")
     }
 
     private fun defineEnumType(
         enumValues: List<String>,
         enumNames: List<String>?,
-        expectedTypeId: TypeId
+        expectedTypeId: TypeId,
+        isInteger: Boolean
     ): TypeId {
-        val definition = EnumType.decodeTypeDefinition(enumValues, enumNames)
+        val definition = EnumType.decodeTypeDefinition(enumValues, enumNames, isInteger)
         val oldTypeId = typeSpace.definedTypes.entries.find { it.value == definition }?.key
         if (oldTypeId == expectedTypeId) return oldTypeId
 

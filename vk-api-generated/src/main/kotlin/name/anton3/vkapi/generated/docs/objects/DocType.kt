@@ -5,19 +5,19 @@ import com.fasterxml.jackson.annotation.JsonValue
 import name.anton3.vkapi.vktypes.Value
 import name.anton3.vkapi.vktypes.parseEnum
 
-enum class DocType(@JsonValue override val value: String) : Value<String> {
-    TEXT("1"),
-    ARCH("2"),
-    GIF("3"),
-    IMAGE("4"),
-    AUDIO("5"),
-    VIDEO("6"),
-    EBOOK("7"),
-    UNKNOWN("8");
+enum class DocType(@JsonValue override val value: Int) : Value<Int> {
+    TEXT(1),
+    ARCH(2),
+    GIF(3),
+    IMAGE(4),
+    AUDIO(5),
+    VIDEO(6),
+    EBOOK(7),
+    UNKNOWN(8);
 
     companion object {
         @JvmStatic
         @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): DocType = parseEnum(value)
+        fun parse(value: Int): DocType = parseEnum(value)
     }
 }

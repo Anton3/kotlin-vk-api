@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonValue
 import name.anton3.vkapi.vktypes.Value
 import name.anton3.vkapi.vktypes.parseEnum
 
-enum class DeleteResponseSuggestionDeleted(@JsonValue override val value: String) : Value<String> {
-    OK("1");
+enum class DeleteResponseSuggestionDeleted(@JsonValue override val value: Int) : Value<Int> {
+    OK(1);
 
     companion object {
         @JvmStatic
         @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): DeleteResponseSuggestionDeleted = parseEnum(value)
+        fun parse(value: Int): DeleteResponseSuggestionDeleted = parseEnum(value)
     }
 }

@@ -5,17 +5,17 @@ import com.fasterxml.jackson.annotation.JsonValue
 import name.anton3.vkapi.vktypes.Value
 import name.anton3.vkapi.vktypes.parseEnum
 
-enum class SearchSort(@JsonValue override val value: String) : Value<String> {
-    DEFAULT("0"),
-    GROWTH("1"),
-    ATTENDANCE("2"),
-    LIKES("3"),
-    COMMENTS("4"),
-    ENTRIES("5");
+enum class SearchSort(@JsonValue override val value: Int) : Value<Int> {
+    DEFAULT(0),
+    GROWTH(1),
+    ATTENDANCE(2),
+    LIKES(3),
+    COMMENTS(4),
+    ENTRIES(5);
 
     companion object {
         @JvmStatic
         @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): SearchSort = parseEnum(value)
+        fun parse(value: Int): SearchSort = parseEnum(value)
     }
 }

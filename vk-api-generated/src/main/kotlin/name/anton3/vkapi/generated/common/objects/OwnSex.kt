@@ -5,14 +5,14 @@ import com.fasterxml.jackson.annotation.JsonValue
 import name.anton3.vkapi.vktypes.Value
 import name.anton3.vkapi.vktypes.parseEnum
 
-enum class OwnSex(@JsonValue override val value: String) : Value<String> {
-    UNDEFINED("0"),
-    FEMALE("1"),
-    MALE("2");
+enum class OwnSex(@JsonValue override val value: Int) : Value<Int> {
+    UNDEFINED(0),
+    FEMALE(1),
+    MALE(2);
 
     companion object {
         @JvmStatic
         @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): OwnSex = parseEnum(value)
+        fun parse(value: Int): OwnSex = parseEnum(value)
     }
 }

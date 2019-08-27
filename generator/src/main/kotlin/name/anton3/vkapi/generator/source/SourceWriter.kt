@@ -23,7 +23,7 @@ interface SourceWriter {
 
     fun parentType(type: TypeId): String
 
-    fun enumItem(name: String, vararg values: String): String
+    fun enumItem(name: String, value: String, isInteger: Boolean): String
 
     fun importClause(currentTypeId: TypeId): String
 
@@ -132,7 +132,7 @@ class KotlinSourceWriter(private val typeSpace: TypeSpace) : SourceWriter {
         return "package " + typeId.packages.joinToString(".")
     }
 
-    override fun enumItem(name: String, vararg values: String): String {
+    override fun enumItem(name: String, value: String, isInteger: Boolean): String {
         val upperCasedName = name
             .toUpperCase()
             .split(Regex("[^\\w\\d]+"))
@@ -140,8 +140,9 @@ class KotlinSourceWriter(private val typeSpace: TypeSpace) : SourceWriter {
             .joinToString("_")
 
         val namePrefix = if (upperCasedName.first().isDigit()) "N_" else ""
+        val literal = if (isInteger) value else "\"$value\""
 
-        return values.joinToString(", ", "$namePrefix$upperCasedName(", ")") { "\"$it\"" }
+        return "$namePrefix$upperCasedName($literal)"
     }
 
     override fun realType(typeId: TypeId): TypeId {
