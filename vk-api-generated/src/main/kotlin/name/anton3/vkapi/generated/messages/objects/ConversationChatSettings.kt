@@ -18,8 +18,8 @@ data class ConversationChatSettings(
     val title: String,
     val pinnedMessage: PinnedMessage? = null,
     val state: ConversationChatSettingsState,
-    val photo: ConversationChatSettingsPhoto,
-    val activeIds: List<Int>,
+    val photo: ConversationChatSettingsPhoto? = null,
+    val activeIds: List<Int>? = null,
     val isGroupChannel: Boolean? = null,
     val ownerId: Int? = null,
     val adminIds: List<Int>? = null

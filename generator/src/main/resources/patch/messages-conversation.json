@@ -190,9 +190,7 @@
           "required": [
             "member_count",
             "title",
-            "state",
-            "photo",
-            "active_ids"
+            "state"
           ],
           "additionalProperties": false
         }
