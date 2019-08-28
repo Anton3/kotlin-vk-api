@@ -1,9 +1,8 @@
 package name.anton3.vkapi.methods.longpoll.attachments
 
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class AttachmentType(@JsonValue override val value: String) : Value<String> {
+enum class AttachmentType(override val value: String) : ValueEnum<String> {
     PHOTO("photo"),
     VIDEO("video"),
     AUDIO("audio"),

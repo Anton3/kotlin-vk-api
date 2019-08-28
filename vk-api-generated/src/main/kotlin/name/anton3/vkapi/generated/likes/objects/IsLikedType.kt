@@ -1,11 +1,10 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.likes.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class IsLikedType(@JsonValue override val value: String) : Value<String> {
+enum class IsLikedType(override val value: String) : ValueEnum<String> {
     POST("post"),
     COMMENT("comment"),
     PHOTO("photo"),
@@ -14,11 +13,5 @@ enum class IsLikedType(@JsonValue override val value: String) : Value<String> {
     NOTE("note"),
     PHOTO_COMMENT("photo_comment"),
     VIDEO_COMMENT("video_comment"),
-    TOPIC_COMMENT("topic_comment");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): IsLikedType = parseEnum(value)
-    }
+    TOPIC_COMMENT("topic_comment")
 }

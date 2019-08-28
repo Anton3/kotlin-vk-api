@@ -1,3 +1,5 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.friends.objects
 
 import name.anton3.vkapi.generated.friends.responses.DeleteResponseFriendDeleted

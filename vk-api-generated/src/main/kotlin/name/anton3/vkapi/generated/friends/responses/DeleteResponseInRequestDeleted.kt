@@ -1,16 +1,9 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.friends.responses
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class DeleteResponseInRequestDeleted(@JsonValue override val value: Int) : Value<Int> {
-    OK(1);
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: Int): DeleteResponseInRequestDeleted = parseEnum(value)
-    }
+enum class DeleteResponseInRequestDeleted(override val value: Int) : ValueEnum<Int> {
+    OK(1)
 }

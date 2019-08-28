@@ -1,19 +1,12 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.groups.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class GetMembersSort(@JsonValue override val value: String) : Value<String> {
+enum class GetMembersSort(override val value: String) : ValueEnum<String> {
     ID_ASC("id_asc"),
     ID_DESC("id_desc"),
     TIME_ASC("time_asc"),
-    TIME_DESC("time_desc");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): GetMembersSort = parseEnum(value)
-    }
+    TIME_DESC("time_desc")
 }

@@ -1,16 +1,9 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.common.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class LinkButtonActionType(@JsonValue override val value: String) : Value<String> {
-    OPEN_URL("open_url");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): LinkButtonActionType = parseEnum(value)
-    }
+enum class LinkButtonActionType(override val value: String) : ValueEnum<String> {
+    OPEN_URL("open_url")
 }

@@ -1,17 +1,10 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.ads.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class AdLayoutCostType(@JsonValue override val value: Int) : Value<Int> {
+enum class AdLayoutCostType(override val value: Int) : ValueEnum<Int> {
     PER_CLICKS(0),
-    PER_IMPRESSIONS(1);
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: Int): AdLayoutCostType = parseEnum(value)
-    }
+    PER_IMPRESSIONS(1)
 }

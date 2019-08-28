@@ -1,19 +1,12 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.apps.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class GetPlatform(@JsonValue override val value: String) : Value<String> {
+enum class GetPlatform(override val value: String) : ValueEnum<String> {
     WEB("web"),
     IOS("ios"),
     ANDROID("android"),
-    WINPHONE("winphone");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): GetPlatform = parseEnum(value)
-    }
+    WINPHONE("winphone")
 }

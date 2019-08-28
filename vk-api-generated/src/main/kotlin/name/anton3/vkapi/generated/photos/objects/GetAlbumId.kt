@@ -1,18 +1,11 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.photos.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class GetAlbumId(@JsonValue override val value: String) : Value<String> {
+enum class GetAlbumId(override val value: String) : ValueEnum<String> {
     PROFILE("profile"),
     WALL("wall"),
-    SAVED("saved");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): GetAlbumId = parseEnum(value)
-    }
+    SAVED("saved")
 }

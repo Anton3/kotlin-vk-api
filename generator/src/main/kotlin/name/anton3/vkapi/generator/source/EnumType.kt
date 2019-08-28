@@ -1,8 +1,6 @@
 package name.anton3.vkapi.generator.source
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
+import name.anton3.vkapi.vktypes.ValueEnum
 
 data class EnumType(val items: List<Item>, val isInteger: Boolean) : TypeDefinition {
 
@@ -13,12 +11,9 @@ data class EnumType(val items: List<Item>, val isInteger: Boolean) : TypeDefinit
 
     override fun generateSource(basePackage: String, typeId: TypeId, sourceWriter: SourceWriter): String {
 
-        sourceWriter.importType(TypeId<JsonCreator>())
-        sourceWriter.importType(TypeId<JsonValue>())
-        sourceWriter.importType(TypeId<Value<*>>())
-        sourceWriter.importType(TypeId<Int>())
-        sourceWriter.importType(TypeId<String>())
-        sourceWriter.importType(TypeId("name.anton3.vkapi.vktypes.parseEnum"))
+        val valueType = if (isInteger) TypeId<Int>() else TypeId<String>()
+        sourceWriter.importType(valueType)
+        sourceWriter.importType(TypeId<ValueEnum<*>>(valueType))
 
         val packageClause = sourceWriter.packageClause(typeId)
         val importClause = sourceWriter.importClause(typeId)
@@ -30,16 +25,12 @@ data class EnumType(val items: List<Item>, val isInteger: Boolean) : TypeDefinit
         val valueClass = if (isInteger) "Int" else "String"
 
         return """
+            |@file:Suppress("unused", "SpellCheckingInspection")
+            |
             |$packageClause$importClause
             |
-            |enum class ${typeId.name}(@JsonValue override val value: $valueClass) : Value<$valueClass> {
-            |    $itemsClause;
-            |
-            |    companion object {
-            |        @JvmStatic
-            |        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-            |        fun parse(value: $valueClass): ${typeId.name} = parseEnum(value)
-            |    }
+            |enum class ${typeId.name}(override val value: $valueClass) : ValueEnum<$valueClass> {
+            |    $itemsClause
             |}
         """.trimMargin()
     }

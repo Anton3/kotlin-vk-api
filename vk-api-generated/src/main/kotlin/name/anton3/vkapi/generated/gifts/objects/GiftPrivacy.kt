@@ -1,18 +1,11 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.gifts.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class GiftPrivacy(@JsonValue override val value: Int) : Value<Int> {
+enum class GiftPrivacy(override val value: Int) : ValueEnum<Int> {
     NAME_AND_MESSAGE_FOR_ALL(0),
     NAME_FOR_ALL(1),
-    NAME_AND_MESSAGE_FOR_RECIPIENT_ONLY(2);
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: Int): GiftPrivacy = parseEnum(value)
-    }
+    NAME_AND_MESSAGE_FOR_RECIPIENT_ONLY(2)
 }

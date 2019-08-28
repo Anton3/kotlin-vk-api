@@ -1,7 +1,5 @@
 package name.anton3.vkapi.generator
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.databind.module.SimpleModule
@@ -425,8 +423,6 @@ class SourceGenerator(val basePackage: String) {
         typeSpace.registerBuiltin<List<*>>()
         typeSpace.registerBuiltin<Map<*, *>>()
         typeSpace.registerBuiltin<JsonDeserialize>()
-        typeSpace.registerBuiltin<JsonCreator>()
-        typeSpace.registerBuiltin<JsonValue>()
         typeSpace.registerBuiltin<VkDate>()
         typeSpace.registerBuiltin<VkList<*>>()
         typeSpace.registerBuiltin<VkBirthDate>()
@@ -438,7 +434,7 @@ class SourceGenerator(val basePackage: String) {
         typeSpace.registerBuiltin<UserGroupMethod>()
         typeSpace.registerBuiltin<UserServiceMethod>()
         typeSpace.registerBuiltin<UserGroupServiceMethod>()
-        typeSpace.registerBuiltin<Value<*>>()
+        typeSpace.registerBuiltin<ValueEnum<*>>()
         typeSpace.registerBuiltin("com.fasterxml.jackson.module.kotlin.jacksonTypeRef")
         typeSpace.registerBuiltin("name.anton3.vkapi.vktypes.parseEnum")
 

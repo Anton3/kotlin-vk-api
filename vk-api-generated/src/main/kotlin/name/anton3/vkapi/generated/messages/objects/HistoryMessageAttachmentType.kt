@@ -1,11 +1,10 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.messages.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class HistoryMessageAttachmentType(@JsonValue override val value: String) : Value<String> {
+enum class HistoryMessageAttachmentType(override val value: String) : ValueEnum<String> {
     PHOTO("photo"),
     VIDEO("video"),
     AUDIO("audio"),
@@ -13,11 +12,5 @@ enum class HistoryMessageAttachmentType(@JsonValue override val value: String) :
     LINK("link"),
     MARKET("market"),
     WALL("wall"),
-    SHARE("share");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): HistoryMessageAttachmentType = parseEnum(value)
-    }
+    SHARE("share")
 }

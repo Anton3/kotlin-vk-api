@@ -1,17 +1,10 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.ads.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class GetDemographicsIdsType(@JsonValue override val value: String) : Value<String> {
+enum class GetDemographicsIdsType(override val value: String) : ValueEnum<String> {
     AD("ad"),
-    CAMPAIGN("campaign");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): GetDemographicsIdsType = parseEnum(value)
-    }
+    CAMPAIGN("campaign")
 }

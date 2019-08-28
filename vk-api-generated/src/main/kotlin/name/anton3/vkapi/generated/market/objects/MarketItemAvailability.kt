@@ -1,18 +1,11 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.market.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class MarketItemAvailability(@JsonValue override val value: Int) : Value<Int> {
+enum class MarketItemAvailability(override val value: Int) : ValueEnum<Int> {
     AVAILABLE(0),
     REMOVED(1),
-    UNAVAILABLE(2);
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: Int): MarketItemAvailability = parseEnum(value)
-    }
+    UNAVAILABLE(2)
 }

@@ -1,20 +1,13 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.newsfeed.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class UnsubscribeType(@JsonValue override val value: String) : Value<String> {
+enum class UnsubscribeType(override val value: String) : ValueEnum<String> {
     NOTE("note"),
     PHOTO("photo"),
     POST("post"),
     TOPIC("topic"),
-    VIDEO("video");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): UnsubscribeType = parseEnum(value)
-    }
+    VIDEO("video")
 }

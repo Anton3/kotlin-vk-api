@@ -1,20 +1,13 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.ads.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class CheckLinkLinkType(@JsonValue override val value: String) : Value<String> {
+enum class CheckLinkLinkType(override val value: String) : ValueEnum<String> {
     COMMUNITY("community"),
     POST("post"),
     APPLICATION("application"),
     VIDEO("video"),
-    SITE("site");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): CheckLinkLinkType = parseEnum(value)
-    }
+    SITE("site")
 }

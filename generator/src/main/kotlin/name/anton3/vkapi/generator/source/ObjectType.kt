@@ -66,7 +66,16 @@ data class ObjectType(
 
         val builder = StringBuilder()
 
-        builder.append("$packageClause$importClause\n\n$description\n$implClause$definitionKeyword ${typeId.name}")
+        builder.append(
+            """
+            |@file:Suppress("unused", "SpellCheckingInspection")
+            |
+            |$packageClause$importClause
+            |
+            |$description
+            |$implClause$definitionKeyword ${typeId.name}
+            """.trimMargin()
+        )
 
         if (kind == Kind.INTERFACE) {
             builder.append(parentClause)

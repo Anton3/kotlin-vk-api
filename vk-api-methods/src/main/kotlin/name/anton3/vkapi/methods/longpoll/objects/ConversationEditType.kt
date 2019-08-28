@@ -1,11 +1,8 @@
 package name.anton3.vkapi.methods.longpoll.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class ConversationEditType(@get:JsonValue override val value: Int) : Value<Int> {
+enum class ConversationEditType(override val value: Int) : ValueEnum<Int> {
     TITLE_CHANGE(1),
     PHOTO_CHANGE(2),
     ADMIN_ADDED(3),
@@ -17,10 +14,4 @@ enum class ConversationEditType(@get:JsonValue override val value: Int) : Value<
     ADMIN_REMOVED(9),
     UNKNOWN2(10),  // Not described in spec, but happens
     UNKNOWN3(11);  // Not described in spec, but happens
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: Int): ConversationEditType = parseEnum(value)
-    }
 }

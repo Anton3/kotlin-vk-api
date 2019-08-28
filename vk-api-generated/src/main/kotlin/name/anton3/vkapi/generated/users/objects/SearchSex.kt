@@ -1,18 +1,11 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.users.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class SearchSex(@JsonValue override val value: Int) : Value<Int> {
+enum class SearchSex(override val value: Int) : ValueEnum<Int> {
     ANY(0),
     FEMALE(1),
-    MALE(2);
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: Int): SearchSex = parseEnum(value)
-    }
+    MALE(2)
 }

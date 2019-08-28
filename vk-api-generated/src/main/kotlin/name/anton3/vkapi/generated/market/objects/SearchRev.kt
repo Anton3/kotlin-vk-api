@@ -1,17 +1,10 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.market.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class SearchRev(@JsonValue override val value: Int) : Value<Int> {
+enum class SearchRev(override val value: Int) : ValueEnum<Int> {
     NORMAL(0),
-    REVERSE(1);
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: Int): SearchRev = parseEnum(value)
-    }
+    REVERSE(1)
 }

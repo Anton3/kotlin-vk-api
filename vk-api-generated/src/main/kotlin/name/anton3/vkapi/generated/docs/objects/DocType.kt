@@ -1,11 +1,10 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.docs.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class DocType(@JsonValue override val value: Int) : Value<Int> {
+enum class DocType(override val value: Int) : ValueEnum<Int> {
     TEXT(1),
     ARCH(2),
     GIF(3),
@@ -13,11 +12,5 @@ enum class DocType(@JsonValue override val value: Int) : Value<Int> {
     AUDIO(5),
     VIDEO(6),
     EBOOK(7),
-    UNKNOWN(8);
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: Int): DocType = parseEnum(value)
-    }
+    UNKNOWN(8)
 }

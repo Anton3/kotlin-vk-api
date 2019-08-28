@@ -1,18 +1,11 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.messages.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class ConversationChatSettingsState(@JsonValue override val value: String) : Value<String> {
+enum class ConversationChatSettingsState(override val value: String) : ValueEnum<String> {
     IN("in"),
     KICKED("kicked"),
-    LEFT("left");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): ConversationChatSettingsState = parseEnum(value)
-    }
+    LEFT("left")
 }

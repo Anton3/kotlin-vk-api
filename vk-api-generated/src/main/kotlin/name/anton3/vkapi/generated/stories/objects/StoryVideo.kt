@@ -1,3 +1,5 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.stories.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize

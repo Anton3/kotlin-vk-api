@@ -1,18 +1,11 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.friends.responses
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class AddResponse(@JsonValue override val value: Int) : Value<Int> {
+enum class AddResponse(override val value: Int) : ValueEnum<Int> {
     SEND(1),
     APPROVED(2),
-    RESEND(4);
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: Int): AddResponse = parseEnum(value)
-    }
+    RESEND(4)
 }

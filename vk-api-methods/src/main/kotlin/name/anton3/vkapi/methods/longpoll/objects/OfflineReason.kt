@@ -1,17 +1,8 @@
 package name.anton3.vkapi.methods.longpoll.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class OfflineReason(@JsonValue override val value: Int) : Value<Int> {
+enum class OfflineReason(override val value: Int) : ValueEnum<Int> {
     LEAVING(0),
-    TIMEOUT(1);
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: Int): OfflineReason = parseEnum(value)
-    }
+    TIMEOUT(1)
 }

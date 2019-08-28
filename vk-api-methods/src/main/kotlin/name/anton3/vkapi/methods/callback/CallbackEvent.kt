@@ -2,7 +2,10 @@
 
 package name.anton3.vkapi.methods.callback
 
-import com.fasterxml.jackson.annotation.*
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.annotation.JsonSubTypes
+import com.fasterxml.jackson.annotation.JsonTypeInfo
 import name.anton3.vkapi.generated.audio.objects.AudioFull
 import name.anton3.vkapi.generated.board.objects.TopicComment
 import name.anton3.vkapi.generated.common.objects.LikesInfo
@@ -12,9 +15,8 @@ import name.anton3.vkapi.generated.video.objects.VideoImpl
 import name.anton3.vkapi.generated.wall.objects.CommentAttachment
 import name.anton3.vkapi.generated.wall.objects.WallComment
 import name.anton3.vkapi.generated.wall.objects.WallpostFull
-import name.anton3.vkapi.vktypes.Value
+import name.anton3.vkapi.vktypes.ValueEnum
 import name.anton3.vkapi.vktypes.VkDate
-import name.anton3.vkapi.vktypes.parseEnum
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 interface Attachment
@@ -283,18 +285,12 @@ class PollVoteNew(groupId: Int, @JsonProperty("object") attachment: PollVoteNewA
     CallbackEvent<PollVoteNewAttachment>(groupId, attachment)
 
 
-enum class JoinType(@JsonValue override val value: String) : Value<String> {
+enum class JoinType(override val value: String) : ValueEnum<String> {
     JOIN("join"),
     UNSURE("unsure"),
     ACCEPTED("accepted"),
     APPROVED("approved"),
-    REQUEST("request");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): JoinType = parseEnum(value)
-    }
+    REQUEST("request")
 }
 
 
@@ -308,7 +304,7 @@ class GroupLeave(groupId: Int, @JsonProperty("object") attachment: GroupLeaveAtt
     CallbackEvent<GroupLeaveAttach>(groupId, attachment)
 
 
-enum class OfficerType(@JsonValue override val value: Int) : Value<Int> {
+enum class OfficerType(override val value: Int) : ValueEnum<Int> {
     USER(0),
     MODERATOR(1),
     EDITOR(2),
@@ -326,7 +322,7 @@ class GroupOfficersEdit(groupId: Int, @JsonProperty("object") attachment: GroupO
     CallbackEvent<GroupOfficersEditAttachment>(groupId, attachment)
 
 
-enum class GroupSettingsField(@JsonValue override val value: String) : Value<String> {
+enum class GroupSettingsField(override val value: String) : ValueEnum<String> {
     TITLE("title"),
     DESCRIPTION("description"),
     ACCESS("access"),

@@ -1,20 +1,13 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.apps.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class GetCatalogSort(@JsonValue override val value: String) : Value<String> {
+enum class GetCatalogSort(override val value: String) : ValueEnum<String> {
     POPULAR_TODAY("popular_today"),
     VISITORS("visitors"),
     CREATE_DATE("create_date"),
     GROWTH_RATE("growth_rate"),
-    POPULAR_WEEK("popular_week");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): GetCatalogSort = parseEnum(value)
-    }
+    POPULAR_WEEK("popular_week")
 }

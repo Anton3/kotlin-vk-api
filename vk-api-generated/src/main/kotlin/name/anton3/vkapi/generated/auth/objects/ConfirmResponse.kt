@@ -1,3 +1,5 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.auth.objects
 
 import name.anton3.vkapi.generated.auth.responses.ConfirmResponseSuccess

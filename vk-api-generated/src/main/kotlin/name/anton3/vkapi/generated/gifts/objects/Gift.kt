@@ -1,3 +1,5 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.gifts.objects
 
 import name.anton3.vkapi.vktypes.VkDate

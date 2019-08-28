@@ -1,18 +1,11 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.newsfeed.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class ItemWallpostType(@JsonValue override val value: String) : Value<String> {
+enum class ItemWallpostType(override val value: String) : ValueEnum<String> {
     POST("post"),
     COPY("copy"),
-    REPLY("reply");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): ItemWallpostType = parseEnum(value)
-    }
+    REPLY("reply")
 }

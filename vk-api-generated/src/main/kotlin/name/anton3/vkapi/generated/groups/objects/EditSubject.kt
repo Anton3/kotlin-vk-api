@@ -1,11 +1,10 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.groups.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class EditSubject(@JsonValue override val value: String) : Value<String> {
+enum class EditSubject(override val value: String) : ValueEnum<String> {
     AUTO("1"),
     ACTIVITY_HOLIDAYS("2"),
     BUSINESS("3"),
@@ -47,11 +46,5 @@ enum class EditSubject(@JsonValue override val value: String) : Value<String> {
     EROTIC("39"),
     HUMOR("40"),
     SOCIETY_HUMANITIES("41"),
-    DESIGN_AND_GRAPHICS("42");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): EditSubject = parseEnum(value)
-    }
+    DESIGN_AND_GRAPHICS("42")
 }

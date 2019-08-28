@@ -1,11 +1,10 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.photos.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class PhotoSizesType(@JsonValue override val value: String) : Value<String> {
+enum class PhotoSizesType(override val value: String) : ValueEnum<String> {
     S("s"),
     M("m"),
     X("x"),
@@ -15,11 +14,5 @@ enum class PhotoSizesType(@JsonValue override val value: String) : Value<String>
     R("r"),
     Y("y"),
     Z("z"),
-    W("w");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): PhotoSizesType = parseEnum(value)
-    }
+    W("w")
 }

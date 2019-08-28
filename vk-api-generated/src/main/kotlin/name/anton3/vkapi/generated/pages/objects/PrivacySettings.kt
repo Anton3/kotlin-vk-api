@@ -1,18 +1,11 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.pages.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class PrivacySettings(@JsonValue override val value: Int) : Value<Int> {
+enum class PrivacySettings(override val value: Int) : ValueEnum<Int> {
     COMMUNITY_MANAGERS_ONLY(0),
     COMMUNITY_MEMBERS_ONLY(1),
-    EVERYONE(2);
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: Int): PrivacySettings = parseEnum(value)
-    }
+    EVERYONE(2)
 }

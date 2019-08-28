@@ -1,11 +1,10 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.messages.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class MessageActionStatus(@JsonValue override val value: String) : Value<String> {
+enum class MessageActionStatus(override val value: String) : ValueEnum<String> {
     CHAT_PHOTO_UPDATE("chat_photo_update"),
     CHAT_PHOTO_REMOVE("chat_photo_remove"),
     CHAT_CREATE("chat_create"),
@@ -14,11 +13,5 @@ enum class MessageActionStatus(@JsonValue override val value: String) : Value<St
     CHAT_KICK_USER("chat_kick_user"),
     CHAT_PIN_MESSAGE("chat_pin_message"),
     CHAT_UNPIN_MESSAGE("chat_unpin_message"),
-    CHAT_INVITE_USER_BY_LINK("chat_invite_user_by_link");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): MessageActionStatus = parseEnum(value)
-    }
+    CHAT_INVITE_USER_BY_LINK("chat_invite_user_by_link")
 }

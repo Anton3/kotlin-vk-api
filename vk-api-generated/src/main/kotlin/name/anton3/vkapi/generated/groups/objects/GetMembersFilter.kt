@@ -1,17 +1,10 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.groups.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class GetMembersFilter(@JsonValue override val value: String) : Value<String> {
+enum class GetMembersFilter(override val value: String) : ValueEnum<String> {
     FRIENDS("friends"),
-    UNSURE("unsure");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): GetMembersFilter = parseEnum(value)
-    }
+    UNSURE("unsure")
 }

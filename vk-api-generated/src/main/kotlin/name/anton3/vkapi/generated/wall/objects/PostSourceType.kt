@@ -1,21 +1,14 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.wall.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class PostSourceType(@JsonValue override val value: String) : Value<String> {
+enum class PostSourceType(override val value: String) : ValueEnum<String> {
     VK("vk"),
     WIDGET("widget"),
     API("api"),
     RSS("rss"),
     SMS("sms"),
-    MVK("mvk");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): PostSourceType = parseEnum(value)
-    }
+    MVK("mvk")
 }

@@ -1,3 +1,5 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.messages.objects
 
 import name.anton3.vkapi.generated.common.objects.Geo

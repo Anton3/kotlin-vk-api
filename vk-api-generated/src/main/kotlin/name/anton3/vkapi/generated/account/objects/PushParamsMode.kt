@@ -1,19 +1,12 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.account.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class PushParamsMode(@JsonValue override val value: String) : Value<String> {
+enum class PushParamsMode(override val value: String) : ValueEnum<String> {
     ON("on"),
     OFF("off"),
     NO_SOUND("no_sound"),
-    NO_TEXT("no_text");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): PushParamsMode = parseEnum(value)
-    }
+    NO_TEXT("no_text")
 }

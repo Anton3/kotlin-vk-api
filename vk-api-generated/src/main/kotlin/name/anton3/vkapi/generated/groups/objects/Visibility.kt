@@ -1,18 +1,11 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.groups.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class Visibility(@JsonValue override val value: Int) : Value<Int> {
+enum class Visibility(override val value: Int) : ValueEnum<Int> {
     OPEN(0),
     CLOSED(1),
-    PRIVATE(2);
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: Int): Visibility = parseEnum(value)
-    }
+    PRIVATE(2)
 }

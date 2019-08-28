@@ -1,22 +1,13 @@
 package name.anton3.vkapi.methods.longpoll.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class FriendPlatform(@JsonValue override val value: Int) : Value<Int> {
+enum class FriendPlatform(override val value: Int) : ValueEnum<Int> {
     MOBILE(1),
     IPHONE(2),
     IPAD(3),
     ANDROID(4),
     WPHONE(5),
     WINDOWS(6),
-    WEB(7);
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: Int): FriendPlatform = parseEnum(value)
-    }
+    WEB(7)
 }

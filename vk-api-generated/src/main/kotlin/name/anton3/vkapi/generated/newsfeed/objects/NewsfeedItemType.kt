@@ -1,11 +1,10 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.newsfeed.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class NewsfeedItemType(@JsonValue override val value: String) : Value<String> {
+enum class NewsfeedItemType(override val value: String) : ValueEnum<String> {
     POST("post"),
     PHOTO("photo"),
     PHOTO_TAG("photo_tag"),
@@ -14,11 +13,5 @@ enum class NewsfeedItemType(@JsonValue override val value: String) : Value<Strin
     NOTE("note"),
     AUDIO("audio"),
     VIDEO("video"),
-    TOPIC("topic");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): NewsfeedItemType = parseEnum(value)
-    }
+    TOPIC("topic")
 }

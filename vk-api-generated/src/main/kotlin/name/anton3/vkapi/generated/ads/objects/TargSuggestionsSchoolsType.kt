@@ -1,19 +1,12 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.ads.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class TargSuggestionsSchoolsType(@JsonValue override val value: String) : Value<String> {
+enum class TargSuggestionsSchoolsType(override val value: String) : ValueEnum<String> {
     SCHOOL("school"),
     UNIVERSITY("university"),
     FACULTY("faculty"),
-    CHAIR("chair");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): TargSuggestionsSchoolsType = parseEnum(value)
-    }
+    CHAIR("chair")
 }

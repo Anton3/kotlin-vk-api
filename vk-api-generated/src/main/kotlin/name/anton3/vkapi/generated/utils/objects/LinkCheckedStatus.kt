@@ -1,18 +1,11 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.utils.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class LinkCheckedStatus(@JsonValue override val value: String) : Value<String> {
+enum class LinkCheckedStatus(override val value: String) : ValueEnum<String> {
     NOT_BANNED("not_banned"),
     BANNED("banned"),
-    PROCESSING("processing");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): LinkCheckedStatus = parseEnum(value)
-    }
+    PROCESSING("processing")
 }

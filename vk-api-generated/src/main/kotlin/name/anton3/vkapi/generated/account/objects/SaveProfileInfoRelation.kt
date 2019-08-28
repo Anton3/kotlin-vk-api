@@ -1,11 +1,10 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.account.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class SaveProfileInfoRelation(@JsonValue override val value: Int) : Value<Int> {
+enum class SaveProfileInfoRelation(override val value: Int) : ValueEnum<Int> {
     SINGLE(1),
     RELATIONSHIP(2),
     ENGAGED(3),
@@ -13,11 +12,5 @@ enum class SaveProfileInfoRelation(@JsonValue override val value: Int) : Value<I
     COMPLICATED(5),
     ACTIVELY_SEARCHING(6),
     IN_LOVE(7),
-    NOT_SPECIFIED(0);
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: Int): SaveProfileInfoRelation = parseEnum(value)
-    }
+    NOT_SPECIFIED(0)
 }

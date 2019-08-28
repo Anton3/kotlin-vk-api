@@ -22,8 +22,10 @@ data class FriendOnline(
             @Suppress("UNUSED_PARAMETER") unused1: Int?,
             @Suppress("UNUSED_PARAMETER") unused2: Int?
         ): FriendOnline {
-            val platform = (extra and 0xFF).takeIf { it != 0 }?.let { FriendPlatform.parse(it) }
+            val platform = (extra and 0xFF).takeIf { it != 0 }?.let { platforms[it] }
             return FriendOnline(eventType, -userId, platform, timestamp)
         }
+
+        private val platforms: Map<Int, FriendPlatform> = FriendPlatform.values().associateBy { it.value }
     }
 }

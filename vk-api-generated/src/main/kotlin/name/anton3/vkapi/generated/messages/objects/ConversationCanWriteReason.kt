@@ -1,11 +1,10 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.messages.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class ConversationCanWriteReason(@JsonValue override val value: Int) : Value<Int> {
+enum class ConversationCanWriteReason(override val value: Int) : ValueEnum<Int> {
     USER_DELETED(18),
     USER_IS_BLACKLISTED(900),
     USER_BLACKLISTED_COMMUNITY(901),
@@ -14,11 +13,5 @@ enum class ConversationCanWriteReason(@JsonValue override val value: Int) : Valu
     COMMUNITY_BLOCKED_MESSAGES(916),
     NO_CONVERSATION_ACCESS(917),
     NO_EMAIL_ACCESS(918),
-    NO_COMMUNITY_ACCESS(203);
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: Int): ConversationCanWriteReason = parseEnum(value)
-    }
+    NO_COMMUNITY_ACCESS(203)
 }

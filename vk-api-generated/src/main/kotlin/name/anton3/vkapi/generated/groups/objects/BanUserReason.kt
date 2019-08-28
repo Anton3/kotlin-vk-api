@@ -1,20 +1,13 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.groups.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class BanUserReason(@JsonValue override val value: Int) : Value<Int> {
+enum class BanUserReason(override val value: Int) : ValueEnum<Int> {
     OTHER(0),
     SPAM(1),
     VERBAL_ABUSE(2),
     STRONG_LANGUAGE(3),
-    IRRELEVANT_MESSAGES(4);
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: Int): BanUserReason = parseEnum(value)
-    }
+    IRRELEVANT_MESSAGES(4)
 }

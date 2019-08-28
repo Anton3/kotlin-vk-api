@@ -1,19 +1,12 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.callback.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class ServerInfoStatus(@JsonValue override val value: String) : Value<String> {
+enum class ServerInfoStatus(override val value: String) : ValueEnum<String> {
     UNCONFIGURED("unconfigured"),
     FAIL("fail"),
     WAIT("wait"),
-    OK("ok");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): ServerInfoStatus = parseEnum(value)
-    }
+    OK("ok")
 }

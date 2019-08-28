@@ -1,22 +1,15 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package name.anton3.vkapi.generated.account.objects
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonValue
-import name.anton3.vkapi.vktypes.Value
-import name.anton3.vkapi.vktypes.parseEnum
+import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class LookupContactsService(@JsonValue override val value: String) : Value<String> {
+enum class LookupContactsService(override val value: String) : ValueEnum<String> {
     EMAIL("email"),
     PHONE("phone"),
     TWITTER("twitter"),
     FACEBOOK("facebook"),
     ODNOKLASSNIKI("odnoklassniki"),
     INSTAGRAM("instagram"),
-    GOOGLE("google");
-
-    companion object {
-        @JvmStatic
-        @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-        fun parse(value: String): LookupContactsService = parseEnum(value)
-    }
+    GOOGLE("google")
 }
