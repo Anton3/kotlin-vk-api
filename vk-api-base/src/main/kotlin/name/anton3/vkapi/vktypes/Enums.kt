@@ -2,7 +2,7 @@ package name.anton3.vkapi.vktypes
 
 import java.io.IOException
 
-interface Value<T> {
+interface Value<out T> {
     val value: T
 }
 

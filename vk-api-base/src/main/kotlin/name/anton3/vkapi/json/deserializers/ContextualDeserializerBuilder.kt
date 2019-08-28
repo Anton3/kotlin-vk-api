@@ -14,6 +14,6 @@ internal class ContextualDeserializerBuilder<T>(private val build: (Deserializat
     }
 
     override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): T {
-        throw NotImplementedError("DeserializerBuilder should be contextualized before use")
+        throw NotImplementedError("This deserializer should be contextualized before use")
     }
 }

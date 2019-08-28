@@ -49,7 +49,8 @@ class VkBaseSerialModule : SimpleModule() {
         addSerializer(OkResponseSerializer)
         addSerializer(PropertyExistsSerializer)
 
-        addDeserializer(VkResponse::class.java, VkResponseDeserializer.builder())
+        addDeserializer(VkResponse::class.java, ContextualDeserializerBuilder(::VkResponseDeserializer))
+        setMixInAnnotation(Value::class.java, ValueMixin::class.java)
     }
 }
 

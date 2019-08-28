@@ -14,13 +14,15 @@ import name.anton3.vkapi.json.core.weakType
 import name.anton3.vkapi.vktypes.VkError
 import name.anton3.vkapi.vktypes.VkResponse
 
-internal class VkResponseDeserializer(private val context: DeserializationContext) :
+internal class VkResponseDeserializer(context: DeserializationContext) :
     StdDeserializer<VkResponse<*>>(weakType<VkResponse<*>>()) {
 
-    override fun getValueType(): JavaType = context.contextualType
-    private val wrappedType = valueType.containedType(0)
+    private val contextualType = context.contextualType
+    private val wrappedType = contextualType.containedType(0)
     private val errorType = strongType<VkError>()
     private val errorsType = strongType<List<VkError>>()
+
+    override fun getValueType(): JavaType = contextualType
 
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext): VkResponse<*> {
         val codec = p.codec as ObjectMapper
@@ -37,9 +39,5 @@ internal class VkResponseDeserializer(private val context: DeserializationContex
         }
 
         return VkResponse(response, error, executeErrors ?: emptyList())
-    }
-
-    companion object {
-        fun builder() = ContextualDeserializerBuilder { VkResponseDeserializer(it) }
     }
 }
