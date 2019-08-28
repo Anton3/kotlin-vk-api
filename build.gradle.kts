@@ -21,7 +21,7 @@ repositories {
 
 subprojects {
     group = "com.github.Anton3"
-    version = "0.8.0"
+    version = "0.9.0-rc"
 
     repositories {
         mavenCentral()
@@ -40,7 +40,7 @@ subprojects {
     }
 
     dependencies {
-        val kotlinVersion = "1.3.41"
+        val kotlinVersion = "1.3.50"
         implementation(kotlin("stdlib-jdk8:$kotlinVersion"))
 
         implementation("org.apache.logging.log4j:log4j-core:2.12.0")
