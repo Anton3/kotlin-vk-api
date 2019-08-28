@@ -2,6 +2,7 @@ package name.anton3.vkapi.generator.source
 
 import name.anton3.vkapi.generator.TypeSpace
 import name.anton3.vkapi.generator.under2camel
+import name.anton3.vkapi.json.core.VkPropertyNamingStrategy
 
 interface SourceWriter {
     fun constructorField(
@@ -51,7 +52,6 @@ fun <T> Collection<T>.joinIfNotEmpty(
     if (isEmpty()) "" else joinTo(StringBuilder(), separator, prefix, postfix, limit, truncated, transform).toString()
 
 class KotlinSourceWriter(private val typeSpace: TypeSpace) : SourceWriter {
-
     private val referencedTypes = HashSet<TypeId>()
 
     override fun constructorField(
@@ -84,7 +84,10 @@ class KotlinSourceWriter(private val typeSpace: TypeSpace) : SourceWriter {
     }
 
     override fun fieldName(name: String): String {
-        return under2camel(name)
+        val fieldName = under2camel(name)
+        val serializedName = VkPropertyNamingStrategy.translate(fieldName)
+        require(serializedName == name) { "Incorrect naming strategy: $name => $fieldName => $serializedName" }
+        return fieldName
     }
 
     override fun parentType(type: TypeId): String {
