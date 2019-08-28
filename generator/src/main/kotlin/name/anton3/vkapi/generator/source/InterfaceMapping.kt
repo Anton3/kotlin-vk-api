@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generator.source
 
+import com.fasterxml.jackson.databind.AbstractTypeResolver
+import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver
 import name.anton3.vkapi.generator.TypeSpace
 
 class InterfaceMapping(private val typeSpace: TypeSpace) : TypeDefinition {
@@ -10,8 +12,8 @@ class InterfaceMapping(private val typeSpace: TypeSpace) : TypeDefinition {
 
     override fun generateSource(basePackage: String, typeId: TypeId, sourceWriter: SourceWriter): String {
 
-        sourceWriter.importType(TypeId("com.fasterxml.jackson.databind.AbstractTypeResolver"))
-        sourceWriter.importType(TypeId("com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver"))
+        sourceWriter.importType(TypeId<AbstractTypeResolver>())
+        sourceWriter.importType(TypeId<SimpleAbstractTypeResolver>())
 
         val mappings = typeSpace.interfaceImplementations
             .map { (iFace, Impl) ->

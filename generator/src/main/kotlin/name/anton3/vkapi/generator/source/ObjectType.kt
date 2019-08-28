@@ -1,5 +1,7 @@
 package name.anton3.vkapi.generator.source
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+
 data class Prop(
     val name: String,
     val typeId: TypeId,
@@ -44,9 +46,9 @@ data class ObjectType(
             sourceWriter.parentType(arg)
         }
 
-        val implType = implementation ?: TypeId("java.lang.Void").takeIf { parents.isNotEmpty() }
+        val implType = implementation ?: TypeId<Void>().takeIf { parents.isNotEmpty() }
         val implClause = implType?.let {
-            sourceWriter.importType(TypeId("com.fasterxml.jackson.databind.annotation.JsonDeserialize"))
+            sourceWriter.importType(TypeId<JsonDeserialize>())
             sourceWriter.importType(implType)
             "@JsonDeserialize(`as` = ${implType.name}::class)\n"
         }.orEmpty()

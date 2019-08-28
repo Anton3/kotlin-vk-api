@@ -1,10 +1,15 @@
 package name.anton3.vkapi.generator
 
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonValue
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
 import name.anton3.vkapi.generator.json.*
 import name.anton3.vkapi.generator.source.*
+import name.anton3.vkapi.method.*
+import name.anton3.vkapi.vktypes.*
 import org.apache.logging.log4j.kotlin.Logging
 import java.nio.file.Files
 import java.nio.file.Path
@@ -142,15 +147,15 @@ class SourceGenerator(val basePackage: String) {
     }
 
     private fun makeArrayType(itemType: TypeId): TypeId {
-        return TypeId("kotlin.collections.List", listOf(itemType))
+        return TypeId<List<*>>(itemType)
     }
 
     private fun makeVkMethod(resultType: TypeId, methodRequirement: TypeId): TypeId {
-        return TypeId("name.anton3.vkapi.method.VkMethod", listOf(resultType, methodRequirement))
+        return TypeId<VkMethod<*, *>>(resultType, methodRequirement)
     }
 
     private fun makeVkList(typeId: TypeId): TypeId {
-        return TypeId("name.anton3.vkapi.vktypes.VkList", listOf(typeId))
+        return TypeId<VkList<*>>(typeId)
     }
 
     private fun makeMethodAccessType(methodSchema: MethodSchema): TypeId {
@@ -158,7 +163,11 @@ class SourceGenerator(val basePackage: String) {
 
         val tokenTypes = methodSchema.accessTokenType.toSet()
         val filteredTokenTypes = listOf("user", "group", "service").filter { tokenTypes.contains(it) }
-        if (filteredTokenTypes.isEmpty()) return TypeId(interfacePackage, "MethodRequirement")
+
+        if (filteredTokenTypes.isEmpty()) {
+            logger.warn("Absent method requirements for ${methodSchema.name}")
+            return TypeId(interfacePackage, "MethodRequirement")
+        }
 
         val interfaceName = filteredTokenTypes.joinToString("", postfix = "Method") { it.capitalize() }
 
@@ -213,7 +222,7 @@ class SourceGenerator(val basePackage: String) {
         val type = EnumType.decodeTypeDefinition(typeObject.enum, typeObject.enumNames, typeObject.type == "integer")
 
         return if (type == BuiltinType)
-            TypeId("kotlin.Boolean")
+            TypeId<Boolean>()
         else
             typeSpace.registerTypeImplementation(typeId, type)
     }
@@ -345,10 +354,8 @@ class SourceGenerator(val basePackage: String) {
             }
 
             val finalType = when {
-                name in listOf("date", "timestamp", "update_time") && typeId.name == "Int" ->
-                    TypeId("name.anton3.vkapi.vktypes.VkDate")
-                name == "bdate" && typeId.name == "String" ->
-                    TypeId("name.anton3.vkapi.vktypes.VkBirthDate")
+                name in listOf("date", "timestamp", "update_time") && typeId.name == "Int" -> TypeId<VkDate>()
+                name == "bdate" && typeId.name == "String" -> TypeId<VkBirthDate>()
                 else -> typeId
             }
 
@@ -365,10 +372,7 @@ class SourceGenerator(val basePackage: String) {
     }
 
     private fun makeMapResultType(): TypeId {
-        val typeId = TypeId(
-            qualifiedName = "kotlin.collections.Map",
-            genericParameters = listOf(TypeId("kotlin.Int"), TypeId("kotlin.Boolean"))
-        )
+        val typeId = TypeId<Map<*, *>>(TypeId<Int>(), TypeId<Boolean>())
 
         return typeSpace.registerTypeImplementation(typeId, BuiltinType)
     }
@@ -416,36 +420,37 @@ class SourceGenerator(val basePackage: String) {
 
     private fun defineCommonTypes() {
         // Types that are not generated
-        typeSpace.registerBuiltin("java.lang.Void")
-        typeSpace.registerBuiltin("kotlin.collections.List")
-        typeSpace.registerBuiltin("kotlin.collections.Map")
-        typeSpace.registerBuiltin("com.fasterxml.jackson.databind.annotation.JsonDeserialize")
-        typeSpace.registerBuiltin("com.fasterxml.jackson.annotation.JsonCreator")
-        typeSpace.registerBuiltin("com.fasterxml.jackson.annotation.JsonValue")
+        typeSpace.registerBuiltin<Void>()
+        typeSpace.registerBuiltin<List<*>>()
+        typeSpace.registerBuiltin<Map<*, *>>()
+        typeSpace.registerBuiltin<JsonDeserialize>()
+        typeSpace.registerBuiltin<JsonCreator>()
+        typeSpace.registerBuiltin<JsonValue>()
+        typeSpace.registerBuiltin<VkDate>()
+        typeSpace.registerBuiltin<VkList<*>>()
+        typeSpace.registerBuiltin<VkBirthDate>()
+        typeSpace.registerBuiltin<VkMethod<*, *>>()
+        typeSpace.registerBuiltin<MethodRequirement>()
+        typeSpace.registerBuiltin<UserMethod>()
+        typeSpace.registerBuiltin<GroupMethod>()
+        typeSpace.registerBuiltin<ServiceMethod>()
+        typeSpace.registerBuiltin<UserGroupMethod>()
+        typeSpace.registerBuiltin<UserServiceMethod>()
+        typeSpace.registerBuiltin<UserGroupServiceMethod>()
+        typeSpace.registerBuiltin<Value<*>>()
         typeSpace.registerBuiltin("com.fasterxml.jackson.module.kotlin.jacksonTypeRef")
-        typeSpace.registerBuiltin("name.anton3.vkapi.vktypes.VkDate")
-        typeSpace.registerBuiltin("name.anton3.vkapi.vktypes.VkList")
-        typeSpace.registerBuiltin("name.anton3.vkapi.vktypes.VkBirthDate")
-        typeSpace.registerBuiltin("name.anton3.vkapi.method.VkMethod")
-        typeSpace.registerBuiltin("name.anton3.vkapi.method.MethodRequirement")
-        typeSpace.registerBuiltin("name.anton3.vkapi.method.UserMethod")
-        typeSpace.registerBuiltin("name.anton3.vkapi.method.ServiceMethod")
-        typeSpace.registerBuiltin("name.anton3.vkapi.method.UserGroupMethod")
-        typeSpace.registerBuiltin("name.anton3.vkapi.method.UserServiceMethod")
-        typeSpace.registerBuiltin("name.anton3.vkapi.method.UserGroupServiceMethod")
-        typeSpace.registerBuiltin("name.anton3.vkapi.vktypes.Value")
         typeSpace.registerBuiltin("name.anton3.vkapi.vktypes.parseEnum")
 
         // Primitive schema types
-        typeSpace.registerVkPrimitiveType("integer", "kotlin.Int")
-        typeSpace.registerVkPrimitiveType("string", "kotlin.String")
-        typeSpace.registerVkPrimitiveType("boolean", "kotlin.Boolean")
-        typeSpace.registerVkPrimitiveType("number", "kotlin.Double")
+        typeSpace.registerVkPrimitiveType<Int>("integer")
+        typeSpace.registerVkPrimitiveType<String>("string")
+        typeSpace.registerVkPrimitiveType<Boolean>("boolean")
+        typeSpace.registerVkPrimitiveType<Double>("number")
 
         // Redefine some schema types to better representations
-        typeSpace.registerVkPrimitiveType("base_bool_int", "name.anton3.vkapi.vktypes.BoolInt")
-        typeSpace.registerVkPrimitiveType("base_property_exists", "name.anton3.vkapi.vktypes.PropertyExists")
-        typeSpace.registerVkPrimitiveType("base_ok_response", "name.anton3.vkapi.vktypes.OkResponse")
+        typeSpace.registerVkPrimitiveType<BoolInt>("base_bool_int")
+        typeSpace.registerVkPrimitiveType<PropertyExists>("base_property_exists")
+        typeSpace.registerVkPrimitiveType<OkResponse>("base_ok_response")
     }
 
     private fun deleteOldAndRecreate(absPath: Path) {

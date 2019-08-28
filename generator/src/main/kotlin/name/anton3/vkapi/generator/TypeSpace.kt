@@ -113,8 +113,16 @@ class TypeSpace {
         registerTypeImplementation(TypeId(qualifiedName), BuiltinType)
     }
 
+    inline fun <reified T> registerBuiltin() {
+        registerBuiltin(T::class.qualifiedName!!)
+    }
+
     fun registerVkPrimitiveType(jsonRef: JsonTypeRef, qualifiedName: String) {
         registerType(jsonRef, TypeId(qualifiedName), BuiltinType)
+    }
+
+    inline fun <reified T> registerVkPrimitiveType(jsonRef: JsonTypeRef) {
+        registerVkPrimitiveType(jsonRef, T::class.qualifiedName!!)
     }
 
     fun resolveTypeIdByJsonRefOrNull(ref: JsonTypeRef): TypeId? {

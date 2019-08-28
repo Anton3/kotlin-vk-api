@@ -52,6 +52,12 @@ data class TypeId(
     }
 }
 
+@Suppress("FunctionName")
+inline fun <reified T> TypeId(vararg genericParameters: TypeId): TypeId {
+    return TypeId(qualifiedName = T::class.qualifiedName!!, genericParameters = genericParameters.toList())
+}
+
+
 fun TypeId.allNestedGenericParameters(): List<TypeId> {
     return treeNodesToList(this, estimatedCount = 4) { it.genericParameters }.distinctBy { it.qualifiedName() }
 }

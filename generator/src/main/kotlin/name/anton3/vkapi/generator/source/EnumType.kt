@@ -1,5 +1,9 @@
 package name.anton3.vkapi.generator.source
 
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonValue
+import name.anton3.vkapi.vktypes.Value
+
 data class EnumType(val items: List<Item>, val isInteger: Boolean) : TypeDefinition {
 
     data class Item(val name: String, val value: String)
@@ -9,12 +13,12 @@ data class EnumType(val items: List<Item>, val isInteger: Boolean) : TypeDefinit
 
     override fun generateSource(basePackage: String, typeId: TypeId, sourceWriter: SourceWriter): String {
 
-        sourceWriter.importType(TypeId("com.fasterxml.jackson.annotation.JsonCreator"))
-        sourceWriter.importType(TypeId("com.fasterxml.jackson.annotation.JsonValue"))
-        sourceWriter.importType(TypeId("name.anton3.vkapi.vktypes.Value"))
+        sourceWriter.importType(TypeId<JsonCreator>())
+        sourceWriter.importType(TypeId<JsonValue>())
+        sourceWriter.importType(TypeId<Value<*>>())
+        sourceWriter.importType(TypeId<Int>())
+        sourceWriter.importType(TypeId<String>())
         sourceWriter.importType(TypeId("name.anton3.vkapi.vktypes.parseEnum"))
-        sourceWriter.importType(TypeId("kotlin.Int"))
-        sourceWriter.importType(TypeId("kotlin.String"))
 
         val packageClause = sourceWriter.packageClause(typeId)
         val importClause = sourceWriter.importClause(typeId)
