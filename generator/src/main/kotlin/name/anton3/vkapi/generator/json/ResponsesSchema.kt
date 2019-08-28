@@ -1,8 +1,5 @@
 package name.anton3.vkapi.generator.json
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-
-
 data class ResponsesSchema(
     val `$schema`: String,
     val title: String,
@@ -18,6 +15,5 @@ data class ResponseDefinitionSchema(
 )
 
 data class ResponseObjectDefinition(
-    @JsonDeserialize(using = ObjectSchemaDeserializer::class)
-    val response: Object
+    val response: TypeDescription
 )

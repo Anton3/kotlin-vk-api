@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
 import name.anton3.vkapi.generator.json.*
@@ -23,7 +24,7 @@ class SourceGenerator(val basePackage: String) {
     private lateinit var objectsSchema: ObjectsSchema
     private lateinit var responsesSchema: ResponsesSchema
 
-    private val jsonObjects = HashMap<JsonTypeRef, Object>()
+    private val jsonObjects = HashMap<JsonTypeRef, TypeDescription>()
 
     private val typeSpace = TypeSpace()
 
@@ -79,7 +80,7 @@ class SourceGenerator(val basePackage: String) {
     private fun resolveMethods() {
         logger.info("Total methods: ${methodsSchema.methods.size}")
         val normalizedMethods = methodsSchema.methods.mapNotNull { normalizeMethodDefinition(it) }.flatten()
-            .filter { responseSchemaIsDefined(it.responses.response) }
+            .filter { responseSchemaIsDefined(it.normalizedResponse) }
         logger.info("Normalized  methods: ${normalizedMethods.size}")
         normalizedMethods.forEach(this::makeMethod)
     }
@@ -126,7 +127,7 @@ class SourceGenerator(val basePackage: String) {
     }
 
     private fun makeMethodResultType(methodSchema: MethodSchema): TypeId? {
-        val responseRef = methodSchema.responses.response.toJsonRef()
+        val responseRef = methodSchema.normalizedResponse.toJsonRef()
         val responseObject = responsesSchema.definitions[responseRef]!!.properties.response
 
         val needsVkListWrapping = responseObject is GeneralObject &&
@@ -174,7 +175,7 @@ class SourceGenerator(val basePackage: String) {
         return TypeId(interfacePackage, interfaceName)
     }
 
-    private fun makeType(nameStrategy: NameStrategy, responseRef: JsonTypeRef, typeObject: Object?): TypeId? {
+    private fun makeType(nameStrategy: NameStrategy, responseRef: JsonTypeRef, typeObject: TypeDescription?): TypeId? {
         if (typeObject == null) {
             logger.warn("Type $responseRef is undefined")
             return null
@@ -341,7 +342,7 @@ class SourceGenerator(val basePackage: String) {
     }
 
     private fun objectPropsToClassProps(
-        properties: Map<String, Object>,
+        properties: Map<String, TypeDescription>,
         nameStrategy: NameStrategy,
         responseRef: JsonTypeRef,
         required: List<String> = emptyList()
@@ -459,18 +460,6 @@ class SourceGenerator(val basePackage: String) {
         Files.createDirectories(absPath)
     }
 
-    fun resolveMethod(methodId: String) {
-        defineCommonTypes()
-        val normalizedMethods = methodsSchema.methods
-            .filter { it.name == methodId }
-            .mapNotNull { normalizeMethodDefinition(it) }
-            .flatten()
-            .filter { responseSchemaIsDefined(it.responses.response) }
-
-        logger.info("Normalized  methods: ${normalizedMethods.size}")
-        normalizedMethods.forEach(this::makeMethod)
-    }
-
     private fun concatenatePackage(packagePath: String, fileName: String): String {
         return if (packagePath.last() == '/') "$packagePath$fileName" else "$packagePath/$fileName"
     }
@@ -527,4 +516,15 @@ class SourceGenerator(val basePackage: String) {
 
 }
 
-private val OBJECT_MAPPER = ObjectMapper().registerModule(KotlinModule())
+private val OBJECT_MAPPER: ObjectMapper = makeObjectMapper()
+
+private fun makeObjectMapper(): ObjectMapper {
+    val module = SimpleModule()
+    module.addDeserializer(TypeDescription::class.java, ObjectSchemaDeserializer)
+
+    val om = ObjectMapper()
+    om.registerModule(KotlinModule())
+    om.registerModule(module)
+
+    return om
+}
