@@ -2,15 +2,21 @@ package name.anton3.vkapi.methods.longpoll
 
 import com.fasterxml.jackson.module.kotlin.readValue
 import name.anton3.vkapi.json.core.vkObjectMapper
+import name.anton3.vkapi.methods.longpoll.events.FriendOnline
 import name.anton3.vkapi.methods.longpoll.events.LongPollEvent
 import name.anton3.vkapi.methods.longpoll.events.MessageAdded
 import name.anton3.vkapi.methods.longpoll.events.MessageEdited
+import name.anton3.vkapi.methods.longpoll.objects.FriendPlatform
+import name.anton3.vkapi.vktypes.VkDate
 import org.intellij.lang.annotations.Language
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class UserLongPollParsingTest {
+
+    private val objectMapper = vkObjectMapper()
+
     @Test
     fun testParsingAttachments() {
         @Language("JSON")
@@ -51,8 +57,6 @@ class UserLongPollParsingTest {
             0
         )
 
-        val objectMapper = vkObjectMapper()
-
         for ((eventJson, attachmentCount) in events.zip(attachmentCounts)) {
             val event = objectMapper.readValue<LongPollEvent>(eventJson)
             assertTrue(event is MessageAdded || event is MessageEdited)
@@ -71,5 +75,14 @@ class UserLongPollParsingTest {
 
             // println(eventJson2)
         }
+
+        val weirdFriendOnline = """{"ts":1850079661,"updates":[[8,-174309413,4,1567064768,2274003,1,0]]}"""
+        val weirdFriendOnlineParsed = UserLongPollResponse(
+            ts = "1850079661",
+            updates = listOf(
+                FriendOnline(8, 174309413, FriendPlatform.ANDROID, VkDate(1567064768))
+            )
+        )
+        assertEquals(weirdFriendOnlineParsed, objectMapper.readValue<UserLongPollResponse>(weirdFriendOnline))
     }
 }

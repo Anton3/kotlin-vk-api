@@ -6,7 +6,7 @@ import name.anton3.vkapi.methods.longpoll.events.LongPollEvent
 import name.anton3.vkapi.methods.longpoll.objects.LongPollFailure
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class LongPollResponse<EventType>(
+data class LongPollResponse<EventType>(
     val failed: LongPollFailure? = null,
     val ts: String? = null,
     val updates: List<EventType> = emptyList()

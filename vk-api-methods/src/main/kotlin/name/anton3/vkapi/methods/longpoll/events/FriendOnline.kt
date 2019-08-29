@@ -20,7 +20,8 @@ data class FriendOnline(
             extra: Int,
             timestamp: VkDate,
             @Suppress("UNUSED_PARAMETER") unused1: Int?,
-            @Suppress("UNUSED_PARAMETER") unused2: Int?
+            @Suppress("UNUSED_PARAMETER") unused2: Int?,
+            @Suppress("UNUSED_PARAMETER") unused3: Int?
         ): FriendOnline {
             val platform = (extra and 0xFF).takeIf { it != 0 }?.let { platforms[it] }
             return FriendOnline(eventType, -userId, platform, timestamp)
