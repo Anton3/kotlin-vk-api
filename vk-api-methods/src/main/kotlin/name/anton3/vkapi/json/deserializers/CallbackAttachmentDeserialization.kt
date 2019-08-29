@@ -1,5 +1,7 @@
 package name.anton3.vkapi.json.deserializers
 
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonValue
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
@@ -18,6 +20,7 @@ import name.anton3.vkapi.generated.gifts.objects.Layout
 import name.anton3.vkapi.generated.market.objects.MarketAlbum
 import name.anton3.vkapi.generated.market.objects.MarketItem
 import name.anton3.vkapi.generated.messages.objects.AudioMessage
+import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
 import name.anton3.vkapi.generated.messages.objects.MessageGraffiti
 import name.anton3.vkapi.generated.pages.objects.WikipageFull
 import name.anton3.vkapi.generated.photos.objects.Photo
@@ -80,6 +83,13 @@ internal val messageAttachmentTypes: List<NamedType> = listOf(
 )
 
 
+class UnknownCallbackAttachment @JsonCreator(mode = JsonCreator.Mode.DELEGATING) constructor(
+    @Suppress("unused")
+    @JsonValue
+    val contents: ObjectNode
+) : WallPostAttachmentBody, CommentAttachmentBody, MessageAttachmentBody
+
+
 internal inline fun <reified Attachment : Any, reified Body : Any> attachmentDeserializer(attachmentTypes: List<NamedType>): StdDeserializer<Attachment> {
     val constructor = Attachment::class.primaryConstructor!!
     val typeToClass = attachmentTypes.associate { it.name!! to it.type!! }
@@ -90,12 +100,17 @@ internal inline fun <reified Attachment : Any, reified Body : Any> attachmentDes
             val node = p.readNode<ObjectNode>()
 
             val type = node["type"]?.asText() ?: error("No `type` field")
-            val bodyNode = node[type]
+            val bodyNode = node[type] as ObjectNode
 
-            val klass = typeToClass.getOrElse(type) { error("Incorrect attachment type: $type") }
-            val body = codec.treeToValue(bodyNode, klass) as Body
+            val klass = typeToClass[type]
 
-            return constructor.call(type, body)
+            val body = if (klass != null) {
+                codec.treeToValue(bodyNode, klass)
+            } else {
+                UnknownCallbackAttachment(bodyNode)
+            }
+
+            return constructor.call(type, body as Body)
         }
     }
 }
