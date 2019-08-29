@@ -1,6 +1,6 @@
 package name.anton3.vkapi.methods.longpoll.attachments
 
-data class GenericAttachment(
-    override val type: AttachmentType,
+class AudioAttachment(
+    override val type: String,
     override val id: String
 ) : Attachment(type, id)
