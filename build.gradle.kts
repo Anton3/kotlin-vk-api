@@ -42,6 +42,7 @@ subprojects {
     dependencies {
         val kotlinVersion = "1.3.50"
         implementation(kotlin("stdlib-jdk8:$kotlinVersion"))
+        implementation(kotlin("reflect:$kotlinVersion"))
 
         implementation("org.apache.logging.log4j:log4j-core:2.12.0")
         implementation("org.apache.logging.log4j:log4j-api-kotlin:1.0.0")
