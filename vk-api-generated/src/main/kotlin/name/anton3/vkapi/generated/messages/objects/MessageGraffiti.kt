@@ -3,6 +3,7 @@
 package name.anton3.vkapi.generated.messages.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import name.anton3.vkapi.generated.docs.objects.SaveDocBody
 
 /**
  * No description
@@ -22,4 +23,4 @@ data class MessageGraffiti(
     val width: Int? = null,
     val height: Int? = null,
     val accessKey: String? = null
-) : MessageAttachmentBody
+) : MessageAttachmentBody, SaveDocBody

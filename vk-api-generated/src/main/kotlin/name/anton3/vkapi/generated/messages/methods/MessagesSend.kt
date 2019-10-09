@@ -34,7 +34,7 @@ import name.anton3.vkapi.method.VkMethod
  */
 data class MessagesSend(
     var userId: Int? = null,
-    var randomId: Int? = null,
+    var randomId: Int,
     var peerId: Int? = null,
     var domain: String? = null,
     var chatId: Int? = null,

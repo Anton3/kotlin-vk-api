@@ -1,0 +1,93 @@
+{
+  "methods": [
+    {
+      "name": "docs.save",
+      "description": "Saves a document after [vk.com/dev/upload_files_2|uploading it to a server]",
+      "access_token_type": [
+        "user",
+        "group"
+      ],
+      "parameters": [
+        {
+          "name": "file",
+          "description": "This parameter is returned when the file is [vk.com/dev/upload_files_2|uploaded to the server]",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "title",
+          "description": "Document title",
+          "type": "string"
+        },
+        {
+          "name": "tags",
+          "description": "Document tags",
+          "type": "string"
+        },
+        {
+          "name": "return_tags",
+          "description": "1 if should return tags, 0 otherwise",
+          "type": "integer"
+        }
+      ],
+      "errors": [
+        {
+          "name": "API_ERROR_SAVE_FILE",
+          "code": 105,
+          "description": "Couldn't save file"
+        }
+      ],
+      "responses": {
+        "response": {
+          "$ref": "responses.json#/definitions/docs_save_response"
+        }
+      }
+    }
+  ],
+  "responses": {
+    "docs_save_response": {
+      "type": "object",
+      "properties": {
+        "response": {
+          "type": "array",
+          "items": {
+            "$ref": "objects.json#/definitions/docs_save_doc"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "objects": {
+    "docs_save_doc": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "body": {
+          "$ref": "#/definitions/docs_save_doc_body"
+        }
+      },
+      "required": [
+        "type",
+        "body"
+      ],
+      "additionalProperties": false
+    },
+    "docs_save_doc_body": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/messages_audio_message"
+        },
+        {
+          "$ref": "#/definitions/docs_doc"
+        },
+        {
+          "$ref": "#/definitions/messages_message_graffiti"
+        }
+      ]
+    }
+  }
+}

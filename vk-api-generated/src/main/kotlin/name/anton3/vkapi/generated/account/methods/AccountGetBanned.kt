@@ -3,10 +3,9 @@
 package name.anton3.vkapi.generated.account.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.generated.users.objects.UserMin
+import name.anton3.vkapi.generated.account.objects.GetBannedResponse
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
-import name.anton3.vkapi.vktypes.VkList
 
 /**
  * [https://vk.com/dev/account.getBanned]
@@ -19,4 +18,4 @@ import name.anton3.vkapi.vktypes.VkList
 data class AccountGetBanned(
     var offset: Int? = null,
     var count: Int? = null
-) : VkMethod<VkList<UserMin>, UserMethod>("account.getBanned", jacksonTypeRef())
+) : VkMethod<GetBannedResponse, UserMethod>("account.getBanned", jacksonTypeRef())

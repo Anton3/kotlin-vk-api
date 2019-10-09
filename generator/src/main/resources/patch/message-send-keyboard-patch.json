@@ -143,7 +143,8 @@
         {
           "name": "random_id",
           "description": "Unique identifier to avoid resending the message.",
-          "type": "integer"
+          "type": "integer",
+          "required": true
         },
         {
           "name": "peer_id",

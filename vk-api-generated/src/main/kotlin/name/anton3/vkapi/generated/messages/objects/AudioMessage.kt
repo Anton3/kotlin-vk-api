@@ -3,6 +3,7 @@
 package name.anton3.vkapi.generated.messages.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import name.anton3.vkapi.generated.docs.objects.SaveDocBody
 
 /**
  * No description
@@ -24,4 +25,4 @@ data class AudioMessage(
     val linkMp3: String,
     val accessKey: String,
     val waveform: List<Int>
-) : MessageAttachmentBody
+) : MessageAttachmentBody, SaveDocBody

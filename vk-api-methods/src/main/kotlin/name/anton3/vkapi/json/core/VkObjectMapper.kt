@@ -3,6 +3,8 @@ package name.anton3.vkapi.json.core
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
+import name.anton3.vkapi.generated.docs.objects.SaveDoc
+import name.anton3.vkapi.generated.docs.objects.SaveDocBody
 import name.anton3.vkapi.generated.messages.objects.MessageAttachment
 import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
 import name.anton3.vkapi.generated.wall.objects.CommentAttachment
@@ -24,12 +26,14 @@ internal fun <T> SimpleModule.addDeserializer(deserializer: JsonDeserializer<T>)
 
 class VkMainSerialModule : SimpleModule() {
     init {
-        addSerializer(attachmentSerializer<WallpostAttachment, WallPostAttachmentBody>())
-        addSerializer(attachmentSerializer<CommentAttachment, CommentAttachmentBody>())
-        addSerializer(attachmentSerializer<MessageAttachment, MessageAttachmentBody>())
-        addDeserializer(attachmentDeserializer<WallpostAttachment, WallPostAttachmentBody>(wallPostAttachmentTypes))
-        addDeserializer(attachmentDeserializer<CommentAttachment, CommentAttachmentBody>(commentAttachmentTypes))
-        addDeserializer(attachmentDeserializer<MessageAttachment, MessageAttachmentBody>(messageAttachmentTypes))
+        addSerializer(vkPolymorphicSerializer<WallpostAttachment, WallPostAttachmentBody>())
+        addSerializer(vkPolymorphicSerializer<CommentAttachment, CommentAttachmentBody>())
+        addSerializer(vkPolymorphicSerializer<MessageAttachment, MessageAttachmentBody>())
+        addSerializer(vkPolymorphicSerializer<SaveDoc, SaveDocBody>())
+        addDeserializer(vkPolymorphicDeserializer<WallpostAttachment, WallPostAttachmentBody>(wallPostAttachmentTypes))
+        addDeserializer(vkPolymorphicDeserializer<CommentAttachment, CommentAttachmentBody>(commentAttachmentTypes))
+        addDeserializer(vkPolymorphicDeserializer<MessageAttachment, MessageAttachmentBody>(messageAttachmentTypes))
+        addDeserializer(vkPolymorphicDeserializer<SaveDoc, SaveDocBody>(saveDocResponseTypes))
 
         addDeserializer(LongPollEvent::class.java, LongPollEventDeserializer)
         setMixInAnnotation(MessageAdded::class.java, LongPollAttachmentsMixin::class.java)

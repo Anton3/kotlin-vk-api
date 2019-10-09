@@ -20,7 +20,8 @@ import name.anton3.vkapi.vktypes.BoolInt
  * @property firstName User first name
  * @property lastName User last name
  * @property deactivated Returns if a profile is deleted or blocked
- * @property hidden Returns if a profile is hidden.
+ * @property isClosed Is the profile hidden by privacy settings
+ * @property canAccessClosed Can we see the profile if is_closed = 1 (e.g. if that user is our friend)
  */
 @JsonDeserialize(`as` = UserImpl::class)
 interface User : UserMin {
@@ -34,6 +35,7 @@ interface User : UserMin {
     override val id: Int
     override val firstName: String
     override val lastName: String
-    override val deactivated: String?
-    override val hidden: Int?
+    override val deactivated: UserMinDeactivated?
+    override val isClosed: BoolInt
+    override val canAccessClosed: BoolInt?
 }

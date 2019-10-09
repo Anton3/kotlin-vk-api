@@ -34,4 +34,4 @@ data class Doc(
     val type: DocType,
     val preview: DocPreview? = null,
     val accessKey: String? = null
-) : WallPostAttachmentBody, CommentAttachmentBody, MessageAttachmentBody
+) : WallPostAttachmentBody, CommentAttachmentBody, MessageAttachmentBody, SaveDocBody
