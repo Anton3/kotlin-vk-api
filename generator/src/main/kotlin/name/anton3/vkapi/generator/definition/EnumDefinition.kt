@@ -1,8 +1,10 @@
-package name.anton3.vkapi.generator.source
+package name.anton3.vkapi.generator.definition
 
+import name.anton3.vkapi.generator.source.SourceWriter
+import name.anton3.vkapi.generator.source.TypeId
 import name.anton3.vkapi.vktypes.ValueEnum
 
-data class EnumType(val items: List<Item>, val isInteger: Boolean) : TypeDefinition {
+data class EnumDefinition(val items: List<Item>, val isInteger: Boolean) : Definition {
 
     data class Item(val name: String, val value: String)
 
@@ -36,9 +38,15 @@ data class EnumType(val items: List<Item>, val isInteger: Boolean) : TypeDefinit
     }
 
     companion object {
-        fun decodeTypeDefinition(values: List<String>, names: List<String>?, isInteger: Boolean): TypeDefinition {
+        fun decodeTypeDefinition(values: List<String>, names: List<String>?, isInteger: Boolean): Definition {
+            // TODO
+            if (isSameAsBoolean(values) && false) return BuiltinDefinition
             val items = (names ?: values).zip(values).map { (name, value) -> Item(name, value) }
-            return EnumType(items, isInteger)
+            return EnumDefinition(items, isInteger)
+        }
+
+        private fun isSameAsBoolean(values: List<String>): Boolean {
+            return values.toSet() in listOf(setOf("1"), setOf("0", "1"))
         }
     }
 }

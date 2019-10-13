@@ -3,6 +3,7 @@
 package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import name.anton3.vkapi.generated.groups.objects.GetFilter
 import name.anton3.vkapi.generated.groups.objects.GroupFull
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
@@ -21,7 +22,7 @@ import name.anton3.vkapi.vktypes.VkList
  */
 data class GroupsGetExtended(
     var userId: Int? = null,
-    var filter: List<String>? = null,
+    var filter: List<GetFilter>? = null,
     var fields: List<String>? = null,
     var offset: Int? = null,
     var count: Int? = null

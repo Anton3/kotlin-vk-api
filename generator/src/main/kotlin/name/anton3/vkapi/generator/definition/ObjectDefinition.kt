@@ -1,6 +1,9 @@
-package name.anton3.vkapi.generator.source
+package name.anton3.vkapi.generator.definition
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import name.anton3.vkapi.generator.source.SourceWriter
+import name.anton3.vkapi.generator.source.TypeId
+import name.anton3.vkapi.generator.source.joinIfNotEmpty
 
 data class Prop(
     val name: String,
@@ -10,13 +13,13 @@ data class Prop(
     val description: String?
 )
 
-data class ObjectType(
+data class ObjectDefinition(
     val props: List<Prop>,
     val kind: Kind,
     val parents: Set<TypeId> = emptySet(),
     val implementation: TypeId? = null,
     val description: String?
-) : TypeDefinition {
+) : Definition {
 
     enum class Kind {
         CLASS, INTERFACE

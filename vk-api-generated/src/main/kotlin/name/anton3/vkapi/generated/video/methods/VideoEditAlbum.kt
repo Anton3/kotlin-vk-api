@@ -3,6 +3,7 @@
 package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import name.anton3.vkapi.generated.video.objects.AlbumPrivacy
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.OkResponse
@@ -21,5 +22,5 @@ data class VideoEditAlbum(
     var groupId: Int? = null,
     var albumId: Int,
     var title: String,
-    var privacy: List<String>? = null
+    var privacy: List<AlbumPrivacy>? = null
 ) : VkMethod<OkResponse, UserMethod>("video.editAlbum", jacksonTypeRef())

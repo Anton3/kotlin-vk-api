@@ -89,17 +89,3 @@ fun joinToPath(components: List<String>): String {
 fun String.splitOrEmpty(vararg delimiters: String): List<String> {
     return takeIf { it.isNotEmpty() }?.split(*delimiters).orEmpty()
 }
-
-interface TypeDefinition {
-    val fixedName: Boolean
-    val hasSource: Boolean
-
-    fun generateSource(basePackage: String, typeId: TypeId, sourceWriter: SourceWriter): String {
-        return sourceWriter.packageClause(typeId)
-    }
-}
-
-object BuiltinType : TypeDefinition {
-    override val fixedName: Boolean get() = true
-    override val hasSource: Boolean get() = false
-}

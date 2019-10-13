@@ -3,6 +3,7 @@
 package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import name.anton3.vkapi.generated.video.objects.SearchFilters
 import name.anton3.vkapi.generated.video.objects.SearchSort
 import name.anton3.vkapi.generated.video.objects.Video
 import name.anton3.vkapi.method.UserMethod
@@ -30,7 +31,7 @@ data class VideoSearch(
     var sort: SearchSort? = null,
     var hd: Int? = null,
     var adult: Boolean? = null,
-    var filters: List<String>? = null,
+    var filters: List<SearchFilters>? = null,
     var searchOwn: Boolean? = null,
     var offset: Int? = null,
     var longer: Int? = null,

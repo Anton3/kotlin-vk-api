@@ -10,9 +10,9 @@ fun main() {
 
     val generator = SourceGenerator(basePackage = "name.anton3.vkapi.generated")
 
-    generator.methodsSchemaFrom("methods.json")
-    generator.loadObjectsDefinitionsFrom("objects.json")
-    generator.loadResponsesDefinitionsFrom("responses.json")
+    generator.loadMethods("methods.json")
+    generator.loadDefinitions("objects.json")
+    generator.loadResponses("responses.json")
 
     generator.loadPatchesFromPackage("/patch")
 

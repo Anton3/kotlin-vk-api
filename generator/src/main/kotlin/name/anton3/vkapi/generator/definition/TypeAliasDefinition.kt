@@ -1,6 +1,9 @@
-package name.anton3.vkapi.generator.source
+package name.anton3.vkapi.generator.definition
 
-class TypeAlias(val originalType: TypeId) : TypeDefinition {
+import name.anton3.vkapi.generator.source.SourceWriter
+import name.anton3.vkapi.generator.source.TypeId
+
+class TypeAliasDefinition(val originalType: TypeId) : Definition {
     override val fixedName: Boolean get() = false
 
     override val hasSource: Boolean get() = true

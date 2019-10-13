@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 object MethodResponsesDeserializer : StdDeserializer<MethodResponses>(MethodResponses::class.java) {
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext): MethodResponses {
         val oc = p.codec
+
+        if (p.isExpectedStartObjectToken) p.nextToken()
         val node: JsonNode = oc.readTree(p)
 
         val kind = when {

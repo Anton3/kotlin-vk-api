@@ -20,23 +20,23 @@ import name.anton3.vkapi.generator.under2Camel
 
 @JsonDeserialize(using = MethodResponsesDeserializer::class)
 interface MethodResponses {
-    fun normalizeMethodDefinition(methodSchema: MethodSchema): List<MethodSchema>
+    fun normalizeMethodDefinition(methodSchema: MethodSchema): List<NormalizedMethod>
 }
 
 @JsonDeserialize(using = JsonDeserializer.None::class)
-class BasicMethodResponses(val response: SchemaFileRef) : MethodResponses {
-    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<MethodSchema> {
-        return listOf(methodSchema)
+class BasicMethodResponses(val response: RefType) : MethodResponses {
+    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<NormalizedMethod> {
+        return listOf(methodSchema.normalize("", emptyMap(), response))
     }
 }
 
 @JsonDeserialize(using = JsonDeserializer.None::class)
 open class MethodExtendedResponses(
-    val response: SchemaFileRef,
-    val extendedResponse: SchemaFileRef
+    val response: RefType,
+    val extendedResponse: RefType
 ) : MethodResponses {
 
-    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<MethodSchema> {
+    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<NormalizedMethod> {
         return listOf(
             methodSchema.normalize("", mapOf("extended" to null), response),
             methodSchema.normalize("Extended", mapOf("extended" to "1"), extendedResponse)
@@ -46,10 +46,10 @@ open class MethodExtendedResponses(
 
 @JsonDeserialize(using = JsonDeserializer.None::class)
 open class FieldsResponses(
-    val response: SchemaFileRef,
-    val fieldsResponse: SchemaFileRef
+    val response: RefType,
+    val fieldsResponse: RefType
 ) : MethodResponses {
-    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<MethodSchema> {
+    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<NormalizedMethod> {
         return listOf(
             methodSchema.normalize("", mapOf("fields" to null), response),
             methodSchema.normalize("WithFields", emptyMap(), fieldsResponse)
@@ -59,11 +59,11 @@ open class FieldsResponses(
 
 @JsonDeserialize(using = JsonDeserializer.None::class)
 class MethodFieldWithFilterResponses(
-    response: SchemaFileRef,
-    fieldsResponse: SchemaFileRef,
-    val filterResponse: SchemaFileRef
+    response: RefType,
+    fieldsResponse: RefType,
+    val filterResponse: RefType
 ) : FieldsResponses(response, fieldsResponse) {
-    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<MethodSchema> {
+    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<NormalizedMethod> {
         return listOf(
             methodSchema.normalize("", mapOf("fields" to null), response),
             methodSchema.normalize("WithFields", emptyMap(), fieldsResponse),
@@ -74,10 +74,10 @@ class MethodFieldWithFilterResponses(
 
 @JsonDeserialize(using = JsonDeserializer.None::class)
 class OnlineMobileResponse(
-    val response: SchemaFileRef,
-    val onlineMobileResponse: SchemaFileRef
+    val response: RefType,
+    val onlineMobileResponse: RefType
 ) : MethodResponses {
-    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<MethodSchema> {
+    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<NormalizedMethod> {
         return listOf(
             methodSchema.normalize("", mapOf("online_mobile" to null), response),
             methodSchema.normalize("OnlineMobile", mapOf("online_mobile" to "1"), onlineMobileResponse)
@@ -87,10 +87,10 @@ class OnlineMobileResponse(
 
 @JsonDeserialize(using = JsonDeserializer.None::class)
 class TargetUidsResponse(
-    val response: SchemaFileRef,
-    val targetUidsResponse: SchemaFileRef
+    val response: RefType,
+    val targetUidsResponse: RefType
 ) : MethodResponses {
-    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<MethodSchema> {
+    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<NormalizedMethod> {
         return listOf(
             methodSchema.normalize("", mapOf("target_uids" to null), response),
             methodSchema.normalize("ManyUIds", emptyMap(), targetUidsResponse)
@@ -100,11 +100,11 @@ class TargetUidsResponse(
 
 @JsonDeserialize(using = JsonDeserializer.None::class)
 class NeedMutualResponse(
-    response: SchemaFileRef,
-    extendedResponse: SchemaFileRef,
-    val needMutualResponse: SchemaFileRef
+    response: RefType,
+    extendedResponse: RefType,
+    val needMutualResponse: RefType
 ) : MethodExtendedResponses(response, extendedResponse) {
-    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<MethodSchema> {
+    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<NormalizedMethod> {
         return listOf(
             methodSchema.normalize("", mapOf("extended" to null, "need_mutual" to null), response),
             methodSchema.normalize("NeedMutual", mapOf("extended" to null, "need_mutual" to "1"), needMutualResponse),
@@ -115,12 +115,12 @@ class NeedMutualResponse(
 
 @JsonDeserialize(using = JsonDeserializer.None::class)
 class UserIdsResponse(
-    response: SchemaFileRef,
-    extendedResponse: SchemaFileRef,
-    val userIdsResponse: SchemaFileRef? = null,
-    val userIdsExtendedResponse: SchemaFileRef? = null
+    response: RefType,
+    extendedResponse: RefType,
+    val userIdsResponse: RefType? = null,
+    val userIdsExtendedResponse: RefType? = null
 ) : MethodExtendedResponses(response, extendedResponse) {
-    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<MethodSchema> {
+    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<NormalizedMethod> {
         return listOf(
             methodSchema.normalize("", mapOf("extended" to null, "user_ids" to null), response),
             methodSchema.normalize("Extended", mapOf("extended" to "1", "user_ids" to null), extendedResponse),
@@ -132,13 +132,13 @@ class UserIdsResponse(
 
 @JsonDeserialize(using = JsonDeserializer.None::class)
 open class SuggestMethodResponses(
-    val response: SchemaFileRef,
-    val regionsResponse: SchemaFileRef,
-    val citiesResponse: SchemaFileRef,
-    val schoolsResponse: SchemaFileRef
+    val response: RefType,
+    val regionsResponse: RefType,
+    val citiesResponse: RefType,
+    val schoolsResponse: RefType
 ) : MethodResponses {
-    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<MethodSchema> {
-        val result = mutableListOf<MethodSchema>()
+    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<NormalizedMethod> {
+        val result = mutableListOf<NormalizedMethod>()
 
         listOf(
             "countries",

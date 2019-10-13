@@ -1,6 +1,12 @@
 package name.anton3.vkapi.generator
 
-import name.anton3.vkapi.generator.source.*
+import name.anton3.vkapi.generator.definition.BuiltinDefinition
+import name.anton3.vkapi.generator.definition.Definition
+import name.anton3.vkapi.generator.definition.ObjectDefinition
+import name.anton3.vkapi.generator.definition.Prop
+import name.anton3.vkapi.generator.source.JsonTypeRef
+import name.anton3.vkapi.generator.source.TypeId
+import name.anton3.vkapi.generator.source.allWildcardGenerics
 import org.apache.logging.log4j.kotlin.Logging
 
 class TypeSpace {
@@ -8,7 +14,7 @@ class TypeSpace {
     companion object : Logging
 
     private val typeReferences: MutableMap<JsonTypeRef, TypeId> = HashMap()
-    val definedTypes: MutableMap<TypeId, TypeDefinition> = HashMap()
+    val definedTypes: MutableMap<TypeId, Definition> = HashMap()
     private val typeAliases: MutableMap<TypeId, TypeId> = HashMap()
     val interfaceImplementations: MutableSet<Pair<TypeId, TypeId>> = HashSet()
 
@@ -17,9 +23,9 @@ class TypeSpace {
     fun splitToInterfaceImplementationPairIfNeeded(typeId: TypeId) {
         val type = definedTypes[resolveTypeAliases(typeId)]
 
-        require(type is ObjectType) { "Only ObjectType can be split" }
+        require(type is ObjectDefinition) { "Only ObjectType can be split" }
 
-        if (type.kind == ObjectType.Kind.INTERFACE) {
+        if (type.kind == ObjectDefinition.Kind.INTERFACE) {
             logger.debug("$typeId is already split")
             return
         }
@@ -33,11 +39,11 @@ class TypeSpace {
         val implType = type.copy(
             props = type.props.map { it.copy(inherited = true) },
             parents = setOf(typeId),
-            kind = ObjectType.Kind.CLASS
+            kind = ObjectDefinition.Kind.CLASS
         )
 
         val interfaceType = type.copy(
-            kind = ObjectType.Kind.INTERFACE,
+            kind = ObjectDefinition.Kind.INTERFACE,
             implementation = implTypeId
         )
 
@@ -59,7 +65,7 @@ class TypeSpace {
         return newTypeId
     }
 
-    private fun registerType(jsonRef: JsonTypeRef, typeId: TypeId, type: TypeDefinition): TypeId {
+    private fun registerType(jsonRef: JsonTypeRef, typeId: TypeId, type: Definition): TypeId {
         registerTypeReference(jsonRef, typeId)
         registerTypeImplementation(typeId, type)
         return typeId
@@ -72,7 +78,7 @@ class TypeSpace {
         typeReferences[jsonRef] = typeId
     }
 
-    fun registerTypeImplementation(typeId: TypeId, type: TypeDefinition): TypeId {
+    fun registerTypeImplementation(typeId: TypeId, type: Definition): TypeId {
         val oldObject = definedTypes[typeId]
         if (definedTypes.containsKey(typeId) && oldObject != type) {
             logger.warn("Collision with name $typeId. New: $type; Old: $oldObject")
@@ -80,7 +86,7 @@ class TypeSpace {
         return replaceTypeImplementation(typeId, type)
     }
 
-    private fun replaceTypeImplementation(typeId: TypeId, type: TypeDefinition): TypeId {
+    private fun replaceTypeImplementation(typeId: TypeId, type: Definition): TypeId {
         definedTypes[typeId] = type
         return typeId
     }
@@ -91,6 +97,11 @@ class TypeSpace {
 
     fun resolveTypeIdByJsonRef(jsonRef: JsonTypeRef): TypeId {
         val typeId = typeReferences[jsonRef] ?: error("Unknown type for jsonReference $jsonRef")
+        return resolveTypeAliases(typeId)
+    }
+
+    fun resolveTypeIdByJsonRefOrNull(ref: JsonTypeRef): TypeId? {
+        val typeId = typeReferences[ref] ?: return null
         return resolveTypeAliases(typeId)
     }
 
@@ -110,7 +121,7 @@ class TypeSpace {
     }
 
     fun registerBuiltin(qualifiedName: String) {
-        registerTypeImplementation(TypeId(qualifiedName), BuiltinType)
+        registerTypeImplementation(TypeId(qualifiedName), BuiltinDefinition)
     }
 
     inline fun <reified T> registerBuiltin() {
@@ -118,21 +129,16 @@ class TypeSpace {
     }
 
     fun registerVkPrimitiveType(jsonRef: JsonTypeRef, qualifiedName: String) {
-        registerType(jsonRef, TypeId(qualifiedName), BuiltinType)
+        registerType(jsonRef, TypeId(qualifiedName), BuiltinDefinition)
     }
 
     inline fun <reified T> registerVkPrimitiveType(jsonRef: JsonTypeRef) {
         registerVkPrimitiveType(jsonRef, T::class.qualifiedName!!)
     }
 
-    fun resolveTypeIdByJsonRefOrNull(ref: JsonTypeRef): TypeId? {
-        val typeId = typeReferences[ref] ?: return null
-        return resolveTypeAliases(typeId)
-    }
-
     fun addParentToType(typeId: TypeId, parentTypeId: TypeId) {
-        val type = definedTypes[typeId] as ObjectType
-        val parentType = definedTypes[parentTypeId] as ObjectType
+        val type = definedTypes[typeId] as ObjectDefinition
+        val parentType = definedTypes[parentTypeId] as ObjectDefinition
 
         splitToInterfaceImplementationPairIfNeeded(parentTypeId)
 
@@ -141,9 +147,7 @@ class TypeSpace {
             type.copy(
                 parents = type.parents + parentTypeId,
                 props = (normalizeTypeIds(type.props).toSet() + normalizeTypeIds(parentType.props).map {
-                    it.copy(
-                        inherited = true
-                    )
+                    it.copy(inherited = true)
                 }.toSet()).toList()
             )
         )

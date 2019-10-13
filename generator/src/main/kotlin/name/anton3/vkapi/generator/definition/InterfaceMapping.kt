@@ -1,14 +1,17 @@
-package name.anton3.vkapi.generator.source
+package name.anton3.vkapi.generator.definition
 
 import com.fasterxml.jackson.databind.AbstractTypeResolver
 import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver
 import name.anton3.vkapi.generator.TypeSpace
+import name.anton3.vkapi.generator.source.SourceWriter
+import name.anton3.vkapi.generator.source.TypeId
 
-class InterfaceMapping(private val typeSpace: TypeSpace) : TypeDefinition {
+class InterfaceMapping(private val typeSpace: TypeSpace) : Definition {
     override val fixedName: Boolean = true
     override val hasSource: Boolean = false
 
-    fun typeId(basePackage: String): TypeId = TypeId(basePackage, "vkInterfaceMapping")
+    fun typeId(basePackage: String): TypeId =
+        TypeId(basePackage, "vkInterfaceMapping")
 
     override fun generateSource(basePackage: String, typeId: TypeId, sourceWriter: SourceWriter): String {
 

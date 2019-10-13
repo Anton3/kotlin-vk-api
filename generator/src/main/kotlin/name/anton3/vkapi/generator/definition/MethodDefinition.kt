@@ -1,4 +1,8 @@
-package name.anton3.vkapi.generator.source
+package name.anton3.vkapi.generator.definition
+
+import name.anton3.vkapi.generator.source.SourceWriter
+import name.anton3.vkapi.generator.source.TypeId
+import name.anton3.vkapi.generator.source.joinIfNotEmpty
 
 data class MethodArgument(
     val typeId: TypeId,
@@ -7,13 +11,13 @@ data class MethodArgument(
     val description: String?
 )
 
-data class MethodType(
+data class MethodDefinition(
     val methodUrl: String,
     val arguments: List<MethodArgument>,
     val result: TypeId,
     val defaultParams: Map<String, String?> = emptyMap(),
     val description: String?
-) : TypeDefinition {
+) : Definition {
 
     class Item(val name: String, val value: String)
 
