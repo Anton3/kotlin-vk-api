@@ -115,17 +115,36 @@ class NeedMutualResponse(
 
 @JsonDeserialize(using = JsonDeserializer.None::class)
 class UserIdsResponse(
-    response: RefType,
-    extendedResponse: RefType,
+    val response: RefType,
+    val extendedResponse: RefType? = null,
     val userIdsResponse: RefType? = null,
     val userIdsExtendedResponse: RefType? = null
-) : MethodExtendedResponses(response, extendedResponse) {
+) : MethodResponses {
+    override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<NormalizedMethod> {
+        return listOfNotNull(
+            methodSchema.normalize("", mapOf("extended" to null, "user_ids" to null), response),
+            extendedResponse?.let {
+                methodSchema.normalize("Extended", mapOf("extended" to "1", "user_ids" to null), it)
+            },
+            // TODO
+            methodSchema.normalize("UserIds", mapOf("extended" to null, "user_ids" to null), response),
+            // TODO
+            extendedResponse?.let {
+                methodSchema.normalize("UserIdsExtended", mapOf("extended" to "1", "user_ids" to null), it)
+            }
+        )
+    }
+}
+
+@JsonDeserialize(using = JsonDeserializer.None::class)
+open class KeysResponse(
+    val keyResponse: RefType,
+    val keysResponse: RefType
+) : MethodResponses {
     override fun normalizeMethodDefinition(methodSchema: MethodSchema): List<NormalizedMethod> {
         return listOf(
-            methodSchema.normalize("", mapOf("extended" to null, "user_ids" to null), response),
-            methodSchema.normalize("Extended", mapOf("extended" to "1", "user_ids" to null), extendedResponse),
-            methodSchema.normalize("UserIds", mapOf("extended" to null, "user_id" to null), response),
-            methodSchema.normalize("UserIdsExtended", mapOf("extended" to "1", "user_id" to null), extendedResponse)
+            methodSchema.normalize("Key", mapOf("keys" to null), keyResponse),
+            methodSchema.normalize("keys", mapOf("key" to null), keysResponse)
         )
     }
 }

@@ -41,3 +41,6 @@ fun MethodSchema.normalize(
         response = responseRef.ref
     )
 }
+
+fun MethodSchema.normalize(): List<NormalizedMethod> =
+    responses.normalizeMethodDefinition(this)

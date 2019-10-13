@@ -2,6 +2,7 @@ package name.anton3.vkapi.generator.json
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonUnwrapped
+import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.vktypes.ValueEnum
 
@@ -36,7 +37,7 @@ enum class AccessTokenType(override val value: String) : ValueEnum<String> {
 @JsonDeserialize(using = SinglePolyUnwrappedDeserializer::class)
 data class MethodParameterSchema(
     val name: String,
-    val default: String? = null,
+    val default: JsonNode? = null,
     val required: Boolean = false,
     @JsonUnwrapped val parameterType: TypeSchema
 )
@@ -48,5 +49,6 @@ data class MethodSchema(
     val accessTokenType: List<AccessTokenType> = emptyList(),
     val parameters: List<MethodParameterSchema> = emptyList(),
     val responses: MethodResponses,
-    val errors: List<Error> = emptyList()
+    val errors: List<Error> = emptyList(),
+    val emptyResponse: Boolean = false
 )

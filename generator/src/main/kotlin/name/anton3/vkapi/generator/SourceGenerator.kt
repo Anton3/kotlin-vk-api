@@ -1,5 +1,6 @@
 package name.anton3.vkapi.generator
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.PropertyNamingStrategy
@@ -52,7 +53,7 @@ class SourceGenerator(val basePackage: String) {
         splitSomeObjects()
 
         logger.info("Defined ${typeSpace.typesCount} types")
-        typeSpace.printDefinedTypesNames()
+        typeSpace.logDefinedTypeNames()
     }
 
     private fun splitSomeObjects() {
@@ -64,19 +65,11 @@ class SourceGenerator(val basePackage: String) {
         }
     }
 
-    /**
-     * пройти по всем методам
-     * каждый из них расщипить если нужно, согласно логике
-     * Для каждого из получившихся "простых" методов:
-     *  Определить "тип" (объект,список,VkСписок)
-     *  Сформировать Type для возвращаемого значени
-     *  Объявить Type для метода
-     */
     private fun resolveMethods() {
         logger.info("Total methods: ${methods.size}")
-        val normalizedMethods = methods.values.map { normalizeMethodDefinition(it) }.flatten()
-            .filter { responseSchemaIsDefined(it.response) }
-        logger.info("Normalized  methods: ${normalizedMethods.size}")
+        val normalizedMethods = methods.values
+            .map { it.normalize() }.flatten().filter { responseSchemaIsDefined(it.response) }
+        logger.info("Normalized methods: ${normalizedMethods.size}")
         normalizedMethods.forEach { makeMethod(it) }
     }
 
@@ -87,14 +80,6 @@ class SourceGenerator(val basePackage: String) {
         return result
     }
 
-    private fun normalizeMethodDefinition(methodSchema: MethodSchema): List<NormalizedMethod> {
-        return methodSchema.responses.normalizeMethodDefinition(methodSchema)
-    }
-
-    /**
-     *  Сформировать Type для возвращаемого значения
-     *  Объявить Type для метода
-     */
     private fun makeMethod(methodsSchema: NormalizedMethod) {
         val methodResultType = makeMethodResultType(methodsSchema)
         if (methodResultType == null) {
@@ -183,7 +168,6 @@ class SourceGenerator(val basePackage: String) {
         val alreadyDefined = typeSpace.resolveTypeIdByJsonRefOrNull(responseRef)
 
         if (alreadyDefined != null) {
-            logger.debug("$responseRef already defined to $alreadyDefined")
             return alreadyDefined
         }
 
@@ -433,6 +417,7 @@ class SourceGenerator(val basePackage: String) {
         typeSpace.registerBuiltin<List<*>>()
         typeSpace.registerBuiltin<Map<*, *>>()
         typeSpace.registerBuiltin<JsonDeserialize>()
+        typeSpace.registerBuiltin<JsonProperty>()
         typeSpace.registerBuiltin<VkDate>()
         typeSpace.registerBuiltin<VkList<*>>()
         typeSpace.registerBuiltin<VkBirthDate>()

@@ -172,7 +172,7 @@
           "$ref": "#/definitions/base_sticker"
         },
         {
-          "$ref": "#/definitions/wall_wallpost_attached"
+          "$ref": "#/definitions/wall_wallpost_to_id"
         },
         {
           "$ref": "#/definitions/wall_wall_comment"

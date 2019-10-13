@@ -1,8 +1,10 @@
 package name.anton3.vkapi.generator.source
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import name.anton3.vkapi.generator.TypeSpace
 import name.anton3.vkapi.generator.under2camel
 import name.anton3.vkapi.json.core.VkPropertyNamingStrategy
+import org.apache.logging.log4j.kotlin.Logging
 
 interface SourceWriter {
     fun constructorField(
@@ -64,10 +66,24 @@ class KotlinSourceWriter(private val typeSpace: TypeSpace) : SourceWriter {
         delegateBy: String?
     ): String {
         return "    " +
+                propertyNameAnnotation(name) +
                 (if (inherited) "override " else "") +
                 (if (final) "val " else "var ") +
                 argument(name, type, nullable, defaultValue) +
                 (delegateBy?.let { " by $it" } ?: "")
+    }
+
+    private fun propertyNameAnnotation(name: String): String {
+        val fieldName = fieldName(name)
+        val serializedName = VkPropertyNamingStrategy.nameForConstructorParameter(null, null, fieldName)
+
+        return if (serializedName == name) {
+            ""
+        } else {
+            logger.debug("Generic naming strategy failed: $name => $fieldName => $serializedName")
+            importType(TypeId<JsonProperty>())
+            """@get:JsonProperty("$name") """
+        }
     }
 
     override fun argument(name: String, type: TypeId, nullable: Boolean, defaultValue: String?): String {
@@ -79,15 +95,11 @@ class KotlinSourceWriter(private val typeSpace: TypeSpace) : SourceWriter {
 
     override fun fieldNameEscaped(name: String): String {
         val result = fieldName(name)
-        return if (result in setOf("class", "object", "2faRequired")) "`$result`"
-        else result
+        return if (result in setOf("class", "object") || !result.first().isLetter()) "`$result`" else result
     }
 
     override fun fieldName(name: String): String {
-        val fieldName = under2camel(name)
-        val serializedName = VkPropertyNamingStrategy.translate(fieldName)
-        require(serializedName == name) { "Incorrect naming strategy: $name => $fieldName => $serializedName" }
-        return fieldName
+        return under2camel(name)
     }
 
     override fun parentType(type: TypeId): String {
@@ -151,4 +163,6 @@ class KotlinSourceWriter(private val typeSpace: TypeSpace) : SourceWriter {
     override fun realType(typeId: TypeId): TypeId {
         return typeSpace.resolveTypeAliases(typeId)
     }
+
+    companion object : Logging
 }

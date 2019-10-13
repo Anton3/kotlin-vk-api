@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "API",
   "description": "API declaration",
   "type": "object",
@@ -33,6 +33,27 @@
         "string"
       ]
     },
+    "responseTypes": {
+      "type": "string",
+      "enum": [
+        "array",
+        "boolean",
+        "integer",
+        "number",
+        "string",
+        "object"
+      ]
+    },
+    "responsePropertyTypes": {
+      "type": "string",
+      "enum": [
+        "array",
+        "boolean",
+        "integer",
+        "number",
+        "string"
+      ]
+    },
     "itemTypes": {
       "type": "string",
       "enum": [
@@ -49,6 +70,12 @@
           "type": "string",
           "description": "Parameter name"
         },
+        "format": {
+          "type": "string",
+          "enum": [
+            "json"
+          ]
+        },
         "type": {
           "$ref": "#/definitions/parameterTypes",
           "description": "Parameter type"
@@ -56,6 +83,10 @@
         "items": {
           "type": "object",
           "properties": {
+            "$ref": {
+              "type": "string",
+              "format": "uri-reference"
+            },
             "type": {
               "$ref": "#/definitions/itemTypes"
             },
@@ -64,10 +95,32 @@
             },
             "minimum": {
               "type": "number"
+            },
+            "enum": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "enumNames": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "uniqueItems": true
             }
           },
-          "required": [
-            "type"
+          "oneOf": [
+            {
+              "required": [
+                "type"
+              ]
+            },
+            {
+              "required": [
+                "$ref"
+              ]
+            }
           ],
           "additionalProperties": false
         },
@@ -86,13 +139,24 @@
         "minimum": {
           "type": "number"
         },
+        "$ref": {
+          "type": "string",
+          "format": "uri-reference"
+        },
         "enum": {
           "type": "array",
           "minItems": 1,
           "uniqueItems": true
         },
-        "default": {
+        "enumNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true
         },
+        "default": [],
         "required": {
           "type": "boolean",
           "default": false
@@ -109,12 +173,95 @@
         "description": {
           "type": "string",
           "description": "Parameter description"
+        },
+        "deprecated_from_version": {
+          "type": "string",
+          "description": "Property deprecated from version"
+        },
+        "from_version": {
+          "type": "string",
+          "description": "Property implemented from version"
         }
       },
       "required": [
         "name",
         "type"
       ],
+      "additionalProperties": false
+    },
+    "responseProperty": {
+      "type": "object",
+      "oneOf": [
+        {
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "required": [
+            "$ref"
+          ]
+        }
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/responseTypes"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "deprecated_from_version": {
+          "type": "string"
+        },
+        "from_version": {
+          "type": "string"
+        },
+        "items": {
+          "oneOf": [
+            {
+              "type": "array"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "$ref": {
+                  "type": "string"
+                }
+              }
+            }
+          ]
+        },
+        "required": {
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "oneOf": {
+          "type": "array"
+        },
+        "$ref": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "properties": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9_]+$": {
+              "$ref": "#/definitions/responseProperty"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
       "additionalProperties": false
     },
     "error": {
@@ -132,6 +279,12 @@
         "description": {
           "type": "string",
           "description": "Error description"
+        },
+        "deprecated_from_version": {
+          "type": "string"
+        },
+        "from_version": {
+          "type": "string"
         }
       },
       "required": [
@@ -159,6 +312,12 @@
           "type": "string",
           "description": "Method description"
         },
+        "deprecated_from_version": {
+          "type": "string"
+        },
+        "from_version": {
+          "type": "string"
+        },
         "access_token_type": {
           "type": "array",
           "items": {
@@ -183,18 +342,25 @@
         "responses": {
           "type": "object",
           "patternProperties": {
-            "^(a-zA-Z)+$": {
-              "$ref": "#/definitions/jsonReference"
+            "^([a-zA-Z0-9_]+)?[rR]esponse$": {
+              "$ref": "#/definitions/response"
             }
           },
+          "additionalProperties": true,
           "description": "References to response objects"
+        },
+        "emptyResponse": {
+          "type": "boolean",
+          "default": false
         },
         "errors": {
           "$ref": "#/definitions/errors"
         }
       },
       "required": [
-        "name"
+        "name",
+        "access_token_type",
+        "responses"
       ],
       "additionalProperties": false
     }
@@ -208,6 +374,20 @@
       "items": {
         "$ref": "#/definitions/method"
       }
+    },
+    "definitions": {
+      "patternProperties": {
+        "^([a-zA-Z0-9_]+)?[rR]esponse$": {
+          "$ref": "#/definitions/response"
+        }
+      }
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri-reference"
+    },
+    "title": {
+      "type": "string"
     }
   },
   "additionalProperties": false

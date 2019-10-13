@@ -91,7 +91,7 @@ class TypeSpace {
         return typeId
     }
 
-    fun printDefinedTypesNames() {
+    fun logDefinedTypeNames() {
         definedTypes.map { it.key.qualifiedName() }.sorted().forEach { logger.debug(it) }
     }
 
@@ -142,13 +142,36 @@ class TypeSpace {
 
         splitToInterfaceImplementationPairIfNeeded(parentTypeId)
 
+        val ownProps = normalizeTypeIds(type.props).associateByTo(mutableMapOf()) { it.name }
+        val parentProps = normalizeTypeIds(parentType.props).associateBy { it.name }
+
+        for ((name, parentProp) in parentProps) {
+            val ownProp = ownProps[name]
+
+            val mergedProp = if (ownProp == null) {
+                parentProp.copy(inherited = true)
+            } else {
+                require(ownProp.typeId == parentProp.typeId) {
+                    "$typeId has multiple different props with name $name"
+                }
+
+                Prop(
+                    name = name,
+                    typeId = ownProp.typeId,
+                    inherited = true,
+                    nullable = ownProp.nullable && parentProp.nullable,
+                    description = ownProp.description ?: parentProp.description
+                )
+            }
+
+            ownProps[name] = mergedProp
+        }
+
         replaceTypeImplementation(
             typeId,
             type.copy(
                 parents = type.parents + parentTypeId,
-                props = (normalizeTypeIds(type.props).toSet() + normalizeTypeIds(parentType.props).map {
-                    it.copy(inherited = true)
-                }.toSet()).toList()
+                props = ownProps.values.toList()
             )
         )
     }

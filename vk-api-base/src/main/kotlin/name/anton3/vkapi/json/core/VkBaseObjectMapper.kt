@@ -9,34 +9,7 @@ import com.fasterxml.jackson.module.kotlin.KotlinModule
 import name.anton3.vkapi.json.deserializers.*
 import name.anton3.vkapi.vktypes.*
 
-object VkPropertyNamingStrategy : PropertyNamingStrategy.PropertyNamingStrategyBase() {
-    override fun translate(propertyName: String): String {
-        val builder = StringBuilder(propertyName.length * 2)
-        var previous: Char? = null
-
-        for (character in propertyName) {
-            when {
-                character.isDigit() -> {
-                    if (previous?.isDigit() == false && noUnderscore.none { it in propertyName }) builder.append('_')
-                    builder.append(character)
-                }
-                character.isLowerCase() -> {
-                    builder.append(character)
-                }
-                character.isUpperCase() -> {
-                    builder.append('_')
-                    builder.append(character.toLowerCase())
-                }
-                else -> error("Unknown character in property name: $character")
-            }
-            previous = character
-        }
-
-        return builder.toString()
-    }
-
-    private val noUnderscore: List<String> = listOf("Mp3", "X2", "x2", "Y2", "y2", "category1", "v1", "v2")
-}
+val VkPropertyNamingStrategy: PropertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
 
 class VkBaseSerialModule : SimpleModule() {
     init {

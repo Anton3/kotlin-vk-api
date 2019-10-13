@@ -21,6 +21,7 @@ object MethodResponsesDeserializer : StdDeserializer<MethodResponses>(MethodResp
             node.has("fieldsResponse") -> FieldsResponses::class
             node.has("schoolsResponse") -> SuggestMethodResponses::class
             node.has("extendedResponse") -> MethodExtendedResponses::class
+            node.has("keysResponse") -> KeysResponse::class
             else -> BasicMethodResponses::class
         }
 
