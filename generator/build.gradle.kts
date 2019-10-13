@@ -1,5 +1,5 @@
 dependencies {
-    val jacksonVersion = "2.9.9"
+    val jacksonVersion = "2.10.0"
 
     api(project(":vk-api-base"))
 

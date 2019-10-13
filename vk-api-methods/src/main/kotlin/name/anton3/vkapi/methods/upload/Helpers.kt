@@ -55,7 +55,7 @@ suspend fun UserGroupClient.uploadMessageDocument(
             title = fileName,
             tags = tags.joinToString(",")
         )
-    ).first()
+    ).first().body as Doc
 }
 
 data class UploadChatPhotoResponse(val response: String)

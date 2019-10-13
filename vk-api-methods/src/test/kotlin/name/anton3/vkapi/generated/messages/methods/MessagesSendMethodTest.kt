@@ -13,9 +13,10 @@ import kotlin.random.Random
 
 class MessagesSendMethodTest {
     @Test
-    fun smoke1() = runBlocking {
+    fun smoke1(): Unit = runBlocking {
         val result = groupApi(
             MessagesSend(
+                randomId = Random.nextInt(0, Int.MAX_VALUE),
                 peerId = peerId,
                 groupId = groupId,
                 message = "test"
@@ -25,8 +26,9 @@ class MessagesSendMethodTest {
     }
 
     @Test
-    fun smoke2() = runBlocking {
+    fun smoke2(): Unit = runBlocking {
         val method = MessagesSend(
+            randomId = Random.nextInt(0, Int.MAX_VALUE),
             userId = peerId,
             message = "test"
         )
@@ -34,13 +36,13 @@ class MessagesSendMethodTest {
     }
 
     @Test
-    fun smoke3() = runBlocking {
+    fun smoke3(): Unit = runBlocking {
         val result = groupApi(makeMessageToSend())
         println(result)
     }
 
     @Test
-    fun smoke4() = runBlocking {
+    fun smoke4(): Unit = runBlocking {
         val date = VkDate(123456)
         val serialized = userApi.objectMapper.writeValueAsString(date)!!
         val deserialized = userApi.objectMapper.readValue<VkDate>(serialized)

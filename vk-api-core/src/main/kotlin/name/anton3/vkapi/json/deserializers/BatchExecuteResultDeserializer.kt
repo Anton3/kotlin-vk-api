@@ -2,12 +2,11 @@ package name.anton3.vkapi.json.deserializers
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.BooleanNode
-import name.anton3.vkapi.json.core.METHOD_ATTRIBUTE
 import name.anton3.vkapi.json.attributes.forwardableAttributes
+import name.anton3.vkapi.json.core.METHOD_ATTRIBUTE
 import name.anton3.vkapi.json.core.readNode
 import name.anton3.vkapi.methods.execute.BatchExecuteMethod
 import name.anton3.vkapi.methods.execute.BatchExecuteResult
@@ -15,7 +14,7 @@ import name.anton3.vkapi.methods.execute.BatchExecuteResult
 internal object BatchExecuteResultDeserializer : StdDeserializer<BatchExecuteResult>(BatchExecuteResult::class.java) {
 
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext): BatchExecuteResult {
-        val codec = p.codec as ObjectMapper
+        val codec = p.codec
         val node = p.readNode<ArrayNode>()
 
         val method: BatchExecuteMethod = ctxt.forwardableAttributes[METHOD_ATTRIBUTE] as? BatchExecuteMethod
@@ -26,7 +25,7 @@ internal object BatchExecuteResultDeserializer : StdDeserializer<BatchExecuteRes
                 if (child is BooleanNode && !child.booleanValue()) {
                     null
                 } else {
-                    codec.readValue<Any?>(child.traverse(codec), childMethod.responseType)
+                    codec.readValue(child.traverse(codec), ctxt.typeFactory.constructType(childMethod.responseType))
                 }
             }
         )

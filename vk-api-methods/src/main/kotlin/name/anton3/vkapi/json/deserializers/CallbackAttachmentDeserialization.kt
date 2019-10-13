@@ -8,6 +8,7 @@ import name.anton3.vkapi.generated.audio.objects.AudioFull
 import name.anton3.vkapi.generated.common.objects.Link
 import name.anton3.vkapi.generated.common.objects.Sticker
 import name.anton3.vkapi.generated.docs.objects.Doc
+import name.anton3.vkapi.generated.docs.objects.SaveDocBody
 import name.anton3.vkapi.generated.gifts.objects.Layout
 import name.anton3.vkapi.generated.market.objects.MarketAlbum
 import name.anton3.vkapi.generated.market.objects.MarketItem
@@ -74,4 +75,4 @@ class UnknownCallbackAttachment @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
     @Suppress("unused")
     @JsonValue
     val contents: ObjectNode
-) : WallPostAttachmentBody, CommentAttachmentBody, MessageAttachmentBody
+) : WallPostAttachmentBody, CommentAttachmentBody, MessageAttachmentBody, SaveDocBody
