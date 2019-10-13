@@ -2,6 +2,7 @@
 
 package name.anton3.vkapi.generated.wall.objects
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 
 /**
@@ -16,6 +17,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 data class AppPost(
     val id: Int? = null,
     val name: String? = null,
-    val photo130: String? = null,
-    val photo604: String? = null
+    @get:JsonProperty("photo_130") val photo130: String? = null,
+    @get:JsonProperty("photo_604") val photo604: String? = null
 ) : WallPostAttachmentBody

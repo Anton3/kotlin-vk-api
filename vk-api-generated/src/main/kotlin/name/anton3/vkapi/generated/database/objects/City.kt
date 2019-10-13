@@ -11,7 +11,7 @@ import name.anton3.vkapi.vktypes.BoolInt
  *
  * @property area Area title
  * @property region Region title
- * @property important Information whether the city is included in important cities list
+ * @property important No description
  * @property id Object ID
  * @property title Object title
  */

@@ -8,7 +8,7 @@ import name.anton3.vkapi.vktypes.BoolInt
 /**
  * No description
  *
- * @property noReposts Information whether reposts hiding is enabled
+ * @property noReposts No description
  * @property sourceIds No description
  * @property id List ID
  * @property title List title

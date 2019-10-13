@@ -3,10 +3,10 @@
 package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.generated.groups.objects.Fields
 import name.anton3.vkapi.generated.groups.objects.GetMembersFilter
 import name.anton3.vkapi.generated.groups.objects.GetMembersSort
 import name.anton3.vkapi.generated.groups.objects.UserXtrRole
+import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.method.UserGroupServiceMethod
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList

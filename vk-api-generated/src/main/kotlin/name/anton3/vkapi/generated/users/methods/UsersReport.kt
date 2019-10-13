@@ -14,7 +14,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * Reports (submits a complain about) a user.
  *
  * @property userId ID of the user about whom a complaint is being made.
- * @property type Type of complaint: 'porn' – pornography, 'spam' – spamming, 'insult' – abusive behavior, 'advertisment' – disruptive advertisements
+ * @property type Type of complaint: 'porn' – pornography, 'spam' – spamming, 'insult' – abusive behavior, 'advertisement' – disruptive advertisements
  * @property comment Comment describing the complaint.
  */
 data class UsersReport(

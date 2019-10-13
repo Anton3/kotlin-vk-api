@@ -13,8 +13,8 @@ import name.anton3.vkapi.method.VkMethod
  * Returns an upload link for chat cover pictures.
  *
  * @property chatId ID of the chat for which you want to upload a cover photo.
- * @property cropX 
- * @property cropY 
+ * @property cropX No description
+ * @property cropY No description
  * @property cropWidth Width (in pixels) of the photo after cropping.
  */
 data class PhotosGetChatUploadServer(

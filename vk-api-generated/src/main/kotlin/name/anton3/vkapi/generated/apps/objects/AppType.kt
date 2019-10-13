@@ -8,5 +8,8 @@ enum class AppType(override val value: String) : ValueEnum<String> {
     APP("app"),
     GAME("game"),
     SITE("site"),
-    STANDALONE("standalone")
+    STANDALONE("standalone"),
+    VK_APP("vk_app"),
+    COMMUNITY_APP("community_app"),
+    HTML5_GAME("html5_game")
 }

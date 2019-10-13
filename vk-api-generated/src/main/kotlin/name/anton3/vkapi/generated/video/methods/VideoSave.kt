@@ -23,6 +23,7 @@ import name.anton3.vkapi.method.VkMethod
  * @property privacyComment No description
  * @property noComments No description
  * @property repeat '1' — to repeat the playback of the video, '0' — to play the video once,
+ * @property compression No description
  */
 data class VideoSave(
     var name: String? = null,
@@ -35,5 +36,6 @@ data class VideoSave(
     var privacyView: List<String>? = null,
     var privacyComment: List<String>? = null,
     var noComments: Boolean? = null,
-    var repeat: Boolean? = null
+    var repeat: Boolean? = null,
+    var compression: Boolean? = null
 ) : VkMethod<SaveResult, UserMethod>("video.save", jacksonTypeRef())

@@ -3,11 +3,10 @@
 package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import name.anton3.vkapi.generated.video.objects.GetCommentsExtendedResponse
 import name.anton3.vkapi.generated.video.objects.GetCommentsSort
-import name.anton3.vkapi.generated.wall.objects.WallComment
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
-import name.anton3.vkapi.vktypes.VkList
 
 /**
  * [https://vk.com/dev/video.getComments]
@@ -21,6 +20,7 @@ import name.anton3.vkapi.vktypes.VkList
  * @property offset Offset needed to return a specific subset of comments.
  * @property count Number of comments to return.
  * @property sort Sort order: 'asc' — oldest comment first, 'desc' — newest comment first
+ * @property fields No description
  */
 data class VideoGetCommentsExtended(
     var ownerId: Int? = null,
@@ -29,8 +29,9 @@ data class VideoGetCommentsExtended(
     var startCommentId: Int? = null,
     var offset: Int? = null,
     var count: Int? = null,
-    var sort: GetCommentsSort? = null
-) : VkMethod<VkList<WallComment>, UserMethod>("video.getComments", jacksonTypeRef()) {
+    var sort: GetCommentsSort? = null,
+    var fields: List<String>? = null
+) : VkMethod<GetCommentsExtendedResponse, UserMethod>("video.getComments", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")
     }

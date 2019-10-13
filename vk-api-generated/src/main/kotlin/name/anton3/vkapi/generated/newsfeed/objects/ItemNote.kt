@@ -16,7 +16,7 @@ import name.anton3.vkapi.vktypes.VkDate
 @JsonDeserialize(`as` = Void::class)
 data class ItemNote(
     val notes: ItemNoteNotes? = null,
-    override val type: NewsfeedItemType? = null,
-    override val sourceId: Int? = null,
-    override val date: VkDate? = null
-) : NewsfeedItem
+    override val type: NewsfeedItemType,
+    override val sourceId: Int,
+    override val date: VkDate
+) : ItemBase, NewsfeedItem

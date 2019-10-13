@@ -20,5 +20,5 @@ import name.anton3.vkapi.vktypes.OkResponse
 data class MarketReport(
     var ownerId: Int,
     var itemId: Int,
-    var reason: Reason
+    var reason: Reason? = null
 ) : VkMethod<OkResponse, UserMethod>("market.report", jacksonTypeRef())

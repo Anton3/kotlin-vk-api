@@ -16,9 +16,11 @@ import name.anton3.vkapi.vktypes.VkList
  * @property ownerId ID of the user or community that owns the video album(s).
  * @property offset Offset needed to return a specific subset of video albums.
  * @property count Number of video albums to return.
+ * @property needSystem No description
  */
 data class VideoGetAlbums(
     var ownerId: Int? = null,
     var offset: Int? = null,
-    var count: Int? = null
+    var count: Int? = null,
+    var needSystem: Boolean? = null
 ) : VkMethod<VkList<VideoAlbumFull>, UserMethod>("video.getAlbums", jacksonTypeRef())

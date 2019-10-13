@@ -4,10 +4,10 @@ package name.anton3.vkapi.generated.wall.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.common.objects.GetCommentsSort
-import name.anton3.vkapi.generated.wall.objects.WallComment
+import name.anton3.vkapi.generated.common.objects.UserGroupFields
+import name.anton3.vkapi.generated.wall.objects.GetCommentsResponse
 import name.anton3.vkapi.method.UserServiceMethod
 import name.anton3.vkapi.method.VkMethod
-import name.anton3.vkapi.vktypes.VkList
 
 /**
  * [https://vk.com/dev/wall.getComments]
@@ -22,14 +22,20 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of comments to return (maximum 100).
  * @property sort Sort order: 'asc' — chronological, 'desc' — reverse chronological
  * @property previewLength Number of characters at which to truncate comments when previewed. By default, '90'. Specify '0' if you do not want to truncate comments.
+ * @property fields No description
+ * @property commentId Comment ID.
+ * @property threadItemsCount Count items in threads.
  */
 data class WallGetComments(
     var ownerId: Int? = null,
-    var postId: Int,
+    var postId: Int? = null,
     var needLikes: Boolean? = null,
     var startCommentId: Int? = null,
     var offset: Int? = null,
     var count: Int? = null,
     var sort: GetCommentsSort? = null,
-    var previewLength: Int? = null
-) : VkMethod<VkList<WallComment>, UserServiceMethod>("wall.getComments", jacksonTypeRef())
+    var previewLength: Int? = null,
+    var fields: List<UserGroupFields>? = null,
+    var commentId: Int? = null,
+    var threadItemsCount: Int? = null
+) : VkMethod<GetCommentsResponse, UserServiceMethod>("wall.getComments", jacksonTypeRef())

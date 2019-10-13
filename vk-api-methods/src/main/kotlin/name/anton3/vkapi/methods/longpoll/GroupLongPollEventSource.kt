@@ -28,7 +28,7 @@ class GroupLongPollEventSource(
     }
 
     override suspend fun iteratorWithTs(iterator: LongPollServer, ts: Int): LongPollServer {
-        return iterator.copy(ts = ts)
+        return iterator.copy(ts = ts.toString())
     }
 
     override suspend fun iterator(): LongPollServer {

@@ -3,7 +3,8 @@
 package name.anton3.vkapi.generated.newsfeed.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.generated.newsfeed.objects.GetFilters
+import name.anton3.vkapi.generated.common.objects.UserGroupFields
+import name.anton3.vkapi.generated.newsfeed.objects.Filters
 import name.anton3.vkapi.generated.newsfeed.objects.GetResponse
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
@@ -22,15 +23,17 @@ import name.anton3.vkapi.method.VkMethod
  * @property startFrom identifier required to get the next page of results. Value for this parameter is returned in 'next_from' field in a reply.
  * @property count Number of news items to return (default 50, maximum 100). For auto feed, you can use the 'new_offset' parameter returned by this method.
  * @property fields Additional fields of [vk.com/dev/fields|profiles] and [vk.com/dev/fields_groups|communities] to return.
+ * @property section No description
  */
 data class NewsfeedGet(
-    var filters: List<GetFilters>? = null,
+    var filters: List<Filters>? = null,
     var returnBanned: Boolean? = null,
     var startTime: Int? = null,
     var endTime: Int? = null,
     var maxPhotos: Int? = null,
-    var sourceIds: List<String>? = null,
+    var sourceIds: String? = null,
     var startFrom: String? = null,
     var count: Int? = null,
-    var fields: List<String>? = null
+    var fields: List<UserGroupFields>? = null,
+    var section: String? = null
 ) : VkMethod<GetResponse, UserMethod>("newsfeed.get", jacksonTypeRef())

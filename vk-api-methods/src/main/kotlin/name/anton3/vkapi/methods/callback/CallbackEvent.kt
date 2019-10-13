@@ -6,8 +6,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
-import name.anton3.vkapi.generated.audio.objects.AudioFull
+import name.anton3.vkapi.generated.audio.objects.Audio
 import name.anton3.vkapi.generated.board.objects.TopicComment
+import name.anton3.vkapi.generated.comment.objects.Thread
 import name.anton3.vkapi.generated.common.objects.LikesInfo
 import name.anton3.vkapi.generated.messages.objects.Message
 import name.anton3.vkapi.generated.photos.objects.Photo
@@ -43,7 +44,7 @@ interface Attachment
     JsonSubTypes.Type(name = "photo_comment_restore", value = PhotoCommentCallbackEvent::class),
     JsonSubTypes.Type(name = "photo_comment_delete", value = PhotoCommentDelete::class),
 
-    JsonSubTypes.Type(name = "audio_new", value = AudioFull::class),
+    JsonSubTypes.Type(name = "audio_new", value = Audio::class),
 
     JsonSubTypes.Type(name = "video_new", value = VideoImpl::class),
     JsonSubTypes.Type(name = "video_comment_new", value = VideoCommentCallbackEvent::class),
@@ -83,10 +84,7 @@ interface Attachment
 
     JsonSubTypes.Type(name = "vkpay_transaction", value = VkPayTransaction::class)
 )
-sealed class CallbackEvent<T>(
-    val groupId: Int,
-    val attachment: T
-) {
+sealed class CallbackEvent<T>(val groupId: Int, val attachment: T) {
     override fun toString(): String {
         return "${this.javaClass.simpleName}(id=${this.groupId}, attach=${this.attachment})"
     }
@@ -115,7 +113,6 @@ class MessageDeny(groupId: Int, @JsonProperty("object") attachment: ToggleMessag
 
 
 class WallReply(
-    val postId: Int,
     val postOwnerId: Int,
     override val id: Int,
     override val fromId: Int,
@@ -125,7 +122,12 @@ class WallReply(
     override val replyToUser: Int?,
     override val replyToComment: Int?,
     override val attachments: List<CommentAttachment>?,
-    override val realOffset: Int?
+    override val realOffset: Int?,
+    override val thread: Thread?,
+    override val postId: Int,
+    override val ownerId: Int?,
+    override val parentsStack: List<Int>?,
+    override val deleted: Boolean?
 ) : WallComment
 
 class WallReplyCallbackEvent(groupId: Int, @JsonProperty("object") attachment: WallReply) :
@@ -174,7 +176,12 @@ class MarketCommentAttach(
     override val replyToUser: Int?,
     override val replyToComment: Int?,
     override val attachments: List<CommentAttachment>?,
-    override val realOffset: Int?
+    override val realOffset: Int?,
+    override val thread: Thread?,
+    override val postId: Int?,
+    override val ownerId: Int?,
+    override val parentsStack: List<Int>?,
+    override val deleted: Boolean?
 ) : WallComment
 
 class MarketCommentCallbackEvent(groupId: Int, @JsonProperty("object") attachment: MarketCommentAttach) :
@@ -206,7 +213,12 @@ class PhotoCommentAttach(
     override val replyToUser: Int?,
     override val replyToComment: Int?,
     override val attachments: List<CommentAttachment>?,
-    override val realOffset: Int?
+    override val realOffset: Int?,
+    override val thread: Thread?,
+    override val postId: Int?,
+    override val ownerId: Int?,
+    override val parentsStack: List<Int>?,
+    override val deleted: Boolean?
 ) : WallComment
 
 class PhotoCommentCallbackEvent(groupId: Int, @JsonProperty("object") attachment: PhotoCommentAttach) :
@@ -235,7 +247,12 @@ class VideoCommentAttachment(
     override val replyToUser: Int?,
     override val replyToComment: Int?,
     override val attachments: List<CommentAttachment>?,
-    override val realOffset: Int?
+    override val realOffset: Int?,
+    override val thread: Thread?,
+    override val postId: Int?,
+    override val ownerId: Int?,
+    override val parentsStack: List<Int>?,
+    override val deleted: Boolean?
 ) : WallComment
 
 class VideoCommentCallbackEvent(groupId: Int, @JsonProperty("object") attachment: VideoCommentAttachment) :

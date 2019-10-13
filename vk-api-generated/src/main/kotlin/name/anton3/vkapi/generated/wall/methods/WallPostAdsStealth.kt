@@ -19,11 +19,11 @@ import name.anton3.vkapi.method.VkMethod
  * @property lat Geographical latitude of a check-in, in degrees (from -90 to 90).
  * @property long Geographical longitude of a check-in, in degrees (from -180 to 180).
  * @property placeId ID of the location where the user was tagged.
- * @property postId Post ID. Used for publishing of scheduled and suggested posts.
  * @property guid Unique identifier to avoid duplication the same post.
  * @property linkButton Link button ID
  * @property linkTitle Link title
  * @property linkImage Link image url
+ * @property linkVideo Link video ID in format "<owner_id>_<media_id>"
  */
 data class WallPostAdsStealth(
     var ownerId: Int,
@@ -33,9 +33,9 @@ data class WallPostAdsStealth(
     var lat: Double? = null,
     var long: Double? = null,
     var placeId: Int? = null,
-    var postId: Int? = null,
     var guid: String? = null,
     var linkButton: String? = null,
     var linkTitle: String? = null,
-    var linkImage: String? = null
+    var linkImage: String? = null,
+    var linkVideo: String? = null
 ) : VkMethod<PostAdsStealthResponse, UserMethod>("wall.postAdsStealth", jacksonTypeRef())

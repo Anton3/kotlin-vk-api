@@ -6,6 +6,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.apps.objects.App
 import name.anton3.vkapi.generated.apps.objects.GetPlatform
 import name.anton3.vkapi.generated.common.objects.NameCase
+import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.method.UserServiceMethod
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
@@ -18,6 +19,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property appId Application ID
  * @property appIds List of application ID
  * @property platform platform. Possible values: *'ios' — iOS,, *'android' — Android,, *'winphone' — Windows Phone,, *'web' — приложения на vk.com. By default: 'web'.
+ * @property extended No description
+ * @property returnFriends No description
  * @property fields Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'contacts', 'education', 'online', 'counters', 'relation', 'last_seen', 'activity', 'can_write_private_message', 'can_see_all_posts', 'can_post', 'universities', (only if return_friends - 1)
  * @property nameCase Case for declension of user name and surname: 'nom' — nominative (default),, 'gen' — genitive,, 'dat' — dative,, 'acc' — accusative,, 'ins' — instrumental,, 'abl' — prepositional. (only if 'return_friends' = '1')
  */
@@ -25,6 +28,8 @@ data class AppsGet(
     var appId: Int? = null,
     var appIds: List<String>? = null,
     var platform: GetPlatform? = null,
-    var fields: List<String>? = null,
+    var extended: Boolean? = null,
+    var returnFriends: Boolean? = null,
+    var fields: List<Fields>? = null,
     var nameCase: NameCase? = null
 ) : VkMethod<VkList<App>, UserServiceMethod>("apps.get", jacksonTypeRef())

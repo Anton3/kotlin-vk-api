@@ -17,5 +17,5 @@ import name.anton3.vkapi.vktypes.OkResponse
  */
 data class MessagesAddChatUser(
     var chatId: Int,
-    var userId: Int
+    var userId: Int? = null
 ) : VkMethod<OkResponse, UserMethod>("messages.addChatUser", jacksonTypeRef())

@@ -4,7 +4,7 @@ package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.video.objects.VideoAlbumFull
-import name.anton3.vkapi.method.MethodRequirement
+import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -21,7 +21,7 @@ data class VideoGetAlbumsByVideoExtended(
     var targetId: Int? = null,
     var ownerId: Int,
     var videoId: Int
-) : VkMethod<VkList<VideoAlbumFull>, MethodRequirement>("video.getAlbumsByVideo", jacksonTypeRef()) {
+) : VkMethod<VkList<VideoAlbumFull>, UserMethod>("video.getAlbumsByVideo", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")
     }

@@ -15,8 +15,8 @@ import name.anton3.vkapi.vktypes.VkDate
  *
  * @property likes No description
  * @property comments No description
- * @property canComment Information whether current user can comment the photo
- * @property canRepost Information whether current user can repost the photo
+ * @property canComment No description
+ * @property canRepost No description
  * @property id Photo ID
  * @property albumId Album ID
  * @property ownerId Photo owner's ID

@@ -5,10 +5,10 @@ package name.anton3.vkapi.generated.secure.objects
 /**
  * No description
  *
- * @property uid User ID
  * @property level Level
+ * @property uid User ID
  */
 data class Level(
-    val uid: Int? = null,
-    val level: Int? = null
+    val level: Int? = null,
+    val uid: Int? = null
 )

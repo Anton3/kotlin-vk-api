@@ -9,19 +9,19 @@ import name.anton3.vkapi.vktypes.VkDate
 /**
  * No description
  *
- * @property id Comment ID
- * @property fromId Author ID
- * @property date Date when the comment has been added in Unixtime
- * @property text Comment text
  * @property attachments No description
+ * @property date Date when the comment has been added in Unixtime
+ * @property fromId Author ID
+ * @property id Comment ID
  * @property realOffset Real position of the comment
+ * @property text Comment text
  */
 @JsonDeserialize(`as` = TopicCommentImpl::class)
 interface TopicComment {
-    val id: Int
-    val fromId: Int
-    val date: VkDate
-    val text: String
     val attachments: List<CommentAttachment>?
+    val date: VkDate
+    val fromId: Int
+    val id: Int
     val realOffset: Int?
+    val text: String
 }

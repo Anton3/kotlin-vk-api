@@ -3,6 +3,7 @@
 package name.anton3.vkapi.generated.users.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.generated.users.objects.GetSubscriptionsResponse
 import name.anton3.vkapi.method.UserServiceMethod
 import name.anton3.vkapi.method.VkMethod
@@ -21,5 +22,5 @@ data class UsersGetSubscriptions(
     var userId: Int? = null,
     var offset: Int? = null,
     var count: Int? = null,
-    var fields: List<String>? = null
+    var fields: List<Fields>? = null
 ) : VkMethod<GetSubscriptionsResponse, UserServiceMethod>("users.getSubscriptions", jacksonTypeRef())

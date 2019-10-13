@@ -4,7 +4,6 @@ package name.anton3.vkapi.generated.messages.objects
 
 import name.anton3.vkapi.generated.groups.objects.Group
 import name.anton3.vkapi.generated.users.objects.UserFull
-import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
@@ -16,6 +15,7 @@ import name.anton3.vkapi.vktypes.BoolInt
  * @property chats No description
  * @property newPts Persistence timestamp
  * @property more Has more
+ * @property conversations No description
  */
 data class GetLongPollHistoryResponse(
     val history: List<List<Int>>? = null,
@@ -24,5 +24,6 @@ data class GetLongPollHistoryResponse(
     val profiles: List<UserFull>? = null,
     val chats: List<Chat>? = null,
     val newPts: Int? = null,
-    val more: BoolInt? = null
+    val more: Boolean? = null,
+    val conversations: List<Conversation>? = null
 )

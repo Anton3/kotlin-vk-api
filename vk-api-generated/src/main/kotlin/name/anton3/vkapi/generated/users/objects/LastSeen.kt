@@ -5,10 +5,10 @@ package name.anton3.vkapi.generated.users.objects
 /**
  * No description
  *
- * @property time Last visit date (in Unix time)
  * @property platform Type of the platform that used for the last authorization
+ * @property time Last visit date (in Unix time)
  */
 data class LastSeen(
-    val time: Int? = null,
-    val platform: Int? = null
+    val platform: Int? = null,
+    val time: Int? = null
 )

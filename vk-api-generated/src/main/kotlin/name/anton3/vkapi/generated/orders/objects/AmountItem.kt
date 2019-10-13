@@ -5,12 +5,12 @@ package name.anton3.vkapi.generated.orders.objects
 /**
  * No description
  *
- * @property votes Votes number
  * @property amount Votes amount in user's currency
  * @property description Amount description
+ * @property votes Votes number
  */
 data class AmountItem(
-    val votes: String? = null,
     val amount: Int? = null,
-    val description: String? = null
+    val description: String? = null,
+    val votes: String? = null
 )

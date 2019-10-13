@@ -17,7 +17,7 @@ import name.anton3.vkapi.vktypes.BoolInt
  * @property votes Votes number
  * @property answerId Current user's answer ID
  * @property answers No description
- * @property anonymous Information whether the pole is anonymous
+ * @property anonymous No description
  */
 @JsonDeserialize(`as` = Void::class)
 data class Poll(

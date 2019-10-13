@@ -2,6 +2,7 @@
 
 package name.anton3.vkapi.generated.video.objects
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.PropertyExists
@@ -25,10 +26,10 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property accessKey Video access key
  * @property addingDate Date when the video has been added in Unixtime
  * @property player URL of the page with a player that can be used to play the video in the browser.
- * @property canEdit Information whether current user can edit the video
- * @property canAdd Information whether current user can add the video
- * @property processing Returns if the video is processing
- * @property live Returns if the video is live translation
+ * @property canEdit No description
+ * @property canAdd No description
+ * @property processing No description
+ * @property live No description
  * @property files No description
  * @property platform No description
  * @property width Video width
@@ -44,10 +45,10 @@ data class VideoImpl(
     override val date: VkDate? = null,
     override val views: Int? = null,
     override val comments: Int? = null,
-    override val photo130: String? = null,
-    override val photo320: String? = null,
-    override val photo640: String? = null,
-    override val photo800: String? = null,
+    @get:JsonProperty("photo_130") override val photo130: String? = null,
+    @get:JsonProperty("photo_320") override val photo320: String? = null,
+    @get:JsonProperty("photo_640") override val photo640: String? = null,
+    @get:JsonProperty("photo_800") override val photo800: String? = null,
     override val accessKey: String? = null,
     override val addingDate: Int? = null,
     override val player: String? = null,

@@ -3,6 +3,7 @@
 package name.anton3.vkapi.generated.newsfeed.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import name.anton3.vkapi.generated.common.objects.UserGroupFields
 import name.anton3.vkapi.generated.newsfeed.objects.GetRecommendedResponse
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
@@ -25,5 +26,5 @@ data class NewsfeedGetRecommended(
     var maxPhotos: Int? = null,
     var startFrom: String? = null,
     var count: Int? = null,
-    var fields: List<String>? = null
+    var fields: List<UserGroupFields>? = null
 ) : VkMethod<GetRecommendedResponse, UserMethod>("newsfeed.getRecommended", jacksonTypeRef())

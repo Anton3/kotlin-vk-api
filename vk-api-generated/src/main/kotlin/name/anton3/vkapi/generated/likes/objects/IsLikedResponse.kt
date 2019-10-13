@@ -7,8 +7,8 @@ import name.anton3.vkapi.vktypes.BoolInt
 /**
  * No description
  *
- * @property liked Information whether user liked the object
- * @property copied Information whether user reposted the object
+ * @property liked No description
+ * @property copied No description
  */
 data class IsLikedResponse(
     val liked: BoolInt,

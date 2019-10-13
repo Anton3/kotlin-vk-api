@@ -18,6 +18,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property deviceId Unique device ID.
  * @property systemVersion String version of device operating system.
  * @property settings Push settings in a [vk.com/dev/push_settings|special format].
+ * @property sandbox No description
  */
 data class AccountRegisterDevice(
     var token: String,
@@ -25,5 +26,6 @@ data class AccountRegisterDevice(
     var deviceYear: Int? = null,
     var deviceId: String,
     var systemVersion: String? = null,
-    var settings: String? = null
+    var settings: String? = null,
+    var sandbox: Boolean? = null
 ) : VkMethod<OkResponse, UserMethod>("account.registerDevice", jacksonTypeRef())

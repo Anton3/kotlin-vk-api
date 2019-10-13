@@ -5,9 +5,9 @@ package name.anton3.vkapi.generated.utils.objects
 import name.anton3.vkapi.vktypes.ValueEnum
 
 enum class GetLinkStatsInterval(override val value: String) : ValueEnum<String> {
-    HOUR("hour"),
     DAY("day"),
-    WEEK("week"),
+    FOREVER("forever"),
+    HOUR("hour"),
     MONTH("month"),
-    FOREVER("forever")
+    WEEK("week")
 }

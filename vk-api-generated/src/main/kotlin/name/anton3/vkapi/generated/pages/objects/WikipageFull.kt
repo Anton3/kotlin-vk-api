@@ -10,37 +10,37 @@ import name.anton3.vkapi.vktypes.BoolInt
 /**
  * No description
  *
- * @property id Page ID
- * @property groupId Community ID
- * @property title Page title
- * @property currentUserCanEdit Information whether current user can edit the page
- * @property currentUserCanEditAccess Information whether current user can edit the page access settings
- * @property whoCanView View settings of the page
- * @property whoCanEdit Edit settings of the page
- * @property edited Date when the page has been edited in Unixtime
  * @property created Date when the page has been created in Unixtime
- * @property views Views number
- * @property editorId Last editor ID
  * @property creatorId Page creator ID
- * @property source Page content, wiki
+ * @property currentUserCanEdit No description
+ * @property currentUserCanEditAccess No description
+ * @property edited Date when the page has been edited in Unixtime
+ * @property editorId Last editor ID
+ * @property groupId Community ID
  * @property html Page content, HTML
+ * @property id Page ID
+ * @property source Page content, wiki
+ * @property title Page title
  * @property viewUrl URL of the page preview
+ * @property views Views number
+ * @property whoCanEdit No description
+ * @property whoCanView No description
  */
 @JsonDeserialize(`as` = Void::class)
 data class WikipageFull(
-    val id: Int,
-    val groupId: Int,
-    val title: String,
+    val created: Int,
+    val creatorId: Int? = null,
     val currentUserCanEdit: BoolInt? = null,
     val currentUserCanEditAccess: BoolInt? = null,
-    val whoCanView: PrivacySettings,
-    val whoCanEdit: PrivacySettings,
     val edited: Int,
-    val created: Int,
-    val views: Int,
     val editorId: Int? = null,
-    val creatorId: Int? = null,
-    val source: String? = null,
+    val groupId: Int,
     val html: String? = null,
-    val viewUrl: String
-) : WallPostAttachmentBody, CommentAttachmentBody
+    val id: Int,
+    val source: String? = null,
+    val title: String,
+    val viewUrl: String,
+    val views: Int,
+    val whoCanEdit: PrivacySettings,
+    val whoCanView: PrivacySettings
+) : CommentAttachmentBody, WallPostAttachmentBody

@@ -7,20 +7,20 @@ import name.anton3.vkapi.vktypes.BoolInt
 /**
  * No description
  *
+ * @property 2faRequired No description
  * @property country Country code
- * @property httpsRequired Information whether HTTPS-only is enabled
- * @property ownPostsDefault Information whether only owners posts should be shown
- * @property noWallReplies Information whether wall comments should be hidden
- * @property intro Information whether user has been processed intro
+ * @property httpsRequired No description
+ * @property intro No description
  * @property lang Language ID
- * @property 2faRequired Two factor authentication is enabled
+ * @property noWallReplies No description
+ * @property ownPostsDefault No description
  */
 data class Info(
+    val `2faRequired`: BoolInt? = null,
     val country: String? = null,
     val httpsRequired: BoolInt? = null,
-    val ownPostsDefault: BoolInt? = null,
-    val noWallReplies: BoolInt? = null,
     val intro: BoolInt? = null,
     val lang: Int? = null,
-    val `2faRequired`: BoolInt? = null
+    val noWallReplies: BoolInt? = null,
+    val ownPostsDefault: BoolInt? = null
 )

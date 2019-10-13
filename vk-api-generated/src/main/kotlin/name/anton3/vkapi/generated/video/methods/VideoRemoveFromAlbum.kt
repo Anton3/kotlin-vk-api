@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.video.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.MethodRequirement
+import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.OkResponse
 
@@ -24,4 +24,4 @@ data class VideoRemoveFromAlbum(
     var albumIds: List<Int>? = null,
     var ownerId: Int,
     var videoId: Int
-) : VkMethod<OkResponse, MethodRequirement>("video.removeFromAlbum", jacksonTypeRef())
+) : VkMethod<OkResponse, UserMethod>("video.removeFromAlbum", jacksonTypeRef())

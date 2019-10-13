@@ -12,5 +12,5 @@ package name.anton3.vkapi.generated.groups.objects
 data class LongPollServer(
     val key: String,
     val server: String,
-    val ts: Int
+    val ts: String
 )

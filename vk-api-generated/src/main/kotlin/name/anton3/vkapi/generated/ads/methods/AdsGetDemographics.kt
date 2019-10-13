@@ -4,7 +4,7 @@ package name.anton3.vkapi.generated.ads.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.ads.objects.DemoStats
-import name.anton3.vkapi.generated.ads.objects.GetDemographicsIdsType
+import name.anton3.vkapi.generated.ads.objects.IdsType
 import name.anton3.vkapi.generated.ads.objects.Period
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
@@ -23,7 +23,7 @@ import name.anton3.vkapi.method.VkMethod
  */
 data class AdsGetDemographics(
     var accountId: Int,
-    var idsType: GetDemographicsIdsType,
+    var idsType: IdsType,
     var ids: String,
     var period: Period,
     var dateFrom: String,

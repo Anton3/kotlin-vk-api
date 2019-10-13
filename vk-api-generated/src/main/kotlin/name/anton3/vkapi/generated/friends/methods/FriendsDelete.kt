@@ -15,5 +15,5 @@ import name.anton3.vkapi.method.VkMethod
  * @property userId ID of the user whose friend request is to be declined or who is to be deleted from the current user's friend list.
  */
 data class FriendsDelete(
-    var userId: Int
+    var userId: Int? = null
 ) : VkMethod<DeleteResponse, UserMethod>("friends.delete", jacksonTypeRef())

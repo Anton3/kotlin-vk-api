@@ -16,10 +16,12 @@ import name.anton3.vkapi.method.VkMethod
  * @property message Comment to be added along with the reposted object.
  * @property groupId Target community ID when reposting to a community.
  * @property markAsAds No description
+ * @property muteNotifications No description
  */
 data class WallRepost(
     var `object`: String,
     var message: String? = null,
     var groupId: Int? = null,
-    var markAsAds: Boolean? = null
+    var markAsAds: Boolean? = null,
+    var muteNotifications: Boolean? = null
 ) : VkMethod<RepostResponse, UserMethod>("wall.repost", jacksonTypeRef())

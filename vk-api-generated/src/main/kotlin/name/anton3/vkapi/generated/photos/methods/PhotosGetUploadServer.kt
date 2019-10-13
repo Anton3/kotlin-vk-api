@@ -12,10 +12,10 @@ import name.anton3.vkapi.method.VkMethod
  *
  * Returns the server address for photo upload.
  *
- * @property albumId Album ID.
  * @property groupId ID of community that owns the album (if the photo will be uploaded to a community album).
+ * @property albumId No description
  */
 data class PhotosGetUploadServer(
-    var albumId: Int? = null,
-    var groupId: Int? = null
+    var groupId: Int? = null,
+    var albumId: Int? = null
 ) : VkMethod<PhotoUpload, UserMethod>("photos.getUploadServer", jacksonTypeRef())

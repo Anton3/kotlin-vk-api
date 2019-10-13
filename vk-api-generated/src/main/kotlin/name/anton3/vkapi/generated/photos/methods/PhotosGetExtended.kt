@@ -3,7 +3,6 @@
 package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.generated.photos.objects.GetAlbumId
 import name.anton3.vkapi.generated.photos.objects.PhotoFull
 import name.anton3.vkapi.method.UserServiceMethod
 import name.anton3.vkapi.method.VkMethod
@@ -26,7 +25,7 @@ import name.anton3.vkapi.vktypes.VkList
  */
 data class PhotosGetExtended(
     var ownerId: Int? = null,
-    var albumId: GetAlbumId? = null,
+    var albumId: String? = null,
     var photoIds: List<String>? = null,
     var rev: Boolean? = null,
     var feedType: String? = null,

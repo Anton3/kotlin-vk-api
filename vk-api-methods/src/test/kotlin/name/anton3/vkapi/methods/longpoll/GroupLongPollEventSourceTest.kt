@@ -15,7 +15,7 @@ import kotlin.random.Random
 class GroupLongPollEventSourceTest {
     @Test
     @Ignore
-    fun smokeTest1() = runBlocking {
+    fun smokeTest1(): Unit = runBlocking {
         val source = groupLongPollEvents(groupApi, groupId, timeout = timeout)
 
         for (event in source) {
@@ -39,7 +39,7 @@ class GroupLongPollEventSourceTest {
                     KeyboardButton(
                         color = KeyboardButtonColor.DEFAULT,
                         action = KeyboardButtonAction(
-                            KeyboardButtonActionType.TEXT,
+                            type = KeyboardButtonActionType.TEXT,
                             payload = "\"some_payload\"",
                             label = "Label"
                         )

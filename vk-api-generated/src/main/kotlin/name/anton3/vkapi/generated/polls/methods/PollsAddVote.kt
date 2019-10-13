@@ -14,12 +14,12 @@ import name.anton3.vkapi.vktypes.BoolInt
  *
  * @property ownerId ID of the user or community that owns the poll. Use a negative value to designate a community ID.
  * @property pollId Poll ID.
- * @property answerId Answer ID.
+ * @property answerIds No description
  * @property isBoard No description
  */
 data class PollsAddVote(
     var ownerId: Int? = null,
     var pollId: Int,
-    var answerId: Int,
+    var answerIds: List<Int>,
     var isBoard: Boolean? = null
 ) : VkMethod<BoolInt, UserMethod>("polls.addVote", jacksonTypeRef())

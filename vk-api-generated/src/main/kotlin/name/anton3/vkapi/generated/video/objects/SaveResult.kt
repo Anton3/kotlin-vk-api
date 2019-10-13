@@ -5,16 +5,18 @@ package name.anton3.vkapi.generated.video.objects
 /**
  * No description
  *
- * @property uploadUrl URL for the video uploading
- * @property videoId Video ID
+ * @property accessKey Video access key
+ * @property description Video description
  * @property ownerId Video owner ID
  * @property title Video title
- * @property description Video description
+ * @property uploadUrl URL for the video uploading
+ * @property videoId Video ID
  */
 data class SaveResult(
-    val uploadUrl: String? = null,
-    val videoId: Int? = null,
+    val accessKey: String? = null,
+    val description: String? = null,
     val ownerId: Int? = null,
     val title: String? = null,
-    val description: String? = null
+    val uploadUrl: String? = null,
+    val videoId: Int? = null
 )

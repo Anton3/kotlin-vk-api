@@ -9,6 +9,6 @@ package name.anton3.vkapi.generated.account.objects
  * @property secret New secret
  */
 data class ChangePasswordResponse(
-    val token: String? = null,
+    val token: String,
     val secret: String? = null
 )

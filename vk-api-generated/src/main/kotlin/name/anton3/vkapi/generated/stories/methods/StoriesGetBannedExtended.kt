@@ -3,6 +3,7 @@
 package name.anton3.vkapi.generated.stories.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import name.anton3.vkapi.generated.common.objects.UserGroupFields
 import name.anton3.vkapi.generated.stories.objects.GetBannedExtendedResponse
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
@@ -15,7 +16,7 @@ import name.anton3.vkapi.method.VkMethod
  * @property fields Additional fields to return
  */
 data class StoriesGetBannedExtended(
-    var fields: List<String>? = null
+    var fields: List<UserGroupFields>? = null
 ) : VkMethod<GetBannedExtendedResponse, UserMethod>("stories.getBanned", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")

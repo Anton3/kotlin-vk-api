@@ -3,7 +3,8 @@
 package name.anton3.vkapi.generated.newsfeed.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.generated.newsfeed.objects.GetCommentsFilters
+import name.anton3.vkapi.generated.common.objects.UserGroupFields
+import name.anton3.vkapi.generated.newsfeed.objects.CommentsFilters
 import name.anton3.vkapi.generated.newsfeed.objects.GetCommentsResponse
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
@@ -18,15 +19,17 @@ import name.anton3.vkapi.method.VkMethod
  * @property reposts Object ID, comments on repost of which shall be returned, e.g. 'wall1_45486'. (If the parameter is set, the 'filters' parameter is optional.),
  * @property startTime Earliest timestamp (in Unix time) of a comment to return. By default, 24 hours ago.
  * @property endTime Latest timestamp (in Unix time) of a comment to return. By default, the current time.
+ * @property lastCommentsCount No description
  * @property startFrom Identificator needed to return the next page with results. Value for this parameter returns in 'next_from' field.
  * @property fields Additional fields of [vk.com/dev/fields|profiles] and [vk.com/dev/fields_groups|communities] to return.
  */
 data class NewsfeedGetComments(
     var count: Int? = null,
-    var filters: List<GetCommentsFilters>? = null,
+    var filters: List<CommentsFilters>? = null,
     var reposts: String? = null,
     var startTime: Int? = null,
     var endTime: Int? = null,
+    var lastCommentsCount: Int? = null,
     var startFrom: String? = null,
-    var fields: List<String>? = null
+    var fields: List<UserGroupFields>? = null
 ) : VkMethod<GetCommentsResponse, UserMethod>("newsfeed.getComments", jacksonTypeRef())

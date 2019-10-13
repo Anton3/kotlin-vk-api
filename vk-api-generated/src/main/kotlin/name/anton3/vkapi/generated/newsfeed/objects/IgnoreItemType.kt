@@ -9,5 +9,6 @@ enum class IgnoreItemType(override val value: String) : ValueEnum<String> {
     TAG_ON_A_PHOTO("tag"),
     PROFILE_PHOTO("profilephoto"),
     VIDEO("video"),
+    PHOTO("photo"),
     AUDIO("audio")
 }

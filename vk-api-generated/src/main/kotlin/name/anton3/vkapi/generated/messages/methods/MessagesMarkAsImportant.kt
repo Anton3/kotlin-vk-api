@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.method.UserGroupMethod
+import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 
 /**
@@ -16,5 +16,5 @@ import name.anton3.vkapi.method.VkMethod
  */
 data class MessagesMarkAsImportant(
     var messageIds: List<Int>? = null,
-    var important: Boolean? = null
-) : VkMethod<List<Int>, UserGroupMethod>("messages.markAsImportant", jacksonTypeRef())
+    var important: Int? = null
+) : VkMethod<List<Int>, UserMethod>("messages.markAsImportant", jacksonTypeRef())

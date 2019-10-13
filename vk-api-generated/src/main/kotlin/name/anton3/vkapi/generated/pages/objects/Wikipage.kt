@@ -5,26 +5,26 @@ package name.anton3.vkapi.generated.pages.objects
 /**
  * No description
  *
- * @property id Page ID
- * @property groupId Community ID
- * @property title Page title
- * @property whoCanView View settings of the page
- * @property whoCanEdit Edit settings of the page
- * @property views Views number
- * @property editorId Last editor ID
- * @property editorName Last editor name
  * @property creatorId Page creator ID
  * @property creatorName Page creator name
+ * @property editorId Last editor ID
+ * @property editorName Last editor name
+ * @property groupId Community ID
+ * @property id Page ID
+ * @property title Page title
+ * @property views Views number
+ * @property whoCanEdit No description
+ * @property whoCanView No description
  */
 data class Wikipage(
-    val id: Int,
-    val groupId: Int,
-    val title: String,
-    val whoCanView: PrivacySettings,
-    val whoCanEdit: PrivacySettings,
-    val views: Int,
+    val creatorId: Int? = null,
+    val creatorName: Int? = null,
     val editorId: Int? = null,
     val editorName: String? = null,
-    val creatorId: Int? = null,
-    val creatorName: Int? = null
+    val groupId: Int,
+    val id: Int,
+    val title: String,
+    val views: Int,
+    val whoCanEdit: PrivacySettings,
+    val whoCanView: PrivacySettings
 )

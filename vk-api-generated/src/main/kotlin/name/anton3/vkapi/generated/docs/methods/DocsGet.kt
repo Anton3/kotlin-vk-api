@@ -4,6 +4,7 @@ package name.anton3.vkapi.generated.docs.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.docs.objects.Doc
+import name.anton3.vkapi.generated.docs.objects.GetType
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
@@ -15,10 +16,12 @@ import name.anton3.vkapi.vktypes.VkList
  *
  * @property count Number of documents to return. By default, all documents.
  * @property offset Offset needed to return a specific subset of documents.
+ * @property type No description
  * @property ownerId ID of the user or community that owns the documents. Use a negative value to designate a community ID.
  */
 data class DocsGet(
     var count: Int? = null,
     var offset: Int? = null,
+    var type: GetType? = null,
     var ownerId: Int? = null
 ) : VkMethod<VkList<Doc>, UserMethod>("docs.get", jacksonTypeRef())

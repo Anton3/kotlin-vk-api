@@ -13,7 +13,9 @@ import name.anton3.vkapi.vktypes.OkResponse
  * Allows sending messages from community to the current user.
  *
  * @property groupId Group ID.
+ * @property key No description
  */
 data class MessagesAllowMessagesFromGroup(
-    var groupId: Int
+    var groupId: Int,
+    var key: String? = null
 ) : VkMethod<OkResponse, UserMethod>("messages.allowMessagesFromGroup", jacksonTypeRef())

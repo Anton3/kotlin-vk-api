@@ -13,9 +13,9 @@ import name.anton3.vkapi.vktypes.BoolInt
  * Returns information specifying whether a user is a member of a community.
  *
  * @property groupId ID or screen name of the community.
- * @property userIds User IDs.
+ * @property userId User ID.
  */
 data class GroupsIsMemberUserIds(
     var groupId: String,
-    var userIds: List<Int>? = null
+    var userId: Int? = null
 ) : VkMethod<BoolInt, UserGroupServiceMethod>("groups.isMember", jacksonTypeRef())

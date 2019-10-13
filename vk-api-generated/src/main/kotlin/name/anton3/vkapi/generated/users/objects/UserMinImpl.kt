@@ -12,8 +12,8 @@ import name.anton3.vkapi.vktypes.BoolInt
  * @property firstName User first name
  * @property lastName User last name
  * @property deactivated Returns if a profile is deleted or blocked
- * @property isClosed Is the profile hidden by privacy settings
- * @property canAccessClosed Can we see the profile if is_closed = 1 (e.g. if that user is our friend)
+ * @property isClosed No description
+ * @property canAccessClosed No description
  */
 @JsonDeserialize(`as` = Void::class)
 data class UserMinImpl(

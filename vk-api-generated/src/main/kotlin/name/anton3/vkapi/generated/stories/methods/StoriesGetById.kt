@@ -3,6 +3,7 @@
 package name.anton3.vkapi.generated.stories.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import name.anton3.vkapi.generated.common.objects.UserGroupFields
 import name.anton3.vkapi.generated.stories.objects.Story
 import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.method.VkMethod
@@ -17,6 +18,6 @@ import name.anton3.vkapi.vktypes.VkList
  * @property fields Additional fields to return
  */
 data class StoriesGetById(
-    var stories: List<String>? = null,
-    var fields: List<String>? = null
+    var stories: List<String>,
+    var fields: List<UserGroupFields>? = null
 ) : VkMethod<VkList<Story>, UserGroupMethod>("stories.getById", jacksonTypeRef())

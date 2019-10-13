@@ -19,6 +19,8 @@ import name.anton3.vkapi.vktypes.VkList
  * @property previewLength Number of characters after which to truncate a previewed message. To preview the full message, specify '0'. "NOTE: Messages are not truncated by default. Messages are truncated by words."
  * @property offset Offset needed to return a specific subset of messages.
  * @property count Number of messages to return.
+ * @property extended No description
+ * @property fields No description
  * @property groupId Group ID (for group messages with group access token)
  */
 data class MessagesSearch(
@@ -28,5 +30,7 @@ data class MessagesSearch(
     var previewLength: Int? = null,
     var offset: Int? = null,
     var count: Int? = null,
+    var extended: Boolean? = null,
+    var fields: List<String>? = null,
     var groupId: Int? = null
 ) : VkMethod<VkList<Message>, UserGroupMethod>("messages.search", jacksonTypeRef())

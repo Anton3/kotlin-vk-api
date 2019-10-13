@@ -10,7 +10,7 @@ import name.anton3.vkapi.vktypes.BoolInt
  * @property count Total number
  * @property items No description
  * @property defaultOrder No description
- * @property canAddTopics Information whether current user can add topic
+ * @property canAddTopics No description
  */
 data class GetTopicsResponse(
     val count: Int,

@@ -26,6 +26,8 @@ import name.anton3.vkapi.method.VkMethod
  * @property postId Post ID. Used for publishing of scheduled and suggested posts.
  * @property guid No description
  * @property markAsAds No description
+ * @property closeComments No description
+ * @property muteNotifications No description
  */
 data class WallPost(
     var ownerId: Int? = null,
@@ -41,5 +43,7 @@ data class WallPost(
     var placeId: Int? = null,
     var postId: Int? = null,
     var guid: String? = null,
-    var markAsAds: Boolean? = null
+    var markAsAds: Boolean? = null,
+    var closeComments: Boolean? = null,
+    var muteNotifications: Boolean? = null
 ) : VkMethod<PostResponse, UserMethod>("wall.post", jacksonTypeRef())

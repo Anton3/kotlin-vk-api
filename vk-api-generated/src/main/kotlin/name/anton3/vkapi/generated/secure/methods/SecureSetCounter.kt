@@ -15,9 +15,11 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property counters No description
  * @property userId No description
  * @property counter counter value.
+ * @property increment No description
  */
 data class SecureSetCounter(
     var counters: List<String>? = null,
     var userId: Int? = null,
-    var counter: Int? = null
+    var counter: Int? = null,
+    var increment: Boolean? = null
 ) : VkMethod<OkResponse, ServiceMethod>("secure.setCounter", jacksonTypeRef())

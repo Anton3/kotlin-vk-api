@@ -5,10 +5,10 @@ package name.anton3.vkapi.generated.messages.objects
 /**
  * No description
  *
- * @property color Button color
  * @property action No description
+ * @property color Button color
  */
 data class KeyboardButton(
-    val color: KeyboardButtonColor,
-    val action: KeyboardButtonAction
+    val action: KeyboardButtonAction,
+    val color: KeyboardButtonColor? = null
 )

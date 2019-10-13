@@ -6,6 +6,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.common.objects.NameCase
 import name.anton3.vkapi.generated.friends.objects.GetOrder
 import name.anton3.vkapi.generated.friends.objects.UserXtrLists
+import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.method.UserServiceMethod
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
@@ -22,6 +23,7 @@ import name.anton3.vkapi.vktypes.VkList
  * @property offset Offset needed to return a specific subset of friends.
  * @property fields Profile fields to return. Sample values: 'uid', 'first_name', 'last_name', 'nickname', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'domain', 'has_mobile', 'rate', 'contacts', 'education'.
  * @property nameCase Case for declension of user name and surname: , 'nom' — nominative (default) , 'gen' — genitive , 'dat' — dative , 'acc' — accusative , 'ins' — instrumental , 'abl' — prepositional
+ * @property ref No description
  */
 data class FriendsGetWithFields(
     var userId: Int? = null,
@@ -29,6 +31,7 @@ data class FriendsGetWithFields(
     var listId: Int? = null,
     var count: Int? = null,
     var offset: Int? = null,
-    var fields: List<String>? = null,
-    var nameCase: NameCase? = null
+    var fields: List<Fields>? = null,
+    var nameCase: NameCase? = null,
+    var ref: String? = null
 ) : VkMethod<VkList<UserXtrLists>, UserServiceMethod>("friends.get", jacksonTypeRef())

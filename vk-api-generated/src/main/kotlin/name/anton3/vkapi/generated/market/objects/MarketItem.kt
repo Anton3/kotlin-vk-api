@@ -11,25 +11,35 @@ import name.anton3.vkapi.vktypes.VkDate
 /**
  * No description
  *
- * @property id Item ID
- * @property ownerId Item owner's ID
- * @property title Item title
- * @property description Item description
- * @property price No description
+ * @property accessKey Access key for the market item
+ * @property availability No description
+ * @property buttonTitle Title for button for url
  * @property category No description
  * @property date Date when the item has been created in Unixtime
+ * @property description Item description
+ * @property externalId No description
+ * @property id Item ID
+ * @property isFavorite No description
+ * @property ownerId Item owner's ID
+ * @property price No description
  * @property thumbPhoto URL of the preview image
- * @property availability No description
+ * @property title Item title
+ * @property url URL to item
  */
 @JsonDeserialize(`as` = MarketItemImpl::class)
-interface MarketItem : WallPostAttachmentBody, CommentAttachmentBody, MessageAttachmentBody {
-    val id: Int
-    val ownerId: Int
-    val title: String
-    val description: String
-    val price: Price
+interface MarketItem : CommentAttachmentBody, WallPostAttachmentBody, MessageAttachmentBody {
+    val accessKey: String?
+    val availability: MarketItemAvailability
+    val buttonTitle: String?
     val category: MarketCategory
     val date: VkDate
+    val description: String
+    val externalId: String?
+    val id: Int
+    val isFavorite: Boolean?
+    val ownerId: Int
+    val price: Price
     val thumbPhoto: String
-    val availability: MarketItemAvailability
+    val title: String
+    val url: String?
 }

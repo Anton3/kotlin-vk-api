@@ -5,12 +5,12 @@ package name.anton3.vkapi.generated.ads.objects
 /**
  * No description
  *
- * @property status Link status
  * @property description Reject reason
  * @property redirectUrl URL
+ * @property status Link status
  */
 data class LinkStatus(
-    val status: String,
     val description: String,
-    val redirectUrl: String
+    val redirectUrl: String,
+    val status: String
 )

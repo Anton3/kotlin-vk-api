@@ -3,6 +3,7 @@
 package name.anton3.vkapi.generated.widgets.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.generated.widgets.objects.GetCommentsResponse
 import name.anton3.vkapi.method.UserServiceMethod
 import name.anton3.vkapi.method.VkMethod
@@ -17,6 +18,7 @@ import name.anton3.vkapi.method.VkMethod
  * @property pageId No description
  * @property order No description
  * @property fields No description
+ * @property offset No description
  * @property count No description
  */
 data class WidgetsGetComments(
@@ -24,6 +26,7 @@ data class WidgetsGetComments(
     var url: String? = null,
     var pageId: String? = null,
     var order: String? = null,
-    var fields: List<String>? = null,
+    var fields: List<Fields>? = null,
+    var offset: Int? = null,
     var count: Int? = null
 ) : VkMethod<GetCommentsResponse, UserServiceMethod>("widgets.getComments", jacksonTypeRef())

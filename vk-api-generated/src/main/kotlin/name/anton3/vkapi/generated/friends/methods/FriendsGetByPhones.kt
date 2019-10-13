@@ -4,6 +4,7 @@ package name.anton3.vkapi.generated.friends.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.friends.objects.UserXtrPhone
+import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 
@@ -17,5 +18,5 @@ import name.anton3.vkapi.method.VkMethod
  */
 data class FriendsGetByPhones(
     var phones: List<String>? = null,
-    var fields: List<String>? = null
+    var fields: List<Fields>? = null
 ) : VkMethod<List<UserXtrPhone>, UserMethod>("friends.getByPhones", jacksonTypeRef())

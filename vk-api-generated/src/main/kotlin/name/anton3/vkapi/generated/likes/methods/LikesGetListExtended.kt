@@ -4,6 +4,7 @@ package name.anton3.vkapi.generated.likes.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.likes.objects.GetListFilter
+import name.anton3.vkapi.generated.likes.objects.GetListFriendsOnly
 import name.anton3.vkapi.generated.likes.objects.Type
 import name.anton3.vkapi.generated.users.objects.UserMin
 import name.anton3.vkapi.method.UserServiceMethod
@@ -15,7 +16,7 @@ import name.anton3.vkapi.vktypes.VkList
  *
  * Returns a list of IDs of users who added the specified object to their 'Likes' list.
  *
- * @property type , Object type: 'post' — post on user or community wall, 'comment' — comment on a wall post, 'photo' — photo, 'audio' — audio, 'video' — video, 'note' — note, 'photo_comment' — comment on the photo, 'video_comment' — comment on the video, 'topic_comment' — comment in the discussion, 'sitepage' — page of the site where the [vk.com/dev/Like|Like widget] is installed
+ * @property type No description
  * @property ownerId ID of the user, community, or application that owns the object. If the 'type' parameter is set as 'sitepage', the application ID is passed as 'owner_id'. Use negative value for a community id. If the 'type' parameter is not set, the 'owner_id' is assumed to be either the current user or the same application ID as if the 'type' parameter was set to 'sitepage'.
  * @property itemId Object ID. If 'type' is set as 'sitepage', 'item_id' can include the 'page_id' parameter value used during initialization of the [vk.com/dev/Like|Like widget].
  * @property pageUrl URL of the page where the [vk.com/dev/Like|Like widget] is installed. Used instead of the 'item_id' parameter.
@@ -31,7 +32,7 @@ data class LikesGetListExtended(
     var itemId: Int? = null,
     var pageUrl: String? = null,
     var filter: GetListFilter? = null,
-    var friendsOnly: Boolean? = null,
+    var friendsOnly: GetListFriendsOnly? = null,
     var offset: Int? = null,
     var count: Int? = null,
     var skipOwn: Boolean? = null

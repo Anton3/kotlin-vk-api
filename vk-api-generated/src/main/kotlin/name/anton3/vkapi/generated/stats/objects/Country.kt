@@ -5,14 +5,14 @@ package name.anton3.vkapi.generated.stats.objects
 /**
  * No description
  *
- * @property count Visitors number
- * @property value Country ID
  * @property code Country code
+ * @property count Visitors number
  * @property name Country name
+ * @property value Country ID
  */
 data class Country(
-    val count: Int? = null,
-    val value: Int? = null,
     val code: String? = null,
-    val name: String? = null
+    val count: Int? = null,
+    val name: String? = null,
+    val value: Int? = null
 )

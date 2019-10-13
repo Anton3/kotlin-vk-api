@@ -15,11 +15,13 @@ import name.anton3.vkapi.method.VkMethod
  * @property widgetApiId No description
  * @property order No description
  * @property period No description
+ * @property offset No description
  * @property count No description
  */
 data class WidgetsGetPages(
     var widgetApiId: Int? = null,
     var order: String? = null,
     var period: String? = null,
+    var offset: Int? = null,
     var count: Int? = null
 ) : VkMethod<GetPagesResponse, UserServiceMethod>("widgets.getPages", jacksonTypeRef())

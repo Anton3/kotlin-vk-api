@@ -18,6 +18,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property name New name of the target group — a string up to 64 characters long.
  * @property domain Domain of the site where user accounting code will be placed.
  * @property lifetime 'Only for the groups that get audience from sites with user accounting code.', Time in days when users added to a retarget group will be automatically excluded from it. '0' – automatic exclusion is off.
+ * @property targetPixelId No description
+ * @property targetPixelRules No description
  */
 data class AdsUpdateTargetGroup(
     var accountId: Int,
@@ -25,5 +27,7 @@ data class AdsUpdateTargetGroup(
     var targetGroupId: Int,
     var name: String,
     var domain: String? = null,
-    var lifetime: Int? = null
+    var lifetime: Int? = null,
+    var targetPixelId: Int? = null,
+    var targetPixelRules: String? = null
 ) : VkMethod<OkResponse, UserMethod>("ads.updateTargetGroup", jacksonTypeRef())

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.account.objects.SaveProfileInfoBdateVisibility
 import name.anton3.vkapi.generated.account.objects.SaveProfileInfoRelation
 import name.anton3.vkapi.generated.account.objects.SaveProfileInfoResponse
-import name.anton3.vkapi.generated.common.objects.OwnSex
+import name.anton3.vkapi.generated.account.objects.SaveProfileInfoSex
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 
@@ -36,7 +36,7 @@ data class AccountSaveProfileInfo(
     var maidenName: String? = null,
     var screenName: String? = null,
     var cancelRequestId: Int? = null,
-    var sex: OwnSex? = null,
+    var sex: SaveProfileInfoSex? = null,
     var relation: SaveProfileInfoRelation? = null,
     var relationPartnerId: Int? = null,
     var bdate: String? = null,

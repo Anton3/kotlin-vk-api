@@ -6,5 +6,6 @@ import name.anton3.vkapi.vktypes.ValueEnum
 
 enum class HintType(override val value: String) : ValueEnum<String> {
     GROUP("group"),
-    PROFILE("profile")
+    PROFILE("profile"),
+    VK_APP("vk_app")
 }

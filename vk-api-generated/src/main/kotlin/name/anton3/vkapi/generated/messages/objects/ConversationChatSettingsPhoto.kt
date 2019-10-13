@@ -2,6 +2,8 @@
 
 package name.anton3.vkapi.generated.messages.objects
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 /**
  * conversation cover image
  *
@@ -10,7 +12,7 @@ package name.anton3.vkapi.generated.messages.objects
  * @property photo200 URL of conversation image with width size of 200 px
  */
 data class ConversationChatSettingsPhoto(
-    val photo50: String,
-    val photo100: String,
-    val photo200: String
+    @get:JsonProperty("photo_50") val photo50: String,
+    @get:JsonProperty("photo_100") val photo100: String,
+    @get:JsonProperty("photo_200") val photo200: String
 )

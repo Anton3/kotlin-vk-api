@@ -7,44 +7,46 @@ import name.anton3.vkapi.vktypes.BoolInt
 /**
  * No description
  *
- * @property id Ad ID
- * @property campaignId Campaign ID
  * @property adFormat Ad format
+ * @property adPlatform Ad platform
+ * @property allLimit Total limit
+ * @property approved No description
+ * @property campaignId Campaign ID
+ * @property category1Id Category ID
+ * @property category2Id Additional category ID
  * @property costType No description
  * @property cpc Cost of a click, kopecks
  * @property cpm Cost of 1000 impressions, kopecks
+ * @property cpa Cost of an action, kopecks
+ * @property disclaimerMedical No description
+ * @property disclaimerSpecialist No description
+ * @property disclaimerSupplements No description
+ * @property id Ad ID
  * @property impressionsLimit Impressions limit
- * @property impressionsLimited Information whether impressions are limited
- * @property adPlatform Ad platform
- * @property allLimit Total limit
- * @property category1Id Category ID
- * @property category2Id Additional category ID
- * @property status No description
+ * @property impressionsLimited No description
  * @property name Ad title
- * @property approved No description
- * @property video Information whether the ad is a video
- * @property disclaimerMedical Information whether disclaimer is enabled
- * @property disclaimerSpecialist Information whether disclaimer is enabled
- * @property disclaimerSupplements Information whether disclaimer is enabled
+ * @property status No description
+ * @property video No description
  */
 data class Ad(
-    val id: Int,
-    val campaignId: Int,
     val adFormat: Int,
+    val adPlatform: String? = null,
+    val allLimit: Int,
+    val approved: AdApproved,
+    val campaignId: Int,
+    val category1Id: Int? = null,
+    val category2Id: Int? = null,
     val costType: AdCostType,
     val cpc: Int? = null,
     val cpm: Int? = null,
-    val impressionsLimit: Int? = null,
-    val impressionsLimited: BoolInt? = null,
-    val adPlatform: String? = null,
-    val allLimit: Int,
-    val category1Id: Int? = null,
-    val category2Id: Int? = null,
-    val status: AdStatus,
-    val name: String,
-    val approved: AdApproved,
-    val video: BoolInt? = null,
+    val cpa: Int? = null,
     val disclaimerMedical: BoolInt? = null,
     val disclaimerSpecialist: BoolInt? = null,
-    val disclaimerSupplements: BoolInt? = null
+    val disclaimerSupplements: BoolInt? = null,
+    val id: Int,
+    val impressionsLimit: Int? = null,
+    val impressionsLimited: BoolInt? = null,
+    val name: String,
+    val status: AdStatus,
+    val video: BoolInt? = null
 )

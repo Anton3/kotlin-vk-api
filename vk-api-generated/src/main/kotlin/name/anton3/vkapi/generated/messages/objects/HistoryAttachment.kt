@@ -5,10 +5,12 @@ package name.anton3.vkapi.generated.messages.objects
 /**
  * No description
  *
- * @property messageId Message ID
  * @property attachment No description
+ * @property messageId Message ID
+ * @property fromId Message author's ID
  */
 data class HistoryAttachment(
-    val messageId: Int? = null,
-    val attachment: HistoryMessageAttachment
+    val attachment: HistoryMessageAttachment,
+    val messageId: Int,
+    val fromId: Int
 )

@@ -13,8 +13,10 @@ import name.anton3.vkapi.vktypes.VkList
  *
  * Returns a list of active ads (offers) which executed by the user will bring him/her respective number of votes to his balance in the application.
  *
+ * @property offset No description
  * @property count Number of results to return.
  */
 data class AccountGetActiveOffers(
+    var offset: Int? = null,
     var count: Int? = null
 ) : VkMethod<VkList<Offer>, UserMethod>("account.getActiveOffers", jacksonTypeRef())

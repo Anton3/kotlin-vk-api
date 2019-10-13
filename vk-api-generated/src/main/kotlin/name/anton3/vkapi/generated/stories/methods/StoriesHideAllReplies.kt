@@ -13,7 +13,9 @@ import name.anton3.vkapi.vktypes.OkResponse
  * Hides all replies in the last 24 hours from the user to current user's stories.
  *
  * @property ownerId ID of the user whose replies should be hidden.
+ * @property groupId No description
  */
 data class StoriesHideAllReplies(
-    var ownerId: Int
+    var ownerId: Int,
+    var groupId: Int? = null
 ) : VkMethod<OkResponse, UserGroupMethod>("stories.hideAllReplies", jacksonTypeRef())

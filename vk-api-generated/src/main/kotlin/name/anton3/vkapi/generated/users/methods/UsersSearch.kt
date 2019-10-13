@@ -3,6 +3,7 @@
 package name.anton3.vkapi.generated.users.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.generated.users.objects.SearchSex
 import name.anton3.vkapi.generated.users.objects.SearchSort
 import name.anton3.vkapi.generated.users.objects.SearchStatus
@@ -55,7 +56,7 @@ data class UsersSearch(
     var sort: SearchSort? = null,
     var offset: Int? = null,
     var count: Int? = null,
-    var fields: List<String>? = null,
+    var fields: List<Fields>? = null,
     var city: Int? = null,
     var country: Int? = null,
     var hometown: String? = null,

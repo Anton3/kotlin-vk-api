@@ -13,9 +13,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * Adds a link to user faves.
  *
  * @property link Link URL.
- * @property text Description text.
  */
 data class FaveAddLink(
-    var link: String,
-    var text: String? = null
+    var link: String
 ) : VkMethod<OkResponse, UserMethod>("fave.addLink", jacksonTypeRef())

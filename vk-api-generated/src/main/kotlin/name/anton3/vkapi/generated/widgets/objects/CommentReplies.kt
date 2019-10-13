@@ -7,12 +7,12 @@ import name.anton3.vkapi.vktypes.BoolInt
 /**
  * No description
  *
+ * @property canPost No description
  * @property count Comments number
- * @property canPost Information whether current user can comment the post
  * @property replies No description
  */
 data class CommentReplies(
-    val count: Int? = null,
     val canPost: BoolInt? = null,
+    val count: Int? = null,
     val replies: List<CommentRepliesItem>? = null
 )

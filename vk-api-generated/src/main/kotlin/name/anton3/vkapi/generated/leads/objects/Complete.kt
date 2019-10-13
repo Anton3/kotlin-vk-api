@@ -8,16 +8,16 @@ import name.anton3.vkapi.vktypes.OkResponse
 /**
  * No description
  *
+ * @property cost Offer cost
  * @property limit Offer limit
  * @property spent Amount of spent votes
- * @property cost Offer cost
- * @property testMode Information whether test mode is enabled
  * @property success No description
+ * @property testMode No description
  */
 data class Complete(
+    val cost: Int? = null,
     val limit: Int? = null,
     val spent: Int? = null,
-    val cost: Int? = null,
-    val testMode: BoolInt? = null,
-    val success: OkResponse? = null
+    val success: OkResponse? = null,
+    val testMode: BoolInt? = null
 )

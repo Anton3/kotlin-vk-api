@@ -13,34 +13,34 @@ import name.anton3.vkapi.vktypes.VkDate
 /**
  * No description
  *
- * @property id Comment ID
- * @property fromId Comment author ID
- * @property toId Wall owner
- * @property date Date when the comment has been added in Unixtime
- * @property user No description
- * @property postType Post type
- * @property text Comment text
- * @property canDelete Information whether current user can delete the comment
- * @property media No description
  * @property attachments No description
- * @property postSource No description
+ * @property canDelete No description
  * @property comments No description
+ * @property date Date when the comment has been added in Unixtime
+ * @property fromId Comment author ID
+ * @property id Comment ID
  * @property likes No description
+ * @property media No description
+ * @property postSource No description
+ * @property postType Post type
  * @property reposts No description
+ * @property text Comment text
+ * @property toId Wall owner
+ * @property user No description
  */
 data class WidgetComment(
-    val id: Int,
-    val fromId: Int,
-    val toId: Int,
-    val date: VkDate,
-    val user: UserFull? = null,
-    val postType: Int,
-    val text: String,
-    val canDelete: BoolInt? = null,
-    val media: CommentMedia? = null,
     val attachments: List<CommentAttachment>? = null,
-    val postSource: PostSource? = null,
+    val canDelete: BoolInt? = null,
     val comments: CommentReplies? = null,
+    val date: VkDate,
+    val fromId: Int,
+    val id: Int,
     val likes: LikesInfo? = null,
-    val reposts: RepostsInfo? = null
+    val media: CommentMedia? = null,
+    val postSource: PostSource? = null,
+    val postType: Int,
+    val reposts: RepostsInfo? = null,
+    val text: String,
+    val toId: Int,
+    val user: UserFull? = null
 )

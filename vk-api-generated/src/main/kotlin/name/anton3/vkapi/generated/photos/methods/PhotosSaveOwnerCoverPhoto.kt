@@ -4,7 +4,7 @@ package name.anton3.vkapi.generated.photos.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.common.objects.Image
-import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.method.VkMethod
 
 /**
@@ -12,10 +12,10 @@ import name.anton3.vkapi.method.VkMethod
  *
  * Saves cover photo after successful uploading.
  *
- * @property photo Parameter returned when photos are [vk.com/dev/upload_files|uploaded to server].
  * @property hash Parameter returned when photos are [vk.com/dev/upload_files|uploaded to server].
+ * @property photo Parameter returned when photos are [vk.com/dev/upload_files|uploaded to server].
  */
 data class PhotosSaveOwnerCoverPhoto(
-    var photo: String,
-    var hash: String
-) : VkMethod<List<Image>, UserMethod>("photos.saveOwnerCoverPhoto", jacksonTypeRef())
+    var hash: String,
+    var photo: String
+) : VkMethod<List<Image>, UserGroupMethod>("photos.saveOwnerCoverPhoto", jacksonTypeRef())

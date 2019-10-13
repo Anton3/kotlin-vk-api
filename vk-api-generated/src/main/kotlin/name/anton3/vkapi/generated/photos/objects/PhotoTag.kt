@@ -8,26 +8,26 @@ import name.anton3.vkapi.vktypes.VkDate
 /**
  * No description
  *
- * @property userId Tagged user ID
+ * @property date Date when tag has been added in Unixtime
  * @property id Tag ID
  * @property placerId ID of the tag creator
  * @property taggedName Tag description
- * @property date Date when tag has been added in Unixtime
+ * @property userId Tagged user ID
+ * @property viewed No description
  * @property x Coordinate X of the left upper corner
- * @property y Coordinate Y of the left upper corner
  * @property x2 Coordinate X of the right lower corner
+ * @property y Coordinate Y of the left upper corner
  * @property y2 Coordinate Y of the right lower corner
- * @property viewed Information whether the tag is reviewed
  */
 data class PhotoTag(
-    val userId: Int,
+    val date: VkDate,
     val id: Int,
     val placerId: Int,
     val taggedName: String,
-    val date: VkDate,
+    val userId: Int,
+    val viewed: BoolInt,
     val x: Double,
-    val y: Double,
     val x2: Double,
-    val y2: Double,
-    val viewed: BoolInt
+    val y: Double,
+    val y2: Double
 )

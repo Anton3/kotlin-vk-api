@@ -13,7 +13,9 @@ import name.anton3.vkapi.method.VkMethod
  * Returns URL to upload an ad photo to.
  *
  * @property adFormat Ad format: *1 — image and text,, *2 — big image,, *3 — exclusive format,, *4 — community, square image,, *7 — special app format.
+ * @property icon No description
  */
 data class AdsGetUploadURL(
-    var adFormat: GetUploadURLAdFormat
+    var adFormat: GetUploadURLAdFormat,
+    var icon: Int? = null
 ) : VkMethod<String, UserMethod>("ads.getUploadURL", jacksonTypeRef())

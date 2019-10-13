@@ -4,6 +4,7 @@ package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.messages.objects.GetLongPollHistoryResponse
+import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.method.VkMethod
 
@@ -21,15 +22,21 @@ import name.anton3.vkapi.method.VkMethod
  * @property msgsLimit Maximum number of messages to return.
  * @property maxMsgId Maximum ID of the message among existing ones in the local copy. Both messages received with API methods (for example, , ), and data received from a Long Poll server (events with code 4) are taken into account.
  * @property groupId Group ID (for group messages with user access token)
+ * @property lpVersion No description
+ * @property lastN No description
+ * @property credentials No description
  */
 data class MessagesGetLongPollHistory(
     var ts: Int? = null,
     var pts: Int? = null,
     var previewLength: Int? = null,
     var onlines: Boolean? = null,
-    var fields: List<String>? = null,
+    var fields: List<Fields>? = null,
     var eventsLimit: Int? = null,
     var msgsLimit: Int? = null,
     var maxMsgId: Int? = null,
-    var groupId: Int? = null
+    var groupId: Int? = null,
+    var lpVersion: Int? = null,
+    var lastN: Int? = null,
+    var credentials: Boolean? = null
 ) : VkMethod<GetLongPollHistoryResponse, UserGroupMethod>("messages.getLongPollHistory", jacksonTypeRef())

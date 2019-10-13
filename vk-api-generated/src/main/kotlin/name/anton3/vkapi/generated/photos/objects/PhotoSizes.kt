@@ -5,14 +5,14 @@ package name.anton3.vkapi.generated.photos.objects
 /**
  * No description
  *
- * @property src URL of the image
- * @property width Width in px
  * @property height Height in px
+ * @property url URL of the image
  * @property type No description
+ * @property width Width in px
  */
 data class PhotoSizes(
-    val src: String,
-    val width: Int,
     val height: Int,
-    val type: PhotoSizesType
+    val url: String,
+    val type: PhotoSizesType,
+    val width: Int
 )

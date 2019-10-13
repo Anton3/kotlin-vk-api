@@ -27,7 +27,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property accessKey Access key for the photo
  */
 @JsonDeserialize(`as` = PhotoImpl::class)
-interface Photo : WallPostAttachmentBody, CommentAttachmentBody, MessageAttachmentBody, NotificationParent {
+interface Photo : CommentAttachmentBody, WallPostAttachmentBody, MessageAttachmentBody, NotificationParent {
     val id: Int
     val albumId: Int
     val ownerId: Int

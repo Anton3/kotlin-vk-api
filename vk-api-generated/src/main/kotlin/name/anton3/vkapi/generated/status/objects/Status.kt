@@ -2,15 +2,15 @@
 
 package name.anton3.vkapi.generated.status.objects
 
-import name.anton3.vkapi.generated.audio.objects.AudioFull
+import name.anton3.vkapi.generated.audio.objects.Audio
 
 /**
  * No description
  *
- * @property text Status text
  * @property audio No description
+ * @property text Status text
  */
 data class Status(
-    val text: String? = null,
-    val audio: AudioFull? = null
+    val audio: Audio? = null,
+    val text: String? = null
 )

@@ -17,17 +17,21 @@ import name.anton3.vkapi.method.VkMethod
  * @property description Item description.
  * @property categoryId Item category ID.
  * @property price Item price.
+ * @property oldPrice No description
  * @property deleted Item status ('1' — deleted, '0' — not deleted).
  * @property mainPhotoId Cover photo ID.
  * @property photoIds IDs of additional photos.
+ * @property url Url for button in market item.
  */
 data class MarketAdd(
     var ownerId: Int,
     var name: String,
     var description: String,
     var categoryId: Int,
-    var price: Double,
+    var price: Double? = null,
+    var oldPrice: Double? = null,
     var deleted: Boolean? = null,
     var mainPhotoId: Int,
-    var photoIds: List<Int>? = null
+    var photoIds: List<Int>? = null,
+    var url: String? = null
 ) : VkMethod<AddResponse, UserMethod>("market.add", jacksonTypeRef())

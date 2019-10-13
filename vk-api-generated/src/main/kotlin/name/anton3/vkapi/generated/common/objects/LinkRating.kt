@@ -5,10 +5,10 @@ package name.anton3.vkapi.generated.common.objects
 /**
  * No description
  *
- * @property stars Count of stars
  * @property reviewsCount Count of reviews
+ * @property stars Count of stars
  */
 data class LinkRating(
-    val stars: Double? = null,
-    val reviewsCount: Int? = null
+    val reviewsCount: Int? = null,
+    val stars: Double? = null
 )

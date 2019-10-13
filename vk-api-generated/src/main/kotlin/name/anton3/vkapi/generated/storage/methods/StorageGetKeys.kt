@@ -3,18 +3,21 @@
 package name.anton3.vkapi.generated.storage.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import name.anton3.vkapi.generated.storage.objects.Value
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 
 /**
- * [https://vk.com/dev/storage.getKeys]
+ * [https://vk.com/dev/storage.get]
  *
- * Returns the names of all variables.
+ * Returns a value of variable with the name set by key parameter.
  *
- * @property userId user id, whose variables names are returned if they were requested with a server method.
- * @property count amount of variable names the info needs to be collected from.
+ * @property keys No description
+ * @property userId No description
+ * @property global No description
  */
-data class StorageGetKeys(
+data class StorageGetkeys(
+    var keys: List<String>? = null,
     var userId: Int? = null,
-    var count: Int? = null
-) : VkMethod<List<String>, UserMethod>("storage.getKeys", jacksonTypeRef())
+    var global: Boolean? = null
+) : VkMethod<List<Value>, UserMethod>("storage.get", jacksonTypeRef())

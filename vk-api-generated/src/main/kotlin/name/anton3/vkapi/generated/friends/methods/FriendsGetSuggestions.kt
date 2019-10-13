@@ -5,6 +5,7 @@ package name.anton3.vkapi.generated.friends.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.common.objects.NameCase
 import name.anton3.vkapi.generated.friends.objects.GetSuggestionsFilter
+import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.generated.users.objects.UserFull
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
@@ -25,6 +26,6 @@ data class FriendsGetSuggestions(
     var filter: List<GetSuggestionsFilter>? = null,
     var count: Int? = null,
     var offset: Int? = null,
-    var fields: List<String>? = null,
+    var fields: List<Fields>? = null,
     var nameCase: NameCase? = null
 ) : VkMethod<VkList<UserFull>, UserMethod>("friends.getSuggestions", jacksonTypeRef())

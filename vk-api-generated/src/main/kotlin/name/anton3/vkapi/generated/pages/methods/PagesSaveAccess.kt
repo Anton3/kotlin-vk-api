@@ -14,7 +14,7 @@ import name.anton3.vkapi.method.VkMethod
  *
  * @property pageId Wiki page ID.
  * @property groupId ID of the community that owns the wiki page.
- * @property userId 
+ * @property userId No description
  * @property view Who can view the wiki page: '1' — only community members, '2' — all users can view the page, '0' — only community managers
  * @property edit Who can edit the wiki page: '1' — only community members, '2' — all users can edit the page, '0' — only community managers
  */

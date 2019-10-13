@@ -5,12 +5,12 @@ package name.anton3.vkapi.generated.groups.objects
 /**
  * No description
  *
- * @property isEnabled Shows whether Long Poll is enabled
  * @property apiVersion API version used for the events
  * @property events No description
+ * @property isEnabled Shows whether Long Poll is enabled
  */
 data class LongPollSettings(
-    val isEnabled: Boolean,
     val apiVersion: String? = null,
-    val events: LongPollEvents
+    val events: LongPollEvents,
+    val isEnabled: Boolean
 )

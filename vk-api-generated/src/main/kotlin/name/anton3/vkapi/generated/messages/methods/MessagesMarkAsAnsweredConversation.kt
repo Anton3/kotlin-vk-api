@@ -12,12 +12,12 @@ import name.anton3.vkapi.vktypes.OkResponse
  *
  * Marks and unmarks conversations as unanswered.
  *
- * @property groupId Group ID (for group messages with group access token)
  * @property peerId ID of conversation to mark as important.
  * @property answered '1' — to mark as answered, '0' — to remove the mark
+ * @property groupId Group ID (for group messages with group access token)
  */
 data class MessagesMarkAsAnsweredConversation(
-    var groupId: Int? = null,
     var peerId: Int,
-    var answered: Boolean? = null
+    var answered: Boolean? = null,
+    var groupId: Int? = null
 ) : VkMethod<OkResponse, UserGroupMethod>("messages.markAsAnsweredConversation", jacksonTypeRef())

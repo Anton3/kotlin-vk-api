@@ -14,11 +14,13 @@ import name.anton3.vkapi.vktypes.OkResponse
  *
  * @property groupId Community ID.
  * @property enabled Sets whether Long Poll is enabled ('0' — disabled, '1' — enabled).
+ * @property apiVersion No description
  * @property messageNew A new incoming message has been received ('0' — disabled, '1' — enabled).
  * @property messageReply A new outcoming message has been received ('0' — disabled, '1' — enabled).
- * @property messageEdit A message has been edited ('0' — disabled, '1' — enabled).
  * @property messageAllow Allowed messages notifications ('0' — disabled, '1' — enabled).
  * @property messageDeny Denied messages notifications ('0' — disabled, '1' — enabled).
+ * @property messageEdit A message has been edited ('0' — disabled, '1' — enabled).
+ * @property messageTypingState No description
  * @property photoNew New photos notifications ('0' — disabled, '1' — enabled).
  * @property audioNew New audios notifications ('0' — disabled, '1' — enabled).
  * @property videoNew New videos notifications ('0' — disabled, '1' — enabled).
@@ -47,17 +49,22 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property pollVoteNew A vote in a public poll has been added ('0' — disabled, '1' — enabled).
  * @property groupJoin Joined community notifications ('0' — disabled, '1' — enabled).
  * @property groupLeave Left community notifications ('0' — disabled, '1' — enabled).
+ * @property groupChangeSettings No description
+ * @property groupChangePhoto No description
+ * @property groupOfficersEdit No description
  * @property userBlock User added to community blacklist
  * @property userUnblock User removed from community blacklist
  */
 data class GroupsSetLongPollSettings(
     var groupId: Int,
     var enabled: Boolean? = null,
+    var apiVersion: String? = null,
     var messageNew: Boolean? = null,
     var messageReply: Boolean? = null,
-    var messageEdit: Boolean? = null,
     var messageAllow: Boolean? = null,
     var messageDeny: Boolean? = null,
+    var messageEdit: Boolean? = null,
+    var messageTypingState: Boolean? = null,
     var photoNew: Boolean? = null,
     var audioNew: Boolean? = null,
     var videoNew: Boolean? = null,
@@ -86,6 +93,9 @@ data class GroupsSetLongPollSettings(
     var pollVoteNew: Boolean? = null,
     var groupJoin: Boolean? = null,
     var groupLeave: Boolean? = null,
+    var groupChangeSettings: Boolean? = null,
+    var groupChangePhoto: Boolean? = null,
+    var groupOfficersEdit: Boolean? = null,
     var userBlock: Boolean? = null,
     var userUnblock: Boolean? = null
 ) : VkMethod<OkResponse, UserGroupMethod>("groups.setLongPollSettings", jacksonTypeRef())

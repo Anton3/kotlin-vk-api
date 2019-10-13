@@ -6,7 +6,9 @@ import name.anton3.vkapi.vktypes.ValueEnum
 
 enum class GetConversationsFilter(override val value: String) : ValueEnum<String> {
     ALL("all"),
-    UNREAD("unread"),
+    BUSINESS_NOTIFY("business_notify"),
     IMPORTANT("important"),
-    UNANSWERED("unanswered")
+    MESSAGE_REQUEST("message_request"),
+    UNANSWERED("unanswered"),
+    UNREAD("unread")
 }

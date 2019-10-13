@@ -13,5 +13,7 @@ enum class NewsfeedItemType(override val value: String) : ValueEnum<String> {
     NOTE("note"),
     AUDIO("audio"),
     VIDEO("video"),
-    TOPIC("topic")
+    TOPIC("topic"),
+    DIGEST("digest"),
+    STORIES("stories")
 }

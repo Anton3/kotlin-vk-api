@@ -4,6 +4,7 @@ package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.messages.objects.Message
+import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
@@ -20,9 +21,9 @@ import name.anton3.vkapi.vktypes.VkList
  * @property groupId Group ID (for group messages with group access token)
  */
 data class MessagesGetByConversationMessageId(
-    var peerId: Int? = null,
+    var peerId: Int,
     var conversationMessageIds: List<Int>,
     var extended: Boolean? = null,
-    var fields: List<String>? = null,
+    var fields: List<Fields>? = null,
     var groupId: Int? = null
 ) : VkMethod<VkList<Message>, UserGroupMethod>("messages.getByConversationMessageId", jacksonTypeRef())

@@ -19,7 +19,7 @@ import name.anton3.vkapi.method.VkMethod
  * @property cropY2 Y coordinate of the right-bottom corner
  */
 data class PhotosGetOwnerCoverPhotoUploadServer(
-    var groupId: Int? = null,
+    var groupId: Int,
     var cropX: Int? = null,
     var cropY: Int? = null,
     var cropX2: Int? = null,

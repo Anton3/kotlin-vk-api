@@ -4,6 +4,7 @@ package name.anton3.vkapi.generated.friends.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.common.objects.NameCase
+import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.generated.users.objects.UserFull
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
@@ -24,7 +25,7 @@ import name.anton3.vkapi.vktypes.VkList
 data class FriendsSearch(
     var userId: Int,
     var q: String? = null,
-    var fields: List<String>? = null,
+    var fields: List<Fields>? = null,
     var nameCase: NameCase? = null,
     var offset: Int? = null,
     var count: Int? = null

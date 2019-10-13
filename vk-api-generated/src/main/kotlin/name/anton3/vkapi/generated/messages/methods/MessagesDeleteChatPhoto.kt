@@ -4,7 +4,7 @@ package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.messages.objects.DeleteChatPhotoResponse
-import name.anton3.vkapi.method.UserMethod
+import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.method.VkMethod
 
 /**
@@ -13,7 +13,9 @@ import name.anton3.vkapi.method.VkMethod
  * Deletes a chat's cover picture.
  *
  * @property chatId Chat ID.
+ * @property groupId No description
  */
 data class MessagesDeleteChatPhoto(
-    var chatId: Int
-) : VkMethod<DeleteChatPhotoResponse, UserMethod>("messages.deleteChatPhoto", jacksonTypeRef())
+    var chatId: Int,
+    var groupId: Int? = null
+) : VkMethod<DeleteChatPhotoResponse, UserGroupMethod>("messages.deleteChatPhoto", jacksonTypeRef())

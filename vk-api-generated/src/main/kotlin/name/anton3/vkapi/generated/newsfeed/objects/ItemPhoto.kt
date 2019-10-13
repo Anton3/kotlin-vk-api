@@ -18,7 +18,7 @@ import name.anton3.vkapi.vktypes.VkDate
 data class ItemPhoto(
     val photos: ItemPhotoPhotos? = null,
     val postId: Int? = null,
-    override val type: NewsfeedItemType? = null,
-    override val sourceId: Int? = null,
-    override val date: VkDate? = null
-) : NewsfeedItem
+    override val type: NewsfeedItemType,
+    override val sourceId: Int,
+    override val date: VkDate
+) : ItemBase, NewsfeedItem

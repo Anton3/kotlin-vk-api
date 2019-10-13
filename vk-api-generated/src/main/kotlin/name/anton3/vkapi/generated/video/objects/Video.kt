@@ -2,6 +2,7 @@
 
 package name.anton3.vkapi.generated.video.objects
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
 import name.anton3.vkapi.generated.notifications.objects.NotificationParent
@@ -29,17 +30,17 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property accessKey Video access key
  * @property addingDate Date when the video has been added in Unixtime
  * @property player URL of the page with a player that can be used to play the video in the browser.
- * @property canEdit Information whether current user can edit the video
- * @property canAdd Information whether current user can add the video
- * @property processing Returns if the video is processing
- * @property live Returns if the video is live translation
+ * @property canEdit No description
+ * @property canAdd No description
+ * @property processing No description
+ * @property live No description
  * @property files No description
  * @property platform No description
  * @property width Video width
  * @property height Video height
  */
 @JsonDeserialize(`as` = VideoImpl::class)
-interface Video : WallPostAttachmentBody, CommentAttachmentBody, MessageAttachmentBody, NotificationParent {
+interface Video : CommentAttachmentBody, WallPostAttachmentBody, MessageAttachmentBody, NotificationParent {
     val id: Int?
     val ownerId: Int?
     val title: String?
@@ -48,10 +49,10 @@ interface Video : WallPostAttachmentBody, CommentAttachmentBody, MessageAttachme
     val date: VkDate?
     val views: Int?
     val comments: Int?
-    val photo130: String?
-    val photo320: String?
-    val photo640: String?
-    val photo800: String?
+    @get:JsonProperty("photo_130") val photo130: String?
+    @get:JsonProperty("photo_320") val photo320: String?
+    @get:JsonProperty("photo_640") val photo640: String?
+    @get:JsonProperty("photo_800") val photo800: String?
     val accessKey: String?
     val addingDate: Int?
     val player: String?

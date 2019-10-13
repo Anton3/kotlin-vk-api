@@ -41,4 +41,4 @@ data class Link(
     val product: LinkProduct? = null,
     val rating: LinkRating? = null,
     val application: LinkApplication? = null
-) : WallPostAttachmentBody, CommentAttachmentBody, MessageAttachmentBody
+) : CommentAttachmentBody, WallPostAttachmentBody, MessageAttachmentBody

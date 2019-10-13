@@ -6,5 +6,6 @@ import name.anton3.vkapi.vktypes.ValueEnum
 
 enum class AdCostType(override val value: Int) : ValueEnum<Int> {
     PER_CLICKS(0),
-    PER_IMPRESSIONS(1)
+    PER_IMPRESSIONS(1),
+    PER_ACTIONS(2)
 }

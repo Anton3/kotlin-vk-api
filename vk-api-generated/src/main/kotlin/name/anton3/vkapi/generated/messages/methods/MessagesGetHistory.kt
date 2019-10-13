@@ -5,6 +5,7 @@ package name.anton3.vkapi.generated.messages.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.messages.objects.GetHistoryResponse
 import name.anton3.vkapi.generated.messages.objects.GetHistoryRev
+import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.method.VkMethod
 
@@ -18,10 +19,10 @@ import name.anton3.vkapi.method.VkMethod
  * @property userId ID of the user whose message history you want to return.
  * @property peerId No description
  * @property startMessageId Starting message ID from which to return history.
+ * @property rev Sort order: '1' — return messages in chronological order. '0' — return messages in reverse chronological order.
  * @property extended Information whether the response should be extended
  * @property fields Profile fields to return.
  * @property groupId Group ID (for group messages with group access token)
- * @property rev Sort order: '1' — return messages in chronological order. '0' — return messages in reverse chronological order.
  */
 data class MessagesGetHistory(
     var offset: Int? = null,
@@ -29,8 +30,8 @@ data class MessagesGetHistory(
     var userId: Int? = null,
     var peerId: Int? = null,
     var startMessageId: Int? = null,
+    var rev: GetHistoryRev? = null,
     var extended: Boolean? = null,
-    var fields: List<String>? = null,
-    var groupId: Int? = null,
-    var rev: GetHistoryRev? = null
+    var fields: List<Fields>? = null,
+    var groupId: Int? = null
 ) : VkMethod<GetHistoryResponse, UserGroupMethod>("messages.getHistory", jacksonTypeRef())

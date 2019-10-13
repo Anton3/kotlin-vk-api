@@ -12,9 +12,9 @@ import name.anton3.vkapi.method.VkMethod
  *
  * Returns the text of one of the previous versions of a wiki page.
  *
- * @property versionId 
+ * @property versionId No description
  * @property groupId ID of the community that owns the wiki page.
- * @property userId 
+ * @property userId No description
  * @property needHtml '1' — to return the page as HTML
  */
 data class PagesGetVersion(

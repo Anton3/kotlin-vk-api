@@ -20,6 +20,7 @@ import name.anton3.vkapi.vktypes.VkList
  * @property count Number of friends to return.
  * @property offset Offset needed to return a specific subset of friends.
  * @property nameCase Case for declension of user name and surname: , 'nom' — nominative (default) , 'gen' — genitive , 'dat' — dative , 'acc' — accusative , 'ins' — instrumental , 'abl' — prepositional
+ * @property ref No description
  */
 data class FriendsGet(
     var userId: Int? = null,
@@ -27,5 +28,6 @@ data class FriendsGet(
     var listId: Int? = null,
     var count: Int? = null,
     var offset: Int? = null,
-    var nameCase: NameCase? = null
+    var nameCase: NameCase? = null,
+    var ref: String? = null
 ) : VkMethod<VkList<Int>, UserServiceMethod>("friends.get", jacksonTypeRef())

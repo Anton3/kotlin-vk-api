@@ -8,23 +8,23 @@ import name.anton3.vkapi.generated.wall.objects.WallPostAttachmentBody
 /**
  * No description
  *
- * @property id Photo album ID
- * @property thumb No description
- * @property ownerId Album owner's ID
- * @property title Photo album title
- * @property description Photo album description
  * @property created Date when the album has been created in Unixtime
- * @property updated Date when the album has been updated last time in Unixtime
+ * @property description Photo album description
+ * @property id Photo album ID
+ * @property ownerId Album owner's ID
  * @property size Photos number
+ * @property thumb No description
+ * @property title Photo album title
+ * @property updated Date when the album has been updated last time in Unixtime
  */
 @JsonDeserialize(`as` = Void::class)
 data class PhotoAlbum(
-    val id: Int,
-    val thumb: Photo? = null,
-    val ownerId: Int,
-    val title: String,
-    val description: String? = null,
     val created: Int,
-    val updated: Int,
-    val size: Int
+    val description: String? = null,
+    val id: Int,
+    val ownerId: Int,
+    val size: Int,
+    val thumb: Photo? = null,
+    val title: String,
+    val updated: Int
 ) : WallPostAttachmentBody

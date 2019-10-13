@@ -3,6 +3,7 @@
 package name.anton3.vkapi.generated.wall.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import name.anton3.vkapi.generated.common.objects.UserGroupFields
 import name.anton3.vkapi.generated.wall.objects.GetByIdExtendedResponse
 import name.anton3.vkapi.method.UserServiceMethod
 import name.anton3.vkapi.method.VkMethod
@@ -19,7 +20,7 @@ import name.anton3.vkapi.method.VkMethod
 data class WallGetByIdExtended(
     var posts: List<String>,
     var copyHistoryDepth: Int? = null,
-    var fields: List<String>? = null
+    var fields: List<UserGroupFields>? = null
 ) : VkMethod<GetByIdExtendedResponse, UserServiceMethod>("wall.getById", jacksonTypeRef()) {
     init {
         unsafeParam("extended", "1")

@@ -12,12 +12,12 @@ import name.anton3.vkapi.vktypes.OkResponse
  *
  * Marks and unmarks conversations as important.
  *
- * @property groupId Group ID (for group messages with group access token)
  * @property peerId ID of conversation to mark as important.
  * @property important '1' — to add a star (mark as important), '0' — to remove the star
+ * @property groupId Group ID (for group messages with group access token)
  */
 data class MessagesMarkAsImportantConversation(
-    var groupId: Int? = null,
     var peerId: Int,
-    var important: Boolean? = null
+    var important: Boolean? = null,
+    var groupId: Int? = null
 ) : VkMethod<OkResponse, UserGroupMethod>("messages.markAsImportantConversation", jacksonTypeRef())

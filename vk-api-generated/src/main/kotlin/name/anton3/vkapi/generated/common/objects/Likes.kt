@@ -7,10 +7,10 @@ import name.anton3.vkapi.vktypes.BoolInt
 /**
  * No description
  *
- * @property userLikes Information whether current user likes the photo
  * @property count Likes number
+ * @property userLikes No description
  */
 data class Likes(
-    val userLikes: BoolInt? = null,
-    val count: Int? = null
+    val count: Int? = null,
+    val userLikes: BoolInt? = null
 )

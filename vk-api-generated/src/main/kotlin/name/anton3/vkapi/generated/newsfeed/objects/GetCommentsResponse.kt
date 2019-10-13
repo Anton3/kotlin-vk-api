@@ -14,8 +14,8 @@ import name.anton3.vkapi.generated.users.objects.UserFull
  * @property nextFrom New from value
  */
 data class GetCommentsResponse(
-    val items: List<NewsfeedItem>? = null,
-    val profiles: List<UserFull>? = null,
-    val groups: List<GroupFull>? = null,
+    val items: List<NewsfeedItem>,
+    val profiles: List<UserFull>,
+    val groups: List<GroupFull>,
     val nextFrom: String? = null
 )

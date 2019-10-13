@@ -4,7 +4,7 @@ package name.anton3.vkapi.generated.orders.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.orders.objects.Amount
-import name.anton3.vkapi.method.MethodRequirement
+import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 
 /**
@@ -18,4 +18,4 @@ import name.anton3.vkapi.method.VkMethod
 data class OrdersGetAmount(
     var userId: Int,
     var votes: List<String>
-) : VkMethod<Amount, MethodRequirement>("orders.getAmount", jacksonTypeRef())
+) : VkMethod<Amount, UserMethod>("orders.getAmount", jacksonTypeRef())

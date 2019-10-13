@@ -14,12 +14,15 @@ import name.anton3.vkapi.method.VkMethod
  *
  * @property leadId Lead ID.
  * @property testResult Value to be return in 'result' field when test mode is used.
+ * @property testMode No description
+ * @property autoStart No description
  * @property age User age.
  * @property country User country code.
  */
 data class LeadsCheckUser(
     var leadId: Int,
     var testResult: Int? = null,
+    var autoStart: Boolean? = null,
     var age: Int? = null,
     var country: String? = null
 ) : VkMethod<Checked, UserMethod>("leads.checkUser", jacksonTypeRef())

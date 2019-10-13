@@ -15,13 +15,15 @@ import name.anton3.vkapi.method.VkMethod
  * @property q Search query string.
  * @property offset Offset for querying specific result subset
  * @property limit Maximum number of results to return.
- * @property filters 
- * @property searchGlobal 
+ * @property filters No description
+ * @property fields No description
+ * @property searchGlobal No description
  */
 data class SearchGetHints(
     var q: String? = null,
     var offset: Int? = null,
     var limit: Int? = null,
     var filters: List<String>? = null,
+    var fields: List<String>? = null,
     var searchGlobal: Boolean? = null
 ) : VkMethod<GetHintsResponse, UserMethod>("search.getHints", jacksonTypeRef())

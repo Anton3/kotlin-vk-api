@@ -14,10 +14,13 @@ import name.anton3.vkapi.vktypes.OkResponse
  *
  * @property groupId Community ID.
  * @property serverId Server ID.
+ * @property apiVersion No description
  * @property messageNew A new incoming message has been received ('0' — disabled, '1' — enabled).
  * @property messageReply A new outcoming message has been received ('0' — disabled, '1' — enabled).
  * @property messageAllow Allowed messages notifications ('0' — disabled, '1' — enabled).
+ * @property messageEdit No description
  * @property messageDeny Denied messages notifications ('0' — disabled, '1' — enabled).
+ * @property messageTypingState No description
  * @property photoNew New photos notifications ('0' — disabled, '1' — enabled).
  * @property audioNew New audios notifications ('0' — disabled, '1' — enabled).
  * @property videoNew New videos notifications ('0' — disabled, '1' — enabled).
@@ -46,6 +49,9 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property pollVoteNew A vote in a public poll has been added ('0' — disabled, '1' — enabled).
  * @property groupJoin Joined community notifications ('0' — disabled, '1' — enabled).
  * @property groupLeave Left community notifications ('0' — disabled, '1' — enabled).
+ * @property groupChangeSettings No description
+ * @property groupChangePhoto No description
+ * @property groupOfficersEdit No description
  * @property userBlock User added to community blacklist
  * @property userUnblock User removed from community blacklist
  * @property leadFormsNew New form in lead forms
@@ -53,10 +59,13 @@ import name.anton3.vkapi.vktypes.OkResponse
 data class GroupsSetCallbackSettings(
     var groupId: Int,
     var serverId: Int? = null,
+    var apiVersion: String? = null,
     var messageNew: Boolean? = null,
     var messageReply: Boolean? = null,
     var messageAllow: Boolean? = null,
+    var messageEdit: Boolean? = null,
     var messageDeny: Boolean? = null,
+    var messageTypingState: Boolean? = null,
     var photoNew: Boolean? = null,
     var audioNew: Boolean? = null,
     var videoNew: Boolean? = null,
@@ -85,6 +94,9 @@ data class GroupsSetCallbackSettings(
     var pollVoteNew: Boolean? = null,
     var groupJoin: Boolean? = null,
     var groupLeave: Boolean? = null,
+    var groupChangeSettings: Boolean? = null,
+    var groupChangePhoto: Boolean? = null,
+    var groupOfficersEdit: Boolean? = null,
     var userBlock: Boolean? = null,
     var userUnblock: Boolean? = null,
     var leadFormsNew: Boolean? = null

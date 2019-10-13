@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 import com.fasterxml.jackson.databind.jsontype.NamedType
 import com.fasterxml.jackson.databind.node.ObjectNode
-import name.anton3.vkapi.generated.audio.objects.AudioFull
+import name.anton3.vkapi.generated.audio.objects.Audio
 import name.anton3.vkapi.generated.common.objects.Link
 import name.anton3.vkapi.generated.common.objects.Sticker
 import name.anton3.vkapi.generated.docs.objects.Doc
@@ -24,7 +24,7 @@ import name.anton3.vkapi.generated.wall.objects.*
 
 internal val wallPostAttachmentTypes: List<NamedType> = listOf(
     NamedType(Photo::class.java, "photo"),
-    NamedType(AudioFull::class.java, "audio"),
+    NamedType(Audio::class.java, "audio"),
     NamedType(Video::class.java, "video"),
     NamedType(Doc::class.java, "doc"),
     NamedType(Link::class.java, "link"),
@@ -42,7 +42,7 @@ internal val wallPostAttachmentTypes: List<NamedType> = listOf(
 
 internal val commentAttachmentTypes: List<NamedType> = listOf(
     NamedType(Photo::class.java, "photo"),
-    NamedType(AudioFull::class.java, "audio"),
+    NamedType(Audio::class.java, "audio"),
     NamedType(Video::class.java, "video"),
     NamedType(Doc::class.java, "doc"),
     NamedType(Link::class.java, "link"),
@@ -55,14 +55,14 @@ internal val commentAttachmentTypes: List<NamedType> = listOf(
 
 internal val messageAttachmentTypes: List<NamedType> = listOf(
     NamedType(Photo::class.java, "photo"),
-    NamedType(AudioFull::class.java, "audio"),
+    NamedType(Audio::class.java, "audio"),
     NamedType(Video::class.java, "video"),
     NamedType(Doc::class.java, "doc"),
     NamedType(Link::class.java, "link"),
     NamedType(MarketAlbum::class.java, "market_album"),
     NamedType(MarketItem::class.java, "market"),
     NamedType(Layout::class.java, "gift"),
-    NamedType(WallpostAttached::class.java, "wall"),
+    NamedType(WallpostToId::class.java, "wall"),
     NamedType(WallComment::class.java, "wall_reply"),
     NamedType(AudioMessage::class.java, "audio_message"),
     NamedType(MessageGraffiti::class.java, "graffiti"),

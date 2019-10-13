@@ -12,5 +12,7 @@ enum class HistoryMessageAttachmentType(override val value: String) : ValueEnum<
     LINK("link"),
     MARKET("market"),
     WALL("wall"),
-    SHARE("share")
+    SHARE("share"),
+    GRAFFITI("graffiti"),
+    AUDIO_MESSAGE("audio_message")
 }

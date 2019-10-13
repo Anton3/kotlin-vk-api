@@ -4,7 +4,7 @@ package name.anton3.vkapi.generated.leads.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.leads.objects.MetricHitResponse
-import name.anton3.vkapi.method.UserServiceMethod
+import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 
 /**
@@ -16,4 +16,4 @@ import name.anton3.vkapi.method.VkMethod
  */
 data class LeadsMetricHit(
     var data: String
-) : VkMethod<MetricHitResponse, UserServiceMethod>("leads.metricHit", jacksonTypeRef())
+) : VkMethod<MetricHitResponse, UserMethod>("leads.metricHit", jacksonTypeRef())

@@ -12,12 +12,12 @@ import name.anton3.vkapi.generated.users.objects.UserFull
  * @property profiles No description
  * @property groups No description
  * @property newOffset New offset value
- * @property newFrom New from value
+ * @property nextFrom Next from value
  */
 data class GetRecommendedResponse(
     val items: List<NewsfeedItem>? = null,
     val profiles: List<UserFull>? = null,
     val groups: List<GroupFull>? = null,
     val newOffset: String? = null,
-    val newFrom: String? = null
+    val nextFrom: String? = null
 )

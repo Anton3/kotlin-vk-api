@@ -8,5 +8,5 @@ enum class ReportType(override val value: String) : ValueEnum<String> {
     PORN("porn"),
     SPAM("spam"),
     INSULT("insult"),
-    ADVERTISMENT("advertisment")
+    ADVERTISEMENT("advertisement")
 }

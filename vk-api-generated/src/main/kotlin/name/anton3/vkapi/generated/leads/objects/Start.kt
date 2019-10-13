@@ -7,7 +7,7 @@ import name.anton3.vkapi.vktypes.BoolInt
 /**
  * No description
  *
- * @property testMode Information whether test mode is enabled
+ * @property testMode No description
  * @property vkSid Session data
  */
 data class Start(

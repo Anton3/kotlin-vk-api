@@ -13,12 +13,12 @@ import name.anton3.vkapi.method.VkMethod
  *
  * @property messageIds Message IDs.
  * @property spam '1' — to mark message as spam.
- * @property deleteForAll '1' — delete message for for all.
  * @property groupId Group ID (for group messages with user access token)
+ * @property deleteForAll '1' — delete message for for all.
  */
 data class MessagesDelete(
     var messageIds: List<Int>? = null,
     var spam: Boolean? = null,
-    var deleteForAll: Boolean? = null,
-    var groupId: Int? = null
+    var groupId: Int? = null,
+    var deleteForAll: Boolean? = null
 ) : VkMethod<Map<Int, Boolean>, UserGroupMethod>("messages.delete", jacksonTypeRef())

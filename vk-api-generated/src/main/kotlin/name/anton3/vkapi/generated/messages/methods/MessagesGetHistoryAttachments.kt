@@ -5,6 +5,7 @@ package name.anton3.vkapi.generated.messages.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.messages.objects.GetHistoryAttachmentsMediaType
 import name.anton3.vkapi.generated.messages.objects.GetHistoryAttachmentsResponse
+import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.method.VkMethod
 
@@ -20,6 +21,8 @@ import name.anton3.vkapi.method.VkMethod
  * @property photoSizes '1' — to return photo sizes in a
  * @property fields Additional profile [vk.com/dev/fields|fields] to return.
  * @property groupId Group ID (for group messages with group access token)
+ * @property preserveOrder No description
+ * @property maxForwardsLevel No description
  */
 data class MessagesGetHistoryAttachments(
     var peerId: Int,
@@ -27,6 +30,8 @@ data class MessagesGetHistoryAttachments(
     var startFrom: String? = null,
     var count: Int? = null,
     var photoSizes: Boolean? = null,
-    var fields: List<String>? = null,
-    var groupId: Int? = null
+    var fields: List<Fields>? = null,
+    var groupId: Int? = null,
+    var preserveOrder: Boolean? = null,
+    var maxForwardsLevel: Int? = null
 ) : VkMethod<GetHistoryAttachmentsResponse, UserGroupMethod>("messages.getHistoryAttachments", jacksonTypeRef())

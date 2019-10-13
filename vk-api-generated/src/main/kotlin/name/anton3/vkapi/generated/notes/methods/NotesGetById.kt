@@ -14,8 +14,10 @@ import name.anton3.vkapi.method.VkMethod
  *
  * @property noteId Note ID.
  * @property ownerId Note owner ID.
+ * @property needWiki No description
  */
 data class NotesGetById(
     var noteId: Int,
-    var ownerId: Int? = null
+    var ownerId: Int? = null,
+    var needWiki: Boolean? = null
 ) : VkMethod<Note, UserMethod>("notes.getById", jacksonTypeRef())

@@ -2,7 +2,7 @@
 
 package name.anton3.vkapi.generated.newsfeed.objects
 
-import name.anton3.vkapi.generated.audio.objects.AudioFull
+import name.anton3.vkapi.generated.audio.objects.Audio
 
 /**
  * No description
@@ -12,5 +12,5 @@ import name.anton3.vkapi.generated.audio.objects.AudioFull
  */
 data class ItemAudioAudio(
     val count: Int? = null,
-    val items: List<AudioFull>? = null
+    val items: List<Audio>? = null
 )

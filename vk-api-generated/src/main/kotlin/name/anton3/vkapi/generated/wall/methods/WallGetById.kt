@@ -3,6 +3,7 @@
 package name.anton3.vkapi.generated.wall.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import name.anton3.vkapi.generated.common.objects.UserGroupFields
 import name.anton3.vkapi.generated.wall.objects.WallpostFull
 import name.anton3.vkapi.method.UserServiceMethod
 import name.anton3.vkapi.method.VkMethod
@@ -19,5 +20,5 @@ import name.anton3.vkapi.method.VkMethod
 data class WallGetById(
     var posts: List<String>,
     var copyHistoryDepth: Int? = null,
-    var fields: List<String>? = null
+    var fields: List<UserGroupFields>? = null
 ) : VkMethod<List<WallpostFull>, UserServiceMethod>("wall.getById", jacksonTypeRef())

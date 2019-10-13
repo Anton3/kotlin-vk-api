@@ -7,14 +7,14 @@ import name.anton3.vkapi.vktypes.BoolInt
 /**
  * No description
  *
- * @property accountId Account ID
- * @property accountType No description
- * @property accountStatus Information whether account is active
  * @property accessRole No description
+ * @property accountId Account ID
+ * @property accountStatus No description
+ * @property accountType No description
  */
 data class Account(
+    val accessRole: AccessRole,
     val accountId: Int,
-    val accountType: AccountType,
     val accountStatus: BoolInt,
-    val accessRole: AccessRole
+    val accountType: AccountType
 )

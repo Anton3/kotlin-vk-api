@@ -2,19 +2,21 @@
 
 package name.anton3.vkapi.generated.groups.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import name.anton3.vkapi.generated.users.objects.User
 
 /**
  * No description
  *
- * @property type No description
- * @property group Information about group if type = group
- * @property profile Information about group if type = profile
  * @property banInfo No description
+ * @property group No description
+ * @property profile No description
+ * @property type No description
  */
+@JsonDeserialize(`as` = Void::class)
 data class OwnerXtrBanInfo(
-    val type: OwnerXtrBanInfoType? = null,
+    val banInfo: BanInfo? = null,
     val group: Group? = null,
     val profile: User? = null,
-    val banInfo: BanInfo? = null
-)
+    val type: OwnerXtrBanInfoType? = null
+) : BannedItem

@@ -5,6 +5,7 @@ package name.anton3.vkapi.generated.polls.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.common.objects.NameCase
 import name.anton3.vkapi.generated.polls.objects.Voters
+import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 
@@ -31,6 +32,6 @@ data class PollsGetVoters(
     var friendsOnly: Boolean? = null,
     var offset: Int? = null,
     var count: Int? = null,
-    var fields: List<String>? = null,
+    var fields: List<Fields>? = null,
     var nameCase: NameCase? = null
 ) : VkMethod<List<Voters>, UserMethod>("polls.getVoters", jacksonTypeRef())

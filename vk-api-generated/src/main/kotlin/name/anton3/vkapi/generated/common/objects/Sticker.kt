@@ -9,15 +9,15 @@ import name.anton3.vkapi.generated.wall.objects.CommentAttachmentBody
 /**
  * No description
  *
- * @property stickerId Sticker ID
- * @property productId Collection ID
  * @property images No description
  * @property imagesWithBackground No description
+ * @property productId Collection ID
+ * @property stickerId Sticker ID
  */
 @JsonDeserialize(`as` = Void::class)
 data class Sticker(
-    val stickerId: Int? = null,
-    val productId: Int? = null,
     val images: List<Image>? = null,
-    val imagesWithBackground: List<Image>? = null
+    val imagesWithBackground: List<Image>? = null,
+    val productId: Int? = null,
+    val stickerId: Int? = null
 ) : CommentAttachmentBody, MessageAttachmentBody

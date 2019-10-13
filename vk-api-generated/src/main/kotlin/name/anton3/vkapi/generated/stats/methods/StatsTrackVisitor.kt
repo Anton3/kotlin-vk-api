@@ -12,6 +12,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  *
  * No description
  *
-
+ * @property id No description
  */
-class StatsTrackVisitor : VkMethod<OkResponse, UserMethod>("stats.trackVisitor", jacksonTypeRef())
+data class StatsTrackVisitor(
+    var id: String
+) : VkMethod<OkResponse, UserMethod>("stats.trackVisitor", jacksonTypeRef())

@@ -15,9 +15,11 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property key No description
  * @property value No description
  * @property userId No description
+ * @property global No description
  */
 data class StorageSet(
     var key: String,
     var value: String? = null,
-    var userId: Int? = null
+    var userId: Int? = null,
+    var global: Boolean? = null
 ) : VkMethod<OkResponse, UserMethod>("storage.set", jacksonTypeRef())

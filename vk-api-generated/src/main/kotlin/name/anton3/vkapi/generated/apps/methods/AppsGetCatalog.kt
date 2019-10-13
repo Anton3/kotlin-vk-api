@@ -4,7 +4,9 @@ package name.anton3.vkapi.generated.apps.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.apps.objects.App
+import name.anton3.vkapi.generated.apps.objects.GetCatalogFilter
 import name.anton3.vkapi.generated.apps.objects.GetCatalogSort
+import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.method.UserServiceMethod
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
@@ -33,9 +35,9 @@ data class AppsGetCatalog(
     var platform: String? = null,
     var extended: Boolean? = null,
     var returnFriends: Boolean? = null,
-    var fields: List<String>? = null,
+    var fields: List<Fields>? = null,
     var nameCase: String? = null,
     var q: String? = null,
     var genreId: Int? = null,
-    var filter: String? = null
+    var filter: GetCatalogFilter? = null
 ) : VkMethod<VkList<App>, UserServiceMethod>("apps.getCatalog", jacksonTypeRef())
