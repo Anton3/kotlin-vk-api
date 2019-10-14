@@ -115,6 +115,9 @@
         },
         "keyboard": {
           "$ref": "#/definitions/messages_keyboard_returned"
+        },
+        "is_cropped": {
+          "type": "boolean"
         }
       },
       "required": [

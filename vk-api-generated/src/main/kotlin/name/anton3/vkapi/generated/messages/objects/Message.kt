@@ -26,6 +26,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property conversationMessageId Unique auto-incremented number for all messages with this peer
  * @property updateTime Date when the message has been updated in Unixtime
  * @property keyboard No description
+ * @property isCropped No description
  */
 data class Message(
     val id: Int,
@@ -45,5 +46,6 @@ data class Message(
     val action: MessageAction? = null,
     val conversationMessageId: Int? = null,
     val updateTime: VkDate? = null,
-    val keyboard: KeyboardReturned? = null
+    val keyboard: KeyboardReturned? = null,
+    val isCropped: Boolean? = null
 )
