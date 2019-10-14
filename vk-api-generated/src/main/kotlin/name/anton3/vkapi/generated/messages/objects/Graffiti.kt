@@ -2,6 +2,9 @@
 
 package name.anton3.vkapi.generated.messages.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import name.anton3.vkapi.generated.docs.objects.SaveDocBody
+
 /**
  * No description
  *
@@ -12,6 +15,7 @@ package name.anton3.vkapi.generated.messages.objects
  * @property url Graffiti URL
  * @property width Graffiti width
  */
+@JsonDeserialize(`as` = Void::class)
 data class Graffiti(
     val accessKey: String? = null,
     val height: Int,
@@ -19,4 +23,4 @@ data class Graffiti(
     val ownerId: Int,
     val url: String,
     val width: Int
-)
+) : SaveDocBody, MessageAttachmentBody

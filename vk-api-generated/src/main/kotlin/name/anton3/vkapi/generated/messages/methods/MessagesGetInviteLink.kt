@@ -3,21 +3,21 @@
 package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.generated.get.objects.InviteLinkResponse
+import name.anton3.vkapi.generated.messages.objects.GetInviteLinkResponse
 import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.method.VkMethod
 
 /**
  * [https://vk.com/dev/messages.getInviteLink]
  *
- * Get an invitation link for a chat
+ * No description
  *
- * @property peerId Destination ID
- * @property reset Pass 1 to generate a new link and reset previous one
- * @property groupId For actions on behalf of a group with user token
+ * @property peerId Destination ID.
+ * @property reset 1 — to generate new link (revoke previous), 0 — to return previous link.
+ * @property groupId Group ID
  */
 data class MessagesGetInviteLink(
     var peerId: Int,
     var reset: Boolean? = null,
     var groupId: Int? = null
-) : VkMethod<InviteLinkResponse, UserGroupMethod>("messages.getInviteLink", jacksonTypeRef())
+) : VkMethod<GetInviteLinkResponse, UserGroupMethod>("messages.getInviteLink", jacksonTypeRef())

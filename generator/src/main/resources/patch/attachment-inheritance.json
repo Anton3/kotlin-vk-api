@@ -181,7 +181,7 @@
           "$ref": "#/definitions/messages_audio_message"
         },
         {
-          "$ref": "#/definitions/messages_message_graffiti"
+          "$ref": "#/definitions/messages_graffiti"
         },
         {
           "$ref": "#/definitions/polls_poll"

@@ -5,16 +5,22 @@ package name.anton3.vkapi.generated.messages.objects
 /**
  * No description
  *
- * @property memberId Member id
- * @property invitedBy User id of the member that invited this member
- * @property joinDate Date when this member entered the conversation
- * @property isAdmin `true` if this member is an admin of the chat
- * @property canKick `true` if current user can kick this member
+ * @property canKick Is it possible for user to kick this member
+ * @property invitedBy No description
+ * @property isAdmin No description
+ * @property isOwner No description
+ * @property isMessageRequest No description
+ * @property joinDate No description
+ * @property requestDate Message request date
+ * @property memberId No description
  */
 data class ConversationMember(
-    val memberId: Int,
-    val invitedBy: Int,
-    val joinDate: Int,
-    val isAdmin: Boolean,
-    val canKick: Boolean
+    val canKick: Boolean? = null,
+    val invitedBy: Int? = null,
+    val isAdmin: Boolean? = null,
+    val isOwner: Boolean? = null,
+    val isMessageRequest: Boolean? = null,
+    val joinDate: Int? = null,
+    val requestDate: Int? = null,
+    val memberId: Int
 )

@@ -85,12 +85,13 @@ import name.anton3.vkapi.vktypes.VkBirthDate
  * @property trending No description
  * @property friendStatus No description
  * @property mutual No description
- * @property id User ID
- * @property firstName User first name
- * @property lastName User last name
  * @property deactivated Returns if a profile is deleted or blocked
- * @property isClosed No description
+ * @property firstName User first name
+ * @property hidden Returns if a profile is hidden.
+ * @property id User ID
+ * @property lastName User last name
  * @property canAccessClosed No description
+ * @property isClosed No description
  */
 @JsonDeserialize(`as` = Void::class)
 data class UserXtrCounters(
@@ -163,10 +164,11 @@ data class UserXtrCounters(
     override val trending: BoolInt? = null,
     override val friendStatus: FriendStatusStatus? = null,
     override val mutual: RequestsMutual? = null,
-    override val id: Int,
+    override val deactivated: String? = null,
     override val firstName: String,
+    override val hidden: Int? = null,
+    override val id: Int,
     override val lastName: String,
-    override val deactivated: UserMinDeactivated? = null,
-    override val isClosed: BoolInt,
-    override val canAccessClosed: BoolInt? = null
+    override val canAccessClosed: Boolean? = null,
+    override val isClosed: Boolean? = null
 ) : UserFull

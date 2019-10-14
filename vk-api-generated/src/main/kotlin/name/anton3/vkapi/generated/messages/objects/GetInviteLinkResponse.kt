@@ -5,8 +5,8 @@ package name.anton3.vkapi.generated.messages.objects
 /**
  * No description
  *
- * @property lastDeletedId Id of the last message, that was deleted
+ * @property link No description
  */
-data class DeleteConversationResponse(
-    val lastDeletedId: Int
+data class GetInviteLinkResponse(
+    val link: String? = null
 )

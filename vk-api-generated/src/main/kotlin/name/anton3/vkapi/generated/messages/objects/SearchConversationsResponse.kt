@@ -8,16 +8,14 @@ import name.anton3.vkapi.generated.users.objects.UserFull
 /**
  * No description
  *
- * @property count Chat members count
+ * @property count Total results number
  * @property items No description
- * @property chatRestrictions No description
  * @property profiles No description
  * @property groups No description
  */
-data class GetConversationMembersResponse(
-    val count: Int,
-    val items: List<ConversationMember>,
-    val chatRestrictions: ChatRestrictions? = null,
+data class SearchConversationsResponse(
+    val count: Int? = null,
+    val items: List<Conversation>? = null,
     val profiles: List<UserFull>? = null,
     val groups: List<GroupFull>? = null
 )

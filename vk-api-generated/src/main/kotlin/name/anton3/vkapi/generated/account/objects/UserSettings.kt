@@ -10,7 +10,6 @@ import name.anton3.vkapi.generated.common.objects.Sex
 import name.anton3.vkapi.generated.users.objects.Personal
 import name.anton3.vkapi.generated.users.objects.UserConnections
 import name.anton3.vkapi.generated.users.objects.UserMin
-import name.anton3.vkapi.generated.users.objects.UserMinDeactivated
 import name.anton3.vkapi.generated.users.objects.UserRelation
 import name.anton3.vkapi.generated.users.objects.UserSettingsXtr
 import name.anton3.vkapi.vktypes.BoolInt
@@ -19,12 +18,13 @@ import name.anton3.vkapi.vktypes.VkBirthDate
 /**
  * No description
  *
- * @property id User ID
- * @property firstName User first name
- * @property lastName User last name
  * @property deactivated Returns if a profile is deleted or blocked
- * @property isClosed No description
+ * @property firstName User first name
+ * @property hidden Returns if a profile is hidden.
+ * @property id User ID
+ * @property lastName User last name
  * @property canAccessClosed No description
+ * @property isClosed No description
  * @property connections No description
  * @property bdate User's date of birth
  * @property bdateVisibility Information whether user's birthdate are hidden
@@ -48,12 +48,13 @@ import name.anton3.vkapi.vktypes.VkBirthDate
  */
 @JsonDeserialize(`as` = Void::class)
 data class UserSettings(
-    override val id: Int,
+    override val deactivated: String? = null,
     override val firstName: String,
+    override val hidden: Int? = null,
+    override val id: Int,
     override val lastName: String,
-    override val deactivated: UserMinDeactivated? = null,
-    override val isClosed: BoolInt,
-    override val canAccessClosed: BoolInt? = null,
+    override val canAccessClosed: Boolean? = null,
+    override val isClosed: Boolean? = null,
     override val connections: UserConnections? = null,
     override val bdate: VkBirthDate? = null,
     override val bdateVisibility: Int? = null,

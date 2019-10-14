@@ -3,36 +3,42 @@
     "docs_doc": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "integer",
-          "description": "Document ID",
-          "minimum": 0
-        },
-        "owner_id": {
-          "type": "integer",
-          "description": "Document owner ID"
-        },
-        "title": {
+        "access_key": {
           "type": "string",
-          "description": "Document title"
+          "description": "Access key for the document"
         },
-        "size": {
+        "date": {
           "type": "integer",
-          "description": "File size in bites",
+          "description": "Date when file has been uploaded in Unixtime",
           "minimum": 0
         },
         "ext": {
           "type": "string",
           "description": "File extension"
         },
-        "url": {
-          "type": "string",
-          "description": "File URL"
-        },
-        "date": {
+        "id": {
           "type": "integer",
-          "description": "Date when file has been uploaded in Unixtime",
+          "description": "Document ID",
           "minimum": 0
+        },
+        "is_licensed": {
+          "$ref": "#/definitions/base_bool_int"
+        },
+        "owner_id": {
+          "type": "integer",
+          "description": "Document owner ID"
+        },
+        "preview": {
+          "$ref": "#/definitions/docs_doc_preview"
+        },
+        "size": {
+          "type": "integer",
+          "description": "File size in bites",
+          "minimum": 0
+        },
+        "title": {
+          "type": "string",
+          "description": "Document title"
         },
         "type": {
           "type": "integer",
@@ -58,12 +64,10 @@
             "unknown"
           ]
         },
-        "preview": {
-          "$ref": "#/definitions/docs_doc_preview"
-        },
-        "access_key": {
+        "url": {
           "type": "string",
-          "description": "Access key for the document"
+          "format": "uri",
+          "description": "File URL"
         }
       },
       "required": [

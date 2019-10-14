@@ -1,12 +1,12 @@
 @file:Suppress("unused", "SpellCheckingInspection")
 
-package name.anton3.vkapi.generated.callback.objects
+package name.anton3.vkapi.generated.groups.objects
 
 import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class ServerInfoStatus(override val value: String) : ValueEnum<String> {
+enum class CallbackServerStatus(override val value: String) : ValueEnum<String> {
     UNCONFIGURED("unconfigured"),
-    FAIL("fail"),
+    FAILED("failed"),
     WAIT("wait"),
     OK("ok")
 }

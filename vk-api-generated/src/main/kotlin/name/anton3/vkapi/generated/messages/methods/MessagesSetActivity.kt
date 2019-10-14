@@ -18,7 +18,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property groupId Group ID (for group messages with group access token)
  */
 data class MessagesSetActivity(
-    var userId: String? = null,
+    var userId: Int? = null,
     var type: String? = null,
     var peerId: Int? = null,
     var groupId: Int? = null

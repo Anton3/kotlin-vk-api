@@ -85,7 +85,7 @@
           "$ref": "#/definitions/docs_doc"
         },
         {
-          "$ref": "#/definitions/messages_message_graffiti"
+          "$ref": "#/definitions/messages_graffiti"
         }
       ]
     }

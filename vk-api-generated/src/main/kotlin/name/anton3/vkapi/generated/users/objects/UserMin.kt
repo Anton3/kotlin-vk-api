@@ -3,24 +3,25 @@
 package name.anton3.vkapi.generated.users.objects
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import name.anton3.vkapi.vktypes.BoolInt
 
 /**
  * No description
  *
- * @property id User ID
- * @property firstName User first name
- * @property lastName User last name
  * @property deactivated Returns if a profile is deleted or blocked
- * @property isClosed No description
+ * @property firstName User first name
+ * @property hidden Returns if a profile is hidden.
+ * @property id User ID
+ * @property lastName User last name
  * @property canAccessClosed No description
+ * @property isClosed No description
  */
 @JsonDeserialize(`as` = UserMinImpl::class)
 interface UserMin {
-    val id: Int
+    val deactivated: String?
     val firstName: String
+    val hidden: Int?
+    val id: Int
     val lastName: String
-    val deactivated: UserMinDeactivated?
-    val isClosed: BoolInt
-    val canAccessClosed: BoolInt?
+    val canAccessClosed: Boolean?
+    val isClosed: Boolean?
 }

@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.generated.callback.objects.ServerInfo
-import name.anton3.vkapi.method.MethodRequirement
+import name.anton3.vkapi.generated.groups.objects.CallbackServer
+import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
 
@@ -13,8 +13,10 @@ import name.anton3.vkapi.vktypes.VkList
  *
  * No description
  *
- * @property groupId Community ID.
+ * @property groupId No description
+ * @property serverIds No description
  */
 data class GroupsGetCallbackServers(
-    var groupId: Int
-) : VkMethod<VkList<ServerInfo>, MethodRequirement>("groups.getCallbackServers", jacksonTypeRef())
+    var groupId: Int,
+    var serverIds: List<Int>? = null
+) : VkMethod<VkList<CallbackServer>, UserGroupMethod>("groups.getCallbackServers", jacksonTypeRef())

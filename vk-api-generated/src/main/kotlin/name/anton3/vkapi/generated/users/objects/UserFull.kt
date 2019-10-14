@@ -84,12 +84,13 @@ import name.anton3.vkapi.vktypes.VkBirthDate
  * @property trending No description
  * @property friendStatus No description
  * @property mutual No description
- * @property id User ID
- * @property firstName User first name
- * @property lastName User last name
  * @property deactivated Returns if a profile is deleted or blocked
- * @property isClosed No description
+ * @property firstName User first name
+ * @property hidden Returns if a profile is hidden.
+ * @property id User ID
+ * @property lastName User last name
  * @property canAccessClosed No description
+ * @property isClosed No description
  */
 @JsonDeserialize(`as` = UserFullImpl::class)
 interface UserFull : User {
@@ -161,10 +162,11 @@ interface UserFull : User {
     override val trending: BoolInt?
     override val friendStatus: FriendStatusStatus?
     override val mutual: RequestsMutual?
-    override val id: Int
+    override val deactivated: String?
     override val firstName: String
+    override val hidden: Int?
+    override val id: Int
     override val lastName: String
-    override val deactivated: UserMinDeactivated?
-    override val isClosed: BoolInt
-    override val canAccessClosed: BoolInt?
+    override val canAccessClosed: Boolean?
+    override val isClosed: Boolean?
 }
