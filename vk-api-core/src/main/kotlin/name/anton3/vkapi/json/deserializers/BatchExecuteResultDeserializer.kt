@@ -25,7 +25,8 @@ internal object BatchExecuteResultDeserializer : StdDeserializer<BatchExecuteRes
                 if (child is BooleanNode && !child.booleanValue()) {
                     null
                 } else {
-                    codec.readValue(child.traverse(codec), ctxt.typeFactory.constructType(childMethod.responseType))
+                    val responseType = ctxt.typeFactory.constructType(childMethod.responseType)
+                    codec.readValue<Any?>(child.traverse(codec), responseType)
                 }
             }
         )
