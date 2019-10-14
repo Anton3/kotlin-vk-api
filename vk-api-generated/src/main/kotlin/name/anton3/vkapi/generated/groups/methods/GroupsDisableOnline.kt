@@ -10,9 +10,9 @@ import name.anton3.vkapi.vktypes.OkResponse
 /**
  * [https://vk.com/dev/groups.disableOnline]
  *
- * Disables 'online' status in a community
+ * No description
  *
- * @property groupId Group ID
+ * @property groupId No description
  */
 data class GroupsDisableOnline(
     var groupId: Int
