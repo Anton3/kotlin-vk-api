@@ -159,6 +159,38 @@
         "date"
       ],
       "additionalProperties": false
+    },
+    "photos_photo_sizes": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "integer",
+          "description": "Height in px",
+          "minimum": 0
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the image"
+        },
+        "type": {
+          "$ref": "#/definitions/photos_photo_sizes_type"
+        },
+        "width": {
+          "type": "integer",
+          "description": "Width in px",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "width",
+        "height",
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "photos_photo_sizes_type": {
+      "type": "string"
     }
   }
 }

@@ -12,7 +12,7 @@ package name.anton3.vkapi.generated.photos.objects
  */
 data class PhotoSizes(
     val height: Int,
-    val url: String,
-    val type: PhotoSizesType,
+    val url: String? = null,
+    val type: String,
     val width: Int
 )
