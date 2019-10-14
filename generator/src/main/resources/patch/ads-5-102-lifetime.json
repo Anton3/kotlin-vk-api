@@ -1,0 +1,125 @@
+{
+  "methods": [
+    {
+      "name": "ads.createTargetGroup",
+      "description": "Creates a group to re-target ads for users who visited advertiser's site (viewed information about the product, registered, etc.).",
+      "access_token_type": [
+        "user"
+      ],
+      "parameters": [
+        {
+          "name": "account_id",
+          "description": "Advertising account ID.",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "client_id",
+          "description": "'Only for advertising agencies.', ID of the client with the advertising account where the group will be created.",
+          "type": "integer"
+        },
+        {
+          "name": "name",
+          "description": "Name of the target group — a string up to 64 characters long.",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "lifetime",
+          "description": "'For groups with auditory created with pixel code only.', , Number of days after that users will be automatically removed from the group.",
+          "type": "integer",
+          "default": 720,
+          "minimum": 0,
+          "maximum": 720,
+          "required": true
+        },
+        {
+          "name": "target_pixel_id",
+          "type": "integer"
+        },
+        {
+          "name": "target_pixel_rules",
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "response": {
+          "$ref": "responses.json#/definitions/ads_createTargetGroup_response"
+        }
+      },
+      "errors": [
+        {
+          "code": 601,
+          "name": "API_ERROR_WEIGHTED_FLOOD",
+          "description": "Permission denied. You have requested too many actions this day. Try later."
+        }
+      ]
+    },
+    {
+      "name": "ads.updateTargetGroup",
+      "description": "Edits a retarget group.",
+      "access_token_type": [
+        "user"
+      ],
+      "parameters": [
+        {
+          "name": "account_id",
+          "description": "Advertising account ID.",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "client_id",
+          "description": "'Only for advertising agencies.' , ID of the client with the advertising account where the group will be created.",
+          "type": "integer"
+        },
+        {
+          "name": "target_group_id",
+          "description": "Group ID.",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "name",
+          "description": "New name of the target group — a string up to 64 characters long.",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "domain",
+          "description": "Domain of the site where user accounting code will be placed.",
+          "type": "string"
+        },
+        {
+          "name": "lifetime",
+          "description": "'Only for the groups that get audience from sites with user accounting code.', Time in days when users added to a retarget group will be automatically excluded from it. '0' – automatic exclusion is off.",
+          "type": "integer",
+          "default": 720,
+          "minimum": 0,
+          "maximum": 720,
+          "required": true
+        },
+        {
+          "name": "target_pixel_id",
+          "type": "integer"
+        },
+        {
+          "name": "target_pixel_rules",
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "response": {
+          "$ref": "responses.json#/definitions/ok_response"
+        }
+      },
+      "errors": [
+        {
+          "code": 601,
+          "name": "API_ERROR_WEIGHTED_FLOOD",
+          "description": "Permission denied. You have requested too many actions this day. Try later."
+        }
+      ]
+    }
+  ]
+}

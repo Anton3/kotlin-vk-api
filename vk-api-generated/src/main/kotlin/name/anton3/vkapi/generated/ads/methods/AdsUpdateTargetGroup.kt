@@ -27,7 +27,7 @@ data class AdsUpdateTargetGroup(
     var targetGroupId: Int,
     var name: String,
     var domain: String? = null,
-    var lifetime: Int? = null,
+    var lifetime: Int,
     var targetPixelId: Int? = null,
     var targetPixelRules: String? = null
 ) : VkMethod<OkResponse, UserMethod>("ads.updateTargetGroup", jacksonTypeRef())

@@ -23,7 +23,7 @@ data class AdsCreateTargetGroup(
     var accountId: Int,
     var clientId: Int? = null,
     var name: String,
-    var lifetime: Int? = null,
+    var lifetime: Int,
     var targetPixelId: Int? = null,
     var targetPixelRules: String? = null
 ) : VkMethod<CreateTargetGroupResponse, UserMethod>("ads.createTargetGroup", jacksonTypeRef())
