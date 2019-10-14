@@ -1,0 +1,31 @@
+{
+  "objects": {
+    "base_likes_info": {
+      "type": "object",
+      "properties": {
+        "can_like": {
+          "$ref": "#/definitions/base_bool_int",
+          "description": "Information whether current user can like the post"
+        },
+        "can_publish": {
+          "$ref": "#/definitions/base_bool_int",
+          "description": "Information whether current user can repost"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Likes number"
+        },
+        "user_likes": {
+          "type": "integer",
+          "description": "Information whether current uer has liked the post"
+        }
+      },
+      "required": [
+        "count",
+        "user_likes"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

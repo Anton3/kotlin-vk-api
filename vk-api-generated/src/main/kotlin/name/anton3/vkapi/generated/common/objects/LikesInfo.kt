@@ -13,7 +13,7 @@ import name.anton3.vkapi.vktypes.BoolInt
  * @property userLikes Information whether current uer has liked the post
  */
 data class LikesInfo(
-    val canLike: BoolInt,
+    val canLike: BoolInt? = null,
     val canPublish: BoolInt? = null,
     val count: Int,
     val userLikes: Int
