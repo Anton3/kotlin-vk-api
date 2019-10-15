@@ -42,5 +42,5 @@ data class Audio(
     val accessKey: String? = null,
     val lyricsId: Int? = null,
     val noSearch: PropertyExists? = null,
-    val isHq: PropertyExists? = null
+    val isHq: Boolean? = null
 ) : CommentAttachmentBody, WallPostAttachmentBody, MessageAttachmentBody

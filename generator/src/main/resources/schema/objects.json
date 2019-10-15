@@ -1801,7 +1801,7 @@
           "$ref": "#/definitions/base_property_exists"
         },
         "is_hq": {
-          "$ref": "#/definitions/base_property_exists"
+          "type": "boolean"
         }
       },
       "required": [
