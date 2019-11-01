@@ -1,0 +1,241 @@
+{
+  "methods": [
+    {
+      "name": "stories.getPhotoUploadServer",
+      "description": "Returns URL for uploading a story with photo.",
+      "access_token_type": [
+        "user",
+        "group"
+      ],
+      "parameters": [
+        {
+          "name": "add_to_news",
+          "description": "1 — to add the story to friend's feed.",
+          "type": "boolean"
+        },
+        {
+          "name": "user_ids",
+          "description": "List of users IDs who can see the story.",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        {
+          "name": "reply_to_story",
+          "description": "ID of the story to reply with the current.",
+          "type": "string"
+        },
+        {
+          "name": "link_text",
+          "description": "Link text (for community's stories only).",
+          "type": "string",
+          "$ref": "objects.json#/definitions/stories_upload_link_text"
+        },
+        {
+          "name": "link_url",
+          "description": "Link URL. Internal links on https://vk.com only.",
+          "type": "string",
+          "maxLength": 2048
+        },
+        {
+          "name": "group_id",
+          "description": "ID of the community to upload the story (should be verified or with the \"fire\" icon).",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "clickable_stickers",
+          "description": "Serialized clickable sticker object",
+          "$ref": "stories_clickable_stickers"
+        }
+      ],
+      "responses": {
+        "response": {
+          "$ref": "responses.json#/definitions/stories_getPhotoUploadServer_response"
+        }
+      },
+      "errors": [
+        {
+          "code": 900,
+          "name": "API_ERROR_MESSAGES_USER_BLOCKED",
+          "description": "Can't send messages for users from blacklist"
+        },
+        {
+          "code": 1602,
+          "name": "API_ERROR_STORY_INCORRECT_REPLY_PRIVACY",
+          "description": "Incorrect reply privacy"
+        },
+        {
+          "code": 19,
+          "name": "API_ERROR_BLOCKED",
+          "description": "Content blocked"
+        }
+      ]
+    },
+    {
+      "name": "stories.getVideoUploadServer",
+      "description": "Allows to receive URL for uploading story with video.",
+      "access_token_type": [
+        "user",
+        "group"
+      ],
+      "parameters": [
+        {
+          "name": "add_to_news",
+          "description": "1 — to add the story to friend's feed.",
+          "type": "boolean"
+        },
+        {
+          "name": "user_ids",
+          "description": "List of users IDs who can see the story.",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        {
+          "name": "reply_to_story",
+          "description": "ID of the story to reply with the current.",
+          "type": "string"
+        },
+        {
+          "name": "link_text",
+          "description": "Link text (for community's stories only).",
+          "type": "string",
+          "$ref": "objects.json#/definitions/stories_upload_link_text"
+        },
+        {
+          "name": "link_url",
+          "description": "Link URL. Internal links on https://vk.com only.",
+          "type": "string",
+          "maxLength": 2048
+        },
+        {
+          "name": "group_id",
+          "description": "ID of the community to upload the story (should be verified or with the \"fire\" icon).",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "clickable_stickers",
+          "description": "Serialized clickable sticker object",
+          "$ref": "stories_clickable_stickers"
+        }
+      ],
+      "responses": {
+        "response": {
+          "$ref": "responses.json#/definitions/stories_getVideoUploadServer_response"
+        }
+      },
+      "errors": [
+        {
+          "code": 900,
+          "name": "API_ERROR_MESSAGES_USER_BLOCKED",
+          "description": "Can't send messages for users from blacklist"
+        },
+        {
+          "code": 1602,
+          "name": "API_ERROR_STORY_INCORRECT_REPLY_PRIVACY",
+          "description": "Incorrect reply privacy"
+        },
+        {
+          "code": 19,
+          "name": "API_ERROR_BLOCKED",
+          "description": "Content blocked"
+        }
+      ]
+    }
+  ],
+  "objects": {
+    "stories_clickable_stickers": {
+      "type": "object",
+      "properties": {
+        "original_width": {
+          "type": "integer",
+          "description": "Width of original photo or video",
+          "minimum": 0
+        },
+        "original_height": {
+          "type": "integer",
+          "description": "Height of original photo or video",
+          "minimum": 0
+        },
+        "clickable_stickers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/stories_clickable_sticker"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "original_width",
+        "original_height",
+        "clickable_stickers"
+      ],
+      "additionalProperties": false
+    },
+    "stories_clickable_sticker": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "mention",
+            "hashtag"
+          ]
+        },
+        "clickable_area": {
+          "type": "array",
+          "description": "Vertices of the clickable area polygon. Prefer a rectangle",
+          "items": {
+            "$ref": "#/definitions/stories_clickable_sticker_point"
+          }
+        },
+        "style": {
+          "type": "string",
+          "description": "Visual style of the sticker",
+          "enum": [
+            "transparent",
+            "underline"
+          ]
+        },
+        "mention": {
+          "type": "string",
+          "description": "VK mention, e.g. [id1|name] or [club1|name]"
+        },
+        "hashtag": {
+          "type": "string",
+          "description": "VK hashtag. Must start with # symbol"
+        }
+      },
+      "required": [
+        "type",
+        "clickable_area"
+      ],
+      "additionalProperties": false
+    },
+    "stories_clickable_sticker_point": {
+      "type": "object",
+      "description": "Point used in definition of a clickable sticker",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "y": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
