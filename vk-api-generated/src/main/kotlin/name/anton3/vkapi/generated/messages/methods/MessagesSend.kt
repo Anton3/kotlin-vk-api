@@ -26,8 +26,8 @@ import name.anton3.vkapi.method.VkMethod
  * @property forwardMessages ID of forwarded messages, separated with a comma. Listed messages of the sender will be shown in the message body at the recipient's. Example: "123,431,544"
  * @property stickerId Sticker id.
  * @property groupId Group ID (for group messages with group access token)
- * @property keyboard keyboard to message
- * @property payload Hidden message (escaped JSON)
+ * @property keyboard Keyboard attachment
+ * @property payload Hidden message (JSON)
  * @property dontParseLinks 1 - links will not attach snippet
  * @property disableMentions 1 - mention of user will not generate notification for him
  * @property notification '1' if the message is a notification (for community messages).

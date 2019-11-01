@@ -9,7 +9,7 @@ import name.anton3.vkapi.vktypes.BoolInt
  *
  * @property accessRole No description
  * @property accountId Account ID
- * @property accountStatus No description
+ * @property accountStatus Information whether account is active
  * @property accountType No description
  */
 data class Account(

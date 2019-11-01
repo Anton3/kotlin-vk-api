@@ -10,8 +10,8 @@ import name.anton3.vkapi.vktypes.BoolInt
  *
  * @property adminId Chat creator ID
  * @property id Chat ID
- * @property kicked No description
- * @property left No description
+ * @property kicked Shows that user has been kicked from the chat
+ * @property left Shows that user has been left the chat
  * @property photo100 URL of the preview image with 100 px in width
  * @property photo200 URL of the preview image with 200 px in width
  * @property photo50 URL of the preview image with 50 px in width

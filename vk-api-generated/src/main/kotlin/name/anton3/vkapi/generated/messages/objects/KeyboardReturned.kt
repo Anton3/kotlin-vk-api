@@ -5,7 +5,7 @@ package name.anton3.vkapi.generated.messages.objects
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 
 /**
- * No description
+ * Keyboard from a received message object
  *
  * @property authorId Community or bot, which set this keyboard
  * @property oneTime Should this keyboard disappear on first use

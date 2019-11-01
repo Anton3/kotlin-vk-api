@@ -14,8 +14,8 @@ import name.anton3.vkapi.vktypes.VkDate
  *
  * @property albumsIds No description
  * @property photos No description
- * @property canComment No description
- * @property canRepost No description
+ * @property canComment Information whether current use can comment the item
+ * @property canRepost Information whether current use can repost the item
  * @property likes No description
  * @property reposts No description
  * @property viewsCount Views number

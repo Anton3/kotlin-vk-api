@@ -13,11 +13,11 @@ import name.anton3.vkapi.vktypes.VkDate
  *
  * @property accessKey Video access key
  * @property addingDate Date when the video has been added in Unixtime
- * @property canAdd No description
- * @property canAddToFaves No description
- * @property canComment No description
- * @property canEdit No description
- * @property canRepost No description
+ * @property canAdd Information whether current user can add the video
+ * @property canAddToFaves Information whether current user can add the video to favourites
+ * @property canComment Information whether current user can comment the video
+ * @property canEdit Information whether current user can edit the video
+ * @property canRepost Information whether current user can comment the video
  * @property comments Number of comments
  * @property date Date when video has been uploaded in Unixtime
  * @property description Video description
@@ -29,11 +29,11 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property id Video ID
  * @property image No description
  * @property likes No description
- * @property live No description
+ * @property live Returns if the video is live translation
  * @property ownerId Video owner ID
  * @property player URL of the page with a player that can be used to play the video in the browser.
- * @property processing No description
- * @property repeat No description
+ * @property processing Returns if the video is processing
+ * @property repeat Information whether the video is repeated
  * @property title Video title
  * @property views Number of views
  */

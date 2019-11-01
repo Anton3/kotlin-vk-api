@@ -9,7 +9,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * No description
  *
  * @property readComments No description
- * @property canComment No description
+ * @property canComment Information whether current user can comment the note
  * @property comments Comments number
  * @property date Date when the note has been created in Unixtime
  * @property id Note ID

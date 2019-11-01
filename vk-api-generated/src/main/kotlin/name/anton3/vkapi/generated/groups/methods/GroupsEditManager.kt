@@ -15,7 +15,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  *
  * @property groupId Community ID.
  * @property userId User ID.
- * @property role No description
+ * @property role Manager role. Possible values: *'moderator',, *'editor',, *'administrator'.
  * @property isContact '1' — to show the manager in Contacts block of the community.
  * @property contactPosition Position to show in Contacts block.
  * @property contactPhone Contact phone.

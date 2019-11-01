@@ -16,7 +16,7 @@ import name.anton3.vkapi.method.VkMethod
  * @property addToNews 1 — to add the story to friend's feed.
  * @property userIds List of users IDs who can see the story.
  * @property replyToStory ID of the story to reply with the current.
- * @property linkText No description
+ * @property linkText Link text (for community's stories only).
  * @property linkUrl Link URL. Internal links on https://vk.com only.
  * @property groupId ID of the community to upload the story (should be verified or with the "fire" icon).
  */

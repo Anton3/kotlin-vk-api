@@ -9,8 +9,8 @@ import name.anton3.vkapi.generated.users.objects.User
  * No description
  *
  * @property banInfo No description
- * @property group No description
- * @property profile No description
+ * @property group Information about group if type = group
+ * @property profile Information about group if type = profile
  * @property type No description
  */
 @JsonDeserialize(`as` = Void::class)

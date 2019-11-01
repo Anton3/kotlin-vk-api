@@ -12,8 +12,8 @@ import name.anton3.vkapi.vktypes.BoolInt
  * @property audio Audio settings
  * @property description Community description
  * @property docs Docs settings
- * @property obsceneFilter No description
- * @property obsceneStopwords No description
+ * @property obsceneFilter Information whether the obscene filter is enabled
+ * @property obsceneStopwords Information whether the stopwords filter is enabled
  * @property obsceneWords The list of stop words
  * @property photos Photos settings
  * @property publicCategory Information about the group category

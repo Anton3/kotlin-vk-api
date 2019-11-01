@@ -14,7 +14,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * No description
  *
  * @property attachments No description
- * @property canDelete No description
+ * @property canDelete Information whether current user can delete the comment
  * @property comments No description
  * @property date Date when the comment has been added in Unixtime
  * @property fromId Comment author ID

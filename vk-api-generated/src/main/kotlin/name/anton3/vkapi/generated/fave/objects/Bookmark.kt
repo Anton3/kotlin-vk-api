@@ -16,7 +16,7 @@ import name.anton3.vkapi.generated.wall.objects.WallpostFull
  * @property product No description
  * @property seen Has user seen this item
  * @property tags No description
- * @property type No description
+ * @property type Item type
  * @property video No description
  */
 data class Bookmark(

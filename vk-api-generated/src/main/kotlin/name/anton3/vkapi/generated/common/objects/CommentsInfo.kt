@@ -7,7 +7,7 @@ import name.anton3.vkapi.vktypes.BoolInt
 /**
  * No description
  *
- * @property canPost No description
+ * @property canPost Information whether current user can comment the post
  * @property count Comments number
  * @property groupsCanPost Information whether groups can comment the post
  */

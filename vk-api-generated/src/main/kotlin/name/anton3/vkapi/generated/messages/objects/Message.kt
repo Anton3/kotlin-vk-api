@@ -25,7 +25,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property action No description
  * @property conversationMessageId Unique auto-incremented number for all messages with this peer
  * @property updateTime Date when the message has been updated in Unixtime
- * @property keyboard No description
+ * @property keyboard Keyboard attachment
  * @property isCropped No description
  */
 data class Message(

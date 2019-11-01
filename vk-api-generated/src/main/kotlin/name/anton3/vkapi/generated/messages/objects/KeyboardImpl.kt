@@ -5,7 +5,7 @@ package name.anton3.vkapi.generated.messages.objects
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 
 /**
- * No description
+ * Keyboard attached to a message
  *
  * @property oneTime Should this keyboard disappear on first use
  * @property buttons No description

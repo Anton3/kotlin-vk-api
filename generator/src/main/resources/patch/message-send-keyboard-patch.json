@@ -2,6 +2,7 @@
   "objects": {
     "messages_keyboard": {
       "type": "object",
+      "description": "Keyboard attached to a message",
       "properties": {
         "one_time": {
           "type": "boolean",
@@ -24,6 +25,7 @@
     },
     "messages_keyboard_returned": {
       "type": "object",
+      "description": "Keyboard from a received message object",
       "allOf": [
         {
           "$ref": "#/definitions/messages_keyboard"
@@ -114,6 +116,7 @@
           "description": "Date when the message has been updated in Unixtime"
         },
         "keyboard": {
+          "description": "Keyboard attachment",
           "$ref": "#/definitions/messages_keyboard_returned"
         },
         "is_cropped": {
@@ -225,13 +228,14 @@
         },
         {
           "name": "keyboard",
-          "description": "keyboard to message",
-          "type": "messages_keyboard"
+          "description": "Keyboard attachment",
+          "$ref": "#/definitions/messages_keyboard"
         },
         {
           "name": "payload",
-          "description": "Hidden message (escaped JSON)",
-          "type": "string"
+          "description": "Hidden message (JSON)",
+          "type": "string",
+          "format": "json"
         },
         {
           "name": "dont_parse_links",

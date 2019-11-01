@@ -18,15 +18,15 @@ import name.anton3.vkapi.vktypes.BoolInt
  * @property cpc Cost of a click, kopecks
  * @property cpm Cost of 1000 impressions, kopecks
  * @property cpa Cost of an action, kopecks
- * @property disclaimerMedical No description
- * @property disclaimerSpecialist No description
- * @property disclaimerSupplements No description
+ * @property disclaimerMedical Information whether disclaimer is enabled
+ * @property disclaimerSpecialist Information whether disclaimer is enabled
+ * @property disclaimerSupplements Information whether disclaimer is enabled
  * @property id Ad ID
  * @property impressionsLimit Impressions limit
- * @property impressionsLimited No description
+ * @property impressionsLimited Information whether impressions are limited
  * @property name Ad title
  * @property status No description
- * @property video No description
+ * @property video Information whether the ad is a video
  */
 data class Ad(
     val adFormat: Int,

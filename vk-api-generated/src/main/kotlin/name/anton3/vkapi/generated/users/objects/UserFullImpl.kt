@@ -29,15 +29,15 @@ import name.anton3.vkapi.vktypes.VkBirthDate
  * @property photo400Orig URL of user's photo with 400 pixels in width
  * @property photoMaxOrig URL of user's photo of maximum size
  * @property photoId ID of the user's main photo
- * @property hasPhoto No description
- * @property hasMobile No description
- * @property isFriend No description
- * @property wallComments No description
- * @property canPost No description
- * @property canSeeAllPosts No description
- * @property canSeeAudio No description
- * @property canWritePrivateMessage No description
- * @property canSendFriendRequest No description
+ * @property hasPhoto Information whether the user has main photo
+ * @property hasMobile Information whether the user specified his phone number
+ * @property isFriend Information whether the user is a friend of current user
+ * @property wallComments Information whether current user can comment wall posts
+ * @property canPost Information whether current user can post on the user's wall
+ * @property canSeeAllPosts Information whether current user can see other users' audio on the wall
+ * @property canSeeAudio Information whether current user can see the user's audio
+ * @property canWritePrivateMessage Information whether current user can write private message
+ * @property canSendFriendRequest Information whether current user can send a friend request
  * @property mobilePhone Information whether current user can see
  * @property homePhone User's mobile phone number
  * @property site User's website
@@ -48,10 +48,10 @@ import name.anton3.vkapi.vktypes.VkBirthDate
  * @property exports No description
  * @property cropPhoto No description
  * @property followersCount Number of user's followers
- * @property blacklisted No description
- * @property blacklistedByMe No description
- * @property isFavorite No description
- * @property isHiddenFromFeed No description
+ * @property blacklisted Information whether current user is in the requested user's blacklist.
+ * @property blacklistedByMe Information whether the requested user is in current user's blacklist
+ * @property isFavorite Information whether the requested user is in faves of current user
+ * @property isHiddenFromFeed Information whether the requested user is hidden from current user's newsfeed
  * @property commonCount Number of common friends with current user
  * @property occupation No description
  * @property career No description
@@ -64,7 +64,7 @@ import name.anton3.vkapi.vktypes.VkBirthDate
  * @property educationForm Education form
  * @property educationStatus User's education status
  * @property homeTown User hometown
- * @property relation No description
+ * @property relation User relationship status
  * @property relationPartner No description
  * @property personal No description
  * @property universities No description
@@ -73,15 +73,15 @@ import name.anton3.vkapi.vktypes.VkBirthDate
  * @property isSubscribedPodcasts Information whether current user is subscribed to podcasts
  * @property canSubscribePodcasts Owner in whitelist or not
  * @property canSubscribePosts Can subscribe to wall
- * @property sex No description
+ * @property sex User sex
  * @property screenName Domain name of the user's page
  * @property photo50 URL of square photo of the user with 50 pixels in width
  * @property photo100 URL of square photo of the user with 100 pixels in width
- * @property online No description
- * @property onlineMobile No description
+ * @property online Information whether the user is online
+ * @property onlineMobile Information whether the user is online in mobile site or application
  * @property onlineApp Application ID
- * @property verified No description
- * @property trending No description
+ * @property verified Information whether the user is verified
+ * @property trending Information whether the user has a "fire" pictogram.
  * @property friendStatus No description
  * @property mutual No description
  * @property deactivated Returns if a profile is deleted or blocked

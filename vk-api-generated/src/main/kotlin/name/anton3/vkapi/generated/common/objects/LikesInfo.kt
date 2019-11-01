@@ -7,8 +7,8 @@ import name.anton3.vkapi.vktypes.BoolInt
 /**
  * No description
  *
- * @property canLike No description
- * @property canPublish No description
+ * @property canLike Information whether current user can like the post
+ * @property canPublish Information whether current user can repost
  * @property count Likes number
  * @property userLikes Information whether current uer has liked the post
  */

@@ -11,7 +11,7 @@ import name.anton3.vkapi.vktypes.BoolInt
  * @property answerId Current user's answer ID
  * @property answers No description
  * @property created Date when poll has been created in Unixtime
- * @property isClosed No description
+ * @property isClosed Information whether the poll is closed
  * @property ownerId Poll owner's ID
  * @property pollId Poll ID
  * @property question Poll question

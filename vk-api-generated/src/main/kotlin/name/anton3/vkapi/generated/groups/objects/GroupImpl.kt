@@ -13,10 +13,10 @@ import name.anton3.vkapi.vktypes.BoolInt
  * @property deactivated Information whether community is banned
  * @property finishDate Finish date in Unixtime format
  * @property id Community ID
- * @property isAdmin No description
- * @property isAdvertiser No description
+ * @property isAdmin Information whether current user is administrator
+ * @property isAdvertiser Information whether current user is advertiser
  * @property isClosed No description
- * @property isMember No description
+ * @property isMember Information whether current user is member
  * @property name Community name
  * @property photo100 URL of square photo of the community with 100 pixels in width
  * @property photo200 URL of square photo of the community with 200 pixels in width

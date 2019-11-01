@@ -8,7 +8,7 @@ import name.anton3.vkapi.vktypes.BoolInt
  * No description
  *
  * @property disabledUntil Time until that notifications are disabled
- * @property sound No description
+ * @property sound Information whether the sound is on
  */
 data class ChatPushSettings(
     val disabledUntil: Int? = null,

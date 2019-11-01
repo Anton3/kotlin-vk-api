@@ -23,7 +23,7 @@ import name.anton3.vkapi.vktypes.PropertyExists
  * @property groups Communities IDs
  * @property interestCategories Interests categories IDs
  * @property interests Interests
- * @property paying No description
+ * @property paying Information whether the user has proceeded VK payments before
  * @property positions Positions IDs
  * @property religions Religions IDs
  * @property retargetingGroups Retargeting groups IDs
@@ -35,7 +35,7 @@ import name.anton3.vkapi.vktypes.PropertyExists
  * @property stations Stations IDs
  * @property statuses Relationship statuses
  * @property streets Streets IDs
- * @property travellers No description
+ * @property travellers Travellers only
  * @property uniFrom University graduation year from
  * @property uniTo University graduation year to
  * @property userBrowsers Browsers

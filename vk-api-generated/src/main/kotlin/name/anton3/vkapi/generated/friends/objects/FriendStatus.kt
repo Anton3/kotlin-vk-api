@@ -8,7 +8,7 @@ import name.anton3.vkapi.vktypes.BoolInt
  * No description
  *
  * @property friendStatus No description
- * @property readState No description
+ * @property readState Information whether request is unviewed
  * @property requestMessage Message sent with request
  * @property sign MD5 hash for the result validation
  * @property userId User ID

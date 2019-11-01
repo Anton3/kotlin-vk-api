@@ -12,7 +12,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property limit Offer limit
  * @property spent Amount of spent votes
  * @property success No description
- * @property testMode No description
+ * @property testMode Information whether test mode is enabled
  */
 data class Complete(
     val cost: Int? = null,

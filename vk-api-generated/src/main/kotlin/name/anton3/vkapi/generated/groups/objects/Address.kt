@@ -16,9 +16,9 @@ package name.anton3.vkapi.generated.groups.objects
  * @property metroStationId Metro id of address
  * @property phone Address phone
  * @property timeOffset Time offset int minutes from utc time
- * @property timetable No description
+ * @property timetable Week timetable for the address
  * @property title Title of the place (Zinger, etc)
- * @property workInfoStatus No description
+ * @property workInfoStatus Status of information about timetable
  */
 data class Address(
     val additionalAddress: String? = null,

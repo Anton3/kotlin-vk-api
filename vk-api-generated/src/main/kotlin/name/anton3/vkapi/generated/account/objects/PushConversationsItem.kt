@@ -9,7 +9,7 @@ import name.anton3.vkapi.vktypes.BoolInt
  *
  * @property disabledUntil Time until that notifications are disabled in seconds
  * @property peerId Peer ID
- * @property sound No description
+ * @property sound Information whether the sound are enabled
  */
 data class PushConversationsItem(
     val disabledUntil: Int,

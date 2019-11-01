@@ -13,8 +13,8 @@ package name.anton3.vkapi.generated.pages.objects
  * @property id Page ID
  * @property title Page title
  * @property views Views number
- * @property whoCanEdit No description
- * @property whoCanView No description
+ * @property whoCanEdit Edit settings of the page
+ * @property whoCanView View settings of the page
  */
 data class Wikipage(
     val creatorId: Int? = null,

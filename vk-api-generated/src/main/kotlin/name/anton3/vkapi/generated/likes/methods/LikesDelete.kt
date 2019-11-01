@@ -13,7 +13,7 @@ import name.anton3.vkapi.method.VkMethod
  *
  * Deletes the specified object from the 'Likes' list of the current user.
  *
- * @property type No description
+ * @property type Object type: 'post' — post on user or community wall, 'comment' — comment on a wall post, 'photo' — photo, 'audio' — audio, 'video' — video, 'note' — note, 'photo_comment' — comment on the photo, 'video_comment' — comment on the video, 'topic_comment' — comment in the discussion, 'sitepage' — page of the site where the [vk.com/dev/Like|Like widget] is installed
  * @property ownerId ID of the user or community that owns the object.
  * @property itemId Object ID.
  */

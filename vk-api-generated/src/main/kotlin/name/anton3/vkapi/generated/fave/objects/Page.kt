@@ -11,7 +11,7 @@ import name.anton3.vkapi.generated.users.objects.UserFull
  * @property description Some info about user or group
  * @property group No description
  * @property tags No description
- * @property type No description
+ * @property type Item type
  * @property updatedDate Timestamp, when this page was bookmarked
  * @property user No description
  */

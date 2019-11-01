@@ -24,7 +24,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property ownerId Owner user_id
  * @property accessKey Access key for the audio
  * @property lyricsId Lyrics ID
- * @property noSearch No description
+ * @property noSearch Information whether the audio is hidden from search
  * @property isHq No description
  */
 @JsonDeserialize(`as` = Void::class)

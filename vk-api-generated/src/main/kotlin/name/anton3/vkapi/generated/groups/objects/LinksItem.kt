@@ -9,7 +9,7 @@ import name.anton3.vkapi.vktypes.BoolInt
  * No description
  *
  * @property desc Link description
- * @property editTitle No description
+ * @property editTitle Information whether the link title can be edited
  * @property id Link ID
  * @property name Link title
  * @property photo100 URL of square image of the link with 100 pixels in width

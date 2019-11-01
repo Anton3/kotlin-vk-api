@@ -10,7 +10,7 @@ import name.anton3.vkapi.generated.groups.objects.GroupFullMemberStatus
  * @property address address of event
  * @property buttonText text of attach
  * @property friends array of friends ids
- * @property memberStatus No description
+ * @property memberStatus Current user's member status
  * @property text text of attach
  * @property time event start time
  */

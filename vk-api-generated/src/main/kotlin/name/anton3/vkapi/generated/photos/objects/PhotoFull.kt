@@ -26,7 +26,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property likes No description
  * @property reposts No description
  * @property comments No description
- * @property canComment No description
+ * @property canComment Information whether current user can comment the photo
  * @property tags No description
  */
 data class PhotoFull(

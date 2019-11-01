@@ -14,38 +14,38 @@ import name.anton3.vkapi.vktypes.BoolInt
  * No description
  *
  * @property market No description
- * @property memberStatus No description
- * @property isFavorite No description
- * @property isSubscribed No description
+ * @property memberStatus Current user's member status
+ * @property isFavorite Information whether community is in faves
+ * @property isSubscribed Information whether current user is subscribed
  * @property city No description
  * @property country No description
- * @property verified No description
+ * @property verified Information whether community is verified
  * @property description Community description
  * @property wikiPage Community's main wiki page title
  * @property membersCount Community members number
  * @property counters No description
  * @property cover No description
- * @property canPost No description
- * @property canSeeAllPosts No description
+ * @property canPost Information whether current user can post on community's wall
+ * @property canSeeAllPosts Information whether current user can see all posts on community's wall
  * @property activity Type of group, start date of event or category of public page
  * @property fixedPost Fixed post ID
- * @property canCreateTopic No description
- * @property canUploadVideo No description
- * @property hasPhoto No description
+ * @property canCreateTopic Information whether current user can create topic
+ * @property canUploadVideo Information whether current user can upload video
+ * @property hasPhoto Information whether community has photo
  * @property status Community status
  * @property mainAlbumId Community's main photo album ID
  * @property links No description
  * @property contacts No description
  * @property site Community's website
  * @property mainSection No description
- * @property trending No description
- * @property canMessage No description
- * @property isMessagesBlocked No description
- * @property canSendNotify No description
- * @property onlineStatus No description
- * @property ageLimits No description
- * @property banInfo No description
- * @property addresses No description
+ * @property trending Information whether the community has a "fire" pictogram.
+ * @property canMessage Information whether current user can send a message to community
+ * @property isMessagesBlocked Information whether community can send a message to current user
+ * @property canSendNotify Information whether community can send notifications by phone number to current user
+ * @property onlineStatus Status of replies in community messages
+ * @property ageLimits Information whether age limit
+ * @property banInfo User ban info
+ * @property addresses Info about addresses in groups
  * @property isSubscribedPodcasts Information whether current user is subscribed to podcasts
  * @property canSubscribePodcasts Owner in whitelist or not
  * @property canSubscribePosts Can subscribe to wall
@@ -53,10 +53,10 @@ import name.anton3.vkapi.vktypes.BoolInt
  * @property deactivated Information whether community is banned
  * @property finishDate Finish date in Unixtime format
  * @property id Community ID
- * @property isAdmin No description
- * @property isAdvertiser No description
+ * @property isAdmin Information whether current user is administrator
+ * @property isAdvertiser Information whether current user is advertiser
  * @property isClosed No description
- * @property isMember No description
+ * @property isMember Information whether current user is member
  * @property name Community name
  * @property photo100 URL of square photo of the community with 100 pixels in width
  * @property photo200 URL of square photo of the community with 200 pixels in width

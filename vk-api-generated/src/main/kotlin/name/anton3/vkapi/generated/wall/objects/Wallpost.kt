@@ -19,14 +19,14 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property id Post ID
  * @property isArchived Is post archived, only for post owners
  * @property isFavorite Information whether the post in favorites list
- * @property likes No description
+ * @property likes Count of likes
  * @property ownerId Wall owner's ID
  * @property postSource No description
  * @property postType No description
- * @property reposts No description
+ * @property reposts Count of views
  * @property signerId Post signer ID
  * @property text Post text
- * @property views No description
+ * @property views Count of views
  */
 @JsonDeserialize(`as` = WallpostImpl::class)
 interface Wallpost {

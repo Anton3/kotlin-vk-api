@@ -35,12 +35,12 @@ import name.anton3.vkapi.vktypes.VkBirthDate
  * @property nameRequest No description
  * @property personal No description
  * @property phone User phone number with some hidden digits
- * @property relation No description
+ * @property relation User relationship status
  * @property relationPartner No description
- * @property relationPending No description
+ * @property relationPending Information whether relation status is pending
  * @property relationRequests No description
  * @property screenName Domain name of the user's page
- * @property sex No description
+ * @property sex User sex
  * @property status User status
  * @property statusAudio No description
  * @property interests No description

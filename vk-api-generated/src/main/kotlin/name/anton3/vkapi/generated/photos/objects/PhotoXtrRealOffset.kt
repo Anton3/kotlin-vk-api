@@ -13,7 +13,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property albumId Album ID
  * @property date Date when uploaded
  * @property height Original photo height
- * @property hidden No description
+ * @property hidden Returns if the photo is hidden above the wall
  * @property id Photo ID
  * @property lat Latitude
  * @property long Longitude

@@ -9,7 +9,7 @@ import name.anton3.vkapi.vktypes.BoolInt
  *
  * @property count Total number
  * @property items No description
- * @property more No description
+ * @property more Information whether next page is presented
  */
 data class GetAllResponse(
     val count: Int? = null,

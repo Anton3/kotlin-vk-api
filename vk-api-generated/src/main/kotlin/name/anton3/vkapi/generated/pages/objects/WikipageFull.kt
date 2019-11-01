@@ -12,8 +12,8 @@ import name.anton3.vkapi.vktypes.BoolInt
  *
  * @property created Date when the page has been created in Unixtime
  * @property creatorId Page creator ID
- * @property currentUserCanEdit No description
- * @property currentUserCanEditAccess No description
+ * @property currentUserCanEdit Information whether current user can edit the page
+ * @property currentUserCanEditAccess Information whether current user can edit the page access settings
  * @property edited Date when the page has been edited in Unixtime
  * @property editorId Last editor ID
  * @property groupId Community ID
@@ -23,8 +23,8 @@ import name.anton3.vkapi.vktypes.BoolInt
  * @property title Page title
  * @property viewUrl URL of the page preview
  * @property views Views number
- * @property whoCanEdit No description
- * @property whoCanView No description
+ * @property whoCanEdit Edit settings of the page
+ * @property whoCanView View settings of the page
  */
 @JsonDeserialize(`as` = Void::class)
 data class WikipageFull(

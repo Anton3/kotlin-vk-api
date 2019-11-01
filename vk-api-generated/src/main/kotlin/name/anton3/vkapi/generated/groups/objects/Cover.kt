@@ -8,7 +8,7 @@ import name.anton3.vkapi.vktypes.BoolInt
 /**
  * No description
  *
- * @property enabled No description
+ * @property enabled Information whether cover is enabled
  * @property images No description
  */
 data class Cover(

@@ -13,7 +13,7 @@ import name.anton3.vkapi.vktypes.VkDate
 /**
  * No description
  *
- * @property isPrivate No description
+ * @property isPrivate Information whether story is private (0 - no, 1 - yes).
  * @property id Video ID
  * @property ownerId Video owner ID
  * @property title Video title
@@ -29,10 +29,10 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property accessKey Video access key
  * @property addingDate Date when the video has been added in Unixtime
  * @property player URL of the page with a player that can be used to play the video in the browser.
- * @property canEdit No description
- * @property canAdd No description
- * @property processing No description
- * @property live No description
+ * @property canEdit Information whether current user can edit the video
+ * @property canAdd Information whether current user can add the video
+ * @property processing Returns if the video is processing
+ * @property live Returns if the video is live translation
  * @property files No description
  * @property platform No description
  * @property width Video width

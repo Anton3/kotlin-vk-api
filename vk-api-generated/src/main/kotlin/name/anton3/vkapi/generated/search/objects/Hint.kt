@@ -12,7 +12,7 @@ import name.anton3.vkapi.vktypes.BoolInt
  *
  * @property app No description
  * @property description Object description
- * @property global No description
+ * @property global Information whether the object has been found globally
  * @property group No description
  * @property profile No description
  * @property section No description

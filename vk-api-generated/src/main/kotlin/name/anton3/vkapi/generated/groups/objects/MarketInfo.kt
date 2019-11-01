@@ -11,7 +11,7 @@ import name.anton3.vkapi.vktypes.BoolInt
  * @property contactId Contact person ID
  * @property currency No description
  * @property currencyText Currency name
- * @property enabled No description
+ * @property enabled Information whether the market is enabled
  * @property mainAlbumId Main market album ID
  * @property priceMax Maximum price
  * @property priceMin Minimum price

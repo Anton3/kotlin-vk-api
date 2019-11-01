@@ -10,7 +10,7 @@ import name.anton3.vkapi.vktypes.VkDate
  *
  * @property date Date when access_token has been generated in Unixtime
  * @property expire Date when access_token will expire in Unixtime
- * @property success No description
+ * @property success Returns if successfully processed
  * @property userId User ID
  */
 data class TokenChecked(

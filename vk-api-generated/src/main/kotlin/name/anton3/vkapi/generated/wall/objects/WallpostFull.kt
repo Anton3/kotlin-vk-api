@@ -13,13 +13,13 @@ import name.anton3.vkapi.vktypes.VkDate
  * No description
  *
  * @property copyHistory No description
- * @property canEdit No description
+ * @property canEdit Information whether current user can edit the post
  * @property createdBy Post creator ID (if post still can be edited)
- * @property canDelete No description
- * @property canPin No description
+ * @property canDelete Information whether current user can delete the post
+ * @property canPin Information whether current user can pin the post
  * @property isPinned Information whether the post is pinned
  * @property comments No description
- * @property markedAsAds No description
+ * @property markedAsAds Information whether the post is marked as ads
  * @property accessKey Access key to private object
  * @property attachments No description
  * @property date Date of publishing in Unixtime
@@ -29,14 +29,14 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property id Post ID
  * @property isArchived Is post archived, only for post owners
  * @property isFavorite Information whether the post in favorites list
- * @property likes No description
+ * @property likes Count of likes
  * @property ownerId Wall owner's ID
  * @property postSource No description
  * @property postType No description
- * @property reposts No description
+ * @property reposts Count of views
  * @property signerId Post signer ID
  * @property text Post text
- * @property views No description
+ * @property views Count of views
  */
 @JsonDeserialize(`as` = Void::class)
 data class WallpostFull(

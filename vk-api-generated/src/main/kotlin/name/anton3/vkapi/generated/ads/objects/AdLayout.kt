@@ -19,7 +19,7 @@ import name.anton3.vkapi.vktypes.BoolInt
  * @property linkUrl URL of advertised object
  * @property previewLink link to preview an ad as it is shown on the website
  * @property title Ad title
- * @property video No description
+ * @property video Information whether the ad is a video
  */
 data class AdLayout(
     val adFormat: Int,

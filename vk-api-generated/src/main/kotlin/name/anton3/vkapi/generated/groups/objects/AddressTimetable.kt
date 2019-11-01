@@ -5,13 +5,13 @@ package name.anton3.vkapi.generated.groups.objects
 /**
  * Timetable for a week
  *
- * @property fri No description
- * @property mon No description
- * @property sat No description
- * @property sun No description
- * @property thu No description
- * @property tue No description
- * @property wed No description
+ * @property fri Timetable for friday
+ * @property mon Timetable for monday
+ * @property sat Timetable for saturday
+ * @property sun Timetable for sunday
+ * @property thu Timetable for thursday
+ * @property tue Timetable for tuesday
+ * @property wed Timetable for wednesday
  */
 data class AddressTimetable(
     val fri: AddressTimetableDay? = null,

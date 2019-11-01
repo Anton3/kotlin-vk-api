@@ -13,8 +13,8 @@ import name.anton3.vkapi.vktypes.BoolInt
  * @property created Date when the topic has been created in Unixtime
  * @property createdBy Creator ID
  * @property id Topic ID
- * @property isClosed No description
- * @property isFixed No description
+ * @property isClosed Information whether the topic is closed
+ * @property isFixed Information whether the topic is fixed
  * @property title Topic title
  * @property updated Date when the topic has been updated in Unixtime
  * @property updatedBy ID of user who updated the topic

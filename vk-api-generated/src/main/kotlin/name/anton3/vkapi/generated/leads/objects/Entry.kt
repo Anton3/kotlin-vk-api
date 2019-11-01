@@ -14,7 +14,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property sid Session string ID
  * @property startDate Start date in Unixtime (for status=2)
  * @property status Action type
- * @property testMode No description
+ * @property testMode Information whether test mode is enabled
  * @property uid User ID
  */
 data class Entry(
