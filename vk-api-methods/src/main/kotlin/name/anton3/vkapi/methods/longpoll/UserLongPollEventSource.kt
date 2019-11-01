@@ -1,9 +1,8 @@
 package name.anton3.vkapi.methods.longpoll
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.flow.Flow
 import name.anton3.vkapi.client.GroupClient
 import name.anton3.vkapi.client.UserClient
 import name.anton3.vkapi.client.UserGroupClient
@@ -16,8 +15,8 @@ import kotlin.coroutines.CoroutineContext
 class UserLongPollEventSource(
     longPollContext: CoroutineContext,
     private val api: UserGroupClient,
-    private val groupId: Int?,
     transportClient: TransportClient,
+    private val groupId: Int?,
     private val timeout: Int
 ) : AbstractLongPollEventSource<LongPollEvent, LongpollParams>(
     longPollContext = longPollContext,
@@ -34,30 +33,52 @@ class UserLongPollEventSource(
     }
 
     override suspend fun iterator(): LongpollParams {
-        return api(MessagesGetLongPollServer(lpVersion = 3).also {
-            if (groupId != null) it.groupId = groupId
-        })
+        return api(MessagesGetLongPollServer(lpVersion = 3, groupId = groupId))
     }
 }
 
-fun CoroutineScope.messageLongPollEvents(
+/**
+ * Receive limited message events for a group in User LongPoll format.
+ * Chat messages are not accessible this way.
+ *
+ * @param api Client to request a LongPoll server
+ *
+ * @param timeoutSeconds Time, after which VK server must respond, even if no events occurred.
+ * Should be less than timeout of `transportClient`
+ *
+ * @param transportClient You might want to supply a custom http client with extended
+ */
+fun messageLongPollEvents(
     api: GroupClient,
-    transportClient: TransportClient = api.transportClient,
-    timeout: Int
-): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, api, null, transportClient, timeout).produceEvents(this)
+    timeoutSeconds: Int = 8,
+    transportClient: TransportClient = api.transportClient
+): Flow<LongPollEvent> =
+    UserLongPollEventSource(Dispatchers.IO, api, transportClient, null, timeoutSeconds).produceEvents()
 
-fun CoroutineScope.messageLongPollEventsAsAdmin(
+/**
+ * Same as `messageLongPollEvents`, but called with the token of an admin user.
+ */
+fun messageLongPollEventsAsAdmin(
     api: UserClient,
     groupId: Int,
-    transportClient: TransportClient = api.transportClient,
-    timeout: Int
-): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, api, groupId, transportClient, timeout).produceEvents(this)
+    timeoutSeconds: Int = 8,
+    transportClient: TransportClient = api.transportClient
+): Flow<LongPollEvent> =
+    UserLongPollEventSource(Dispatchers.IO, api, transportClient, groupId, timeoutSeconds).produceEvents()
 
-fun CoroutineScope.messageLongPollEventsForUser(
+/**
+ * Receive User LongPoll events.
+ *
+ * @param api Client to request a LongPoll server
+ *
+ * @param timeoutSeconds Time, after which VK server must respond, even if no events occurred.
+ * Should be less than timeout of `transportClient`
+ *
+ * @param transportClient You might want to supply a custom http client with extended
+ */
+fun messageLongPollEventsForUser(
     api: UserClient,
-    transportClient: TransportClient = api.transportClient,
-    timeout: Int
-): ReceiveChannel<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, api, null, transportClient, timeout).produceEvents(this)
+    timeoutSeconds: Int = 8,
+    transportClient: TransportClient = api.transportClient
+): Flow<LongPollEvent> =
+    UserLongPollEventSource(Dispatchers.IO, api, transportClient, null, timeoutSeconds).produceEvents()

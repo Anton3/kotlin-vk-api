@@ -2,10 +2,10 @@ package name.anton3.vkapi.methods.longpoll
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.ClosedSendChannelException
-import kotlinx.coroutines.channels.ReceiveChannel
-import kotlinx.coroutines.channels.produce
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
 import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.core.get
@@ -15,6 +15,7 @@ import java.io.IOException
 import java.nio.charset.Charset
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.coroutineContext
 
 abstract class AbstractLongPollEventSource<EventType, IteratorType>(
     private val longPollContext: CoroutineContext,
@@ -67,11 +68,10 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
         }
     }
 
-    @Suppress("EXPERIMENTAL_API_USAGE")
-    fun produceEvents(scope: CoroutineScope): ReceiveChannel<EventType> = scope.produce {
+    fun produceEvents(): Flow<EventType> = flow {
         var iter = iteratorSwallowing()
 
-        while (true) {
+        while (coroutineContext.isActive) {
             val response = try {
                 getEvents(iter)
             } catch (e: IOException) {
@@ -81,11 +81,10 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
             }
 
             iter = response.first
-            val events = response.second
+            if (!coroutineContext.isActive) break
 
-            if (isClosedForSend) break
             try {
-                events.forEach { send(it) }
+                response.second.forEach { emit(it) }
             } catch (e: ClosedSendChannelException) {
                 break
             }

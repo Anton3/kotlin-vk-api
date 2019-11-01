@@ -1,9 +1,8 @@
 package name.anton3.vkapi.methods.longpoll
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.flow.Flow
 import name.anton3.vkapi.client.UserGroupClient
 import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.generated.groups.methods.GroupsGetLongPollServer
@@ -36,10 +35,22 @@ class GroupLongPollEventSource(
     }
 }
 
-fun CoroutineScope.groupLongPollEvents(
+/**
+ * Primary source for group long poll events
+ *
+ * @param api Client to request a LongPoll server
+ *
+ * @param groupId Group ID corresponding to `api`
+ *
+ * @param timeoutSeconds Time, after which VK server must respond, even if no events occurred.
+ * Should be less than timeout of `transportClient`
+ *
+ * @param transportClient You might want to supply a custom http client with extended
+ */
+fun groupLongPollEvents(
     api: UserGroupClient,
     groupId: Int,
-    timeout: Int,
+    timeoutSeconds: Int = 8,
     transportClient: TransportClient = api.transportClient
-): ReceiveChannel<CallbackEvent<*>> =
-    GroupLongPollEventSource(Dispatchers.IO, api, groupId, transportClient, timeout).produceEvents(this)
+): Flow<CallbackEvent<*>> =
+    GroupLongPollEventSource(Dispatchers.IO, api, groupId, transportClient, timeoutSeconds).produceEvents()

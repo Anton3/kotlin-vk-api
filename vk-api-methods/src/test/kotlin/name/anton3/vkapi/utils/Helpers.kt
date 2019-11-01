@@ -5,9 +5,14 @@ import io.ktor.client.engine.apache.Apache
 import name.anton3.vkapi.client.GroupClient
 import name.anton3.vkapi.client.KtorTransportClient
 import name.anton3.vkapi.client.UserClient
+import name.anton3.vkapi.client.VkClient
+import name.anton3.vkapi.core.MethodExecutor
+import name.anton3.vkapi.core.TransportClient
 import name.anton3.vkapi.executors.JsonApiMethodExecutor
 import name.anton3.vkapi.executors.TokenMethodExecutor
 import name.anton3.vkapi.json.core.vkObjectMapper
+import name.anton3.vkapi.method.GroupMethod
+import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.tokens.GroupToken
 import name.anton3.vkapi.tokens.UserToken
 import java.io.FileInputStream
@@ -35,22 +40,22 @@ private fun readPropsFrom(strPath: String): Properties? {
     }
 }
 
+class Dummy
+
 fun readResource(path: String): ByteArray =
-        String::class.java.classLoader.getResourceAsStream(path)!!.readBytes()
+    Dummy::class.java.classLoader.getResourceAsStream(path)!!.readBytes()
 
-val groupAccessToken = readConfigParam("groupAccessToken")
-val userAccessToken = readConfigParam("userAccessToken")
-val groupId = readConfigParam("groupId").toInt()
-val peerId = readConfigParam("peerId").toInt()
+val groupAccessToken: String = readConfigParam("groupAccessToken")
+val userAccessToken: String = readConfigParam("userAccessToken")
+val groupId: Int = readConfigParam("groupId").toInt()
+val peerId: Int = readConfigParam("peerId").toInt()
 
-const val timeout = 9
-val httpClient = KtorTransportClient(HttpClient(Apache) {
+const val longPollTimeout: Int = 8
+val httpClient: TransportClient = KtorTransportClient(HttpClient(Apache) {
     engine {
         socketTimeout = 10_000
     }
 })
-val executor = JsonApiMethodExecutor(httpClient, vkObjectMapper())
-val groupToken = GroupToken(groupAccessToken)
-val userToken = UserToken(userAccessToken)
-val groupApi = GroupClient(TokenMethodExecutor(executor, groupToken))
-val userApi = UserClient(TokenMethodExecutor(executor, userToken))
+val executor: MethodExecutor = JsonApiMethodExecutor(httpClient, vkObjectMapper())
+val groupApi: VkClient<GroupMethod> = GroupClient(TokenMethodExecutor(executor, GroupToken(groupAccessToken)))
+val userApi: VkClient<UserMethod> = UserClient(TokenMethodExecutor(executor, UserToken(userAccessToken)))
