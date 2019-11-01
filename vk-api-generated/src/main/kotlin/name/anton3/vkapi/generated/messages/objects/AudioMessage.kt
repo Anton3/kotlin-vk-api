@@ -8,21 +8,21 @@ import name.anton3.vkapi.generated.docs.objects.SaveDocBody
 /**
  * No description
  *
- * @property id No description
- * @property ownerId No description
- * @property duration No description
- * @property linkOgg No description
- * @property linkMp3 No description
- * @property accessKey No description
+ * @property accessKey Access key for audio message
+ * @property duration Audio message duration in seconds
+ * @property id Audio message ID
+ * @property linkMp3 MP3 file URL
+ * @property linkOgg OGG file URL
+ * @property ownerId Audio message owner ID
  * @property waveform No description
  */
 @JsonDeserialize(`as` = Void::class)
 data class AudioMessage(
-    val id: Int,
-    val ownerId: Int,
+    val accessKey: String? = null,
     val duration: Int,
-    val linkOgg: String,
+    val id: Int,
     val linkMp3: String,
-    val accessKey: String,
+    val linkOgg: String,
+    val ownerId: Int,
     val waveform: List<Int>
 ) : SaveDocBody, MessageAttachmentBody
