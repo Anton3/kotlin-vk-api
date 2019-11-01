@@ -21,7 +21,7 @@ repositories {
 
 subprojects {
     group = "com.github.Anton3"
-    version = "0.10.0"
+    version = "0.10.5"
 
     repositories {
         mavenCentral()
