@@ -13,6 +13,7 @@ buildscript {
 plugins {
     `java-library`
     kotlin("jvm") version "1.3.50"
+    id("com.github.ManifestClasspath") version "0.1.0-RELEASE"
 }
 
 repositories {
