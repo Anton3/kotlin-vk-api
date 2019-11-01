@@ -2,6 +2,8 @@
 
 package name.anton3.vkapi.generated.stories.objects
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import name.anton3.vkapi.generated.messages.objects.MessageAttachmentBody
 import name.anton3.vkapi.generated.photos.objects.Photo
 import name.anton3.vkapi.vktypes.BoolInt
 import name.anton3.vkapi.vktypes.VkDate
@@ -37,6 +39,7 @@ import name.anton3.vkapi.vktypes.VkDate
  * @property canAsk Information whether story has question sticker and current user can send question to the author
  * @property canAskAnonymous Information whether story has question sticker and current user can send anonymous question to the author
  */
+@JsonDeserialize(`as` = Void::class)
 data class Story(
     val accessKey: String? = null,
     val canComment: BoolInt? = null,
@@ -65,4 +68,4 @@ data class Story(
     val needMute: Boolean? = null,
     val canAsk: BoolInt? = null,
     val canAskAnonymous: BoolInt? = null
-)
+) : MessageAttachmentBody

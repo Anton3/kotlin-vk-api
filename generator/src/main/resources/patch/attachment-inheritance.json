@@ -185,6 +185,9 @@
         },
         {
           "$ref": "#/definitions/polls_poll"
+        },
+        {
+          "$ref": "#/definitions/stories_story"
         }
       ]
     }
