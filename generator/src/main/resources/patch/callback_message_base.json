@@ -1,0 +1,26 @@
+{
+  "objects": {
+    "callback_message_base": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "objects.json#/definitions/callback_message_type"
+        },
+        "object": {
+          "type": "string",
+          "description": "Note: it's some object type in reality!"
+        },
+        "group_id": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "type",
+        "object",
+        "group_id"
+      ],
+      "withoutRefs": true
+    }
+  }
+}

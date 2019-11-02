@@ -50,10 +50,19 @@ class SourceGenerator(val basePackage: String) {
     fun resolveTypes() {
         defineCommonTypes()
         resolveMethods()
+        processTopLevelTypes()
         splitSomeObjects()
 
         logger.info("Defined ${typeSpace.typesCount} types")
         typeSpace.logDefinedTypeNames()
+    }
+
+    private fun resolveMethods() {
+        logger.info("Total methods: ${methods.size}")
+        val normalizedMethods = methods.values
+            .map { it.normalize() }.flatten().filter { responseSchemaIsDefined(it.response) }
+        logger.info("Normalized methods: ${normalizedMethods.size}")
+        normalizedMethods.forEach { makeMethod(it) }
     }
 
     private fun splitSomeObjects() {
@@ -65,12 +74,13 @@ class SourceGenerator(val basePackage: String) {
         }
     }
 
-    private fun resolveMethods() {
-        logger.info("Total methods: ${methods.size}")
-        val normalizedMethods = methods.values
-            .map { it.normalize() }.flatten().filter { responseSchemaIsDefined(it.response) }
-        logger.info("Normalized methods: ${normalizedMethods.size}")
-        normalizedMethods.forEach { makeMethod(it) }
+    private fun processTopLevelTypes() {
+        val generateUnusedTypes = false
+
+        @Suppress("ConstantConditionIf")
+        if (generateUnusedTypes) {
+            for ((ref, def) in definitions) makeType(::nameObject, ref, def)
+        }
     }
 
     private fun responseSchemaIsDefined(ref: JsonTypeRef): Boolean {
@@ -160,12 +170,12 @@ class SourceGenerator(val basePackage: String) {
         return TypeId(interfacePackage, interfaceName)
     }
 
-    private fun makeType(nameStrategy: NameStrategy, responseRef: JsonTypeRef, typeSchema: TypeSchema?): TypeId? {
+    private fun makeType(nameStrategy: NameStrategy, typeRef: JsonTypeRef, typeSchema: TypeSchema?): TypeId? {
         if (typeSchema == null) {
-            logger.warn("Type $responseRef is undefined")
+            logger.warn("Type $typeRef is undefined")
             return null
         }
-        val alreadyDefined = typeSpace.resolveTypeIdByJsonRefOrNull(responseRef)
+        val alreadyDefined = typeSpace.resolveTypeIdByJsonRefOrNull(typeRef)
 
         if (alreadyDefined != null) {
             return alreadyDefined
@@ -173,17 +183,17 @@ class SourceGenerator(val basePackage: String) {
 
         return when (typeSchema) {
             is SimpleType -> typeSpace.resolveTypeIdByJsonRef(typeSchema.ref)
-            is OneOfType -> makeOneOfType(::nameObject, responseRef, typeSchema)
-            is AllOfType -> makeAllOfType(::nameObject, responseRef, typeSchema)
+            is OneOfType -> makeOneOfType(::nameObject, typeRef, typeSchema)
+            is AllOfType -> makeAllOfType(::nameObject, typeRef, typeSchema)
             is RefType -> {
                 val toJsonRef = typeSchema.ref
                 val objDefinition = definitions[toJsonRef]
                 makeType(::nameObject, toJsonRef, objDefinition)
             }
             is SimpleMultiType -> typeSpace.resolveTypeIdByJsonRef("string")
-            is EnumType -> makeEnumType(nameStrategy, responseRef, typeSchema)
-            is ArrayType -> makeType(::nameObject, responseRef, typeSchema.items)?.let { makeArrayType(it) }
-            is ObjectType -> defineObjectType(nameStrategy, responseRef, typeSchema)
+            is EnumType -> makeEnumType(nameStrategy, typeRef, typeSchema)
+            is ArrayType -> makeType(::nameObject, typeRef, typeSchema.items)?.let { makeArrayType(it) }
+            is ObjectType -> defineObjectType(nameStrategy, typeRef, typeSchema)
             is PatternPropertiesType -> makeMapResultType()
         }
     }
