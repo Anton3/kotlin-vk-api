@@ -27,7 +27,7 @@ open class VkMethod<T, out R : MethodRequirement>(
 
     var accessToken: String? = null
     var clientSecret: String? = null
-    var v: String? = "5.102"
+    var v: String? = "5.103"
     var lang: VkLang? = null
     var testMode: Int? = null
 }

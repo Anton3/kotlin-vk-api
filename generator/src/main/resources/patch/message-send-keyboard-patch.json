@@ -16,6 +16,10 @@
               "$ref": "#/definitions/messages_keyboard_button"
             }
           }
+        },
+        "inline": {
+          "type": "boolean",
+          "description": "Should this keyboard be attached to a message instead of a conversation"
         }
       },
       "required": [

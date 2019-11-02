@@ -101,6 +101,8 @@ class CallbackConfirmationRequest(
 ) : CallbackEvent<Nothing?>(groupId, null, secret)
 
 
+data class MessageWithClientInfo(val message: Message, val clientInfo: ClientInfo)
+
 class MessageNew(
     groupId: Int,
     @JsonProperty("object") attachment: Message,
