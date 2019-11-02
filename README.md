@@ -101,9 +101,19 @@ println(response?.text)
 
 Примеры использования можно найти в:
  
-- `GroupLongPollEventSourceTest`
-- `UserLongPollEventSourceTest`
-- `CallbackTest`
+- [`GroupLongPollEventSourceTest`](https://github.com/Anton3/kotlin-vk-api/blob/master/vk-api-methods/src/test/kotlin/name/anton3/vkapi/methods/longpoll/GroupLongPollEventSourceTest.kt)
+- [`UserLongPollEventSourceTest`](https://github.com/Anton3/kotlin-vk-api/blob/master/vk-api-methods/src/test/kotlin/name/anton3/vkapi/methods/longpoll/UserLongPollEventSourceTest.kt)
+- [`CallbackTest`](https://github.com/Anton3/kotlin-vk-api/blob/master/vk-api-methods/src/test/kotlin/name/anton3/vkapi/methods/callback/CallbackTest.kt)
+
+### Логи
+
+```kotlin
+// build.gradle.kts
+implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.12.0")
+```
+
+В вашей папке `resources` должен быть файл `log4j2.xml`,
+[вот пример](https://github.com/Anton3/kotlin-vk-api/blob/master/vk-api-methods/src/test/resources/log4j2.xml).
 
 ## Структура библиотеки
 Библиотека разбита на следующие модули:
