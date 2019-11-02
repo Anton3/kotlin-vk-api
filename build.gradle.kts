@@ -45,11 +45,11 @@ subprojects {
         implementation(kotlin("stdlib-jdk8:$kotlinVersion"))
         implementation(kotlin("reflect:$kotlinVersion"))
 
-        implementation("org.apache.logging.log4j:log4j-core:2.12.0")
+        implementation("org.apache.logging.log4j:log4j-core:2.12.1")
         implementation("org.apache.logging.log4j:log4j-api-kotlin:1.0.0")
 
         testImplementation("junit:junit:4.12")
-        testImplementation("org.apache.logging.log4j:log4j-slf4j-impl:2.12.0")
+        testImplementation("org.apache.logging.log4j:log4j-slf4j-impl:2.12.1")
     }
 
     val sourcesJar by tasks.creating(Jar::class) {
