@@ -20,10 +20,6 @@ import name.anton3.vkapi.vktypes.ValueEnum
 import name.anton3.vkapi.vktypes.VkDate
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-interface Attachment
-
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(
     defaultImpl = NotImplemented::class,
     use = JsonTypeInfo.Id.NAME,
@@ -31,6 +27,8 @@ interface Attachment
     property = "type"
 )
 @JsonSubTypes(
+    JsonSubTypes.Type(name = "confirmation", value = CallbackConfirmationRequest::class),
+
     JsonSubTypes.Type(name = "message_new", value = MessageNew::class),
     JsonSubTypes.Type(name = "message_reply", value = MessageReply::class),
     JsonSubTypes.Type(name = "message_edit", value = MessageEdit::class),
@@ -84,32 +82,56 @@ interface Attachment
 
     JsonSubTypes.Type(name = "vkpay_transaction", value = VkPayTransaction::class)
 )
-sealed class CallbackEvent<T>(val groupId: Int, val attachment: T) {
+sealed class CallbackEvent<T>(val groupId: Int, val attachment: T, val secret: String?) {
     override fun toString(): String {
         return "${this.javaClass.simpleName}(id=${this.groupId}, attach=${this.attachment})"
     }
 }
 
+class NotImplemented(
+    groupId: Int,
+    @JsonProperty("object") attachment: Map<String, Any>,
+    secret: String?
+) : CallbackEvent<Map<String, Any>>(groupId, attachment, secret)
 
-class NotImplemented(groupId: Int, @JsonProperty("object") attachment: Map<String, Any>) :
-    CallbackEvent<Map<String, Any>>(groupId, attachment)
 
-class MessageNew(groupId: Int, @JsonProperty("object") attachment: Message) :
-    CallbackEvent<Message>(groupId, attachment)
+class CallbackConfirmationRequest(
+    groupId: Int,
+    secret: String?
+) : CallbackEvent<Nothing?>(groupId, null, secret)
 
-class MessageReply(groupId: Int, @JsonProperty("object") attachment: Message) :
-    CallbackEvent<Message>(groupId, attachment)
 
-class MessageEdit(groupId: Int, @JsonProperty("object") attachment: Message) :
-    CallbackEvent<Message>(groupId, attachment)
+class MessageNew(
+    groupId: Int,
+    @JsonProperty("object") attachment: Message,
+    secret: String?
+) : CallbackEvent<Message>(groupId, attachment, secret)
+
+class MessageReply(
+    groupId: Int,
+    @JsonProperty("object") attachment: Message,
+    secret: String?
+) : CallbackEvent<Message>(groupId, attachment, secret)
+
+class MessageEdit(
+    groupId: Int,
+    @JsonProperty("object") attachment: Message,
+    secret: String?
+) : CallbackEvent<Message>(groupId, attachment, secret)
 
 data class ToggleMessageAllowance(val userId: Int, val key: String?)
 
-class MessageAllow(groupId: Int, @JsonProperty("object") attachment: ToggleMessageAllowance) :
-    CallbackEvent<ToggleMessageAllowance>(groupId, attachment)
+class MessageAllow(
+    groupId: Int,
+    @JsonProperty("object") attachment: ToggleMessageAllowance,
+    secret: String?
+) : CallbackEvent<ToggleMessageAllowance>(groupId, attachment, secret)
 
-class MessageDeny(groupId: Int, @JsonProperty("object") attachment: ToggleMessageAllowance) :
-    CallbackEvent<ToggleMessageAllowance>(groupId, attachment)
+class MessageDeny(
+    groupId: Int,
+    @JsonProperty("object") attachment: ToggleMessageAllowance,
+    secret: String?
+) : CallbackEvent<ToggleMessageAllowance>(groupId, attachment, secret)
 
 
 class WallReply(
@@ -130,19 +152,31 @@ class WallReply(
     override val deleted: Boolean?
 ) : WallComment
 
-class WallReplyCallbackEvent(groupId: Int, @JsonProperty("object") attachment: WallReply) :
-    CallbackEvent<WallReply>(groupId, attachment)
+class WallReplyCallbackEvent(
+    groupId: Int,
+    @JsonProperty("object") attachment: WallReply,
+    secret: String?
+) : CallbackEvent<WallReply>(groupId, attachment, secret)
 
 class WallReplyDeleteAttachment(val ownerId: Int, val id: Int, val userId: Int, val deleteId: Int, val postId: Int)
 
-class WallReplyDelete(groupId: Int, @JsonProperty("object") attachment: WallReplyDeleteAttachment) :
-    CallbackEvent<WallReplyDeleteAttachment>(groupId, attachment)
+class WallReplyDelete(
+    groupId: Int,
+    @JsonProperty("object") attachment: WallReplyDeleteAttachment,
+    secret: String?
+) : CallbackEvent<WallReplyDeleteAttachment>(groupId, attachment, secret)
 
-class WallPostNew(groupId: Int, @JsonProperty("object") attachment: WallpostFull) :
-    CallbackEvent<WallpostFull>(groupId, attachment)
+class WallPostNew(
+    groupId: Int,
+    @JsonProperty("object") attachment: WallpostFull,
+    secret: String?
+) : CallbackEvent<WallpostFull>(groupId, attachment, secret)
 
-class WallRepost(groupId: Int, @JsonProperty("object") attachment: WallpostFull) :
-    CallbackEvent<WallpostFull>(groupId, attachment)
+class WallRepost(
+    groupId: Int,
+    @JsonProperty("object") attachment: WallpostFull,
+    secret: String?
+) : CallbackEvent<WallpostFull>(groupId, attachment, secret)
 
 
 data class BoardPostEventAttach(
@@ -156,13 +190,19 @@ data class BoardPostEventAttach(
     override val realOffset: Int?
 ) : TopicComment
 
-class BoardPostCallbackEvent(groupId: Int, @JsonProperty("object") attachment: BoardPostEventAttach) :
-    CallbackEvent<BoardPostEventAttach>(groupId, attachment)
+class BoardPostCallbackEvent(
+    groupId: Int,
+    @JsonProperty("object") attachment: BoardPostEventAttach,
+    secret: String?
+) : CallbackEvent<BoardPostEventAttach>(groupId, attachment, secret)
 
 data class BoardPostDeleteAttachment(val topicId: Int, val topicOwnerId: Int, val id: Int)
 
-class BoardPostDelete(groupId: Int, @JsonProperty("object") attachment: BoardPostDeleteAttachment) :
-    CallbackEvent<BoardPostDeleteAttachment>(groupId, attachment)
+class BoardPostDelete(
+    groupId: Int,
+    @JsonProperty("object") attachment: BoardPostDeleteAttachment,
+    secret: String?
+) : CallbackEvent<BoardPostDeleteAttachment>(groupId, attachment, secret)
 
 
 class MarketCommentAttach(
@@ -184,8 +224,11 @@ class MarketCommentAttach(
     override val deleted: Boolean?
 ) : WallComment
 
-class MarketCommentCallbackEvent(groupId: Int, @JsonProperty("object") attachment: MarketCommentAttach) :
-    CallbackEvent<MarketCommentAttach>(groupId, attachment)
+class MarketCommentCallbackEvent(
+    groupId: Int,
+    @JsonProperty("object") attachment: MarketCommentAttach,
+    secret: String?
+) : CallbackEvent<MarketCommentAttach>(groupId, attachment, secret)
 
 data class MarketCommentDeleteAttachment(
     val ownerId: Int,
@@ -195,12 +238,18 @@ data class MarketCommentDeleteAttachment(
     val itemId: Int
 )
 
-class MarketCommentDelete(groupId: Int, @JsonProperty("object") attachment: MarketCommentDeleteAttachment) :
-    CallbackEvent<MarketCommentDeleteAttachment>(groupId, attachment)
+class MarketCommentDelete(
+    groupId: Int,
+    @JsonProperty("object") attachment: MarketCommentDeleteAttachment,
+    secret: String?
+) : CallbackEvent<MarketCommentDeleteAttachment>(groupId, attachment, secret)
 
 
-class PhotoNew(groupId: Int, @JsonProperty("object") attachment: Photo) :
-    CallbackEvent<Photo>(groupId, attachment)
+class PhotoNew(
+    groupId: Int,
+    @JsonProperty("object") attachment: Photo,
+    secret: String?
+) : CallbackEvent<Photo>(groupId, attachment, secret)
 
 class PhotoCommentAttach(
     val photoId: Int,
@@ -221,8 +270,11 @@ class PhotoCommentAttach(
     override val deleted: Boolean?
 ) : WallComment
 
-class PhotoCommentCallbackEvent(groupId: Int, @JsonProperty("object") attachment: PhotoCommentAttach) :
-    CallbackEvent<PhotoCommentAttach>(groupId, attachment)
+class PhotoCommentCallbackEvent(
+    groupId: Int,
+    @JsonProperty("object") attachment: PhotoCommentAttach,
+    secret: String?
+) : CallbackEvent<PhotoCommentAttach>(groupId, attachment, secret)
 
 class PhotoCommentDeleteAttachment(
     val ownerId: Int,
@@ -232,8 +284,11 @@ class PhotoCommentDeleteAttachment(
     val photoId: Int
 )
 
-class PhotoCommentDelete(groupId: Int, @JsonProperty("object") attachment: PhotoCommentDeleteAttachment) :
-    CallbackEvent<PhotoCommentDeleteAttachment>(groupId, attachment)
+class PhotoCommentDelete(
+    groupId: Int,
+    @JsonProperty("object") attachment: PhotoCommentDeleteAttachment,
+    secret: String?
+) : CallbackEvent<PhotoCommentDeleteAttachment>(groupId, attachment, secret)
 
 
 class VideoCommentAttachment(
@@ -255,8 +310,11 @@ class VideoCommentAttachment(
     override val deleted: Boolean?
 ) : WallComment
 
-class VideoCommentCallbackEvent(groupId: Int, @JsonProperty("object") attachment: VideoCommentAttachment) :
-    CallbackEvent<VideoCommentAttachment>(groupId, attachment)
+class VideoCommentCallbackEvent(
+    groupId: Int,
+    @JsonProperty("object") attachment: VideoCommentAttachment,
+    secret: String?
+) : CallbackEvent<VideoCommentAttachment>(groupId, attachment, secret)
 
 class VideoCommentDeleteAttachment(
     val ownerId: Int,
@@ -266,8 +324,11 @@ class VideoCommentDeleteAttachment(
     val videoId: Int
 )
 
-class VideoCommentDelete(groupId: Int, @JsonProperty("object") attachment: VideoCommentDeleteAttachment) :
-    CallbackEvent<VideoCommentDeleteAttachment>(groupId, attachment)
+class VideoCommentDelete(
+    groupId: Int,
+    @JsonProperty("object") attachment: VideoCommentDeleteAttachment,
+    secret: String?
+) : CallbackEvent<VideoCommentDeleteAttachment>(groupId, attachment, secret)
 
 
 class UserBlockAttachment(
@@ -278,8 +339,11 @@ class UserBlockAttachment(
     val comment: String
 )
 
-class UserBlock(groupId: Int, @JsonProperty("object") attachment: UserBlockAttachment) :
-    CallbackEvent<UserBlockAttachment>(groupId, attachment)
+class UserBlock(
+    groupId: Int,
+    @JsonProperty("object") attachment: UserBlockAttachment,
+    secret: String?
+) : CallbackEvent<UserBlockAttachment>(groupId, attachment, secret)
 
 class UserUnblockAttachment(
     val adminId: Int,
@@ -287,8 +351,11 @@ class UserUnblockAttachment(
     val byEndDate: Boolean
 )
 
-class UserUnblock(groupId: Int, @JsonProperty("object") attachment: UserUnblockAttachment) :
-    CallbackEvent<UserUnblockAttachment>(groupId, attachment)
+class UserUnblock(
+    groupId: Int,
+    @JsonProperty("object") attachment: UserUnblockAttachment,
+    secret: String?
+) : CallbackEvent<UserUnblockAttachment>(groupId, attachment, secret)
 
 
 class PollVoteNewAttachment(
@@ -298,8 +365,11 @@ class PollVoteNewAttachment(
     val optionId: Int
 )
 
-class PollVoteNew(groupId: Int, @JsonProperty("object") attachment: PollVoteNewAttachment) :
-    CallbackEvent<PollVoteNewAttachment>(groupId, attachment)
+class PollVoteNew(
+    groupId: Int,
+    @JsonProperty("object") attachment: PollVoteNewAttachment,
+    secret: String?
+) : CallbackEvent<PollVoteNewAttachment>(groupId, attachment, secret)
 
 
 enum class JoinType(override val value: String) : ValueEnum<String> {
@@ -314,11 +384,17 @@ enum class JoinType(override val value: String) : ValueEnum<String> {
 data class GroupJoinAttach(val userId: Int, val joinType: JoinType)
 data class GroupLeaveAttach(val userId: Int, val self: Boolean)
 
-class GroupJoin(groupId: Int, @JsonProperty("object") attachment: GroupJoinAttach) :
-    CallbackEvent<GroupJoinAttach>(groupId, attachment)
+class GroupJoin(
+    groupId: Int,
+    @JsonProperty("object") attachment: GroupJoinAttach,
+    secret: String?
+) : CallbackEvent<GroupJoinAttach>(groupId, attachment, secret)
 
-class GroupLeave(groupId: Int, @JsonProperty("object") attachment: GroupLeaveAttach) :
-    CallbackEvent<GroupLeaveAttach>(groupId, attachment)
+class GroupLeave(
+    groupId: Int,
+    @JsonProperty("object") attachment: GroupLeaveAttach,
+    secret: String?
+) : CallbackEvent<GroupLeaveAttach>(groupId, attachment, secret)
 
 
 enum class OfficerType(override val value: Int) : ValueEnum<Int> {
@@ -335,8 +411,11 @@ data class GroupOfficersEditAttachment(
     val levelNew: OfficerType
 )
 
-class GroupOfficersEdit(groupId: Int, @JsonProperty("object") attachment: GroupOfficersEditAttachment) :
-    CallbackEvent<GroupOfficersEditAttachment>(groupId, attachment)
+class GroupOfficersEdit(
+    groupId: Int,
+    @JsonProperty("object") attachment: GroupOfficersEditAttachment,
+    secret: String?
+) : CallbackEvent<GroupOfficersEditAttachment>(groupId, attachment, secret)
 
 
 enum class GroupSettingsField(override val value: String) : ValueEnum<String> {
@@ -365,8 +444,11 @@ data class GroupChangeSettingsAttachment(
     val changes: Map<GroupSettingsField, GroupSettingsFieldChange>
 )
 
-class GroupChangeSettings(groupId: Int, @JsonProperty("object") attachment: GroupChangeSettingsAttachment) :
-    CallbackEvent<GroupChangeSettingsAttachment>(groupId, attachment)
+class GroupChangeSettings(
+    groupId: Int,
+    @JsonProperty("object") attachment: GroupChangeSettingsAttachment,
+    secret: String?
+) : CallbackEvent<GroupChangeSettingsAttachment>(groupId, attachment, secret)
 
 
 data class GroupChangePhotoAttachment(
@@ -374,8 +456,11 @@ data class GroupChangePhotoAttachment(
     val photo: Photo
 )
 
-class GroupChangePhoto(groupId: Int, @JsonProperty("object") attachment: GroupChangePhotoAttachment) :
-    CallbackEvent<GroupChangePhotoAttachment>(groupId, attachment)
+class GroupChangePhoto(
+    groupId: Int,
+    @JsonProperty("object") attachment: GroupChangePhotoAttachment,
+    secret: String?
+) : CallbackEvent<GroupChangePhotoAttachment>(groupId, attachment, secret)
 
 
 data class VkPayTransactionAttachment(
@@ -385,5 +470,8 @@ data class VkPayTransactionAttachment(
     val date: VkDate
 )
 
-class VkPayTransaction(groupId: Int, @JsonProperty("object") attachment: VkPayTransactionAttachment) :
-    CallbackEvent<VkPayTransactionAttachment>(groupId, attachment)
+class VkPayTransaction(
+    groupId: Int,
+    @JsonProperty("object") attachment: VkPayTransactionAttachment,
+    secret: String?
+) : CallbackEvent<VkPayTransactionAttachment>(groupId, attachment, secret)
