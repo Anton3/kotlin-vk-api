@@ -49,6 +49,7 @@ val groupAccessToken: String = readConfigParam("groupAccessToken")
 val userAccessToken: String = readConfigParam("userAccessToken")
 val groupId: Int = readConfigParam("groupId").toInt()
 val peerId: Int = readConfigParam("peerId").toInt()
+val callbackConfirmationCode: String = readConfigParam("callbackConfirmationCode")
 
 const val longPollTimeout: Int = 8
 val httpClient: TransportClient = KtorTransportClient(HttpClient(Apache) {

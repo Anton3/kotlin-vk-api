@@ -46,6 +46,8 @@ class GroupLongPollEventSource(
  * Should be less than timeout of `transportClient`
  *
  * @param transportClient You might want to supply a custom http client with extended
+ *
+ * @return Lazy flow, consider `.buffer()` to read events asynchronously
  */
 fun groupLongPollEvents(
     api: UserGroupClient,

@@ -47,6 +47,10 @@ class UserLongPollEventSource(
  * Should be less than timeout of `transportClient`
  *
  * @param transportClient You might want to supply a custom http client with extended
+ *
+ * @return Lazy flow, consider `.buffer()` to read events asynchronously
+ *
+ * @see messageLongPollEventsAsAdmin
  */
 fun messageLongPollEvents(
     api: GroupClient,
@@ -57,6 +61,8 @@ fun messageLongPollEvents(
 
 /**
  * Same as `messageLongPollEvents`, but called with the token of an admin user.
+ *
+ * @see messageLongPollEvents
  */
 fun messageLongPollEventsAsAdmin(
     api: UserClient,
@@ -75,6 +81,8 @@ fun messageLongPollEventsAsAdmin(
  * Should be less than timeout of `transportClient`
  *
  * @param transportClient You might want to supply a custom http client with extended
+ *
+ * @return Lazy flow, consider `.buffer()` to read events asynchronously
  */
 fun messageLongPollEventsForUser(
     api: UserClient,

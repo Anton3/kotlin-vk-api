@@ -1,6 +1,8 @@
 package name.anton3.vkapi.methods.longpoll
 
 import com.fasterxml.jackson.module.kotlin.readValue
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import name.anton3.vkapi.generated.messages.methods.MessagesSend
@@ -13,13 +15,14 @@ import org.junit.Ignore
 import org.junit.Test
 import kotlin.random.Random
 
+@UseExperimental(ExperimentalCoroutinesApi::class)
 class GroupLongPollEventSourceTest {
     @Test
     @Ignore
-    fun smokeTest1(): Unit = runBlocking {
+    fun `Use Bot LongPoll API to receive events for a group`(): Unit = runBlocking {
         val source = groupLongPollEvents(groupApi, groupId, timeoutSeconds = longPollTimeout)
 
-        source.collect { event ->
+        source.buffer().collect { event ->
             println(event.toString())
 
             if (event is MessageNew) {

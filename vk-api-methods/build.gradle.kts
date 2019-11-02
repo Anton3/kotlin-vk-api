@@ -10,4 +10,5 @@ dependencies {
 
     val ktorVersion = "1.2.3"
     testImplementation("io.ktor:ktor-client-apache:$ktorVersion")
+    testImplementation("io.ktor:ktor-server-netty:$ktorVersion")
 }

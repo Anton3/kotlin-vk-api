@@ -60,10 +60,12 @@ val response: WallpostFull = api(WallGet(domain = "departureMsk"))
 println(response.text)
 ```
 
+### Обработка ошибок
+
 При выполнении могут выбрасываться различные исключения — наследники
 `IOException`:
 
-- Ошибки API ВК: `VkAPiException`
+- Ошибки VK API: `VkAPiException`
 - Ошибки соединения: `IOException`
 - Ошибки парсинга JSON: `JsonProcessingException`
 - Другие ошибки при запросе и парсинге ответа: `IOException`
@@ -91,6 +93,14 @@ import name.anton3.vkapi.client.swallow
 val response: WallpostFull? = swallow { api(WallGet(domain = "departureMsk")) }
 println(response?.text)
 ```
+
+### LongPoll и Callback
+
+Примеры использования можно найти в:
+ 
+- `GroupLongPollEventSourceTest`
+- `UserLongPollEventSourceTest`
+- `CallbackTest`
 
 ## Структура библиотеки
 Библиотека разбита на следующие модули:
