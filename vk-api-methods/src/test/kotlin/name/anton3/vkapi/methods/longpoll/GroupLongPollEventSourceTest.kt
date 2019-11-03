@@ -20,14 +20,14 @@ class GroupLongPollEventSourceTest {
     @Test
     @Ignore
     fun `Use Bot LongPoll API to receive events for a group`(): Unit = runBlocking {
-        val source = groupLongPollEvents(groupApi, groupId, timeoutSeconds = longPollTimeout)
+        val source = groupLongPollEvents(groupApi, groupId, wait = longPollTimeout)
 
         source.buffer().collect { event ->
             println(event.toString())
 
             if (event is MessageNew) {
-                println(event.attachment.peerId)
-                println(event.attachment.fromId)
+                println(event.attachment.message.peerId)
+                println(event.attachment.message.fromId)
 
                 val result = groupApi(makeMessageToSend())
                 println(result)

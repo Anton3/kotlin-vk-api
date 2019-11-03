@@ -17,7 +17,7 @@ class UserLongPollEventSourceTest {
     @Test
     @Ignore
     fun `Use User LongPoll API to receive limited group events`(): Unit = runBlocking {
-        val source = messageLongPollEvents(groupApi, timeoutSeconds = longPollTimeout)
+        val source = messageLongPollEvents(groupApi, wait = longPollTimeout)
 
         source.buffer().collect { event ->
             println(event.toString())
@@ -32,7 +32,7 @@ class UserLongPollEventSourceTest {
     @Test
     @Ignore
     fun `Use User LongPoll API to receive user events`(): Unit = runBlocking {
-        val source = messageLongPollEventsForUser(userApi, timeoutSeconds = longPollTimeout)
+        val source = messageLongPollEventsForUser(userApi, wait = longPollTimeout)
 
         source.buffer().collect { event ->
             println(event.toString())
