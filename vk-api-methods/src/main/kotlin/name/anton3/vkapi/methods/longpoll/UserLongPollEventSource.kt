@@ -24,6 +24,10 @@ class UserLongPollEventSource(
     transportClient = transportClient,
     responseType = jacksonTypeRef()
 ) {
+    init {
+        require(timeout in 1..90) { "Maximum LongPoll wait value is 90 seconds, got: $timeout" }
+    }
+
     override suspend fun iteratorToUrl(iterator: LongpollParams): String {
         return "https://${iterator.server}?act=a_check&key=${iterator.key}&ts=${iterator.ts}&wait=$timeout&mode=${2 + 8 + 64}&version=3"
     }
@@ -43,8 +47,8 @@ class UserLongPollEventSource(
  *
  * @param api Client to request a LongPoll server
  *
- * @param timeoutSeconds Time, after which VK server must respond, even if no events occurred.
- * Should be less than timeout of `transportClient`
+ * @param wait Time after which LongPoll server must respond, even if no events occurred.
+ * Should be less than timeout of `transportClient`. Maximum allowed value is 90.
  *
  * @param transportClient You might want to supply a custom http client with extended
  *
@@ -54,10 +58,10 @@ class UserLongPollEventSource(
  */
 fun messageLongPollEvents(
     api: GroupClient,
-    timeoutSeconds: Int = 8,
+    wait: Int = 8,
     transportClient: TransportClient = api.transportClient
 ): Flow<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, api, transportClient, null, timeoutSeconds).produceEvents()
+    UserLongPollEventSource(Dispatchers.IO, api, transportClient, null, wait).produceEvents()
 
 /**
  * Same as `messageLongPollEvents`, but called with the token of an admin user.
@@ -67,18 +71,18 @@ fun messageLongPollEvents(
 fun messageLongPollEventsAsAdmin(
     api: UserClient,
     groupId: Int,
-    timeoutSeconds: Int = 8,
+    wait: Int = 8,
     transportClient: TransportClient = api.transportClient
 ): Flow<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, api, transportClient, groupId, timeoutSeconds).produceEvents()
+    UserLongPollEventSource(Dispatchers.IO, api, transportClient, groupId, wait).produceEvents()
 
 /**
  * Receive User LongPoll events.
  *
  * @param api Client to request a LongPoll server
  *
- * @param timeoutSeconds Time, after which VK server must respond, even if no events occurred.
- * Should be less than timeout of `transportClient`
+ * @param wait Time after which LongPoll server must respond, even if no events occurred.
+ * Should be less than timeout of `transportClient`. Maximum allowed value is 90.
  *
  * @param transportClient You might want to supply a custom http client with extended
  *
@@ -86,7 +90,7 @@ fun messageLongPollEventsAsAdmin(
  */
 fun messageLongPollEventsForUser(
     api: UserClient,
-    timeoutSeconds: Int = 8,
+    wait: Int = 8,
     transportClient: TransportClient = api.transportClient
 ): Flow<LongPollEvent> =
-    UserLongPollEventSource(Dispatchers.IO, api, transportClient, null, timeoutSeconds).produceEvents()
+    UserLongPollEventSource(Dispatchers.IO, api, transportClient, null, wait).produceEvents()
