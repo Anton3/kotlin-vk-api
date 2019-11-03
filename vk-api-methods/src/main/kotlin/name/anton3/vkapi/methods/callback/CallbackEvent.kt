@@ -105,9 +105,9 @@ data class MessageWithClientInfo(val message: Message, val clientInfo: ClientInf
 
 class MessageNew(
     groupId: Int,
-    @JsonProperty("object") attachment: Message,
+    @JsonProperty("object") attachment: MessageWithClientInfo,
     secret: String?
-) : CallbackEvent<Message>(groupId, attachment, secret)
+) : CallbackEvent<MessageWithClientInfo>(groupId, attachment, secret)
 
 class MessageReply(
     groupId: Int,
