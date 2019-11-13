@@ -1,6 +1,7 @@
 package name.anton3.vkapi.client
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import kotlinx.coroutines.CancellationException
 import name.anton3.executors.core.DynamicRequest
 import name.anton3.vkapi.core.MethodExecutor
 import name.anton3.vkapi.core.TransportClient
@@ -12,6 +13,14 @@ import java.io.IOException
 inline fun <T> swallow(block: () -> T): T? {
     return try {
         block()
+    } catch (e: CancellationException) {
+        if (generateSequence<Throwable>(e) { it.cause }.any { "Fail to execute request" in it.message.orEmpty() }) {
+            // Ktor uses CancellationException as their normal exceptions >:(
+            // see io.ktor.client.engine.apache.ApacheResponseConsumer.failed
+            null
+        } else {
+            throw e
+        }
     } catch (e: IOException) {
         null
     }
