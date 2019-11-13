@@ -16,5 +16,6 @@ data class ExtraFields(
     val fromAdmin: Int?,
     val geo: String?,
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    val emoji: Int?
+    val emoji: Int?,
+    val payload: String?
 )
