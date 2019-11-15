@@ -20,6 +20,12 @@ repositories {
     mavenCentral()
 }
 
+tasks.withType(KotlinCompile::class.java).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
 subprojects {
     group = "com.github.Anton3"
     version = "0.11.2"
@@ -32,6 +38,7 @@ subprojects {
     apply(plugin = "java-library")
     apply(plugin = "kotlin")
     apply(plugin = "maven")
+    apply(plugin = "com.github.ManifestClasspath")
 
     tasks.withType(KotlinCompile::class.java).all {
         kotlinOptions {
