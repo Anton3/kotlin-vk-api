@@ -12,6 +12,7 @@ data class ExtraFields(
     val sourceAct: MessageActionStatus?,
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     val sourceMid: Int?,
+    val sourceText: String?,
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     val fromAdmin: Int?,
     val geo: String?,
