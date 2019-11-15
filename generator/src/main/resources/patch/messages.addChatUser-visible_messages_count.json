@@ -1,0 +1,63 @@
+{
+  "methods": [
+    {
+      "name": "messages.addChatUser",
+      "description": "Adds a new user to a chat.",
+      "access_token_type": [
+        "user"
+      ],
+      "parameters": [
+        {
+          "name": "chat_id",
+          "description": "Chat ID.",
+          "type": "integer",
+          "required": true,
+          "minimum": 0,
+          "maximum": 100000000
+        },
+        {
+          "name": "user_id",
+          "description": "ID of the user to be added to the chat.",
+          "type": "integer",
+          "required": true,
+          "minimum": 0
+        },
+        {
+          "name": "visible_messages_count",
+          "description": "Size of the messages history provided to the newly added user, up to 1000",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000,
+          "default": 0
+        }
+      ],
+      "responses": {
+        "response": {
+          "$ref": "responses.json#/definitions/ok_response"
+        }
+      },
+      "errors": [
+        {
+          "code": 103,
+          "name": "API_ERROR_LIMITS",
+          "description": "Out of limits"
+        },
+        {
+          "code": 925,
+          "name": "API_ERROR_MESSAGES_CHAT_NOT_ADMIN",
+          "description": "You are not admin of this chat"
+        },
+        {
+          "code": 939,
+          "name": "API_ERROR_MESSAGES_MESSAGE_REQUEST_ALREADY_SENT",
+          "description": "Message request already sent"
+        },
+        {
+          "code": 936,
+          "name": "API_ERROR_MESSAGES_CONTACT_NOT_FOUND",
+          "description": "Contact not found"
+        }
+      ]
+    }
+  ]
+}
