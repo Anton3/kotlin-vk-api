@@ -1,0 +1,12 @@
+{
+  "objects": {
+    "base_link_button_action_type": {
+      "type": "string",
+      "description": "Action type",
+      "enum": [
+        "open_url",
+        "join_group_and_open_url"
+      ]
+    }
+  }
+}
