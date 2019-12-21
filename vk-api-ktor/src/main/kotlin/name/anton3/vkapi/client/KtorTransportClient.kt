@@ -5,8 +5,7 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.forms.append
 import io.ktor.client.request.forms.formData
-import io.ktor.client.request.request
-import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.HttpStatement
 import io.ktor.client.statement.readBytes
 import io.ktor.http.*
 import io.ktor.http.content.OutgoingContent
@@ -25,55 +24,28 @@ class KtorTransportClient(
     private val retryAttemptsInvalidStatusCount: Int = 3
 ) : TransportClient {
 
-    companion object : Logging
+    override suspend fun invoke(request: TransportClient.Request): TransportClient.Response {
+        return callWithStatusCheck(request)
+    }
 
-    private suspend fun callWithStatusCheck(
-        request: HttpRequestBuilder,
-        rawRequest: TransportClient.Request
-    ): TransportClient.Response {
+    private suspend fun callWithStatusCheck(request: TransportClient.Request): TransportClient.Response {
         lateinit var response: TransportClient.Response
 
         repeat(retryAttemptsInvalidStatusCount) {
-            response = call(request, rawRequest)
+            response = callWithNetworkRetries(request)
             if (!isInvalidGatewayStatus(HttpStatusCode.fromValue(response.status))) return response
         }
 
         return response
     }
 
-    private fun isInvalidGatewayStatus(status: HttpStatusCode): Boolean {
-        return status == HttpStatusCode.BadGateway || status == HttpStatusCode.GatewayTimeout
-    }
-
-    private suspend fun call(
-        request: HttpRequestBuilder,
-        rawRequest: TransportClient.Request
-    ): TransportClient.Response {
+    private suspend fun callWithNetworkRetries(request: TransportClient.Request): TransportClient.Response {
         lateinit var exception: IOException
 
         repeat(retryAttemptsNetworkErrorCount) {
-            val startTime: Instant = Instant.now()
-
             try {
-                val response = client.request<HttpResponse>(HttpRequestBuilder().takeFrom(request))
-
-                response.requestTime
-
-                val result = response.readBytes()
-
-                val endTime: Instant = Instant.now()
-                val resultTime: Duration = Duration.between(startTime, endTime)
-                val vkResponse = toVkResponse(response, result)
-
-                logRequest(rawRequest, vkResponse, result, resultTime)
-                return toVkResponse(response, result)
-
+                return callWithLogging(request)
             } catch (e: IOException) {
-                val endTime: Instant = Instant.now()
-                val resultTime = Duration.between(startTime, endTime)
-
-                logRequest(rawRequest, null, null, resultTime)
-                logger.warn("Network troubles")
                 exception = e
             }
         }
@@ -81,14 +53,46 @@ class KtorTransportClient(
         throw exception
     }
 
+    private suspend fun callWithLogging(request: TransportClient.Request): TransportClient.Response {
+        val startTime = Instant.now()
+
+        try {
+            val vkResponse = call(request)
+            val resultTime = Duration.between(startTime, Instant.now())
+            logRequest(request, vkResponse, resultTime)
+            return vkResponse
+        } catch (e: IOException) {
+            val resultTime = Duration.between(startTime, Instant.now())
+            logRequest(request, null, resultTime)
+            throw e
+        }
+    }
+
+    private suspend fun call(request: TransportClient.Request): TransportClient.Response {
+        val httpRequest = HttpRequestBuilder().apply {
+            method = HttpMethod.parse(request.method.toString())
+            url.takeFrom(request.url)
+            body = convertBody(request.content)
+        }
+
+        return HttpStatement(httpRequest, client).execute {
+            TransportClient.Response(it.status.value, it.readBytes())
+        }
+    }
+
+    private fun isInvalidGatewayStatus(status: HttpStatusCode): Boolean {
+        return status == HttpStatusCode.BadGateway || status == HttpStatusCode.GatewayTimeout
+    }
+
     private fun logRequest(
         request: TransportClient.Request,
         response: TransportClient.Response?,
-        result: ByteArray?,
         resultTime: Duration?
     ) {
-        logger.info {
-            "Request: ${request.method} ${request.url}"
+        if (response == null) {
+            logger.warn { "Network troubles: ${request.method} ${request.url}" }
+        } else {
+            logger.info { "Request: ${request.method} ${request.url}" }
         }
 
         logger.debug {
@@ -97,21 +101,18 @@ class KtorTransportClient(
               Body: ${request.content}
               Response time: ${resultTime ?: "-"}
               Status: ${response?.status ?: "-"}
-              Response: ${result?.toString(Charsets.UTF_8)?.take(10000) ?: "-"}
+              Response: ${response?.data?.toString(Charsets.UTF_8)?.take(10000) ?: "-"}
             """.trimIndent()
         }
     }
 
-    private fun toVkResponse(httpResponse: HttpResponse, rawContent: ByteArray): TransportClient.Response {
-        return TransportClient.Response(httpResponse.status.value, rawContent)
-    }
-
     private fun convertBody(body: RequestContent): OutgoingContent = when (body) {
-        is RequestContent.Empty -> TextContent("", ContentType.parse(body.contentType).withCharset(Charsets.UTF_8))
-        is RequestContent.Text -> TextContent(
-            body.data,
-            ContentType.parse(body.contentType).withCharset(Charsets.UTF_8)
-        )
+        is RequestContent.Empty -> {
+            TextContent("", ContentType.parse(body.contentType).withCharset(Charsets.UTF_8))
+        }
+        is RequestContent.Text -> {
+            TextContent(body.data, ContentType.parse(body.contentType).withCharset(Charsets.UTF_8))
+        }
         is RequestContent.Form -> MultiPartFormDataContent(formData {
             for ((key, value) in body.data) {
                 append(key, value)
@@ -124,13 +125,5 @@ class KtorTransportClient(
         })
     }
 
-    override suspend fun invoke(request: TransportClient.Request): TransportClient.Response {
-        val httpRequest = HttpRequestBuilder().apply {
-            method = HttpMethod.parse(request.method.toString())
-            url.takeFrom(request.url)
-            body = convertBody(request.content)
-        }
-
-        return callWithStatusCheck(httpRequest, request)
-    }
+    private companion object : Logging
 }
