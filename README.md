@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.Anton3:kotlin-vk-api:0.11.3")
+    implementation("com.github.Anton3:kotlin-vk-api:0.11.4")
 }
 ```
 
@@ -100,7 +100,7 @@ println(response?.text)
 ### LongPoll и Callback
 
 Примеры использования можно найти в:
- 
+
 - [`GroupLongPollEventSourceTest`](https://github.com/Anton3/kotlin-vk-api/blob/master/vk-api-methods/src/test/kotlin/name/anton3/vkapi/methods/longpoll/GroupLongPollEventSourceTest.kt)
 - [`UserLongPollEventSourceTest`](https://github.com/Anton3/kotlin-vk-api/blob/master/vk-api-methods/src/test/kotlin/name/anton3/vkapi/methods/longpoll/UserLongPollEventSourceTest.kt)
 - [`CallbackTest`](https://github.com/Anton3/kotlin-vk-api/blob/master/vk-api-methods/src/test/kotlin/name/anton3/vkapi/methods/callback/CallbackTest.kt)
