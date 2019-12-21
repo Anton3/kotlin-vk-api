@@ -6,13 +6,13 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.50")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.60")
     }
 }
 
 plugins {
     `java-library`
-    kotlin("jvm") version "1.3.50"
+    kotlin("jvm") version "1.3.60"
     id("com.github.ManifestClasspath") version "0.1.0-RELEASE"
 }
 
@@ -28,7 +28,7 @@ tasks.withType(KotlinCompile::class.java).all {
 
 subprojects {
     group = "com.github.Anton3"
-    version = "0.11.3"
+    version = "0.11.4"
 
     repositories {
         mavenCentral()
@@ -48,7 +48,7 @@ subprojects {
     }
 
     dependencies {
-        val kotlinVersion = "1.3.50"
+        val kotlinVersion = "1.3.60"
         implementation(kotlin("stdlib-jdk8:$kotlinVersion"))
         implementation(kotlin("reflect:$kotlinVersion"))
 

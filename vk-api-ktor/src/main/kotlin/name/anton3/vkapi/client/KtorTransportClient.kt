@@ -6,12 +6,12 @@ import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.forms.append
 import io.ktor.client.request.forms.formData
 import io.ktor.client.request.request
-import io.ktor.client.response.HttpResponse
-import io.ktor.client.response.readBytes
+import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.readBytes
 import io.ktor.http.*
 import io.ktor.http.content.OutgoingContent
 import io.ktor.http.content.TextContent
-import kotlinx.io.charsets.Charsets
+import io.ktor.utils.io.core.writeFully
 import name.anton3.vkapi.core.RequestContent
 import name.anton3.vkapi.core.TransportClient
 import org.apache.logging.log4j.kotlin.Logging

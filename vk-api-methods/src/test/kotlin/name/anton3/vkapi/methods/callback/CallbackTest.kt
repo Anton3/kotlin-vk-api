@@ -17,7 +17,6 @@ import name.anton3.vkapi.utils.groupApi
 import org.junit.Ignore
 import org.junit.Test
 import java.time.Duration
-import java.util.concurrent.TimeUnit
 
 class CallbackTest {
     @Test
@@ -37,7 +36,7 @@ class CallbackTest {
 
         server.start(wait = false)
         delay(Duration.ofSeconds(10))
-        server.stop(3, 5, TimeUnit.SECONDS)
+        server.stop(3000, 5000)
     }
 
     private fun processEvent(event: CallbackEvent<*>) {
