@@ -9,7 +9,10 @@ import name.anton3.vkapi.generated.messages.methods.MessagesSend
 import name.anton3.vkapi.generated.messages.objects.*
 import name.anton3.vkapi.generated.photos.objects.Photo
 import name.anton3.vkapi.methods.callback.MessageNew
-import name.anton3.vkapi.utils.*
+import name.anton3.vkapi.utils.groupApi
+import name.anton3.vkapi.utils.groupId
+import name.anton3.vkapi.utils.objectMapper
+import name.anton3.vkapi.utils.peerId
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -20,7 +23,7 @@ class GroupLongPollEventSourceTest {
     @Test
     @Disabled
     fun `Use Bot LongPoll API to receive events for a group`(): Unit = runBlocking {
-        val source = groupLongPollEvents(groupApi, groupId, wait = longPollTimeout)
+        val source = groupLongPollEvents(groupApi, groupId)
 
         source.buffer().collect { event ->
             println(event.toString())
