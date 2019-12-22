@@ -3,8 +3,8 @@ package name.anton3.vkapi.json.deserializers
 import com.fasterxml.jackson.module.kotlin.readValue
 import name.anton3.vkapi.json.core.vkBaseObjectMapper
 import name.anton3.vkapi.vktypes.ValueEnum
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 class ValueDeserializerTest {
 

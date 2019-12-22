@@ -2,7 +2,7 @@ package name.anton3.vkapi.generated.wall.methods
 
 import kotlinx.coroutines.runBlocking
 import name.anton3.vkapi.utils.userApi
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class WallGetMethodExtendedTest {
     @Test

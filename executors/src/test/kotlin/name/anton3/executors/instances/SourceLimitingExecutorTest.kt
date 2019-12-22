@@ -7,7 +7,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.time.delay
 import name.anton3.executors.core.DynamicExecutor
 import name.anton3.executors.core.DynamicRequest
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import java.time.Duration
 
 class SourceLimitingExecutorTest {

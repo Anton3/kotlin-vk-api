@@ -4,7 +4,7 @@ import kotlinx.coroutines.runBlocking
 import name.anton3.vkapi.methods.utils.toAttachmentId
 import name.anton3.vkapi.utils.groupApi
 import name.anton3.vkapi.utils.readResource
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class HelpersKtTest {
     @Test

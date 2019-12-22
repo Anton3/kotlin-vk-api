@@ -14,13 +14,13 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.time.delay
 import name.anton3.vkapi.utils.callbackConfirmationCode
 import name.anton3.vkapi.utils.groupApi
-import org.junit.Ignore
-import org.junit.Test
+import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Test
 import java.time.Duration
 
 class CallbackTest {
     @Test
-    @Ignore
+    @Disabled
     fun `Use Bot Callback API to receive group events`(): Unit = runBlocking<Unit>(Dispatchers.Default) {
         val server = embeddedServer(Netty, port = 8080) {
             routing {

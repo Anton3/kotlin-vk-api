@@ -9,13 +9,13 @@ import name.anton3.vkapi.methods.longpoll.events.MessageAdded
 import name.anton3.vkapi.utils.groupApi
 import name.anton3.vkapi.utils.longPollTimeout
 import name.anton3.vkapi.utils.userApi
-import org.junit.Ignore
-import org.junit.Test
+import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Test
 
 @ExperimentalCoroutinesApi
 class UserLongPollEventSourceTest {
     @Test
-    @Ignore
+    @Disabled
     fun `Use User LongPoll API to receive limited group events`(): Unit = runBlocking {
         val source = messageLongPollEvents(groupApi, wait = longPollTimeout)
 
@@ -30,7 +30,7 @@ class UserLongPollEventSourceTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     fun `Use User LongPoll API to receive user events`(): Unit = runBlocking {
         val source = messageLongPollEventsForUser(userApi, wait = longPollTimeout)
 

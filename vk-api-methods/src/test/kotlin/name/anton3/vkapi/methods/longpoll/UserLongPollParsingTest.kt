@@ -9,9 +9,9 @@ import name.anton3.vkapi.methods.longpoll.events.MessageEdited
 import name.anton3.vkapi.methods.longpoll.objects.FriendPlatform
 import name.anton3.vkapi.vktypes.VkDate
 import org.intellij.lang.annotations.Language
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 
 class UserLongPollParsingTest {
 

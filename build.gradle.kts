@@ -4,11 +4,11 @@ buildscript {
     extra["kotlin"] = "1.3.60"
     extra["ktor"] = "1.3.0-rc"
     extra["coroutines"] = "1.3.3"
-    extra["jackson"] = "2.10.0"
-    extra["guava"] = "28.0-jre"
-    extra["log4j"] = "2.12.0"
+    extra["jackson"] = "2.10.1"
+    extra["guava"] = "28.1-jre"
+    extra["log4j"] = "2.13.0"
     extra["log4jKotlin"] = "1.0.0"
-    extra["junit"] = "4.12"
+    extra["junit"] = "5.6.0-M1"
 
     repositories {
         mavenCentral()
@@ -68,7 +68,7 @@ subprojects {
         implementation("org.apache.logging.log4j:log4j-core:$log4j")
         implementation("org.apache.logging.log4j:log4j-api-kotlin:$log4jKotlin")
 
-        testImplementation("junit:junit:$junit")
+        testImplementation("org.junit.jupiter:junit-jupiter-api:$junit")
         testImplementation("org.apache.logging.log4j:log4j-slf4j-impl:$log4j")
     }
 

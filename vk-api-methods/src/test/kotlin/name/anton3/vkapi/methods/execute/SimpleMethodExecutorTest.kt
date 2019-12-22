@@ -4,7 +4,7 @@ import kotlinx.coroutines.runBlocking
 import name.anton3.vkapi.generated.groups.methods.GroupsGetById
 import name.anton3.vkapi.utils.groupApi
 import name.anton3.vkapi.utils.groupId
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class SimpleMethodExecutorTest {
     @Test

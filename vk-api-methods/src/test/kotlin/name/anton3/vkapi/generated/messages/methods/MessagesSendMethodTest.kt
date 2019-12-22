@@ -8,7 +8,7 @@ import name.anton3.vkapi.utils.groupId
 import name.anton3.vkapi.utils.peerId
 import name.anton3.vkapi.utils.userApi
 import name.anton3.vkapi.vktypes.VkDate
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import kotlin.random.Random
 
 class MessagesSendMethodTest {
@@ -44,7 +44,10 @@ class MessagesSendMethodTest {
     @Test
     fun smoke4(): Unit = runBlocking {
         val date = VkDate(123456)
+
+        @Suppress("BlockingMethodInNonBlockingContext")
         val serialized = userApi.objectMapper.writeValueAsString(date)!!
+
         val deserialized = userApi.objectMapper.readValue<VkDate>(serialized)
         println(date)
         println(serialized)
