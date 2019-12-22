@@ -29,6 +29,9 @@ class VkClientFactory(
     private val baseExecutor: MethodExecutor = JsonApiMethodExecutor(transportClient, objectMapper)
     private val closeableExecutors: MutableList<Closeable> = Collections.synchronizedList(mutableListOf())
 
+    val transportClient: TransportClient get() = baseExecutor.transportClient
+    val objectMapper: ObjectMapper get() = baseExecutor.objectMapper
+
     fun user(
         token: UserToken,
         flushDelayMillis: Long = 500L,

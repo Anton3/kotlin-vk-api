@@ -6,7 +6,7 @@ dependencies {
     val coroutines = rootProject.ext["coroutines"]
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines")
 
-    testImplementation(project(":vk-api-ktor"))
+    testImplementation(project(":vk-api-simple"))
 
     val ktor = rootProject.ext["ktor"]
     testImplementation("io.ktor:ktor-client-apache:$ktor")
