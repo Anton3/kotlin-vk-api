@@ -1,12 +1,21 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
+    extra["kotlin"] = "1.3.60"
+    extra["ktor"] = "1.3.0-rc"
+    extra["coroutines"] = "1.3.3"
+    extra["jackson"] = "2.10.0"
+    extra["guava"] = "28.0-jre"
+    extra["log4j"] = "2.12.0"
+    extra["log4jKotlin"] = "1.0.0"
+    extra["junit"] = "4.12"
+
     repositories {
         mavenCentral()
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.60")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${rootProject.extra["kotlin"]}")
     }
 }
 
@@ -48,15 +57,19 @@ subprojects {
     }
 
     dependencies {
-        val kotlinVersion = "1.3.60"
-        implementation(kotlin("stdlib-jdk8:$kotlinVersion"))
-        implementation(kotlin("reflect:$kotlinVersion"))
+        val kotlin = rootProject.ext["kotlin"]
+        val log4j = rootProject.ext["log4j"]
+        val junit = rootProject.ext["junit"]
+        val log4jKotlin = rootProject.ext["log4jKotlin"]
 
-        implementation("org.apache.logging.log4j:log4j-core:2.12.1")
-        implementation("org.apache.logging.log4j:log4j-api-kotlin:1.0.0")
+        implementation(kotlin("stdlib-jdk8:$kotlin"))
+        implementation(kotlin("reflect:$kotlin"))
 
-        testImplementation("junit:junit:4.12")
-        testImplementation("org.apache.logging.log4j:log4j-slf4j-impl:2.12.1")
+        implementation("org.apache.logging.log4j:log4j-core:$log4j")
+        implementation("org.apache.logging.log4j:log4j-api-kotlin:$log4jKotlin")
+
+        testImplementation("junit:junit:$junit")
+        testImplementation("org.apache.logging.log4j:log4j-slf4j-impl:$log4j")
     }
 
     val sourcesJar by tasks.creating(Jar::class) {

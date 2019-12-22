@@ -1,11 +1,12 @@
 dependencies {
-    val jacksonVersion = "2.10.0"
+    val guava = rootProject.ext["guava"]
+    val log4j = rootProject.ext["log4j"]
 
     api(project(":vk-api-base"))
 
     // For naming conversions
-    implementation("com.google.guava:guava:28.0-jre")
+    implementation("com.google.guava:guava:$guava")
 
     // Not testImplementation, because this package contains a complete program
-    implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.12.0")
+    implementation("org.apache.logging.log4j:log4j-slf4j-impl:$log4j")
 }

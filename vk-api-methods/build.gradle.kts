@@ -3,12 +3,12 @@ dependencies {
     api(project(":vk-api-core"))
 
     // For LongPoll
-    val coroutinesVersion = "1.3.3"
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    val coroutines = rootProject.ext["coroutines"]
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines")
 
     testImplementation(project(":vk-api-ktor"))
 
-    val ktorVersion = "1.3.0-rc"
-    testImplementation("io.ktor:ktor-client-apache:$ktorVersion")
-    testImplementation("io.ktor:ktor-server-netty:$ktorVersion")
+    val ktor = rootProject.ext["ktor"]
+    testImplementation("io.ktor:ktor-client-apache:$ktor")
+    testImplementation("io.ktor:ktor-server-netty:$ktor")
 }
