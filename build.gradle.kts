@@ -9,6 +9,8 @@ buildscript {
     extra["log4j"] = "2.13.0"
     extra["log4jKotlin"] = "1.0.0"
     extra["junit"] = "5.6.0-M1"
+    extra["httpClientAsync"] = "4.1.4"
+    extra["httpClientMime"] = "4.5.6"
 
     repositories {
         mavenCentral()

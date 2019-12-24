@@ -26,42 +26,29 @@ dependencies {
 
 ## Быстрый старт
 
-Библиотека опирается на `HttpClient` из [Ktor](https://github.com/ktorio/ktor).
-Для начала оберните его в один на всё приложение `VkClientFactory`:
+Для начала, создайте один на всё приложение `VkClientFactory`:
 
 ```kotlin
-import io.ktor.client.HttpClient
-import name.anton3.vkapi.client.VkClientFactory
-import name.anton3.vkapi.client.ktorClientFactory
-
-val httpClient: HttpClient = TODO()
-val clientFactory: VkClientFactory = ktorClientFactory(httpClient)
+val clientFactory: VkClientFactory = apacheClientFactory()
 ```
 
-Создайте токен нужного типа и создайте ваш клиент ВК с его помощью:
+Создайте клиент ВК нужного типа:
 
 ```kotlin
-import name.anton3.vkapi.client.GroupClient
-import name.anton3.vkapi.tokens.GroupToken
+val client: GroupClient = clientFactory.group(GroupToken(accessToken))
+```
 
-val api: GroupClient = clientFactory.group(GroupToken(accessToken))
+Используйте этот клиент для выполнения всех запросов, подпадающих под один и тот
+же лимит запросов ВК:
+
+```kotlin
+val wallpost: WallpostFull = client(WallGet(domain = "departureMsk"))
 ```
 
 > **Замечание.** Клиент учитывает ограничения ВК на запросы к API и объединяет несколько запросов
 в один через Execute, когда это возможно. Тип клиента зависит от прав
 на выполнение методов. Выполнение метода на клиенте с несовместимым токеном
 порождает ошибку на этапе компиляции.
-
-Используйте этот клиент для выполнения всех запросов, подпадающих под один и тот
-же лимит запросов ВК:
-
-```kotlin
-import name.anton3.vkapi.generated.wall.methods.WallGet
-import name.anton3.vkapi.generated.wall.objects.WallpostFull
-
-val response: WallpostFull = api(WallGet(domain = "departureMsk"))
-println(response.text)
-```
 
 ### Обработка ошибок
 
@@ -91,10 +78,17 @@ while (true) {
 воспользоваться `swallow`:
 
 ```kotlin
-import name.anton3.vkapi.client.swallow
+val response: WallpostFull? = swallow { client(WallGet(domain = "departureMsk")) }
+println(response)
+```
 
-val response: WallpostFull? = swallow { api(WallGet(domain = "departureMsk")) }
-println(response?.text)
+Можно запросто написать расширение для `VkClient<R>`, обрабатывающее ошибки
+нужным вам образом:
+
+```kotlin
+suspend inline fun <R : MethodRequirement, T : Any> VkClient<R>.call(
+    method: VkMethod<T, R>
+): T? = swallow { this(method) }
 ```
 
 ### LongPoll и Callback
@@ -109,11 +103,20 @@ println(response?.text)
 
 ```kotlin
 // build.gradle.kts
-implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.12.0")
+implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.13.0")
 ```
 
 В вашей папке `resources` должен быть файл `log4j2.xml`,
 [вот пример](https://github.com/Anton3/kotlin-vk-api/blob/master/vk-api-methods/src/test/resources/log4j2.xml).
+
+### Кастомные запросы
+
+```kotlin
+val method = VkMethod<MyResponse, MyRequirement>("wall.get", jacksonTypeRef())
+method.unsafeParam("my_first_param", "foo")
+method.unsafeParam("my_second_param", "bar")
+val response: MyResponse = client(method)
+```
 
 ## Структура библиотеки
 Библиотека разбита на следующие модули:
@@ -126,7 +129,8 @@ implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.12.0")
 некоторых сгенерированных классов, а также предоставляет удобный интерфейс для
 таких методов, как Callback API, LongPoll API, Upload
 - `vk-api-ktor` — привязка к [Ktor](https://github.com/ktorio/ktor)
-- `vk-api-simple` — включает все модули и предоставляет `ktorClientFactory`
+- `vk-api-apache` — привязка к Apache `AsyncHttpClient`
+- `vk-api-simple` — включает все модули и предоставляет `apacheClientFactory`
 
 Т.к. оригинальная схема написана неряшливо, каких-то планов по ее поддержке
 не озвучено, то в проекте она хранится в следующем виде:
@@ -159,7 +163,9 @@ implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.12.0")
 - PR приниимается или отклоняется. Если отклоняется, то вы в любом случае можете
 создать Release в своём форке и пользоваться своими изменениями дальше
 
-#### Доработки основного кода библиотеки (`vk-api-core`)
+#### Доработки основного кода библиотеки
+
+`vk-api-base`, `vk-api-core`, `executors`
 
 #### Дополнения и исправления в JSON-схеме
 Дополнения принимаются или в виде новых небольших патчей для JSON-схемы, или
