@@ -3,8 +3,8 @@ package name.anton3.vkapi.executors
 import com.fasterxml.jackson.databind.ObjectMapper
 import name.anton3.executors.core.DynamicRequest
 import name.anton3.vkapi.core.MethodExecutor
-import name.anton3.vkapi.core.RequestContent
 import name.anton3.vkapi.core.TransportClient
+import name.anton3.vkapi.core.TransportRequest
 import name.anton3.vkapi.core.post
 import name.anton3.vkapi.json.core.deserializeResponse
 import name.anton3.vkapi.json.core.serializeMethod
@@ -21,7 +21,7 @@ data class JsonApiMethodExecutor(
         val params = objectMapper.serializeMethod(request)
         val response = transportClient.post(
             url = URL_PREFIX + request.apiMethodName,
-            content = RequestContent.Form(params)
+            parts = params.entries.map { TransportRequest.Part.Text(it.key, it.value) }
         )
         return objectMapper.deserializeResponse(request, response.data)
     }
