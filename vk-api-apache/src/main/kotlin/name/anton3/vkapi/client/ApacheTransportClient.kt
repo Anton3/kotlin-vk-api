@@ -14,6 +14,7 @@ import org.apache.http.concurrent.FutureCallback
 import org.apache.http.entity.ContentType
 import org.apache.http.entity.StringEntity
 import org.apache.http.entity.mime.MultipartEntityBuilder
+import org.apache.http.impl.nio.client.CloseableHttpAsyncClient
 import org.apache.http.impl.nio.client.HttpAsyncClientBuilder
 import org.apache.http.nio.client.HttpAsyncClient
 import kotlin.coroutines.resume
@@ -39,7 +40,7 @@ suspend fun HttpAsyncClient.execute(request: HttpUriRequest): HttpResponse {
     }
 }
 
-class ApacheTransportClient(private val client: HttpAsyncClient = defaultHttpAsyncClient()) : TransportClient {
+class ApacheTransportClient(private val client: HttpAsyncClient) : TransportClient {
 
     override suspend fun invoke(request: TransportRequest): TransportResponse {
         val apacheRequest = convertRequest(request)
@@ -103,19 +104,18 @@ class ApacheTransportClient(private val client: HttpAsyncClient = defaultHttpAsy
             .mapValues { it.value.joinToString(", ", transform = Header::getValue) }
         return TransportResponse(statusCode, body, headers)
     }
+}
 
-    companion object {
-        fun defaultHttpAsyncClient(): HttpAsyncClient {
-            val requestConfig = RequestConfig.custom()
-                .setConnectTimeout(10000)
-                .setSocketTimeout(10000)
-                .setConnectionRequestTimeout(10000)
-                .build()
-            return HttpAsyncClientBuilder.create()
-                .setMaxConnTotal(1000)
-                .setMaxConnPerRoute(1000)
-                .setDefaultRequestConfig(requestConfig)
-                .build()
-        }
-    }
+fun defaultHttpAsyncClient(): CloseableHttpAsyncClient {
+    val requestConfig = RequestConfig.custom()
+        .setConnectTimeout(10000)
+        .setSocketTimeout(10000)
+        .setConnectionRequestTimeout(10000)
+        .build()
+    return HttpAsyncClientBuilder.create()
+        .setMaxConnTotal(1000)
+        .setMaxConnPerRoute(1000)
+        .setDefaultRequestConfig(requestConfig)
+        .build()
+        .apply { start() }
 }

@@ -29,6 +29,7 @@ dependencies {
 Для начала, создайте один на всё приложение `VkClientFactory`:
 
 ```kotlin
+val apacheClient: CloseableHttpAsyncClient = defaultHttpAsyncClient()
 val clientFactory: VkClientFactory = apacheClientFactory()
 ```
 
@@ -43,6 +44,13 @@ val client: GroupClient = clientFactory.group(GroupToken(accessToken))
 
 ```kotlin
 val wallpost: WallpostFull = client(WallGet(domain = "departureMsk"))
+```
+
+В конце программы стоит всё закрыть:
+
+```kotlin
+clientFactory.closeAndJoin()
+apacheClient.close()
 ```
 
 > **Замечание.** Клиент учитывает ограничения ВК на запросы к API и объединяет несколько запросов

@@ -19,32 +19,18 @@ class RetryingTransportClient(
         lateinit var response: TransportResponse
 
         repeat(retryAttemptsInvalidStatusCount) {
-            response = callWithNetworkRetries(request)
+            response = callWithLogging(request)
             if (!isInvalidGatewayStatus(response.status)) return response
         }
 
         return response
     }
 
-    private suspend fun callWithNetworkRetries(request: TransportRequest): TransportResponse {
-        lateinit var exception: IOException
-
-        repeat(retryAttemptsNetworkErrorCount) {
-            try {
-                return callWithLogging(request)
-            } catch (e: IOException) {
-                exception = e
-            }
-        }
-
-        throw exception
-    }
-
     private suspend fun callWithLogging(request: TransportRequest): TransportResponse {
         val startTime = Instant.now()
 
         try {
-            val vkResponse = base(request)
+            val vkResponse = callWithNetworkRetries(request)
             val resultTime = Duration.between(startTime, Instant.now())
             logRequest(request, vkResponse, resultTime)
             return vkResponse
@@ -53,6 +39,20 @@ class RetryingTransportClient(
             logRequest(request, null, resultTime)
             throw e
         }
+    }
+
+    private suspend fun callWithNetworkRetries(request: TransportRequest): TransportResponse {
+        lateinit var exception: IOException
+
+        repeat(retryAttemptsNetworkErrorCount) {
+            try {
+                return base(request)
+            } catch (e: IOException) {
+                exception = e
+            }
+        }
+
+        throw exception
     }
 
     private fun isInvalidGatewayStatus(status: Int): Boolean {
