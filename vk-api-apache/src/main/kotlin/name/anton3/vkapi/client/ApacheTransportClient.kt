@@ -64,6 +64,8 @@ class ApacheTransportClient(private val client: HttpAsyncClient = defaultHttpAsy
         apacheRequest.protocolVersion = ProtocolVersion("HTTP", 1, 1)
         apacheRequest.setHeader("Accept-Charset", "utf-8")
 
+        request.headers.forEach { apacheRequest.addHeader(it.key, it.value) }
+
         return apacheRequest
     }
 
