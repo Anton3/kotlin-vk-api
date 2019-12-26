@@ -6,7 +6,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.withContext
 import name.anton3.vkapi.core.MethodExecutor
-import name.anton3.vkapi.core.TransportClient
+import name.anton3.vkapi.transport.TransportClient
 import name.anton3.vkapi.executors.BatchMethodExecutor
 import name.anton3.vkapi.executors.JsonApiMethodExecutor
 import name.anton3.vkapi.executors.ThrottledMethodExecutor

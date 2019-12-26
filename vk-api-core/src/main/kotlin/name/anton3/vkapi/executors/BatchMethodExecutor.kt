@@ -10,6 +10,7 @@ import name.anton3.executors.util.batchAwareRequestStorage
 import name.anton3.vkapi.core.*
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.methods.execute.batch
+import name.anton3.vkapi.transport.TransportClient
 import name.anton3.vkapi.vktypes.VkApiException
 import name.anton3.vkapi.vktypes.VkResponse
 import java.io.Closeable

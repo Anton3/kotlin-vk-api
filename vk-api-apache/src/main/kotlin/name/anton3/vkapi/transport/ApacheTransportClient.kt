@@ -1,9 +1,6 @@
-package name.anton3.vkapi.client
+package name.anton3.vkapi.transport
 
 import kotlinx.coroutines.*
-import name.anton3.vkapi.core.TransportClient
-import name.anton3.vkapi.core.TransportRequest
-import name.anton3.vkapi.core.TransportResponse
 import org.apache.http.Header
 import org.apache.http.HttpEntity
 import org.apache.http.HttpResponse

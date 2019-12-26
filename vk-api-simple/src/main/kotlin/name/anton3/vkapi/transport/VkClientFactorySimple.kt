@@ -1,6 +1,6 @@
-package name.anton3.vkapi.client
+package name.anton3.vkapi.transport
 
-import name.anton3.vkapi.core.RetryingTransportClient
+import name.anton3.vkapi.client.VkClientFactory
 import name.anton3.vkapi.json.core.vkObjectMapper
 import org.apache.http.nio.client.HttpAsyncClient
 

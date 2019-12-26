@@ -1,4 +1,4 @@
-package name.anton3.vkapi.core
+package name.anton3.vkapi.transport
 
 import org.apache.logging.log4j.kotlin.Logging
 import java.io.IOException

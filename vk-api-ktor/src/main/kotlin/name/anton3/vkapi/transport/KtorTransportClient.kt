@@ -1,4 +1,4 @@
-package name.anton3.vkapi.client
+package name.anton3.vkapi.transport
 
 import io.ktor.client.HttpClient
 import io.ktor.client.request.HttpRequestBuilder
@@ -13,9 +13,6 @@ import io.ktor.client.utils.EmptyContent
 import io.ktor.http.*
 import io.ktor.http.content.OutgoingContent
 import io.ktor.http.content.TextContent
-import name.anton3.vkapi.core.TransportClient
-import name.anton3.vkapi.core.TransportRequest
-import name.anton3.vkapi.core.TransportResponse
 
 class KtorTransportClient(private val client: HttpClient) : TransportClient {
 

@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
-import name.anton3.vkapi.core.TransportClient
-import name.anton3.vkapi.core.get
+import name.anton3.vkapi.transport.TransportClient
+import name.anton3.vkapi.transport.get
 import name.anton3.vkapi.methods.longpoll.objects.LongPollFailure
 import org.apache.logging.log4j.kotlin.Logging
 import java.io.IOException

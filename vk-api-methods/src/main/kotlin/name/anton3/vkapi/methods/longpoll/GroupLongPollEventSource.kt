@@ -4,7 +4,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import name.anton3.vkapi.client.UserGroupClient
-import name.anton3.vkapi.core.TransportClient
+import name.anton3.vkapi.transport.TransportClient
 import name.anton3.vkapi.generated.groups.methods.GroupsGetLongPollServer
 import name.anton3.vkapi.generated.groups.objects.LongPollServer
 import name.anton3.vkapi.methods.callback.CallbackEvent

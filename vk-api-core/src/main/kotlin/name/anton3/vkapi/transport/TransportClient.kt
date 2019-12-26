@@ -1,6 +1,6 @@
 @file:Suppress("ArrayInDataClass")
 
-package name.anton3.vkapi.core
+package name.anton3.vkapi.transport
 
 // Must ensure UTF-8 everywhere
 // Must support at least GET and POST methods
@@ -45,18 +45,3 @@ data class TransportResponse(
     val data: ByteArray,
     val headers: Map<String, String>
 )
-
-
-suspend inline fun TransportClient.get(url: String): TransportResponse =
-    invoke(TransportRequest(url, "GET"))
-
-suspend inline fun TransportClient.post(url: String, parts: List<TransportRequest.Part>): TransportResponse =
-    invoke(TransportRequest(url, "POST", TransportRequest.Body.Form(parts)))
-
-suspend inline fun TransportClient.post(
-    url: String,
-    key: String,
-    fileName: String,
-    data: ByteArray
-): TransportResponse =
-    post(url, listOf(TransportRequest.Part.File(key, fileName, data)))

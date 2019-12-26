@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import name.anton3.vkapi.client.GroupClient
 import name.anton3.vkapi.client.UserClient
 import name.anton3.vkapi.client.UserGroupClient
-import name.anton3.vkapi.core.TransportClient
+import name.anton3.vkapi.transport.TransportClient
 import name.anton3.vkapi.generated.messages.methods.MessagesGetLongPollServer
 import name.anton3.vkapi.generated.messages.objects.LongpollParams
 import name.anton3.vkapi.methods.longpoll.events.LongPollEvent

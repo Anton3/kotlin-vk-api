@@ -3,7 +3,7 @@ package name.anton3.vkapi.methods.upload
 import com.fasterxml.jackson.module.kotlin.readValue
 import name.anton3.vkapi.client.UserClient
 import name.anton3.vkapi.client.UserGroupClient
-import name.anton3.vkapi.core.post
+import name.anton3.vkapi.transport.post
 import name.anton3.vkapi.generated.docs.methods.DocsGetMessagesUploadServer
 import name.anton3.vkapi.generated.docs.methods.DocsSave
 import name.anton3.vkapi.generated.docs.objects.Doc
@@ -20,7 +20,7 @@ data class UploadPhotoResponse(val server: Int, val hash: String, val photo: Str
 
 suspend fun UserGroupClient.uploadMessagePhoto(peerId: Int, byteArray: ByteArray): Photo {
     val uploadUrl = this(PhotosGetMessagesUploadServer(peerId)).uploadUrl
-    val response = transportClient.post(uploadUrl, "photo", "someName.jpg", byteArray)
+    val response = transportClient.post(uploadUrl) { file("photo", "someName.jpg", byteArray) }
 
     val uploadPhotoResponse: UploadPhotoResponse =
         objectMapper.readValue(response.data.toString(Charset.forName("UTF-8")))
@@ -44,7 +44,7 @@ suspend fun UserGroupClient.uploadMessageDocument(
 ): Doc {
     val uploadUrl = this(DocsGetMessagesUploadServer(GetMessagesUploadServerType.DOC, peerId)).uploadUrl
 
-    val response = transportClient.post(uploadUrl, "file", fileName, byteArray)
+    val response = transportClient.post(uploadUrl) { file("file", fileName, byteArray) }
     val uploadDocumentResponse: UploadDocumentResponse =
         objectMapper.readValue(response.data.toString(Charset.forName("UTF-8")))
 
@@ -66,7 +66,7 @@ suspend fun UserClient.uploadChatPhoto(
 ): SetChatPhotoResponse {
     val uploadUrl = this(PhotosGetChatUploadServer(chatId = chatId)).uploadUrl
 
-    val response = transportClient.post(uploadUrl, "file", fileName, byteArray)
+    val response = transportClient.post(uploadUrl) { file("file", fileName, byteArray) }
     val uploadPhotoResponse: UploadChatPhotoResponse =
         objectMapper.readValue(response.data.toString(Charset.forName("UTF-8")))
 

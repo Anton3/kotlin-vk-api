@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import kotlinx.coroutines.CancellationException
 import name.anton3.executors.core.DynamicRequest
 import name.anton3.vkapi.core.MethodExecutor
-import name.anton3.vkapi.core.TransportClient
+import name.anton3.vkapi.transport.TransportClient
 import name.anton3.vkapi.core.executeTyped
 import name.anton3.vkapi.core.extractSimpleResult
 import name.anton3.vkapi.method.*

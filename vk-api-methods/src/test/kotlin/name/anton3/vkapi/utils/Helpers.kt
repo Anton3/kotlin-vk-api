@@ -3,8 +3,8 @@ package name.anton3.vkapi.utils
 import com.fasterxml.jackson.databind.ObjectMapper
 import name.anton3.vkapi.client.VkClient
 import name.anton3.vkapi.client.VkClientFactory
-import name.anton3.vkapi.client.apacheClientFactory
-import name.anton3.vkapi.client.defaultHttpAsyncClient
+import name.anton3.vkapi.transport.apacheClientFactory
+import name.anton3.vkapi.transport.defaultHttpAsyncClient
 import name.anton3.vkapi.method.GroupMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.tokens.GroupToken
