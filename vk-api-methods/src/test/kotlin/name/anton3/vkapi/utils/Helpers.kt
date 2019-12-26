@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import name.anton3.vkapi.client.VkClient
 import name.anton3.vkapi.client.VkClientFactory
 import name.anton3.vkapi.client.apacheClientFactory
+import name.anton3.vkapi.client.defaultHttpAsyncClient
 import name.anton3.vkapi.method.GroupMethod
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.tokens.GroupToken
@@ -44,7 +45,7 @@ val groupId: Int = readConfigParam("groupId").toInt()
 val peerId: Int = readConfigParam("peerId").toInt()
 val callbackConfirmationCode: String = readConfigParam("callbackConfirmationCode")
 
-private val clientFactory: VkClientFactory = apacheClientFactory()
+private val clientFactory: VkClientFactory = apacheClientFactory(defaultHttpAsyncClient())  // won't close
 val groupApi: VkClient<GroupMethod> = clientFactory.group(GroupToken(groupAccessToken))
 val userApi: VkClient<UserMethod> = clientFactory.user(UserToken(userAccessToken))
 val objectMapper: ObjectMapper = clientFactory.objectMapper
