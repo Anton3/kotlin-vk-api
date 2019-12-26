@@ -49,26 +49,14 @@ class ApacheTransportClient(private val client: HttpAsyncClient) : TransportClie
         return convertResponse(apacheResponse)
     }
 
-    private fun convertRequest(request: TransportRequest): HttpRequestBase {
-        val apacheRequest: HttpRequestBase = when (request.method) {
-            "GET" -> HttpGet(request.url)
-            "POST" -> HttpPost(request.url)
-            "PATCH" -> HttpPatch(request.url)
-            "PUT" -> HttpPut(request.url)
-            "DELETE" -> HttpDelete(request.url)
-            "HEAD" -> HttpHead(request.url)
-            "OPTIONS" -> HttpOptions(request.url)
-            "TRACE" -> HttpOptions(request.url)
-            else -> throw UnsupportedOperationException("Unsupported method: ${request.method}")
-        }
-
-        (apacheRequest as? HttpEntityEnclosingRequestBase)?.entity = convertBody(request.body)
-        apacheRequest.protocolVersion = ProtocolVersion("HTTP", 1, 1)
-        apacheRequest.setHeader("Accept-Charset", "utf-8")
-
-        request.headers.forEach { apacheRequest.addHeader(it.key, it.value) }
-
-        return apacheRequest
+    private fun convertRequest(request: TransportRequest): HttpUriRequest {
+        val builder = RequestBuilder.create(request.method)
+        builder.version = ProtocolVersion("HTTP", 1, 1)
+        builder.charset = Charsets.UTF_8
+        builder.setHeader("Accept-Charset", "utf-8")
+        request.headers.forEach { builder.setHeader(it.key, it.value) }
+        builder.entity = convertBody(request.body)
+        return builder.build()
     }
 
     private fun convertBody(body: TransportRequest.Body): HttpEntity? = when (body) {
