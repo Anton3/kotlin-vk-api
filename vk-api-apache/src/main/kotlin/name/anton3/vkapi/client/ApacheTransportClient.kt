@@ -9,7 +9,8 @@ import org.apache.http.HttpEntity
 import org.apache.http.HttpResponse
 import org.apache.http.ProtocolVersion
 import org.apache.http.client.config.RequestConfig
-import org.apache.http.client.methods.*
+import org.apache.http.client.methods.HttpUriRequest
+import org.apache.http.client.methods.RequestBuilder
 import org.apache.http.concurrent.FutureCallback
 import org.apache.http.entity.ContentType
 import org.apache.http.entity.StringEntity
@@ -116,6 +117,7 @@ fun defaultHttpAsyncClient(): CloseableHttpAsyncClient {
         .setMaxConnTotal(1000)
         .setMaxConnPerRoute(1000)
         .setDefaultRequestConfig(requestConfig)
+        .disableCookieManagement()
         .build()
         .apply { start() }
 }
