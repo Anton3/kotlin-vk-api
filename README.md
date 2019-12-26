@@ -63,7 +63,7 @@ apacheClient.close()
 При выполнении могут выбрасываться различные исключения — наследники
 `IOException`:
 
-- Ошибки VK API: `VkAPiException`
+- Ошибки VK API: `VkApiException`
 - Ошибки соединения: `IOException`
 - Ошибки парсинга JSON: `JsonProcessingException`
 - Другие ошибки при запросе и парсинге ответа: `IOException`
