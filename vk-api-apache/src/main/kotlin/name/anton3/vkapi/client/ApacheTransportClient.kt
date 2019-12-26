@@ -51,6 +51,7 @@ class ApacheTransportClient(private val client: HttpAsyncClient) : TransportClie
 
     private fun convertRequest(request: TransportRequest): HttpUriRequest {
         val builder = RequestBuilder.create(request.method)
+        builder.setUri(request.url)
         builder.version = ProtocolVersion("HTTP", 1, 1)
         builder.charset = Charsets.UTF_8
         builder.setHeader("Accept-Charset", "utf-8")
