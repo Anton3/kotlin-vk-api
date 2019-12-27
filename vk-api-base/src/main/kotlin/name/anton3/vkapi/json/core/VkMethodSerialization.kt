@@ -16,7 +16,11 @@ fun ObjectMapper.serializeMethod(method: VkMethod<*, *>): Map<String, String> {
         .associate { it.key to propertyValueToParameter(it.value, this) }
 }
 
-fun <T> ObjectMapper.deserializeResponse(method: VkMethod<T, *>, response: ByteArray): VkResponse<T> {
+fun <T> ObjectMapper.deserializeResponse(method: VkMethod<T, *>, utf8Response: ByteArray): VkResponse<T> {
+    return reader(ForwardableAttributes(METHOD_ATTRIBUTE, method)).forType(responseType(method)).readValue(utf8Response)
+}
+
+fun <T> ObjectMapper.deserializeResponse(method: VkMethod<T, *>, response: String): VkResponse<T> {
     return reader(ForwardableAttributes(METHOD_ATTRIBUTE, method)).forType(responseType(method)).readValue(response)
 }
 

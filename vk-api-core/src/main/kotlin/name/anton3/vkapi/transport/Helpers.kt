@@ -1,5 +1,7 @@
 package name.anton3.vkapi.transport
 
+import java.nio.charset.Charset
+
 class TransportFormBuilder {
     private val parts: MutableList<TransportRequest.Part> = mutableListOf()
 
@@ -28,3 +30,16 @@ suspend inline fun TransportClient.post(
     body: TransportFormBuilder.() -> Unit
 ): TransportResponse =
     invoke(TransportRequest(url, "POST", TransportFormBuilder().apply(body).build(), headers))
+
+
+fun TransportResponse.decodeToString(): String {
+    val charsetString = findHeader(headers, "Content-Type")?.let { charsetRegex.find(it) }?.value
+    val charset: Charset = if (charsetString != null && Charset.isSupported(charsetString)) {
+        Charset.forName(charsetString)
+    } else {
+        Charsets.UTF_8
+    }
+    return data.toString(charset)
+}
+
+private val charsetRegex = Regex("""(?<=charset=)[a-zA-Z][a-zA-Z0-9\-+.:_]*""")

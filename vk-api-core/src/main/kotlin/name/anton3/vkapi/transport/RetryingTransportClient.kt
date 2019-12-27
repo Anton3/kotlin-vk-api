@@ -80,15 +80,14 @@ class RetryingTransportClient(
             if (response == null) {
                 requestPart
             } else {
-                val contentType = response.headers.entries.find {
-                    it.key.equals("Content-Type", ignoreCase = true)
-                }?.value?.substringBefore(';')?.trim()
+                val contentType = findHeader(response.headers, "Content-Type")
+                    ?.substringBefore(';')?.trim()
 
                 val responseString = if (
                     contentType?.substringBefore('/') == "text" ||
                     contentType == "application/json"
                 ) {
-                    response.data.toString(Charsets.UTF_8).take(10000)
+                    response.decodeToString().take(10000)
                 } else {
                     "<binary data>"
                 }
@@ -111,4 +110,8 @@ class RetryingTransportClient(
 
 private fun formatHeaders(headers: Map<String, String>): String {
     return headers.entries.joinToString { "${it.key}: \"${quote(it.value)}\"" }
+}
+
+internal fun findHeader(headers: Map<String, String>, key: String): String? {
+    return headers.entries.find { it.key.equals(key, ignoreCase = true) }?.value
 }

@@ -7,12 +7,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
-import name.anton3.vkapi.transport.TransportClient
-import name.anton3.vkapi.transport.get
 import name.anton3.vkapi.methods.longpoll.objects.LongPollFailure
+import name.anton3.vkapi.transport.TransportClient
+import name.anton3.vkapi.transport.decodeToString
+import name.anton3.vkapi.transport.get
 import org.apache.logging.log4j.kotlin.Logging
 import java.io.IOException
-import java.nio.charset.Charset
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.coroutineContext
@@ -38,7 +38,7 @@ abstract class AbstractLongPollEventSource<EventType, IteratorType>(
             transportClient.get(iteratorToUrl(iterator))
         }
 
-        val vkJson = vkResponse.data.toString(Charset.forName("UTF-8"))
+        val vkJson = vkResponse.decodeToString()
         logger.debug("VK long poll responds with $vkJson")
 
         @Suppress("BlockingMethodInNonBlockingContext")
