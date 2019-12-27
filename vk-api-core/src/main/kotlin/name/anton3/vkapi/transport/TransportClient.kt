@@ -2,6 +2,8 @@
 
 package name.anton3.vkapi.transport
 
+import com.fasterxml.jackson.core.io.JsonStringEncoder
+
 // Must ensure UTF-8 everywhere
 // Must support at least GET and POST methods
 interface TransportClient {
@@ -19,24 +21,27 @@ data class TransportRequest(
     val headers: Map<String, String> = emptyMap()
 ) {
     sealed class Body {
-        object Empty : Body()
+        object Empty : Body() {
+            override fun toString(): String = "Empty"
+        }
 
-        data class Text(val data: String, val contentType: String) : Body()
+        data class Text(val data: String, val contentType: String) : Body() {
+            override fun toString(): String = "Text($contentType, \"${quote(data)}\")"
+        }
 
-        data class Form(val parts: List<Part>) : Body()
+        data class Form(val parts: List<Part>) : Body() {
+            override fun toString(): String = "Form(${parts.joinToString()})"
+        }
     }
 
     sealed class Part {
-        data class Text(
-            val key: String,
-            val value: String
-        ) : Part()
+        data class Text(val key: String, val value: String) : Part() {
+            override fun toString(): String = "\"${quote(key)}\": \"${quote(value)}\""
+        }
 
-        data class File(
-            val key: String,
-            val fileName: String,
-            val data: ByteArray
-        ) : Part()
+        data class File(val key: String, val fileName: String, val data: ByteArray) : Part() {
+            override fun toString(): String = "\"${quote(key)}\": File(\"${quote(fileName)}\")"
+        }
     }
 }
 
@@ -45,3 +50,9 @@ data class TransportResponse(
     val data: ByteArray,
     val headers: Map<String, String>
 )
+
+
+internal fun quote(str: String): String {
+    val result: CharArray = JsonStringEncoder.getInstance().quoteAsString(str)
+    return String(result, 0, minOf(result.size, 10000))
+}

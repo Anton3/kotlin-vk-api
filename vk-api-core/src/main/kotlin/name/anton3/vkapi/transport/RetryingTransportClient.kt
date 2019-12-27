@@ -62,7 +62,7 @@ class RetryingTransportClient(
     private fun logRequest(
         request: TransportRequest,
         response: TransportResponse?,
-        resultTime: Duration?
+        resultTime: Duration
     ) {
         if (response == null) {
             logger.warn { "Network troubles: ${request.method} ${request.url}" }
@@ -71,15 +71,44 @@ class RetryingTransportClient(
         }
 
         logger.debug {
-            """
+            val requestPart = """
             Request details
+              Headers: ${formatHeaders(request.headers)}
               Body: ${request.body}
-              Response time: ${resultTime ?: "-"}
-              Status: ${response?.status ?: "-"}
-              Response: ${response?.data?.toString(Charsets.UTF_8)?.take(10000) ?: "-"}
             """.trimIndent()
+
+            if (response == null) {
+                requestPart
+            } else {
+                val contentType = response.headers.entries.find {
+                    it.key.equals("Content-Type", ignoreCase = true)
+                }?.value?.substringBefore(';')?.trim()
+
+                val responseString = if (
+                    contentType?.substringBefore('/') == "text" ||
+                    contentType == "application/json"
+                ) {
+                    response.data.toString(Charsets.UTF_8).take(10000)
+                } else {
+                    "<binary data>"
+                }
+
+                val responsePart = """
+                Response details:
+                  Latency: $resultTime
+                  Status: ${response.status}
+                  Headers: ${formatHeaders(response.headers)}
+                  Body: $responseString
+                """.trimIndent()
+
+                "$requestPart\n$responsePart"
+            }
         }
     }
 
     private companion object : Logging
+}
+
+private fun formatHeaders(headers: Map<String, String>): String {
+    return headers.entries.joinToString { "${it.key}: \"${quote(it.value)}\"" }
 }
