@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode
 import com.fasterxml.jackson.databind.node.ValueNode
 import name.anton3.vkapi.json.attributes.ForwardableAttributes
 import name.anton3.vkapi.json.attributes.reader
+import name.anton3.vkapi.json.attributes.writer
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkResponse
 
@@ -16,12 +17,16 @@ fun ObjectMapper.serializeMethod(method: VkMethod<*, *>): Map<String, String> {
         .associate { it.key to propertyValueToParameter(it.value, this) }
 }
 
-fun <T> ObjectMapper.deserializeResponse(method: VkMethod<T, *>, utf8Response: ByteArray): VkResponse<T> {
-    return reader(ForwardableAttributes(METHOD_ATTRIBUTE, method)).forType(responseType(method)).readValue(utf8Response)
+fun <T> ObjectMapper.deserializeResponse(method: VkMethod<T, *>, response: String): VkResponse<T> {
+    return reader(ForwardableAttributes(METHOD_ATTRIBUTE, method))
+        .forType(responseType(method))
+        .readValue(response)
 }
 
-fun <T> ObjectMapper.deserializeResponse(method: VkMethod<T, *>, response: String): VkResponse<T> {
-    return reader(ForwardableAttributes(METHOD_ATTRIBUTE, method)).forType(responseType(method)).readValue(response)
+fun ObjectMapper.serializeResponse(method: VkMethod<*, *>, response: VkResponse<*>): String {
+    return writer(ForwardableAttributes(METHOD_ATTRIBUTE, method))
+        .forType(responseType(method))
+        .writeValueAsString(response)
 }
 
 private fun ObjectMapper.responseType(method: VkMethod<*, *>): JavaType {
