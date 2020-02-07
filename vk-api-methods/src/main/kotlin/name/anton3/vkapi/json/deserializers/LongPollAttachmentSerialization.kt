@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
+import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializerProvider
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
@@ -27,27 +28,27 @@ internal class AttachmentsDeserializer : StdDeserializer<List<Attachment>>(stron
 
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext): List<Attachment> {
         val objectMapper = p.codec as ObjectMapper
-
         val node = p.readNode<ObjectNode>()
 
-        return node.fields()
-            .asSequence()
-            .filter { it.key.startsWith("attach") }
-            .groupBy { it.key.substring(6, 7).toInt() }
-            .values
-            .map { properties ->
-                val strippedProperties = properties.associate { (key, value) ->
-                    val strippedKey = if (key.length == 7) {
-                        "id"
-                    } else {
-                        key.substring(8)
-                    }
+        val properties = mutableMapOf<Int, MutableMap<String, JsonNode>>()
 
-                    strippedKey to value
-                }
+        for ((k, v) in node.fields()) {
+            val (id, key) = parseAttachmentKey(k) ?: continue
+            properties.getOrPut(id) { mutableMapOf() }[key] = v
+        }
 
-                objectMapper.convertValue(strippedProperties, Attachment::class.java)
-            }
+        return properties.toList().sortedBy { it.first }
+            .map { objectMapper.convertValue(it.second, Attachment::class.java) }
+    }
+
+    private fun parseAttachmentKey(key: String): Pair<Int, String>? {
+        if (!key.startsWith("attach")) return null
+        val id = key.elementAtOrNull(6)
+            ?.let { Character.digit(it, 10) }
+            ?.takeIf { it != -1 } ?: return null
+        if (key.length == 7) return id to "id"
+        if (key[7] != '_') return null
+        return id to key.substring(8)
     }
 }
 

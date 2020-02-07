@@ -35,7 +35,28 @@ class UserLongPollParsingTest {
             """[5,3255428,532481,2000000017,1565189959,"В оригинале там шёл яд 🌚",{"emoji":"1","title":"","from":"151629538"},{}]""",
             """[5,3252946,532481,2000000269,1565128950,"https:\/\/youtu.be\/p-nI2vNC-Ag",{"from":"171297502"},{"attach1_type":"video","attach1":"171297502_456239816"}]""",
             """[4,3253315,532481,2000000030,1565152987,"a",{},{},0]""",
-            """[4,3253315,532481,2000000030,1565152987,"b",{},{},42]"""
+            """[4,3253315,532481,2000000030,1565152987,"b",{},{},42]""",
+            """
+            [
+              4,
+              5878644,
+              532481,
+              2000000452,
+              1581082728,
+              "",
+              {
+                "from": "505985306"
+              },
+              {
+                "attach1_product_id": "379",
+                "attach1_type": "sticker",
+                "attach1": "12968",
+                "attach1_kind": "animation",
+                "attachments": "[{\"type\":\"sticker\",\"sticker\":{\"images\":[{\"height\":64,\"url\":\"https:\/\/vk.com\/sticker\/1-379-64\",\"width\":64},{\"height\":128,\"url\":\"https:\/\/vk.com\/sticker\/1-379-128\",\"width\":128},{\"height\":256,\"url\":\"https:\/\/vk.com\/sticker\/1-379-256\",\"width\":256},{\"height\":352,\"url\":\"https:\/\/vk.com\/sticker\/1-379-352\",\"width\":352},{\"height\":512,\"url\":\"https:\/\/vk.com\/sticker\/1-379-512\",\"width\":512}],\"images_with_background\":[{\"height\":64,\"url\":\"https:\/\/vk.com\/sticker\/1-379-64b\",\"width\":64},{\"height\":128,\"url\":\"https:\/\/vk.com\/sticker\/1-379-128b\",\"width\":128},{\"height\":256,\"url\":\"https:\/\/vk.com\/sticker\/1-379-256b\",\"width\":256},{\"height\":352,\"url\":\"https:\/\/vk.com\/sticker\/1-379-352b\",\"width\":352},{\"height\":512,\"url\":\"https:\/\/vk.com\/sticker\/1-379-512b\",\"width\":512}],\"product_id\":11,\"sticker_id\":379}}]",
+                "attachments_count": "1"
+              }
+            ]
+            """.trimIndent()
         )
 
         val attachmentCounts = listOf(
@@ -54,7 +75,7 @@ class UserLongPollParsingTest {
             1,
             0,
             0,
-            0
+            1
         )
 
         for ((eventJson, attachmentCount) in events.zip(attachmentCounts)) {
@@ -62,7 +83,7 @@ class UserLongPollParsingTest {
             assertTrue(event is MessageAdded || event is MessageEdited)
 
             val attachments = (event as? MessageAdded)?.attachments ?: (event as MessageEdited).attachments!!
-            assertTrue(attachments.size == attachmentCount)
+            assertEquals(attachments.size, attachmentCount)
 
             val eventJson2 = objectMapper.writeValueAsString(event)
 
@@ -76,7 +97,9 @@ class UserLongPollParsingTest {
             // println(eventJson2)
         }
 
+        @Language("JSON")
         val weirdFriendOnline = """{"ts":1850079661,"updates":[[8,-174309413,4,1567064768,2274003,1,0]]}"""
+
         val weirdFriendOnlineParsed = UserLongPollResponse(
             ts = "1850079661",
             updates = listOf(
