@@ -7,7 +7,6 @@ import name.anton3.executors.core.IsIncompleteBatch
 import name.anton3.executors.core.RequestStorage
 import name.anton3.executors.core.setStorage
 import java.util.*
-import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentLinkedQueue
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.Comparator
@@ -19,13 +18,11 @@ class FifoRequestStorage<Request> : RequestStorage<Request> {
 
     override suspend fun add(request: DynamicRequest<Request>) {
         request.setStorage(this)
-        set.add(request)
         queue.add(request)
     }
 
     override suspend fun poll(): DynamicRequest<Request> {
         val request = queue.poll()!!
-        set.remove(request)
         return request.apply { setStorage(null) }
     }
 
@@ -37,18 +34,12 @@ class FifoRequestStorage<Request> : RequestStorage<Request> {
         updater()
     }
 
-    override suspend fun contains(request: DynamicRequest<Request>): Boolean {
-        return request in set
-    }
-
     private val queue: Queue<DynamicRequest<Request>> = ConcurrentLinkedQueue()
-    private val set: MutableSet<DynamicRequest<Request>> =
-        ConcurrentHashMap<DynamicRequest<Request>, Unit>().keySet(Unit)
 }
 
 class SortedRequestStorage<Request, State>(
     private val stateBuilder: (DynamicRequest<Request>) -> State,
-    priorityComparator: java.util.Comparator<Pair<DynamicRequest<Request>, State>>
+    priorityComparator: Comparator<Pair<DynamicRequest<Request>, State>>
 ) : RequestStorage<Request> {
 
     override suspend fun add(request: DynamicRequest<Request>) {
@@ -74,10 +65,6 @@ class SortedRequestStorage<Request, State>(
             updater()
             if (containsRequest) requests.add(request)
         }
-    }
-
-    override suspend fun contains(request: DynamicRequest<Request>): Boolean {
-        return mutex.withLock { requests.contains(request) }
     }
 
     private suspend inline fun pollInternal(): DynamicRequest<Request> {

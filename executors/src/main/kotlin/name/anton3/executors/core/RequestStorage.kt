@@ -27,8 +27,6 @@ interface RequestStorage<Request> {
      * If the request is not in this storage, just call `updater`.
      */
     suspend fun update(request: DynamicRequest<Request>, updater: suspend () -> Unit)
-
-    suspend fun contains(request: DynamicRequest<Request>): Boolean
 }
 
 
