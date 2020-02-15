@@ -17,8 +17,10 @@ abstract class StoringDynamicExecutor<Request, Response> : DynamicExecutor<Reque
         Collections.synchronizedMap(WeakHashMap())
 
     protected suspend fun add(request: DynamicRequest<Request>): CompletableDeferred<Response> {
+        val handle = CompletableDeferred<Response>(parent = job)
+        handles[request] = handle
         requestStorage.add(request)
-        return CompletableDeferred<Response>(parent = job).also { handles[request] = it }
+        return handle
     }
 
     protected suspend inline fun submit(request: DynamicRequest<Request>, block: () -> Unit): Response {
