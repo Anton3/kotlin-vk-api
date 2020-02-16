@@ -14,7 +14,6 @@ import java.io.Closeable
 import java.time.Duration
 import java.util.*
 import java.util.concurrent.atomic.AtomicReference
-import kotlin.collections.HashSet
 import kotlin.coroutines.CoroutineContext
 
 class BatchExecutor<Request, Response>(
@@ -30,7 +29,6 @@ class BatchExecutor<Request, Response>(
     private val coroutineScope: CoroutineScope = CoroutineScope(this.coroutineContext)
 
     private val pendingRequests: MutableMap<DynamicRequest<Request>, Unit> = WeakHashMap()
-    private val timedOutRequests: MutableSet<DynamicRequest<Request>> = HashSet()
     private var pendingBatchRequests: Int = 0
     private val incompleteBatchRequest: AtomicReference<BatchRequest?> = AtomicReference(null)
     private val mutex: Mutex = Mutex()
@@ -72,12 +70,8 @@ class BatchExecutor<Request, Response>(
 
     private suspend fun timeElapsed(request: DynamicRequest<Request>) {
         mutex.withLock {
-            if (request in pendingRequests) {
-                timedOutRequests.add(request)
-
-                if (timedOutRequests.size > pendingBatchRequests * batchSize) {
-                    sendBatchRequest()
-                }
+            if (request in pendingRequests && pendingRequests.size > pendingBatchRequests * batchSize) {
+                sendBatchRequest()
             }
         }
     }
@@ -121,7 +115,6 @@ class BatchExecutor<Request, Response>(
                 --pendingBatchRequests
                 batch = pollMany(minOf(batchSize, pendingRequests.size))
                 batch.forEach { pendingRequests.remove(it.request) }
-                batch.forEach { timedOutRequests.remove(it.request) }
             }
 
             return batch.map { it.request.get() }
