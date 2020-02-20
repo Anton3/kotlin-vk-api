@@ -4,21 +4,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.time.delay
 import name.anton3.executors.core.DynamicExecutor
-import name.anton3.executors.core.DynamicRequest
 import name.anton3.executors.core.map
 import name.anton3.executors.util.FifoRequestStorage
 import org.junit.jupiter.api.Test
+import java.io.IOException
 import java.time.Duration
+import kotlin.random.Random
 
 class SourceLimitingExecutorTest {
     @Test
-    fun testThrottledExecutor(): Unit = runBlocking<Unit>(context = Dispatchers.Default) {
-        val baseExecutor = object : DynamicExecutor<String, Unit> {
-            override suspend fun execute(dynamicRequest: DynamicRequest<String>) {
-                println(dynamicRequest.get())
-            }
+    fun testThrottledExecutor(): Unit = runBlocking(context = Dispatchers.Default) {
+        val baseExecutor = DynamicExecutor<String, Unit> { request ->
+            println(request.get())
         }
 
         val throttler = ThrottledExecutor(
@@ -30,11 +30,9 @@ class SourceLimitingExecutorTest {
         )
 
         val batcher = BatchExecutor(
-            base = object : DynamicExecutor<List<String>, List<Unit>> {
-                override suspend fun execute(dynamicRequest: DynamicRequest<List<String>>): List<Unit> {
-                    throttler.execute(dynamicRequest.map { "batch: " + it.joinToString() })
-                    return List(dynamicRequest.get().size) { Unit }
-                }
+            base = DynamicExecutor<List<String>, List<Unit>> { request ->
+                throttler.execute(request.map { "batch: " + it.joinToString() })
+                List(request.get().size) { Unit }
             },
             coroutineContext = Dispatchers.Default,
             batchSize = 3,
@@ -49,14 +47,52 @@ class SourceLimitingExecutorTest {
                 }
             }
         }
+
+//        throttler.close()
+        batcher.close()
+        Unit
     }
 
     @Test
-    fun testLimitedHistory(): Unit = runBlocking<Unit>(context = Dispatchers.Default) {
-        val baseExecutor = object : DynamicExecutor<String, Unit> {
-            override suspend fun execute(dynamicRequest: DynamicRequest<String>) {
-                println(dynamicRequest.get())
+    fun testThrowing(): Unit = runBlocking(context = Dispatchers.Default) {
+        val baseExecutor = DynamicExecutor<String, Unit> { request ->
+            if (Random.nextDouble() < 0.5) throw IOException("Failed to print \"${request.get()}\"")
+        }
+
+        val throttler = ThrottledExecutor(
+            base = baseExecutor,
+            coroutineContext = coroutineContext,
+            rateLimit = 2000,
+            ratePeriod = Duration.ofSeconds(1),
+            requestStorage = FifoRequestStorage()
+        )
+
+        val s = Semaphore(permits = 10000, acquiredPermits = 10000)
+
+        coroutineScope {
+            repeat(10000) { i ->
+                launch {
+                    s.acquire()
+                    try {
+                        throttler.execute(i.toString())
+                    } catch (e: IOException) {
+                        Unit
+                    }
+                    s.release()
+                }
             }
+
+            repeat(10000) { s.release() }
+        }
+
+        throttler.close()
+        Unit
+    }
+
+    @Test
+    fun testLimitedHistory(): Unit = runBlocking(context = Dispatchers.Default) {
+        val baseExecutor = DynamicExecutor<String, Unit> { request ->
+            println(request.get())
         }
 
         val sourceLimiter = SourceLimitingExecutor(
@@ -83,5 +119,6 @@ class SourceLimitingExecutorTest {
                 }
             }
         }
+        Unit
     }
 }

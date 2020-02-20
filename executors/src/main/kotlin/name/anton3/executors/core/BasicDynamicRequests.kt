@@ -13,7 +13,7 @@ data class SimpleDynamicRequest<Request>(private val request: Request) : Dynamic
 abstract class SynchronizedDynamicRequest<out Request> : DynamicRequest<Request> {
     final override suspend fun get(): Request {
         if (!internalRequestStarted.getAndSet(true)) {
-            internalRequest.complete { finalize() }
+            internalRequest.complete(runCatching { finalize() })
         }
         return internalRequest.await()
     }
@@ -29,7 +29,7 @@ fun <Request, BaseRequest> DynamicRequest<BaseRequest>.map(
 ): SynchronizedDynamicRequest<Request> = MappedDynamicRequest(this, block)
 
 
-internal class MappedDynamicRequest<Request, BaseRequest>(
+private class MappedDynamicRequest<Request, BaseRequest>(
     private val base: DynamicRequest<BaseRequest>,
     private val preprocessor: suspend (BaseRequest) -> Request
 ) : SynchronizedDynamicRequest<Request>() {
