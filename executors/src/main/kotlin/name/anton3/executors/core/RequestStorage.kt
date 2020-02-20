@@ -29,6 +29,21 @@ interface RequestStorage<Request> {
     suspend fun update(request: DynamicRequest<Request>, updater: suspend () -> Unit)
 }
 
+@Suppress("UNCHECKED_CAST", "DEPRECATION")
+class TypedRequestStorage<Request, D : DynamicRequest<Request>>(
+    @get:Deprecated(message = "Use type-safe methods instead", level = DeprecationLevel.WARNING)
+    val unsafeStorage: RequestStorage<Request>
+) {
+    suspend inline fun add(request: D): Unit = unsafeStorage.add(request)
+
+    suspend inline fun poll(): D = unsafeStorage.poll() as D
+
+    suspend inline fun pollMany(n: Int): List<D> = unsafeStorage.pollMany(n) as List<D>
+
+    suspend inline fun update(request: D, noinline updater: suspend () -> Unit): Unit =
+        unsafeStorage.update(request, updater)
+}
+
 
 /**
  * Must be called in RequestStorage.add and RequestStorage.poll
