@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import name.anton3.vkapi.generated.common.objects.ChronologicalSort
 import name.anton3.vkapi.generated.messages.objects.GetHistoryResponse
-import name.anton3.vkapi.generated.messages.objects.GetHistoryRev
 import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.method.VkMethod
@@ -30,7 +30,7 @@ data class MessagesGetHistory(
     var userId: Int? = null,
     var peerId: Int? = null,
     var startMessageId: Int? = null,
-    var rev: GetHistoryRev? = null,
+    var rev: ChronologicalSort? = null,
     var extended: Boolean? = null,
     var fields: List<Fields>? = null,
     var groupId: Int? = null

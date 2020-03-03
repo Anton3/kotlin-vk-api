@@ -4,10 +4,10 @@ package name.anton3.vkapi.generated.newsfeed.objects
 
 import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class UnsubscribeType(override val value: String) : ValueEnum<String> {
-    NOTE("note"),
-    PHOTO("photo"),
+enum class NewsfeedFilter(override val value: String) : ValueEnum<String> {
     POST("post"),
+    PHOTO("photo"),
+    VIDEO("video"),
     TOPIC("topic"),
-    VIDEO("video")
+    NOTE("note")
 }

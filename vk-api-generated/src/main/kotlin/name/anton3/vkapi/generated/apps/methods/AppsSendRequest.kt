@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.apps.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.generated.apps.objects.Type
+import name.anton3.vkapi.generated.apps.objects.RequestType
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 
@@ -22,7 +22,7 @@ import name.anton3.vkapi.method.VkMethod
 data class AppsSendRequest(
     var userId: Int,
     var text: String? = null,
-    var type: Type? = null,
+    var type: RequestType? = null,
     var name: String? = null,
     var key: String? = null,
     var separate: Boolean? = null

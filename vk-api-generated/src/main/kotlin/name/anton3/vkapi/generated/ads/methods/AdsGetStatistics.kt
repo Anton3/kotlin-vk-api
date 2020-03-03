@@ -3,9 +3,9 @@
 package name.anton3.vkapi.generated.ads.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.generated.ads.objects.Period
+import name.anton3.vkapi.generated.ads.objects.GroupingPeriod
+import name.anton3.vkapi.generated.ads.objects.ObjectType
 import name.anton3.vkapi.generated.ads.objects.Stats
-import name.anton3.vkapi.generated.ads.objects.Type
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 
@@ -23,9 +23,9 @@ import name.anton3.vkapi.method.VkMethod
  */
 data class AdsGetStatistics(
     var accountId: Int,
-    var idsType: Type,
+    var idsType: ObjectType,
     var ids: String,
-    var period: Period,
+    var period: GroupingPeriod,
     var dateFrom: String,
     var dateTo: String
 ) : VkMethod<List<Stats>, UserMethod>("ads.getStatistics", jacksonTypeRef())

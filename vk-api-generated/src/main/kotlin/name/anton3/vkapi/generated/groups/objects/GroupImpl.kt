@@ -33,7 +33,7 @@ data class GroupImpl(
     override val id: Int? = null,
     override val isAdmin: BoolInt? = null,
     override val isAdvertiser: BoolInt? = null,
-    override val isClosed: GroupIsClosed? = null,
+    override val isClosed: GroupAccess? = null,
     override val isMember: BoolInt? = null,
     override val name: String? = null,
     @get:JsonProperty("photo_100") override val photo100: String? = null,
@@ -41,5 +41,5 @@ data class GroupImpl(
     @get:JsonProperty("photo_50") override val photo50: String? = null,
     override val screenName: String? = null,
     override val startDate: Int? = null,
-    override val type: Type? = null
+    override val type: GroupType? = null
 ) : Group

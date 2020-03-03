@@ -5,15 +5,10 @@ package name.anton3.vkapi.generated.groups.methods
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.groups.objects.GroupAccess
 import name.anton3.vkapi.generated.groups.objects.GroupAgeLimits
-import name.anton3.vkapi.generated.groups.objects.GroupAudio
-import name.anton3.vkapi.generated.groups.objects.GroupDocs
 import name.anton3.vkapi.generated.groups.objects.GroupMarketCurrency
-import name.anton3.vkapi.generated.groups.objects.GroupPhotos
 import name.anton3.vkapi.generated.groups.objects.GroupSubject
-import name.anton3.vkapi.generated.groups.objects.GroupTopics
-import name.anton3.vkapi.generated.groups.objects.GroupVideo
 import name.anton3.vkapi.generated.groups.objects.GroupWall
-import name.anton3.vkapi.generated.groups.objects.GroupWiki
+import name.anton3.vkapi.generated.groups.objects.SectionVisibility
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.OkResponse
@@ -87,16 +82,16 @@ data class GroupsEdit(
     var publicSubcategory: Int? = null,
     var publicDate: String? = null,
     var wall: GroupWall? = null,
-    var topics: GroupTopics? = null,
-    var photos: GroupPhotos? = null,
-    var video: GroupVideo? = null,
-    var audio: GroupAudio? = null,
+    var topics: SectionVisibility? = null,
+    var photos: SectionVisibility? = null,
+    var video: SectionVisibility? = null,
+    var audio: SectionVisibility? = null,
     var links: Boolean? = null,
     var events: Boolean? = null,
     var places: Boolean? = null,
     var contacts: Boolean? = null,
-    var docs: GroupDocs? = null,
-    var wiki: GroupWiki? = null,
+    var docs: SectionVisibility? = null,
+    var wiki: SectionVisibility? = null,
     var messages: Boolean? = null,
     var articles: Boolean? = null,
     var addresses: Boolean? = null,

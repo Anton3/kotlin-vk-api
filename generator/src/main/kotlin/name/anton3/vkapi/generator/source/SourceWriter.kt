@@ -164,5 +164,5 @@ class KotlinSourceWriter(private val typeSpace: TypeSpace) : SourceWriter {
         return typeSpace.resolveTypeAliases(typeId)
     }
 
-    companion object : Logging
+    private companion object : Logging
 }

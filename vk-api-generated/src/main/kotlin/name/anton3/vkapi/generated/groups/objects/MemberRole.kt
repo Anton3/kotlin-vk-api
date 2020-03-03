@@ -12,5 +12,5 @@ package name.anton3.vkapi.generated.groups.objects
 data class MemberRole(
     val id: Int? = null,
     val permissions: List<MemberRolePermission>? = null,
-    val role: MemberRoleStatus? = null
+    val role: RoleOptions? = null
 )

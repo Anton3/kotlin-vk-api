@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.groups.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.groups.objects.Group
+import name.anton3.vkapi.generated.groups.objects.GroupType
 import name.anton3.vkapi.generated.groups.objects.SearchSort
-import name.anton3.vkapi.generated.groups.objects.Type
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
@@ -27,7 +27,7 @@ import name.anton3.vkapi.vktypes.VkList
  */
 data class GroupsSearch(
     var q: String,
-    var type: Type? = null,
+    var type: GroupType? = null,
     var countryId: Int? = null,
     var cityId: Int? = null,
     var future: Boolean? = null,

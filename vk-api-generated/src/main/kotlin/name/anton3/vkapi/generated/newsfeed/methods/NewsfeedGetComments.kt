@@ -4,8 +4,8 @@ package name.anton3.vkapi.generated.newsfeed.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import name.anton3.vkapi.generated.common.objects.UserGroupFields
-import name.anton3.vkapi.generated.newsfeed.objects.CommentsFilters
 import name.anton3.vkapi.generated.newsfeed.objects.GetCommentsResponse
+import name.anton3.vkapi.generated.newsfeed.objects.NewsfeedFilter
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 
@@ -25,7 +25,7 @@ import name.anton3.vkapi.method.VkMethod
  */
 data class NewsfeedGetComments(
     var count: Int? = null,
-    var filters: List<CommentsFilters>? = null,
+    var filters: List<NewsfeedFilter>? = null,
     var reposts: String? = null,
     var startTime: Int? = null,
     var endTime: Int? = null,

@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.messages.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.generated.messages.objects.GetHistoryAttachmentsMediaType
 import name.anton3.vkapi.generated.messages.objects.GetHistoryAttachmentsResponse
+import name.anton3.vkapi.generated.messages.objects.HistoryMessageAttachmentType
 import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.method.UserGroupMethod
 import name.anton3.vkapi.method.VkMethod
@@ -26,7 +26,7 @@ import name.anton3.vkapi.method.VkMethod
  */
 data class MessagesGetHistoryAttachments(
     var peerId: Int,
-    var mediaType: GetHistoryAttachmentsMediaType? = null,
+    var mediaType: HistoryMessageAttachmentType? = null,
     var startFrom: String? = null,
     var count: Int? = null,
     var photoSizes: Boolean? = null,

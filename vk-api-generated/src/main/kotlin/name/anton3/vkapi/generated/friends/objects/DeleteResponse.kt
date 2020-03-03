@@ -2,11 +2,8 @@
 
 package name.anton3.vkapi.generated.friends.objects
 
-import name.anton3.vkapi.generated.friends.responses.DeleteResponseFriendDeleted
-import name.anton3.vkapi.generated.friends.responses.DeleteResponseInRequestDeleted
-import name.anton3.vkapi.generated.friends.responses.DeleteResponseOutRequestDeleted
-import name.anton3.vkapi.generated.friends.responses.DeleteResponseSuggestionDeleted
 import name.anton3.vkapi.vktypes.OkResponse
+import name.anton3.vkapi.vktypes.PropertyExists
 
 /**
  * No description
@@ -19,8 +16,8 @@ import name.anton3.vkapi.vktypes.OkResponse
  */
 data class DeleteResponse(
     val success: OkResponse,
-    val friendDeleted: DeleteResponseFriendDeleted? = null,
-    val outRequestDeleted: DeleteResponseOutRequestDeleted? = null,
-    val inRequestDeleted: DeleteResponseInRequestDeleted? = null,
-    val suggestionDeleted: DeleteResponseSuggestionDeleted? = null
+    val friendDeleted: PropertyExists? = null,
+    val outRequestDeleted: PropertyExists? = null,
+    val inRequestDeleted: PropertyExists? = null,
+    val suggestionDeleted: PropertyExists? = null
 )

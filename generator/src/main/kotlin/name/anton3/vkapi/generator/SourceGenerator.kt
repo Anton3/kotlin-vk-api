@@ -24,7 +24,7 @@ import kotlin.streams.asSequence
 
 class SourceGenerator(val basePackage: String) {
 
-    companion object : Logging
+    private companion object : Logging
 
     private val methods: MutableMap<String, MethodSchema> = mutableMapOf()
     private val definitions: MutableMap<String, TypeSchema> = mutableMapOf()
@@ -198,27 +198,14 @@ class SourceGenerator(val basePackage: String) {
         }
     }
 
-    // TODO
     private fun makeEnumType(nameStrategy: NameStrategy, responseRef: JsonTypeRef, typeObject: EnumType): TypeId {
-        val typeIdByRef = typeSpace.resolveTypeIdByJsonRefOrNull(responseRef)
-            ?.let { typeSpace.resolveTypeAliases(it) }
-
-        if (typeIdByRef != null) return typeIdByRef
+        typeSpace.resolveTypeIdByJsonRefOrNull(responseRef)
+            ?.let { return typeSpace.resolveTypeAliases(it) }
 
         val typeId = nameStrategy(responseRef, basePackage)
-        if (typeSpace.definedTypes[typeId]?.fixedName == true)
-            return typeId
+        if (typeSpace.definedTypes[typeId]?.fixedName == true) return typeId
 
-        val definition = EnumDefinition.decodeTypeDefinition(
-            typeObject.enum,
-            typeObject.enumNames,
-            typeObject.type == NodeType.INTEGER
-        )
-
-        return if (definition == BuiltinDefinition)
-            TypeId<Boolean>()
-        else
-            typeSpace.registerTypeImplementation(typeId, definition)
+        return defineAndSimplifyEnumType(typeId, typeObject)
     }
 
     private fun makeOneOfType(nameStrategy: NameStrategy, responseRef: JsonTypeRef, typeObject: OneOfType): TypeId? {
@@ -387,24 +374,20 @@ class SourceGenerator(val basePackage: String) {
         val candidateTypeId = nameObject((parts + param.name).joinToString("_"), basePackage)
 
         if (type is EnumType) {
-            return defineEnumType(candidateTypeId, type)
+            return defineAndSimplifyEnumType(candidateTypeId, type)
         } else if (type is ArrayType && type.items is EnumType) {
-            return makeArrayType(defineEnumType(candidateTypeId, type.items))
+            return makeArrayType(defineAndSimplifyEnumType(candidateTypeId, type.items))
         }
 
         // dirty hack; should use a proper naming scheme
         return makeType(::nameObject, "SHOULD_NOT_BE_USED", type)!!
     }
 
-    // TODO
-    private fun defineEnumType(expectedTypeId: TypeId, typeObject: EnumType): TypeId {
-        val definition = EnumDefinition.decodeTypeDefinition(
-            typeObject.enum,
-            typeObject.enumNames,
-            typeObject.type == NodeType.INTEGER
-        )
+    private fun defineAndSimplifyEnumType(expectedTypeId: TypeId, typeObject: EnumType): TypeId {
+        val definition = EnumDefinition.decodeTypeDefinition(typeObject)
+        definition.equivalentBuiltin()?.let { return it }
 
-        val oldTypeId = typeSpace.definedTypes.entries.find { it.value == definition }?.key
+        val oldTypeId = typeSpace.definedTypes.entries.find { definition.isEquivalent(it.value) }?.key
         if (oldTypeId == expectedTypeId) return oldTypeId
 
         val mergedTypeId = oldTypeId?.let { mergeEqualTypes(oldTypeId, expectedTypeId, basePackage) }

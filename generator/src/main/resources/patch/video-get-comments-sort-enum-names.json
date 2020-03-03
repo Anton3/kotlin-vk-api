@@ -1,0 +1,87 @@
+{
+  "methods": [
+    {
+      "name": "video.getComments",
+      "description": "Returns a list of comments on a video.",
+      "access_token_type": [
+        "user"
+      ],
+      "parameters": [
+        {
+          "name": "owner_id",
+          "description": "ID of the user or community that owns the video.",
+          "type": "integer"
+        },
+        {
+          "name": "video_id",
+          "description": "Video ID.",
+          "type": "integer",
+          "required": true,
+          "minimum": 0
+        },
+        {
+          "name": "need_likes",
+          "description": "'1' — to return an additional 'likes' field",
+          "type": "boolean"
+        },
+        {
+          "name": "start_comment_id",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "offset",
+          "description": "Offset needed to return a specific subset of comments.",
+          "type": "integer"
+        },
+        {
+          "name": "count",
+          "description": "Number of comments to return.",
+          "type": "integer",
+          "default": 20,
+          "minimum": 0,
+          "maximum": 100
+        },
+        {
+          "name": "sort",
+          "description": "Sort order: 'asc' — oldest comment first, 'desc' — newest comment first",
+          "type": "string",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "enumNames": [
+            "chronological",
+            "reverse chronological"
+          ]
+        },
+        {
+          "name": "extended",
+          "type": "boolean"
+        },
+        {
+          "name": "fields",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "response": {
+          "$ref": "responses.json#/definitions/video_getComments_response"
+        },
+        "extendedResponse": {
+          "$ref": "responses.json#/definitions/video_getComments_extended_response"
+        }
+      },
+      "errors": [
+        {
+          "code": 801,
+          "name": "API_ERROR_VIDEO_COMMENTS_CLOSED",
+          "description": "Comments for this video are closed"
+        }
+      ]
+    }
+  ]
+}

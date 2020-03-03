@@ -4,7 +4,7 @@ package name.anton3.vkapi.generated.common.objects
 
 import name.anton3.vkapi.vktypes.ValueEnum
 
-enum class Reason(override val value: Int) : ValueEnum<Int> {
+enum class ReportReason(override val value: Int) : ValueEnum<Int> {
     SPAM(0),
     CHILD_PORNOGRAPHY(1),
     EXTREMISM(2),

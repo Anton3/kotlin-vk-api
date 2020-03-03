@@ -11,7 +11,7 @@ import org.apache.logging.log4j.kotlin.Logging
 
 class TypeSpace {
 
-    companion object : Logging
+    private companion object : Logging
 
     private val typeReferences: MutableMap<JsonTypeRef, TypeId> = HashMap()
     val definedTypes: MutableMap<TypeId, Definition> = HashMap()

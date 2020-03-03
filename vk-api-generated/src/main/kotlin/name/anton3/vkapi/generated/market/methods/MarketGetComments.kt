@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.market.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.generated.market.objects.GetCommentsSort
+import name.anton3.vkapi.generated.common.objects.GetCommentsSort
 import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.generated.wall.objects.WallComment
 import name.anton3.vkapi.method.UserMethod

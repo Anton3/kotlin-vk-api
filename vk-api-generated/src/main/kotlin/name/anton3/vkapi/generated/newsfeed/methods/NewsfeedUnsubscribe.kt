@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.newsfeed.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.generated.newsfeed.objects.UnsubscribeType
+import name.anton3.vkapi.generated.newsfeed.objects.NewsfeedFilter
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.OkResponse
@@ -18,7 +18,7 @@ import name.anton3.vkapi.vktypes.OkResponse
  * @property itemId Object ID.
  */
 data class NewsfeedUnsubscribe(
-    var type: UnsubscribeType,
+    var type: NewsfeedFilter,
     var ownerId: Int? = null,
     var itemId: Int
 ) : VkMethod<OkResponse, UserMethod>("newsfeed.unsubscribe", jacksonTypeRef())

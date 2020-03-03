@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.market.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.generated.common.objects.Reason
+import name.anton3.vkapi.generated.common.objects.ReportReason
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.OkResponse
@@ -20,5 +20,5 @@ import name.anton3.vkapi.vktypes.OkResponse
 data class MarketReportComment(
     var ownerId: Int,
     var commentId: Int,
-    var reason: Reason
+    var reason: ReportReason
 ) : VkMethod<OkResponse, UserMethod>("market.reportComment", jacksonTypeRef())

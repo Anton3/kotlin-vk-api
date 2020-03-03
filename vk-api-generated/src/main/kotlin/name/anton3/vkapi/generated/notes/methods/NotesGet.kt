@@ -3,8 +3,8 @@
 package name.anton3.vkapi.generated.notes.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import name.anton3.vkapi.generated.common.objects.ChronologicalSort
 import name.anton3.vkapi.generated.notes.objects.Note
-import name.anton3.vkapi.generated.notes.objects.Sort
 import name.anton3.vkapi.method.UserMethod
 import name.anton3.vkapi.method.VkMethod
 import name.anton3.vkapi.vktypes.VkList
@@ -25,5 +25,5 @@ data class NotesGet(
     var userId: Int? = null,
     var offset: Int? = null,
     var count: Int? = null,
-    var sort: Sort? = null
+    var sort: ChronologicalSort? = null
 ) : VkMethod<VkList<Note>, UserMethod>("notes.get", jacksonTypeRef())

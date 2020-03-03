@@ -23,7 +23,7 @@ import name.anton3.vkapi.vktypes.BoolInt
  * @property type No description
  */
 data class GroupXtrInvitedBy(
-    val adminLevel: GroupXtrInvitedByAdminLevel? = null,
+    val adminLevel: GroupAdminLevel? = null,
     val id: String? = null,
     val invitedBy: Int? = null,
     val isAdmin: BoolInt? = null,
@@ -35,5 +35,5 @@ data class GroupXtrInvitedBy(
     @get:JsonProperty("photo_200") val photo200: String? = null,
     @get:JsonProperty("photo_50") val photo50: String? = null,
     val screenName: String? = null,
-    val type: GroupXtrInvitedByType? = null
+    val type: GroupType? = null
 )

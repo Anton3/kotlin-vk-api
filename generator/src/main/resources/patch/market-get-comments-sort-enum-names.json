@@ -1,0 +1,90 @@
+{
+  "methods": [
+    {
+      "name": "market.getComments",
+      "description": "Returns comments list for an item.",
+      "access_token_type": [
+        "user"
+      ],
+      "parameters": [
+        {
+          "name": "owner_id",
+          "description": "ID of an item owner community",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "item_id",
+          "description": "Item ID.",
+          "type": "integer",
+          "required": true,
+          "minimum": 0
+        },
+        {
+          "name": "need_likes",
+          "description": "'1' — to return likes info.",
+          "type": "boolean"
+        },
+        {
+          "name": "start_comment_id",
+          "description": "ID of a comment to start a list from (details below).",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "offset",
+          "type": "integer",
+          "default": 0,
+          "minimum": 0
+        },
+        {
+          "name": "count",
+          "description": "Number of results to return.",
+          "type": "integer",
+          "default": 20,
+          "minimum": 0,
+          "maximum": 100
+        },
+        {
+          "name": "sort",
+          "description": "Sort order ('asc' — from old to new, 'desc' — from new to old)",
+          "type": "string",
+          "default": "asc",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "enumNames": [
+            "chronological",
+            "reverse chronological"
+          ]
+        },
+        {
+          "name": "extended",
+          "description": "'1' — comments will be returned as numbered objects, in addition lists of 'profiles' and 'groups' objects will be returned.",
+          "type": "boolean"
+        },
+        {
+          "name": "fields",
+          "description": "List of additional profile fields to return. See the [vk.com/dev/fields|details]",
+          "type": "array",
+          "items": {
+            "$ref": "objects.json#/definitions/users_fields"
+          }
+        }
+      ],
+      "responses": {
+        "response": {
+          "$ref": "responses.json#/definitions/market_getComments_response"
+        }
+      },
+      "errors": [
+        {
+          "code": 1401,
+          "name": "API_ERROR_MARKET_COMMENTS_CLOSED",
+          "description": "Comments for this market are closed"
+        }
+      ]
+    }
+  ]
+}

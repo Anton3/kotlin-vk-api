@@ -1,0 +1,66 @@
+{
+  "methods": [
+    {
+      "name": "notes.getComments",
+      "description": "Returns a list of comments on a note.",
+      "access_token_type": [
+        "user"
+      ],
+      "parameters": [
+        {
+          "name": "note_id",
+          "description": "Note ID.",
+          "type": "integer",
+          "required": true,
+          "minimum": 0
+        },
+        {
+          "name": "owner_id",
+          "description": "Note owner ID.",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "sort",
+          "type": "integer",
+          "default": 0,
+          "minimum": 0,
+          "enum": [
+            0,
+            1
+          ],
+          "enumNames": [
+            "chronological",
+            "reverse chronological"
+          ]
+        },
+        {
+          "name": "offset",
+          "type": "integer",
+          "default": 0,
+          "minimum": 0
+        },
+        {
+          "name": "count",
+          "description": "Number of comments to return.",
+          "type": "integer",
+          "default": 20,
+          "minimum": 0,
+          "maximum": 100
+        }
+      ],
+      "responses": {
+        "response": {
+          "$ref": "responses.json#/definitions/notes_getComments_response"
+        }
+      },
+      "errors": [
+        {
+          "code": 181,
+          "name": "API_ERROR_ACCESS_NOTE",
+          "description": "Access to note denied"
+        }
+      ]
+    }
+  ]
+}

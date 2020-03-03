@@ -2,17 +2,11 @@ package name.anton3.vkapi.generator
 
 import name.anton3.vkapi.generator.source.JsonTypeRef
 import name.anton3.vkapi.generator.source.TypeId
+import org.apache.logging.log4j.kotlin.logger
+
+private val logger = logger("NameStrategy")
 
 typealias NameStrategy = (str: JsonTypeRef, basePackage: String) -> TypeId
-
-fun toCamelCase(string: String): String =
-    string.split('.', '_').joinToString("") { it.capitalize() }
-
-private fun beforeDot(path: String) =
-    path.substringBefore('.')
-
-private fun splitOnFirstUnderscore(string: String): Pair<String, String> =
-    string.substringBefore('_') to string.substringAfter('_')
 
 // notes.edit -> notes.methods.NotesEdit
 fun nameMethod(jsonTypeRef: JsonTypeRef, basePackage: String): TypeId {
@@ -38,8 +32,8 @@ fun nameResponse(jsonTypeRef: JsonTypeRef, basePackage: String): TypeId {
 fun nameObject(jsonTypeRef: JsonTypeRef, basePackage: String): TypeId {
     val (packageNameSpace, classPart) = splitOnFirstUnderscore(jsonTypeRef)
     return TypeId(
-        packages = "${alterPackageNameSpace(packageNameSpace)}.objects",
-        name = alterClassName(toCamelCase(classPart)),
+        packages = "${PACKAGE_NAMES_ALTERATION.getOrSame(packageNameSpace)}.objects",
+        name = CLASS_NAMES_ALTERATION.getOrSame(toCamelCase(classPart)),
         basePackage = basePackage
     )
 }
@@ -49,25 +43,23 @@ private val CLASS_NAMES_ALTERATION = mapOf(
     "List" to "ListMin"
 )
 
-fun alterClassName(className: String): String =
-    CLASS_NAMES_ALTERATION.getOrDefault(className, className)
-
 private val PACKAGE_NAMES_ALTERATION = mapOf("base" to "common")
-
-fun alterPackageNameSpace(packageNameSpace: String): String =
-    PACKAGE_NAMES_ALTERATION.getOrDefault(packageNameSpace, packageNameSpace)
 
 
 fun mergeEqualTypes(old: TypeId, new: TypeId, basePackage: String): TypeId? {
-    val candidateName = splitCamelCase(old.name).commonSuffix(splitCamelCase(new.name)).joinToString("")
+    if (old.name in MERGE_AVOID || new.name in MERGE_AVOID) return null
 
-    val name1 = MERGE_RULES.getOrDefault(old.name, old.name)
-    val name2 = MERGE_RULES.getOrDefault(new.name, new.name)
+    val name1 = MERGE_GROUPS.getOrDefault(old.name, old.name)
+    val name2 = MERGE_GROUPS.getOrDefault(new.name, new.name)
 
     val newName = when {
         name1 == name2 -> name1
-        candidateName.isNotEmpty() -> candidateName
-        else -> return null
+        old.name.startsWith(new.name) -> old.name
+        new.name.startsWith(old.name) -> new.name
+        else -> {
+            logger.warn("Equal types $old and $new were not merged, please add a merge rule")
+            return null
+        }
     }
 
     return if (old.packages == new.packages) {
@@ -77,20 +69,46 @@ fun mergeEqualTypes(old: TypeId, new: TypeId, basePackage: String): TypeId? {
     }
 }
 
-private val MERGE_RULES = mapOf(
-    "SaveAccessEdit" to "Access",
-    "SaveAccessView" to "Access",
-    "EditAccess" to "Visibility",
-    "GroupIsClosed" to "Visibility",
-    "EditPhotos" to "SectionAccess",
-    "EditTopics" to "SectionAccess",
-    "EditVideo" to "SectionAccess",
-    "EditAudio" to "SectionAccess",
-    "EditDocs" to "SectionAccess",
-    "EditWiki" to "SectionAccess",
-    "SaveProfileInfoSex" to "OwnSex",
-    "SignupSex" to "OwnSex"
-)
+private val MERGE_AVOID: Set<String> = setOf()
+
+private val MERGE_GROUPS: Map<String, String> = mapOf(
+    "Access" to listOf("SaveAccessEdit", "SaveAccessView"),
+    "GroupAccess" to listOf("GroupAccess", "EditAccess", "GroupIsClosed"),
+    "SectionAccess" to listOf("EditPhotos", "EditTopics", "EditAudio", "EditDocs", "EditWiki"),
+    "OwnSex" to listOf("SaveProfileInfoSex", "SignupSex"),
+    "HistoryMessageAttachmentType" to listOf("HistoryMessageAttachmentType", "GetHistoryAttachmentsMediaType"),
+    "GroupAdminLevel" to listOf("GroupAdminLevel", "GroupXtrInvitedByAdminLevel"),
+    "GroupType" to listOf("GroupXtrInvitedByType", "SearchType"),
+    "ObjectType" to listOf("ObjectType", "GetStatisticsIdsType"),
+    "RequestType" to listOf("GetFriendsListType", "SendRequestType"),
+    "IdsType" to listOf("GetDemographicsIdsType", "GetPostsReachIdsType"),
+    "GroupingPeriod" to listOf("GetDemographicsPeriod", "GetStatisticsPeriod"),
+    "ItemType" to listOf("GetItemType", "SetTagsItemType"),
+    "NameCase" to listOf(
+        "GetNameCase", "GetSuggestionsNameCase", "SearchNameCase", "GetInvitedUsersNameCase", "GetBannedNameCase",
+        "GetVotersNameCase", "GetFollowersNameCase"
+    ),
+    "SectionVisibility" to listOf("GroupTopics", "GroupPhotos", "GroupVideo", "GroupAudio", "GroupDocs", "GroupWiki"),
+    "RoleOptions" to listOf("RoleOptions", "MemberRoleStatus"),
+    "ReportReason" to listOf("ReportReason", "ReportCommentReason", "ReportPostReason"),
+    "NewsfeedFilter" to listOf("CommentsFilters", "UnsubscribeType"),
+    "ChronologicalSort" to listOf("GetHistoryRev", "GetSort"),
+    "AlbumPrivacy" to listOf("AddAlbumPrivacy", "EditAlbumPrivacy"),
+    "AdStatus" to listOf("AdStatus", "CampaignStatus")
+).flatMap { (k, v) -> v.map { it to k } }.toMap()
+
+
+fun toCamelCase(string: String): String =
+    string.split('.', '_').joinToString("") { it.capitalize() }
+
+private fun beforeDot(path: String) =
+    path.substringBefore('.')
+
+private fun splitOnFirstUnderscore(string: String): Pair<String, String> =
+    string.substringBefore('_') to string.substringAfter('_')
+
+@Suppress("NOTHING_TO_INLINE")
+private inline fun <T> Map<T, T>.getOrSame(key: T): T = get(key) ?: key
 
 private fun splitCamelCase(string: String): List<String> {
     val wordRegex = Regex("""\p{Upper}\p{Lower}*""")

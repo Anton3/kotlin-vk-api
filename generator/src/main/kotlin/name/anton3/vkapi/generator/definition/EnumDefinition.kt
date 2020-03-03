@@ -1,7 +1,11 @@
 package name.anton3.vkapi.generator.definition
 
+import name.anton3.vkapi.generator.json.EnumType
+import name.anton3.vkapi.generator.json.NodeType
 import name.anton3.vkapi.generator.source.SourceWriter
 import name.anton3.vkapi.generator.source.TypeId
+import name.anton3.vkapi.vktypes.BoolInt
+import name.anton3.vkapi.vktypes.PropertyExists
 import name.anton3.vkapi.vktypes.ValueEnum
 
 data class EnumDefinition(val items: List<Item>, val isInteger: Boolean) : Definition {
@@ -37,16 +41,29 @@ data class EnumDefinition(val items: List<Item>, val isInteger: Boolean) : Defin
         """.trimMargin()
     }
 
+    fun isEquivalent(other: Definition): Boolean {
+        return other is EnumDefinition &&
+                isInteger == other.isInteger &&
+                items.sortedBy { it.name } == other.items.sortedBy { it.name }
+    }
+
+    fun equivalentBuiltin(): TypeId? {
+        return when (items.associate { it.name to it.value }) {
+            NO_YES_ITEMS -> TypeId<BoolInt>()
+            OK_ITEMS -> TypeId<PropertyExists>()
+            else -> null
+        }
+    }
+
     companion object {
-        fun decodeTypeDefinition(values: List<String>, names: List<String>?, isInteger: Boolean): Definition {
-            // TODO
-            if (isSameAsBoolean(values) && false) return BuiltinDefinition
-            val items = (names ?: values).zip(values).map { (name, value) -> Item(name, value) }
-            return EnumDefinition(items, isInteger)
+        fun decodeTypeDefinition(typeObject: EnumType): EnumDefinition {
+            return EnumDefinition(
+                items = (typeObject.enumNames ?: typeObject.enum).zip(typeObject.enum, ::Item),
+                isInteger = typeObject.type == NodeType.INTEGER
+            )
         }
 
-        private fun isSameAsBoolean(values: List<String>): Boolean {
-            return values.toSet() in listOf(setOf("1"), setOf("0", "1"))
-        }
+        private val NO_YES_ITEMS: Map<String, String> = mapOf("no" to "0", "yes" to "1")
+        private val OK_ITEMS: Map<String, String> = mapOf("ok" to "1")
     }
 }

@@ -1,0 +1,68 @@
+{
+  "methods": [
+    {
+      "name": "notes.get",
+      "description": "Returns a list of notes created by a user.",
+      "access_token_type": [
+        "user"
+      ],
+      "parameters": [
+        {
+          "name": "note_ids",
+          "description": "Note IDs.",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        {
+          "name": "user_id",
+          "description": "Note owner ID.",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "offset",
+          "type": "integer",
+          "default": 0,
+          "minimum": 0
+        },
+        {
+          "name": "count",
+          "description": "Number of notes to return.",
+          "type": "integer",
+          "default": 20,
+          "minimum": 0,
+          "maximum": 100
+        },
+        {
+          "name": "sort",
+          "type": "integer",
+          "default": 0,
+          "minimum": 0,
+          "enum": [
+            0,
+            1
+          ],
+          "enumNames": [
+            "reverse chronological",
+            "chronological"
+          ]
+        }
+      ],
+      "responses": {
+        "response": {
+          "$ref": "responses.json#/definitions/notes_get_response"
+        }
+      },
+      "errors": [
+        {
+          "code": 180,
+          "name": "API_ERROR_PARAM_NOTE_ID",
+          "description": "Note not found"
+        }
+      ]
+    }
+  ]
+}

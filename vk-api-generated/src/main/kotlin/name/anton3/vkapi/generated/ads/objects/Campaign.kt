@@ -20,7 +20,7 @@ data class Campaign(
     val id: Int,
     val name: String,
     val startTime: Int,
-    val status: CampaignStatus,
+    val status: AdStatus,
     val stopTime: Int,
     val type: CampaignType
 )

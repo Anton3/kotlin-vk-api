@@ -3,7 +3,7 @@
 package name.anton3.vkapi.generated.apps.methods
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import name.anton3.vkapi.generated.apps.objects.Type
+import name.anton3.vkapi.generated.apps.objects.RequestType
 import name.anton3.vkapi.generated.users.objects.Fields
 import name.anton3.vkapi.generated.users.objects.UserFull
 import name.anton3.vkapi.method.UserMethod
@@ -25,6 +25,6 @@ data class AppsGetFriendsList(
     var extended: Boolean? = null,
     var count: Int? = null,
     var offset: Int? = null,
-    var type: Type? = null,
+    var type: RequestType? = null,
     var fields: List<Fields>? = null
 ) : VkMethod<VkList<UserFull>, UserMethod>("apps.getFriendsList", jacksonTypeRef())

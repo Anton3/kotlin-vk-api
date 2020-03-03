@@ -12,5 +12,5 @@ package name.anton3.vkapi.generated.ads.objects
 data class DemoStats(
     val id: Int? = null,
     val stats: DemostatsFormat? = null,
-    val type: Type? = null
+    val type: ObjectType? = null
 )

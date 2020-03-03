@@ -33,7 +33,7 @@ interface Group {
     val id: Int?
     val isAdmin: BoolInt?
     val isAdvertiser: BoolInt?
-    val isClosed: GroupIsClosed?
+    val isClosed: GroupAccess?
     val isMember: BoolInt?
     val name: String?
     @get:JsonProperty("photo_100") val photo100: String?
@@ -41,5 +41,5 @@ interface Group {
     @get:JsonProperty("photo_50") val photo50: String?
     val screenName: String?
     val startDate: Int?
-    val type: Type?
+    val type: GroupType?
 }

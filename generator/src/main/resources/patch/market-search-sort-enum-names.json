@@ -1,0 +1,120 @@
+{
+  "methods": [
+    {
+      "name": "market.search",
+      "description": "Searches market items in a community's catalog",
+      "access_token_type": [
+        "user"
+      ],
+      "parameters": [
+        {
+          "name": "owner_id",
+          "description": "ID of an items owner community.",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "album_id",
+          "type": "integer",
+          "default": 0,
+          "minimum": 0
+        },
+        {
+          "name": "q",
+          "description": "Search query, for example \"pink slippers\".",
+          "type": "string"
+        },
+        {
+          "name": "price_from",
+          "description": "Minimum item price value.",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "price_to",
+          "description": "Maximum item price value.",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "tags",
+          "description": "Comma-separated tag IDs list.",
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "sort",
+          "type": "integer",
+          "default": 0,
+          "enum": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "enumNames": [
+            "default",
+            "by adding date",
+            "by price",
+            "by popularity"
+          ]
+        },
+        {
+          "name": "rev",
+          "description": "'0' — do not use reverse order, '1' — use reverse order",
+          "type": "integer",
+          "default": 1,
+          "minimum": 0,
+          "enum": [
+            0,
+            1
+          ],
+          "enumNames": [
+            "normal",
+            "reverse"
+          ]
+        },
+        {
+          "name": "offset",
+          "description": "Offset needed to return a specific subset of results.",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "count",
+          "description": "Number of items to return.",
+          "type": "integer",
+          "default": 20,
+          "minimum": 0,
+          "maximum": 200
+        },
+        {
+          "name": "extended",
+          "description": "'1' – to return additional fields: 'likes, can_comment, car_repost, photos'. By default: '0'.",
+          "type": "boolean",
+          "default": "0"
+        },
+        {
+          "name": "status",
+          "type": "integer",
+          "default": 0,
+          "minimum": 0,
+          "enum": [
+            0,
+            2
+          ]
+        }
+      ],
+      "responses": {
+        "response": {
+          "$ref": "responses.json#/definitions/market_search_response"
+        },
+        "extendedResponse": {
+          "$ref": "responses.json#/definitions/market_search_extended_response"
+        }
+      }
+    }
+  ]
+}
