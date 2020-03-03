@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JavaType
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ArrayNode
+import com.fasterxml.jackson.databind.node.BooleanNode
 import com.fasterxml.jackson.databind.node.ObjectNode
 import com.fasterxml.jackson.databind.node.ValueNode
 import name.anton3.vkapi.json.attributes.ForwardableAttributes
@@ -36,6 +37,7 @@ private fun ObjectMapper.responseType(method: VkMethod<*, *>): JavaType {
 }
 
 private fun propertyValueToParameter(value: JsonNode, objectMapper: ObjectMapper): String = when (value) {
+    is BooleanNode -> if (value.booleanValue()) "1" else "0"
     is ValueNode -> value.asText()
     is ArrayNode -> value.elements().asSequence().joinToString(",") { it.asText() }
     else -> objectMapper.writeValueAsString(value)
