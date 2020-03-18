@@ -27,7 +27,7 @@ inline fun <reified Attachment : Any, reified Body : Any> vkPolymorphicDeseriali
             val node = p.readNode<ObjectNode>()
 
             val type = node["type"]?.asText() ?: error("No `type` field")
-            val bodyNode = node[type] as ObjectNode
+            val bodyNode = if (type in TYPES_WITHOUT_UNWRAPPING) node else node[type] as ObjectNode
 
             val klass = typeToClass[type]
 
@@ -55,8 +55,16 @@ inline fun <reified Attachment : Any, reified Body : Any> vkPolymorphicSerialize
 
             val bodyNode = codec.valueToTree<ObjectNode>(body)
 
-            val resultNode = ObjectNode(codec.nodeFactory, mapOf("type" to TextNode(type), type to bodyNode))
+            val resultNode = if (type in TYPES_WITHOUT_UNWRAPPING) {
+                bodyNode.put("type", type)
+            } else {
+                ObjectNode(codec.nodeFactory, mapOf("type" to TextNode(type), type to bodyNode))
+            }
+
             return codec.writeTree(gen, resultNode)
         }
     }
 }
+
+
+val TYPES_WITHOUT_UNWRAPPING: Set<String> = setOf("photos_list")
