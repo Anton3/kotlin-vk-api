@@ -25,7 +25,7 @@ internal interface ReadWriteMutex {
 @Suppress("FunctionName")
 internal fun ReadWriteMutex(): ReadWriteMutex = ReadWriteMutexImpl()
 
-@UseExperimental(InternalCoroutinesApi::class)
+@OptIn(InternalCoroutinesApi::class)
 private class ReadWriteMutexImpl : ReadWriteMutex {
 
     // count -1: write lock held
