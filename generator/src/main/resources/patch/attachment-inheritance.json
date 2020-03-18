@@ -64,7 +64,11 @@
                 "description": "String ID of photo"
               }
             }
-          }
+          },
+          "required": [
+            "photos_list"
+          ],
+          "additionalProperties": false
         },
         {
           "$ref": "#/definitions/market_market_album"

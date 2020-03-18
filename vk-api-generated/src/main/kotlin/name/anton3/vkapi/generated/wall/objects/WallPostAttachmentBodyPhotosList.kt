@@ -11,5 +11,5 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @JsonDeserialize(`as` = Void::class)
 data class WallPostAttachmentBodyPhotosList(
-    val photosList: List<String>? = null
+    val photosList: List<String>
 ) : WallPostAttachmentBody
