@@ -1,6 +1,9 @@
 package name.anton3.vkapi.vktypes
 
-enum class VkLang(private val code: Int) {
+import com.fasterxml.jackson.annotation.JsonIgnore
+
+@Suppress("SpellCheckingInspection")
+enum class VkLang(override val value: Int) : ValueEnum<Int> {
     RU(0),  // Русский
     UK(1),  // Українська
     BE(2),  // Беларуская (тарашкевiца)
@@ -89,5 +92,10 @@ enum class VkLang(private val code: Int) {
     KAB(457),  // Taqbaylit
     EO(555),  // Esperanto
     LA(666),  // Lingua Latina
-    Soviet(777),  // Советский
+    Soviet(777);  // Советский
+
+    @Deprecated(message = "Use `value` instead", replaceWith = ReplaceWith("value"))
+    @get:JsonIgnore
+    val code: Int
+        get() = value
 }
