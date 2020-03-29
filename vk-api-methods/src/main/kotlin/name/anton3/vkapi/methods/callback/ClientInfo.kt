@@ -6,5 +6,6 @@ data class ClientInfo(
     val buttonActions: List<String>,
     val keyboard: Boolean = false,
     val inlineKeyboard: Boolean = false,
+    val carousel: Boolean = false,
     val langId: VkLang = VkLang.RU
 )
