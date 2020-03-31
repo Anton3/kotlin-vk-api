@@ -1,16 +1,16 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
-    extra["kotlin"] = "1.3.70"
-    extra["ktor"] = "1.3.0"
-    extra["coroutines"] = "1.3.3"
-    extra["jackson"] = "2.10.2"
+    extra["kotlin"] = "1.3.71"
+    extra["ktor"] = "1.3.1"
+    extra["coroutines"] = "1.3.5"
+    extra["jackson"] = "2.10.3"
     extra["guava"] = "28.2-jre"
-    extra["log4j"] = "2.13.0"
+    extra["log4j"] = "2.13.1"
     extra["log4jKotlin"] = "1.0.0"
-    extra["junit"] = "5.6.0"
+    extra["junit"] = "5.6.1"
     extra["httpClientAsync"] = "4.1.4"
-    extra["httpClientMime"] = "4.5.11"
+    extra["httpClientMime"] = "4.5.12"
 
     repositories {
         mavenCentral()
@@ -23,7 +23,7 @@ buildscript {
 
 plugins {
     `java-library`
-    kotlin("jvm") version "1.3.70"
+    kotlin("jvm") version "1.3.71"
     id("com.github.ManifestClasspath") version "0.1.0-RELEASE"
 }
 
