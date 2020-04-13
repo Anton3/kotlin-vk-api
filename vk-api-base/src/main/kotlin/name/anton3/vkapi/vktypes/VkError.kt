@@ -1,7 +1,5 @@
 package name.anton3.vkapi.vktypes
 
-import com.fasterxml.jackson.databind.JsonNode
-
 data class VkError(
     val errorCode: Int,
     val errorMsg: String,
@@ -11,9 +9,8 @@ data class VkError(
     val captchaSid: String? = null,
     val captchaImg: String? = null,
     val confirmationText: String? = null
-
 ) {
-    data class MapEntry(val key: String, val value: JsonNode)
+    data class MapEntry(val key: String, val value: String)
 
     override fun toString(): String = "$errorCode: $errorMsg"
 }
