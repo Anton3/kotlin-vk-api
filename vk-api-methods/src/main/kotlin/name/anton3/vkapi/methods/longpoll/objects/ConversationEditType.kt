@@ -14,5 +14,6 @@ enum class ConversationEditType(override val value: Int) : ValueEnum<Int> {
     ADMIN_REMOVED(9),
     UNKNOWN2(10),
     UNKNOWN3(11),
+    UNKNOWN5(17),
     UNKNOWN4(18)
 }
