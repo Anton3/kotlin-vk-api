@@ -6,14 +6,14 @@ enum class ConversationEditType(override val value: Int) : ValueEnum<Int> {
     TITLE_CHANGE(1),
     PHOTO_CHANGE(2),
     ADMIN_ADDED(3),
-    UNKNOWN(4),
+    UNKNOWN4(4),
     MESSAGE_PINNED(5),
     USER_JOINED(6),
     USER_EXITED(7),
     USER_KICKED(8),
     ADMIN_REMOVED(9),
-    UNKNOWN2(10),
-    UNKNOWN3(11),
-    UNKNOWN5(17),
-    UNKNOWN4(18)
+    UNKNOWN10(10),
+    UNKNOWN11(11),
+    UNKNOWN17(17),
+    UNKNOWN18(18)
 }
