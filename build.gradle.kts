@@ -39,7 +39,7 @@ tasks.withType(KotlinCompile::class.java).all {
 
 subprojects {
     group = "com.github.Anton3"
-    version = "0.13.0"
+    version = "0.13.1"
 
     repositories {
         mavenCentral()
